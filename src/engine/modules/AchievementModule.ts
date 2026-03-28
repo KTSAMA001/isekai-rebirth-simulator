@@ -7,10 +7,13 @@ import type { WorldInstance, GameState } from '../core/types'
 import type { ConditionDSL } from './ConditionDSL'
 
 export class AchievementModule {
-  constructor(
-    private world: WorldInstance,
-    private dsl: ConditionDSL
-  ) {}
+  private world: WorldInstance
+  private dsl: ConditionDSL
+
+  constructor(world: WorldInstance, dsl: ConditionDSL) {
+    this.world = world
+    this.dsl = dsl
+  }
 
   /** 检查本局是否解锁新成就，返回新解锁的成就 ID */
   checkAchievements(state: GameState): string[] {

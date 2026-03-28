@@ -6,7 +6,11 @@
 import type { WorldInstance, GameState, EvaluationResult } from '../core/types'
 
 export class EvaluatorModule {
-  constructor(private world: WorldInstance) {}
+  private world: WorldInstance
+
+  constructor(world: WorldInstance) {
+    this.world = world
+  }
 
   /** 计算最终得分 */
   calculate(state: GameState): EvaluationResult {

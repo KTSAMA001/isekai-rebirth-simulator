@@ -6,7 +6,11 @@
 import type { WorldInstance, AttributeSnapshot } from '../core/types'
 
 export class AttributeModule {
-  constructor(private world: WorldInstance) {}
+  private world: WorldInstance
+
+  constructor(world: WorldInstance) {
+    this.world = world
+  }
 
   /** 初始化属性（全部置为默认值） */
   initAttributes(): Record<string, number> {

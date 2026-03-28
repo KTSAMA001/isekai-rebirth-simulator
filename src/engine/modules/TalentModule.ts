@@ -7,10 +7,13 @@ import type { WorldInstance, GameState, TalentEffect } from '../core/types'
 import type { RandomProvider } from '../core/RandomProvider'
 
 export class TalentModule {
-  constructor(
-    private world: WorldInstance,
-    private random: RandomProvider
-  ) {}
+  private world: WorldInstance
+  private random: RandomProvider
+
+  constructor(world: WorldInstance, random: RandomProvider) {
+    this.world = world
+    this.random = random
+  }
 
   /** 抽取天赋池 */
   draftTalents(

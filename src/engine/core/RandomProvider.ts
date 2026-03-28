@@ -4,8 +4,10 @@
  */
 export class RandomProvider {
   private state: number
+  private seed: number
 
-  constructor(private seed: number) {
+  constructor(seed: number) {
+    this.seed = seed
     this.state = seed
   }
 

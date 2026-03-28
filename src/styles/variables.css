@@ -1,0 +1,79 @@
+/* ==================== 异世界主题 CSS 变量 ==================== */
+:root {
+  /* 主色调 */
+  --color-primary: #8b5cf6;
+  --color-primary-light: #a78bfa;
+  --color-primary-dark: #7c3aed;
+  --color-secondary: #d946ef;
+  --color-secondary-light: #e879f9;
+
+  /* 背景 */
+  --bg-main: #0f0a1a;
+  --bg-card: #1a1128;
+  --bg-card-hover: #231740;
+  --bg-overlay: rgba(15, 10, 26, 0.85);
+  --bg-panel: #160f24;
+
+  /* 文字 */
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-muted: #64748b;
+  --text-gold: #fbbf24;
+  --text-dim: #475569;
+
+  /* 边框 */
+  --border-color: #2d2042;
+  --border-glow: rgba(139, 92, 246, 0.3);
+
+  /* 稀有度颜色 */
+  --rarity-common: #60a5fa;
+  --rarity-rare: #c084fc;
+  --rarity-legendary: #fbbf24;
+
+  /* 评级颜色 */
+  --grade-d: #64748b;
+  --grade-c: #60a5fa;
+  --grade-b: #4ade80;
+  --grade-a: #fbbf24;
+  --grade-s: #c084fc;
+  --grade-ss: #f472b6;
+  --grade-sss: #ef4444;
+
+  /* 状态色 */
+  --color-success: #4ade80;
+  --color-danger: #ef4444;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+
+  /* 间距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* 字体 */
+  --font-main: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-title: 'Georgia', 'Noto Serif SC', serif;
+
+  /* 阴影 */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.2);
+  --shadow-gold: 0 0 20px rgba(251, 191, 36, 0.3);
+
+  /* 过渡 */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* 布局 */
+  --max-width: 480px;
+  --header-height: 56px;
+}

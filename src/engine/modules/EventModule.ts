@@ -15,12 +15,22 @@ import type { ConditionDSL } from './ConditionDSL'
 import type { AttributeModule } from './AttributeModule'
 
 export class EventModule {
+  private world: WorldInstance
+  private random: RandomProvider
+  private dsl: ConditionDSL
+  private attrModule: AttributeModule
+
   constructor(
-    private world: WorldInstance,
-    private random: RandomProvider,
-    private dsl: ConditionDSL,
-    private attrModule: AttributeModule
-  ) {}
+    world: WorldInstance,
+    random: RandomProvider,
+    dsl: ConditionDSL,
+    attrModule: AttributeModule
+  ) {
+    this.world = world
+    this.random = random
+    this.dsl = dsl
+    this.attrModule = attrModule
+  }
 
   /** 获取当前年龄可触发的事件候选列表 */
   getCandidates(age: number, state: GameState): WorldEventDef[] {
