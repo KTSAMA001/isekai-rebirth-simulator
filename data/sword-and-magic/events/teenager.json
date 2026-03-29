@@ -900,8 +900,8 @@
     "description": "几杯麦酒下肚，一个兽人对你的长相发表了不当评论。",
     "minAge": 18,
     "maxAge": 25,
-    "weight": 6,
-    "include": "attribute.str >= 6",
+    "weight": 3,
+    "include": "attribute.str >= 8",
     "effects": [
       {
         "type": "modify_attribute",
@@ -1360,6 +1360,7 @@
       {
         "id": "listen_stories",
         "title": "听他讲故事",
+        "description": "你盘腿坐在篝火旁，听商人讲述远方王国的传说和深海之下的遗迹。那些关于巨龙与魔塔的故事让你的眼界一下子开阔了许多，心中涌起对未知世界的向往。",
         "probability": 0.5,
         "effects": [
           {
@@ -1379,6 +1380,7 @@
       {
         "id": "buy_something",
         "title": "买了一件奇怪的东西",
+        "description": "商人的货摊上摆满了稀奇古怪的玩意儿，你的目光被一件带有异域纹饰的斗篷吸引。虽然花光了积蓄，但穿上它的时候，你仿佛能感受到远方大陆的风。",
         "probability": 0.3,
         "effects": [
           {
@@ -1412,6 +1414,7 @@
       {
         "id": "enjoy_night",
         "title": "享受星空",
+        "description": "你躺在篝火旁的草地上，仰望漫天繁星。银河如同一条发光的河流横贯夜空，远处传来猫头鹰的低鸣。这一刻的宁静让你忘记了所有烦恼，内心充满了平和。",
         "probability": 0.5,
         "effects": [
           {
@@ -1425,6 +1428,7 @@
       {
         "id": "explore_night",
         "title": "夜间探险",
+        "description": "趁朋友们都睡着了，你独自一人打着手电钻进了漆黑的林间小路。树影婆娑间似乎有什么东西在注视着你，但你的脚步没有停下。夜晚的森林藏着白天看不到的秘密。",
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
@@ -1471,6 +1475,7 @@
       {
         "id": "accept_strange_quest",
         "title": "接下奇怪委托",
+        "description": "你揭下那张字迹潦草的羊皮纸，委托人的要求古怪离奇。直觉告诉你，这趟任务恐怕不会太平，但冒险的诱惑让你无法抗拒。",
         "probability": 0.3,
         "effects": [
           {
@@ -1490,6 +1495,7 @@
       {
         "id": "take_normal_quest",
         "title": "只接普通委托",
+        "description": "你从告示板上挑了一份运送货物的普通委托，稳妥地完成任务后拿到了一笔不错的报酬。平淡无奇，但胜在踏实。",
         "probability": 0.4,
         "effects": [
           {
@@ -1509,6 +1515,7 @@
       {
         "id": "help_friend_quest",
         "title": "帮朋友接委托",
+        "description": "你的朋友想接一份委托但一个人做不了，你决定和他一起完成。两个人并肩作战的感觉比独自冒险好多了。",
         "probability": 0.3,
         "effects": [
           {
@@ -1549,6 +1556,7 @@
       {
         "id": "approach_them",
         "title": "上前搭讪",
+        "description": "你鼓起所有勇气走向那个人，心跳快得几乎要从嗓子眼里蹦出来。能说的每句话都在脑海里排练了无数遍，就看这一刻了。",
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
@@ -1583,6 +1591,7 @@
       {
         "id": "watch_from_afar",
         "title": "远远偷看",
+        "description": "你躲在集市的柱子后面偷偷看着那个人，心里像是被塞了一团棉花。这份说不出口的悸动，大概就是传说中的暗恋吧。",
         "probability": 0.35,
         "effects": [
           {
@@ -1596,6 +1605,7 @@
       {
         "id": "pretend_not_care",
         "title": "装作不在意",
+        "description": "你强迫自己移开目光，装作若无其事地走向另一个摊位。但风吹来的那一缕发香，却让整整一天都心不在焉。",
         "probability": 0.3,
         "effects": []
       }
@@ -1616,6 +1626,7 @@
       {
         "id": "train_hard",
         "title": "独自苦练",
+        "description": "你在这个无人知晓的训练场中日复一日地挥洒汗水，没有人指导，只有自己的倒影作伴。孤独的修炼反而让你悟出了独门心得。",
         "probability": 0.4,
         "effects": [
           {
@@ -1635,6 +1646,7 @@
       {
         "id": "explore_depths",
         "title": "探索深处",
+        "description": "训练场的深处漆黑一片，隐约传来滴水声和古老的气息。你点燃一支火把小心翼翼地走进去，不知道等待你的是机缘还是陷阱。",
         "probability": 0.35,
         "riskCheck": {
           "attribute": "str",
@@ -1669,6 +1681,7 @@
       {
         "id": "leave_training",
         "title": "离开",
+        "description": "这个隐秘之地让你感到不安，总觉得黑暗中有什么东西在注视着你。你没有多做停留，转身离开了这个诡异的地方。",
         "probability": 0.25,
         "effects": []
       }

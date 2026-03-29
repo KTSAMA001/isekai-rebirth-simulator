@@ -1,10 +1,13 @@
 {
   "EventEffect": {
     "type": "object",
-    "required": ["type", "target"],
+    "required": ["type", "target", "value"],
     "additionalProperties": false,
     "properties": {
-      "type": { "type": "string" },
+      "type": {
+        "type": "string",
+        "enum": ["modify_attribute", "set_attribute", "add_talent", "trigger_event", "set_flag", "modify_hp", "modify_max_hp_bonus", "set_counter", "modify_counter", "grant_item", "trigger_on_age"]
+      },
       "target": { "type": "string" },
       "value": { "type": ["number", "boolean", "string"] },
       "probability": { "type": "number", "minimum": 0, "maximum": 1 },

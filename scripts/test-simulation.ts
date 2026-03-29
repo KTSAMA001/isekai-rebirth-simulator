@@ -57,7 +57,22 @@ function runOneGame(gameNum: number, seed: number): GameLog {
 
   // Draft talents
   const drafted = engine.draftTalents()
-  const selected = drafted.slice(0, 3)
+
+  // 选择天赋时过滤互斥对，避免崩溃
+  // 已知互斥关系：dragon_blood <-> demon_heritage
+  const mutuallyExclusivePairs: [string, string][] = [
+    ['dragon_blood', 'demon_heritage'],
+  ]
+  const selected: string[] = []
+  for (const id of drafted) {
+    if (selected.length >= 3) break
+    const isConflicting = mutuallyExclusivePairs.some(([a, b]) =>
+      (id === a && selected.includes(b)) || (id === b && selected.includes(a))
+    )
+    if (!isConflicting) {
+      selected.push(id)
+    }
+  }
   engine.selectTalents(selected)
 
   // Allocate attributes (total 20, each 1-10)
@@ -387,6 +402,10 @@ function main() {
   }
 
   // Stats
+  if (allLogs.length === 0) {
+    console.log('❌ 所有游戏均崩溃，无法统计')
+    return
+  }
   const avgAge = Math.round(allLogs.reduce((s, g) => s + g.finalAge, 0) / allLogs.length)
   const avgEvents = Math.round(allLogs.reduce((s, g) => s + g.entries.length, 0) / allLogs.length)
   console.log('📈 游戏统计:')

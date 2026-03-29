@@ -247,6 +247,7 @@
       {
         "id": "teach_everything",
         "title": "倾囊相授",
+        "description": "你看着年轻人眼中那股热忱，想起了当年的自己。你决定将毕生所学毫无保留地传授给他，在教导中你也获得了新的领悟。",
         "probability": 0.4,
         "effects": [
           {
@@ -272,6 +273,7 @@
       {
         "id": "think_about_it",
         "title": "考虑一下",
+        "description": "你没有立刻答应，而是陷入了沉思。传授技艺意味着承认自己已经老了，但看着那双渴望的眼睛，你的心渐渐软了下来。",
         "probability": 0.35,
         "effects": [
           {
@@ -285,6 +287,7 @@
       {
         "id": "refuse_request",
         "title": "拒绝",
+        "description": "你摇了摇头，告诉年轻人这条路没有捷径。有些技艺是要靠自己去闯出来的，旁人教不了，也替不了。",
         "probability": 0.25,
         "effects": []
       }

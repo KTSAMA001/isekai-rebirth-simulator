@@ -446,9 +446,6 @@
         "description": "灵魂 -2"
       }
     ],
-    "mutuallyExclusive": [
-      "dragon_blood"
-    ],
     "draftWeight": 10
   },
   {
