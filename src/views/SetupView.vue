@@ -49,6 +49,11 @@ const talentPenalty = computed(() => {
   return gameStore.state?.talentPenalty ?? 0
 })
 
+// 属性ID→中文名映射
+function getAttrName(id: string): string {
+  return world.value?.attributes.find(a => a.id === id)?.name ?? id
+}
+
 // 属性初始值 — defaultValue + 天赋正值加成（负值通过扣减点数体现）
 const baseValues = computed(() => {
   const vals: Record<string, number> = {}
@@ -151,7 +156,7 @@ function onAttrConfirm(allocation: Record<string, number>) {
           <div class="preset-desc">{{ preset.description }}</div>
           <div v-if="preset.attributes && Object.keys(preset.attributes).length" class="preset-attrs">
             <span v-for="(val, key) in preset.attributes" :key="key" class="preset-attr">
-              {{ key }} +{{ val }}
+              {{ getAttrName(key) }}{{ val > 0 ? '+' : '' }}{{ val }}
             </span>
           </div>
         </div>
