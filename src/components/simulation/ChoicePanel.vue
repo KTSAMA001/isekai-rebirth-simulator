@@ -25,6 +25,23 @@ function talentName(talentId: string): string {
   return props.world.index.talentsById.get(talentId)?.name ?? talentId
 }
 
+/** 计算风险选项的成功率 */
+function getSuccessChance(branch: EventBranch): number | null {
+  if (!branch.riskCheck) return null
+  const rc = branch.riskCheck
+  const attrValue = props.state.attributes[rc.attribute] ?? 0
+  return Math.min(100, Math.max(0, Math.round((rc.baseChance + attrValue * rc.successBonus) * 100)))
+}
+
+/** 获取风险选项的成功率预览文本 */
+function getRiskText(branch: EventBranch): string {
+  if (!branch.riskCheck) return ''
+  const rc = branch.riskCheck
+  const attrValue = props.state.attributes[rc.attribute] ?? 0
+  const chance = getSuccessChance(branch)
+  return `📊 成功率 ${chance}%（${attrName(rc.attribute)} ${attrValue}）`
+}
+
 /** 求值一个原子条件（无 | & 逻辑运算符） */
 function evaluateAtom(cond: string): boolean {
   const state = props.state
@@ -170,12 +187,19 @@ function getUnlockText(branch: EventBranch): string {
         :class="{
           'choice-locked': !isAvailable(branch),
           'choice-available': isAvailable(branch),
+          'choice-risk': !!branch.riskCheck && isAvailable(branch),
         }"
         :disabled="!isAvailable(branch)"
         @click="emit('select', branch.id)"
       >
-        <div class="choice-label">{{ branch.title }}</div>
+        <div class="choice-label">
+          {{ branch.title }}
+          <span v-if="branch.riskCheck" class="risk-badge">⚔</span>
+        </div>
         <div class="choice-desc">{{ branch.description }}</div>
+        <div v-if="branch.riskCheck && isAvailable(branch)" class="risk-hint">
+          {{ getRiskText(branch) }}
+        </div>
         <div v-if="!isAvailable(branch) && getUnlockText(branch)" class="choice-locked-hint">
           🔒 {{ getUnlockText(branch) }} 后可选
         </div>
@@ -253,5 +277,30 @@ function getUnlockText(branch: EventBranch): string {
   font-size: 0.7rem;
   color: var(--text-dim);
   padding: 2px 0;
+}
+
+.risk-badge {
+  font-size: 0.75rem;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.risk-hint {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: var(--color-primary-light, #a78bfa);
+  padding: 2px 6px;
+  background: rgba(167, 139, 250, 0.08);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+.choice-btn.choice-risk {
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.choice-btn.choice-risk:hover {
+  border-color: rgba(167, 139, 250, 0.6);
+  background: rgba(167, 139, 250, 0.06);
 }
 </style>

@@ -60,6 +60,18 @@ export interface EventEffect {
   description?: string
 }
 
+/** 风险判定配置 */
+export interface RiskCheck {
+  /** 判定依据的属性ID（如 str, mag, chr） */
+  attribute: string
+  /** 难度：属性达到此值时成功率为 100% */
+  difficulty: number
+  /** 基础成功率（0-1，属性为0时的成功率） */
+  baseChance: number
+  /** 每点属性增加的成功率（0-1） */
+  successBonus: number
+}
+
 /** 事件分支 */
 export interface EventBranch {
   id: string
@@ -70,6 +82,14 @@ export interface EventBranch {
   nextEvents?: string[]
   /** 选择此分支的前置条件 */
   requireCondition?: string
+  /** 风险判定（可选，有风险的选择才需要） */
+  riskCheck?: RiskCheck
+  /** 失败时的效果（如果 riskCheck 存在且判定失败时使用，否则使用 effects） */
+  failureEffects?: EventEffect[]
+  /** 成功时的描述文字 */
+  successText?: string
+  /** 失败时的描述文字 */
+  failureText?: string
 }
 
 /** 事件优先级 */
@@ -293,6 +313,10 @@ export interface YearResult {
   effectTexts?: string[]
   /** 当年日志条目 */
   logEntry?: EventLogEntry
+  /** 风险判定的结果（仅 riskCheck 时有值） */
+  isSuccess?: boolean
+  /** 是否进行了风险判定 */
+  riskRolled?: boolean
 }
 
 // ==================== 评分结果 ====================

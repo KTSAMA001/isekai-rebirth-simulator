@@ -7,6 +7,8 @@ const props = defineProps<{
   event: WorldEventDef | null
   logEntry?: EventLogEntry
   yearPhase: 'awaiting_choice' | 'showing_event' | 'mundane_year' | null
+  riskRolled?: boolean
+  isSuccess?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -59,6 +61,11 @@ function handleClick() {
 
     <!-- 效果反馈 -->
     <div v-if="logEntry && logEntry.effects.length > 0" class="effects-row">
+      <!-- 风险判定结果标记 -->
+      <div v-if="riskRolled" class="risk-result" :class="isSuccess ? 'risk-success' : 'risk-failure'">
+        <span v-if="isSuccess">✨ 成功！</span>
+        <span v-else>💔 失败...</span>
+      </div>
       <span
         v-for="(eff, i) in logEntry.effects"
         :key="i"
@@ -161,6 +168,21 @@ function handleClick() {
 .effect-chip.negative {
   background: rgba(239, 68, 68, 0.12);
   color: var(--color-danger);
+}
+
+.risk-result {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 8px 0 4px;
+  letter-spacing: 2px;
+}
+.risk-result.risk-success {
+  color: var(--color-success, #4ade80);
+}
+.risk-result.risk-failure {
+  color: var(--color-danger, #ef4444);
 }
 
 .skip-hint {

@@ -4,7 +4,7 @@
  * initGame → draftTalents → selectTalents → allocateAttributes → simulateYear × N → finish
  */
 
-import type { GameState, WorldInstance, YearResult } from './types'
+import type { EventEffect, GameState, WorldInstance, YearResult } from './types'
 import { RandomProvider } from './RandomProvider'
 import { AttributeModule } from '../modules/AttributeModule'
 import { TalentModule } from '../modules/TalentModule'
@@ -326,10 +326,38 @@ export class SimulationEngine {
       throw new Error(`分支 ${branchId} 不存在`)
     }
 
-    // 合并基础效果 + 分支效果
-    const allEffects = [...event.effects, ...branch.effects]
+    let isSuccess: boolean | undefined
+    let riskRolled = false
+    let chosenEffects: EventEffect[]
+    let resultText: string | undefined
+
+    // 风险判定
+    if (branch.riskCheck) {
+      riskRolled = true
+      const rc = branch.riskCheck
+      const attrValue = this.state.attributes[rc.attribute] ?? 0
+      const chance = Math.min(1, Math.max(0, rc.baseChance + attrValue * rc.successBonus))
+      isSuccess = this.random.chance(chance)
+
+      if (isSuccess) {
+        chosenEffects = [...event.effects, ...branch.effects]
+        resultText = branch.successText
+      } else {
+        chosenEffects = [...event.effects, ...(branch.failureEffects ?? branch.effects)]
+        resultText = branch.failureText
+      }
+    } else {
+      // 确定性结果
+      chosenEffects = [...event.effects, ...branch.effects]
+    }
+
     const clonedState = this.cloneState(this.state)
-    const effectTexts = this.eventModule.applyEffectsOnState(allEffects, clonedState)
+    const effectTexts = this.eventModule.applyEffectsOnState(chosenEffects, clonedState)
+
+    // 如果有风险判定结果文本，追加到效果文本
+    if (resultText) {
+      effectTexts.push(resultText)
+    }
 
     // 记录日志
     const logEntry = {
@@ -353,6 +381,8 @@ export class SimulationEngine {
       event,
       effectTexts,
       logEntry,
+      isSuccess,
+      riskRolled,
     }
   }
 

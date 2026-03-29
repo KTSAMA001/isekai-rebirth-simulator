@@ -134,6 +134,8 @@ function checkFinished() {
       :event="currentEvent"
       :log-entry="currentLogEntry"
       :year-phase="yearPhase"
+      :risk-rolled="currentYearResult?.riskRolled"
+      :is-success="currentYearResult?.isSuccess"
       @typing-done="() => {}"
     />
 
