@@ -28,6 +28,8 @@ export class SimulationEngine {
   private evaluatorModule: EvaluatorModule
   private achievementModule: AchievementModule
   private dsl: ConditionDSL
+  /** 基于初始体魄的固定恢复量（allocateAttributes 时计算，不再随属性成长增长） */
+  private initialStrRegen = 1
 
   constructor(world: WorldInstance, seed?: number) {
     this.world = world
@@ -168,6 +170,9 @@ export class SimulationEngine {
 
     // 根据（天赋+分配后的）属性计算初始 HP
     this.state.hp = this.computeInitHp()
+    // 固定每年的恢复量（基于初始体魄，不随成长增长）
+    const initStr = attributes['str'] ?? 0
+    this.initialStrRegen = 1 + Math.floor(initStr / 3)
 
     this.state = {
       ...this.state,
@@ -188,10 +193,9 @@ export class SimulationEngine {
     return 20 + str * 3
   }
 
-  /** 每年恢复 HP：1 + floor(体魄/3)（新的一年恢复上一年伤势） */
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长） */
   private regenHp(): void {
-    const str = this.state.attributes['str'] ?? 0
-    const regen = 1 + Math.floor(str / 3)
+    const regen = this.initialStrRegen
     this.state = {
       ...this.state,
       hp: this.state.hp + regen,

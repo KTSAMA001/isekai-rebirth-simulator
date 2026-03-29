@@ -97,7 +97,7 @@ export const events: WorldEventDef[] = [
     description: '村里的大孩子抢走了你的面包，还把你推进泥坑。',
     minAge: 3,
     maxAge: 6,
-    weight: 15,
+    weight: 8,
     exclude: 'has.flag.bullied_child',
     effects: [],
     branches: [
@@ -440,7 +440,7 @@ export const events: WorldEventDef[] = [
     description: '你成为了骑士的侍从，每天挥剑一千次。',
     minAge: 10,
     maxAge: 14,
-    weight: 12,
+    weight: 6,
     include: 'attribute.str >= 4',
     exclude: 'has.flag.squire',
     unique: true,
