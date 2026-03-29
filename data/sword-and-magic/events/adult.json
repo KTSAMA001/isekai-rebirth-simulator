@@ -3407,9 +3407,15 @@
     "minAge": 16,
     "maxAge": 25,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "weight": 6,
     "effects": [
+      {
+        "type": "set_flag",
+        "target": "in_relationship",
+        "value": 1,
+        "description": "在月光下你们确认了心意"
+      },
       {
         "type": "modify_attribute",
         "target": "spr",
@@ -3422,7 +3428,8 @@
         "value": 1,
         "description": "运势 +1"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "festival_dance",
@@ -3436,9 +3443,15 @@
     "minAge": 14,
     "maxAge": 22,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "weight": 5,
     "effects": [
+      {
+        "type": "set_flag",
+        "target": "in_relationship",
+        "value": 1,
+        "description": "篝火旁的舞步拉近了距离"
+      },
       {
         "type": "modify_attribute",
         "target": "spr",
@@ -3451,7 +3464,8 @@
         "value": 1,
         "description": "魅力 +1"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "quest_parting",
@@ -3465,7 +3479,7 @@
     "minAge": 18,
     "maxAge": 35,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "weight": 5,
     "branches": [
       {
@@ -3489,7 +3503,9 @@
             "value": 1,
             "description": "恋人在远征"
           }
-        ]
+        ],
+        "id": "quest_parting_branch0",
+        "title": "你把护身符系在对方的剑鞘上，低声说'你一定要活着回来'"
       },
       {
         "description": "\"我们到此为止吧。\"你转身走进了雨里。战场上的死别，比生离温柔",
@@ -3503,7 +3519,8 @@
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "分手"
+            "description": "分手",
+            "value": "in_relationship"
           },
           {
             "type": "modify_attribute",
@@ -3511,9 +3528,13 @@
             "value": -1,
             "description": "灵魂 -1"
           }
-        ]
+        ],
+        "id": "quest_parting_branch1",
+        "title": "\"我们到此为止吧。\"你转身走进了雨里。战场上的死别，比生离温柔"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true
   },
   {
     "id": "forbidden_love",
@@ -3527,7 +3548,7 @@
     "minAge": 16,
     "maxAge": 28,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "weight": 4,
     "branches": [
       {
@@ -3548,9 +3569,12 @@
           {
             "type": "modify_hp",
             "value": -15,
-            "description": "HP -15（逃亡受伤）"
+            "description": "HP -15（逃亡受伤）",
+            "target": "hp"
           }
-        ]
+        ],
+        "id": "forbidden_love_branch0",
+        "title": "你们决定一起逃跑，去没有人认识你们的地方开始新生活"
       },
       {
         "description": "族里的长老发现了。你被关在地牢里，隔着铁栏听到外面的喊叫声渐渐停了",
@@ -3564,7 +3588,8 @@
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "被迫分离"
+            "description": "被迫分离",
+            "value": "in_relationship"
           },
           {
             "type": "modify_attribute",
@@ -3575,11 +3600,16 @@
           {
             "type": "modify_hp",
             "value": -20,
-            "description": "HP -20（地牢）"
+            "description": "HP -20（地牢）",
+            "target": "hp"
           }
-        ]
+        ],
+        "id": "forbidden_love_branch1",
+        "title": "族里的长老发现了。你被关在地牢里，隔着铁栏听到外面的喊叫声渐渐停了"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true
   },
   {
     "id": "rescue_from_dungeon",
@@ -3611,8 +3641,16 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "你们的关系更加坚定"
           }
-        ]
+        ],
+        "id": "rescue_from_dungeon_branch0",
+        "title": "你找到了那个人的踪迹，拔剑冲了进去"
       },
       {
         "description": "你去找了冒险者公会，悬赏招募了一支临时队伍",
@@ -3628,10 +3666,21 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（战术）"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "你们的关系更加坚定"
           }
-        ]
+        ],
+        "id": "rescue_from_dungeon_branch1",
+        "title": "你去找了冒险者公会，悬赏招募了一支临时队伍"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true,
+    "exclude": "has.flag.married | has.flag.in_relationship"
   },
   {
     "id": "soul_bound",
@@ -3670,7 +3719,9 @@
             "value": 1,
             "description": "魔力 +1"
           }
-        ]
+        ],
+        "id": "soul_bound_branch0",
+        "title": "在精灵之光的照耀下，你们的手指交织在一起，感到一股暖流贯穿全身"
       },
       {
         "description": "你犹豫了。永恒的绑定太沉重了，你还没准备好把灵魂交给另一个人",
@@ -3690,11 +3741,16 @@
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "被拒绝后分手"
+            "description": "被拒绝后分手",
+            "value": "in_relationship"
           }
-        ]
+        ],
+        "id": "soul_bound_branch1",
+        "title": "你犹豫了。永恒的绑定太沉重了，你还没准备好把灵魂交给另一个人"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true
   },
   {
     "id": "family_blessing",
@@ -3729,6 +3785,7 @@
         "value": -1,
         "description": "家境 -1"
       }
-    ]
+    ],
+    "unique": true
   }
 ]

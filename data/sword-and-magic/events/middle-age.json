@@ -1428,7 +1428,9 @@
             "value": 1,
             "description": "智慧 +1"
           }
-        ]
+        ],
+        "id": "lover_curse_branch0",
+        "title": "你毫不犹豫地开始了仪式——十年的寿命算什么"
       },
       {
         "description": "你犹豫了很久。最终你选择了……用别人的命来代替（邪道禁术）",
@@ -1451,9 +1453,14 @@
             "value": 1,
             "description": "触碰禁忌"
           }
-        ]
+        ],
+        "id": "lover_curse_branch1",
+        "title": "你犹豫了很久。最终你选择了……用别人的命来代替（邪道禁术）"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true,
+    "exclude": "has.flag.married | has.flag.in_relationship"
   },
   {
     "id": "lover_death_battlefield",
@@ -1475,12 +1482,14 @@
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "失去爱人"
+            "description": "失去爱人",
+            "value": "in_relationship"
           },
           {
             "type": "remove_flag",
             "target": "married",
-            "description": "失去配偶"
+            "description": "失去配偶",
+            "value": "married"
           },
           {
             "type": "set_flag",
@@ -1509,9 +1518,12 @@
           {
             "type": "modify_hp",
             "value": -15,
-            "description": "HP -15（悲痛）"
+            "description": "HP -15（悲痛）",
+            "target": "hp"
           }
-        ]
+        ],
+        "id": "lover_death_battlefield_branch0",
+        "title": "你没有哭。你捡起了那把剑，加入了下一批远征军——不是为了王国，是为了那个人的仇"
       },
       {
         "description": "你把戒指挂在脖子上，在房间里坐了三天三夜。第四天早上，你走出来，眼神变了",
@@ -1519,12 +1531,14 @@
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "失去爱人"
+            "description": "失去爱人",
+            "value": "in_relationship"
           },
           {
             "type": "remove_flag",
             "target": "married",
-            "description": "失去配偶"
+            "description": "失去配偶",
+            "value": "married"
           },
           {
             "type": "set_flag",
@@ -1541,11 +1555,17 @@
           {
             "type": "modify_hp",
             "value": -25,
-            "description": "HP -25（三天没吃饭）"
+            "description": "HP -25（三天没吃饭）",
+            "target": "hp"
           }
-        ]
+        ],
+        "id": "lover_death_battlefield_branch1",
+        "title": "你把戒指挂在脖子上，在房间里坐了三天三夜。第四天早上，你走出来，眼神变了"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true,
+    "exclude": "has.flag.married"
   },
   {
     "id": "protect_family",
@@ -1575,7 +1595,9 @@
         "value": 1,
         "description": "体魄 +1"
       }
-    ]
+    ],
+    "unique": true,
+    "exclude": "has.flag.married | has.flag.in_relationship"
   },
   {
     "id": "widowed_wanderer",
@@ -1607,7 +1629,9 @@
             "value": 1,
             "description": "运势 +1"
           }
-        ]
+        ],
+        "id": "widowed_wanderer_branch0",
+        "title": "你在一座陌生的小镇停下了脚步。酒馆老板的笑脸让你想起了某个人——不，是时候向前看了"
       },
       {
         "description": "你加入了佣兵团。战斗是最好的止痛药——至少在挥剑的时候，什么都不用想",
@@ -1627,9 +1651,12 @@
           {
             "type": "modify_hp",
             "value": -10,
-            "description": "HP -10（伤痕累累）"
+            "description": "HP -10（伤痕累累）",
+            "target": "hp"
           }
-        ]
+        ],
+        "id": "widowed_wanderer_branch1",
+        "title": "你加入了佣兵团。战斗是最好的止痛药——至少在挥剑的时候，什么都不用想"
       },
       {
         "description": "你站在悬崖边，风吹过你的斗篷。你想起了那个人说的最后一句话——'好好活着'。你退后了一步",
@@ -1646,8 +1673,12 @@
             "value": 2,
             "description": "运势 +2"
           }
-        ]
+        ],
+        "id": "widowed_wanderer_branch2",
+        "title": "你站在悬崖边，风吹过你的斗篷。你想起了那个人说的最后一句话——'好好活着'。你退后了一步"
       }
-    ]
+    ],
+    "effects": [],
+    "unique": true
   }
 ]
