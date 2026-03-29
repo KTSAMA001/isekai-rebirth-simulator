@@ -49,20 +49,34 @@ const showSavePanel = ref(false)
 const saveMessage = ref('')
 
 onMounted(() => {
-  // 如果 store 中没有匹配的 state，尝试从自动存档恢复
-  if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
-    if (gameStore.hasAutoSave()) {
-      gameStore.loadSave(0)
+  // store 中有匹配的 state → 正常继续
+  if (gameStore.state && gameStore.state.meta.playId === props.playId) {
+    if (state.value?.phase === 'simulating') {
+      advanceToNextInteraction()
     }
-    if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
-      router.replace('/')
+    return
+  }
+
+  // store 为空（页面刷新了） → 尝试从自动存档恢复
+  if (gameStore.hasAutoSave()) {
+    const ok = gameStore.loadSave(0)
+    if (ok && gameStore.state) {
+      // 存档恢复成功，更新 URL 以匹配存档的 playId
+      if (gameStore.state.meta.playId !== props.playId) {
+        router.replace({
+          name: 'play',
+          params: { worldId: props.worldId, playId: gameStore.state.meta.playId },
+        })
+      }
+      if (state.value?.phase === 'simulating') {
+        advanceToNextInteraction()
+      }
       return
     }
   }
-  // 首年自动开始
-  if (state.value?.phase === 'simulating') {
-    advanceToNextInteraction()
-  }
+
+  // 没有存档也无法恢复 → 回首页
+  router.replace('/')
 })
 
 /** 自动推进到下一个需要玩家交互的节点（事件/选择/结束） */
