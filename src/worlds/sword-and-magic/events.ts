@@ -3034,4 +3034,213 @@ export const events: WorldEventDef[] = [
     tag: 'life',
     priority: 'major',
   },
+  {
+    id: 'village_feud',
+    effects: [],
+    title: '村长之争',
+    description: '两个家族因为土地边界争吵不休，你恰好目击了一切...',
+    minAge: 7,
+    maxAge: 12,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'speak_for_weak',
+        title: '帮弱者说话',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 2, description: '魅力 +2（正义之声）' },
+          { type: 'set_flag', target: 'justice_lover', value: true, description: '成为正义之人' },
+        ],
+      },
+      {
+        id: 'pretend_not_see',
+        title: '假装没看到',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1（内心不安）' },
+        ],
+      },
+      {
+        id: 'tell_adult',
+        title: '去告诉大人',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（懂得求助）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
+  },
+  {
+    id: 'lost_treasure_map',
+    effects: [],
+    title: '藏宝图碎片',
+    description: '你在河里洗脚时踩到了一块刻着奇怪符号的石头...',
+    minAge: 8,
+    maxAge: 14,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'study_carefully',
+        title: '仔细研究',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2（解谜天赋）' },
+          { type: 'set_flag', target: 'treasure_hunter', value: true, description: '成为寻宝者' },
+        ],
+      },
+      {
+        id: 'throw_away',
+        title: '扔掉它',
+        probability: 0.3,
+        effects: [],
+      },
+      {
+        id: 'hide_it',
+        title: '藏起来',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（直觉）' },
+        ],
+      },
+    ],
+    tag: 'adventure',
+    priority: 'major',
+  },
+  {
+    id: 'young_rival',
+    effects: [],
+    title: '少年的对手',
+    description: '镇上来了一个和你同龄的天才少年，大家总是拿你们比较...',
+    minAge: 9,
+    maxAge: 14,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'surpass_him',
+        title: '努力超越他',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（刻苦锻炼）' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（勤学不辍）' },
+        ],
+      },
+      {
+        id: 'befriend_him',
+        title: '和他交朋友',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 2, description: '魅力 +2（赢得友谊）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（惺惺相惜）' },
+        ],
+      },
+      {
+        id: 'ignore_him',
+        title: '无视他',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（自在）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
+  },
+  {
+    id: 'rainy_day_adventure',
+    title: '雨日冒险',
+    description: '下着大雨，你偷偷溜出家门，在雨中发现了一个被废弃的地窖入口...',
+    minAge: 5,
+    maxAge: 9,
+    weight: 4,
+    unique: true,
+    effects: [],
+    branches: [
+      {
+        id: 'enter_cellar',
+        title: '钻进去看看',
+        description: '你鼓起勇气，摸黑走进了地窖',
+        probability: 0.4,
+        riskCheck: {
+          attribute: 'spr',
+          difficulty: 6,
+          scale: 2,
+        },
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2（地窖中的发现）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（勇气试炼）' },
+          { type: 'modify_hp', target: 'hp', value: -8, description: 'HP -8（跌落受伤）' },
+        ],
+      },
+      {
+        id: 'wait_at_door',
+        title: '在门口等雨停',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（静心聆听雨声）' },
+        ],
+      },
+      {
+        id: 'run_home_rain',
+        title: '跑回家',
+        probability: 0.25,
+        effects: [],
+      },
+    ],
+    tag: 'adventure',
+    priority: 'major',
+  },
+  {
+    id: 'first_competition',
+    title: '第一次比赛',
+    description: '村里举办了一年一度的儿童比赛，你被推上了赛场...',
+    minAge: 6,
+    maxAge: 10,
+    weight: 4,
+    unique: true,
+    effects: [],
+    branches: [
+      {
+        id: 'go_all_out',
+        title: '拼尽全力',
+        description: '你咬紧牙关，使出了全部力气',
+        probability: 0.4,
+        riskCheck: {
+          attribute: 'str',
+          difficulty: 6,
+          scale: 2,
+        },
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2（全力拼搏）' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（赢得喝彩）' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（虽败犹荣）' },
+        ],
+      },
+      {
+        id: 'strategic_forfeit',
+        title: '策略性放弃',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（审时度势）' },
+        ],
+      },
+      {
+        id: 'dirty_trick',
+        title: '暗中使绊',
+        description: '你趁裁判不注意，在对手脚下做了点手脚',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: -2, description: '魅力 -2（被发现了）' },
+          { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2（胜之不武）' },
+          { type: 'set_flag', target: 'dirty_player', value: 1, description: '学会了不择手段' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
+  },
 ]
