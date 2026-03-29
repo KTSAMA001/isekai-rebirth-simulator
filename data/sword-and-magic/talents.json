@@ -513,5 +513,539 @@
     "inheritable": true,
     "flavorText": "世界不过是一场游戏，而你，是那个按下重启键的人。",
     "draftWeight": 1
+  },
+  {
+    "id": "street_rascal",
+    "name": "街头混混",
+    "description": "从小在街头摸爬滚打，练就了一身小聪明和敏锐的直觉。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "monastery_upbringing",
+    "name": "寺院教养",
+    "description": "从小在寺院中长大，耳濡目染，心灵纯净。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3,
+        "description": "灵魂 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（与世隔绝）"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "fisherman_child",
+    "name": "渔家子弟",
+    "description": "大海的儿女，水性极佳，性格坚韧。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "traveling_minstrel",
+    "name": "游吟诗人之子",
+    "description": "父亲是走南闯北的吟游诗人，你从小就见多识广。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3,
+        "description": "魅力 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "blacksmith_apprentice",
+    "name": "铁匠学徒",
+    "description": "从小在火炉旁锤打钢铁，双臂有力，意志坚定。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "healer_lineage",
+    "name": "药草师传承",
+    "description": "家中世代行医，你从小就识得百草。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "stable_boy",
+    "name": "马厩少年",
+    "description": "在领主马厩中长大的孩子，和马匹比和人亲近。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "tavern_child",
+    "name": "酒馆之子",
+    "description": "在酒馆的喧嚣声中长大，三教九流无所不通。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "魅力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1,
+        "description": "家境 +1"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "moonlit_blessing",
+    "name": "月之祝福",
+    "description": "你出生在月全食之夜，据说这样的孩子灵魂格外通透。",
+    "rarity": "common",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2"
+      }
+    ],
+    "icon": "⭐",
+    "draftWeight": 10
+  },
+  {
+    "id": "elven_blood",
+    "name": "精灵血脉",
+    "description": "远祖中有精灵的血统，赋予你超凡的感知和魔力亲和。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3,
+        "description": "魔力 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": -1,
+        "description": "体魄 -1（体质单薄）"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "giant_heritage",
+    "name": "巨人后裔",
+    "description": "传说你的祖先曾与巨人缔结契约，赋予后代非凡的力量。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 4,
+        "description": "体魄 +4"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（不善思考）"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "prophet_eye",
+    "name": "先知之眼",
+    "description": "你天生拥有一只可以预见未来的眼睛……至少别人是这么说的。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 4,
+        "description": "运势 +4"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "cursed_wanderer",
+    "name": "诅咒流浪者",
+    "description": "一个不知名的诅咒跟随着你，让你四海漂泊，但也磨练了你的意志。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3,
+        "description": "灵魂 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -2,
+        "description": "家境 -2（身无分文）"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "mercenary_legacy",
+    "name": "佣兵世家",
+    "description": "你的家族世代以剑为生，从会走路开始就在练剑。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 3,
+        "description": "体魄 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1,
+        "description": "家境 +1"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "star_fallen",
+    "name": "星降之子",
+    "description": "一颗流星坠落的夜晚你出生了，额头上隐约有星形印记。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "魅力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "shadow_born",
+    "name": "暗影之子",
+    "description": "你出生在日食之时，周围的人都说你带着不祥之兆。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 3,
+        "description": "运势 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": -1,
+        "description": "魅力 -1（令人不安）"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "royal_tutor",
+    "name": "王室教师之徒",
+    "description": "幼时曾被退隐的王室教师收为弟子，接受了精英教育。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 4,
+        "description": "智慧 +4"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": -1,
+        "description": "体魄 -1（久坐书房）"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "beast_tamer",
+    "name": "驯兽师苗子",
+    "description": "从小就能和动物交流，村里的野兽见了你都很温顺。",
+    "rarity": "rare",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1"
+      }
+    ],
+    "icon": "💎",
+    "draftWeight": 5
+  },
+  {
+    "id": "time_traveler",
+    "name": "时空旅人",
+    "description": "你不属于这个世界。你的灵魂穿越了时空的裂隙，带着前世的记忆。",
+    "rarity": "legendary",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 5,
+        "description": "智慧 +5（前世记忆）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      }
+    ],
+    "icon": "🌟",
+    "draftWeight": 1
+  },
+  {
+    "id": "divine_chosen",
+    "name": "神之眷顾",
+    "description": "诸神之中有一位注视着你。祂的祝福将伴随你一生。",
+    "rarity": "legendary",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 5,
+        "description": "灵魂 +5（神赐）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "魅力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2"
+      }
+    ],
+    "icon": "🌟",
+    "draftWeight": 1
+  },
+  {
+    "id": "ancient_dragon_soul",
+    "name": "远古龙魂",
+    "description": "一头远古巨龙在陨落前将灵魂碎片注入了你的身体。",
+    "rarity": "legendary",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 3,
+        "description": "体魄 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3,
+        "description": "魔力 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1（龙威）"
+      }
+    ],
+    "icon": "🌟",
+    "draftWeight": 1
   }
 ]
