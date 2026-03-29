@@ -50,7 +50,7 @@ export class SimulationEngine {
     // 从第一个属性快照重建 initialStrRegen
     const firstSnapshot = state.attributeHistory[0]
     const initStr = firstSnapshot?.values?.['str'] ?? state.attributes['str'] ?? 0
-    engine.initialStrRegen = 1 + Math.floor(initStr / 4)
+    engine.initialStrRegen = 1 + Math.floor(initStr / 3)
 
     // 重建 routeAnchorsTriggered：已触发过的锚点事件不再重复触发
     const routes = world.manifest.routes ?? []
@@ -246,7 +246,7 @@ export class SimulationEngine {
     this.state.hp = this.computeInitHp()
     // 固定每年的恢复量（基于初始体魄，不随成长增长）
     const initStr = attributes['str'] ?? 0
-    this.initialStrRegen = 1 + Math.floor(initStr / 4)
+    this.initialStrRegen = 1 + Math.floor(initStr / 3)
 
     this.state = {
       ...this.state,

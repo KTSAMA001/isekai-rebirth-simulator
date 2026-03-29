@@ -786,7 +786,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -30,
+            "value": -15,
             "description": "HP -30"
           },
           {

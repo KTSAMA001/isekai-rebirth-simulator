@@ -1479,7 +1479,7 @@
       {
         "type": "modify_hp",
         "target": "hp",
-        "value": -20,
+        "value": -15,
         "description": "HP -20（濒死）"
       }
     ],
