@@ -128,7 +128,7 @@
     "maxAge": 30,
     "weight": 6,
     "include": "attribute.chr >= 10 & attribute.mny >= 8 & has.flag.knight | has.flag.lord | has.flag.merchant_master",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "unique": true,
     "effects": [],
     "branches": [
@@ -192,7 +192,7 @@
     "maxAge": 30,
     "weight": 5,
     "include": "attribute.chr >= 8",
-    "exclude": "has.flag.married",
+    "exclude": "has.flag.married | has.flag.in_relationship",
     "unique": true,
     "effects": [],
     "branches": [
@@ -3394,5 +3394,320 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "lover_quarrel",
+    "title": "第一次争吵",
+    "description": "不知道从什么小事开始的，但你们谁都不肯先低头。沉默比争吵更让人窒息。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "drama"
+    ],
+    "minAge": 18,
+    "maxAge": 35,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married",
+    "weight": 5,
+    "branches": [
+      {
+        "description": "你深吸一口气，先说了'对不起'",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（学会了退让）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1"
+          }
+        ]
+      },
+      {
+        "description": "你摔门而去，在雨里走了很久",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "value": -10,
+            "description": "HP -10（淋雨感冒）"
+          },
+          {
+            "type": "set_flag",
+            "target": "heartbroken",
+            "value": 1,
+            "description": "心碎"
+          },
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "分手"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "long_distance",
+    "title": "异地之恋",
+    "description": "梦想把你们送到了不同的城市。每天最期待的就是夜里的那通电话，但信号有时候真的很差。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "life"
+    ],
+    "minAge": 20,
+    "maxAge": 30,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married",
+    "weight": 4,
+    "branches": [
+      {
+        "description": "攒了三个月的钱，只为了一张去看对方的火车票",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2"
+          }
+        ]
+      },
+      {
+        "description": "\"我们都需要向前看。\"你们在电话两端同时沉默了很久",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "heartbroken",
+            "value": 1,
+            "description": "心碎"
+          },
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "分手"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wedding_anniversary",
+    "title": "结婚纪念日",
+    "description": "又是一年了。日子平淡得像白开水，但回头看看，白开水其实是世界上最珍贵的东西。",
+    "priority": "minor",
+    "tags": [
+      "romance",
+      "life"
+    ],
+    "minAge": 30,
+    "maxAge": 60,
+    "include": "has.flag.married",
+    "weight": 3,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1（满足感）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1"
+      }
+    ]
+  },
+  {
+    "id": "marriage_crisis",
+    "title": "婚姻的裂痕",
+    "description": "你们已经很久没有好好说过话了。餐桌上的沉默比刀还冷，孩子似乎也感觉到了什么。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "drama"
+    ],
+    "minAge": 35,
+    "maxAge": 55,
+    "include": "has.flag.married",
+    "weight": 4,
+    "branches": [
+      {
+        "description": "你决定放下骄傲，开始尝试重新了解身边的人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（成长）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "description": "你们平静地坐下来谈了很久，然后签下了那份文件",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "married",
+            "description": "离婚"
+          },
+          {
+            "type": "set_flag",
+            "target": "divorced",
+            "value": 1,
+            "description": "离婚"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lover_sickness",
+    "title": "病床前的守候",
+    "description": "那个人病的很重。你每天守在床边，握着那只越来越冰凉的手，心里不停祈祷着什么。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "tragedy"
+    ],
+    "minAge": 25,
+    "maxAge": 60,
+    "include": "has.flag.in_relationship | has.flag.married",
+    "weight": 3,
+    "branches": [
+      {
+        "description": "奇迹发生了。那个人慢慢睁开了眼睛，虚弱地笑了笑说'你还没走啊'",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2,
+            "description": "运势 +2"
+          },
+          {
+            "type": "modify_hp",
+            "value": -10,
+            "description": "HP -10（操劳）"
+          }
+        ]
+      },
+      {
+        "description": "那天早上，握着的手突然松开了。你愣了很久，才意识到脸上有什么东西在流",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "widowed",
+            "value": 1,
+            "description": "丧偶"
+          },
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "失去爱人"
+          },
+          {
+            "type": "remove_flag",
+            "target": "married",
+            "description": "失去配偶"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "灵魂 -3"
+          },
+          {
+            "type": "modify_hp",
+            "value": -25,
+            "description": "HP -25（悲痛欲绝）"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "second_chance_love",
+    "title": "第二春",
+    "description": "离婚后很久了，你以为自己再也不会心动。但在那个雨天，有人把伞递到了你头上。",
+    "priority": "minor",
+    "tags": [
+      "romance",
+      "life"
+    ],
+    "minAge": 35,
+    "maxAge": 60,
+    "include": "has.flag.divorced",
+    "exclude": "has.flag.in_relationship | has.flag.married",
+    "weight": 3,
+    "branches": [
+      {
+        "description": "你接过伞，鼓起勇气说'要不要一起喝杯热茶？'",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "再次恋爱"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "description": "你道了谢，转身走进了雨里。但嘴角不自觉地上扬了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1"
+          }
+        ]
+      }
+    ]
   }
 ]

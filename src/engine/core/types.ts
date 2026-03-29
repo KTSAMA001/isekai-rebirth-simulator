@@ -52,7 +52,7 @@ export interface WorldTalentDef {
 
 /** 事件效果 */
 export interface EventEffect {
-  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp' | 'set_counter' | 'modify_counter' | 'grant_item'
+  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'remove_flag' | 'modify_hp' | 'set_counter' | 'modify_counter' | 'grant_item'
   target: string
   value: number
   probability?: number

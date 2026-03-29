@@ -6,7 +6,7 @@
     "properties": {
       "type": {
         "type": "string",
-        "enum": ["modify_attribute", "set_attribute", "add_talent", "trigger_event", "set_flag", "modify_hp", "modify_max_hp_bonus", "set_counter", "modify_counter", "grant_item", "trigger_on_age"]
+        "enum": ["modify_attribute", "set_attribute", "add_talent", "trigger_event", "set_flag", "remove_flag", "modify_hp", "modify_max_hp_bonus", "set_counter", "modify_counter", "grant_item", "trigger_on_age"]
       },
       "target": { "type": "string" },
       "value": { "type": ["number", "boolean", "string"] },

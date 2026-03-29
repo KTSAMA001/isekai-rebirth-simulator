@@ -1583,6 +1583,18 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（心动）"
+          },
+          {
+            "type": "set_flag",
+            "target": "first_love",
+            "value": 1,
+            "description": "初恋"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "开始恋爱"
           }
         ],
         "failureEffects": [
@@ -1607,6 +1619,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（暗恋的滋味）"
+          },
+          {
+            "type": "set_flag",
+            "target": "first_love",
+            "value": 1,
+            "description": "初恋（暗恋）"
           }
         ]
       },
