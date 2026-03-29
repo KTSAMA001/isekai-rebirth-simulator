@@ -2224,5 +2224,141 @@
     "unique": true,
     "tag": "exploration",
     "priority": "major"
+  },
+  {
+    "id": "dual_charisma_magic",
+    "title": "魅力施法者",
+    "description": "你的魔法不是用来战斗的——你是用它来表演的。一位剧团团长邀请你加入。",
+    "minAge": 16,
+    "maxAge": 30,
+    "weight": 2,
+    "include": "attribute.chr >= 14 & attribute.mag >= 10",
+    "effects": [],
+    "branches": [
+      {
+        "id": "charmagic_join",
+        "title": "加入剧团",
+        "description": "在舞台闪耀",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（演出收入）"
+          },
+          {
+            "type": "set_flag",
+            "target": "stage_mage",
+            "value": 1,
+            "description": "舞台魔法师"
+          }
+        ]
+      },
+      {
+        "id": "charmagic_freelance",
+        "title": "自由表演",
+        "description": "不受约束",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "charmagic_decline",
+        "title": "不感兴趣",
+        "description": "我可不是小丑",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "dual_scholar_warrior",
+    "title": "学者战士",
+    "description": "你在王都最大的图书馆里兼职做保安。一位老学者注意到了你的特点：既强壮又聪明。",
+    "minAge": 18,
+    "maxAge": 30,
+    "weight": 2,
+    "include": "attribute.str >= 12 & attribute.int >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "sw_research",
+        "title": "接受指导",
+        "description": "一个特殊的修行项目",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "scholar_warrior",
+            "value": 1,
+            "description": "学者战士"
+          }
+        ]
+      },
+      {
+        "id": "sw_guard",
+        "title": "专心保安",
+        "description": "简单直接",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1"
+          }
+        ]
+      },
+      {
+        "id": "sw_quit",
+        "title": "辞职",
+        "description": "有更好的事做",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]

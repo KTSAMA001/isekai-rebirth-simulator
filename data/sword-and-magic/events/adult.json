@@ -2660,5 +2660,727 @@
     "unique": true,
     "tag": "exploration",
     "priority": "minor"
+  },
+  {
+    "id": "dual_war_mage",
+    "title": "战争法师",
+    "description": "军队需要一位既能冲前线又能施展魔法的战争法师。你有这个能力。",
+    "minAge": 20,
+    "maxAge": 40,
+    "weight": 2,
+    "include": "attribute.str >= 14 & attribute.mag >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "warmage_join",
+        "title": "报名",
+        "description": "两个都擅长就该用上",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_mage",
+            "value": 1,
+            "description": "战争法师！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25"
+          }
+        ],
+        "successText": "你成为了传说级的战争法师！",
+        "failureText": "战场太残酷了..."
+      },
+      {
+        "id": "warmage_train",
+        "title": "先训练",
+        "description": "还不能上战场",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          }
+        ]
+      },
+      {
+        "id": "warmage_refuse",
+        "title": "不了",
+        "description": "我选一个就行",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "major"
+  },
+  {
+    "id": "dual_merchant_spy",
+    "title": "暗商",
+    "description": "一位神秘商人提出了一份特殊的交易：帮你收集情报，你帮他运输'特殊货物'。利润极高。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 2,
+    "include": "attribute.mny >= 12 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "spy_accept",
+        "title": "接受",
+        "description": "高风险高回报",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 6,
+            "description": "家境 +6"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "underworld_contact",
+            "value": 1,
+            "description": "地下世界人脉"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -4,
+            "description": "家境 -4（被查获）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          }
+        ],
+        "successText": "你建立了庞大的情报网络！",
+        "failureText": "被卫兵查获了..."
+      },
+      {
+        "id": "spy_decline",
+        "title": "拒绝",
+        "description": "违法的事我不干",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "spy_investigate",
+        "title": "调查他",
+        "description": "先看看是什么来头",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "challenge_abyss",
+    "title": "深渊之门",
+    "description": "大地裂开了一道口子，黑色的雾气从裂缝中涌出。所有靠近的人都说听到了低语...",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 1,
+    "include": "attribute.spr >= 20",
+    "effects": [],
+    "branches": [
+      {
+        "id": "abyss_enter",
+        "title": "走入深渊",
+        "description": "低语在呼唤你",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 26,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 5,
+            "description": "灵魂 +5（深渊觉醒）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "魔力 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "abyss_walker",
+            "value": 1,
+            "description": "深渊行者！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50（深渊吞噬）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "灵魂 -3"
+          }
+        ],
+        "successText": "你征服了深渊！你的灵魂焕然一新。",
+        "failureText": "深渊差点吞噬了你的灵魂..."
+      },
+      {
+        "id": "abyss_seal",
+        "title": "封印裂缝",
+        "description": "这是更大的威胁",
+        "probability": 0.3,
+        "requireCondition": "attribute.mag >= 16",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（英雄）"
+          }
+        ]
+      },
+      {
+        "id": "abyss_flee",
+        "title": "远离",
+        "description": "这不是人能碰的",
+        "probability": 0.5,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "challenge_god_trial",
+    "title": "神之试炼",
+    "description": "一道金色的光从天而降，包裹了你。一个宏大的声音响起：'凡人，你将接受试炼。'",
+    "minAge": 35,
+    "maxAge": 60,
+    "weight": 1,
+    "include": "attribute.spr >= 22 & attribute.str >= 16 & attribute.mag >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "god_accept",
+        "title": "接受试炼",
+        "description": "这是命运的召唤",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 28,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 6,
+            "description": "灵魂 +6（神眷）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "divine_champion",
+            "value": 1,
+            "description": "神之冠军！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -60,
+            "description": "HP -60（神罚）"
+          }
+        ],
+        "successText": "你通过了神之试炼！光芒环绕着你！",
+        "failureText": "你的凡人之躯承受不住神力..."
+      },
+      {
+        "id": "god_refuse",
+        "title": "拒绝",
+        "description": "我只是凡人",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（谦逊）"
+          }
+        ]
+      },
+      {
+        "id": "god_bargain",
+        "title": "讨价还价",
+        "description": "能不能简单点",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "challenge_final_boss",
+    "title": "魔王降临",
+    "description": "天空变成了血红色。魔王带着他的大军出现在王都上空。这是最终决战。",
+    "minAge": 35,
+    "maxAge": 60,
+    "weight": 1,
+    "include": "(attribute.str >= 18 | attribute.mag >= 18) & attribute.spr >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "boss_fight",
+        "title": "直面魔王",
+        "description": "最后的战斗！",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 26,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 4,
+            "description": "体魄 +4"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（救世主）"
+          },
+          {
+            "type": "set_flag",
+            "target": "demon_king_slayer",
+            "value": 1,
+            "description": "弑魔勇者！！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -60,
+            "description": "HP -60（致命伤）"
+          }
+        ],
+        "successText": "你击败了魔王！世界得救了！",
+        "failureText": "魔王太强了..."
+      },
+      {
+        "id": "boss_magic",
+        "title": "用魔法对抗",
+        "description": "魔法或许更有效",
+        "probability": 0.2,
+        "requireCondition": "attribute.mag >= 20",
+        "riskCheck": {
+          "attribute": "mag",
+          "difficulty": 26,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4,
+            "description": "魔力 +4"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "demon_king_slayer",
+            "value": 1,
+            "description": "弑魔勇者！！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -60,
+            "description": "HP -60"
+          }
+        ],
+        "successText": "你的魔法击碎了魔王！",
+        "failureText": "魔王的黑暗魔法太强大..."
+      },
+      {
+        "id": "boss_support",
+        "title": "辅助",
+        "description": "不是所有人都要当主角",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "boss_evacuate",
+        "title": "帮助撤离",
+        "description": "先保住平民",
+        "probability": 0.3,
+        "requireCondition": "attribute.chr >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "chain_rise_to_power",
+    "title": "权力之路",
+    "description": "你的名声越来越大。有人开始议论——也许你该去参选城镇议会。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "(has.flag.war_hero | has.flag.orator | has.flag.champion) & attribute.chr >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "power_run",
+        "title": "参选",
+        "description": "是时候了",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "chr",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（议员俸禄）"
+          },
+          {
+            "type": "set_flag",
+            "target": "council_member",
+            "value": 1,
+            "description": "议会议员"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（落选）"
+          }
+        ],
+        "successText": "你当选了！",
+        "failureText": "票数差一点..."
+      },
+      {
+        "id": "power_kingmaker",
+        "title": "做幕后推手",
+        "description": "不自己上",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "power_decline",
+        "title": "没兴趣",
+        "description": "政治太复杂",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "chain_master_craftsman",
+    "title": "匠心独运",
+    "description": "多年积累的经验让你成为了领域内的权威。有人想拜你为师。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "(has.flag.famous_inventor | has.flag.elemental_master | has.flag.tower_master | has.flag.researcher) & attribute.int >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "craft_teach",
+        "title": "收徒",
+        "description": "传承很重要",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "master_mentor",
+            "value": 1,
+            "description": "大师导师"
+          }
+        ]
+      },
+      {
+        "id": "craft_write",
+        "title": "写书",
+        "description": "把知识记录下来",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_author",
+            "value": 1,
+            "description": "著名作者"
+          }
+        ]
+      },
+      {
+        "id": "craft_retire",
+        "title": "享受成果",
+        "description": "够了",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "chain_dark_past",
+    "title": "黑暗过去",
+    "description": "你过去做的一些事情被翻了出来。有人拿着证据威胁你...",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 2,
+    "include": "has.flag.underworld_contact | attribute.int >= 10",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dark_negotiate",
+        "title": "谈判",
+        "description": "让他们闭嘴",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（封口费）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2,
+            "description": "魅力 -2（丑闻）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3"
+          }
+        ],
+        "successText": "你成功让他们闭嘴了",
+        "failureText": "丑闻传遍了整个王国..."
+      },
+      {
+        "id": "dark_confess",
+        "title": "坦白",
+        "description": "真相迟早会出来",
+        "probability": 0.3,
+        "requireCondition": "attribute.spr >= 10",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1"
+          }
+        ]
+      },
+      {
+        "id": "dark_threaten",
+        "title": "威胁回去",
+        "description": "别以为我好欺负",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]
