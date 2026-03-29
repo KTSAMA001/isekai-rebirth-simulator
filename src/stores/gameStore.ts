@@ -31,7 +31,7 @@ export const useGameStore = defineStore('game', () => {
     const world = worldStore.getCurrentWorld()
     if (!world) throw new Error('未选择世界')
 
-    engine.value = new SimulationEngine(world, seed)
+    engine.value = new SimulationEngine(world)
     state.value = engine.value.initGame(characterName, presetId)
   }
 
