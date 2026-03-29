@@ -19,6 +19,36 @@ const talentDefs = computed(() => {
     .filter(Boolean)
 })
 
+const inventoryItems = computed(() => {
+  return props.state.inventory.items
+    .map(slot => {
+      const def = props.world.index.itemsById?.get(slot.itemId)
+      if (!def) return null
+      return { def, slot }
+    })
+    .filter(Boolean) as { def: any; slot: any }[]
+})
+
+function itemTooltip(item: { def: any; slot: any }) {
+  const def = item.def
+  const effectDescs = def.effects.map((e: any) => {
+    switch (e.type) {
+      case 'hp_regen_bonus': return e.value > 0 ? `每年HP恢复+${e.value}` : `每年HP恢复${e.value}`
+      case 'hp_flat_bonus': return `HP+${e.value}`
+      case 'attr_passive_growth': return `${e.target}成长+${e.value}/年`
+      case 'skill_check_bonus': return `判定+${Math.round(e.value * 100)}%`
+      case 'damage_reduction': return `伤害减免${Math.round(e.value * 100)}%`
+      case 'death_save': return `免死一次(恢复${e.value}HP)`
+      case 'conditional_regen': return `HP<${e.condition?.match(/\d+/)?.[0] ?? '?'}时恢复${e.value}`
+      case 'hp_cap_modifier': return `HP上限${e.value > 0 ? '+' : ''}${Math.round(e.value * 100)}%`
+      case 'attr_floor': return `${e.target}不低于${e.value}`
+      default: return e.type
+    }
+  })
+  const rarityLabel = { common: '普通', rare: '稀有', legendary: '传说' }[def.rarity]
+  return [`${def.icon} ${def.name} [${rarityLabel}]`, def.description, '---', ...effectDescs].join('\n')
+}
+
 /** HP 等级颜色：HP 低于初始值(30)变红 */
 function hpClass() {
   if (props.state.hp <= 10) return 'low'
@@ -72,6 +102,22 @@ function toggleExpand() {
         <span v-for="t in talentDefs" :key="t!.id" class="talent-detail-tag" :class="`rarity-${t!.rarity}`">
           {{ t!.icon }} {{ t!.name }}
         </span>
+      </div>
+      <!-- 物品栏 -->
+      <div v-if="inventoryItems.length > 0" class="items-section">
+        <div class="items-title">物品 <span class="items-count">{{ inventoryItems.length }}/{{ state.inventory.maxSlots }}</span></div>
+        <div class="items-grid">
+          <div
+            v-for="item in inventoryItems"
+            :key="item.def.id"
+            class="item-slot"
+            :class="`rarity-${item.def.rarity}`"
+            :title="itemTooltip(item)"
+          >
+            <span class="item-icon">{{ item.def.icon }}</span>
+            <span class="item-name">{{ item.def.name }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -206,4 +252,63 @@ function toggleExpand() {
 .talent-detail-tag.rarity-common { background: rgba(96, 165, 250, 0.12); color: var(--rarity-common); }
 .talent-detail-tag.rarity-rare { background: rgba(192, 132, 252, 0.12); color: var(--rarity-rare); }
 .talent-detail-tag.rarity-legendary { background: rgba(251, 191, 36, 0.12); color: var(--rarity-legendary); }
+
+/* 物品栏 */
+.items-section {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-color);
+}
+
+.items-title {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.items-count {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.items-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.item-slot {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  cursor: default;
+  transition: transform 0.15s;
+  border: 1px solid transparent;
+}
+
+.item-slot:hover {
+  transform: scale(1.05);
+  border-color: var(--border-color);
+}
+
+.item-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.item-name {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+
+.item-slot.rarity-common { background: rgba(96, 165, 250, 0.08); }
+.item-slot.rarity-rare { background: rgba(192, 132, 252, 0.08); }
+.item-slot.rarity-legendary { background: rgba(251, 191, 36, 0.08); }
 </style>
