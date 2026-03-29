@@ -128,7 +128,7 @@
     "maxAge": 30,
     "weight": 6,
     "include": "attribute.chr >= 10 & attribute.mny >= 8 & has.flag.knight | has.flag.lord | has.flag.merchant_master",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.in_relationship | has.flag.widowed",
     "unique": true,
     "effects": [],
     "branches": [
@@ -192,7 +192,7 @@
     "maxAge": 30,
     "weight": 5,
     "include": "attribute.chr >= 8",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.in_relationship | has.flag.widowed",
     "unique": true,
     "effects": [],
     "branches": [
@@ -3750,7 +3750,10 @@
       }
     ],
     "effects": [],
-    "unique": true
+    "unique": true,
+    "prerequisites": [
+      "has.flag.in_relationship"
+    ]
   },
   {
     "id": "family_blessing",

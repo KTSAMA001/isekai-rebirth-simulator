@@ -1633,7 +1633,14 @@
         "title": "装作不在意",
         "description": "你强迫自己移开目光，装作若无其事地走向另一个摊位。但风吹来的那一缕发香，却让整整一天都心不在焉。",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "first_love",
+            "value": 1,
+            "description": "心动了"
+          }
+        ]
       }
     ],
     "tag": "life",

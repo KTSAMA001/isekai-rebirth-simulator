@@ -20,6 +20,8 @@ interface ScoreData {
   lifespan: number
   currentScore: number
   currentGrade: string
+  eventLog: { age: number; eventId: string; branchId?: string }[]
+  flags: Set<string>
 }
 
 function runOneGame(seed: number): ScoreData {
@@ -108,6 +110,8 @@ function runOneGame(seed: number): ScoreData {
     lifespan: result.details.lifespan,
     currentScore: result.score,
     currentGrade: result.grade,
+    eventLog: finalState.eventLog.map(e => ({ age: e.age, eventId: e.eventId, branchId: (e as any).branchId })),
+    flags: finalState.flags,
   }
 }
 
@@ -152,6 +156,96 @@ function main() {
   for (const p of [10, 25, 50, 75, 90]) {
     const idx = Math.floor(N * p / 100)
     console.log(`  P${p}: ${scores[Math.min(idx, N-1)]}`)
+  }
+
+  // === 详细事件日志 ===
+  console.log('\n' + '='.repeat(60))
+  console.log('详细事件日志 + 关联分析')
+  console.log('='.repeat(60))
+
+  for (let i = 0; i < N; i++) {
+    const d = data[i]
+    console.log(`\n--- R${String(i+1).padStart(2)} (age=${d.lifespan}, grade=${d.currentGrade}) ---`)
+    for (const ev of d.eventLog) {
+      const branch = ev.branchId ? ` [${ev.branchId}]` : ''
+      console.log(`  age=${String(ev.age).padStart(2)}  ${ev.eventId}${branch}`)
+    }
+    const flagArr = [...d.flags].filter(f => !f.startsWith('triggered_') && !f.startsWith('near_') && !f.startsWith('miracle_'))
+    if (flagArr.length > 0) {
+      console.log(`  最终flags: ${flagArr.join(', ')}`)
+    }
+  }
+
+  // === 事件关联分析 ===
+  console.log('\n' + '='.repeat(60))
+  console.log('事件关联分析')
+  console.log('='.repeat(60))
+
+  // 1. 链式事件检测：同一局中先后出现的有前置关系的事件
+  const chainPairs: Record<string, number> = {}
+  const knownChains: Record<string, string> = {
+    'bullied': 'bullied_child',
+    'bullied_repeat': 'bullied_child',
+    'bullied_fight_back': 'bullied_child',
+    'heartbreak_growth': 'heartbroken',
+    'first_love': 'first_love',
+    'love_at_first_sight': 'first_love',
+    'marry_noble': 'married',
+    'marry_adventurer': 'married',
+    'family_blessing': 'parent',
+    'lover_death_battlefield': 'married',
+    'widowed_wanderer': 'widowed',
+    'starlight_promise': 'in_relationship',
+    'rescue_from_dungeon': 'in_relationship',
+    'soul_bound': 'in_relationship',
+  }
+
+  for (const d of data) {
+    const events = d.eventLog
+    for (let a = 0; a < events.length; a++) {
+      for (let b = a + 1; b < events.length; b++) {
+        const pair = `${events[a].eventId} → ${events[b].eventId}`
+        chainPairs[pair] = (chainPairs[pair] || 0) + 1
+      }
+    }
+  }
+
+  // 输出出现2次以上的连续事件对
+  console.log('\n--- 常见事件序列（≥2次） ---')
+  const sorted = Object.entries(chainPairs).filter(([,c]) => c >= 2).sort((a,b) => b[1] - a[1])
+  for (const [pair, count] of sorted.slice(0, 30)) {
+    console.log(`  ${pair}: ${count}次`)
+  }
+
+  // 2. 有前置flag但没触发前置事件的情况
+  console.log('\n--- 前置Flag问题检测 ---')
+  for (const d of data) {
+    const eventIds = new Set(d.eventLog.map(e => e.eventId))
+    for (const [eventId, requiredFlag] of Object.entries(knownChains)) {
+      if (eventIds.has(eventId) && !d.flags.has(requiredFlag) && !eventIds.has(requiredFlag.replace('has.flag.',''))) {
+        // Check if the flag was set by an earlier event in the same game
+        const flagSetByEvent = d.eventLog.some(e => {
+          return e.eventId === 'bullied' || e.eventId === 'bullied_repeat' || 
+                 e.eventId === 'first_love' || e.eventId === 'love_at_first_sight' ||
+                 e.eventId === 'marry_noble' || e.eventId === 'marry_adventurer'
+        })
+        console.log(`  R${data.indexOf(d)+1}: ${eventId} 触发了但缺 ${requiredFlag} flag`)
+      }
+    }
+  }
+
+  // 3. 事件触发频率
+  console.log('\n--- 全部事件触发频率 ---')
+  const eventFreq: Record<string, number> = {}
+  for (const d of data) {
+    for (const ev of d.eventLog) {
+      eventFreq[ev.eventId] = (eventFreq[ev.eventId] || 0) + 1
+    }
+  }
+  const freqSorted = Object.entries(eventFreq).sort((a,b) => b[1] - a[1])
+  for (const [eid, count] of freqSorted) {
+    const pct = Math.round(count / N * 100)
+    console.log(`  ${eid}: ${count}/${N} (${pct}%)`)
   }
 }
 
