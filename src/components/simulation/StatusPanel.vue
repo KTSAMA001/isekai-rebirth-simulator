@@ -53,7 +53,7 @@ function itemTooltip(item: { def: any; slot: any }) {
       default: return e.type
     }
   })
-  const rarityLabel = { common: '普通', rare: '稀有', legendary: '传说' }[def.rarity]
+  const rarityLabel = ({ common: '普通', rare: '稀有', legendary: '传说' } as Record<string, string>)[def.rarity]
   return [`${def.icon} ${def.name} [${rarityLabel}]`, def.description, '---', ...effectDescs].join('\n')
 }
 </script>

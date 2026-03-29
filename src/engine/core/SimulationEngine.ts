@@ -350,7 +350,7 @@ export class SimulationEngine {
       this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
       this.pendingYearEvent = null
       this.postYearProcess()
-      return { phase: 'showing_event', event: anchorEvent, eventTexts, logEntry }
+      return { phase: 'showing_event', event: anchorEvent, effectTexts, logEntry }
     }
 
     // === Age 1 强制 birth 事件 ===
@@ -358,6 +358,7 @@ export class SimulationEngine {
       const birthEvents = candidates.filter(e => e.id.startsWith('birth_'))
       if (birthEvents.length > 0) {
         const birthEvent = this.eventModule.pickEvent(birthEvents)
+        if (birthEvent) {
         this.pendingYearEvent = birthEvent
         this.state = {
           ...this.state,
@@ -372,6 +373,7 @@ export class SimulationEngine {
         this.pendingYearEvent = null
         this.postYearProcess()
         return { phase: 'showing_event', event: birthEvent, effectTexts, logEntry }
+        }
       }
     }
 

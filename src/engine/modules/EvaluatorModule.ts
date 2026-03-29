@@ -28,12 +28,8 @@ export class EvaluatorModule {
     const lifespanScore = lifespan * 0.5
     const itemScore = state.inventory.items.length * 3
     const itemCount = state.inventory.items.length
-    // 路线奖励：有路线锚点才加分
+    // 路线奖励：基于已触发的锚点数量加分
     let routeBonus = 0
-    if (state.routeId) {
-      const route = this.world.index.routesById?.get(state.routeId)
-      if (route) routeBonus = route.priority * 0.5
-    }
     const score = attrScore + lifespanScore + itemScore + routeBonus
 
     // 确定评级

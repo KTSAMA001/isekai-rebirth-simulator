@@ -223,7 +223,7 @@ export class EventModule {
       }
       case 'grant_item': {
         // 物品获取由 SimulationEngine 处理
-        break
+        return effect.description ?? ''
       }
       case 'trigger_event': {
         // 触发后续事件

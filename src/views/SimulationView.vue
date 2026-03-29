@@ -97,7 +97,7 @@ function advanceToNextInteraction() {
     if (result.phase === 'mundane_year') {
       // 平淡年 → 自动跳过，继续下一年
       gameStore.skipYear()
-      if (state.value?.phase === 'finished') {
+      if ((state.value?.phase as string) === 'finished') {
         currentYearResult.value = result
         checkFinished()
         return
