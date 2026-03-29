@@ -1467,8 +1467,8 @@
       {
         "type": "modify_hp",
         "target": "hp",
-        "value": -40,
-        "description": "HP -40（濒死）"
+        "value": -20,
+        "description": "HP -20（濒死）"
       }
     ],
     "branches": [
@@ -1527,8 +1527,8 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -30,
-            "description": "HP -30"
+            "value": -15,
+            "description": "HP -15"
           }
         ],
         "successText": "你从死神手中挣脱！",
