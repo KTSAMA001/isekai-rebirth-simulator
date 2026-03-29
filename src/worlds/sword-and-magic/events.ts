@@ -271,12 +271,11 @@ export const events: WorldEventDef[] = [
   },
   {
     id: 'noble_kid_revenge',
-    title: '权贵的报复',
-    description: '上次被你打跑的那个孩子，他父亲是村里的权贵。今天，他带着一群人来了。',
+    title: '权贵的孩子',
+    description: '一个穿着华丽的同龄孩子当街抢走了你的东西，周围的人视而不见——大家都知道他父亲是谁。',
     minAge: 5,
     maxAge: 9,
-    weight: 4,
-    include: 'has.flag.fight_back',
+    weight: 2,
     unique: true,
     effects: [],
     branches: [
