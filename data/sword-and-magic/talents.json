@@ -98,7 +98,7 @@
         "type": "modify_attribute",
         "target": "str",
         "value": -1,
-        "description": "体魄 -1"
+        "description": "可分配点数 -1（体魄天赋不足）"
       }
     ],
     "draftWeight": 100
@@ -208,7 +208,7 @@
         "type": "modify_attribute",
         "target": "spr",
         "value": -1,
-        "description": "灵魂 -1"
+        "description": "可分配点数 -1（灵魂天赋不足）"
       }
     ],
     "draftWeight": 100
@@ -443,7 +443,7 @@
         "type": "modify_attribute",
         "target": "spr",
         "value": -2,
-        "description": "灵魂 -2"
+        "description": "可分配点数 -2（灵魂天赋不足）"
       }
     ],
     "draftWeight": 10
