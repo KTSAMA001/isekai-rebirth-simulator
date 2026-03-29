@@ -453,7 +453,10 @@
       }
     ],
     "tag": "combat",
-    "priority": "major"
+    "priority": "major",
+    "prerequisites": [
+      "has.flag.bullied_child"
+    ]
   },
   {
     "id": "dungeon_explore_1",
