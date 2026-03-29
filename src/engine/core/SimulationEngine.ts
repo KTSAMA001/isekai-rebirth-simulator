@@ -137,20 +137,33 @@ export class SimulationEngine {
       console.warn(`[天赋] 互斥冲突已自动解决: ${conflicts.join('; ')}`)
     }
 
-    // 计算天赋扣减点数（type=modify_attribute 且 value<0 的绝对值之和）
+    // 处理天赋效果：正值直接加到属性上，负值扣减可分配点数
     let penalty = 0
+    const talentAttrs: Record<string, number> = {}
     for (const id of selected) {
       const def = this.world.index.talentsById.get(id)
       if (!def) continue
       for (const eff of def.effects) {
-        if (eff.type === 'modify_attribute' && eff.value !== undefined && eff.value < 0) {
-          penalty += Math.abs(eff.value)
+        if (eff.type === 'modify_attribute' && eff.value !== undefined) {
+          if (eff.value < 0) {
+            penalty += Math.abs(eff.value)
+          } else {
+            talentAttrs[eff.target] = (talentAttrs[eff.target] ?? 0) + eff.value
+          }
         }
       }
     }
 
+    // 应用天赋正值加成到属性
+    let attrs = { ...this.state.attributes }
+    for (const [attrId, bonus] of Object.entries(talentAttrs)) {
+      const max = this.world.attributes.find(a => a.id === attrId)?.max ?? 99
+      attrs[attrId] = Math.min((attrs[attrId] ?? 0) + bonus, max)
+    }
+
     this.state = {
       ...this.state,
+      attributes: attrs,
       talents: {
         ...this.state.talents,
         selected,

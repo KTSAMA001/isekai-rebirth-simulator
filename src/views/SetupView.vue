@@ -49,7 +49,7 @@ const talentPenalty = computed(() => {
   return gameStore.state?.talentPenalty ?? 0
 })
 
-// 属性初始值 — 始终使用 defaultValue（天赋效果通过扣减点数体现，不直接修改属性值）
+// 属性初始值 — defaultValue + 天赋正值加成（负值通过扣减点数体现）
 const baseValues = computed(() => {
   const vals: Record<string, number> = {}
   for (const attr of world.value?.attributes ?? []) {
@@ -63,6 +63,10 @@ const baseValues = computed(() => {
         vals[k] = (vals[k] ?? 0) + v
       }
     }
+  }
+  // 应用天赋正值加成
+  for (const [attrId, bonus] of Object.entries(talentBonuses.value)) {
+    vals[attrId] = (vals[attrId] ?? 0) + bonus
   }
   return vals
 })
