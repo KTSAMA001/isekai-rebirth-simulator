@@ -1817,5 +1817,848 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "mage_magic_tower",
+    "title": "法师塔",
+    "description": "你被邀请参观王国最著名的法师塔。塔主是一位神秘的老魔法师，据说他活了三百年。",
+    "minAge": 25,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "has.flag.magic_graduate & attribute.mag >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "tower_challenge",
+        "title": "挑战塔主",
+        "description": "你的魔力足够强了",
+        "probability": 0.2,
+        "requireCondition": "attribute.mag >= 20",
+        "riskCheck": {
+          "attribute": "mag",
+          "difficulty": 22,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4,
+            "description": "魔力 +4（超越大师）"
+          },
+          {
+            "type": "set_flag",
+            "target": "tower_master",
+            "value": 1,
+            "description": "法师塔新主人！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2"
+          }
+        ],
+        "successText": "你击败了三百年的老魔法师！",
+        "failureText": "差距太大了..."
+      },
+      {
+        "id": "tower_learn",
+        "title": "拜师学艺",
+        "description": "还有很多要学的",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "tower_observe",
+        "title": "参观而已",
+        "description": "过来看看",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "critical"
+  },
+  {
+    "id": "mage_elemental_plane",
+    "title": "元素位面",
+    "description": "你在一次传送实验中意外打开了通往元素位面的裂缝。纯粹的火焰、冰霜和雷电在你面前交织。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "has.flag.magic_graduate & attribute.mag >= 18 & attribute.spr >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "plane_absorb",
+        "title": "吸收元素之力",
+        "description": "这可能是你最强的一次突破",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 22,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 5,
+            "description": "魔力 +5（元素精华）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "elemental_lord",
+            "value": 1,
+            "description": "元素之主！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -35,
+            "description": "HP -35（元素暴走）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -3,
+            "description": "魔力 -3"
+          }
+        ],
+        "successText": "你驾驭了元素之力！",
+        "failureText": "元素的力量将你击飞..."
+      },
+      {
+        "id": "plane_study",
+        "title": "研究裂缝",
+        "description": "科学的态度",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          }
+        ]
+      },
+      {
+        "id": "plane_seal",
+        "title": "封印裂缝",
+        "description": "太危险了",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "critical"
+  },
+  {
+    "id": "mage_magic_war",
+    "title": "魔法战争",
+    "description": "两个魔法城邦之间的战争一触即发。作为魔法师，你无法置身事外——两边都向你发出了邀请。",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "has.flag.magic_graduate",
+    "effects": [],
+    "branches": [
+      {
+        "id": "magicwar_fight",
+        "title": "参战",
+        "description": "为了正义！",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "mag",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2（实战）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1,
+            "description": "战争英雄"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          }
+        ],
+        "successText": "你的魔法扭转了战局！",
+        "failureText": "敌人的魔法太强了..."
+      },
+      {
+        "id": "magicwar_negotiate",
+        "title": "充当调解人",
+        "description": "战争没有赢家",
+        "probability": 0.3,
+        "requireCondition": "attribute.chr >= 12 & attribute.int >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "magicwar_neutral",
+        "title": "保持中立",
+        "description": "别卷进去",
+        "probability": 0.5,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "major"
+  },
+  {
+    "id": "knight_siege",
+    "title": "城堡围攻",
+    "description": "一支叛军围攻了边境城堡。作为骑士，你有义务保卫王国。",
+    "minAge": 22,
+    "maxAge": 45,
+    "weight": 3,
+    "include": "has.flag.knight & attribute.str >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "siege_lead",
+        "title": "领兵冲锋",
+        "description": "骑士就该冲锋陷阵",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1,
+            "description": "战争英雄"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25"
+          }
+        ],
+        "successText": "你击溃了叛军！",
+        "failureText": "被箭射中了..."
+      },
+      {
+        "id": "siege_defend",
+        "title": "守城",
+        "description": "更稳妥的选择",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "siege_retreat",
+        "title": "撤退",
+        "description": "这仗打不了",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "major"
+  },
+  {
+    "id": "knight_dragon_quest",
+    "title": "屠龙",
+    "description": "一条巨龙出现在王国北部。国王悬赏勇者前往讨伐。",
+    "minAge": 28,
+    "maxAge": 50,
+    "weight": 2,
+    "include": "has.flag.knight & attribute.str >= 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dragon_hunt",
+        "title": "接受任务",
+        "description": "这是骑士的终极使命",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 24,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 4,
+            "description": "体魄 +4（屠龙者）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（国王赏赐）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_slayer",
+            "value": 1,
+            "description": "屠龙勇者！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50（龙息）"
+          }
+        ],
+        "successText": "你击败了巨龙！王国为你欢呼！",
+        "failureText": "龙息将你吞没..."
+      },
+      {
+        "id": "dragon_party",
+        "title": "组建队伍",
+        "description": "人多力量大",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "dragon_refuse",
+        "title": "拒绝了",
+        "description": "活着不好吗",
+        "probability": 0.5,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "merchant_guild",
+    "title": "商行",
+    "description": "你有了一个大胆的想法——成立自己的商行。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 3,
+    "include": "has.flag.merchant_apprentice & attribute.mny >= 10 & attribute.int >= 10",
+    "effects": [],
+    "branches": [
+      {
+        "id": "guild_found",
+        "title": "创业！",
+        "description": "就从今天开始",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "guild_founder",
+            "value": 1,
+            "description": "商行创始人"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（创业失败）"
+          }
+        ],
+        "successText": "你的商行蒸蒸日上！",
+        "failureText": "第一个季度就亏了..."
+      },
+      {
+        "id": "guild_joint",
+        "title": "找人合伙",
+        "description": "分担风险",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "guild_pass",
+        "title": "算了",
+        "description": "做生意太难了",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "merchant_auction",
+    "title": "稀有拍卖会",
+    "description": "一年一度的稀有品拍卖会。据说这次的压轴拍品是一把古代神器。",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 2,
+    "include": "has.flag.merchant_apprentice & attribute.mny >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "auction_bid",
+        "title": "竞拍神器",
+        "description": "这东西值多少钱？",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "mny",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（神器持有者）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（升值空间）"
+          },
+          {
+            "type": "set_flag",
+            "target": "artifact_owner",
+            "value": 1,
+            "description": "神器持有者"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -4,
+            "description": "家境 -4（高价竞拍）"
+          }
+        ],
+        "successText": "你成功拍下了神器！",
+        "failureText": "被一个神秘买家截胡了"
+      },
+      {
+        "id": "auction_network",
+        "title": "混圈子",
+        "description": "来交朋友的",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "auction_watch",
+        "title": "看热闹",
+        "description": "没钱也来见识见识",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "merchant_economic_crisis",
+    "title": "经济危机",
+    "description": "王国遭遇了严重的经济危机。货币贬值，物价飞涨。",
+    "minAge": 28,
+    "maxAge": 50,
+    "weight": 2,
+    "include": "has.flag.merchant_apprentice",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -3,
+        "description": "家境 -3（经济危机）"
+      }
+    ],
+    "branches": [
+      {
+        "id": "crisis_speculate",
+        "title": "抄底",
+        "description": "危机就是机遇",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 8,
+            "description": "家境 +8（抄底成功！）"
+          },
+          {
+            "type": "set_flag",
+            "target": "economic_genius",
+            "value": 1,
+            "description": "经济天才"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -5,
+            "description": "家境 -5（血亏）"
+          }
+        ],
+        "successText": "你在最低点买入，大赚一笔！",
+        "failureText": "抄底抄在半山腰..."
+      },
+      {
+        "id": "crisis_stable",
+        "title": "保守经营",
+        "description": "活着最重要",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（慢慢恢复）"
+          }
+        ]
+      },
+      {
+        "id": "crisis_help",
+        "title": "帮助他人",
+        "description": "很多人需要帮助",
+        "probability": 0.2,
+        "requireCondition": "attribute.chr >= 10",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "adv_bounty",
+    "title": "高价悬赏",
+    "description": "冒险者公会发布了一个S级悬赏——讨伐一只古代魔兽。赏金足够买一座城堡。",
+    "minAge": 22,
+    "maxAge": 45,
+    "weight": 3,
+    "include": "has.flag.guild_member & attribute.str >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "bounty_accept",
+        "title": "接任务",
+        "description": "这个钱我赚定了",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 6,
+            "description": "家境 +6（巨额赏金）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_hunter",
+            "value": 1,
+            "description": "知名猎人"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -35,
+            "description": "HP -35"
+          }
+        ],
+        "successText": "你击杀了魔兽！赏金到账！",
+        "failureText": "魔兽比你想象的强多了..."
+      },
+      {
+        "id": "bounty_research",
+        "title": "先调查",
+        "description": "知己知彼",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          }
+        ]
+      },
+      {
+        "id": "bounty_pass",
+        "title": "放过",
+        "description": "命比钱重要",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "major"
+  },
+  {
+    "id": "adv_uncharted",
+    "title": "未踏之地",
+    "description": "地图上有一片从未被标注的空白区域。你决定去探索它。",
+    "minAge": 20,
+    "maxAge": 40,
+    "weight": 2,
+    "include": "has.flag.guild_member",
+    "effects": [],
+    "branches": [
+      {
+        "id": "uncharted_explore",
+        "title": "出发",
+        "description": "未知才是最精彩的",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "pioneer",
+            "value": 1,
+            "description": "先驱者"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20"
+          }
+        ],
+        "successText": "你发现了一片全新的土地！",
+        "failureText": "遇到了沼泽和毒虫..."
+      },
+      {
+        "id": "uncharted_report",
+        "title": "上报王国",
+        "description": "让专业人员来",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "uncharted_forget",
+        "title": "算了",
+        "description": "可能什么都没有",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "minor"
   }
 ]

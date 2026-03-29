@@ -2063,5 +2063,166 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "knight_tournament",
+    "title": "骑士锦标赛",
+    "description": "王国骑士锦标赛开始了！全国最强的骑士齐聚一堂，争夺'勇者'的称号。",
+    "minAge": 18,
+    "maxAge": 30,
+    "weight": 3,
+    "include": "has.flag.knight & attribute.str >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "tournament_win",
+        "title": "参加比赛",
+        "description": "是时候证明自己了",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "体魄 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（勇者之名）"
+          },
+          {
+            "type": "set_flag",
+            "target": "champion",
+            "value": 1,
+            "description": "锦标赛冠军！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20（受伤退赛）"
+          }
+        ],
+        "successText": "你击败了所有对手，获得了勇者称号！",
+        "failureText": "半决赛遇到了一个怪物般的对手..."
+      },
+      {
+        "id": "tournament_watch",
+        "title": "观赛学习",
+        "description": "先看看高手怎么打",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（观摩学习）"
+          }
+        ]
+      },
+      {
+        "id": "tournament_skip",
+        "title": "不感兴趣",
+        "description": "比赛而已",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "major"
+  },
+  {
+    "id": "adv_legendary_dungeon",
+    "title": "传说地下城",
+    "description": "你发现了一座传说中藏有无数宝藏的地下城入口。无数冒险者折戟于此。",
+    "minAge": 20,
+    "maxAge": 45,
+    "weight": 2,
+    "include": "has.flag.guild_member & attribute.str >= 14 & attribute.mag >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dungeon_enter",
+        "title": "进入！",
+        "description": "你就是为了这种时刻而活",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "体魄 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5（宝藏）"
+          },
+          {
+            "type": "set_flag",
+            "target": "legend_explorer",
+            "value": 1,
+            "description": "传说探索者"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30（陷阱）"
+          }
+        ],
+        "successText": "你征服了传说地下城！满载而归！",
+        "failureText": "差点被机关压扁..."
+      },
+      {
+        "id": "dungeon_map",
+        "title": "先画地图",
+        "description": "安全第一",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          }
+        ]
+      },
+      {
+        "id": "dungeon_team",
+        "title": "组队",
+        "description": "不一个人冒险",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "major"
   }
 ]

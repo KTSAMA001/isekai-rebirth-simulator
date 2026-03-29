@@ -1949,5 +1949,94 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "mage_arcane_library",
+    "title": "禁忌魔法图书馆",
+    "description": "你发现了魔法学院地下深处的禁忌藏书区。入口上刻着警告：'此处封印着上古禁术，擅入者后果自负。'",
+    "minAge": 16,
+    "maxAge": 25,
+    "weight": 3,
+    "include": "has.flag.magic_student & attribute.mag >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "arcane_read",
+        "title": "偷偷阅读",
+        "description": "知识就是力量",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "魔力 +3（禁术）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "forbidden_knowledge",
+            "value": 1,
+            "description": "禁忌知识！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25（诅咒反噬）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2"
+          }
+        ],
+        "successText": "你学会了上古禁术！但代价是什么...",
+        "failureText": "一个符文突然爆裂..."
+      },
+      {
+        "id": "arcane_report",
+        "title": "报告老师",
+        "description": "不能让这些东西留在校园里",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "arcane_leave",
+        "title": "离开",
+        "description": "不想惹麻烦",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
   }
 ]
