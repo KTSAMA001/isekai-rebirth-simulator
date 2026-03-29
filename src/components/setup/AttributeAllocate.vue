@@ -8,6 +8,7 @@ const props = defineProps<{
   totalPoints: number
   baseValues: Record<string, number>
   talentBonuses: Record<string, number>
+  talentPenalty: number
 }>()
 
 const emit = defineEmits<{
@@ -64,6 +65,7 @@ function confirm() {
         <span class="points-num" :class="{ warn: remaining === 0, danger: remaining < 0 }">
           {{ remaining }}
         </span>
+        <span v-if="talentPenalty > 0" class="penalty-hint">（天赋扣减 -{{ talentPenalty }}）</span>
       </div>
     </div>
 
@@ -127,6 +129,12 @@ function confirm() {
   margin-top: var(--space-sm);
   color: var(--text-secondary);
   font-size: 0.9rem;
+}
+
+.penalty-hint {
+  font-size: 0.75rem;
+  color: var(--color-danger);
+  margin-left: 4px;
 }
 
 .points-num {

@@ -31,12 +31,12 @@ const presets = computed(() => world.value?.presets ?? [])
 const draftPool = ref<WorldTalentDef[]>([])
 const selectedTalents = ref<WorldTalentDef[]>([])
 
-// 天赋加成
+// 天赋加成（仅正值显示为属性加成提示，负值通过扣减点数体现）
 const talentBonuses = computed(() => {
   const bonuses: Record<string, number> = {}
   for (const t of selectedTalents.value) {
     for (const eff of t.effects) {
-      if (eff.type === 'modify_attribute' && eff.value !== undefined) {
+      if (eff.type === 'modify_attribute' && eff.value !== undefined && eff.value > 0) {
         bonuses[eff.target] = (bonuses[eff.target] ?? 0) + eff.value
       }
     }
@@ -44,17 +44,16 @@ const talentBonuses = computed(() => {
   return bonuses
 })
 
-// 属性初始值 — 使用后端 state.attributes（天赋效果已应用且 clamp）
+// 天赋扣减点数总值
+const talentPenalty = computed(() => {
+  return gameStore.state?.talentPenalty ?? 0
+})
+
+// 属性初始值 — 始终使用 defaultValue（天赋效果通过扣减点数体现，不直接修改属性值）
 const baseValues = computed(() => {
   const vals: Record<string, number> = {}
-  if (gameStore.state?.attributes) {
-    for (const attr of world.value?.attributes ?? []) {
-      vals[attr.id] = gameStore.state.attributes[attr.id] ?? attr.defaultValue
-    }
-  } else if (world.value) {
-    for (const attr of world.value.attributes) {
-      vals[attr.id] = attr.defaultValue
-    }
+  for (const attr of world.value?.attributes ?? []) {
+    vals[attr.id] = attr.defaultValue
   }
   // 应用预设属性（UI 展示用）
   if (selectedPresetId.value) {
@@ -171,9 +170,10 @@ function onAttrConfirm(allocation: Record<string, number>) {
         v-if="world"
         :attributes="world.attributes"
         :talents="selectedTalents"
-        :total-points="world.manifest.initialPoints"
+        :total-points="world.manifest.initialPoints - talentPenalty"
         :base-values="baseValues"
         :talent-bonuses="talentBonuses"
+        :talent-penalty="talentPenalty"
         @confirm="onAttrConfirm"
       />
     </section>

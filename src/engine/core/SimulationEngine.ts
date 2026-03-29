@@ -87,6 +87,7 @@ export class SimulationEngine {
         progress: {},
       },
       inventory: { items: [], maxSlots: 3 },
+      talentPenalty: 0,
       phase: 'talent-draft',
     }
 
@@ -136,13 +137,17 @@ export class SimulationEngine {
       console.warn(`[天赋] 互斥冲突已自动解决: ${conflicts.join('; ')}`)
     }
 
-    // 应用天赋属性修改
-    const modifications = this.talentModule.getImmediateEffects(selected)
-    const { attributes, peaks } = this.attrModule.modify(
-      this.state.attributes,
-      this.state.attributePeaks,
-      modifications
-    )
+    // 计算天赋扣减点数（type=modify_attribute 且 value<0 的绝对值之和）
+    let penalty = 0
+    for (const id of selected) {
+      const def = this.world.index.talentsById.get(id)
+      if (!def) continue
+      for (const eff of def.effects) {
+        if (eff.type === 'modify_attribute' && eff.value !== undefined && eff.value < 0) {
+          penalty += Math.abs(eff.value)
+        }
+      }
+    }
 
     this.state = {
       ...this.state,
@@ -150,8 +155,7 @@ export class SimulationEngine {
         ...this.state.talents,
         selected,
       },
-      attributes,
-      attributePeaks: peaks,
+      talentPenalty: penalty,
     }
 
     return this.getState()
@@ -163,10 +167,11 @@ export class SimulationEngine {
       throw new Error(`当前阶段 ${this.state.phase} 不允许分配属性`)
     }
 
+    const effectivePoints = this.world.manifest.initialPoints - this.state.talentPenalty
     const { attributes, remaining } = this.attrModule.allocate(
       this.state.attributes,
       allocation,
-      this.world.manifest.initialPoints
+      effectivePoints
     )
 
     if (remaining < 0) {

@@ -335,6 +335,8 @@ export interface GameState {
   }
   /** 物品背包 */
   inventory: InventoryState
+  /** 天赋负面修正总值（扣减可分配点数） */
+  talentPenalty: number
   phase: GamePhase
   result?: GameResult
   /** 当前年份需要玩家选择的事件分支 */
