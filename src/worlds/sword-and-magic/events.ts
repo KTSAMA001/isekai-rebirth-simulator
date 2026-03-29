@@ -9,7 +9,7 @@ export const events: WorldEventDef[] = [
     minAge: 0,
     maxAge: 0,
     weight: 10,
-    include: 'attribute.mny >= 6',
+    include: 'attribute.mny >= 10',
     unique: true,
     effects: [],
     tag: 'life',
@@ -22,8 +22,8 @@ export const events: WorldEventDef[] = [
     minAge: 0,
     maxAge: 0,
     weight: 20,
-    include: 'attribute.mny >= 3',
-    exclude: 'attribute.mny >= 6',
+    include: 'attribute.mny >= 4',
+    exclude: 'attribute.mny >= 10',
     unique: true,
     effects: [],
     tag: 'life',
@@ -51,7 +51,7 @@ export const events: WorldEventDef[] = [
     minAge: 1,
     maxAge: 3,
     weight: 5,
-    include: 'attribute.mag >= 4',
+    include: 'attribute.mag >= 6',
     unique: true,
     effects: [],
     branches: [
@@ -80,7 +80,7 @@ export const events: WorldEventDef[] = [
         title: '试着控制',
         description: '你竟然本能地尝试控制这股力量！',
         probability: 0.25,
-        requireCondition: 'attribute.int >= 4',
+        requireCondition: 'attribute.int >= 5',
         effects: [
           { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
           { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
@@ -131,9 +131,8 @@ export const events: WorldEventDef[] = [
         requireCondition: 'attribute.str >= 3',
         riskCheck: {
           attribute: 'str',
-          difficulty: 6,
-          baseChance: 0.3,
-          successBonus: 0.15,
+          difficulty: 4,
+          scale: 2,
         },
         effects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -175,7 +174,7 @@ export const events: WorldEventDef[] = [
     minAge: 5,
     maxAge: 6,
     weight: 3,
-    include: 'attribute.luk >= 4 & attribute.spr >= 3',
+    include: 'attribute.luk >= 6 & attribute.spr >= 4',
     unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
@@ -194,7 +193,7 @@ export const events: WorldEventDef[] = [
     minAge: 7,
     maxAge: 10,
     weight: 8,
-    include: 'attribute.mag >= 5',
+    include: 'attribute.mag >= 8',
     exclude: 'has.flag.magic_student',
     unique: true,
     effects: [],
@@ -243,9 +242,8 @@ export const events: WorldEventDef[] = [
         probability: 0.5,
         riskCheck: {
           attribute: 'str',
-          difficulty: 7,
-          baseChance: 0.4,
-          successBonus: 0.12,
+          difficulty: 8,
+          scale: 3,
         },
         effects: [
           { type: 'modify_attribute', target: 'str', value: 3, description: '体魄 +3' },
@@ -282,7 +280,7 @@ export const events: WorldEventDef[] = [
     minAge: 12,
     maxAge: 15,
     weight: 8,
-    include: 'attribute.chr >= 5',
+    include: 'attribute.chr >= 8',
     exclude: 'has.flag.first_love',
     unique: true,
     effects: [],
@@ -294,9 +292,8 @@ export const events: WorldEventDef[] = [
         probability: 0.35,
         riskCheck: {
           attribute: 'chr',
-          difficulty: 6,
-          baseChance: 0.3,
-          successBonus: 0.15,
+          difficulty: 8,
+          scale: 3,
         },
         effects: [
           { type: 'modify_attribute', target: 'chr', value: 2, description: '魅力 +2' },
@@ -340,7 +337,7 @@ export const events: WorldEventDef[] = [
     minAge: 12,
     maxAge: 15,
     weight: 6,
-    include: 'attribute.str >= 5',
+    include: 'attribute.str >= 6',
     exclude: 'has.flag.fight_back',
     unique: true,
     effects: [
@@ -358,7 +355,7 @@ export const events: WorldEventDef[] = [
     minAge: 13,
     maxAge: 15,
     weight: 7,
-    include: 'attribute.str >= 3 | attribute.mag >= 3',
+    include: 'attribute.str >= 3 | attribute.mag >= 4',
     exclude: 'has.flag.dungeon_first',
     unique: true,
     effects: [],
@@ -370,9 +367,8 @@ export const events: WorldEventDef[] = [
         probability: 0.5,
         riskCheck: {
           attribute: 'str',
-          difficulty: 7,
-          baseChance: 0.25,
-          successBonus: 0.12,
+          difficulty: 8,
+          scale: 3,
         },
         effects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -460,7 +456,7 @@ export const events: WorldEventDef[] = [
         title: '被朋友保护',
         description: '朋友挡在你面前，替你求情',
         probability: 0.1,
-        requireCondition: 'attribute.chr >= 4',
+        requireCondition: 'attribute.chr >= 5',
         effects: [
           { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
           { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
@@ -497,7 +493,7 @@ export const events: WorldEventDef[] = [
     minAge: 16,
     maxAge: 20,
     weight: 15,
-    include: 'attribute.str >= 4 | attribute.mag >= 4',
+    include: 'attribute.str >= 4 | attribute.mag >= 6',
     exclude: 'has.flag.guild_member',
     unique: true,
     effects: [],
@@ -534,7 +530,7 @@ export const events: WorldEventDef[] = [
     minAge: 20,
     maxAge: 25,
     weight: 5,
-    include: 'attribute.int >= 6',
+    include: 'attribute.int >= 10',
     exclude: 'has.flag.mage_graduate',
     unique: true,
     effects: [
@@ -562,9 +558,8 @@ export const events: WorldEventDef[] = [
         probability: 0.6,
         riskCheck: {
           attribute: 'str',
-          difficulty: 8,
-          baseChance: 0.35,
-          successBonus: 0.1,
+          difficulty: 12,
+          scale: 3,
         },
         effects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -599,14 +594,14 @@ export const events: WorldEventDef[] = [
     minAge: 22,
     maxAge: 35,
     weight: 4,
-    include: 'attribute.str >= 7 | attribute.mag >= 7',
+    include: 'attribute.str >= 14 | attribute.mag >= 14',
     effects: [],
     branches: [
       {
         id: 'dragon_kill',
         title: '正面击杀',
         description: '你与巨龙正面对决！',
-        requireCondition: 'attribute.str >= 9 | attribute.mag >= 9',
+        requireCondition: 'attribute.str >= 18 | attribute.mag >= 18',
         probability: 0.3,
         effects: [
           { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
@@ -685,7 +680,7 @@ export const events: WorldEventDef[] = [
     minAge: 25,
     maxAge: 30,
     weight: 6,
-    include: 'attribute.chr >= 6 & attribute.mny >= 5',
+    include: 'attribute.chr >= 10 & attribute.mny >= 8',
     exclude: 'has.flag.married',
     unique: true,
     effects: [],
@@ -722,7 +717,7 @@ export const events: WorldEventDef[] = [
     minAge: 22,
     maxAge: 30,
     weight: 5,
-    include: 'attribute.chr >= 5',
+    include: 'attribute.chr >= 8',
     exclude: 'has.flag.married',
     unique: true,
     effects: [],
@@ -760,8 +755,8 @@ export const events: WorldEventDef[] = [
     minAge: 20,
     maxAge: 30,
     weight: 6,
-    include: 'attribute.mag >= 5',
-    exclude: 'attribute.spr >= 5',
+    include: 'attribute.mag >= 8',
+    exclude: 'attribute.spr >= 8',
     effects: [],
     branches: [
       {
@@ -780,7 +775,7 @@ export const events: WorldEventDef[] = [
         title: '拒绝并战斗',
         description: '你拔剑迎战！',
         probability: 0.4,
-        requireCondition: 'attribute.str >= 5 | attribute.mag >= 7',
+        requireCondition: 'attribute.str >= 6 | attribute.mag >= 14',
         effects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
           { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
@@ -811,7 +806,7 @@ export const events: WorldEventDef[] = [
     minAge: 18,
     maxAge: 25,
     weight: 12,
-    include: 'attribute.str >= 5',
+    include: 'attribute.str >= 6',
     effects: [
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
       { type: 'modify_hp', target: 'hp', value: -10, description: 'HP -10' },
@@ -846,7 +841,7 @@ export const events: WorldEventDef[] = [
     minAge: 35,
     maxAge: 50,
     weight: 3,
-    include: 'attribute.mny >= 6 & attribute.chr >= 5',
+    include: 'attribute.mny >= 10 & attribute.chr >= 8',
     effects: [
       { type: 'modify_attribute', target: 'mny', value: 3, description: '家境 +3' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
@@ -863,7 +858,7 @@ export const events: WorldEventDef[] = [
     minAge: 40,
     maxAge: 55,
     weight: 3,
-    include: 'attribute.mag >= 8 & attribute.int >= 7',
+    include: 'attribute.mag >= 18 & attribute.int >= 14',
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 3, description: '魔力 +3' },
       { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2' },
@@ -880,7 +875,7 @@ export const events: WorldEventDef[] = [
     minAge: 35,
     maxAge: 55,
     weight: 8,
-    include: 'attribute.str >= 7 | attribute.mag >= 7',
+    include: 'attribute.str >= 14 | attribute.mag >= 14',
     exclude: 'has.flag.has_student',
     unique: true,
     effects: [
@@ -920,7 +915,7 @@ export const events: WorldEventDef[] = [
         id: 'war_frontline',
         title: '上前线',
         description: '你冲在最前面',
-        requireCondition: 'attribute.str >= 6',
+        requireCondition: 'attribute.str >= 10',
         probability: 0.4,
         effects: [
           { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
@@ -944,7 +939,7 @@ export const events: WorldEventDef[] = [
         id: 'war_hero',
         title: '带队突击',
         description: '你带领精锐小队直取敌军主将！',
-        requireCondition: 'attribute.chr >= 7 & attribute.str >= 7',
+        requireCondition: 'attribute.chr >= 15 & attribute.str >= 14',
         probability: 0.2,
         effects: [
           { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
@@ -1020,7 +1015,7 @@ export const events: WorldEventDef[] = [
     minAge: 30,
     maxAge: 40,
     weight: 1,
-    include: 'attribute.int >= 6',
+    include: 'attribute.int >= 10',
     effects: [
       { type: 'modify_attribute', target: 'mny', value: 5, description: '家境 +5' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
@@ -1076,7 +1071,7 @@ export const events: WorldEventDef[] = [
     minAge: 65,
     maxAge: 75,
     weight: 8,
-    include: 'attribute.chr >= 7',
+    include: 'attribute.chr >= 15',
     effects: [
       { type: 'modify_attribute', target: 'chr', value: 3, description: '魅力 +3' },
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
@@ -1099,7 +1094,7 @@ export const events: WorldEventDef[] = [
         id: 'destroy_world',
         title: '毁灭世界',
         description: '你选择终结一切',
-        requireCondition: 'attribute.str >= 10 | attribute.mag >= 10',
+        requireCondition: 'attribute.str >= 22 | attribute.mag >= 26',
         probability: 0.3,
         effects: [
           { type: 'modify_attribute', target: 'spr', value: -5, description: '灵魂 -5' },
@@ -1147,7 +1142,7 @@ export const events: WorldEventDef[] = [
     minAge: 70,
     maxAge: 80,
     weight: 12,
-    include: 'attribute.spr >= 5',
+    include: 'attribute.spr >= 8',
     unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 3, description: '灵魂 +3' },
@@ -1162,7 +1157,7 @@ export const events: WorldEventDef[] = [
     minAge: 70,
     maxAge: 80,
     weight: 4,
-    include: 'attribute.mag >= 9',
+    include: 'attribute.mag >= 22',
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 5, description: '魔力 +5（最后一刻的辉煌）' },
       { type: 'modify_hp', target: 'hp', value: -30, description: 'HP -30' },

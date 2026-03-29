@@ -336,7 +336,9 @@ export class SimulationEngine {
       riskRolled = true
       const rc = branch.riskCheck
       const attrValue = this.state.attributes[rc.attribute] ?? 0
-      const chance = Math.min(1, Math.max(0, rc.baseChance + attrValue * rc.successBonus))
+      const scale = rc.scale ?? 3
+      const x = (attrValue - rc.difficulty) / scale
+      const chance = 1 / (1 + Math.exp(-x))
       isSuccess = this.random.chance(chance)
 
       if (isSuccess) {

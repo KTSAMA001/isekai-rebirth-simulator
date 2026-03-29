@@ -64,12 +64,14 @@ export interface EventEffect {
 export interface RiskCheck {
   /** 判定依据的属性ID（如 str, mag, chr） */
   attribute: string
-  /** 难度：属性达到此值时成功率为 100% */
+  /** 难度值：属性达到此值时成功率约 50% */
   difficulty: number
-  /** 基础成功率（0-1，属性为0时的成功率） */
-  baseChance: number
-  /** 每点属性增加的成功率（0-1） */
-  successBonus: number
+  /**
+   * 曲线陡度（默认 3）
+   * 越大 → 曲线越陡，接近开关判定
+   * 越小 → 曲线越平缓，属性差距影响更线性
+   */
+  scale?: number
 }
 
 /** 事件分支 */

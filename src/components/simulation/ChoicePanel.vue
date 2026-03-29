@@ -30,7 +30,9 @@ function getSuccessChance(branch: EventBranch): number | null {
   if (!branch.riskCheck) return null
   const rc = branch.riskCheck
   const attrValue = props.state.attributes[rc.attribute] ?? 0
-  return Math.min(100, Math.max(0, Math.round((rc.baseChance + attrValue * rc.successBonus) * 100)))
+  const scale = rc.scale ?? 3
+  const x = (attrValue - rc.difficulty) / scale
+  return Math.min(100, Math.max(1, Math.round(100 / (1 + Math.exp(-x)))))
 }
 
 /** 获取风险选项的成功率预览文本 */
@@ -39,7 +41,7 @@ function getRiskText(branch: EventBranch): string {
   const rc = branch.riskCheck
   const attrValue = props.state.attributes[rc.attribute] ?? 0
   const chance = getSuccessChance(branch)
-  return `📊 成功率 ${chance}%（${attrName(rc.attribute)} ${attrValue}）`
+  return `📊 成功率 ${chance}%（${attrName(rc.attribute)} ${attrValue} / 难度 ${rc.difficulty}）`
 }
 
 /** 求值一个原子条件（无 | & 逻辑运算符） */
