@@ -181,20 +181,8 @@ export class EventModule {
         return effect.description ?? `${effect.target} 设为 ${effect.value}`
       }
       case 'modify_hp': {
-        state.hp = Math.max(0, Math.min(state.maxHp, state.hp + effect.value))
+        state.hp = Math.max(0, state.hp + effect.value)
         return effect.description ?? `HP ${effect.value >= 0 ? '+' : ''}${effect.value}`
-      }
-      case 'modify_max_hp_bonus': {
-        state.maxHpBonus += effect.value
-        // 同时更新 maxHp
-        const str = state.attributes['str'] ?? 0
-        const spr = state.attributes['spr'] ?? 0
-        state.maxHp = 50 + str * 10 + spr * 5 + state.maxHpBonus
-        // 如果当前 hp 超过新上限，夹紧
-        if (state.hp > state.maxHp) {
-          state.hp = state.maxHp
-        }
-        return effect.description ?? `HP上限 ${effect.value >= 0 ? '+' : ''}${effect.value}`
       }
       case 'set_flag': {
         state.flags = new Set([...state.flags, effect.target])

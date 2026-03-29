@@ -68,9 +68,7 @@ export class SimulationEngine {
         inherited: [],
       },
       age: 0,
-      maxHpBonus: 0,
       hp: 0, // 会在下面重新计算
-      maxHp: 0,
       flags: new Set<string>(),
       triggeredEvents: new Set<string>(),
       eventLog: [],
@@ -81,9 +79,8 @@ export class SimulationEngine {
       phase: 'talent-draft',
     }
 
-    // 根据初始属性计算 maxHp 和 hp
-    this.state.maxHp = this.computeMaxHp()
-    this.state.hp = this.state.maxHp
+    // 初始 HP = 30 + 体魄×5
+    this.state.hp = this.computeInitHp()
 
     return this.getState()
   }
@@ -169,9 +166,8 @@ export class SimulationEngine {
       }
     }
 
-    // 计算动态 HP 上限并初始化 HP
-    this.state.maxHp = this.computeMaxHp()
-    this.state.hp = this.state.maxHp
+    // 根据（天赋+分配后的）属性计算初始 HP
+    this.state.hp = this.computeInitHp()
 
     this.state = {
       ...this.state,
@@ -186,29 +182,19 @@ export class SimulationEngine {
 
   // ==================== Galgame 化三步流程 ====================
 
-  /** 根据属性动态计算 HP 上限：50 + 体魄*10 + 灵魂*5 + maxHpBonus */
-  private computeMaxHp(): number {
+  /** 根据属性计算初始 HP：30 + 体魄×5 */
+  private computeInitHp(): number {
     const str = this.state.attributes['str'] ?? 0
-    const spr = this.state.attributes['spr'] ?? 0
-    return 50 + str * 10 + spr * 5 + this.state.maxHpBonus
+    return 30 + str * 5
   }
 
-  /** 重新计算 maxHp，夹紧 hp，并恢复部分 HP */
-  private recalcMaxHpAndRegen(): void {
-    const newMaxHp = this.computeMaxHp()
-    // 每年恢复：取 max(str*2, 5) 和 maxHp*10% 中较大者
-    const regen = Math.max(
-      Math.max((this.state.attributes['str'] ?? 0) * 2, 5),
-      Math.floor(newMaxHp * 0.1)
-    )
-    const newHp = Math.min(
-      newMaxHp,
-      this.state.hp + regen
-    )
+  /** 每年恢复 HP：2 + 体魄×1（新的一年恢复上一年伤势） */
+  private regenHp(): void {
+    const str = this.state.attributes['str'] ?? 0
+    const regen = 2 + str
     this.state = {
       ...this.state,
-      maxHp: newMaxHp,
-      hp: Math.max(0, newHp),
+      hp: this.state.hp + regen,
     }
   }
 
@@ -222,7 +208,7 @@ export class SimulationEngine {
     }
 
     // 新的一年：恢复部分 HP（上一年受伤的恢复）
-    this.recalcMaxHpAndRegen()
+    this.regenHp()
 
     // 年龄 +1
     let newState = {
@@ -419,10 +405,10 @@ export class SimulationEngine {
     }
   }
 
-  /** 年度后处理：HP重算/恢复、快照、成就、死亡检查 */
+  /** 年度后处理：HP恢复、快照、成就、死亡检查 */
   private postYearProcess(): void {
-    // 重新计算 maxHp 并恢复部分 HP
-    this.recalcMaxHpAndRegen()
+    // 恢复部分 HP（平淡年）
+    this.regenHp()
 
     this.postYearProcessCore()
   }

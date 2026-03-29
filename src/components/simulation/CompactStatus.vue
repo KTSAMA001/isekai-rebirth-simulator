@@ -19,8 +19,11 @@ const talentDefs = computed(() => {
     .filter(Boolean)
 })
 
-function hpPercent() {
-  return Math.max(0, Math.min(100, (props.state.hp / props.state.maxHp) * 100))
+/** HP 等级颜色：HP 低于初始值(30)变红 */
+function hpClass() {
+  if (props.state.hp <= 10) return 'low'
+  if (props.state.hp <= 30) return 'mid'
+  return ''
 }
 
 function toggleExpand() {
@@ -33,8 +36,8 @@ function toggleExpand() {
     <!-- 折叠状态：单行显示 -->
     <div class="compact-row">
       <span class="age-badge">{{ state.age }}岁</span>
-      <span class="hp-mini" :class="{ low: hpPercent() < 30, mid: hpPercent() >= 30 && hpPercent() < 70 }">
-        🩸{{ state.hp }}/{{ state.maxHp }}
+      <span class="hp-mini" :class="hpClass()">
+        🩸{{ state.hp }}
       </span>
       <div class="attr-icons">
         <span v-for="attr in visibleAttrs" :key="attr.id" class="attr-icon-item" :style="{ color: attr.color }">
@@ -51,11 +54,10 @@ function toggleExpand() {
 
     <!-- 展开详情 -->
     <div v-if="expanded" class="detail-panel" @click.stop>
-      <!-- HP 进度条 -->
+      <!-- HP 详情 -->
       <div class="hp-detail">
-        <div class="hp-bar">
-          <div class="hp-fill" :style="{ width: hpPercent() + '%' }" :class="{ low: hpPercent() < 30, mid: hpPercent() >= 30 && hpPercent() < 70 }"></div>
-        </div>
+        <span class="hp-label">🩸 生命值</span>
+        <span class="hp-value" :class="hpClass()">{{ state.hp }}</span>
       </div>
       <!-- 属性详情 -->
       <div class="attr-detail-list">
@@ -63,9 +65,6 @@ function toggleExpand() {
           <span class="attr-d-icon">{{ attr.icon }}</span>
           <span class="attr-d-name">{{ attr.name }}</span>
           <span class="attr-d-val" :style="{ color: attr.color }">{{ state.attributes[attr.id] ?? 0 }}</span>
-          <div class="attr-d-bar">
-            <div class="attr-d-fill" :style="{ width: ((state.attributes[attr.id] ?? 0) / attr.max) * 100 + '%', background: attr.color }"></div>
-          </div>
         </div>
       </div>
       <!-- 天赋标签 -->
@@ -156,23 +155,23 @@ function toggleExpand() {
 
 .hp-detail {
   margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
-.hp-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-  overflow: hidden;
+.hp-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 }
 
-.hp-fill {
-  height: 100%;
-  border-radius: 3px;
-  background: var(--color-success);
-  transition: width var(--transition-slow);
+.hp-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-success);
 }
-.hp-fill.mid { background: var(--color-warning); }
-.hp-fill.low { background: var(--color-danger); }
+.hp-value.mid { color: var(--color-warning); }
+.hp-value.low { color: var(--color-danger); }
 
 .attr-detail-list {
   display: flex;
@@ -190,20 +189,6 @@ function toggleExpand() {
 .attr-d-icon { font-size: 0.8rem; }
 .attr-d-name { color: var(--text-secondary); flex: 1; font-size: 0.7rem; }
 .attr-d-val { font-weight: 700; font-size: 0.75rem; min-width: 20px; text-align: right; }
-
-.attr-d-bar {
-  width: 60px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.attr-d-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width var(--transition-normal);
-}
 
 .talent-detail {
   margin-top: var(--space-sm);

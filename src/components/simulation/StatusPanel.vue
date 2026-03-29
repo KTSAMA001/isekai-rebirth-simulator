@@ -17,8 +17,10 @@ const talentDefs = computed(() => {
     .filter(Boolean)
 })
 
-function hpPercent() {
-  return Math.max(0, Math.min(100, (props.state.hp / props.state.maxHp) * 100))
+function hpClass() {
+  if (props.state.hp <= 10) return 'low'
+  if (props.state.hp <= 30) return 'mid'
+  return ''
 }
 </script>
 
@@ -33,17 +35,9 @@ function hpPercent() {
       <div class="hp-section">
         <div class="hp-label">
           <span>HP</span>
-          <span class="hp-value">{{ state.hp }} / {{ state.maxHp }}</span>
-        </div>
-        <div class="hp-bar">
-          <div
-            class="hp-fill"
-            :style="{ width: hpPercent() + '%' }"
-            :class="{ low: hpPercent() < 30, mid: hpPercent() >= 30 && hpPercent() < 70 }"
-          ></div>
+          <span class="hp-value" :class="hpClass()">{{ state.hp }}</span>
         </div>
       </div>
-    </div>
 
     <!-- 属性条 -->
     <div class="attrs-section">
