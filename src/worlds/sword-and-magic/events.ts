@@ -275,7 +275,7 @@ export const events: WorldEventDef[] = [
     description: '一个穿着华丽的同龄孩子当街抢走了你的东西，周围的人视而不见——大家都知道他父亲是谁。',
     minAge: 5,
     maxAge: 9,
-    weight: 2,
+    weight: 1,
     unique: true,
     effects: [],
     branches: [
@@ -439,7 +439,7 @@ export const events: WorldEventDef[] = [
     description: '你成为了骑士的侍从，每天挥剑一千次。',
     minAge: 10,
     maxAge: 14,
-    weight: 6,
+    weight: 3,
     include: 'attribute.str >= 4',
     exclude: 'has.flag.squire',
     unique: true,
@@ -903,7 +903,7 @@ export const events: WorldEventDef[] = [
     description: '公会墙上贴着一张皱巴巴的委托单："灭杀村外骚扰家畜的史莱姆"。报酬：5银币。',
     minAge: 16,
     maxAge: 22,
-    weight: 10,
+    weight: 3,
     unique: true,
     effects: [],
     branches: [
@@ -2746,7 +2746,7 @@ export const events: WorldEventDef[] = [
     description: '镇上告示板贴满了冒险委托，你最感兴趣的是一个奇怪的委托...',
     minAge: 16,
     maxAge: 22,
-    weight: 5,
+    weight: 3,
     unique: true,
     branches: [
       {
@@ -2830,7 +2830,7 @@ export const events: WorldEventDef[] = [
     description: '你发现了一个隐秘的训练场，里面只有你一个人...',
     minAge: 15,
     maxAge: 21,
-    weight: 5,
+    weight: 3,
     unique: true,
     branches: [
       {
