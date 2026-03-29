@@ -10,6 +10,7 @@ export const events: WorldEventDef[] = [
     maxAge: 0,
     weight: 10,
     include: 'attribute.mny >= 6',
+    unique: true,
     effects: [],
     tag: 'life',
   },
@@ -22,6 +23,7 @@ export const events: WorldEventDef[] = [
     weight: 20,
     include: 'attribute.mny >= 3',
     exclude: 'attribute.mny >= 6',
+    unique: true,
     effects: [],
     tag: 'life',
   },
@@ -33,6 +35,7 @@ export const events: WorldEventDef[] = [
     maxAge: 0,
     weight: 15,
     include: 'attribute.mny <= 2',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
     ],
@@ -46,6 +49,7 @@ export const events: WorldEventDef[] = [
     maxAge: 3,
     weight: 5,
     include: 'attribute.mag >= 4',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
     ],
@@ -58,6 +62,7 @@ export const events: WorldEventDef[] = [
     minAge: 3,
     maxAge: 6,
     weight: 15,
+    exclude: 'has.flag.bullied_child',
     effects: [
       { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（痛定思痛）' },
@@ -73,6 +78,7 @@ export const events: WorldEventDef[] = [
     maxAge: 6,
     weight: 10,
     include: 'attribute.mny <= 2',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
@@ -87,6 +93,7 @@ export const events: WorldEventDef[] = [
     maxAge: 6,
     weight: 3,
     include: 'attribute.luk >= 4 & attribute.spr >= 3',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
       { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
@@ -104,6 +111,8 @@ export const events: WorldEventDef[] = [
     maxAge: 10,
     weight: 8,
     include: 'attribute.mag >= 5',
+    exclude: 'has.flag.magic_student',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
@@ -119,6 +128,8 @@ export const events: WorldEventDef[] = [
     maxAge: 14,
     weight: 12,
     include: 'attribute.str >= 4',
+    exclude: 'has.flag.squire',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
       { type: 'set_flag', target: 'squire', value: 1, description: '侍从修炼' },
@@ -133,6 +144,8 @@ export const events: WorldEventDef[] = [
     maxAge: 15,
     weight: 8,
     include: 'attribute.chr >= 5',
+    exclude: 'has.flag.first_love',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
       { type: 'set_flag', target: 'first_love', value: 1, description: '初恋' },
@@ -147,6 +160,8 @@ export const events: WorldEventDef[] = [
     maxAge: 15,
     weight: 6,
     include: 'attribute.str >= 5',
+    exclude: 'has.flag.fight_back',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
@@ -162,6 +177,8 @@ export const events: WorldEventDef[] = [
     maxAge: 15,
     weight: 7,
     include: 'attribute.str >= 3 | attribute.mag >= 3',
+    exclude: 'has.flag.dungeon_first',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
       { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
@@ -260,6 +277,8 @@ export const events: WorldEventDef[] = [
     maxAge: 20,
     weight: 15,
     include: 'attribute.str >= 4 | attribute.mag >= 4',
+    exclude: 'has.flag.guild_member',
+    unique: true,
     effects: [
       { type: 'set_flag', target: 'guild_member', value: 1, description: '成为冒险者' },
     ],
@@ -273,6 +292,8 @@ export const events: WorldEventDef[] = [
     maxAge: 25,
     weight: 5,
     include: 'attribute.int >= 6',
+    exclude: 'has.flag.mage_graduate',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
@@ -287,6 +308,7 @@ export const events: WorldEventDef[] = [
     minAge: 16,
     maxAge: 22,
     weight: 10,
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1' },
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -384,6 +406,8 @@ export const events: WorldEventDef[] = [
     maxAge: 30,
     weight: 6,
     include: 'attribute.chr >= 6 & attribute.mny >= 5',
+    exclude: 'has.flag.married',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mny', value: 2, description: '家境 +2' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
@@ -399,6 +423,8 @@ export const events: WorldEventDef[] = [
     maxAge: 30,
     weight: 5,
     include: 'attribute.chr >= 5',
+    exclude: 'has.flag.married',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -478,6 +504,8 @@ export const events: WorldEventDef[] = [
     minAge: 18,
     maxAge: 25,
     weight: 2,
+    include: 'has.flag.fairy_friend',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
@@ -527,6 +555,8 @@ export const events: WorldEventDef[] = [
     maxAge: 55,
     weight: 8,
     include: 'attribute.str >= 7 | attribute.mag >= 7',
+    exclude: 'has.flag.has_student',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
       { type: 'set_flag', target: 'has_student', value: 1, description: '收了徒弟' },
@@ -623,6 +653,7 @@ export const events: WorldEventDef[] = [
     minAge: 40,
     maxAge: 50,
     weight: 10,
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: -2, description: '灵魂 -2', probability: 0.5 },
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（顿悟）', probability: 0.5 },
@@ -655,6 +686,7 @@ export const events: WorldEventDef[] = [
     minAge: 60,
     maxAge: 70,
     weight: 10,
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
       { type: 'modify_hp', target: 'hp', value: 20, description: 'HP +20' },
@@ -738,6 +770,7 @@ export const events: WorldEventDef[] = [
     maxAge: 80,
     weight: 12,
     include: 'attribute.spr >= 5',
+    unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 3, description: '灵魂 +3' },
     ],
