@@ -294,5 +294,1096 @@
     ],
     "tag": "life",
     "priority": "minor"
+  },
+  {
+    "id": "mid_heir_training",
+    "title": "培养继承人",
+    "description": "你的孩子到了该学东西的年纪。你决定亲自教导他。",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 4,
+    "include": "attribute.chr >= 12 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "heir_excellent",
+        "title": "青出于蓝",
+        "description": "孩子的天赋让你惊讶",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（名师出高徒）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（欣慰）"
+          },
+          {
+            "type": "set_flag",
+            "target": "great_parent",
+            "value": 1,
+            "description": "优秀导师"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（因材施教）"
+          }
+        ],
+        "successText": "孩子展现出了惊人的天赋！",
+        "failureText": "教导的过程比想象中困难"
+      },
+      {
+        "id": "heir_average",
+        "title": "中规中矩",
+        "description": "孩子普普通通，但至少诚实善良",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（知足）"
+          }
+        ]
+      },
+      {
+        "id": "heir_rebel",
+        "title": "叛逆期",
+        "description": "孩子跟你对着干",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（头疼）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（焦虑）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_political_intrigue",
+    "title": "宫廷阴谋",
+    "description": "一位贵族秘密找到你，邀请你加入一场针对宰相的密谋。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.chr >= 14 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "plot_join",
+        "title": "参与密谋",
+        "description": "你决定加入这场权力游戏",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4,
+            "description": "家境 +4（权力收益）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（人脉扩张）"
+          },
+          {
+            "type": "set_flag",
+            "target": "political_player",
+            "value": 1,
+            "description": "政客"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（抄家）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          }
+        ],
+        "successText": "宰相倒台了！你在新政权中获得了重要地位",
+        "failureText": "密谋败露，你差点丢了脑袋"
+      },
+      {
+        "id": "plot_inform",
+        "title": "向宰相告密",
+        "description": "两面下注才是聪明人",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（赏赐）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（小人）"
+          }
+        ]
+      },
+      {
+        "id": "plot_refuse",
+        "title": "不掺和",
+        "description": "政治太脏了，你不想沾边",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（清白）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "mid_existential_crisis",
+    "title": "中年危机",
+    "description": "你站在窗前，看着镜子里的自己。白头发多了几根，皱纹也深了。这一切，值得吗？",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 4,
+    "include": "attribute.spr < 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "crisis_overcome",
+        "title": "找到新目标",
+        "description": "你重新燃起了对生活的热情",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 14,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3（顿悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（新视角）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（沉沦）"
+          }
+        ],
+        "successText": "你终于明白，人生的意义在于体验本身",
+        "failureText": "你越来越消沉……"
+      },
+      {
+        "id": "crisis_travel",
+        "title": "出去走走",
+        "description": "旅行能治愈一切",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（新风景）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（旅途奇遇）"
+          }
+        ]
+      },
+      {
+        "id": "crisis_drown",
+        "title": "借酒消愁",
+        "description": "你把自己泡在了酒桶里",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（酗酒）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2（颓废）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_found_school",
+    "title": "开宗立派",
+    "description": "你决定创办自己的道场/学院/商会，将毕生所学传承下去。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.str >= 18 | attribute.mag >= 18 | attribute.int >= 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "school_thrive",
+        "title": "门庭若市",
+        "description": "你的学校名声远播",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "chr",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（一代宗师）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（学费收入）"
+          },
+          {
+            "type": "set_flag",
+            "target": "founder",
+            "value": 1,
+            "description": "开山立派！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（投资失败）"
+          }
+        ],
+        "successText": "各地学子慕名而来！",
+        "failureText": "没有人愿意来你的学校……"
+      },
+      {
+        "id": "school_small",
+        "title": "小而美",
+        "description": "几个弟子，足够了",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（小有名气）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（教学相长）"
+          }
+        ]
+      },
+      {
+        "id": "school_giveup",
+        "title": "算了自己不擅长",
+        "description": "教书这种事还是交给别人吧",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（自知之明）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "mid_old_enemy",
+    "title": "旧敌来访",
+    "description": "多年前得罪的人找上门了。他的眼神里满是恨意。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "",
+    "effects": [],
+    "branches": [
+      {
+        "id": "enemy_fight",
+        "title": "正面迎战",
+        "description": "有什么账，算清楚",
+        "probability": 0.3,
+        "requireCondition": "attribute.str >= 16 | attribute.mag >= 16",
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（威名）"
+          },
+          {
+            "type": "set_flag",
+            "target": "old_enemy_defeated",
+            "value": 1,
+            "description": "恩怨了结"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -40,
+            "description": "HP -40"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2"
+          }
+        ],
+        "successText": "一招制敌！这是你实力的证明",
+        "failureText": "对方比你想的更强……"
+      },
+      {
+        "id": "enemy_negotiate",
+        "title": "谈判和解",
+        "description": "冤家宜解不宜结",
+        "probability": 0.4,
+        "requireCondition": "attribute.chr >= 12 & attribute.int >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（化解恩怨）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（放下）"
+          }
+        ]
+      },
+      {
+        "id": "enemy_hide",
+        "title": "躲起来",
+        "description": "你选择暂时避开",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（心虚）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_adopt_orphan",
+    "title": "路边孤儿",
+    "description": "你在路边发现了一个饥饿的孩子。他的眼神让你想起了曾经的自己。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.chr >= 10 & attribute.mny >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "adopt_take",
+        "title": "带回家",
+        "description": "你决定收养这个孩子",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（善良）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（温暖）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（养育费）"
+          },
+          {
+            "type": "set_flag",
+            "target": "adopted_child",
+            "value": 1,
+            "description": "养子女"
+          }
+        ]
+      },
+      {
+        "id": "adopt_donate",
+        "title": "给些钱就走",
+        "description": "你不想多管闲事",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（施舍）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（善念）"
+          }
+        ]
+      },
+      {
+        "id": "adopt_ignore",
+        "title": "无视",
+        "description": "街上可怜的人太多了",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_lord_govern",
+    "title": "封地治理",
+    "description": "国王封你为领主。你终于有了自己的土地和子民。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.chr >= 16 & attribute.mny >= 12 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "lord_benevolent",
+        "title": "仁政爱民",
+        "description": "你致力于让领地繁荣",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（爱民如子）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（领地繁荣）"
+          },
+          {
+            "type": "set_flag",
+            "target": "beloved_lord",
+            "value": 1,
+            "description": "仁慈领主"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（治理不善）"
+          }
+        ],
+        "successText": "你的领地成为了王国最富庶的地方！",
+        "failureText": "治理比打仗难多了"
+      },
+      {
+        "id": "lord_military",
+        "title": "军事领主",
+        "description": "以铁腕手段统治",
+        "probability": 0.3,
+        "requireCondition": "attribute.str >= 16",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（练兵）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "iron_lord",
+            "value": 1,
+            "description": "铁腕领主"
+          }
+        ]
+      },
+      {
+        "id": "lord_lazy",
+        "title": "甩手掌柜",
+        "description": "交给管家管就行了",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（自然增长）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（清闲）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "mid_scholar_work",
+    "title": "学术研究",
+    "description": "你决定把你多年的研究和经验写成一部著作。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.int >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "scholar_breakthrough",
+        "title": "重大发现",
+        "description": "研究过程中你有了突破性发现",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3,
+            "description": "智力 +3（学术突破）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（学术声望）"
+          },
+          {
+            "type": "set_flag",
+            "target": "great_scholar",
+            "value": 1,
+            "description": "大学者！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（至少努力了）"
+          }
+        ],
+        "successText": "你的论文轰动了整个学术界！",
+        "failureText": "研究走进了死胡同……"
+      },
+      {
+        "id": "scholar_useful",
+        "title": "实用手册",
+        "description": "写一本实用的工具书",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（版税）"
+          },
+          {
+            "type": "set_flag",
+            "target": "author",
+            "value": 1,
+            "description": "作者"
+          }
+        ]
+      },
+      {
+        "id": "scholar_abandon",
+        "title": "太无聊了不写了",
+        "description": "写作确实不是你的强项",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_return_adventure",
+    "title": "重出江湖",
+    "description": "平静的日子过久了，你开始怀念冒险的刺激感。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.str >= 14 | attribute.mag >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "return_dungeon",
+        "title": "挑战新地城",
+        "description": "听说有一座新发现的地下城",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（宝物）"
+          },
+          {
+            "type": "grant_item",
+            "target": "ancient_relic",
+            "value": 1,
+            "description": "获得 🏺 远古遗物"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -35,
+            "description": "HP -35"
+          }
+        ],
+        "successText": "你从地城深处带回了传说中的宝物！",
+        "failureText": "这次冒险代价不小"
+      },
+      {
+        "id": "return_bounty",
+        "title": "接个赏金任务",
+        "description": "小试身手",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（赏金）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（保持状态）"
+          }
+        ]
+      },
+      {
+        "id": "return_train",
+        "title": "训练新冒险者",
+        "description": "把经验传给年轻人也不错",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（导师）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（教学）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_magic_experiment",
+    "title": "禁忌实验",
+    "description": "你在一本古书上发现了一个有趣的魔法阵。虽然标注着'危险'，但好奇心驱使你想要尝试。",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.mag >= 14 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "experiment_success",
+        "title": "大成功！",
+        "description": "魔法阵发出耀眼的光芒",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "mag",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "魔力 +3（魔法突破）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2（知识拓展）"
+          },
+          {
+            "type": "set_flag",
+            "target": "forbidden_knowledge",
+            "value": 1,
+            "description": "禁忌知识！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50（魔法反噬）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -2,
+            "description": "魔力 -2"
+          }
+        ],
+        "successText": "你感受到了前所未有的魔法力量在体内涌动！",
+        "failureText": "轰——实验炸了"
+      },
+      {
+        "id": "experiment_partial",
+        "title": "部分成功",
+        "description": "虽然没有完全成功，但学到了很多",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "experiment_stop",
+        "title": "太危险了不试了",
+        "description": "安全第一",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（谨慎）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "mid_gambling",
+    "title": "地下赌场",
+    "description": "朋友拉你去了一个地下赌场。据说赢的人能一夜暴富。",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.luk >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "gamble_big",
+        "title": "梭哈！",
+        "description": "全押！",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5（一夜暴富）"
+          },
+          {
+            "type": "set_flag",
+            "target": "lucky_gambler",
+            "value": 1,
+            "description": "赌神！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（倾家荡产）"
+          }
+        ],
+        "successText": "你赢了！整个赌场都在为你鼓掌",
+        "failureText": "你输得只剩一条裤衩……"
+      },
+      {
+        "id": "gamble_small",
+        "title": "玩玩就好",
+        "description": "小赌怡情",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（手气不错）"
+          }
+        ]
+      },
+      {
+        "id": "gamble_refuse",
+        "title": "不赌博",
+        "description": "十赌九输",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（自律）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mid_business_rivalry",
+    "title": "商战",
+    "description": "你的生意对手放出话来，要在一个月内把你挤出市场。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.mny >= 12 & attribute.int >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "rivalry_outsmart",
+        "title": "智取胜过",
+        "description": "以策略击败对手",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4,
+            "description": "家境 +4（市场垄断）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（声望）"
+          },
+          {
+            "type": "set_flag",
+            "target": "business_tycoon",
+            "value": 1,
+            "description": "商业巨头"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（损失惨重）"
+          }
+        ],
+        "successText": "对手灰溜溜地退出了市场！",
+        "failureText": "你被打得措手不及"
+      },
+      {
+        "id": "rivalry_cooperate",
+        "title": "合作共赢",
+        "description": "你主动提出合作",
+        "probability": 0.4,
+        "requireCondition": "attribute.chr >= 14",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（合作收益）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（格局）"
+          }
+        ]
+      },
+      {
+        "id": "rivalry_retreat",
+        "title": "战略性撤退",
+        "description": "留得青山在",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（吃一堑长一智）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]

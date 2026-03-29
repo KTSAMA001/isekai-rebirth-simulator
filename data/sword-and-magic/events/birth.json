@@ -45,5 +45,193 @@
     ],
     "tag": "life",
     "priority": "major"
+  },
+  {
+    "id": "birth_noble_estate",
+    "title": "贵族庄园",
+    "description": "你出生在一座宏伟的庄园里。华丽的摇篮、柔软的丝绸、仆人们的低声细语……你还没睁开眼，就已经赢在了起跑线上。",
+    "minAge": 0,
+    "maxAge": 0,
+    "weight": 6,
+    "include": "",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2,
+        "description": "家境 +2（贵族出身）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1（教养优良）"
+      },
+      {
+        "type": "set_flag",
+        "target": "noble_birth",
+        "value": 1,
+        "description": "贵族血统"
+      }
+    ],
+    "branches": [
+      {
+        "id": "noble_loving",
+        "title": "温馨童年",
+        "description": "父母对你关爱有加",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（爱的滋养）"
+          },
+          {
+            "type": "set_flag",
+            "target": "loving_family",
+            "value": 1,
+            "description": "温馨家庭"
+          }
+        ]
+      },
+      {
+        "id": "noble_strict",
+        "title": "严苛家教",
+        "description": "父母对你要求极高",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2（严格教育）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（压力）"
+          }
+        ]
+      },
+      {
+        "id": "noble_neglected",
+        "title": "被忽视的孩子",
+        "description": "父母忙于事务，你由保姆带大",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（自由成长）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（缺乏社交）"
+          }
+        ]
+      }
+    ],
+    "unique": false,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "birth_wilderness",
+    "title": "荒野求生",
+    "description": "你出生在一处偏远的山林小屋里。没有华丽的摇篮，只有粗布和草药的味道。但这里空气清新，夜晚能看到满天的星星。",
+    "minAge": 0,
+    "maxAge": 0,
+    "weight": 4,
+    "include": "",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1（山野生活）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1（贴近自然）"
+      },
+      {
+        "type": "set_flag",
+        "target": "wild_birth",
+        "value": 1,
+        "description": "荒野出身"
+      }
+    ],
+    "branches": [
+      {
+        "id": "wild_shaman",
+        "title": "萨满之徒",
+        "description": "村里的萨满收你为徒",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1（秘术传承）"
+          },
+          {
+            "type": "set_flag",
+            "target": "shaman_apprentice",
+            "value": 1,
+            "description": "萨满学徒"
+          }
+        ]
+      },
+      {
+        "id": "wild_hunter",
+        "title": "猎人后裔",
+        "description": "你从小跟父亲学习打猎",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（狩猎锻炼）"
+          },
+          {
+            "type": "set_flag",
+            "target": "hunter_lineage",
+            "value": 1,
+            "description": "猎人家族"
+          }
+        ]
+      },
+      {
+        "id": "wild_orphan",
+        "title": "命运多舛",
+        "description": "父母早逝，你被村民收养",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "幸运 -1（苦难童年）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（逆境成长）"
+          }
+        ]
+      }
+    ],
+    "unique": false,
+    "tag": "exploration",
+    "priority": "major"
   }
 ]

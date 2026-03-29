@@ -404,5 +404,25 @@
       }
     ],
     "acquireText": "获得 🧠 转生记忆 — 智慧/家境成长+0.5/年，判定+5%"
+  },
+  {
+    "id": "ancient_relic",
+    "name": "远古遗物",
+    "description": "一件散发着微弱光芒的古物，来自一个早已消逝的文明。",
+    "icon": "🏺",
+    "rarity": "legendary",
+    "category": "accessory",
+    "effects": [
+      {
+        "type": "attr_passive_growth",
+        "target": "int",
+        "value": 0.5
+      },
+      {
+        "type": "skill_check_bonus",
+        "value": 0.15
+      }
+    ],
+    "acquireText": "获得 🏺 远古遗物 — 智力每年成长+0.5, 所有判定+15%"
   }
 ]

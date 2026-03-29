@@ -70,5 +70,883 @@
     "unique": true,
     "tag": "magic",
     "priority": "minor"
+  },
+  {
+    "id": "elder_memoir",
+    "title": "撰写回忆录",
+    "description": "你坐在壁炉旁，翻开一本空白的羊皮纸。一生的故事，总该留下点什么。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 4,
+    "include": "attribute.int >= 15",
+    "effects": [],
+    "branches": [
+      {
+        "id": "memoir_bestseller",
+        "title": "传世之作",
+        "description": "你的回忆录轰动全国",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（名声大噪）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（版税收入）"
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_author",
+            "value": 1,
+            "description": "著名作家"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（磨练文笔）"
+          }
+        ],
+        "successText": "你的故事被翻译成了五种语言！吟游诗人争相传唱",
+        "failureText": "写完之后你发现……读的人只有你自己"
+      },
+      {
+        "id": "memoir_private",
+        "title": "私人日记",
+        "description": "你决定只写给后辈看",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（心灵平静）"
+          },
+          {
+            "type": "set_flag",
+            "target": "memoir_written",
+            "value": 1,
+            "description": "回忆录完成"
+          }
+        ]
+      },
+      {
+        "id": "memoir_abandon",
+        "title": "算了不想写了",
+        "description": "往事不堪回首",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（释怀）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_disciple_visit",
+    "title": "故徒来访",
+    "description": "一个年轻人敲响了你的门，自称是你当年教导过的学生。他的眼中满是敬意。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 4,
+    "include": "has.flag.guild_member | has.flag.magic_graduate | has.flag.knight | attribute.chr >= 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "disciple_grateful",
+        "title": "感念师恩",
+        "description": "学生带来了礼物和消息",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（礼物）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（声望）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 10,
+            "description": "HP +10（欣慰）"
+          }
+        ]
+      },
+      {
+        "id": "disciple_seek_help",
+        "title": "求师指点",
+        "description": "学生遇到困难来求助",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（教学相长）"
+          },
+          {
+            "type": "set_flag",
+            "target": "master_mentor",
+            "value": 1,
+            "description": "一代名师"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（力不从心）"
+          }
+        ],
+        "successText": "你的一句话点醒了困惑中的学生",
+        "failureText": "你发现自己已经跟不上时代了……"
+      },
+      {
+        "id": "disciple_disappoint",
+        "title": "形同陌路",
+        "description": "他已经不是当年的那个孩子了",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（失落）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_last_adventure",
+    "title": "不服老的冒险",
+    "description": "听说地下城发现了新的楼层。你的心跳加速了——冒险者的血液可不会因为几根白头发就冷却下来。",
+    "minAge": 55,
+    "maxAge": 70,
+    "weight": 3,
+    "include": "attribute.str >= 14 | attribute.mag >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "last_adv_go",
+        "title": "出发！",
+        "description": "你拿起老伙计（武器/法杖），义无反顾",
+        "probability": 0.3,
+        "requireCondition": "attribute.str >= 18 | attribute.mag >= 18",
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（传奇事迹）"
+          },
+          {
+            "type": "set_flag",
+            "target": "undying_legend",
+            "value": 1,
+            "description": "不死传奇！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -60,
+            "description": "HP -60（重伤）"
+          },
+          {
+            "type": "set_flag",
+            "target": "near_death",
+            "value": 1,
+            "description": "濒死体验"
+          }
+        ],
+        "successText": "你打败了地下城之主！所有人都在传颂你的名字",
+        "failureText": "你被怪物击飞了出去……老了就是老了"
+      },
+      {
+        "id": "last_adv_guide",
+        "title": "当向导",
+        "description": "你带年轻人去，自己当后盾",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（受人尊敬）"
+          },
+          {
+            "type": "set_flag",
+            "target": "mentor_legend",
+            "value": 1,
+            "description": "传奇导师"
+          }
+        ]
+      },
+      {
+        "id": "last_adv_pass",
+        "title": "看年轻人去",
+        "description": "你选择在酒馆等着听他们的故事",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（从容）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "major"
+  },
+  {
+    "id": "elder_family_reunion",
+    "title": "天伦之乐",
+    "description": "孩子们都回来了。屋子里充满了欢笑声和食物的香味。这是你最幸福的时刻。",
+    "minAge": 50,
+    "maxAge": 80,
+    "weight": 5,
+    "include": "attribute.chr >= 10 & attribute.mny >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "family_harmony",
+        "title": "其乐融融",
+        "description": "一家人其乐融融",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 15,
+            "description": "HP +15（幸福感）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（满足）"
+          }
+        ]
+      },
+      {
+        "id": "family_dispute",
+        "title": "遗产之争",
+        "description": "孩子们为了你的财产吵了起来……",
+        "probability": 0.3,
+        "requireCondition": "attribute.mny >= 20",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（家丑）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（心寒）"
+          }
+        ]
+      },
+      {
+        "id": "family_legacy",
+        "title": "传承家业",
+        "description": "你宣布将家业交给最合适的孩子",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（英明决断）"
+          },
+          {
+            "type": "set_flag",
+            "target": "family_legacy",
+            "value": 1,
+            "description": "家族传承"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_illness",
+    "title": "疾病缠身",
+    "description": "你开始频繁咳嗽，身体越来越沉重。医生的表情不太好看。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 5,
+    "include": "attribute.str < 25",
+    "effects": [],
+    "branches": [
+      {
+        "id": "illness_fight",
+        "title": "积极治疗",
+        "description": "你四处求医问药",
+        "probability": 0.4,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "体魄 -2（身体衰退）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -4,
+            "description": "体魄 -4（重病）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50"
+          }
+        ],
+        "successText": "在草药师的帮助下，你的病情得到了控制",
+        "failureText": "疾病比你想象的更严重……"
+      },
+      {
+        "id": "illness_magic",
+        "title": "魔法治疗",
+        "description": "你寻求魔法师的帮助",
+        "probability": 0.3,
+        "requireCondition": "attribute.mag >= 10 | has.flag.magic_student",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 10,
+            "description": "HP +10（治疗效果）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（治疗费）"
+          }
+        ]
+      },
+      {
+        "id": "illness_accept",
+        "title": "坦然面对",
+        "description": "生死有命，富贵在天",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（觉悟）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "elder_spirit_trial",
+    "title": "灵魂试炼",
+    "description": "在一个月圆之夜，你的意识突然脱离了身体。你看到了自己的一生如走马灯般闪过。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "include": "attribute.spr >= 15 | has.flag.dragon_blood | has.flag.demon_heritage",
+    "effects": [],
+    "branches": [
+      {
+        "id": "spirit_ascend",
+        "title": "灵魂升华",
+        "description": "你领悟了生命的真谛",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4,
+            "description": "灵魂 +4（超脱）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2（灵力提升）"
+          },
+          {
+            "type": "set_flag",
+            "target": "spirit_ascended",
+            "value": 1,
+            "description": "灵魂升华！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25（反噬）"
+          }
+        ],
+        "successText": "你感受到了前所未有的平静和力量",
+        "failureText": "灵力暴走，你差点就回不来了……"
+      },
+      {
+        "id": "spirit_insight",
+        "title": "获得感悟",
+        "description": "你看到了过去忽略的真相",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（顿悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（感悟）"
+          }
+        ]
+      },
+      {
+        "id": "spirit_fear",
+        "title": "恐惧",
+        "description": "这太可怕了，你想醒来",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（阴影）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "elder_legacy_gift",
+    "title": "传家之宝",
+    "description": "你决定把最重要的东西传给下一代。它承载着你一生的记忆和荣耀。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "include": "has.flag.dragon_slayer | has.flag.knight_hero | has.flag.archmage | has.flag.famous_inventor | has.flag.merchant_master",
+    "effects": [],
+    "branches": [
+      {
+        "id": "legacy_worthy",
+        "title": "传给有缘人",
+        "description": "你在年轻冒险者中寻找最合适的继承者",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（受人敬仰）"
+          },
+          {
+            "type": "set_flag",
+            "target": "legend_legacy",
+            "value": 1,
+            "description": "传说传承"
+          }
+        ]
+      },
+      {
+        "id": "legacy_sell",
+        "title": "卖了换钱",
+        "description": "实用主义万岁",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5（意外之财）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（被人议论）"
+          }
+        ]
+      },
+      {
+        "id": "legacy_keep",
+        "title": "还是自己留着吧",
+        "description": "这是你最好的回忆",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（眷恋）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_kingdom_crisis",
+    "title": "王国危机",
+    "description": "战争来临了。即使是白发苍苍的老者，也被征召保卫家园。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 3,
+    "include": "attribute.str >= 12 | attribute.mag >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "crisis_hero",
+        "title": "挺身而出",
+        "description": "你主动请缨",
+        "probability": 0.3,
+        "requireCondition": "attribute.str >= 20 | attribute.mag >= 20",
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 22,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（民族英雄）"
+          },
+          {
+            "type": "set_flag",
+            "target": "kingdom_hero",
+            "value": 1,
+            "description": "国家英雄！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -70,
+            "description": "HP -70（战伤）"
+          }
+        ],
+        "successText": "老将军一马当先，击退了敌军！",
+        "failureText": "你在战场上倒下了……但你的勇气激励了所有人"
+      },
+      {
+        "id": "crisis_strategist",
+        "title": "担任军师",
+        "description": "用你的经验为指挥官出谋划策",
+        "probability": 0.4,
+        "requireCondition": "attribute.int >= 15",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（智囊）"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1,
+            "description": "战争英雄"
+          }
+        ]
+      },
+      {
+        "id": "crisis_evacuate",
+        "title": "帮助撤离",
+        "description": "你组织村民撤退",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（救人）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20（疲惫）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "elder_peaceful_days",
+    "title": "宁静时光",
+    "description": "你搬到了乡下的小屋。每天钓鱼、种花、看日落。这就是你一直在寻找的生活。",
+    "minAge": 50,
+    "maxAge": 80,
+    "weight": 4,
+    "include": "attribute.spr >= 12",
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": 10,
+        "description": "HP +10（身心放松）"
+      }
+    ],
+    "branches": [
+      {
+        "id": "peace_garden",
+        "title": "精心打理花园",
+        "description": "你种了一片美丽的花园",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（与自然亲近）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（花开富贵）"
+          }
+        ]
+      },
+      {
+        "id": "peace_fishing",
+        "title": "日日垂钓",
+        "description": "湖边是最好的思考地点",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1（思考）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（宁静）"
+          }
+        ]
+      },
+      {
+        "id": "peace_lonely",
+        "title": "太安静了",
+        "description": "你开始怀念过去的热闹",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（决定走出家门）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_final_counting",
+    "title": "生命的终点",
+    "description": "你感觉到了——这一次，时间不会再给你机会了。你的一生，该做个了结了。",
+    "minAge": 65,
+    "maxAge": 80,
+    "weight": 2,
+    "include": "",
+    "effects": [],
+    "branches": [
+      {
+        "id": "final_glory",
+        "title": "名垂青史",
+        "description": "你的名字将被后人永远铭记",
+        "probability": 0.2,
+        "requireCondition": "attribute.chr >= 25 & attribute.int >= 20",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "eternal_glory",
+            "value": 1,
+            "description": "永恒荣耀！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          }
+        ]
+      },
+      {
+        "id": "final_loved",
+        "title": "被爱的人环绕",
+        "description": "你在家人的陪伴中安详离去",
+        "probability": 0.3,
+        "requireCondition": "attribute.chr >= 15 & attribute.spr >= 15",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "peaceful_end",
+            "value": 1,
+            "description": "安详离世"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          }
+        ]
+      },
+      {
+        "id": "final_battle",
+        "title": "战斗到最后一刻",
+        "description": "你选择了一种战士的方式离去",
+        "probability": 0.2,
+        "requireCondition": "attribute.str >= 20 | attribute.mag >= 20",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "warriors_death",
+            "value": 1,
+            "description": "战士之死！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "final_mystery",
+        "title": "消失在星空中",
+        "description": "你的身体化为了点点星光……",
+        "probability": 0.15,
+        "requireCondition": "attribute.spr >= 20 & attribute.mag >= 15",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "ascended",
+            "value": 1,
+            "description": "羽化登仙！！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3"
+          }
+        ]
+      },
+      {
+        "id": "final_quiet",
+        "title": "安静地离开",
+        "description": "就像来时一样，悄然离去",
+        "probability": 0.15,
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "quiet_end",
+            "value": 1,
+            "description": "悄然而逝"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
   }
 ]
