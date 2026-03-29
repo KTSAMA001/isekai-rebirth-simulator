@@ -33,9 +33,10 @@ export class AttributeModule {
     for (const def of this.world.attributes) {
       if (def.hidden) continue
       const allocated = allocation[def.id] ?? 0
-      const newVal = def.defaultValue + allocated
+      const base = currentAttrs[def.id] ?? def.defaultValue
+      const newVal = base + allocated
       const clamped = Math.max(def.min, Math.min(def.max, newVal))
-      const actual = clamped - def.defaultValue
+      const actual = clamped - base
       used += Math.max(0, actual)
       attrs[def.id] = clamped
     }

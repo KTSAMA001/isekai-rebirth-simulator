@@ -52,7 +52,7 @@ export interface WorldTalentDef {
 
 /** 事件效果 */
 export interface EventEffect {
-  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp'
+  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp' | 'modify_max_hp_bonus'
   target: string
   value: number
   probability?: number
@@ -236,6 +236,8 @@ export interface GameState {
   age: number
   hp: number
   maxHp: number
+  /** 事件给予的额外 HP 上限加成（默认 0） */
+  maxHpBonus: number
   flags: Set<string>
   triggeredEvents: Set<string>
   eventLog: EventLogEntry[]

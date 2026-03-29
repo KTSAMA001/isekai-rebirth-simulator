@@ -42,11 +42,6 @@ const showChoices = computed(() => {
   return currentYearResult.value?.phase === 'awaiting_choice'
 })
 
-// 是否可以开始新年
-const canStartYear = computed(() => {
-  return !currentYearResult.value && state.value?.phase === 'simulating'
-})
-
 const isFinished = computed(() => state.value?.phase === 'finished')
 
 onMounted(() => {
@@ -54,13 +49,43 @@ onMounted(() => {
     router.replace('/')
     return
   }
+  // 首年自动开始
+  if (state.value?.phase === 'simulating') {
+    advanceToNextInteraction()
+  }
 })
 
-/** 开始新年 */
-function startYear() {
+/** 自动推进到下一个需要玩家交互的节点（事件/选择/结束） */
+function advanceToNextInteraction() {
   if (!gameStore.engine || isFinished.value) return
-  const result = gameStore.startYear()
-  currentYearResult.value = result
+
+  const MAX_ITERATIONS = 200 // 安全防护
+  for (let i = 0; i < MAX_ITERATIONS; i++) {
+    const result = gameStore.startYear()
+
+    // 游戏结束（年龄上限或 HP 耗尽）
+    if (state.value?.phase === 'finished') {
+      currentYearResult.value = result
+      checkFinished()
+      return
+    }
+
+    if (result.phase === 'mundane_year') {
+      // 平淡年 → 自动跳过，继续下一年
+      gameStore.skipYear()
+      if (state.value?.phase === 'finished') {
+        currentYearResult.value = result
+        checkFinished()
+        return
+      }
+      continue
+    }
+
+    // 遇到事件（需要展示或需要选择）→ 停在这里
+    currentYearResult.value = result
+    checkFinished()
+    return
+  }
 }
 
 /** 选择分支 */
@@ -71,10 +96,13 @@ function selectBranch(branchId: string) {
   checkFinished()
 }
 
-/** 继续（showing_event / mundane_year → 清空结果，准备下一年） */
+/** 继续（直接推进到下一个交互节点） */
 function continueNext() {
-  currentYearResult.value = null
-  checkFinished()
+  if (isFinished.value) {
+    checkFinished()
+    return
+  }
+  advanceToNextInteraction()
 }
 
 /** 检查是否结束 */
@@ -125,14 +153,7 @@ function checkFinished() {
       </button>
     </div>
 
-    <!-- 开始新年按钮 -->
-    <div v-if="canStartYear" class="continue-bar">
-      <button class="continue-btn start-btn" @click="startYear">
-        开始第 {{ (state?.age ?? 0) + 1 }} 年
-      </button>
-    </div>
-
-    <!-- 结束状态 -->
+    <!-- 结束状态（无当前事件时显示） -->
     <div v-if="isFinished && !currentYearResult" class="continue-bar">
       <button class="continue-btn" @click="router.replace({ name: 'result', params: { worldId: props.worldId, playId: props.playId } })">
         查看结局
@@ -210,9 +231,5 @@ function checkFinished() {
 
 .continue-btn:active {
   transform: scale(0.96);
-}
-
-.start-btn {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 }
 </style>

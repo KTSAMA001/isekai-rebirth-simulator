@@ -68,8 +68,9 @@ export class SimulationEngine {
         inherited: [],
       },
       age: 0,
-      hp: 100,
-      maxHp: 999,
+      maxHpBonus: 0,
+      hp: 0, // 会在下面重新计算
+      maxHp: 0,
       flags: new Set<string>(),
       triggeredEvents: new Set<string>(),
       eventLog: [],
@@ -79,6 +80,10 @@ export class SimulationEngine {
       },
       phase: 'talent-draft',
     }
+
+    // 根据初始属性计算 maxHp 和 hp
+    this.state.maxHp = this.computeMaxHp()
+    this.state.hp = this.state.maxHp
 
     return this.getState()
   }
@@ -164,6 +169,10 @@ export class SimulationEngine {
       }
     }
 
+    // 计算动态 HP 上限并初始化 HP
+    this.state.maxHp = this.computeMaxHp()
+    this.state.hp = this.state.maxHp
+
     this.state = {
       ...this.state,
       attributes,
@@ -176,6 +185,32 @@ export class SimulationEngine {
   }
 
   // ==================== Galgame 化三步流程 ====================
+
+  /** 根据属性动态计算 HP 上限：50 + 体魄*10 + 灵魂*5 + maxHpBonus */
+  private computeMaxHp(): number {
+    const str = this.state.attributes['str'] ?? 0
+    const spr = this.state.attributes['spr'] ?? 0
+    return 50 + str * 10 + spr * 5 + this.state.maxHpBonus
+  }
+
+  /** 重新计算 maxHp，夹紧 hp，并恢复部分 HP */
+  private recalcMaxHpAndRegen(): void {
+    const newMaxHp = this.computeMaxHp()
+    // 每年恢复：取 max(str*2, 5) 和 maxHp*10% 中较大者
+    const regen = Math.max(
+      Math.max((this.state.attributes['str'] ?? 0) * 2, 5),
+      Math.floor(newMaxHp * 0.1)
+    )
+    const newHp = Math.min(
+      newMaxHp,
+      this.state.hp + regen
+    )
+    this.state = {
+      ...this.state,
+      maxHp: newMaxHp,
+      hp: Math.max(0, newHp),
+    }
+  }
 
   /** 缓存：startYear 产生的待处理事件 */
   private pendingYearEvent: import('./types').WorldEventDef | null = null
@@ -341,8 +376,11 @@ export class SimulationEngine {
     }
   }
 
-  /** 年度后处理：快照、成就、死亡检查 */
+  /** 年度后处理：HP重算/恢复、快照、成就、死亡检查 */
   private postYearProcess(): void {
+    // 重新计算 maxHp 并恢复部分 HP
+    this.recalcMaxHpAndRegen()
+
     // 记录属性快照
     const snapshot = this.attrModule.snapshot(this.state.attributes, this.state.age)
     let newState = {

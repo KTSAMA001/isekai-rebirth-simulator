@@ -345,6 +345,7 @@ export const events: WorldEventDef[] = [
     effects: [
       { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
       { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
+      { type: 'modify_max_hp_bonus', target: 'max_hp', value: 50, description: 'HP上限 +50（龙血强化）' },
       { type: 'set_flag', target: 'dragon_awakened', value: 1, description: '龙血觉醒！' },
     ],
     unique: true,
