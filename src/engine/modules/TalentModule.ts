@@ -55,7 +55,7 @@ export class TalentModule {
     return { drafted: finalDrafted, replacements }
   }
 
-  /** 选择天赋（处理互斥） */
+  /** 选择天赋（处理互斥 — 自动跳过冲突天赋，保留先选的） */
   selectTalents(
     draftPool: string[],
     selections: string[],
@@ -63,26 +63,43 @@ export class TalentModule {
   ): { selected: string[]; conflicts: string[] } {
     const conflicts: string[] = []
     const selected: string[] = []
+    const acceptedSet = new Set<string>()
 
-    // 检查互斥
-    const selectionSet = new Set(selections)
     for (const id of selections) {
+      if (selected.length >= maxCount) break
+
       const def = this.world.index.talentsById.get(id)
+
+      // 检查是否与已接受的天赋互斥
+      let isConflicting = false
       if (def?.mutuallyExclusive) {
         for (const excludeId of def.mutuallyExclusive) {
-          if (selectionSet.has(excludeId)) {
-            conflicts.push(`${id} 与 ${excludeId} 互斥`)
+          if (acceptedSet.has(excludeId)) {
+            conflicts.push(`${id} 与 ${excludeId} 互斥，已跳过 ${id}`)
+            isConflicting = true
+            break
           }
         }
       }
+
+      // 反向检查：已接受的天赋是否声明了与当前天赋互斥
+      if (!isConflicting) {
+        for (const acceptedId of acceptedSet) {
+          const acceptedDef = this.world.index.talentsById.get(acceptedId)
+          if (acceptedDef?.mutuallyExclusive?.includes(id)) {
+            conflicts.push(`${acceptedId} 与 ${id} 互斥，已跳过 ${id}`)
+            isConflicting = true
+            break
+          }
+        }
+      }
+
+      if (!isConflicting) {
+        selected.push(id)
+        acceptedSet.add(id)
+      }
     }
 
-    if (conflicts.length > 0) {
-      return { selected: [], conflicts }
-    }
-
-    // 限制数量
-    selected.push(...selections.slice(0, maxCount))
     return { selected, conflicts }
   }
 

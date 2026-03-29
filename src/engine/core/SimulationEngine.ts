@@ -133,7 +133,7 @@ export class SimulationEngine {
     )
 
     if (conflicts.length > 0) {
-      throw new Error(`天赋冲突: ${conflicts.join(', ')}`)
+      console.warn(`[天赋] 互斥冲突已自动解决: ${conflicts.join('; ')}`)
     }
 
     // 应用天赋属性修改
