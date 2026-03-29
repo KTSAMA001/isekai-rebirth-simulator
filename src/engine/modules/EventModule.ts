@@ -221,6 +221,10 @@ export class EventModule {
         const sign = effect.value >= 0 ? '+' : ''
         return effect.description ?? `计数器 ${effect.target} ${sign}${effect.value}`
       }
+      case 'grant_item': {
+        // 物品获取由 SimulationEngine 处理
+        break
+      }
       case 'trigger_event': {
         // 触发后续事件
         const nextEvent = this.world.index.eventsById.get(effect.target)
@@ -254,6 +258,10 @@ export class EventModule {
       achievements: {
         unlocked: [...state.achievements.unlocked],
         progress: { ...state.achievements.progress },
+      },
+      inventory: {
+        ...state.inventory,
+        items: [...state.inventory.items],
       },
       attributeHistory: [...state.attributeHistory],
     }

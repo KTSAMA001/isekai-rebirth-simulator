@@ -7,6 +7,7 @@ import { attributes } from './attributes'
 import { talents } from './talents'
 import { events } from './events'
 import { achievements } from './achievements'
+import { items } from './items'
 import { presets } from './presets'
 import { scoringRule } from './rules'
 
@@ -18,6 +19,7 @@ export function createSwordAndMagicWorld() {
     talents,
     events,
     achievements,
+    items,
     presets,
     scoringRule
   )

@@ -12,6 +12,7 @@ import { EventModule } from '../modules/EventModule'
 import { ConditionDSL } from '../modules/ConditionDSL'
 import { EvaluatorModule } from '../modules/EvaluatorModule'
 import { AchievementModule } from '../modules/AchievementModule'
+import { ItemModule } from '../modules/ItemModule'
 
 /** 生成简短唯一 ID */
 function generatePlayId(): string {
@@ -27,6 +28,7 @@ export class SimulationEngine {
   private eventModule: EventModule
   private evaluatorModule: EvaluatorModule
   private achievementModule: AchievementModule
+  private itemModule: ItemModule
   private dsl: ConditionDSL
   /** 基于初始体魄的固定恢复量（allocateAttributes 时计算，不再随属性成长增长） */
   private initialStrRegen = 1
@@ -44,6 +46,7 @@ export class SimulationEngine {
     this.eventModule = new EventModule(world, this.random, this.dsl, this.attrModule)
     this.evaluatorModule = new EvaluatorModule(world)
     this.achievementModule = new AchievementModule(world, this.dsl)
+    this.itemModule = new ItemModule(world, this.dsl)
   }
 
   /** 初始化新游戏 */
@@ -83,6 +86,7 @@ export class SimulationEngine {
         unlocked: [],
         progress: {},
       },
+      inventory: { items: [], maxSlots: 3 },
       phase: 'talent-draft',
     }
 
@@ -208,7 +212,12 @@ export class SimulationEngine {
     const initHp = this.computeInitHp()
     // 软上限：初始HP × 1.5 + 年龄×0.5，避免高体魄角色HP无限膨胀
     const softCap = Math.floor(initHp * 1.5 + this.state.age * 0.5)
-    const newHp = Math.min(this.state.hp + regen, softCap)
+    // 物品HP恢复加成
+    const itemBonus = this.itemModule.getHpRegenBonus(this.state)
+    // 物品HP软上限修正
+    const capModifier = this.itemModule.getHpCapModifier(this.state)
+    const modifiedCap = Math.max(softCap * (1 + capModifier), 20)
+    const newHp = Math.min(this.state.hp + regen + itemBonus, modifiedCap)
     this.state = {
       ...this.state,
       hp: newHp,
@@ -395,6 +404,19 @@ export class SimulationEngine {
       chosenEffects = [...event.effects, ...branch.effects]
     }
 
+    // 处理物品获取
+    for (const fx of chosenEffects) {
+      if (fx.type === 'grant_item') {
+        const result = this.itemModule.grantItem(this.state, fx.target)
+        if (result.success) {
+          const hpBonus = this.itemModule.getFlatHpBonus(fx.target)
+          if (hpBonus > 0) {
+            this.state = { ...this.state, hp: this.state.hp + hpBonus }
+          }
+        }
+      }
+    }
+
     const clonedState = this.cloneState(this.state)
     const effectTexts = this.eventModule.applyEffectsOnState(chosenEffects, clonedState)
 
@@ -468,6 +490,23 @@ export class SimulationEngine {
       attributeHistory: [...this.state.attributeHistory, snapshot],
     }
 
+    // 物品被动属性成长
+    const growth = this.itemModule.getAttributeGrowth(newState)
+    for (const [attrId, bonus] of Object.entries(growth)) {
+      if (bonus > 0) {
+        const current = newState.attributes[attrId] ?? 0
+        const peak = newState.attributePeaks[attrId] ?? 0
+        const max = this.world.attributes.find(a => a.id === attrId)?.max ?? 99
+        const newAttr = Math.min(Math.floor(current + bonus), max)
+        const newPeak = Math.max(peak, newAttr)
+        newState = {
+          ...newState,
+          attributes: { ...newState.attributes, [attrId]: newAttr },
+          attributePeaks: { ...newState.attributePeaks, [attrId]: newPeak },
+        }
+      }
+    }
+
     // 检查成就
     const newAchievements = this.achievementModule.checkAchievements(newState)
     if (newAchievements.length > 0) {
@@ -493,6 +532,14 @@ export class SimulationEngine {
       } else {
         // 60% 挂上濒死标记，继续
         newState.flags = new Set([...newState.flags, 'near_death'])
+      }
+    }
+
+    // 免死效果检查
+    if (newState.hp <= 0) {
+      const deathSaveHp = this.itemModule.consumeDeathSave(newState)
+      if (deathSaveHp > 0) {
+        newState = { ...newState, hp: deathSaveHp }
       }
     }
 
@@ -534,6 +581,10 @@ export class SimulationEngine {
       achievements: {
         unlocked: [...state.achievements.unlocked],
         progress: { ...state.achievements.progress },
+      },
+      inventory: {
+        ...state.inventory,
+        items: [...state.inventory.items],
       },
       attributeHistory: [...state.attributeHistory],
     }

@@ -10,6 +10,7 @@ import type {
   WorldTalentDef,
   WorldEventDef,
   WorldAchievementDef,
+  WorldItemDef,
   WorldPresetDef,
   WorldScoringRule,
 } from '../core/types'
@@ -21,6 +22,7 @@ export function createWorldInstance(
   talents: WorldTalentDef[],
   events: WorldEventDef[],
   achievements: WorldAchievementDef[],
+  items: WorldItemDef[] = [],
   presets: WorldPresetDef[],
   scoringRule: WorldScoringRule
 ): IWorldInstance {
@@ -40,18 +42,25 @@ export function createWorldInstance(
     eventsById.set(event.id, event)
   }
 
+  const itemsById = new Map<string, WorldItemDef>()
+  for (const item of items) {
+    itemsById.set(item.id, item)
+  }
+
   return {
     manifest,
     attributes,
     talents,
     events,
     achievements,
+    items,
     presets,
     scoringRule,
     index: {
       attributesById,
       talentsById,
       eventsById,
+      itemsById,
     },
   }
 }

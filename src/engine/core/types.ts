@@ -52,12 +52,68 @@ export interface WorldTalentDef {
 
 /** 事件效果 */
 export interface EventEffect {
-  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp' | 'set_counter' | 'modify_counter'
+  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp' | 'set_counter' | 'modify_counter' | 'grant_item'
   target: string
   value: number
   probability?: number
   condition?: string
   description?: string
+}
+
+// ==================== 物品系统 ====================
+
+/** 物品稀有度 */
+export type ItemRarity = 'common' | 'rare' | 'legendary'
+
+/** 物品效果 */
+export interface ItemEffectDef {
+  /** 效果类型 */
+  type:
+    | 'hp_regen_bonus'        // 每年额外HP恢复（如 +1）
+    | 'hp_flat_bonus'         // 获得时一次性HP加成
+    | 'attr_passive_growth'   // 每年属性被动成长（如 体魄+0.3/年）
+    | 'skill_check_bonus'     // 判定成功率加成（如 +5% → value=0.05）
+    | 'damage_reduction'      // 受到HP损失减免（如 -20% → value=0.2）
+    | 'event_weight_bonus'    // 特定事件权重修改（如 战斗事件×1.5）
+    | 'death_save'            // 免死一次（HP归零时恢复到value值）
+    | 'conditional_regen'     // 条件HP恢复（HP低于阈值时恢复value点）
+    | 'hp_cap_modifier'       // HP软上限修改（如 -20% → value=-0.2）
+    | 'attr_floor'            // 属性保底（属性不低于value）
+    | 'counter_bonus'         // counter增长加成（特定counter每次+额外value）
+  /** 作用的属性/事件标签/counter ID（取决于type） */
+  target?: string
+  /** 效果数值 */
+  value: number
+  /** 触发条件（DSL，为空则始终触发） */
+  condition?: string
+}
+
+/** 世界物品定义 */
+export interface WorldItemDef {
+  id: string
+  name: string
+  description: string
+  icon: string
+  rarity: ItemRarity
+  category: 'weapon' | 'armor' | 'accessory' | 'consumable' | 'special'
+  /** 物品被动效果列表 */
+  effects: ItemEffectDef[]
+  /** 获取时的描述文本（显示在事件选择中） */
+  acquireText: string
+}
+
+/** 持有的物品实例 */
+export interface InventorySlot {
+  itemId: string
+  /** 获取时的年龄 */
+  acquiredAge: number
+}
+
+/** 背包状态 */
+export interface InventoryState {
+  items: InventorySlot[]
+  /** 最大格子数 */
+  maxSlots: number
 }
 
 /** 风险判定配置 */
@@ -204,6 +260,7 @@ export interface WorldInstance {
   talents: WorldTalentDef[]
   events: WorldEventDef[]
   achievements: WorldAchievementDef[]
+  items: WorldItemDef[]
   presets: WorldPresetDef[]
   scoringRule: WorldScoringRule
   /** 索引映射，加速查找 */
@@ -211,6 +268,7 @@ export interface WorldInstance {
     attributesById: Map<string, WorldAttributeDef>
     talentsById: Map<string, WorldTalentDef>
     eventsById: Map<string, WorldEventDef>
+    itemsById: Map<string, WorldItemDef>
   }
 }
 
@@ -275,6 +333,8 @@ export interface GameState {
     unlocked: string[]
     progress: Record<string, number>
   }
+  /** 物品背包 */
+  inventory: InventoryState
   phase: GamePhase
   result?: GameResult
   /** 当前年份需要玩家选择的事件分支 */
