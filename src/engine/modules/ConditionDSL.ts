@@ -57,6 +57,8 @@ export class ConditionDSL {
         return ctx.state.triggeredEvents.has(id)
       case 'achievement':
         return ctx.state.achievements.unlocked.includes(id)
+      case 'flag':
+        return ctx.state.flags.has(id)
       default:
         return false
     }
