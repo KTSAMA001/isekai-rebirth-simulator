@@ -276,8 +276,9 @@ function validateGame(gameLog: GameLog, allEvents: any[]): ValidationIssue[] {
     }
 
     // Check 4: HP shouldn't exceed initial + reasonable regen
-    // Max HP should be initHp + age * max_regen (floor(10/3)+1 = 4)
-    const maxAllowed = gameLog.maxHp + entry.age * 4 + 10 // +10 buffer for positive HP events
+    // Max HP should be initHp + age * max_regen (floor(10/3)+1 = 4) + item bonuses
+    // Items can add up to ~3 HP/year (hero_blade +2, herbal_pouch +1), over 80 years = +240
+    const maxAllowed = gameLog.maxHp + entry.age * 7 + 50 // +50 buffer for item bonuses + events
     if (entry.hpAfter > maxAllowed && entry.hpAfter > entry.hpBefore) {
       issues.push({
         gameNum: gameLog.gameNum,

@@ -168,6 +168,7 @@ export const events: WorldEventDef[] = [
     effects: [
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+      { type: 'grant_item', target: 'orphan_bracelet', value: 1, description: '获得 📿 孤儿手环' },
     ],
     tag: 'life',
     priority: 'minor',
@@ -351,6 +352,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
           { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
           { type: 'set_flag', target: 'magic_student', value: 1, description: '成为魔法学生' },
+            { type: 'grant_item', target: 'crystal_shard', value: 1, description: '获得 💎 魔力碎片' },
         ],
       },
       {
@@ -462,6 +464,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'str', value: 3, description: '体魄 +3' },
           { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
           { type: 'set_flag', target: 'squire', value: 1, description: '侍从修炼（刻苦）' },
+            { type: 'grant_item', target: 'training_dummy', value: 1, description: '获得 🥊 练功桩' },
         ],
         failureEffects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -593,6 +596,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
           { type: 'set_flag', target: 'dungeon_first', value: 1, description: '初次探险（深入）' },
           { type: 'set_flag', target: 'dungeon_veteran', value: 1, description: '地下城老手' },
+            { type: 'grant_item', target: 'old_map', value: 1, description: '获得 🗺️ 古旧地图' },
         ],
         failureEffects: [
           { type: 'modify_hp', target: 'hp', value: -25, description: 'HP -25（掉进暗河）' },
@@ -690,6 +694,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
           { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
           { type: 'set_flag', target: 'knight', value: 1, description: '正式骑士！' },
+            { type: 'grant_item', target: 'squire_shield', value: 1, description: '获得 🛡️ 侍从之盾' },
         ],
         failureEffects: [
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
@@ -845,6 +850,7 @@ export const events: WorldEventDef[] = [
     effects: [
       { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2' },
       { type: 'set_flag', target: 'reincarnated', value: 1, description: '前世觉醒' },
+      { type: 'grant_item', target: 'reincarnation_memory', value: 1, description: '获得 🧠 转生记忆' },
     ],
     unique: true,
     tag: 'epic',
@@ -996,6 +1002,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_hp', target: 'hp', value: -50, description: 'HP -50' },
           { type: 'modify_attribute', target: 'mny', value: 3, description: '家境 +3' },
           { type: 'set_flag', target: 'near_death', value: 1, description: '濒死体验' },
+            { type: 'grant_item', target: 'dragon_scale', value: 1, description: '获得 🐲 龙鳞护符' },
         ],
       },
       {
@@ -1047,6 +1054,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
       { type: 'set_flag', target: 'hero_journey', value: 1, description: '踏上勇者之路' },
+      { type: 'grant_item', target: 'hero_blade', value: 1, description: '获得 ⚔️ 圣剑' },
     ],
     unique: true,
     tag: 'epic',
@@ -1411,6 +1419,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
       { type: 'modify_hp', target: 'hp', value: 5, description: 'HP +5' },
+      { type: 'grant_item', target: 'fairy_dust', value: 1, description: '获得 ✨ 精灵之尘' },
     ],
     tag: 'adventure',
     priority: 'minor',
@@ -1441,6 +1450,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'mny', value: 4, description: '家境 +4' },
           { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
           { type: 'set_flag', target: 'dungeon_master', value: 1, description: '地下城征服者' },
+            { type: 'grant_item', target: 'cursed_blade', value: 1, description: '获得 🗡️ 诅咒之刃' },
         ],
         failureEffects: [
           { type: 'modify_hp', target: 'hp', value: -40, description: 'HP -40（险些丧命）' },
@@ -1751,6 +1761,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_hp', target: 'hp', value: -50, description: 'HP -50' },
           { type: 'modify_attribute', target: 'mny', value: 3, description: '家境 +3' },
           { type: 'set_flag', target: 'war_hero', value: 1, description: '战争英雄！' },
+            { type: 'grant_item', target: 'war_medal', value: 1, description: '获得 🎖️ 军功章' },
         ],
       },
     ],
@@ -2154,6 +2165,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
       { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1（得到报酬）' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（村民好感）' },
+      { type: 'grant_item', target: 'herbal_pouch', value: 1, description: '获得 🌿 草药袋' },
     ],
     tag: 'life',
     priority: 'minor',
@@ -2302,6 +2314,7 @@ export const events: WorldEventDef[] = [
         probability: 0.3,
         effects: [
           { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
+            { type: 'grant_item', target: 'traveler_cloak', value: 1, description: '获得 🧥 旅人斗篷' },
         ],
       },
     ],
@@ -2369,6 +2382,7 @@ export const events: WorldEventDef[] = [
     effects: [
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+      { type: 'grant_item', target: 'chronicle_book', value: 1, description: '获得 📖 编年史' },
     ],
     tag: 'life',
     priority: 'minor',
@@ -2545,6 +2559,7 @@ export const events: WorldEventDef[] = [
         effects: [
           { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学到经验）' },
           { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（被激励了）' },
+            { type: 'grant_item', target: 'lucky_charm', value: 1, description: '获得 🍀 幸运符' },
         ],
       },
       {
@@ -3294,6 +3309,7 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学会了药膏配方）' },
           { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（祖孙情深）' },
           { type: 'set_flag', target: 'herbal_knowledge', value: true, description: '获得草药知识' },
+            { type: 'grant_item', target: 'soul_gem', value: 1, description: '获得 🔮 灵魂宝石' },
         ],
       },
       {
