@@ -181,7 +181,13 @@ export class EventModule {
         return effect.description ?? `${effect.target} 设为 ${effect.value}`
       }
       case 'modify_hp': {
+        const hpBefore = state.hp
         state.hp = Math.max(0, state.hp + effect.value)
+        // 致命打击：单次伤害超过当前 HP 的 50%，额外扣 10 HP
+        if (effect.value < 0 && Math.abs(effect.value) > hpBefore * 0.5) {
+          state.hp = Math.max(0, state.hp - 10)
+          return `${effect.description ?? `HP ${effect.value}`}；致命打击！额外 HP -10`
+        }
         return effect.description ?? `HP ${effect.value >= 0 ? '+' : ''}${effect.value}`
       }
       case 'set_flag': {
