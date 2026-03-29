@@ -221,6 +221,9 @@ export class SimulationEngine {
       throw new Error(`当前阶段 ${this.state.phase} 不允许推演`)
     }
 
+    // 新的一年：恢复部分 HP（上一年受伤的恢复）
+    this.recalcMaxHpAndRegen()
+
     // 年龄 +1
     let newState = {
       ...this.state,
@@ -259,16 +262,24 @@ export class SimulationEngine {
       return { phase: 'mundane_year', event: null }
     }
 
-    // 按优先级排序，优先选 critical/major
+    // 按优先级分组，在最高可用优先级内按权重随机
+    const priorityOrder: Record<string, number> = { critical: 0, major: 1, minor: 2 }
     const sorted = [...candidates].sort((a, b) => {
-      const priorityOrder = { critical: 0, major: 1, minor: 2 }
       const pa = priorityOrder[a.priority ?? 'minor']
       const pb = priorityOrder[b.priority ?? 'minor']
       return pa - pb
     })
 
-    // 取最高优先级的事件
-    const event = sorted[0]
+    // 取最高优先级组
+    const topPriority = priorityOrder[sorted[0].priority ?? 'minor']
+    const topGroup = sorted.filter(e => (priorityOrder[e.priority ?? 'minor']) === topPriority)
+
+    // 在组内按权重随机选择
+    const event = this.eventModule.pickEvent(topGroup)
+    if (!event) {
+      this.pendingYearEvent = null
+      return { phase: 'mundane_year', event: null }
+    }
     this.pendingYearEvent = event
 
     // 记录已触发
@@ -375,8 +386,8 @@ export class SimulationEngine {
     this.state = clonedState
     this.pendingYearEvent = null
 
-    // 后处理
-    this.postYearProcess()
+    // 后处理（不含 HP 恢复——HP 恢复移到下一次 startYear）
+    this.postYearProcessNoRegen()
 
     return {
       phase: 'showing_event',
@@ -413,7 +424,16 @@ export class SimulationEngine {
     // 重新计算 maxHp 并恢复部分 HP
     this.recalcMaxHpAndRegen()
 
-    // 记录属性快照
+    this.postYearProcessCore()
+  }
+
+  /** 年度后处理（不含 HP 恢复）—— 用于 resolveBranch 之后 */
+  private postYearProcessNoRegen(): void {
+    this.postYearProcessCore()
+  }
+
+  /** 后处理核心逻辑：快照、成就、死亡检查 */
+  private postYearProcessCore(): void {
     const snapshot = this.attrModule.snapshot(this.state.attributes, this.state.age)
     let newState = {
       ...this.state,
