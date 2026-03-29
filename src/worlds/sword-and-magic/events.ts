@@ -2346,4 +2346,319 @@ export const events: WorldEventDef[] = [
     tag: 'life',
     priority: 'minor',
   },
+  {
+    id: 'childhood_chase',
+    title: '抓蜻蜓',
+    description: '夏日午后，你拿着自制的小网兜在草丛间追逐蜻蜓。',
+    minAge: 3,
+    maxAge: 6,
+    weight: 5,
+    unique: true,
+    effects: [],
+    branches: [
+      {
+        id: 'catch_one',
+        title: '抓到了一只',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（开心）' },
+        ],
+      },
+      {
+        id: 'fall_down',
+        title: '摔了一跤',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（皮实了）' },
+        ],
+      },
+      {
+        id: 'let_go',
+        title: '抓到又放了',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（善良）' },
+        ],
+      },
+    ],
+    tag: 'childhood',
+    priority: 'minor',
+  },
+  {
+    id: 'childhood_hide_seek',
+    title: '捉迷藏',
+    description: '你和小伙伴们玩起了捉迷藏，你来当躲藏的那一个。',
+    minAge: 3,
+    maxAge: 6,
+    weight: 5,
+    unique: true,
+    effects: [],
+    branches: [
+      {
+        id: 'hide_well',
+        title: '藏得太好没人找到',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（善于观察）' },
+        ],
+      },
+      {
+        id: 'found_quickly',
+        title: '很快被找到了',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（和大家一起笑）' },
+        ],
+      },
+      {
+        id: 'hide_scary_place',
+        title: '躲进了 scary 的地方',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1（吓哭了）' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（胆量锻炼）' },
+        ],
+      },
+    ],
+    tag: 'childhood',
+    priority: 'minor',
+  },
+  {
+    id: 'childhood_pet',
+    title: '捡到受伤小鸟',
+    description: '你在草丛里发现了一只翅膀受伤的小鸟，它正可怜地叫着。',
+    minAge: 3,
+    maxAge: 6,
+    weight: 5,
+    unique: true,
+    effects: [],
+    branches: [
+      {
+        id: 'heal_bird',
+        title: '带回家照顾',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（温柔）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+        ],
+      },
+      {
+        id: 'leave_bird',
+        title: '看了一眼就走了',
+        probability: 0.3,
+        effects: [],
+      },
+      {
+        id: 'call_adult',
+        title: '去找大人帮忙',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（懂得求助）' },
+        ],
+      },
+    ],
+    tag: 'childhood',
+    priority: 'minor',
+  },
+  {
+    id: 'village_race',
+    effects: [],
+    title: '村里赛跑',
+    description: '村里举办了一年一度的赛跑比赛，你决定报名参加。',
+    minAge: 10,
+    maxAge: 14,
+    weight: 5,
+    unique: true,
+    branches: [
+      {
+        id: 'sprint_hard',
+        title: '全力冲刺',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（跑完很爽）' },
+        ],
+      },
+      {
+        id: 'pacing_strategy',
+        title: '合理分配体力',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（懂得策略）' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+        ],
+      },
+      {
+        id: 'trip_over',
+        title: '途中绊倒了',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（摔出来的韧性）' },
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1（丢脸）' },
+        ],
+      },
+    ],
+    tag: 'childhood',
+    priority: 'minor',
+  },
+  {
+    id: 'old_soldier_story',
+    effects: [],
+    title: '老兵的故事',
+    description: '村口的老兵又坐在树下，几个孩子围着他，听他讲年轻时的战场经历。',
+    minAge: 10,
+    maxAge: 14,
+    weight: 5,
+    unique: true,
+    branches: [
+      {
+        id: 'listen_carefully',
+        title: '认真听完',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学到经验）' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（被激励了）' },
+        ],
+      },
+      {
+        id: 'ask_questions',
+        title: '追问他战斗的细节',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2（深入了解）' },
+        ],
+      },
+      {
+        id: 'bored_leave',
+        title: '觉得无聊走开了',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（去玩了）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'minor',
+  },
+  {
+    id: 'catch_thief',
+    effects: [],
+    title: '抓小偷',
+    description: '集市上有人大喊"抓小偷！"，一个黑影从你身边窜过。',
+    minAge: 10,
+    maxAge: 14,
+    weight: 5,
+    unique: true,
+    branches: [
+      {
+        id: 'chase_thief',
+        title: '追上去',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（见义勇为）' },
+        ],
+      },
+      {
+        id: 'block_path',
+        title: '拦住去路',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（机智）' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+        ],
+      },
+      {
+        id: 'shout_alert',
+        title: '大声喊叫提醒别人',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（正义感）' },
+        ],
+      },
+    ],
+    tag: 'adventure',
+    priority: 'minor',
+  },
+  {
+    id: 'old_friend_reunion',
+    effects: [],
+    title: '老友重逢',
+    description: '在城里的酒馆，你遇到了多年未见的老朋友。你们曾经一起在泥巴地里打滚，如今他已是一方小有名气的商人。',
+    minAge: 35,
+    maxAge: 45,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'drink_together',
+        title: '坐下来喝一杯',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（叙旧很愉快）' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（人脉）' },
+        ],
+      },
+      {
+        id: 'business_proposal',
+        title: '聊起了合作生意',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1（商机）' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（商业头脑）' },
+        ],
+      },
+      {
+        id: 'polite_decline',
+        title: '寒暄几句后告别',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（释然）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'minor',
+  },
+  {
+    id: 'apprentice_contest',
+    effects: [],
+    title: '弟子比武大会',
+    description: '城中举办了一年一度的弟子比武大会，各门各派的年轻弟子齐聚一堂，切磋武艺。',
+    minAge: 35,
+    maxAge: 45,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'coach_disciple',
+        title: '指导自己的弟子参赛',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（师者风范）' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（教学相长）' },
+        ],
+      },
+      {
+        id: 'watch_and_bet',
+        title: '在场边观战押注',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（运气不错）' },
+          { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1（赢了一笔）' },
+        ],
+      },
+      {
+        id: 'join_exhibition',
+        title: '上台表演助兴',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（活动筋骨）' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（赢得喝彩）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'minor',
+  },
 ]

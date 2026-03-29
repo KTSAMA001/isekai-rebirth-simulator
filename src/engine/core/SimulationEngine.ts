@@ -393,8 +393,8 @@ export class SimulationEngine {
   skipYear(): YearResult {
     this.pendingYearEvent = null
 
-    // 后处理
-    this.postYearProcess()
+    // 后处理（HP恢复已在 startYear 年初完成）
+    this.postYearProcessCore()
 
     return {
       phase: 'mundane_year',
@@ -409,11 +409,8 @@ export class SimulationEngine {
     }
   }
 
-  /** 年度后处理：HP恢复、快照、成就、死亡检查 */
+  /** 年度后处理：快照、成就、死亡检查（HP恢复已在 startYear 年初统一完成） */
   private postYearProcess(): void {
-    // 恢复部分 HP（平淡年）
-    this.regenHp()
-
     this.postYearProcessCore()
   }
 
