@@ -25,9 +25,8 @@ const remaining = computed(() => props.totalPoints - allocated.value)
 
 function getDisplayValue(attrId: string): number {
   const base = props.baseValues[attrId] ?? 0
-  const bonus = props.talentBonuses[attrId] ?? 0
   const alloc = allocation.value[attrId] ?? 0
-  return base + bonus + alloc
+  return base + alloc
 }
 
 function getBonus(attrId: string): number {

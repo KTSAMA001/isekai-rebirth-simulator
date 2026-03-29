@@ -44,15 +44,19 @@ const talentBonuses = computed(() => {
   return bonuses
 })
 
-// 属性初始值
+// 属性初始值 — 使用后端 state.attributes（天赋效果已应用且 clamp）
 const baseValues = computed(() => {
   const vals: Record<string, number> = {}
-  if (world.value) {
+  if (gameStore.state?.attributes) {
+    for (const attr of world.value?.attributes ?? []) {
+      vals[attr.id] = gameStore.state.attributes[attr.id] ?? attr.defaultValue
+    }
+  } else if (world.value) {
     for (const attr of world.value.attributes) {
       vals[attr.id] = attr.defaultValue
     }
   }
-  // 应用预设属性
+  // 应用预设属性（UI 展示用）
   if (selectedPresetId.value) {
     const preset = presets.value.find(p => p.id === selectedPresetId.value)
     if (preset?.attributes) {
