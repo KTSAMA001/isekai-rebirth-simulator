@@ -20,7 +20,7 @@
     "maxAge": 1,
     "weight": 20,
     "include": "attribute.mny >= 4",
-    "exclude": "attribute.mny >= 10",
+    "exclude": "attribute.mny >= 8",
     "unique": true,
     "effects": [],
     "tag": "life",
@@ -33,7 +33,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 15,
-    "include": "attribute.mny <= 2",
+    "include": "attribute.mny <= 3",
     "unique": true,
     "effects": [
       {
