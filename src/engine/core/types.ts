@@ -72,6 +72,9 @@ export interface EventBranch {
   requireCondition?: string
 }
 
+/** 事件优先级 */
+export type EventPriority = 'critical' | 'major' | 'minor'
+
 /** 事件定义 */
 export interface WorldEventDef {
   id: string
@@ -87,6 +90,8 @@ export interface WorldEventDef {
   isBad?: boolean
   tag?: string
   unique?: boolean
+  /** 事件优先级：critical=有分支必须选 / major=需确认 / minor=可自动跳过 */
+  priority?: EventPriority
 }
 
 /** 成就定义 */
@@ -267,6 +272,25 @@ export type ConditionAST =
 export interface ConditionContext {
   state: GameState
   world: WorldInstance
+}
+
+// ==================== 年度推演结果 ====================
+
+/** 年度阶段（用于 galgame 化逐年交互） */
+export type YearPhase = 'awaiting_choice' | 'showing_event' | 'mundane_year'
+
+/** 年度推演结果 */
+export interface YearResult {
+  /** 当年阶段 */
+  phase: YearPhase
+  /** 触发的事件（无事件时为 null） */
+  event: WorldEventDef | null
+  /** 可选分支（仅 phase=awaiting_choice 时有值） */
+  branches?: EventBranch[]
+  /** 事件效果描述文本 */
+  effectTexts?: string[]
+  /** 当年日志条目 */
+  logEntry?: EventLogEntry
 }
 
 // ==================== 评分结果 ====================

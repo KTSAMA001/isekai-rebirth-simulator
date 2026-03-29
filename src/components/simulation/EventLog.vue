@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import type { EventLogEntry, WorldInstance } from '@/engine/core/types'
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   entries: EventLogEntry[]
   world: WorldInstance
 }>()
 
-const emit = defineEmits<{
-  branchSelect: [eventId: string, branchId: string]
-}>()
+const expanded = ref(false)
 
-const logContainer = ref<HTMLElement | null>(null)
+// 默认只显示最近 3 年
+const visibleEntries = computed(() => {
+  if (expanded.value) return props.entries
+  return props.entries.slice(-3)
+})
 
 // 按年龄分组
 const grouped = computed(() => {
   const groups: { age: number; entries: EventLogEntry[] }[] = []
   let currentAge = -1
-  for (const entry of props.entries) {
+  for (const entry of visibleEntries.value) {
     if (entry.age !== currentAge) {
       currentAge = entry.age
       groups.push({ age: currentAge, entries: [] })
@@ -27,66 +29,101 @@ const grouped = computed(() => {
   return groups
 })
 
-// 自动滚动到底部
-watch(() => props.entries.length, async () => {
-  await nextTick()
-  if (logContainer.value) {
-    logContainer.value.scrollTop = logContainer.value.scrollHeight
-  }
-})
+function toggleExpand() {
+  expanded.value = !expanded.value
+}
 </script>
 
 <template>
-  <div class="event-log" ref="logContainer">
-    <div v-if="entries.length === 0" class="log-empty">
-      <p class="text-muted">等待命运的齿轮转动...</p>
+  <div class="event-log-compact">
+    <div class="log-header" @click="toggleExpand">
+      <span class="log-title">📜 历史事件</span>
+      <span class="log-toggle">{{ expanded ? '收起 ▲' : `展开 (${entries.length}) ▼` }}</span>
     </div>
-    <div v-for="group in grouped" :key="group.age" class="age-group">
-      <div class="age-divider">
-        <span class="age-badge">{{ group.age }} 岁</span>
+
+    <div v-if="expanded" class="log-body">
+      <div v-if="entries.length === 0" class="log-empty">
+        <p class="text-muted">等待命运的齿轮转动...</p>
       </div>
-      <div v-for="entry in group.entries" :key="`${entry.age}-${entry.eventId}-${entry.branchId}`" class="event-card animate-slide-up">
-        <div class="event-title">{{ entry.title }}</div>
-        <div class="event-desc">{{ entry.description }}</div>
-        <div v-if="entry.effects.length > 0" class="event-effects">
-          <span
-            v-for="(eff, i) in entry.effects"
-            :key="i"
-            class="effect-chip"
-            :class="eff.startsWith('-') ? 'negative' : 'positive'"
-          >
-            {{ eff }}
-          </span>
+      <div v-for="group in grouped" :key="group.age" class="age-group">
+        <div class="age-divider">
+          <span class="age-badge">{{ group.age }} 岁</span>
+        </div>
+        <div v-for="entry in group.entries" :key="`${entry.age}-${entry.eventId}-${entry.branchId}`" class="event-item">
+          <div class="event-title">{{ entry.title }}</div>
+          <div v-if="entry.effects.length > 0" class="event-effects">
+            <span
+              v-for="(eff, i) in entry.effects"
+              :key="i"
+              class="effect-chip"
+              :class="eff.startsWith('-') ? 'negative' : 'positive'"
+            >
+              {{ eff }}
+            </span>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- 折叠时简要显示 -->
+    <div v-else class="log-summary">
+      <span v-for="entry in visibleEntries.slice(-3)" :key="`${entry.age}-${entry.eventId}`" class="summary-chip">
+        {{ entry.age }}岁: {{ entry.title }}
+      </span>
+      <span v-if="entries.length === 0" class="summary-chip text-muted">暂无</span>
     </div>
   </div>
 </template>
 
 <style scoped>
-.event-log {
-  flex: 1;
+.event-log-compact {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-color);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.log-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.log-toggle {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.log-body {
+  max-height: 200px;
   overflow-y: auto;
-  padding: var(--space-md);
-  scroll-behavior: smooth;
+  padding: 0 var(--space-md) var(--space-md);
 }
 
 .log-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--text-muted);
+  font-size: 0.8rem;
 }
 
 .age-group {
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .age-divider {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  margin: var(--space-md) 0 var(--space-sm);
+  gap: var(--space-xs);
+  margin: var(--space-xs) 0;
 }
 
 .age-divider::before,
@@ -98,47 +135,36 @@ watch(() => props.entries.length, async () => {
 }
 
 .age-badge {
-  padding: 2px 12px;
+  padding: 1px 8px;
   background: rgba(251, 191, 36, 0.1);
   color: var(--text-gold);
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.event-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-  margin-bottom: var(--space-sm);
+.event-item {
+  padding: var(--space-xs) 0;
 }
 
 .event-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--text-primary);
-}
-
-.event-desc {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 6px;
 }
 
 .event-effects {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 3px;
+  margin-top: 2px;
 }
 
 .effect-chip {
-  padding: 1px 8px;
+  padding: 1px 6px;
   border-radius: var(--radius-sm);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
 }
 .effect-chip.positive {
@@ -148,5 +174,21 @@ watch(() => props.entries.length, async () => {
 .effect-chip.negative {
   background: rgba(239, 68, 68, 0.1);
   color: var(--color-danger);
+}
+
+/* 折叠摘要 */
+.log-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 var(--space-md) var(--space-sm);
+}
+
+.summary-chip {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
 }
 </style>

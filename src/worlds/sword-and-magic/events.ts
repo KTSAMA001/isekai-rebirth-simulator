@@ -13,6 +13,7 @@ export const events: WorldEventDef[] = [
     unique: true,
     effects: [],
     tag: 'life',
+    priority: 'major',
   },
   {
     id: 'birth_common',
@@ -26,6 +27,7 @@ export const events: WorldEventDef[] = [
     unique: true,
     effects: [],
     tag: 'life',
+    priority: 'major',
   },
   {
     id: 'birth_slums',
@@ -40,6 +42,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
     ],
     tag: 'life',
+    priority: 'major',
   },
   {
     id: 'magic_burst_baby',
@@ -50,10 +53,43 @@ export const events: WorldEventDef[] = [
     weight: 5,
     include: 'attribute.mag >= 4',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
+    effects: [],
+    branches: [
+      {
+        id: 'cry_out',
+        title: '大哭',
+        description: '你被吓哭了，魔力随着眼泪流淌出来',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
+          { type: 'set_flag', target: 'emotional_magic', value: 1, description: '感性施法者' },
+        ],
+      },
+      {
+        id: 'wave_hands',
+        title: '挥舞小手',
+        description: '你好奇地挥了挥手，小火球在指尖跳舞',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
+          { type: 'modify_hp', target: 'hp', value: -5, description: 'HP -5（烧到手指了）' },
+        ],
+      },
+      {
+        id: 'try_control',
+        title: '试着控制',
+        description: '你竟然本能地尝试控制这股力量！',
+        probability: 0.25,
+        requireCondition: 'attribute.int >= 4',
+        effects: [
+          { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
+          { type: 'set_flag', target: 'early_magic_control', value: 1, description: '幼年魔力控制' },
+        ],
+      },
     ],
     tag: 'magic',
+    priority: 'critical',
   },
   {
     id: 'bullied',
@@ -63,12 +99,46 @@ export const events: WorldEventDef[] = [
     maxAge: 6,
     weight: 15,
     exclude: 'has.flag.bullied_child',
-    effects: [
-      { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
-      { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1（痛定思痛）' },
-      { type: 'set_flag', target: 'bullied_child', value: 1, description: '被欺负了' },
+    effects: [],
+    branches: [
+      {
+        id: 'endure',
+        title: '忍气吞声',
+        description: '你低着头不说话，等他们走了再从泥坑里爬出来',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学会隐忍）' },
+          { type: 'set_flag', target: 'bullied_child', value: 1, description: '被欺负了' },
+        ],
+      },
+      {
+        id: 'seek_help',
+        title: '找大人帮忙',
+        description: '你跑去找村里的长辈告状',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（学会求助）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+          { type: 'set_flag', target: 'bullied_child', value: 1, description: '被欺负了' },
+        ],
+      },
+      {
+        id: 'fight_back_child',
+        title: '试着反抗',
+        description: '你握紧拳头冲了上去！虽然没打赢，但他们再也不敢小看你了',
+        probability: 0.3,
+        requireCondition: 'attribute.str >= 3',
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_hp', target: 'hp', value: -5, description: 'HP -5' },
+          { type: 'set_flag', target: 'bullied_child', value: 1, description: '被欺负了' },
+          { type: 'set_flag', target: 'fight_back', value: 1, description: '不再忍气吞声' },
+        ],
+      },
     ],
     tag: 'social',
+    priority: 'critical',
   },
   {
     id: 'church_orphan',
@@ -84,6 +154,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
     ],
     tag: 'life',
+    priority: 'major',
   },
   {
     id: 'fairy_encounter',
@@ -100,6 +171,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'fairy_friend', value: 1, description: '精灵之友' },
     ],
     tag: 'adventure',
+    priority: 'major',
   },
 
   // ==================== 少年期（7-15 岁） ====================
@@ -113,12 +185,32 @@ export const events: WorldEventDef[] = [
     include: 'attribute.mag >= 5',
     exclude: 'has.flag.magic_student',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'mag', value: 1, description: '魔力 +1' },
-      { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
-      { type: 'set_flag', target: 'magic_student', value: 1, description: '成为魔法学生' },
+    effects: [],
+    branches: [
+      {
+        id: 'enroll_academy',
+        title: '入学',
+        description: '你踏入了魔法学院的大门，空气中弥漫着魔力的味道',
+        probability: 0.6,
+        effects: [
+          { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
+          { type: 'set_flag', target: 'magic_student', value: 1, description: '成为魔法学生' },
+        ],
+      },
+      {
+        id: 'refuse_academy',
+        title: '拒绝入学',
+        description: '"我不想被关在塔里看书。"你把信塞进了抽屉',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+        ],
+      },
     ],
     tag: 'magic',
+    priority: 'critical',
   },
   {
     id: 'squire_training',
@@ -130,11 +222,33 @@ export const events: WorldEventDef[] = [
     include: 'attribute.str >= 4',
     exclude: 'has.flag.squire',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
-      { type: 'set_flag', target: 'squire', value: 1, description: '侍从修炼' },
+    effects: [],
+    branches: [
+      {
+        id: 'train_hard',
+        title: '全力修炼',
+        description: '你咬牙坚持，手上的茧比谁都厚',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 3, description: '体魄 +3' },
+          { type: 'modify_hp', target: 'hp', value: -10, description: 'HP -10（训练受伤）' },
+          { type: 'set_flag', target: 'squire', value: 1, description: '侍从修炼（刻苦）' },
+        ],
+      },
+      {
+        id: 'slack_off',
+        title: '偷懒摸鱼',
+        description: '你学会了偷懒的技巧——假装在挥剑，其实在打瞌睡',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（摸鱼也是一种智慧）' },
+          { type: 'set_flag', target: 'squire', value: 1, description: '侍从修炼（摸鱼）' },
+        ],
+      },
     ],
     tag: 'combat',
+    priority: 'critical',
   },
   {
     id: 'first_love',
@@ -146,11 +260,43 @@ export const events: WorldEventDef[] = [
     include: 'attribute.chr >= 5',
     exclude: 'has.flag.first_love',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
-      { type: 'set_flag', target: 'first_love', value: 1, description: '初恋' },
+    effects: [],
+    branches: [
+      {
+        id: 'confess',
+        title: '表白',
+        description: '你鼓起勇气递上了一封手写的信',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+          { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
+          { type: 'set_flag', target: 'first_love', value: 1, description: '初恋（表白）' },
+        ],
+      },
+      {
+        id: 'secret_crush',
+        title: '暗恋',
+        description: '你把这份感情藏在心底，远远地看着对方就好',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学会思考）' },
+          { type: 'set_flag', target: 'first_love', value: 1, description: '初恋（暗恋）' },
+        ],
+      },
+      {
+        id: 'give_up',
+        title: '放弃',
+        description: '"还太早了。"你摇摇头，转身继续练习剑术',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'set_flag', target: 'first_love', value: 1, description: '初恋（放弃）' },
+        ],
+      },
     ],
     tag: 'romance',
+    priority: 'critical',
   },
   {
     id: 'bullied_fight_back',
@@ -168,6 +314,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'fight_back', value: 1, description: '不再忍气吞声' },
     ],
     tag: 'combat',
+    priority: 'major',
   },
   {
     id: 'dungeon_explore_1',
@@ -185,6 +332,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'dungeon_first', value: 1, description: '初次探险' },
     ],
     tag: 'adventure',
+    priority: 'major',
   },
   {
     id: 'dragon_awakening',
@@ -201,6 +349,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
   {
     id: 'demon_hunt',
@@ -251,6 +400,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'critical',
   },
   {
     id: 'reincarnated_memory',
@@ -266,6 +416,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
 
   // ==================== 青年期（16-30 岁） ====================
@@ -279,10 +430,32 @@ export const events: WorldEventDef[] = [
     include: 'attribute.str >= 4 | attribute.mag >= 4',
     exclude: 'has.flag.guild_member',
     unique: true,
-    effects: [
-      { type: 'set_flag', target: 'guild_member', value: 1, description: '成为冒险者' },
+    effects: [],
+    branches: [
+      {
+        id: 'join_guild',
+        title: '加入公会',
+        description: '你在登记表上签了名，成为了一名正式冒险者',
+        probability: 0.6,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'set_flag', target: 'guild_member', value: 1, description: '成为冒险者' },
+        ],
+      },
+      {
+        id: 'solo_adventure',
+        title: '独自冒险',
+        description: '"我不需要公会。"你转身离开，踏上独自的旅途',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
+          { type: 'set_flag', target: 'solo_adventurer', value: 1, description: '独行侠' },
+        ],
+      },
     ],
     tag: 'adventure',
+    priority: 'critical',
   },
   {
     id: 'magic_graduate',
@@ -300,6 +473,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'mage_graduate', value: 1, description: '魔法毕业' },
     ],
     tag: 'magic',
+    priority: 'major',
   },
   {
     id: 'first_quest',
@@ -309,11 +483,33 @@ export const events: WorldEventDef[] = [
     maxAge: 22,
     weight: 10,
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1' },
-      { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+    effects: [],
+    branches: [
+      {
+        id: 'quest_serious',
+        title: '认真完成',
+        description: '你仔细调查了史莱姆的出没规律，制定了完美的作战计划',
+        probability: 0.6,
+        effects: [
+          { type: 'modify_attribute', target: 'mny', value: 2, description: '家境 +2' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
+          { type: 'set_flag', target: 'reliable_adventurer', value: 1, description: '可靠的冒险者' },
+        ],
+      },
+      {
+        id: 'quest_slack',
+        title: '敷衍了事',
+        description: '你随便打了几只史莱姆就回来交差了',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'mny', value: 1, description: '家境 +1' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（省力也是一种本事）' },
+        ],
+      },
     ],
     tag: 'adventure',
+    priority: 'critical',
   },
   {
     id: 'dragon_slay_attempt',
@@ -364,6 +560,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'critical',
   },
   {
     id: 'royal_summon',
@@ -380,6 +577,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
   {
     id: 'hero_journey_start',
@@ -397,6 +595,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
   {
     id: 'marry_noble',
@@ -408,12 +607,32 @@ export const events: WorldEventDef[] = [
     include: 'attribute.chr >= 6 & attribute.mny >= 5',
     exclude: 'has.flag.married',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'mny', value: 2, description: '家境 +2' },
-      { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
-      { type: 'set_flag', target: 'married', value: 1, description: '已婚' },
+    effects: [],
+    branches: [
+      {
+        id: 'accept_noble_marriage',
+        title: '接受联姻',
+        description: '你穿上礼服，走上了红毯',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'mny', value: 3, description: '家境 +3' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+          { type: 'set_flag', target: 'married', value: 1, description: '已婚（贵族）' },
+        ],
+      },
+      {
+        id: 'refuse_noble_marriage',
+        title: '拒绝联姻',
+        description: '"我的婚姻不该是筹码。"你毅然回绝',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+          { type: 'set_flag', target: 'refused_marriage', value: 1, description: '拒绝联姻' },
+        ],
+      },
     ],
     tag: 'romance',
+    priority: 'critical',
   },
   {
     id: 'marry_adventurer',
@@ -425,12 +644,33 @@ export const events: WorldEventDef[] = [
     include: 'attribute.chr >= 5',
     exclude: 'has.flag.married',
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
-      { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
-      { type: 'set_flag', target: 'married', value: 1, description: '已婚' },
+    effects: [],
+    branches: [
+      {
+        id: 'together_forever',
+        title: '在一起',
+        description: '你们在星空下交换了誓言',
+        probability: 0.6,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'set_flag', target: 'married', value: 1, description: '已婚（冒险者）' },
+        ],
+      },
+      {
+        id: 'stay_friends',
+        title: '保持友谊',
+        description: '"我们更适合做战友。"你们相视一笑',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1' },
+          { type: 'set_flag', target: 'true_friend', value: 1, description: '真挚友谊' },
+        ],
+      },
     ],
     tag: 'romance',
+    priority: 'critical',
   },
   {
     id: 'dark_mage_tempt',
@@ -481,6 +721,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'dark',
+    priority: 'critical',
   },
   {
     id: 'tavern_brawl',
@@ -496,6 +737,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'tough_reputation', value: 1, description: '硬汉名声' },
     ],
     tag: 'combat',
+    priority: 'minor',
   },
   {
     id: 'fairy_friend_return',
@@ -512,6 +754,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_hp', target: 'hp', value: 30, description: 'HP +30' },
     ],
     tag: 'adventure',
+    priority: 'major',
   },
 
   // ==================== 中年期（31-60 岁） ====================
@@ -530,6 +773,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'social',
+    priority: 'major',
   },
   {
     id: 'master_spell',
@@ -546,6 +790,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'magic',
+    priority: 'major',
   },
   {
     id: 'student_successor',
@@ -562,6 +807,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'has_student', value: 1, description: '收了徒弟' },
     ],
     tag: 'social',
+    priority: 'major',
   },
   {
     id: 'lost_in_dungeon',
@@ -578,6 +824,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1', probability: 0.5 },
     ],
     tag: 'adventure',
+    priority: 'minor',
   },
   {
     id: 'war_breaks_out',
@@ -629,6 +876,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'critical',
   },
   {
     id: 'world_breaking_start',
@@ -645,6 +893,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
   {
     id: 'midlife_crisis',
@@ -654,12 +903,34 @@ export const events: WorldEventDef[] = [
     maxAge: 50,
     weight: 10,
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'spr', value: -2, description: '灵魂 -2', probability: 0.5 },
-      { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（顿悟）', probability: 0.5 },
-      { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1', probability: 0.5 },
+    effects: [],
+    branches: [
+      {
+        id: 'let_go',
+        title: '放下执念',
+        description: '你深吸一口气，决定放下过去的遗憾',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
+          { type: 'modify_hp', target: 'hp', value: 10, description: 'HP +10' },
+          { type: 'set_flag', target: 'inner_peace', value: 1, description: '内心平静' },
+        ],
+      },
+      {
+        id: 'persist_dream',
+        title: '坚持梦想',
+        description: '"还没完！"你攥紧拳头，重新燃起了斗志',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1' },
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
+          { type: 'set_flag', target: 'never_give_up', value: 1, description: '永不放弃' },
+        ],
+      },
     ],
     tag: 'life',
+    priority: 'critical',
   },
   {
     id: 'reincarnated_invention',
@@ -676,6 +947,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'major',
   },
 
   // ==================== 老年期（61-80 岁） ====================
@@ -687,11 +959,34 @@ export const events: WorldEventDef[] = [
     maxAge: 70,
     weight: 10,
     unique: true,
-    effects: [
-      { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
-      { type: 'modify_hp', target: 'hp', value: 20, description: 'HP +20' },
+    effects: [],
+    branches: [
+      {
+        id: 'retire_peaceful',
+        title: '归隐山林',
+        description: '你买了一座小木屋，在山林间过起了悠闲的日子',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 3, description: '灵魂 +3' },
+          { type: 'modify_hp', target: 'hp', value: 20, description: 'HP +20' },
+          { type: 'set_flag', target: 'peaceful_retirement', value: 1, description: '安享晚年' },
+        ],
+      },
+      {
+        id: 'continue_adventure',
+        title: '继续冒险',
+        description: '"老夫还没老到走不动路！"你擦亮了剑',
+        probability: 0.5,
+        effects: [
+          { type: 'modify_attribute', target: 'str', value: 1, description: '体魄 +1' },
+          { type: 'modify_hp', target: 'hp', value: -20, description: 'HP -20' },
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+          { type: 'set_flag', target: 'never_retired', value: 1, description: '永不退休' },
+        ],
+      },
     ],
     tag: 'life',
+    priority: 'critical',
   },
   {
     id: 'legend_spread',
@@ -707,6 +1002,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'social',
+    priority: 'major',
   },
   {
     id: 'final_cataclysm',
@@ -761,6 +1057,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
+    priority: 'critical',
   },
   {
     id: 'peaceful_end',
@@ -775,6 +1072,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'spr', value: 3, description: '灵魂 +3' },
     ],
     tag: 'life',
+    priority: 'major',
   },
   {
     id: 'magic_breakthrough_final',
@@ -790,5 +1088,6 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'magic',
+    priority: 'major',
   },
 ]

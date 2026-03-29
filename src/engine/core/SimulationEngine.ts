@@ -4,7 +4,7 @@
  * initGame → draftTalents → selectTalents → allocateAttributes → simulateYear × N → finish
  */
 
-import type { GameState, WorldInstance } from './types'
+import type { GameState, WorldInstance, YearResult } from './types'
 import { RandomProvider } from './RandomProvider'
 import { AttributeModule } from '../modules/AttributeModule'
 import { TalentModule } from '../modules/TalentModule'
@@ -175,7 +175,236 @@ export class SimulationEngine {
     return this.getState()
   }
 
-  /** 推演一年 */
+  // ==================== Galgame 化三步流程 ====================
+
+  /** 缓存：startYear 产生的待处理事件 */
+  private pendingYearEvent: import('./types').WorldEventDef | null = null
+
+  /** 开始一年：年龄+1，获取事件，返回年度结果 */
+  startYear(): YearResult {
+    if (this.state.phase !== 'simulating') {
+      throw new Error(`当前阶段 ${this.state.phase} 不允许推演`)
+    }
+
+    // 年龄 +1
+    let newState = {
+      ...this.state,
+      age: this.state.age + 1,
+    }
+
+    // 检查天赋年龄触发效果
+    const talentEffects = this.talentModule.getActiveEffects(
+      newState.talents.selected,
+      newState.age,
+      newState
+    )
+
+    // 应用天赋触发效果
+    if (talentEffects.length > 0) {
+      for (const effect of talentEffects) {
+        if (effect.type === 'modify_attribute' && effect.value !== undefined) {
+          const result = this.attrModule.modify(
+            newState.attributes,
+            newState.attributePeaks,
+            [{ attribute: effect.target, value: effect.value }]
+          )
+          newState = { ...newState, attributes: result.attributes, attributePeaks: result.peaks }
+        }
+      }
+    }
+
+    this.state = newState
+
+    // 获取候选事件
+    const candidates = this.eventModule.getCandidates(this.state.age, this.state)
+
+    if (candidates.length === 0) {
+      // 平淡年
+      this.pendingYearEvent = null
+      return { phase: 'mundane_year', event: null }
+    }
+
+    // 按优先级排序，优先选 critical/major
+    const sorted = [...candidates].sort((a, b) => {
+      const priorityOrder = { critical: 0, major: 1, minor: 2 }
+      const pa = priorityOrder[a.priority ?? 'minor']
+      const pb = priorityOrder[b.priority ?? 'minor']
+      return pa - pb
+    })
+
+    // 取最高优先级的事件
+    const event = sorted[0]
+    this.pendingYearEvent = event
+
+    // 记录已触发
+    this.state = {
+      ...this.state,
+      triggeredEvents: new Set([...this.state.triggeredEvents, event.id]),
+    }
+
+    if (event.branches && event.branches.length > 0) {
+      // 有分支 → 需要玩家选择
+      return {
+        phase: 'awaiting_choice',
+        event,
+        branches: event.branches,
+      }
+    }
+
+    // 无分支的普通事件 → 应用效果，显示结果
+    const clonedState = this.cloneState(this.state)
+    const effectTexts = this.eventModule.applyEffectsOnState(event.effects, clonedState)
+
+    // 记录日志
+    const logEntry = {
+      age: this.state.age,
+      eventId: event.id,
+      title: event.title,
+      description: event.description,
+      effects: effectTexts,
+    }
+    clonedState.eventLog = [...this.state.eventLog, logEntry]
+
+    this.state = clonedState
+    this.pendingYearEvent = null
+
+    // 后处理（快照、成就、死亡检查）
+    this.postYearProcess()
+
+    return {
+      phase: 'showing_event',
+      event,
+      effectTexts,
+      logEntry,
+    }
+  }
+
+  /** 玩家选择分支，应用效果 */
+  resolveBranch(branchId: string): YearResult {
+    if (!this.pendingYearEvent) {
+      throw new Error('没有待处理的分支事件')
+    }
+
+    const event = this.pendingYearEvent
+    const branch = event.branches?.find(b => b.id === branchId)
+    if (!branch) {
+      throw new Error(`分支 ${branchId} 不存在`)
+    }
+
+    // 合并基础效果 + 分支效果
+    const allEffects = [...event.effects, ...branch.effects]
+    const clonedState = this.cloneState(this.state)
+    const effectTexts = this.eventModule.applyEffectsOnState(allEffects, clonedState)
+
+    // 记录日志
+    const logEntry = {
+      age: this.state.age,
+      eventId: event.id,
+      title: event.title,
+      description: event.description,
+      effects: effectTexts,
+      branchId,
+    }
+    clonedState.eventLog = [...this.state.eventLog, logEntry]
+
+    this.state = clonedState
+    this.pendingYearEvent = null
+
+    // 后处理
+    this.postYearProcess()
+
+    return {
+      phase: 'showing_event',
+      event,
+      effectTexts,
+      logEntry,
+    }
+  }
+
+  /** 跳过平淡年 */
+  skipYear(): YearResult {
+    this.pendingYearEvent = null
+
+    // 后处理
+    this.postYearProcess()
+
+    return {
+      phase: 'mundane_year',
+      event: null,
+      logEntry: {
+        age: this.state.age,
+        eventId: '__mundane__',
+        title: '平静的一年',
+        description: '什么特别的事都没发生，平平淡淡地度过了。',
+        effects: [],
+      },
+    }
+  }
+
+  /** 年度后处理：快照、成就、死亡检查 */
+  private postYearProcess(): void {
+    // 记录属性快照
+    const snapshot = this.attrModule.snapshot(this.state.attributes, this.state.age)
+    let newState = {
+      ...this.state,
+      attributeHistory: [...this.state.attributeHistory, snapshot],
+    }
+
+    // 检查成就
+    const newAchievements = this.achievementModule.checkAchievements(newState)
+    if (newAchievements.length > 0) {
+      newState = {
+        ...newState,
+        achievements: {
+          unlocked: [...newState.achievements.unlocked, ...newAchievements],
+          progress: { ...newState.achievements.progress },
+        },
+      }
+    }
+
+    // 检查死亡
+    const dead = newState.hp <= 0 || newState.age >= this.world.manifest.maxAge
+    if (dead) {
+      newState = { ...newState, phase: 'finished' }
+      const result = this.evaluatorModule.calculate(newState)
+      newState = {
+        ...newState,
+        result: {
+          score: result.score,
+          grade: result.grade,
+          gradeTitle: result.gradeTitle,
+          gradeDescription: result.gradeDescription,
+          lifespan: newState.age,
+        },
+      }
+    }
+
+    this.state = newState
+  }
+
+  /** 深克隆 GameState */
+  private cloneState(state: GameState): GameState {
+    return {
+      ...state,
+      attributes: { ...state.attributes },
+      attributePeaks: { ...state.attributePeaks },
+      talents: {
+        selected: [...state.talents.selected],
+        draftPool: [...state.talents.draftPool],
+        inherited: [...state.talents.inherited],
+      },
+      flags: new Set(state.flags),
+      triggeredEvents: new Set(state.triggeredEvents),
+      eventLog: [...state.eventLog],
+      achievements: {
+        unlocked: [...state.achievements.unlocked],
+        progress: { ...state.achievements.progress },
+      },
+      attributeHistory: [...state.attributeHistory],
+    }
+  }
+
+  /** 推演一年（向后兼容，保留原有接口） */
   simulateYear(branchChoices?: Record<string, string>): GameState {
     if (this.state.phase !== 'simulating') {
       throw new Error(`当前阶段 ${this.state.phase} 不允许推演`)

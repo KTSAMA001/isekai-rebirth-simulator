@@ -46,6 +46,14 @@ export class EventModule {
       // exclude 条件
       if (event.exclude && this.dsl.evaluate(event.exclude, ctx)) return false
       return true
+    }).sort((a, b) => {
+      // 按优先级排序：critical > major > minor
+      const order = { critical: 0, major: 1, minor: 2 }
+      const pa = order[a.priority ?? 'minor']
+      const pb = order[b.priority ?? 'minor']
+      if (pa !== pb) return pa - pb
+      // 同优先级按权重降序
+      return b.weight - a.weight
     })
   }
 
@@ -117,6 +125,11 @@ export class EventModule {
     newState.eventLog = [...state.eventLog, logEntry]
 
     return newState
+  }
+
+  /** 应用效果列表到状态（公开版本，供 SimulationEngine 调用） */
+  applyEffectsOnState(effects: EventEffect[], state: GameState): string[] {
+    return this.applyEffects(effects, state)
   }
 
   /** 应用效果列表到状态 */

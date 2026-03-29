@@ -5,7 +5,7 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { GameState, WorldInstance } from '@/engine/core/types'
+import type { GameState, WorldInstance, YearResult } from '@/engine/core/types'
 import { SimulationEngine } from '@/engine/core/SimulationEngine'
 import { useWorldStore } from './worldStore'
 
@@ -55,7 +55,35 @@ export const useGameStore = defineStore('game', () => {
     state.value = engine.value.allocateAttributes(allocation)
   }
 
-  /** 推演一年 */
+  // ==================== Galgame 化三步流程 ====================
+
+  /** 开始一年：年龄+1，获取事件 */
+  function startYear(): YearResult {
+    if (!engine.value) throw new Error('引擎未初始化')
+    const result = engine.value.startYear()
+    state.value = engine.value.getState()
+    return result
+  }
+
+  /** 选择分支，应用效果 */
+  function resolveBranch(branchId: string): YearResult {
+    if (!engine.value) throw new Error('引擎未初始化')
+    const result = engine.value.resolveBranch(branchId)
+    state.value = engine.value.getState()
+    return result
+  }
+
+  /** 跳过平淡年 */
+  function skipYear(): YearResult {
+    if (!engine.value) throw new Error('引擎未初始化')
+    const result = engine.value.skipYear()
+    state.value = engine.value.getState()
+    return result
+  }
+
+  // ==================== 向后兼容 ====================
+
+  /** 推演一年（向后兼容） */
   function simulateYear(branchChoices?: Record<string, string>) {
     if (!engine.value) throw new Error('引擎未初始化')
     state.value = engine.value.simulateYear(branchChoices)
@@ -89,6 +117,9 @@ export const useGameStore = defineStore('game', () => {
     draftTalents,
     selectTalents,
     allocateAttributes,
+    startYear,
+    resolveBranch,
+    skipYear,
     simulateYear,
     finish,
     resetGame,

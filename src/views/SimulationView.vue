@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
-import StatusPanel from '@/components/simulation/StatusPanel.vue'
+import CompactStatus from '@/components/simulation/CompactStatus.vue'
+import EventScene from '@/components/simulation/EventScene.vue'
+import ChoicePanel from '@/components/simulation/ChoicePanel.vue'
 import EventLog from '@/components/simulation/EventLog.vue'
-import type { EventBranch } from '@/engine/core/types'
+import type { YearResult } from '@/engine/core/types'
 
 const props = defineProps<{
   worldId: string
@@ -19,52 +21,65 @@ const worldStore = useWorldStore()
 const world = computed(() => worldStore.worlds.find(w => w.manifest.id === props.worldId))
 const state = computed(() => gameStore.state)
 
-// 分支选择
-const pendingBranches = ref<EventBranch[]>([])
-const pendingEventId = ref('')
-const pendingEventTitle = ref('')
-const pendingEventDesc = ref('')
-const showBranchModal = ref(false)
+// 当前年度状态
+const currentYearResult = ref<YearResult | null>(null)
+const currentEvent = computed(() => currentYearResult.value?.event ?? null)
+const currentBranches = computed(() => currentYearResult.value?.branches ?? [])
+const yearPhase = computed(() => currentYearResult.value?.phase ?? null)
 
-// 播放控制
-const isPlaying = ref(false)
-const speed = ref(1)
-let timer: ReturnType<typeof setTimeout> | null = null
+// 年度日志（用于 EventScene 展示效果）
+const currentLogEntry = computed(() => currentYearResult.value?.logEntry)
 
-const speedOptions = [1, 2, 5]
+// 是否显示"继续"按钮
+const showContinue = computed(() => {
+  if (!currentYearResult.value) return false
+  const phase = currentYearResult.value.phase
+  return phase === 'showing_event' || phase === 'mundane_year'
+})
+
+// 是否显示选择面板
+const showChoices = computed(() => {
+  return currentYearResult.value?.phase === 'awaiting_choice'
+})
+
+// 是否可以开始新年
+const canStartYear = computed(() => {
+  return !currentYearResult.value && state.value?.phase === 'simulating'
+})
 
 const isFinished = computed(() => state.value?.phase === 'finished')
 
 onMounted(() => {
-  // 如果没有游戏状态，跳回首页
   if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
     router.replace('/')
     return
   }
 })
 
-onUnmounted(() => {
-  stopAuto()
-})
-
-function stopAuto() {
-  isPlaying.value = false
-  if (timer) {
-    clearTimeout(timer)
-    timer = null
-  }
+/** 开始新年 */
+function startYear() {
+  if (!gameStore.engine || isFinished.value) return
+  const result = gameStore.startYear()
+  currentYearResult.value = result
 }
 
-function nextYear() {
-  if (!gameStore.state || isFinished.value) return
-  const currentState = gameStore.simulateYear()
+/** 选择分支 */
+function selectBranch(branchId: string) {
+  if (!gameStore.engine) return
+  const result = gameStore.resolveBranch(branchId)
+  currentYearResult.value = result
+  checkFinished()
+}
 
-  // 检查是否需要分支选择 — 当前引擎直接解析分支，
-  // 这里简单处理：如果事件有分支，需要暂停让用户选
-  // 但实际引擎目前自动选分支，所以直接继续
-  if (currentState.phase === 'finished') {
-    stopAuto()
-    // 延迟跳转结算
+/** 继续（showing_event / mundane_year → 清空结果，准备下一年） */
+function continueNext() {
+  currentYearResult.value = null
+  checkFinished()
+}
+
+/** 检查是否结束 */
+function checkFinished() {
+  if (state.value?.phase === 'finished') {
     setTimeout(() => {
       router.replace({
         name: 'result',
@@ -73,104 +88,59 @@ function nextYear() {
     }, 1500)
   }
 }
-
-function togglePlay() {
-  if (isPlaying.value) {
-    stopAuto()
-  } else {
-    isPlaying.value = true
-    autoStep()
-  }
-}
-
-function autoStep() {
-  if (!isPlaying.value || isFinished.value) {
-    stopAuto()
-    return
-  }
-  nextYear()
-  const delay = Math.max(100, 1000 / speed.value)
-  timer = setTimeout(autoStep, delay)
-}
-
-function setSpeed(s: number) {
-  speed.value = s
-}
-
-function skipToEnd() {
-  stopAuto()
-  // 快速推演到结束
-  const run = () => {
-    if (!gameStore.state || isFinished.value) {
-      router.replace({
-        name: 'result',
-        params: { worldId: props.worldId, playId: props.playId },
-      })
-      return
-    }
-    nextYear()
-    // 用 requestAnimationFrame 避免卡死
-    setTimeout(run, 20)
-  }
-  run()
-}
-
-function selectBranch(branchId: string) {
-  showBranchModal.value = false
-  // 重新推演这一年，带分支选择
-  // 注意：当前引擎设计是在 simulateYear 时传 branchChoices
-  // 这里简化处理，直接继续下一年的推演
-  nextYear()
-}
 </script>
 
 <template>
   <div v-if="state && world" class="simulation-page">
-    <!-- 状态面板 -->
-    <div class="sim-status">
-      <StatusPanel :state="state" :world="world" />
+    <!-- 顶栏 -->
+    <div class="top-bar">
+      <button class="back-btn" @click="router.replace('/')">◁ 返回</button>
+      <span class="year-label">第 {{ state.age }} 年</span>
     </div>
 
-    <!-- 事件日志 -->
-    <EventLog :entries="state.eventLog" :world="world" />
+    <!-- 紧凑状态栏 -->
+    <CompactStatus :state="state" :world="world" />
 
-    <!-- 分支选择弹窗 -->
-    <div v-if="showBranchModal" class="branch-overlay" @click.self="showBranchModal = false">
-      <div class="branch-modal card animate-pop-in">
-        <h3 class="branch-title">{{ pendingEventTitle }}</h3>
-        <p class="branch-desc">{{ pendingEventDesc }}</p>
-        <div class="branch-options">
-          <button
-            v-for="branch in pendingBranches"
-            :key="branch.id"
-            class="btn btn-ghost btn-block branch-btn"
-            @click="selectBranch(branch.id)"
-          >
-            {{ branch.title }}
-          </button>
-        </div>
-      </div>
-    </div>
+    <!-- 主事件区域 -->
+    <EventScene
+      :event="currentEvent"
+      :log-entry="currentLogEntry"
+      :year-phase="yearPhase"
+      @typing-done="() => {}"
+    />
 
-    <!-- 控制栏 -->
-    <div class="controls">
-      <button class="ctrl-btn" :class="{ active: isPlaying }" @click="togglePlay">
-        {{ isPlaying ? '⏸' : '▶' }}
+    <!-- 选择面板 -->
+    <ChoicePanel
+      v-if="showChoices && currentBranches.length > 0"
+      :branches="currentBranches"
+      :state="state"
+      :world="world"
+      @select="selectBranch"
+    />
+
+    <!-- 继续按钮 -->
+    <div v-if="showContinue" class="continue-bar">
+      <button class="continue-btn" @click="continueNext">
+        {{ isFinished ? '查看结局' : '继续' }}
       </button>
-      <div class="speed-group">
-        <button
-          v-for="s in speedOptions"
-          :key="s"
-          class="speed-btn"
-          :class="{ active: speed === s }"
-          @click="setSpeed(s)"
-        >
-          {{ s }}x
-        </button>
-      </div>
-      <button class="ctrl-btn" @click="nextYear" :disabled="isFinished">⏭</button>
-      <button class="ctrl-btn skip-btn" @click="skipToEnd" :disabled="isFinished">⏩</button>
     </div>
+
+    <!-- 开始新年按钮 -->
+    <div v-if="canStartYear" class="continue-bar">
+      <button class="continue-btn start-btn" @click="startYear">
+        开始第 {{ (state?.age ?? 0) + 1 }} 年
+      </button>
+    </div>
+
+    <!-- 结束状态 -->
+    <div v-if="isFinished && !currentYearResult" class="continue-bar">
+      <button class="continue-btn" @click="router.replace({ name: 'result', params: { worldId: props.worldId, playId: props.playId } })">
+        查看结局
+      </button>
+    </div>
+
+    <!-- 折叠历史日志 -->
+    <EventLog :entries="state.eventLog" :world="world" />
   </div>
 </template>
 
@@ -181,113 +151,68 @@ function selectBranch(branchId: string) {
   height: calc(100vh - var(--header-height));
   max-width: var(--max-width);
   margin: 0 auto;
+  overflow: hidden;
 }
 
-.sim-status {
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-/* 控制栏 */
-.controls {
+/* 顶栏 */
+.top-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-  padding: var(--space-md);
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
   background: var(--bg-panel);
-  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
 
-.ctrl-btn {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  font-size: 1.1rem;
-  transition: all var(--transition-fast);
-}
-.ctrl-btn:hover:not(:disabled) {
-  border-color: var(--color-primary);
-}
-.ctrl-btn:active:not(:disabled) {
-  transform: scale(0.92);
-}
-.ctrl-btn.active {
-  border-color: var(--color-primary);
-  background: rgba(139, 92, 246, 0.15);
-}
-.ctrl-btn:disabled {
-  opacity: 0.3;
-}
-
-.speed-group {
-  display: flex;
-  gap: 4px;
-}
-
-.speed-btn {
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
   font-size: 0.8rem;
-  font-weight: 600;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-.speed-btn.active {
-  border-color: var(--color-primary);
-  color: var(--color-primary-light);
-  background: rgba(139, 92, 246, 0.15);
+  cursor: pointer;
+  padding: var(--space-xs);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.skip-btn {
-  font-size: 0.9rem;
-}
-
-/* 分支选择弹窗 */
-.branch-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-md);
-}
-
-.branch-modal {
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.branch-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: var(--space-sm);
-}
-
-.branch-desc {
+.year-label {
   font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
+  font-weight: 700;
+  color: var(--text-gold);
 }
 
-.branch-options {
+/* 继续按钮栏 */
+.continue-bar {
+  padding: var(--space-md);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.branch-btn {
-  text-align: left;
+.continue-btn {
+  min-height: 48px;
+  min-width: 200px;
+  padding: var(--space-sm) var(--space-xl);
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.continue-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.continue-btn:active {
+  transform: scale(0.96);
+}
+
+.start-btn {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 }
 </style>
