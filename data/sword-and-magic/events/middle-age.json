@@ -676,7 +676,7 @@
         "title": "正面迎战",
         "description": "有什么账，算清楚",
         "probability": 0.3,
-        "requireCondition": "attribute.str >= 16 | attribute.mag >= 16",
+        "requireCondition": "attribute.str >= 10 | attribute.mag >= 10",
         "riskCheck": {
           "attribute": "str",
           "difficulty": 16,
@@ -718,7 +718,7 @@
         "title": "谈判和解",
         "description": "冤家宜解不宜结",
         "probability": 0.4,
-        "requireCondition": "attribute.chr >= 12 & attribute.int >= 12",
+        "requireCondition": "attribute.chr >= 8 & attribute.int >= 8",
         "effects": [
           {
             "type": "modify_attribute",
@@ -1026,7 +1026,7 @@
     "minAge": 30,
     "maxAge": 50,
     "weight": 3,
-    "include": "attribute.str >= 14 | attribute.mag >= 14",
+    "include": "attribute.str >= 10 | attribute.mag >= 10",
     "effects": [],
     "branches": [
       {
@@ -1122,7 +1122,7 @@
     "minAge": 25,
     "maxAge": 50,
     "weight": 3,
-    "include": "attribute.mag >= 14 & attribute.int >= 12",
+    "include": "attribute.mag >= 10 & attribute.int >= 10",
     "effects": [],
     "branches": [
       {
@@ -1302,7 +1302,7 @@
     "minAge": 30,
     "maxAge": 55,
     "weight": 3,
-    "include": "attribute.mny >= 12 & attribute.int >= 12",
+    "include": "attribute.mny >= 8 & attribute.int >= 10",
     "effects": [],
     "branches": [
       {

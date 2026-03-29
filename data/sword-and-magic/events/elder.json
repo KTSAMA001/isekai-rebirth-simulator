@@ -168,7 +168,7 @@
     "minAge": 55,
     "maxAge": 80,
     "weight": 4,
-    "include": "has.flag.guild_member | has.flag.magic_graduate | has.flag.knight | attribute.chr >= 18",
+    "include": "has.flag.guild_member | has.flag.magic_graduate | has.flag.knight | attribute.chr >= 12",
     "effects": [],
     "branches": [
       {
