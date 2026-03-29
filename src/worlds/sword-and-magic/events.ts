@@ -323,7 +323,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'social',
-    priority: 'critical',
+    priority: 'major',
   },
 
   // ==================== 少年期（7-15 岁） ====================
