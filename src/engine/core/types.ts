@@ -52,7 +52,7 @@ export interface WorldTalentDef {
 
 /** 事件效果 */
 export interface EventEffect {
-  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp'
+  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'modify_hp' | 'set_counter' | 'modify_counter'
   target: string
   value: number
   probability?: number
@@ -114,6 +114,15 @@ export interface WorldEventDef {
   unique?: boolean
   /** 事件优先级：critical=有分支必须选 / major=需确认 / minor=可自动跳过 */
   priority?: EventPriority
+  /** 前置条件：全部满足才进入候选池 */
+  prerequisites?: string[]
+  /** 互斥条件：满足任一则排除 */
+  mutuallyExclusive?: string[]
+  /** 动态权重修饰符 */
+  weightModifiers?: Array<{
+    condition: string
+    weightMultiplier: number
+  }>
 }
 
 /** 成就定义 */
@@ -183,6 +192,7 @@ export interface WorldManifest {
     presets: string
     rules: string
   }
+  routes?: LifeRoute[]
 }
 
 // ==================== 运行时实例 ====================
@@ -258,6 +268,7 @@ export interface GameState {
   age: number
   hp: number
   flags: Set<string>
+  counters: Map<string, number>
   triggeredEvents: Set<string>
   eventLog: EventLogEntry[]
   achievements: {
@@ -316,6 +327,29 @@ export interface YearResult {
   isSuccess?: boolean
   /** 是否进行了风险判定 */
   riskRolled?: boolean
+}
+
+// ==================== 生命周期路线 ====================
+
+/** 路线锚点事件 */
+export interface RouteAnchor {
+  eventId: string
+  minAge: number
+  maxAge: number
+  mandatory: boolean
+}
+
+/** 生命周期路线定义 */
+export interface LifeRoute {
+  id: string
+  name: string
+  description: string
+  enterCondition?: string
+  exitCondition?: string
+  priority: number
+  anchorEvents: RouteAnchor[]
+  entryFlags?: string[]
+  exclusiveEvents?: string[]
 }
 
 // ==================== 评分结果 ====================

@@ -4,7 +4,7 @@
  * initGame → draftTalents → selectTalents → allocateAttributes → simulateYear × N → finish
  */
 
-import type { EventEffect, GameState, WorldInstance, YearResult } from './types'
+import type { EventEffect, GameState, LifeRoute, WorldInstance, WorldEventDef, YearResult } from './types'
 import { RandomProvider } from './RandomProvider'
 import { AttributeModule } from '../modules/AttributeModule'
 import { TalentModule } from '../modules/TalentModule'
@@ -30,6 +30,10 @@ export class SimulationEngine {
   private dsl: ConditionDSL
   /** 基于初始体魄的固定恢复量（allocateAttributes 时计算，不再随属性成长增长） */
   private initialStrRegen = 1
+  /** 当前激活的路线 */
+  private activeRoute: LifeRoute | null = null
+  /** 已触发的路线锚点事件（key = "routeId:eventId"） */
+  private routeAnchorsTriggered: Set<string> = new Set()
 
   constructor(world: WorldInstance, seed?: number) {
     this.world = world
@@ -72,6 +76,7 @@ export class SimulationEngine {
       age: 0,
       hp: 0, // 会在下面重新计算
       flags: new Set<string>(),
+      counters: new Map<string, number>(),
       triggeredEvents: new Set<string>(),
       eventLog: [],
       achievements: {
@@ -83,6 +88,10 @@ export class SimulationEngine {
 
     // 初始 HP = 20 + 体魄×3
     this.state.hp = this.computeInitHp()
+
+    // 初始化路线系统
+    this.activeRoute = null
+    this.routeAnchorsTriggered = new Set()
 
     return this.getState()
   }
@@ -246,29 +255,54 @@ export class SimulationEngine {
     // 获取候选事件
     const candidates = this.eventModule.getCandidates(this.state.age, this.state)
 
+    // 路线系统：检查路线切换
+    this.updateRoute()
+
+    // 路线系统：检查强制锚点事件
+    const anchorEvent = this.checkMandatoryAnchor()
+    if (anchorEvent) {
+      // 锚点事件强制触发，跳过正常选择
+      this.pendingYearEvent = anchorEvent
+      this.state = {
+        ...this.state,
+        triggeredEvents: new Set([...this.state.triggeredEvents, anchorEvent.id]),
+      }
+      if (anchorEvent.branches && anchorEvent.branches.length > 0) {
+        return { phase: 'awaiting_choice', event: anchorEvent, branches: anchorEvent.branches }
+      }
+      // 无分支锚点直接执行
+      const effectTexts = this.eventModule.applyEffectsOnState(anchorEvent.effects, this.state)
+      const logEntry = { age: this.state.age, eventId: anchorEvent.id, title: anchorEvent.title, description: anchorEvent.description, effects: effectTexts }
+      this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
+      this.pendingYearEvent = null
+      this.postYearProcess()
+      return { phase: 'showing_event', event: anchorEvent, effectTexts, logEntry }
+    }
+
     if (candidates.length === 0) {
       // 平淡年
       this.pendingYearEvent = null
       return { phase: 'mundane_year', event: null }
     }
 
-    // 30%概率从所有候选中选（让minor事件有机会），70%概率从最高优先级组中选
-    let event: WorldEventDef | null
-    if (this.random.next() < 0.7 && candidates.length > 0) {
-      // 按优先级分组，在最高可用优先级内按权重随机
-      const priorityOrder: Record<string, number> = { critical: 0, major: 1, minor: 2 }
-      const sorted = [...candidates].sort((a, b) => {
-        const pa = priorityOrder[a.priority ?? 'minor']
-        const pb = priorityOrder[b.priority ?? 'minor']
-        return pa - pb
-      })
-      const topPriority = priorityOrder[sorted[0].priority ?? 'minor']
-      const topGroup = sorted.filter(e => (priorityOrder[e.priority ?? 'minor']) === topPriority)
-      event = this.eventModule.pickEvent(topGroup)
-    } else {
-      // 从所有候选中按权重随机选择
-      event = this.eventModule.pickEvent(candidates)
-    }
+    // 动态权重选择：应用 weightModifiers + minor 降权
+    const ctx = { state: this.state, world: this.world }
+    const scored = candidates.map(e => {
+      let w = e.weight
+      if (e.weightModifiers) {
+        for (const mod of e.weightModifiers) {
+          if (this.dsl.evaluate(mod.condition, ctx)) {
+            w *= mod.weightMultiplier
+          }
+        }
+      }
+      // minor 事件降权，减少填充事件干扰
+      if ((e.priority ?? 'minor') === 'minor') {
+        w *= 0.7
+      }
+      return { event: e, weight: w }
+    })
+    let event: WorldEventDef | null = this.random.weightedPick(scored, s => s.weight).event
     if (!event) {
       this.pendingYearEvent = null
       return { phase: 'mundane_year', event: null }
@@ -490,6 +524,7 @@ export class SimulationEngine {
         inherited: [...state.talents.inherited],
       },
       flags: new Set(state.flags),
+      counters: new Map(state.counters),
       triggeredEvents: new Set(state.triggeredEvents),
       eventLog: [...state.eventLog],
       achievements: {
@@ -498,6 +533,82 @@ export class SimulationEngine {
       },
       attributeHistory: [...state.attributeHistory],
     }
+  }
+
+  // ==================== 路线系统 ====================
+
+  /** 更新当前路线（检查退出与进入） */
+  private updateRoute(): void {
+    const ctx = { state: this.state, world: this.world }
+    const routes = this.world.manifest.routes ?? []
+
+    // 检查当前路线是否应该退出
+    if (this.activeRoute && this.activeRoute.exitCondition) {
+      if (this.dsl.evaluate(this.activeRoute.exitCondition, ctx)) {
+        this.activeRoute = null
+      }
+    }
+
+    // 检查是否有新路线可以进入
+    if (!this.activeRoute) {
+      let bestRoute: LifeRoute | null = null
+      let fallbackRoute: LifeRoute | null = null
+
+      for (const route of routes) {
+        // 无 enterCondition 的路线作为 fallback 候选
+        if (!route.enterCondition) {
+          if (!fallbackRoute || route.priority > fallbackRoute.priority) {
+            fallbackRoute = route
+          }
+          continue
+        }
+        if (this.dsl.evaluate(route.enterCondition, ctx)) {
+          if (!bestRoute || route.priority > bestRoute.priority) {
+            bestRoute = route
+          }
+        }
+      }
+
+      // 没有匹配的条件路线时，使用 fallback 路线
+      const chosenRoute = bestRoute ?? fallbackRoute
+      if (chosenRoute) {
+        this.activeRoute = chosenRoute
+        // 设置路线入场 flag
+        if (chosenRoute.entryFlags && chosenRoute.entryFlags.length > 0) {
+          const newFlags = new Set(this.state.flags)
+          for (const f of chosenRoute.entryFlags) newFlags.add(f)
+          this.state = { ...this.state, flags: newFlags }
+        }
+      }
+    }
+  }
+
+  /** 检查当前路线是否有强制锚点事件需要触发 */
+  private checkMandatoryAnchor(): WorldEventDef | null {
+    if (!this.activeRoute) return null
+    for (const anchor of this.activeRoute.anchorEvents) {
+      if (!anchor.mandatory) continue
+      const anchorKey = `${this.activeRoute.id}:${anchor.eventId}`
+      if (this.routeAnchorsTriggered.has(anchorKey)) continue
+      if (this.state.age < anchor.minAge || this.state.age > anchor.maxAge) continue
+      // 检查事件是否满足条件
+      const event = this.world.index.eventsById.get(anchor.eventId)
+      if (!event) continue
+      if (event.unique && this.state.triggeredEvents.has(event.id)) continue
+      if (event.include && !this.dsl.evaluate(event.include, { state: this.state, world: this.world })) continue
+      if (event.exclude && this.dsl.evaluate(event.exclude, { state: this.state, world: this.world })) continue
+      if (event.prerequisites && !event.prerequisites.every(p => this.dsl.evaluate(p, { state: this.state, world: this.world }))) continue
+      if (event.mutuallyExclusive && event.mutuallyExclusive.some(m => this.dsl.evaluate(m, { state: this.state, world: this.world }))) continue
+      // 找到强制锚点
+      this.routeAnchorsTriggered.add(anchorKey)
+      return event
+    }
+    return null
+  }
+
+  /** 获取当前激活的路线（供外部查询） */
+  getActiveRoute(): LifeRoute | null {
+    return this.activeRoute
   }
 
   /** 推演一年（向后兼容，保留原有接口） */

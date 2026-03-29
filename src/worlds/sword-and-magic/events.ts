@@ -656,7 +656,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'knight_examination',
@@ -2698,7 +2698,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'stray_dog',
@@ -2737,7 +2737,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'bounty_notice',
@@ -2778,7 +2778,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'love_at_first_sight',
@@ -2821,7 +2821,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'secret_training',
@@ -2907,7 +2907,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'mysterious_stranger',
@@ -2948,7 +2948,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'old_rival',
@@ -2994,7 +2994,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'legacy_question',
@@ -3032,7 +3032,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'village_feud',
@@ -3071,7 +3071,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'lost_treasure_map',
@@ -3108,7 +3108,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'young_rival',
@@ -3148,7 +3148,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'rainy_day_adventure',
@@ -3192,7 +3192,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'first_competition',
@@ -3241,7 +3241,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'grandma_recipes',
@@ -3285,7 +3285,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'river_discovery',
@@ -3331,6 +3331,6 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
 ]

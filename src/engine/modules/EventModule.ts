@@ -45,6 +45,16 @@ export class EventModule {
       if (event.include && !this.dsl.evaluate(event.include, ctx)) return false
       // exclude 条件
       if (event.exclude && this.dsl.evaluate(event.exclude, ctx)) return false
+      // prerequisites 过滤
+      if (event.prerequisites) {
+        const allMet = event.prerequisites.every(p => this.dsl.evaluate(p, ctx))
+        if (!allMet) return false
+      }
+      // mutuallyExclusive 过滤
+      if (event.mutuallyExclusive) {
+        const anyMet = event.mutuallyExclusive.some(m => this.dsl.evaluate(m, ctx))
+        if (anyMet) return false
+      }
       return true
     }).sort((a, b) => {
       // 按优先级排序：critical > major > minor
@@ -200,6 +210,17 @@ export class EventModule {
         }
         return effect.description ?? `获得天赋: ${effect.target}`
       }
+      case 'set_counter': {
+        state.counters = new Map([...state.counters, [effect.target, effect.value]])
+        return effect.description ?? `计数器 ${effect.target} 设为 ${effect.value}`
+      }
+      case 'modify_counter': {
+        const current = state.counters.get(effect.target) ?? 0
+        const newVal = current + effect.value
+        state.counters = new Map([...state.counters, [effect.target, newVal]])
+        const sign = effect.value >= 0 ? '+' : ''
+        return effect.description ?? `计数器 ${effect.target} ${sign}${effect.value}`
+      }
       case 'trigger_event': {
         // 触发后续事件
         const nextEvent = this.world.index.eventsById.get(effect.target)
@@ -227,6 +248,7 @@ export class EventModule {
         inherited: [...state.talents.inherited],
       },
       flags: new Set(state.flags),
+      counters: new Map(state.counters),
       triggeredEvents: new Set(state.triggeredEvents),
       eventLog: [...state.eventLog],
       achievements: {
