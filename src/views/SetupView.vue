@@ -75,7 +75,7 @@ function selectPreset(presetId: string) {
   selectedPresetId.value = presetId
   const preset = presets.value.find(p => p.id === presetId)
   worldStore.selectWorld(props.worldId)
-  gameStore.initGame(preset?.name ?? '无名之人')
+  gameStore.initGame(preset?.name ?? '无名之人', preset?.id)
 
   // 自动抽取天赋并进入天赋选择
   const drafted = gameStore.draftTalents()

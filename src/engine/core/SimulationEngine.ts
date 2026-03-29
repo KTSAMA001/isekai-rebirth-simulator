@@ -51,8 +51,19 @@ export class SimulationEngine {
 
   /** 初始化新游戏 */
   initGame(characterName: string, presetId?: string): GameState {
+    // 查找预设
+    const preset = presetId ? this.world.presets.find(p => p.id === presetId) : undefined
     const attrs = this.attrModule.initAttributes()
     const peaks: Record<string, number> = {}
+
+    // 应用预设属性加成
+    if (preset?.attributes) {
+      for (const [k, v] of Object.entries(preset.attributes)) {
+        const max = this.world.attributes.find(a => a.id === k)?.max ?? 99
+        attrs[k] = Math.min((attrs[k] ?? 0) + v, max)
+      }
+    }
+
     for (const key of Object.keys(attrs)) {
       peaks[key] = attrs[key]
     }
@@ -74,7 +85,7 @@ export class SimulationEngine {
       talents: {
         selected: [],
         draftPool: [],
-        inherited: [],
+        inherited: preset?.talents ?? [],
       },
       age: 0,
       hp: 0, // 会在下面重新计算
@@ -127,10 +138,14 @@ export class SimulationEngine {
 
   /** 选择天赋 */
   selectTalents(talentIds: string[]): GameState {
+    // 预设天赋（inherited）自动加入已选
+    const allSelected = [...this.state.talents.inherited, ...talentIds]
+    const uniqueSelected = [...new Set(allSelected)]
+
     const { selected, conflicts } = this.talentModule.selectTalents(
       this.state.talents.draftPool,
-      talentIds,
-      this.world.manifest.talentSelectCount
+      uniqueSelected,
+      (this.world.manifest.talentSelectCount + this.state.talents.inherited.length)
     )
 
     if (conflicts.length > 0) {

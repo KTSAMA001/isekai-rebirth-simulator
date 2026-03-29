@@ -3,24 +3,32 @@
     "id": "random_1",
     "name": "艾伦",
     "title": "不知名的旅人",
-    "description": "来自边境村庄的年轻人，踏上了冒险之旅。",
-    "attributes": {},
+    "description": "普通人家的孩子，没有特别的背景，一切靠自己的努力。",
+    "attributes": {
+      "int": 1,
+      "luk": 1
+    },
     "locked": false
   },
   {
     "id": "random_2",
     "name": "莉娜",
     "title": "好奇心旺盛的少女",
-    "description": "城市出身的少女，对魔法和冒险充满向往。",
-    "attributes": {},
+    "description": "邻家女孩，性格温和善良，拥有不为人知的潜能。",
+    "attributes": {
+      "spr": 1,
+      "chr": 1
+    },
     "locked": false
   },
   {
     "id": "random_3",
     "name": "加隆",
     "title": "老兵之子",
-    "description": "退役骑士的儿子，继承了父亲的剑和意志。",
-    "attributes": {},
+    "description": "矿山长大的少年，强壮而坚韧，梦想成为骑士。",
+    "attributes": {
+      "str": 2
+    },
     "talents": [
       "fighter_instinct"
     ],
@@ -30,7 +38,7 @@
     "id": "reincarnator",
     "name": "???",
     "title": "转生者",
-    "description": "睁开眼发现自己变成了一个婴儿。这一切…太熟悉了。",
+    "description": "来自异世界的灵魂，带着前世的知识和运气。",
     "attributes": {
       "int": 2,
       "luk": 2
@@ -45,7 +53,7 @@
     "id": "dragonborn",
     "name": "阿尔维斯",
     "title": "龙裔",
-    "description": "额头上有一枚龙鳞形状的胎记。",
+    "description": "龙血传承者，天生拥有超凡的体魄和魔力。",
     "attributes": {
       "str": 2,
       "mag": 2
@@ -60,7 +68,7 @@
     "id": "worldbreaker_preset",
     "name": "漆黑之子",
     "title": "终焉的预兆",
-    "description": "你出生的那天，天空中出现了一条裂缝。",
+    "description": "被选中的毁灭之子，背负着改变世界的命运。",
     "attributes": {
       "mag": 3,
       "luk": 2,

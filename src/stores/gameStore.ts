@@ -26,13 +26,13 @@ export const useGameStore = defineStore('game', () => {
   const isFinished = computed(() => phase.value === 'finished')
 
   /** 初始化新游戏 */
-  function initGame(characterName: string, seed?: number) {
+  function initGame(characterName: string, presetId?: string) {
     const worldStore = useWorldStore()
     const world = worldStore.getCurrentWorld()
     if (!world) throw new Error('未选择世界')
 
     engine.value = new SimulationEngine(world, seed)
-    state.value = engine.value.initGame(characterName)
+    state.value = engine.value.initGame(characterName, presetId)
   }
 
   /** 抽取天赋 */
