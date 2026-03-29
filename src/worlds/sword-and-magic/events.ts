@@ -1390,6 +1390,10 @@ export const events: WorldEventDef[] = [
       { type: 'modify_hp', target: 'hp', value: -20, description: 'HP -20' },
       { type: 'set_flag', target: 'tough_reputation', value: 1, description: '硬汉名声' },
     ],
+        weightModifiers: [
+      { condition: 'has.flag.guild_member', weightMultiplier: 0.5 },
+      { condition: 'attribute.str >= 10', weightMultiplier: 1.5 },
+    ],
     unique: true,
     tag: 'combat',
     priority: 'minor',
@@ -1675,7 +1679,7 @@ export const events: WorldEventDef[] = [
     maxAge: 55,
     weight: 8,
     include: 'attribute.str >= 14 | attribute.mag >= 14',
-    exclude: 'has.flag.has_student',
+    exclude: 'has.flag.has_student | has.flag.knight',
     unique: true,
     effects: [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
@@ -2811,6 +2815,10 @@ export const events: WorldEventDef[] = [
     minAge: 16,
     maxAge: 22,
     weight: 5,
+    exclude: 'has.flag.first_love',
+    weightModifiers: [
+      { condition: 'has.flag.heartbroken', weightMultiplier: 0.3 },
+    ],
     unique: true,
     branches: [
       {
