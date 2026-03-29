@@ -149,6 +149,9 @@ export const events: WorldEventDef[] = [
         failureText: '你冲了上去，但对方太壮了...你被打得鼻青脸肿',
       },
     ],
+        weightModifiers: [
+      { condition: 'attribute.str >= 4', weightMultiplier: 0.5 },
+    ],
     tag: 'social',
     priority: 'major',
     unique: true,
@@ -167,7 +170,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'fairy_encounter',
@@ -184,7 +187,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'fairy_friend', value: 1, description: '精灵之友' },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'bullied_repeat',
@@ -538,6 +541,9 @@ export const events: WorldEventDef[] = [
         ],
       },
     ],
+        weightModifiers: [
+      { condition: 'attribute.chr >= 10', weightMultiplier: 1.5 },
+    ],
     tag: 'romance',
     priority: 'major',
   },
@@ -715,8 +721,12 @@ export const events: WorldEventDef[] = [
         ],
       },
     ],
+        weightModifiers: [
+      { condition: 'attribute.str >= 8', weightMultiplier: 1.5 },
+      { condition: 'attribute.chr >= 8', weightMultiplier: 1.2 },
+    ],
     tag: 'combat',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'merchant_apprentice',
@@ -771,7 +781,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'demon_hunt',
@@ -838,7 +848,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
 
   // ==================== 青年期（16-30 岁） ====================
@@ -848,7 +858,7 @@ export const events: WorldEventDef[] = [
     description: '你推开公会大门，铜铃叮当作响。"新人？登记表在那儿。"',
     minAge: 16,
     maxAge: 20,
-    weight: 15,
+    weight: 6,
     include: 'attribute.str >= 4 | attribute.mag >= 6',
     exclude: 'has.flag.guild_member',
     unique: true,
@@ -876,6 +886,10 @@ export const events: WorldEventDef[] = [
         ],
       },
     ],
+        weightModifiers: [
+      { condition: '!has.flag.magic_student & !has.flag.knight', weightMultiplier: 2.0 },
+      { condition: 'has.flag.magic_student | has.flag.knight', weightMultiplier: 0.1 },
+    ],
     tag: 'adventure',
     priority: 'major',
   },
@@ -893,6 +907,9 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'mag', value: 2, description: '魔力 +2' },
       { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1' },
       { type: 'set_flag', target: 'mage_graduate', value: 1, description: '魔法毕业' },
+    ],
+        weightModifiers: [
+      { condition: 'attribute.int >= 12', weightMultiplier: 1.5 },
     ],
     tag: 'magic',
     priority: 'major',
@@ -939,6 +956,9 @@ export const events: WorldEventDef[] = [
           { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（省力也是一种本事）' },
         ],
       },
+    ],
+        weightModifiers: [
+      { condition: 'has.flag.guild_member', weightMultiplier: 2.0 },
     ],
     tag: 'adventure',
     priority: 'major',
@@ -991,6 +1011,9 @@ export const events: WorldEventDef[] = [
       },
     ],
     unique: true,
+        weightModifiers: [
+      { condition: 'has.flag.knight | has.flag.guild_member', weightMultiplier: 1.5 },
+    ],
     tag: 'epic',
     priority: 'critical',
   },
@@ -1009,7 +1032,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'hero_journey_start',
@@ -1027,7 +1050,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'marry_noble',
@@ -1352,7 +1375,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'dark',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'tavern_brawl',
@@ -1386,7 +1409,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_hp', target: 'hp', value: 5, description: 'HP +5' },
     ],
     tag: 'adventure',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'advanced_dungeon',
@@ -1625,7 +1648,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'social',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'master_spell',
@@ -1659,7 +1682,7 @@ export const events: WorldEventDef[] = [
       { type: 'set_flag', target: 'has_student', value: 1, description: '收了徒弟' },
     ],
     tag: 'social',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'lost_in_dungeon',
@@ -1746,7 +1769,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'midlife_crisis',
@@ -1800,7 +1823,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'epic',
-    priority: 'major',
+    priority: 'minor',
   },
 
   // ==================== 老年期（61-80 岁） ====================
@@ -1855,7 +1878,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'social',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'final_cataclysm',
@@ -1925,7 +1948,7 @@ export const events: WorldEventDef[] = [
       { type: 'modify_attribute', target: 'spr', value: 3, description: '灵魂 +3' },
     ],
     tag: 'life',
-    priority: 'major',
+    priority: 'minor',
   },
   {
     id: 'magic_breakthrough_final',
@@ -1941,7 +1964,7 @@ export const events: WorldEventDef[] = [
     ],
     unique: true,
     tag: 'magic',
-    priority: 'major',
+    priority: 'minor',
   },
 
   // ==================== 填充事件 v2 - 打破固定链条 ====================
