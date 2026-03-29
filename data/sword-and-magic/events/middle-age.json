@@ -1390,5 +1390,264 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "lover_curse",
+    "title": "诅咒的代价",
+    "description": "那个人的灵魂被暗影法师诅咒了，正在一点一点消散。你找到了解除诅咒的方法——但代价是献祭自己十年的寿命。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "tragedy"
+    ],
+    "minAge": 20,
+    "maxAge": 50,
+    "include": "has.flag.in_relationship | has.flag.married",
+    "weight": 3,
+    "riskCheck": {
+      "attribute": "int",
+      "successBonus": 0.05,
+      "baseChance": 0.4,
+      "failureHpDamage": 20,
+      "failureDescription": "仪式失败了。诅咒反噬到了你身上，那个人的眼神从希望变成了空洞。",
+      "successDescription": "你的法术成功了！诅咒像黑烟一样从那个人的身体里被抽离。但你的头发白了一半。"
+    },
+    "branches": [
+      {
+        "description": "你毫不犹豫地开始了仪式——十年的寿命算什么",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          }
+        ]
+      },
+      {
+        "description": "你犹豫了很久。最终你选择了……用别人的命来代替（邪道禁术）",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "灵魂 -3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2（禁术知识）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_ritual",
+            "value": 1,
+            "description": "触碰禁忌"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lover_death_battlefield",
+    "title": "战场的噩耗",
+    "description": "远征军回来了，但城门口的黑旗比平时多了一面。你在人群中疯狂地寻找那张脸，直到一个浑身是血的战友把一枚沾着泥土的戒指递到你手里。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "tragedy"
+    ],
+    "minAge": 20,
+    "maxAge": 50,
+    "include": "has.flag.lover_at_war | has.flag.in_relationship | has.flag.married",
+    "weight": 3,
+    "branches": [
+      {
+        "description": "你没有哭。你捡起了那把剑，加入了下一批远征军——不是为了王国，是为了那个人的仇",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "失去爱人"
+          },
+          {
+            "type": "remove_flag",
+            "target": "married",
+            "description": "失去配偶"
+          },
+          {
+            "type": "set_flag",
+            "target": "widowed",
+            "value": 1,
+            "description": "丧偶"
+          },
+          {
+            "type": "set_flag",
+            "target": "avenger",
+            "value": 1,
+            "description": "复仇者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2（仇恨驱使）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2"
+          },
+          {
+            "type": "modify_hp",
+            "value": -15,
+            "description": "HP -15（悲痛）"
+          }
+        ]
+      },
+      {
+        "description": "你把戒指挂在脖子上，在房间里坐了三天三夜。第四天早上，你走出来，眼神变了",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "失去爱人"
+          },
+          {
+            "type": "remove_flag",
+            "target": "married",
+            "description": "失去配偶"
+          },
+          {
+            "type": "set_flag",
+            "target": "widowed",
+            "value": 1,
+            "description": "丧偶"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（在痛苦中觉醒）"
+          },
+          {
+            "type": "modify_hp",
+            "value": -25,
+            "description": "HP -25（三天没吃饭）"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "protect_family",
+    "title": "家门口的怪物",
+    "description": "深夜，孩子们的哭声把你惊醒。你抄起武器推开门——一头暗狼正站在院子中间，红色的眼睛死死盯着木屋的方向。",
+    "priority": "critical",
+    "tags": [
+      "romance",
+      "combat"
+    ],
+    "minAge": 25,
+    "maxAge": 55,
+    "include": "has.flag.married | has.flag.parent",
+    "weight": 4,
+    "riskCheck": {
+      "attribute": "str",
+      "successBonus": 0.04,
+      "baseChance": 0.45,
+      "failureHpDamage": 30,
+      "failureDescription": "暗狼的速度比你想象的快得多。它的利爪划过你的胸口，你在地上滚了几圈，勉强爬起来挡在了门口。",
+      "successDescription": "你挡在门口，一刀砍下了暗狼的头颅。孩子们的哭声停了——不是因为安全了，是因为被你的怒吼吓住了。"
+    },
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      }
+    ]
+  },
+  {
+    "id": "widowed_wanderer",
+    "title": "失去之后的流浪",
+    "description": "你已经不记得自己走了多久了。从那个人的葬礼到现在，你经过了多少座城市，喝了多少杯劣质麦酒。世界还在转，但你不想跟着转了。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "tragedy"
+    ],
+    "minAge": 30,
+    "maxAge": 60,
+    "include": "has.flag.widowed",
+    "exclude": "has.flag.in_relationship | has.flag.married",
+    "weight": 4,
+    "branches": [
+      {
+        "description": "你在一座陌生的小镇停下了脚步。酒馆老板的笑脸让你想起了某个人——不，是时候向前看了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（慢慢走出来）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1"
+          }
+        ]
+      },
+      {
+        "description": "你加入了佣兵团。战斗是最好的止痛药——至少在挥剑的时候，什么都不用想",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_hp",
+            "value": -10,
+            "description": "HP -10（伤痕累累）"
+          }
+        ]
+      },
+      {
+        "description": "你站在悬崖边，风吹过你的斗篷。你想起了那个人说的最后一句话——'好好活着'。你退后了一步",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（选择了活下去）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2,
+            "description": "运势 +2"
+          }
+        ]
+      }
+    ]
   }
 ]

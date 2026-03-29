@@ -3396,13 +3396,71 @@
     "priority": "minor"
   },
   {
-    "id": "lover_quarrel",
-    "title": "第一次争吵",
-    "description": "不知道从什么小事开始的，但你们谁都不肯先低头。沉默比争吵更让人窒息。",
+    "id": "starlight_promise",
+    "title": "星光下的约定",
+    "description": "你们坐在悬崖边，脚下的魔法森林在月光下泛着幽蓝的光。那个人把一株发光的月光花递到你手里，轻声说'等我从深渊回来，我们就在一起'。",
     "priority": "major",
     "tags": [
       "romance",
-      "drama"
+      "sweet"
+    ],
+    "minAge": 16,
+    "maxAge": 25,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married",
+    "weight": 6,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1"
+      }
+    ]
+  },
+  {
+    "id": "festival_dance",
+    "title": "丰收祭的舞蹈",
+    "description": "一年一度的丰收祭上，吟游诗人弹起了琴。那个人向你伸出手，'跟我来'。你在篝火旁转圈，忘记了一切烦恼。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "sweet"
+    ],
+    "minAge": 14,
+    "maxAge": 22,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married",
+    "weight": 5,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ]
+  },
+  {
+    "id": "quest_parting",
+    "title": "远征前的告别",
+    "description": "王国征召令下来了，那个人要被派往北境战场。你站在城门口，手里攥着织了三个月的护身符，嘴唇动了动却什么都没说出来。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "bitter"
     ],
     "minAge": 18,
     "maxAge": 35,
@@ -3411,79 +3469,30 @@
     "weight": 5,
     "branches": [
       {
-        "description": "你深吸一口气，先说了'对不起'",
+        "description": "你把护身符系在对方的剑鞘上，低声说'你一定要活着回来'",
         "effects": [
           {
             "type": "modify_attribute",
             "target": "spr",
             "value": 1,
-            "description": "灵魂 +1（学会了退让）"
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
             "value": 1,
             "description": "运势 +1"
-          }
-        ]
-      },
-      {
-        "description": "你摔门而去，在雨里走了很久",
-        "effects": [
-          {
-            "type": "modify_hp",
-            "value": -10,
-            "description": "HP -10（淋雨感冒）"
           },
           {
             "type": "set_flag",
-            "target": "heartbroken",
+            "target": "lover_at_war",
             "value": 1,
-            "description": "心碎"
-          },
-          {
-            "type": "remove_flag",
-            "target": "in_relationship",
-            "description": "分手"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "long_distance",
-    "title": "异地之恋",
-    "description": "梦想把你们送到了不同的城市。每天最期待的就是夜里的那通电话，但信号有时候真的很差。",
-    "priority": "major",
-    "tags": [
-      "romance",
-      "life"
-    ],
-    "minAge": 20,
-    "maxAge": 30,
-    "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married",
-    "weight": 4,
-    "branches": [
-      {
-        "description": "攒了三个月的钱，只为了一张去看对方的火车票",
-        "effects": [
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": 2,
-            "description": "灵魂 +2"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "mny",
-            "value": -2,
-            "description": "家境 -2"
+            "description": "恋人在远征"
           }
         ]
       },
       {
-        "description": "\"我们都需要向前看。\"你们在电话两端同时沉默了很久",
+        "description": "\"我们到此为止吧。\"你转身走进了雨里。战场上的死别，比生离温柔",
         "effects": [
           {
             "type": "set_flag",
@@ -3507,110 +3516,22 @@
     ]
   },
   {
-    "id": "wedding_anniversary",
-    "title": "结婚纪念日",
-    "description": "又是一年了。日子平淡得像白开水，但回头看看，白开水其实是世界上最珍贵的东西。",
-    "priority": "minor",
-    "tags": [
-      "romance",
-      "life"
-    ],
-    "minAge": 30,
-    "maxAge": 60,
-    "include": "has.flag.married",
-    "weight": 3,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1,
-        "description": "灵魂 +1（满足感）"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": 1,
-        "description": "运势 +1"
-      }
-    ]
-  },
-  {
-    "id": "marriage_crisis",
-    "title": "婚姻的裂痕",
-    "description": "你们已经很久没有好好说过话了。餐桌上的沉默比刀还冷，孩子似乎也感觉到了什么。",
+    "id": "forbidden_love",
+    "title": "禁忌之恋",
+    "description": "你们分属敌对的两族。每一次偷偷见面都可能被处死，但那种刀尖上舔蜜的刺激，让你们谁也放不下。",
     "priority": "major",
     "tags": [
       "romance",
-      "drama"
+      "bitter"
     ],
-    "minAge": 35,
-    "maxAge": 55,
-    "include": "has.flag.married",
+    "minAge": 16,
+    "maxAge": 28,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married",
     "weight": 4,
     "branches": [
       {
-        "description": "你决定放下骄傲，开始尝试重新了解身边的人",
-        "effects": [
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": 2,
-            "description": "灵魂 +2（成长）"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "chr",
-            "value": 1,
-            "description": "魅力 +1"
-          }
-        ]
-      },
-      {
-        "description": "你们平静地坐下来谈了很久，然后签下了那份文件",
-        "effects": [
-          {
-            "type": "remove_flag",
-            "target": "married",
-            "description": "离婚"
-          },
-          {
-            "type": "set_flag",
-            "target": "divorced",
-            "value": 1,
-            "description": "离婚"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": -2,
-            "description": "灵魂 -2"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "mny",
-            "value": -3,
-            "description": "家境 -3"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "lover_sickness",
-    "title": "病床前的守候",
-    "description": "那个人病的很重。你每天守在床边，握着那只越来越冰凉的手，心里不停祈祷着什么。",
-    "priority": "major",
-    "tags": [
-      "romance",
-      "tragedy"
-    ],
-    "minAge": 25,
-    "maxAge": 60,
-    "include": "has.flag.in_relationship | has.flag.married",
-    "weight": 3,
-    "branches": [
-      {
-        "description": "奇迹发生了。那个人慢慢睁开了眼睛，虚弱地笑了笑说'你还没走啊'",
+        "description": "你们决定一起逃跑，去没有人认识你们的地方开始新生活",
         "effects": [
           {
             "type": "modify_attribute",
@@ -3620,93 +3541,193 @@
           },
           {
             "type": "modify_attribute",
-            "target": "luk",
-            "value": 2,
-            "description": "运势 +2"
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（流亡）"
           },
           {
             "type": "modify_hp",
-            "value": -10,
-            "description": "HP -10（操劳）"
+            "value": -15,
+            "description": "HP -15（逃亡受伤）"
           }
         ]
       },
       {
-        "description": "那天早上，握着的手突然松开了。你愣了很久，才意识到脸上有什么东西在流",
+        "description": "族里的长老发现了。你被关在地牢里，隔着铁栏听到外面的喊叫声渐渐停了",
         "effects": [
           {
             "type": "set_flag",
-            "target": "widowed",
+            "target": "heartbroken",
             "value": 1,
-            "description": "丧偶"
+            "description": "心碎"
           },
           {
             "type": "remove_flag",
             "target": "in_relationship",
-            "description": "失去爱人"
-          },
-          {
-            "type": "remove_flag",
-            "target": "married",
-            "description": "失去配偶"
+            "description": "被迫分离"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -3,
-            "description": "灵魂 -3"
+            "value": -2,
+            "description": "灵魂 -2"
           },
           {
             "type": "modify_hp",
-            "value": -25,
-            "description": "HP -25（悲痛欲绝）"
+            "value": -20,
+            "description": "HP -20（地牢）"
           }
         ]
       }
     ]
   },
   {
-    "id": "second_chance_love",
-    "title": "第二春",
-    "description": "离婚后很久了，你以为自己再也不会心动。但在那个雨天，有人把伞递到了你头上。",
-    "priority": "minor",
+    "id": "rescue_from_dungeon",
+    "title": "深入魔窟的营救",
+    "description": "那个人被兽人掳走了。所有人都说不可能活着回来，但你在黎明前就出了城，独自一人向兽人的巢穴走去。",
+    "priority": "critical",
     "tags": [
       "romance",
-      "life"
+      "epic"
     ],
-    "minAge": 35,
-    "maxAge": 60,
-    "include": "has.flag.divorced",
-    "exclude": "has.flag.in_relationship | has.flag.married",
-    "weight": 3,
+    "minAge": 18,
+    "maxAge": 40,
+    "include": "has.flag.in_relationship | has.flag.married",
+    "weight": 5,
+    "riskCheck": {
+      "attribute": "str",
+      "successBonus": 0.04,
+      "baseChance": 0.3,
+      "failureHpDamage": 35,
+      "failureDescription": "你在洞穴深处被发现了。虽然侥幸逃脱，但那个人还困在里面。",
+      "successDescription": "你找到了那个人被关的笼子。铁锁被你一剑劈开，你们一起跑出了魔窟。"
+    },
     "branches": [
       {
-        "description": "你接过伞，鼓起勇气说'要不要一起喝杯热茶？'",
+        "description": "你找到了那个人的踪迹，拔剑冲了进去",
         "effects": [
           {
-            "type": "set_flag",
-            "target": "in_relationship",
-            "value": 1,
-            "description": "再次恋爱"
-          },
-          {
             "type": "modify_attribute",
-            "target": "spr",
+            "target": "str",
             "value": 1,
-            "description": "灵魂 +1"
+            "description": "体魄 +1"
           }
         ]
       },
       {
-        "description": "你道了谢，转身走进了雨里。但嘴角不自觉地上扬了",
+        "description": "你去找了冒险者公会，悬赏招募了一支临时队伍",
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "luk",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（悬赏金）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
             "value": 1,
-            "description": "运势 +1"
+            "description": "智慧 +1（战术）"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "soul_bound",
+    "title": "灵魂契约",
+    "description": "你们在精灵圣树下许下了灵魂契约——两颗灵魂从此交织在一起。如果一方死去，另一方的灵魂也会碎裂。",
+    "priority": "critical",
+    "tags": [
+      "romance",
+      "epic",
+      "magic"
+    ],
+    "minAge": 20,
+    "maxAge": 35,
+    "include": "has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.soul_bound",
+    "weight": 3,
+    "branches": [
+      {
+        "description": "在精灵之光的照耀下，你们的手指交织在一起，感到一股暖流贯穿全身",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "soul_bound",
+            "value": 1,
+            "description": "灵魂契约"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          }
+        ]
+      },
+      {
+        "description": "你犹豫了。永恒的绑定太沉重了，你还没准备好把灵魂交给另一个人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（思考了自己真正想要什么）"
+          },
+          {
+            "type": "set_flag",
+            "target": "heartbroken",
+            "value": 1,
+            "description": "心碎"
+          },
+          {
+            "type": "remove_flag",
+            "target": "in_relationship",
+            "description": "被拒绝后分手"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "family_blessing",
+    "title": "新生命的降临",
+    "description": "清晨的阳光照进木屋，你小心翼翼地抱起襁褓中的小家伙。那个人的笑容让你觉得，这个世界上的所有怪物和诅咒，都不值一提。",
+    "priority": "major",
+    "tags": [
+      "romance",
+      "life"
+    ],
+    "minAge": 22,
+    "maxAge": 38,
+    "include": "has.flag.married",
+    "exclude": "has.flag.parent",
+    "weight": 5,
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "parent",
+        "value": 1,
+        "description": "成为父母"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -1,
+        "description": "家境 -1"
       }
     ]
   }
