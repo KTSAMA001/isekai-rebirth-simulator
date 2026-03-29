@@ -252,20 +252,23 @@ export class SimulationEngine {
       return { phase: 'mundane_year', event: null }
     }
 
-    // 按优先级分组，在最高可用优先级内按权重随机
-    const priorityOrder: Record<string, number> = { critical: 0, major: 1, minor: 2 }
-    const sorted = [...candidates].sort((a, b) => {
-      const pa = priorityOrder[a.priority ?? 'minor']
-      const pb = priorityOrder[b.priority ?? 'minor']
-      return pa - pb
-    })
-
-    // 取最高优先级组
-    const topPriority = priorityOrder[sorted[0].priority ?? 'minor']
-    const topGroup = sorted.filter(e => (priorityOrder[e.priority ?? 'minor']) === topPriority)
-
-    // 在组内按权重随机选择
-    const event = this.eventModule.pickEvent(topGroup)
+    // 30%概率从所有候选中选（让minor事件有机会），70%概率从最高优先级组中选
+    let event: WorldEventDef | null
+    if (this.random.next() < 0.7 && candidates.length > 0) {
+      // 按优先级分组，在最高可用优先级内按权重随机
+      const priorityOrder: Record<string, number> = { critical: 0, major: 1, minor: 2 }
+      const sorted = [...candidates].sort((a, b) => {
+        const pa = priorityOrder[a.priority ?? 'minor']
+        const pb = priorityOrder[b.priority ?? 'minor']
+        return pa - pb
+      })
+      const topPriority = priorityOrder[sorted[0].priority ?? 'minor']
+      const topGroup = sorted.filter(e => (priorityOrder[e.priority ?? 'minor']) === topPriority)
+      event = this.eventModule.pickEvent(topGroup)
+    } else {
+      // 从所有候选中按权重随机选择
+      event = this.eventModule.pickEvent(candidates)
+    }
     if (!event) {
       this.pendingYearEvent = null
       return { phase: 'mundane_year', event: null }
