@@ -190,7 +190,7 @@ export class SimulationEngine {
     this.state.hp = this.computeInitHp()
     // 固定每年的恢复量（基于初始体魄，不随成长增长）
     const initStr = attributes['str'] ?? 0
-    this.initialStrRegen = 2 + Math.floor(initStr / 2)
+    this.initialStrRegen = 2 + Math.floor(initStr / 3)
 
     this.state = {
       ...this.state,
@@ -205,10 +205,10 @@ export class SimulationEngine {
 
   // ==================== Galgame 化三步流程 ====================
 
-  /** 根据属性计算初始 HP：30 + 体魄×4 */
+  /** 根据属性计算初始 HP：25 + 体魄×3 */
   private computeInitHp(): number {
     const str = this.state.attributes['str'] ?? 0
-    return 30 + str * 4
+    return 25 + str * 3
   }
 
   /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 */
@@ -534,12 +534,12 @@ export class SimulationEngine {
     // 濒死判定：HP ≤ 10 且 > 0 时，有概率直接死亡或奇迹生还
     if (newState.hp > 0 && newState.hp <= 10) {
       const roll = this.random.next()
-      if (roll < 0.15) {
-        // 15% 概率直接死亡
+      if (roll < 0.20) {
+        // 20% 概率直接死亡
         newState = { ...newState, hp: 0 }
-      } else if (roll < 0.30) {
+      } else if (roll < 0.35) {
         // 15% 概率奇迹生还，恢复 HP
-        newState = { ...newState, hp: newState.hp + 20 }
+        newState = { ...newState, hp: newState.hp + 18 }
         newState.flags = new Set([...newState.flags, 'miracle_survival'])
       } else {
         // 70% 挂上濒死标记，继续
