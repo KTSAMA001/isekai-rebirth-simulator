@@ -887,7 +887,7 @@ export const events: WorldEventDef[] = [
     minAge: 20,
     maxAge: 25,
     weight: 5,
-    include: 'attribute.int >= 10',
+    include: 'has.flag.magic_student & attribute.int >= 10',
     exclude: 'has.flag.mage_graduate',
     unique: true,
     effects: [
