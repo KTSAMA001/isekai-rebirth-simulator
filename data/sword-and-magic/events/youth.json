@@ -9,13 +9,7 @@
     "include": "attribute.mag >= 8",
     "exclude": "has.flag.magic_student",
     "unique": true,
-    "effects": [
-      {
-        "type": "set_flag",
-        "target": "magic_academy",
-        "value": true
-      }
-    ],
+    "effects": [],
     "branches": [
       {
         "id": "enroll_academy",
@@ -46,6 +40,11 @@
             "target": "crystal_shard",
             "value": 1,
             "description": "获得 💎 魔力碎片"
+          },
+          {
+            "type": "set_flag",
+            "target": "magic_academy",
+            "value": true
           }
         ],
         "successText": "当你推开学院大门的那一刻，空气中弥漫的魔力让你全身颤栗。一位白发教授看了你的入学通知书，微微点头：「有趣……你的魔力波动很特别。」"
@@ -67,6 +66,11 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "magic_academy",
+            "value": true
           }
         ],
         "successText": "你把通知书折好收进了抽屉。也许将来会有别的机会吧……你这样安慰自己，继续过着普通的日子。"
@@ -199,7 +203,7 @@
     "tag": "magic",
     "priority": "major",
     "prerequisites": [
-      "has.flag.magic_academy"
+      "flag:magic_academy"
     ]
   },
   {

@@ -3,9 +3,9 @@
     "id": "dragon_slay_attempt",
     "title": "讨伐巨龙",
     "description": "一头黑龙盘踞在北方的山谷，赏金高得惊人。你决定去试试。",
-    "minAge": 22,
-    "maxAge": 35,
-    "weight": 2,
+    "minAge": 28,
+    "maxAge": 38,
+    "weight": 1,
     "include": "attribute.str >= 14 | attribute.mag >= 14",
     "effects": [],
     "branches": [
@@ -481,7 +481,7 @@
     "description": "魔王军入侵了！所有冒险者被征召。",
     "minAge": 40,
     "maxAge": 55,
-    "weight": 5,
+    "weight": 2,
     "effects": [],
     "branches": [
       {
@@ -602,7 +602,7 @@
     "description": "\"我这辈子到底在干什么？\"你站在悬崖边，看着夕阳发呆。",
     "minAge": 40,
     "maxAge": 50,
-    "weight": 10,
+    "weight": 2,
     "unique": true,
     "effects": [],
     "branches": [
@@ -1661,7 +1661,7 @@
     "description": "一支来自东方的商队经过你的城镇。他们愿意和你做生意。",
     "minAge": 22,
     "maxAge": 50,
-    "weight": 3,
+    "weight": 1,
     "include": "attribute.mny >= 10 & attribute.chr >= 8",
     "effects": [],
     "branches": [
@@ -1738,7 +1738,7 @@
     "description": "国王突然提高了税率。你的财务状况岌岌可危。",
     "minAge": 25,
     "maxAge": 55,
-    "weight": 3,
+    "weight": 1,
     "include": "attribute.mny >= 8",
     "effects": [
       {

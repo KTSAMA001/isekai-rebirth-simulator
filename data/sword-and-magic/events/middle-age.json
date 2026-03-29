@@ -582,7 +582,7 @@
     "description": "你决定创办自己的道场/学院/商会，将毕生所学传承下去。",
     "minAge": 35,
     "maxAge": 55,
-    "weight": 3,
+    "weight": 2,
     "include": "attribute.str >= 18 | attribute.mag >= 18 | attribute.int >= 18",
     "effects": [],
     "branches": [
@@ -672,7 +672,7 @@
     "description": "多年前得罪的人找上门了。他的眼神里满是恨意。",
     "minAge": 30,
     "maxAge": 50,
-    "weight": 3,
+    "weight": 1,
     "include": "",
     "effects": [],
     "branches": [
@@ -941,7 +941,7 @@
     "description": "你决定把你多年的研究和经验写成一部著作。",
     "minAge": 30,
     "maxAge": 55,
-    "weight": 3,
+    "weight": 1,
     "include": "attribute.int >= 16",
     "effects": [],
     "branches": [
