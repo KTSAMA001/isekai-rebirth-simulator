@@ -171,6 +171,7 @@ function runOneGame(gameNum: number, seed: number): GameLog {
         })
       }
     } else if (yearResult.phase === 'showing_event' && yearResult.event) {
+      // showing_event: effects already applied automatically, just log
       log.push({
         age: stateAfter.age,
         eventId: yearResult.event.id,
@@ -317,7 +318,8 @@ function validateGame(gameLog: GameLog, allEvents: any[]): ValidationIssue[] {
 // ==================== 主函数 ====================
 
 function main() {
-  console.log('🧪 异世界重生模拟器 — 10局测试验证\n')
+  const GAME_COUNT = 20
+  console.log(`🧪 异世界重生模拟器 — ${GAME_COUNT}局测试验证\n`)
   console.log('='.repeat(60))
 
   const world = createSwordAndMagicWorld()
@@ -326,7 +328,7 @@ function main() {
   const allLogs: GameLog[] = []
   const allIssues: ValidationIssue[] = []
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= GAME_COUNT; i++) {
     const seed = 1000 + i * 7919 // deterministic but varied seeds
     console.log(`\n=== 游戏 #${i} (seed: ${seed}) ===`)
 
@@ -362,9 +364,9 @@ function main() {
   console.log('\n📊 验证报告\n')
 
   if (allIssues.length === 0) {
-    console.log('✅ 10局游戏全部通过验证！未发现逻辑问题。\n')
+    console.log(`✅ ${GAME_COUNT}局游戏全部通过验证！未发现逻辑问题。\n`)
   } else {
-    console.log(`❌ 10局游戏发现 ${allIssues.length} 个逻辑问题：\n`)
+    console.log(`❌ ${GAME_COUNT}局游戏发现 ${allIssues.length} 个逻辑问题：\n`)
 
     // Group by check type
     const byType = new Map<string, ValidationIssue[]>()
@@ -391,6 +393,119 @@ function main() {
   console.log(`  平均事件数: ${avgEvents} 个/局`)
   console.log(`  总事件数: ${allLogs.reduce((s, g) => s + g.entries.length, 0)}`)
   console.log(`  逻辑问题: ${allIssues.length} 个`)
+
+  // ==================== 连锁反应分析 ====================
+  console.log('\n🔗 连锁反应分析（检测固定事件序列）\n')
+
+  // 1. 事件触发率统计
+  const eventTriggerCount = new Map<string, number>()
+  for (const game of allLogs) {
+    const seen = new Set<string>()
+    for (const entry of game.entries) {
+      if (entry.eventId !== '__death__' && !seen.has(entry.eventId)) {
+        seen.add(entry.eventId)
+        eventTriggerCount.set(entry.eventId, (eventTriggerCount.get(entry.eventId) || 0) + 1)
+      }
+    }
+  }
+
+  const validGames = allLogs.length
+  const highRateEvents: string[] = []
+  console.log('  📊 事件触发率（出现 ≥70% 的局）：')
+  for (const [eid, count] of eventTriggerCount) {
+    const rate = count / validGames
+    if (rate >= 0.7) {
+      const eventDef = allEvents.find(e => e.id === eid)
+      const title = eventDef?.title ?? eid
+      const pct = Math.round(rate * 100)
+      console.log(`    ⚠️ ${eid} (${title}): ${count}/${validGames}局 (${pct}%)`)
+      highRateEvents.push(eid)
+    }
+  }
+  if (highRateEvents.length === 0) {
+    console.log('    ✅ 无过高触发率事件')
+  }
+
+  // 2. 固定序列检测：找出总是按相同顺序出现的事件对
+  console.log('\n  📊 固定事件序列（A→B 总是按此顺序出现 ≥70%）：')
+  const pairAB = new Map<string, number>()   // A before B count
+  const pairBA = new Map<string, number>()   // B before A count
+  const pairCoOccur = new Map<string, number>() // A and B in same game
+
+  for (const game of allLogs) {
+    const eventIds = game.entries.filter(e => e.eventId !== '__death__').map(e => e.eventId)
+    for (let i = 0; i < eventIds.length; i++) {
+      for (let j = i + 1; j < eventIds.length; j++) {
+        const key = [eventIds[i], eventIds[j]].sort().join(' ↔ ')
+        pairCoOccur.set(key, (pairCoOccur.get(key) || 0) + 1)
+        const abKey = `${eventIds[i]} → ${eventIds[j]}`
+        pairAB.set(abKey, (pairAB.get(abKey) || 0) + 1)
+      }
+    }
+  }
+
+  const fixedSequences: string[] = []
+  for (const [key, count] of pairAB) {
+    const [a, b] = key.split(' → ')
+    const reverseKey = `${b} → ${a}`
+    const reverseCount = pairBA.get(reverseKey) || 0
+    const coCount = pairCoOccur.get(`${[a, b].sort().join(' ↔ ')}`) || 0
+    if (coCount >= validGames * 0.5 && count > 0 && reverseCount === 0 && count >= validGames * 0.7) {
+      console.log(`    ⚠️ ${key}: ${count}/${validGames}局（反向出现 0 次）`)
+      fixedSequences.push(key)
+    }
+  }
+  if (fixedSequences.length === 0) {
+    console.log('    ✅ 未发现固定序列')
+  }
+
+  // 3. 每局事件数量分布
+  console.log('\n  📊 每局事件数分布：')
+  const eventCounts = allLogs.map(g => g.entries.length)
+  const minE = Math.min(...eventCounts)
+  const maxE = Math.max(...eventCounts)
+  const buckets = new Map<string, number>()
+  for (const c of eventCounts) {
+    const bucket = c <= 10 ? '≤10' : c <= 15 ? '11-15' : c <= 20 ? '16-20' : c <= 25 ? '21-25' : '>25'
+    buckets.set(bucket, (buckets.get(bucket) || 0) + 1)
+  }
+  for (const [bucket, count] of buckets) {
+    const bar = '█'.repeat(count)
+    console.log(`    ${bucket}个事件: ${bar} (${count}局)`)
+  }
+  console.log(`    范围: ${minE}-${maxE}, 中位数: ${eventCounts.sort((a,b)=>a-b)[Math.floor(eventCounts.length/2)]}`)
+
+  // 4. 死亡年龄分布
+  console.log('\n  📊 死亡/结局分布：')
+  const deathBuckets = new Map<string, number>()
+  for (const g of allLogs) {
+    const bucket = g.finalAge <= 20 ? '≤20岁' : g.finalAge <= 40 ? '21-40岁' : g.finalAge <= 60 ? '41-60岁' : '>60岁'
+    deathBuckets.set(bucket, (deathBuckets.get(bucket) || 0) + 1)
+  }
+  for (const [bucket, count] of deathBuckets) {
+    const bar = '█'.repeat(count)
+    console.log(`    ${bucket}: ${bar} (${count}局)`)
+  }
+
+  // 5. 总结建议
+  console.log('\n  💡 建议：')
+  if (highRateEvents.length > 0) {
+    console.log(`    - ${highRateEvents.length} 个事件触发率 ≥70%，考虑降低权重或增加排除条件`)
+  }
+  if (fixedSequences.length > 0) {
+    console.log(`    - ${fixedSequences.length} 对固定事件序列，缺少随机性`)
+  }
+  const earlyDeaths = allLogs.filter(g => g.finalAge <= 25).length
+  if (earlyDeaths > validGames * 0.4) {
+    console.log(`    - ${earlyDeaths}/${validGames} 局在 25 岁前死亡，可能过于困难`)
+  }
+  const lateDeaths = allLogs.filter(g => g.finalAge >= 75).length
+  if (lateDeaths > validGames * 0.7) {
+    console.log(`    - ${lateDeaths}/${validGames} 局活到 75+ 岁，后期可能缺乏挑战`)
+  }
+  if (highRateEvents.length === 0 && fixedSequences.length === 0 && earlyDeaths <= validGames * 0.4 && lateDeaths <= validGames * 0.7) {
+    console.log('    ✅ 数据分布合理，未发现明显问题')
+  }
 }
 
 main()
