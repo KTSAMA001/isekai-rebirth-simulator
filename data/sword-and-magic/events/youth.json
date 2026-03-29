@@ -1543,5 +1543,525 @@
     ],
     "tag": "life",
     "priority": "minor"
+  },
+  {
+    "id": "luk_lucky_coin",
+    "title": "捡到金币",
+    "description": "你在路边发现了一枚闪闪发光的金币。这可不是普通的金币——上面刻着古老的符文。",
+    "minAge": 10,
+    "maxAge": 18,
+    "weight": 3,
+    "include": "attribute.luk >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "lucky_keep",
+        "title": "收起来",
+        "description": "这肯定是好东西",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "lucky_coin",
+            "value": 1,
+            "description": "幸运金币"
+          }
+        ]
+      },
+      {
+        "id": "lucky_spend",
+        "title": "买糖吃了",
+        "description": "管它什么符文，买糖！",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（甜蜜）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "lucky_lost",
+        "title": "弄丢了",
+        "description": "第二天就找不到了...",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "幸运 -1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "minor"
+  },
+  {
+    "id": "luk_potion_find",
+    "title": "神秘药水",
+    "description": "你在森林深处发现了一瓶发着蓝光的药水。标签上写着'喝我'。",
+    "minAge": 12,
+    "maxAge": 20,
+    "weight": 2,
+    "include": "attribute.luk >= 15",
+    "effects": [],
+    "branches": [
+      {
+        "id": "potion_drink",
+        "title": "一口闷！",
+        "description": "YOLO！",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "potion_power",
+            "value": 1,
+            "description": "药水力量"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25（中毒）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          }
+        ],
+        "successText": "全身充满了力量！",
+        "failureText": "肚子好疼...下次不乱喝了"
+      },
+      {
+        "id": "potion_sell",
+        "title": "拿去卖",
+        "description": "万一是毒药呢",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          }
+        ]
+      },
+      {
+        "id": "potion_leave",
+        "title": "放下就走",
+        "description": "不明来源的东西不能碰",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "minor"
+  },
+  {
+    "id": "spr_spirit_animal",
+    "title": "灵兽伴行",
+    "description": "一只银色的狐狸出现在你面前。它用清澈的眼睛注视着你。",
+    "minAge": 14,
+    "maxAge": 25,
+    "weight": 2,
+    "include": "attribute.spr >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "spirit_befriend",
+        "title": "伸出手",
+        "description": "你慢慢靠近它",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "spirit_companion",
+            "value": 1,
+            "description": "灵兽同伴！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          }
+        ],
+        "successText": "灵兽轻轻蹭了你的手！",
+        "failureText": "灵兽转身离去..."
+      },
+      {
+        "id": "spirit_watch",
+        "title": "静静观察",
+        "description": "不急",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "spirit_flee",
+        "title": "跑！",
+        "description": "不对劲...",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "mny_inherit_uncle",
+    "title": "叔父遗产",
+    "description": "你从未谋面的叔父去世了，留给你一笔遗产和一封信。",
+    "minAge": 15,
+    "maxAge": 22,
+    "weight": 3,
+    "include": "attribute.mny >= 6",
+    "effects": [],
+    "branches": [
+      {
+        "id": "inherit_accept",
+        "title": "接受遗产",
+        "description": "钱嘛谁不爱呢",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4,
+            "description": "家境 +4"
+          },
+          {
+            "type": "set_flag",
+            "target": "inherited_wealth",
+            "value": 1,
+            "description": "继承遗产"
+          }
+        ]
+      },
+      {
+        "id": "inherit_charity",
+        "title": "捐给穷人",
+        "description": "信里说要你这样做",
+        "probability": 0.2,
+        "requireCondition": "attribute.chr >= 10",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "philanthropist",
+            "value": 1,
+            "description": "慈善家"
+          }
+        ]
+      },
+      {
+        "id": "inherit_invest",
+        "title": "投资",
+        "description": "钱生钱",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 14,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 6,
+            "description": "家境 +6"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2"
+          }
+        ],
+        "successText": "投资回报不错！",
+        "failureText": "血本无归..."
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "str_bodyguard_job",
+    "title": "保镖任务",
+    "description": "一位富商需要一个保镖保护他前往邻城。报酬丰厚。",
+    "minAge": 16,
+    "maxAge": 30,
+    "weight": 3,
+    "include": "attribute.str >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "guard_accept",
+        "title": "接任务",
+        "description": "正好锻炼一下",
+        "probability": 0.4,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 14,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "experienced_guard",
+            "value": 1,
+            "description": "老练保镖"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1"
+          }
+        ],
+        "successText": "成功保护了商人！",
+        "failureText": "遇到强敌..."
+      },
+      {
+        "id": "guard_decline",
+        "title": "不感兴趣",
+        "description": "不想冒险",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "guard_negotiate",
+        "title": "讨价还价",
+        "description": "先谈谈报酬",
+        "probability": 0.3,
+        "requireCondition": "attribute.chr >= 10",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "combat",
+    "priority": "minor"
+  },
+  {
+    "id": "int_invention",
+    "title": "奇思妙想",
+    "description": "你在看书的时候突然有了一个绝妙的想法——如果把这个和那个结合在一起...",
+    "minAge": 14,
+    "maxAge": 25,
+    "weight": 3,
+    "include": "attribute.int >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "invention_build",
+        "title": "动手制造",
+        "description": "想法不实现就是空想",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_inventor",
+            "value": 1,
+            "description": "著名发明家！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2"
+          }
+        ],
+        "successText": "你的发明引起了轰动！",
+        "failureText": "理论上可行，实际上不行"
+      },
+      {
+        "id": "invention_patent",
+        "title": "先申请专利",
+        "description": "保护知识产权",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "invention_forget",
+        "title": "忘了",
+        "description": "想不起来了",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]

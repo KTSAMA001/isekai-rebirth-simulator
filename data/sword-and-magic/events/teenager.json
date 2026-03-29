@@ -1688,5 +1688,266 @@
     ],
     "tag": "adventure",
     "priority": "major"
+  },
+  {
+    "id": "spr_dream_vision",
+    "title": "预知梦",
+    "description": "你做了一个清晰的梦——梦中你站在高塔上，背后是燃烧的城市。",
+    "minAge": 12,
+    "maxAge": 18,
+    "weight": 3,
+    "include": "attribute.spr >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dream_heed",
+        "title": "认真对待",
+        "description": "这个梦一定有含义",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "prophet_dream",
+            "value": 1,
+            "description": "预知能力"
+          }
+        ]
+      },
+      {
+        "id": "dream_ignore",
+        "title": "只是一个梦",
+        "description": "别想太多",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "dream_fear",
+        "title": "噩梦缠身",
+        "description": "你开始害怕睡觉",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（失眠）"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "minor"
+  },
+  {
+    "id": "mag_elemental_fusion",
+    "title": "元素融合",
+    "description": "你在魔法实验中意外将两种元素融合了。火焰和冰霜在你手中交织——这从未有人做到过。",
+    "minAge": 14,
+    "maxAge": 25,
+    "weight": 3,
+    "include": "attribute.mag >= 14 & attribute.int >= 10",
+    "effects": [],
+    "branches": [
+      {
+        "id": "fusion_control",
+        "title": "尝试控制",
+        "description": "这可能改变魔法史",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "mag",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "魔力 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "elemental_master",
+            "value": 1,
+            "description": "元素融合！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -35,
+            "description": "HP -35"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -2,
+            "description": "魔力 -2"
+          }
+        ],
+        "successText": "你创造了全新的魔法体系！",
+        "failureText": "实验室炸了"
+      },
+      {
+        "id": "fusion_record",
+        "title": "先记录下来",
+        "description": "科学研究最重要的是记录",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "researcher",
+            "value": 1,
+            "description": "研究者"
+          }
+        ]
+      },
+      {
+        "id": "fusion_stop",
+        "title": "太危险了！",
+        "description": "赶紧停下",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "chr_public_speech",
+    "title": "广场演说",
+    "description": "城镇广场上正在举行辩论大赛。你被推到了台上。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "include": "attribute.chr >= 12 & attribute.int >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "speech_inspire",
+        "title": "慷慨陈词",
+        "description": "你决定发表一篇演说",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "chr",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "orator",
+            "value": 1,
+            "description": "演说家"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1"
+          }
+        ],
+        "successText": "全场起立鼓掌！",
+        "failureText": "你忘词了..."
+      },
+      {
+        "id": "speech_debate",
+        "title": "辩论对手",
+        "description": "正面交锋",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ]
+      },
+      {
+        "id": "speech_flee",
+        "title": "溜了",
+        "description": "人太多了好可怕",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]

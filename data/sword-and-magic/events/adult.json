@@ -1109,5 +1109,713 @@
     ],
     "tag": "life",
     "priority": "minor"
+  },
+  {
+    "id": "luk_lottery",
+    "title": "王国彩票",
+    "description": "一年一度的王国彩票开奖日到了。你随手买了一张。",
+    "minAge": 20,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "attribute.luk >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "lottery_jackpot",
+        "title": "中大奖了！",
+        "description": "号码完全一致！",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 22,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 8,
+            "description": "家境 +8（大奖！）"
+          },
+          {
+            "type": "set_flag",
+            "target": "lottery_winner",
+            "value": 1,
+            "description": "彩票大奖！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1"
+          }
+        ],
+        "successText": "头奖！！！",
+        "failureText": "差一个数字..."
+      },
+      {
+        "id": "lottery_small",
+        "title": "小奖",
+        "description": "聊胜于无",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "lottery_nothing",
+        "title": "没中奖",
+        "description": "意料之中",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "luk_wild_encounter",
+    "title": "野外奇遇",
+    "description": "你迷路了。在一片陌生的森林里，你发现了一处隐藏的洞穴，里面传来微弱的光芒。",
+    "minAge": 18,
+    "maxAge": 45,
+    "weight": 3,
+    "include": "attribute.luk >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "wild_treasure",
+        "title": "探索洞穴",
+        "description": "好奇心害死猫，但也可能发现宝藏",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          }
+        ],
+        "successText": "洞穴里藏着古代遗迹！",
+        "failureText": "你踩到了陷阱..."
+      },
+      {
+        "id": "wild_fairy",
+        "title": "遇到精灵",
+        "description": "一个发光的小精灵出现了",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "wild_escape",
+        "title": "赶紧跑",
+        "description": "不安全",
+        "probability": 0.4,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "exploration",
+    "priority": "minor"
+  },
+  {
+    "id": "spr_meditation_retreat",
+    "title": "闭关修炼",
+    "description": "你决定在山洞中闭关修炼三个月。",
+    "minAge": 20,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.spr >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "meditation_breakthrough",
+        "title": "顿悟",
+        "description": "在第三十天，你看到了另一个世界",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 20,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4,
+            "description": "灵魂 +4（大悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "enlightened",
+            "value": 1,
+            "description": "开悟！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          }
+        ],
+        "successText": "你感受到了宇宙的真理！",
+        "failureText": "什么都没发生"
+      },
+      {
+        "id": "meditation_calm",
+        "title": "内心平静",
+        "description": "收获了宁静",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1"
+          }
+        ]
+      },
+      {
+        "id": "meditation_fail",
+        "title": "待不住",
+        "description": "三天就受不了了",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "spr_curse_breaker",
+    "title": "诅咒解除",
+    "description": "一位村民跪在你面前，恳求你帮他解除身上的诅咒。",
+    "minAge": 18,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.spr >= 14 & attribute.mag >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "curse_success",
+        "title": "尝试解除",
+        "description": "你集中精神对抗诅咒",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 18,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "curse_breaker",
+            "value": 1,
+            "description": "诅咒解除者"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          }
+        ],
+        "successText": "诅咒解除了！",
+        "failureText": "诅咒太强了..."
+      },
+      {
+        "id": "curse_research",
+        "title": "先研究一下",
+        "description": "这种诅咒从没见过",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "curse_refuse",
+        "title": "超出能力",
+        "description": "不想冒险",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "spr_near_death",
+    "title": "濒死体验",
+    "description": "一场意外让你差点丧命。意识模糊中，你看到了一条发光的通道...",
+    "minAge": 20,
+    "maxAge": 60,
+    "weight": 2,
+    "include": "",
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -40,
+        "description": "HP -40（濒死）"
+      }
+    ],
+    "branches": [
+      {
+        "id": "neardeath_return",
+        "title": "回来吧",
+        "description": "你选择了回来",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          }
+        ]
+      },
+      {
+        "id": "neardeath_fight",
+        "title": "与死神搏斗",
+        "description": "你不想死",
+        "probability": 0.3,
+        "requireCondition": "attribute.spr >= 10",
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "cheated_death",
+            "value": 1,
+            "description": "死里逃生"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          }
+        ],
+        "successText": "你从死神手中挣脱！",
+        "failureText": "差点回不来了..."
+      },
+      {
+        "id": "neardeath_accept",
+        "title": "接受命运",
+        "description": "该走就走吧",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "major"
+  },
+  {
+    "id": "spr_divine_sign",
+    "title": "神谕降临",
+    "description": "天空出现了巨大的光柱。所有人都抬头仰望——这是神明的征兆。",
+    "minAge": 20,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "attribute.spr >= 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "divine_hear",
+        "title": "聆听神谕",
+        "description": "你听到了一个声音...",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 22,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4,
+            "description": "灵魂 +4（神恩）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "chosen_one",
+            "value": 1,
+            "description": "被选中者！"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20"
+          }
+        ],
+        "successText": "你成为了神明的使者！",
+        "failureText": "凡人无法承受神力..."
+      },
+      {
+        "id": "divine_witness",
+        "title": "做个见证者",
+        "description": "这件事太大了",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          }
+        ]
+      },
+      {
+        "id": "divine_ignore",
+        "title": "不关我事",
+        "description": "该干嘛干嘛",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "mny_trade_route",
+    "title": "丝绸之路",
+    "description": "一支来自东方的商队经过你的城镇。他们愿意和你做生意。",
+    "minAge": 22,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.mny >= 10 & attribute.chr >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "trade_deal",
+        "title": "谈判",
+        "description": "你决定和他们谈",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "international_trader",
+            "value": 1,
+            "description": "跨国商人"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3"
+          }
+        ],
+        "successText": "你建立了稳定的贸易关系！",
+        "failureText": "对方不吃你那套"
+      },
+      {
+        "id": "trade_learn",
+        "title": "学习他们的语言",
+        "description": "知识就是财富",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智力 +2"
+          }
+        ]
+      },
+      {
+        "id": "trade_pass",
+        "title": "算了",
+        "description": "风险太大",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "mny_tax_crisis",
+    "title": "税务危机",
+    "description": "国王突然提高了税率。你的财务状况岌岌可危。",
+    "minAge": 25,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.mny >= 8",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -2,
+        "description": "家境 -2（重税）"
+      }
+    ],
+    "branches": [
+      {
+        "id": "tax_evade",
+        "title": "偷税漏税",
+        "description": "总有办法...",
+        "probability": 0.2,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 16,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -5,
+            "description": "家境 -5"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          }
+        ],
+        "successText": "完美避开了检查",
+        "failureText": "你被抓住了..."
+      },
+      {
+        "id": "tax_adapt",
+        "title": "开源节流",
+        "description": "想办法增加收入",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1"
+          }
+        ]
+      },
+      {
+        "id": "tax_protest",
+        "title": "抗议！",
+        "description": "凭什么涨税？",
+        "probability": 0.4,
+        "requireCondition": "attribute.chr >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "tax_reformer",
+            "value": 1,
+            "description": "税务改革者"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
   }
 ]
