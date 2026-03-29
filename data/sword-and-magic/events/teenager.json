@@ -1362,7 +1362,7 @@
     "description": "一个来自远方的商人来到村里，带来了各种新奇的商品和故事。",
     "minAge": 15,
     "maxAge": 25,
-    "weight": 3,
+    "weight": 2,
     "unique": true,
     "branches": [
       {

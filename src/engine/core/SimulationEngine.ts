@@ -67,7 +67,7 @@ export class SimulationEngine {
 
   constructor(world: WorldInstance, seed?: number) {
     this.world = world
-    this.random = new RandomProvider(seed ?? Date.now())
+    this.random = new RandomProvider(seed ?? (Date.now() * 1000 + Math.floor(Math.random() * 1000000)))
     this.dsl = new ConditionDSL()
     this.attrModule = new AttributeModule(world)
     this.talentModule = new TalentModule(world, this.random)

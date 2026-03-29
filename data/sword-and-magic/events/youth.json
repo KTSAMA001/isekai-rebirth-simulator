@@ -9,7 +9,13 @@
     "include": "attribute.mag >= 8",
     "exclude": "has.flag.magic_student",
     "unique": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "magic_academy",
+        "value": true
+      }
+    ],
     "branches": [
       {
         "id": "enroll_academy",
@@ -191,7 +197,10 @@
       }
     ],
     "tag": "magic",
-    "priority": "major"
+    "priority": "major",
+    "prerequisites": [
+      "has.flag.magic_academy"
+    ]
   },
   {
     "id": "squire_training",
@@ -1897,7 +1906,7 @@
     "description": "一位富商需要一个保镖保护他前往邻城。报酬丰厚。",
     "minAge": 16,
     "maxAge": 30,
-    "weight": 3,
+    "weight": 2,
     "include": "attribute.str >= 12",
     "effects": [],
     "branches": [

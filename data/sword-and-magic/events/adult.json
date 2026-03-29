@@ -1282,7 +1282,7 @@
     "description": "你决定在山洞中闭关修炼三个月。",
     "minAge": 20,
     "maxAge": 50,
-    "weight": 3,
+    "weight": 2,
     "include": "attribute.spr >= 14",
     "effects": [],
     "branches": [
@@ -1473,7 +1473,7 @@
     "description": "一场意外让你差点丧命。意识模糊中，你看到了一条发光的通道...",
     "minAge": 20,
     "maxAge": 60,
-    "weight": 2,
+    "weight": 1,
     "include": "",
     "effects": [
       {
