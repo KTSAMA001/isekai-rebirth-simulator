@@ -8,6 +8,7 @@ const props = defineProps<{
 }>()
 
 const expanded = ref(false)
+const selectedItem = ref<{ def: any; slot: any } | null>(null)
 
 const visibleAttrs = computed(() => {
   return props.world.attributes.filter(a => !a.hidden)
@@ -29,9 +30,8 @@ const inventoryItems = computed(() => {
     .filter(Boolean) as { def: any; slot: any }[]
 })
 
-function itemTooltip(item: { def: any; slot: any }) {
-  const def = item.def
-  const effectDescs = def.effects.map((e: any) => {
+function getEffectDescs(def: any): string[] {
+  return def.effects.map((e: any) => {
     switch (e.type) {
       case 'hp_regen_bonus': return e.value > 0 ? `每年HP恢复+${e.value}` : `每年HP恢复${e.value}`
       case 'hp_flat_bonus': return `HP+${e.value}`
@@ -45,8 +45,12 @@ function itemTooltip(item: { def: any; slot: any }) {
       default: return e.type
     }
   })
-  const rarityLabel = { common: '普通', rare: '稀有', legendary: '传说' }[def.rarity]
-  return [`${def.icon} ${def.name} [${rarityLabel}]`, def.description, '---', ...effectDescs].join('\n')
+}
+
+const rarityLabel = (r: string) => ({ common: '普通', rare: '稀有', legendary: '传说' }[r] ?? r)
+
+function selectItem(item: { def: any; slot: any } | null) {
+  selectedItem.value = selectedItem.value?.def.id === item?.def.id ? null : item
 }
 
 /** HP 等级颜色：HP 低于初始值(30)变红 */
@@ -58,6 +62,7 @@ function hpClass() {
 
 function toggleExpand() {
   expanded.value = !expanded.value
+  if (!expanded.value) selectedItem.value = null
 }
 </script>
 
@@ -111,11 +116,23 @@ function toggleExpand() {
             v-for="item in inventoryItems"
             :key="item.def.id"
             class="item-slot"
-            :class="`rarity-${item.def.rarity}`"
-            :title="itemTooltip(item)"
+            :class="[`rarity-${item.def.rarity}`, { selected: selectedItem?.def.id === item.def.id }]"
+            @click.stop="selectItem(item)"
           >
             <span class="item-icon">{{ item.def.icon }}</span>
             <span class="item-name">{{ item.def.name }}</span>
+          </div>
+        </div>
+        <!-- 物品详情面板 -->
+        <div v-if="selectedItem" class="item-detail-panel" @click.stop>
+          <div class="item-detail-header">
+            <span class="item-detail-icon">{{ selectedItem.def.icon }}</span>
+            <span class="item-detail-name" :class="`rarity-${selectedItem.def.rarity}`">{{ selectedItem.def.name }}</span>
+            <span class="item-detail-rarity" :class="`rarity-${selectedItem.def.rarity}`">[{{ rarityLabel(selectedItem.def.rarity) }}]</span>
+          </div>
+          <div v-if="selectedItem.def.description" class="item-detail-desc">{{ selectedItem.def.description }}</div>
+          <div v-if="getEffectDescs(selectedItem.def).length > 0" class="item-detail-effects">
+            <div v-for="(desc, i) in getEffectDescs(selectedItem.def)" :key="i" class="item-effect-line">{{ desc }}</div>
           </div>
         </div>
       </div>
@@ -284,14 +301,20 @@ function toggleExpand() {
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   font-size: 0.7rem;
-  cursor: default;
-  transition: transform 0.15s;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
   border: 1px solid transparent;
 }
 
-.item-slot:hover {
+.item-slot:hover,
+.item-slot.selected {
   transform: scale(1.05);
   border-color: var(--border-color);
+}
+
+.item-slot.selected {
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
 .item-icon {
@@ -311,4 +334,66 @@ function toggleExpand() {
 .item-slot.rarity-common { background: rgba(96, 165, 250, 0.08); }
 .item-slot.rarity-rare { background: rgba(192, 132, 252, 0.08); }
 .item-slot.rarity-legendary { background: rgba(251, 191, 36, 0.08); }
+
+/* 物品详情面板 */
+.item-detail-panel {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.item-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item-detail-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.item-detail-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.item-detail-name.rarity-common { color: var(--rarity-common); }
+.item-detail-name.rarity-rare { color: var(--rarity-rare); }
+.item-detail-name.rarity-legendary { color: var(--rarity-legendary); }
+
+.item-detail-rarity {
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+.item-detail-rarity.rarity-common { color: var(--rarity-common); }
+.item-detail-rarity.rarity-rare { color: var(--rarity-rare); }
+.item-detail-rarity.rarity-legendary { color: var(--rarity-legendary); }
+
+.item-detail-desc {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.item-detail-effects {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-effect-line {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  padding-left: 8px;
+  position: relative;
+}
+.item-effect-line::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+}
 </style>
