@@ -3243,4 +3243,94 @@ export const events: WorldEventDef[] = [
     tag: 'life',
     priority: 'major',
   },
+  {
+    id: 'grandma_recipes',
+    effects: [],
+    title: '奶奶的秘方',
+    description: '奶奶教你做一种特殊的药膏，她说这是祖传的秘方...',
+    minAge: 5,
+    maxAge: 9,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'learn_carefully',
+        title: '认真学习',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（学会了药膏配方）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（祖孙情深）' },
+          { type: 'set_flag', target: 'herbal_knowledge', value: true, description: '获得草药知识' },
+        ],
+      },
+      {
+        id: 'absent_minded',
+        title: '心不在焉',
+        probability: 0.3,
+        effects: [],
+      },
+      {
+        id: 'secret_recipe',
+        title: '偷偷加点自己的配方',
+        probability: 0.3,
+        riskCheck: { attribute: 'int', difficulty: 5, scale: 2 },
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2（天赋灵感）' },
+        ],
+        failureEffects: [
+          { type: 'modify_hp', target: 'hp', value: -5, description: 'HP -5（炸了）' },
+        ],
+        successText: '你无意中改良了配方！奶奶惊喜地看着你...',
+        failureText: '药膏突然冒出怪烟，把你熏了个跟头！',
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
+  },
+  {
+    id: 'river_discovery',
+    effects: [],
+    title: '河底发光',
+    description: '干旱季节河水退去，你发现河底有什么东西在发光...',
+    minAge: 6,
+    maxAge: 10,
+    weight: 4,
+    unique: true,
+    branches: [
+      {
+        id: 'dive_in',
+        title: '潜下去捡',
+        probability: 0.35,
+        riskCheck: { attribute: 'str', difficulty: 6, scale: 2 },
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 2, description: '智慧 +2（发现了神秘宝物）' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（好运）' },
+        ],
+        failureEffects: [
+          { type: 'modify_hp', target: 'hp', value: -10, description: 'HP -10（差点溺水）' },
+        ],
+        successText: '你捞出了一块会发光的奇异石头！',
+        failureText: '水流比你想象的要急，你被冲出去好几米...',
+      },
+      {
+        id: 'call_adults_river',
+        title: '叫大人来看',
+        probability: 0.35,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（大人夸你懂事）' },
+        ],
+      },
+      {
+        id: 'remember_location',
+        title: '记住位置以后再来',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'int', value: 1, description: '智慧 +1（冷静观察）' },
+          { type: 'modify_attribute', target: 'luk', value: 1, description: '运势 +1（留待未来）' },
+        ],
+      },
+    ],
+    tag: 'adventure',
+    priority: 'major',
+  },
 ]
