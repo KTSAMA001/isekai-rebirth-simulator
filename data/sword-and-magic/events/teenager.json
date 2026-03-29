@@ -900,7 +900,7 @@
     "description": "几杯麦酒下肚，一个兽人对你的长相发表了不当评论。",
     "minAge": 18,
     "maxAge": 25,
-    "weight": 3,
+    "weight": 2,
     "include": "attribute.str >= 8",
     "effects": [
       {
@@ -928,8 +928,8 @@
         "weightMultiplier": 0.5
       },
       {
-        "condition": "attribute.str >= 10",
-        "weightMultiplier": 1.5
+        "condition": "attribute.str >= 12",
+        "weightMultiplier": 1.3
       }
     ],
     "unique": true,
