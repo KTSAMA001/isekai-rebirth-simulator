@@ -19,7 +19,7 @@
     "魔法",
     "剑与魔法"
   ],
-  "maxAge": 80,
+  "maxAge": 100,
   "initialPoints": 20,
   "talentDraftCount": 10,
   "talentSelectCount": 3,

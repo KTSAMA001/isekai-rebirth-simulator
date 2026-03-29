@@ -50,7 +50,7 @@ export class SimulationEngine {
     // 从第一个属性快照重建 initialStrRegen
     const firstSnapshot = state.attributeHistory[0]
     const initStr = firstSnapshot?.values?.['str'] ?? state.attributes['str'] ?? 0
-    engine.initialStrRegen = 2 + Math.floor(initStr / 3)
+    engine.initialStrRegen = 1 + Math.floor(initStr / 4)
 
     // 重建 routeAnchorsTriggered：已触发过的锚点事件不再重复触发
     const routes = world.manifest.routes ?? []
@@ -246,7 +246,7 @@ export class SimulationEngine {
     this.state.hp = this.computeInitHp()
     // 固定每年的恢复量（基于初始体魄，不随成长增长）
     const initStr = attributes['str'] ?? 0
-    this.initialStrRegen = 2 + Math.floor(initStr / 3)
+    this.initialStrRegen = 1 + Math.floor(initStr / 4)
 
     this.state = {
       ...this.state,
@@ -267,18 +267,26 @@ export class SimulationEngine {
     return 25 + str * 3
   }
 
-  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 */
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 年龄衰减 */
   private regenHp(): void {
     const regen = this.initialStrRegen
     const initHp = this.computeInitHp()
-    // 软上限：初始HP × 1.5 + 年龄×0.5，避免高体魄角色HP无限膨胀
-    const softCap = Math.floor(initHp * 1.5 + this.state.age * 0.5)
+    // 软上限：初始HP × 1.3 + 年龄×0.4
+    const softCap = Math.floor(initHp * 1.3 + this.state.age * 0.4)
     // 物品HP恢复加成
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
     // 物品HP软上限修正
     const capModifier = this.itemModule.getHpCapModifier(this.state)
     const modifiedCap = Math.max(softCap * (1 + capModifier), 20)
-    const newHp = Math.min(this.state.hp + regen + itemBonus, modifiedCap)
+    
+    // 年龄衰减：55岁后开始自然衰老，75岁后急剧
+    let ageDecay = 0
+    const age = this.state.age
+    if (age >= 75) ageDecay = 3
+    else if (age >= 65) ageDecay = 2
+    else if (age >= 55) ageDecay = 1
+    
+    const newHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
     this.state = {
       ...this.state,
       hp: newHp,
