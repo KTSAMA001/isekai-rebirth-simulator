@@ -408,7 +408,7 @@
     "maxAge": 55,
     "weight": 8,
     "include": "attribute.str >= 14 | attribute.mag >= 14 & has.flag.knight | has.flag.mage_graduate | has.flag.merchant_master | has.flag.famous_inventor",
-    "exclude": "has.flag.has_student | has.flag.knight",
+    "exclude": "has.flag.has_student",
     "unique": true,
     "effects": [
       {
@@ -3407,7 +3407,7 @@
     "minAge": 16,
     "maxAge": 25,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.starlight_promise",
     "weight": 6,
     "effects": [
       {
@@ -3443,7 +3443,7 @@
     "minAge": 14,
     "maxAge": 22,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.festival_dance",
     "weight": 5,
     "effects": [
       {
@@ -3479,7 +3479,7 @@
     "minAge": 18,
     "maxAge": 35,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.quest_parting",
     "weight": 5,
     "branches": [
       {
@@ -3520,7 +3520,7 @@
             "type": "remove_flag",
             "target": "in_relationship",
             "description": "分手",
-            "value": "in_relationship"
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -3548,7 +3548,7 @@
     "minAge": 16,
     "maxAge": 28,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.in_relationship",
+    "exclude": "has.flag.married | has.flag.forbidden_love",
     "weight": 4,
     "branches": [
       {
@@ -3589,7 +3589,7 @@
             "type": "remove_flag",
             "target": "in_relationship",
             "description": "被迫分离",
-            "value": "in_relationship"
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -3680,7 +3680,7 @@
     ],
     "effects": [],
     "unique": true,
-    "exclude": "has.flag.married | has.flag.in_relationship"
+    "exclude": "has.flag.rescue_from_dungeon"
   },
   {
     "id": "soul_bound",
@@ -3742,7 +3742,7 @@
             "type": "remove_flag",
             "target": "in_relationship",
             "description": "被拒绝后分手",
-            "value": "in_relationship"
+            "value": 1
           }
         ],
         "id": "soul_bound_branch1",

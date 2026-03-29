@@ -1460,7 +1460,7 @@
     ],
     "effects": [],
     "unique": true,
-    "exclude": "has.flag.married | has.flag.in_relationship"
+    "exclude": "has.flag.lover_curse"
   },
   {
     "id": "lover_death_battlefield",
@@ -1483,13 +1483,13 @@
             "type": "remove_flag",
             "target": "in_relationship",
             "description": "失去爱人",
-            "value": "in_relationship"
+            "value": 1
           },
           {
             "type": "remove_flag",
             "target": "married",
             "description": "失去配偶",
-            "value": "married"
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -1532,13 +1532,13 @@
             "type": "remove_flag",
             "target": "in_relationship",
             "description": "失去爱人",
-            "value": "in_relationship"
+            "value": 1
           },
           {
             "type": "remove_flag",
             "target": "married",
             "description": "失去配偶",
-            "value": "married"
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -1565,7 +1565,7 @@
     ],
     "effects": [],
     "unique": true,
-    "exclude": "has.flag.married"
+    "exclude": "has.flag.widowed"
   },
   {
     "id": "protect_family",
@@ -1597,7 +1597,7 @@
       }
     ],
     "unique": true,
-    "exclude": "has.flag.married | has.flag.in_relationship"
+    "exclude": "has.flag.protect_family"
   },
   {
     "id": "widowed_wanderer",
