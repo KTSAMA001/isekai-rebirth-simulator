@@ -202,12 +202,16 @@ export class SimulationEngine {
     return 20 + str * 3
   }
 
-  /** 每年恢复 HP：基于初始体魄（不随属性成长增长） */
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 */
   private regenHp(): void {
     const regen = this.initialStrRegen
+    const initHp = this.computeInitHp()
+    // 软上限：初始HP × 1.5 + 年龄×0.5，避免高体魄角色HP无限膨胀
+    const softCap = Math.floor(initHp * 1.5 + this.state.age * 0.5)
+    const newHp = Math.min(this.state.hp + regen, softCap)
     this.state = {
       ...this.state,
-      hp: this.state.hp + regen,
+      hp: newHp,
     }
   }
 

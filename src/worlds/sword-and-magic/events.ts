@@ -1059,7 +1059,7 @@ export const events: WorldEventDef[] = [
     minAge: 25,
     maxAge: 30,
     weight: 6,
-    include: 'attribute.chr >= 10 & attribute.mny >= 8',
+    include: 'attribute.chr >= 10 & attribute.mny >= 8 & has.flag.knight | has.flag.lord | has.flag.merchant_master',
     exclude: 'has.flag.married',
     unique: true,
     effects: [],
@@ -1422,7 +1422,7 @@ export const events: WorldEventDef[] = [
     minAge: 18,
     maxAge: 25,
     weight: 5,
-    include: 'has.flag.dungeon_veteran',
+    include: 'has.flag.dungeon_veteran & has.flag.guild_member & has.flag.dungeon_veteran',
     unique: true,
     effects: [],
     branches: [
@@ -1484,7 +1484,7 @@ export const events: WorldEventDef[] = [
     minAge: 22,
     maxAge: 30,
     weight: 5,
-    include: 'has.flag.merchant_apprentice',
+    include: 'has.flag.merchant_apprentice & has.flag.merchant_apprentice',
     unique: true,
     effects: [],
     branches: [
@@ -1580,7 +1580,7 @@ export const events: WorldEventDef[] = [
     minAge: 18,
     maxAge: 25,
     weight: 5,
-    include: 'has.flag.knight',
+    include: 'has.flag.knight & has.flag.knight & has.flag.knight_honor',
     unique: true,
     effects: [],
     branches: [
@@ -1678,7 +1678,7 @@ export const events: WorldEventDef[] = [
     minAge: 35,
     maxAge: 55,
     weight: 8,
-    include: 'attribute.str >= 14 | attribute.mag >= 14',
+    include: 'attribute.str >= 14 | attribute.mag >= 14 & has.flag.knight | has.flag.mage_graduate | has.flag.merchant_master | has.flag.famous_inventor',
     exclude: 'has.flag.has_student | has.flag.knight',
     unique: true,
     effects: [
@@ -1765,7 +1765,7 @@ export const events: WorldEventDef[] = [
     minAge: 50,
     maxAge: 60,
     weight: 1,
-    include: 'has.talent.worldbreaker',
+    include: 'has.talent.worldbreaker & has.flag.knight | has.flag.guild_member',
     effects: [
       { type: 'modify_attribute', target: 'str', value: 2, description: '体魄 +2' },
       { type: 'modify_attribute', target: 'mag', value: 3, description: '魔力 +3' },
@@ -1819,7 +1819,7 @@ export const events: WorldEventDef[] = [
     minAge: 30,
     maxAge: 40,
     weight: 1,
-    include: 'attribute.int >= 10',
+    include: 'attribute.int >= 10 & has.flag.married',
     effects: [
       { type: 'modify_attribute', target: 'mny', value: 5, description: '家境 +5' },
       { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
@@ -1875,7 +1875,7 @@ export const events: WorldEventDef[] = [
     minAge: 65,
     maxAge: 75,
     weight: 8,
-    include: 'attribute.chr >= 15',
+    include: 'attribute.chr >= 15 & has.flag.dragon_slayer | has.flag.knight_hero | has.flag.war_hero | has.flag.archmage | has.flag.famous_inventor & has.flag.knight | has.flag.guild_member | has.flag.mage_graduate',
     effects: [
       { type: 'modify_attribute', target: 'chr', value: 3, description: '魅力 +3' },
       { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2' },
@@ -1891,7 +1891,7 @@ export const events: WorldEventDef[] = [
     minAge: 55,
     maxAge: 65,
     weight: 1,
-    include: 'has.talent.worldbreaker',
+    include: 'has.talent.worldbreaker & has.flag.world_breaking',
     effects: [],
     branches: [
       {
@@ -2815,7 +2815,7 @@ export const events: WorldEventDef[] = [
     minAge: 16,
     maxAge: 22,
     weight: 5,
-    exclude: 'has.flag.first_love',
+    exclude: 'has.flag.first_love | has.flag.never_retired',
     weightModifiers: [
       { condition: 'has.flag.heartbroken', weightMultiplier: 0.3 },
     ],
@@ -2906,7 +2906,8 @@ export const events: WorldEventDef[] = [
     minAge: 25,
     maxAge: 40,
     weight: 4,
-    unique: true,
+      include: 'has.flag.merchant_apprentice | has.flag.merchant_master & has.flag.has_student & has.flag.has_student',
+  unique: true,
     branches: [
       {
         id: 'invest_all',
@@ -3035,7 +3036,8 @@ export const events: WorldEventDef[] = [
     minAge: 50,
     maxAge: 65,
     weight: 4,
-    unique: true,
+      include: 'has.flag.has_student | has.flag.married | has.flag.lord',
+  unique: true,
     branches: [
       {
         id: 'teach_everything',
