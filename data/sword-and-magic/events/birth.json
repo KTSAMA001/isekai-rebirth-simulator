@@ -6,7 +6,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 10,
-    "include": "attribute.mny >= 10",
+    "include": "attribute.mny >= 8",
     "unique": true,
     "effects": [],
     "tag": "life",
@@ -44,7 +44,8 @@
       }
     ],
     "tag": "life",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "attribute.mny >= 4"
   },
   {
     "id": "birth_noble_estate",
@@ -53,7 +54,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 6,
-    "include": "",
+    "include": "attribute.mny >= 8",
     "effects": [
       {
         "type": "modify_attribute",
