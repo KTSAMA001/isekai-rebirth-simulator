@@ -37,6 +37,34 @@ export class SimulationEngine {
   /** 已触发的路线锚点事件（key = "routeId:eventId"） */
   private routeAnchorsTriggered: Set<string> = new Set()
 
+  /** 从已保存的状态恢复引擎 */
+  static restoreFromState(state: GameState, world: WorldInstance): SimulationEngine {
+    const engine = new SimulationEngine(world, state.meta.seed)
+    engine.state = state
+
+    // 恢复随机数状态
+    if (typeof state.meta.seed === 'number') {
+      engine.random.restoreState(state.meta.seed)
+    }
+
+    // 从第一个属性快照重建 initialStrRegen
+    const firstSnapshot = state.attributeHistory[0]
+    const initStr = firstSnapshot?.values?.['str'] ?? state.attributes['str'] ?? 0
+    engine.initialStrRegen = 2 + Math.floor(initStr / 3)
+
+    // 重建 routeAnchorsTriggered：已触发过的锚点事件不再重复触发
+    const routes = world.manifest.routes ?? []
+    for (const route of routes) {
+      for (const anchor of route.anchorEvents) {
+        if (state.triggeredEvents.has(anchor.eventId)) {
+          engine.routeAnchorsTriggered.add(`${route.id}:${anchor.eventId}`)
+        }
+      }
+    }
+
+    return engine
+  }
+
   constructor(world: WorldInstance, seed?: number) {
     this.world = world
     this.random = new RandomProvider(seed ?? Date.now())

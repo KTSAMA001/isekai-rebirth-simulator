@@ -33,11 +33,17 @@ export const useWorldStore = defineStore('world', () => {
     return worldRegistry.get(currentWorldId.value)
   }
 
+  /** 按 ID 获取世界实例 */
+  function getWorldById(worldId: string): WorldInstance | undefined {
+    return worldRegistry.get(worldId)
+  }
+
   return {
     worlds,
     currentWorldId,
     initBuiltinWorlds,
     selectWorld,
     getCurrentWorld,
+    getWorldById,
   }
 })

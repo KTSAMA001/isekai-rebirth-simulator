@@ -1,14 +1,72 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorldStore } from '@/stores/worldStore'
+import { useGameStore, type SaveSlot } from '@/stores/gameStore'
 
 const router = useRouter()
 const worldStore = useWorldStore()
+const gameStore = useGameStore()
+
+const saveSlots = ref<(SaveSlot | null)[]>([])
+
+onMounted(() => {
+  refreshSaves()
+})
+
+function refreshSaves() {
+  saveSlots.value = gameStore.getSaveSlots()
+}
 
 function startGame(worldId: string) {
   worldStore.selectWorld(worldId)
   router.push({ name: 'setup', params: { worldId } })
 }
+
+function continueGame(slotId: number) {
+  if (gameStore.loadSave(slotId)) {
+    const state = gameStore.state
+    if (state) {
+      if (state.phase === 'simulating') {
+        router.push({
+          name: 'play',
+          params: {
+            worldId: state.meta.worldId,
+            playId: state.meta.playId,
+          },
+        })
+      } else if (state.phase === 'finished') {
+        router.push({
+          name: 'result',
+          params: {
+            worldId: state.meta.worldId,
+            playId: state.meta.playId,
+          },
+        })
+      } else {
+        // 其他阶段（talent-draft, attribute-allocate）回到 setup
+        router.push({ name: 'setup', params: { worldId: state.meta.worldId } })
+      }
+    }
+  }
+}
+
+function deleteSave(slotId: number) {
+  gameStore.deleteSave(slotId)
+  refreshSaves()
+}
+
+function formatTime(ts: number): string {
+  const d = new Date(ts)
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  const hour = String(d.getHours()).padStart(2, '0')
+  const min = String(d.getMinutes()).padStart(2, '0')
+  return `${month}-${day} ${hour}:${min}`
+}
+
+/** 判断是否可以继续（仅自动存档有"继续"按钮） */
+const autoSlot = ref<SaveSlot | null>(null)
 </script>
 
 <template>
@@ -24,6 +82,23 @@ function startGame(worldId: string) {
       <p class="hero-subtitle animate-slide-up">
         在异世界开始你的第二人生
       </p>
+    </section>
+
+    <!-- 自动存档 / 继续游戏 -->
+    <section v-if="saveSlots[0]" class="save-section">
+      <h3 class="section-title">继续游戏</h3>
+      <div class="save-card card card-glow" @click="continueGame(0)">
+        <div class="save-icon">📖</div>
+        <div class="save-info">
+          <div class="save-name">{{ saveSlots[0]!.characterName }}</div>
+          <div class="save-detail">
+            {{ saveSlots[0]!.worldName }} · {{ saveSlots[0]!.age }}岁 ·
+            {{ saveSlots[0]!.phase === 'finished' ? '已结束' : '进行中' }}
+          </div>
+          <div class="save-time">{{ formatTime(saveSlots[0]!.timestamp) }}</div>
+        </div>
+        <div class="save-arrow">&rarr;</div>
+      </div>
     </section>
 
     <!-- 世界选择 -->
@@ -46,6 +121,34 @@ function startGame(worldId: string) {
             </div>
           </div>
           <div class="world-arrow">&rarr;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 存档管理 -->
+    <section class="save-section">
+      <h3 class="section-title">存档管理</h3>
+      <div class="manual-slots">
+        <div
+          v-for="i in 3"
+          :key="i"
+          class="slot-card card"
+          :class="{ 'slot-empty': !saveSlots[i] }"
+        >
+          <template v-if="saveSlots[i]">
+            <div class="slot-content" @click="continueGame(i)">
+              <div class="slot-name">{{ saveSlots[i]!.characterName }}</div>
+              <div class="slot-detail">
+                {{ saveSlots[i]!.worldName }} · {{ saveSlots[i]!.age }}岁
+                <span v-if="saveSlots[i]!.score"> · {{ saveSlots[i]!.score }}分</span>
+              </div>
+              <div class="slot-time">{{ formatTime(saveSlots[i]!.timestamp) }}</div>
+            </div>
+            <button class="slot-delete" @click.stop="deleteSave(i)">删除</button>
+          </template>
+          <template v-else>
+            <div class="slot-empty-text">存档 {{ i }} — 空</div>
+          </template>
         </div>
       </div>
     </section>
@@ -104,13 +207,18 @@ function startGame(worldId: string) {
   font-size: 1rem;
 }
 
-/* 世界列表 */
+/* 区域标题 */
 .section-title {
   font-family: var(--font-title);
   font-size: 1.1rem;
   color: var(--text-secondary);
   margin-bottom: var(--space-md);
   padding-left: var(--space-xs);
+}
+
+/* 世界列表 */
+.world-section {
+  margin-top: var(--space-xl);
 }
 
 .world-list {
@@ -194,6 +302,119 @@ function startGame(worldId: string) {
   font-size: 1.2rem;
   color: var(--text-muted);
   flex-shrink: 0;
+}
+
+/* 继续游戏区域 */
+.save-section {
+  margin-top: var(--space-lg);
+}
+
+.save-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  cursor: pointer;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.save-card:active {
+  transform: scale(0.98);
+}
+
+.save-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.save-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.save-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.save-detail {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.save-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.save-arrow {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* 手动存档槽位 */
+.manual-slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.slot-card {
+  padding: var(--space-sm) var(--space-md);
+  min-height: unset;
+}
+
+.slot-card:not(.slot-empty) {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.slot-content {
+  flex: 1;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.slot-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.slot-detail {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.slot-time {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.slot-delete {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.slot-delete:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.slot-empty-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: var(--space-xs) 0;
 }
 
 .home-footer {

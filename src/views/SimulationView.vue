@@ -44,10 +44,20 @@ const showChoices = computed(() => {
 
 const isFinished = computed(() => state.value?.phase === 'finished')
 
+// 存档面板状态
+const showSavePanel = ref(false)
+const saveMessage = ref('')
+
 onMounted(() => {
+  // 如果 store 中没有匹配的 state，尝试从自动存档恢复
   if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
-    router.replace('/')
-    return
+    if (gameStore.hasAutoSave()) {
+      gameStore.loadSave(0)
+    }
+    if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
+      router.replace('/')
+      return
+    }
   }
   // 首年自动开始
   if (state.value?.phase === 'simulating') {
@@ -116,6 +126,13 @@ function checkFinished() {
     }, 1500)
   }
 }
+
+/** 保存到指定槽位 */
+function saveGame(slotId: number) {
+  const ok = gameStore.saveToSlot(slotId)
+  saveMessage.value = ok ? `已保存到存档 ${slotId}` : '保存失败'
+  setTimeout(() => { saveMessage.value = '' }, 2000)
+}
 </script>
 
 <template>
@@ -124,6 +141,21 @@ function checkFinished() {
     <div class="top-bar">
       <button class="back-btn" @click="router.replace('/')">◁ 返回</button>
       <span class="year-label">第 {{ state.age }} 年</span>
+      <button class="save-btn" @click="showSavePanel = !showSavePanel">存档</button>
+    </div>
+
+    <!-- 存档面板 -->
+    <div v-if="showSavePanel" class="save-panel">
+      <div class="save-panel-title">保存游戏</div>
+      <div class="save-slot-list">
+        <button
+          v-for="i in 3"
+          :key="i"
+          class="save-slot-btn"
+          @click="saveGame(i)"
+        >存档 {{ i }}</button>
+      </div>
+      <div v-if="saveMessage" class="save-msg">{{ saveMessage }}</div>
     </div>
 
     <!-- 紧凑状态栏 -->
@@ -233,5 +265,67 @@ function checkFinished() {
 
 .continue-btn:active {
   transform: scale(0.96);
+}
+
+/* 保存按钮 */
+.save-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-light);
+}
+
+/* 存档面板 */
+.save-panel {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.save-panel-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.save-slot-list {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.save-slot-btn {
+  flex: 1;
+  padding: var(--space-xs);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.save-slot-btn:hover {
+  border-color: var(--color-primary);
+}
+
+.save-slot-btn:active {
+  transform: scale(0.96);
+}
+
+.save-msg {
+  font-size: 0.75rem;
+  color: var(--color-success);
+  text-align: center;
+  margin-top: var(--space-xs);
 }
 </style>
