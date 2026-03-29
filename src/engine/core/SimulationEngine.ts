@@ -316,10 +316,30 @@ export class SimulationEngine {
       return { phase: 'mundane_year', event: null }
     }
 
-    // 动态权重选择：应用 weightModifiers + minor 降权
+    // 动态权重选择：tag属性亲和力 + weightModifiers + minor降权
     const ctx = { state: this.state, world: this.world }
+    const attrs = this.state.attributes
     const scored = candidates.map(e => {
       let w = e.weight
+
+      // === Tag-Attribute Affinity ===
+      // 事件tag与角色属性的匹配度，软性影响触发概率
+      const tag = e.tag ?? ''
+      if (tag === 'magic') {
+        w *= this.tagAffinity(attrs, 'mag', 'spr')
+      } else if (tag === 'combat') {
+        w *= this.tagAffinity(attrs, 'str', 'luk')
+      } else if (tag === 'social') {
+        w *= this.tagAffinity(attrs, 'chr', 'mny')
+      } else if (tag === 'exploration') {
+        w *= this.tagAffinity(attrs, 'luk', 'spr')
+      } else if (tag === 'epic') {
+        // epic事件看灵魂（精神强度）
+        w *= this.tagAffinity(attrs, 'spr', 'int')
+      }
+      // 'life' tag不加成（birth事件应均匀分布）
+
+      // 显式 weightModifiers
       if (e.weightModifiers) {
         for (const mod of e.weightModifiers) {
           if (this.dsl.evaluate(mod.condition, ctx)) {
@@ -684,6 +704,24 @@ export class SimulationEngine {
       return event
     }
     return null
+  }
+
+  /** Tag-Attribute Affinity：根据属性计算tag匹配度乘数
+   *  primaryAttr高 → 更可能触发对应tag的事件
+   *  公式: 1 + (primary - 10) / 30, 范围约 0.67~2.0
+   *  次要属性贡献20%权重
+   */
+  private tagAffinity(
+    attrs: Record<string, number>,
+    primaryAttr: string,
+    secondaryAttr: string
+  ): number {
+    const primary = attrs[primaryAttr] ?? 0
+    const secondary = attrs[secondaryAttr] ?? 0
+    const primaryMul = 1 + (primary - 10) / 30
+    const secondaryMul = 1 + (secondary - 10) / 30 * 0.2
+    // 混合：80%主属性 + 20%次属性，基准1.0
+    return 0.8 * primaryMul + 0.2 * secondaryMul
   }
 
   /** 获取当前激活的路线（供外部查询） */
