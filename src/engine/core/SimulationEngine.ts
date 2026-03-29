@@ -405,9 +405,11 @@ export class SimulationEngine {
     }
 
     // 处理物品获取
+    const grantItemMessages: string[] = []
     for (const fx of chosenEffects) {
       if (fx.type === 'grant_item') {
         const result = this.itemModule.grantItem(this.state, fx.target)
+        grantItemMessages.push(result.message)
         if (result.success) {
           const hpBonus = this.itemModule.getFlatHpBonus(fx.target)
           if (hpBonus > 0) {
@@ -419,6 +421,11 @@ export class SimulationEngine {
 
     const clonedState = this.cloneState(this.state)
     const effectTexts = this.eventModule.applyEffectsOnState(chosenEffects, clonedState)
+
+    // 追加物品获取提示文本
+    for (const msg of grantItemMessages) {
+      effectTexts.push(msg)
+    }
 
     // 如果有风险判定结果文本，追加到效果文本
     if (resultText) {
