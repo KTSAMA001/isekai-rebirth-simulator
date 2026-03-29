@@ -1,0 +1,103 @@
+{
+  "EventEffect": {
+    "type": "object",
+    "required": ["type", "target"],
+    "additionalProperties": false,
+    "properties": {
+      "type": { "type": "string" },
+      "target": { "type": "string" },
+      "value": { "type": ["number", "boolean", "string"] },
+      "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+      "condition": { "type": "string" },
+      "description": { "type": "string" },
+      "age": { "type": "integer" }
+    }
+  },
+
+  "RiskCheck": {
+    "type": "object",
+    "required": ["attribute", "difficulty"],
+    "additionalProperties": false,
+    "properties": {
+      "attribute": { "type": "string" },
+      "difficulty": { "type": "number" },
+      "scale": { "type": "number", "exclusiveMinimum": 0 }
+    }
+  },
+
+  "EventBranch": {
+    "type": "object",
+    "required": ["id", "title", "effects"],
+    "additionalProperties": false,
+    "properties": {
+      "id": { "type": "string" },
+      "title": { "type": "string" },
+      "description": { "type": "string" },
+      "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+      "effects": { "type": "array", "items": { "$ref": "#/definitions/EventEffect" } },
+      "nextEvents": { "type": "array", "items": { "type": "string" } },
+      "requireCondition": { "type": "string" },
+      "riskCheck": { "$ref": "#/definitions/RiskCheck" },
+      "failureEffects": { "type": "array", "items": { "$ref": "#/definitions/EventEffect" } },
+      "successText": { "type": "string" },
+      "failureText": { "type": "string" }
+    }
+  },
+
+  "ItemEffectDef": {
+    "type": "object",
+    "required": ["type", "value"],
+    "additionalProperties": false,
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["hp_regen_bonus", "hp_flat_bonus", "attr_passive_growth", "skill_check_bonus", "damage_reduction", "event_weight_bonus", "death_save", "conditional_regen", "hp_cap_modifier", "attr_floor", "counter_bonus"]
+      },
+      "target": { "type": "string" },
+      "value": { "type": ["number", "boolean", "string"] },
+      "condition": { "type": "string" }
+    }
+  },
+
+  "RouteAnchor": {
+    "type": "object",
+    "required": ["eventId", "minAge", "maxAge", "mandatory"],
+    "additionalProperties": false,
+    "properties": {
+      "eventId": { "type": "string" },
+      "minAge": { "type": "integer", "minimum": 0 },
+      "maxAge": { "type": "integer", "minimum": 0 },
+      "mandatory": { "type": "boolean" }
+    }
+  },
+
+  "LifeRoute": {
+    "type": "object",
+    "required": ["id", "name", "description", "priority", "anchorEvents"],
+    "additionalProperties": false,
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "description": { "type": "string" },
+      "enterCondition": { "type": ["string", "null"] },
+      "exitCondition": { "type": ["string", "null"] },
+      "priority": { "type": "integer" },
+      "entryFlags": { "type": "array", "items": { "type": "string" } },
+      "exclusiveEvents": { "type": "array", "items": { "type": "string" } },
+      "anchorEvents": { "type": "array", "items": { "$ref": "#/definitions/RouteAnchor" } }
+    }
+  },
+
+  "ScoreGrade": {
+    "type": "object",
+    "required": ["minScore", "maxScore", "grade", "title", "description"],
+    "additionalProperties": false,
+    "properties": {
+      "minScore": { "type": "number" },
+      "maxScore": { "type": ["number", "null"] },
+      "grade": { "type": "string" },
+      "title": { "type": "string" },
+      "description": { "type": "string" }
+    }
+  }
+}

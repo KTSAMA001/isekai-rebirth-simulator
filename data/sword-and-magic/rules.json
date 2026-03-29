@@ -1,0 +1,46 @@
+{
+  "grades": [
+    {
+      "minScore": 0,
+      "maxScore": 15,
+      "grade": "D",
+      "title": "路人NPC",
+      "description": "在这个世界的传说中，你只是个路人甲。连吟游诗人都不愿意写你的故事。"
+    },
+    {
+      "minScore": 15,
+      "maxScore": 25,
+      "grade": "C",
+      "title": "普通冒险者",
+      "description": "你度过了平凡但充实的一生。至少，你活了下来。"
+    },
+    {
+      "minScore": 25,
+      "maxScore": 35,
+      "grade": "B",
+      "title": "知名冒险者",
+      "description": "冒险者公会的大厅里挂着你的名字。偶尔有新人会问起你的故事。"
+    },
+    {
+      "minScore": 35,
+      "maxScore": 50,
+      "grade": "A",
+      "title": "传说中的勇者",
+      "description": "你的名字被写进了王国的史书。孩子们在睡前听着你的故事入睡。"
+    },
+    {
+      "minScore": 50,
+      "maxScore": 65,
+      "grade": "S",
+      "title": "一代传奇",
+      "description": "你的传说跨越了国界。吟游诗人为你谱写了史诗，魔法学院用你的名字命名了一座塔。"
+    },
+    {
+      "minScore": 65,
+      "maxScore": null,
+      "grade": "SS",
+      "title": "世界之巅",
+      "description": "你站在了这个世界所能达到的最高处。时间会遗忘王国，但不会遗忘你。因为你，就是传说本身。"
+    }
+  ]
+}

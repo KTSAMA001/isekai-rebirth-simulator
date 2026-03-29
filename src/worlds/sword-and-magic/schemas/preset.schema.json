@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "preset",
+  "type": "object",
+  "required": ["id", "name", "title", "description", "attributes", "locked"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "attributes": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "talents": { "type": "array", "items": { "type": "string" } },
+    "locked": { "type": "boolean" },
+    "unlockCondition": { "type": "string" }
+  }
+}

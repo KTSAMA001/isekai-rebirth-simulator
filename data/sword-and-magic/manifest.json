@@ -1,0 +1,208 @@
+{
+  "id": "sword-and-magic",
+  "name": "剑与魔法",
+  "subtitle": "在巨龙咆哮的苍穹下，书写你的传说",
+  "description": "一个充满魔法与冒险的异世界。在这里，你可以成为伟大的魔法师、传奇的剑士、富甲一方的商人，或者...发明可乐的穿越者。",
+  "version": "1.0.0",
+  "author": "isekai-sim",
+  "icon": "⚔️",
+  "banner": "",
+  "theme": {
+    "primary": "#8b5cf6",
+    "secondary": "#d946ef",
+    "background": "#0f0a1a",
+    "text": "#e2e8f0"
+  },
+  "tags": [
+    "奇幻",
+    "冒险",
+    "魔法",
+    "剑与魔法"
+  ],
+  "maxAge": 80,
+  "initialPoints": 20,
+  "talentDraftCount": 10,
+  "talentSelectCount": 3,
+  "files": {
+    "attributes": "attributes.json",
+    "talents": "talents.json",
+    "events": "events.json",
+    "achievements": "achievements.json",
+    "presets": "presets.json",
+    "rules": "rules.json"
+  },
+  "routes": [
+    {
+      "id": "mage",
+      "name": "魔法之路",
+      "description": "踏上奥术之道，追求魔法的极致",
+      "enterCondition": "has.flag.magic_student",
+      "exitCondition": null,
+      "priority": 20,
+      "entryFlags": [
+        "on_mage_path"
+      ],
+      "anchorEvents": [
+        {
+          "eventId": "magic_exam",
+          "minAge": 10,
+          "maxAge": 13,
+          "mandatory": true
+        },
+        {
+          "eventId": "magic_duel",
+          "minAge": 15,
+          "maxAge": 20,
+          "mandatory": false
+        },
+        {
+          "eventId": "magic_graduate",
+          "minAge": 20,
+          "maxAge": 25,
+          "mandatory": true
+        },
+        {
+          "eventId": "master_spell",
+          "minAge": 40,
+          "maxAge": 55,
+          "mandatory": false
+        }
+      ],
+      "exclusiveEvents": [
+        "dark_mage_tempt",
+        "dark_mage_choice",
+        "magic_breakthrough_final"
+      ]
+    },
+    {
+      "id": "knight",
+      "name": "骑士之路",
+      "description": "以剑与荣誉书写骑士传说",
+      "enterCondition": "has.flag.squire & !has.flag.magic_student",
+      "exitCondition": null,
+      "priority": 15,
+      "entryFlags": [
+        "on_knight_path"
+      ],
+      "anchorEvents": [
+        {
+          "eventId": "knight_examination",
+          "minAge": 15,
+          "maxAge": 18,
+          "mandatory": true
+        },
+        {
+          "eventId": "first_quest",
+          "minAge": 16,
+          "maxAge": 22,
+          "mandatory": false
+        },
+        {
+          "eventId": "knight_glory",
+          "minAge": 18,
+          "maxAge": 25,
+          "mandatory": false
+        },
+        {
+          "eventId": "dragon_slay_attempt",
+          "minAge": 22,
+          "maxAge": 35,
+          "mandatory": false
+        }
+      ],
+      "exclusiveEvents": [
+        "war_breaks_out"
+      ]
+    },
+    {
+      "id": "merchant",
+      "name": "商人之路",
+      "description": "在商海中纵横捭阖，积累财富与权势",
+      "enterCondition": "has.flag.merchant_apprentice",
+      "exitCondition": null,
+      "priority": 15,
+      "entryFlags": [
+        "on_merchant_path"
+      ],
+      "anchorEvents": [
+        {
+          "eventId": "merchant_career",
+          "minAge": 22,
+          "maxAge": 30,
+          "mandatory": true
+        },
+        {
+          "eventId": "investment_opportunity",
+          "minAge": 25,
+          "maxAge": 40,
+          "mandatory": false
+        },
+        {
+          "eventId": "become_lord",
+          "minAge": 35,
+          "maxAge": 50,
+          "mandatory": false
+        }
+      ],
+      "exclusiveEvents": []
+    },
+    {
+      "id": "adventurer",
+      "name": "冒险者之路",
+      "description": "探索未知的地城与秘境，追寻传说中的宝藏",
+      "enterCondition": "has.flag.guild_member",
+      "exitCondition": null,
+      "priority": 10,
+      "entryFlags": [
+        "on_adventurer_path"
+      ],
+      "anchorEvents": [
+        {
+          "eventId": "first_quest",
+          "minAge": 16,
+          "maxAge": 22,
+          "mandatory": true
+        },
+        {
+          "eventId": "dungeon_explore_1",
+          "minAge": 13,
+          "maxAge": 15,
+          "mandatory": false
+        },
+        {
+          "eventId": "advanced_dungeon",
+          "minAge": 18,
+          "maxAge": 25,
+          "mandatory": false
+        }
+      ],
+      "exclusiveEvents": [
+        "bounty_notice"
+      ]
+    },
+    {
+      "id": "commoner",
+      "name": "平民之路",
+      "description": "平凡而安宁的一生",
+      "enterCondition": null,
+      "exitCondition": null,
+      "priority": 0,
+      "entryFlags": [],
+      "anchorEvents": [
+        {
+          "eventId": "retirement",
+          "minAge": 60,
+          "maxAge": 70,
+          "mandatory": false
+        },
+        {
+          "eventId": "peaceful_end",
+          "minAge": 70,
+          "maxAge": 80,
+          "mandatory": false
+        }
+      ],
+      "exclusiveEvents": []
+    }
+  ]
+}

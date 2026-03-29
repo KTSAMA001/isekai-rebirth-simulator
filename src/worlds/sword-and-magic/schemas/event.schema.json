@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "event",
+  "type": "object",
+  "required": ["id", "title", "description", "minAge", "maxAge", "weight", "effects"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z_][a-z0-9_]*$" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "minAge": { "type": "integer", "minimum": 0, "maximum": 80 },
+    "maxAge": { "type": "integer", "minimum": 0, "maximum": 80 },
+    "weight": { "type": "number", "minimum": 0 },
+    "include": { "type": "string" },
+    "exclude": { "type": "string" },
+    "effects": { "type": "array", "items": { "$ref": "shared.json#/definitions/EventEffect" } },
+    "branches": { "type": "array", "items": { "$ref": "shared.json#/definitions/EventBranch" } },
+    "isBad": { "type": "boolean" },
+    "tag": { "type": "string" },
+    "unique": { "type": "boolean" },
+    "priority": { "enum": ["critical", "major", "minor"] },
+    "prerequisites": { "type": "array", "items": { "type": "string" } },
+    "mutuallyExclusive": { "type": "array", "items": { "type": "string" } },
+    "weightModifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["condition", "weightMultiplier"],
+        "additionalProperties": false,
+        "properties": {
+          "condition": { "type": "string" },
+          "weightMultiplier": { "type": "number", "minimum": 0, "maximum": 10 }
+        }
+      }
+    }
+  }
+}

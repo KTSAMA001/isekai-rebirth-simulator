@@ -1,0 +1,1322 @@
+[
+  {
+    "id": "magic_burst_baby",
+    "title": "婴儿的魔力暴走",
+    "description": "你打了个喷嚏，摇篮旁边的蜡烛全部同时爆炸了。保姆吓得辞职了。",
+    "minAge": 1,
+    "maxAge": 3,
+    "weight": 5,
+    "include": "attribute.mag >= 6",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "cry_out",
+        "title": "大哭",
+        "description": "你被吓哭了，魔力随着眼泪流淌出来",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "emotional_magic",
+            "value": 1,
+            "description": "感性施法者"
+          }
+        ]
+      },
+      {
+        "id": "wave_hands",
+        "title": "挥舞小手",
+        "description": "你好奇地挥了挥手，小火球在指尖跳舞",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（烧到手指了）"
+          }
+        ]
+      },
+      {
+        "id": "try_control",
+        "title": "试着控制",
+        "description": "你竟然本能地尝试控制这股力量！",
+        "probability": 0.25,
+        "requireCondition": "attribute.int >= 5",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "early_magic_control",
+            "value": 1,
+            "description": "幼年魔力控制"
+          }
+        ]
+      }
+    ],
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "bullied",
+    "title": "被大孩子欺负",
+    "description": "村里的大孩子抢走了你的面包，还把你推进泥坑。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "exclude": "has.flag.bullied_child",
+    "effects": [],
+    "branches": [
+      {
+        "id": "endure",
+        "title": "忍气吞声",
+        "description": "你低着头不说话，等他们走了再从泥坑里爬出来",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（学会隐忍）"
+          },
+          {
+            "type": "set_flag",
+            "target": "bullied_child",
+            "value": 1,
+            "description": "被欺负了"
+          },
+          {
+            "type": "set_flag",
+            "target": "timid",
+            "value": 1,
+            "description": "胆怯"
+          }
+        ]
+      },
+      {
+        "id": "seek_help",
+        "title": "找大人帮忙",
+        "description": "你跑去找村里的长辈告状",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（学会求助）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "bullied_child",
+            "value": 1,
+            "description": "被欺负了"
+          }
+        ]
+      },
+      {
+        "id": "fight_back_child",
+        "title": "试着反抗",
+        "description": "你握紧拳头冲了上去！",
+        "probability": 0.3,
+        "requireCondition": "attribute.str >= 3",
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 4,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -3,
+            "description": "HP -3"
+          },
+          {
+            "type": "set_flag",
+            "target": "bullied_child",
+            "value": 1,
+            "description": "被欺负了"
+          },
+          {
+            "type": "set_flag",
+            "target": "fight_back",
+            "value": 1,
+            "description": "不再忍气吞声"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          },
+          {
+            "type": "set_flag",
+            "target": "bullied_child",
+            "value": 1,
+            "description": "被欺负了"
+          }
+        ],
+        "successText": "虽然挨了几拳，但你让他们知道你不是好惹的！",
+        "failureText": "你冲了上去，但对方太壮了...你被打得鼻青脸肿"
+      }
+    ],
+    "weightModifiers": [
+      {
+        "condition": "attribute.str >= 4",
+        "weightMultiplier": 0.5
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "unique": true
+  },
+  {
+    "id": "church_orphan",
+    "title": "教会的温暖",
+    "description": "孤儿院的修女们对你格外温柔，教会了你认字。",
+    "minAge": 4,
+    "maxAge": 6,
+    "weight": 10,
+    "include": "attribute.mny <= 2",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "grant_item",
+        "target": "orphan_bracelet",
+        "value": 1,
+        "description": "获得 📿 孤儿手环"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "fairy_encounter",
+    "title": "林中的精灵",
+    "description": "你在森林边缘发现了一只受伤的精灵，你帮它包扎了翅膀。",
+    "minAge": 5,
+    "maxAge": 6,
+    "weight": 3,
+    "include": "attribute.luk >= 6 & attribute.spr >= 4",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1,
+        "description": "魔力 +1"
+      },
+      {
+        "type": "set_flag",
+        "target": "fairy_friend",
+        "value": 1,
+        "description": "精灵之友"
+      }
+    ],
+    "tag": "adventure",
+    "priority": "minor"
+  },
+  {
+    "id": "bullied_repeat",
+    "title": "他们又来了",
+    "description": "欺负你的大孩子又出现了，这次他们把你堵在了小巷里。看来上次的隐忍被当成了软弱。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 8,
+    "include": "has.flag.timid",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "endure_again",
+        "title": "继续忍耐",
+        "description": "你咬着嘴唇，等他们心满意足地离开",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "set_flag",
+            "target": "timid_deep",
+            "value": 1,
+            "description": "深度胆怯"
+          }
+        ]
+      },
+      {
+        "id": "tell_parents",
+        "title": "告诉父母",
+        "description": "这次你决定不再独自承受，跑回家告诉了父母",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（学会求助）"
+          },
+          {
+            "type": "set_flag",
+            "target": "parental_help",
+            "value": 1,
+            "description": "父母介入"
+          }
+        ]
+      }
+    ],
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "stand_up_moment",
+    "title": "不再忍耐",
+    "description": "那些大孩子又来挑衅了。但这次，你心里有什么东西碎裂了——取而代之的是一股从未有过的勇气。",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 5,
+    "include": "has.flag.timid",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "fight_back_brave",
+        "title": "正面反击",
+        "description": "\"够了！\"你攥紧拳头站了起来，眼中是连你自己都陌生的怒火",
+        "probability": 0.5,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 5,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "brave",
+            "value": 1,
+            "description": "变得勇敢"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -8,
+            "description": "HP -8"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（至少你尝试了）"
+          }
+        ],
+        "successText": "你一拳打在了带头那人的鼻子上！他们惊愕地看着你，再也不敢来犯",
+        "failureText": "你还是打不过，但你眼中的勇气让他们犹豫了...暂时"
+      },
+      {
+        "id": "seek_help_smart",
+        "title": "寻求帮助",
+        "description": "你找到了村长，把一切都告诉了他",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（用脑子解决问题）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "smart_seeker",
+            "value": 1,
+            "description": "善于求助"
+          }
+        ]
+      }
+    ],
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "noble_kid_revenge",
+    "title": "权贵的孩子",
+    "description": "一个穿着华丽的同龄孩子当街抢走了你的东西，周围的人视而不见——大家都知道他父亲是谁。",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 1,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "swallow_pride",
+        "title": "默默忍耐",
+        "description": "你知道得罪不起权贵，低下头认了错",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_grudge",
+            "value": 1,
+            "description": "对权贵的怨恨"
+          }
+        ]
+      },
+      {
+        "id": "stand_ground",
+        "title": "据理力争",
+        "description": "\"是他先欺负我的！\"你不卑不亢地直视那权贵的眼睛",
+        "probability": 0.35,
+        "riskCheck": {
+          "attribute": "chr",
+          "difficulty": 6,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_conflict",
+            "value": 1,
+            "description": "与权贵冲突"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_conflict",
+            "value": 1,
+            "description": "与权贵冲突"
+          }
+        ],
+        "successText": "权贵被你的气势镇住了，悻悻离去。你赢得了村民的尊敬",
+        "failureText": "权贵冷笑一声，把你推倒在地...\"不知天高地厚\""
+      },
+      {
+        "id": "report_authority",
+        "title": "告到更高层",
+        "description": "你越过了那权贵，直接去找了领主的代理人",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "justice_seek",
+            "value": 1,
+            "description": "追求正义"
+          }
+        ]
+      }
+    ],
+    "tag": "social",
+    "priority": "major"
+  },
+  {
+    "id": "childhood_play",
+    "title": "村口的泥巴大战",
+    "description": "你和邻居家的小孩在村口展开了一场激烈的泥巴大战！",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1（开心）"
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "steal_sweets",
+    "effects": [],
+    "title": "偷吃糖果",
+    "description": "你趁妈妈不注意偷拿了一颗糖果，结果被发现了。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "apologize",
+        "title": "老实道歉",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "lie_about_it",
+        "title": "撒谎",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          }
+        ]
+      },
+      {
+        "id": "blame_sibling",
+        "title": "嫁祸给兄弟/姐妹",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1"
+          }
+        ]
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "first_snow",
+    "title": "初雪",
+    "description": "今年第一场雪，你兴奋地冲出门堆雪人。",
+    "minAge": 3,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "tree_climbing",
+    "title": "爬树冒险",
+    "description": "你挑战爬上了村里最高的那棵树。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "riskCheck": {
+      "attribute": "str",
+      "difficulty": 5,
+      "scale": 2
+    },
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1（成就感）"
+      }
+    ],
+    "failureEffects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -8,
+        "description": "HP -8（摔下来了）"
+      }
+    ],
+    "successText": "你站在树顶，俯瞰整个村庄！",
+    "failureText": "你从树上掉了下来...还好是草地。",
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "river_fishing",
+    "effects": [],
+    "title": "河边抓鱼",
+    "description": "你和朋友们去河边抓鱼，这是孩子们最喜欢的消遣。",
+    "minAge": 6,
+    "maxAge": 12,
+    "weight": 5,
+    "unique": true,
+    "branches": [
+      {
+        "id": "patient_fish",
+        "title": "耐心等待",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（卖了鱼）"
+          }
+        ]
+      },
+      {
+        "id": "chase_fish",
+        "title": "直接下水",
+        "probability": 0.4,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 5,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（被水冲走）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "childhood_chase",
+    "title": "抓蜻蜓",
+    "description": "夏日午后，你拿着自制的小网兜在草丛间追逐蜻蜓。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "catch_one",
+        "title": "抓到了一只",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（开心）"
+          }
+        ]
+      },
+      {
+        "id": "fall_down",
+        "title": "摔了一跤",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（皮实了）"
+          }
+        ]
+      },
+      {
+        "id": "let_go",
+        "title": "抓到又放了",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（善良）"
+          }
+        ]
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "childhood_hide_seek",
+    "title": "捉迷藏",
+    "description": "你和小伙伴们玩起了捉迷藏，你来当躲藏的那一个。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "hide_well",
+        "title": "藏得太好没人找到",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（善于观察）"
+          }
+        ]
+      },
+      {
+        "id": "found_quickly",
+        "title": "很快被找到了",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（和大家一起笑）"
+          }
+        ]
+      },
+      {
+        "id": "hide_scary_place",
+        "title": "躲进了 scary 的地方",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（吓哭了）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（胆量锻炼）"
+          }
+        ]
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "childhood_pet",
+    "title": "捡到受伤小鸟",
+    "description": "你在草丛里发现了一只翅膀受伤的小鸟，它正可怜地叫着。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "heal_bird",
+        "title": "带回家照顾",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（温柔）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "leave_bird",
+        "title": "看了一眼就走了",
+        "probability": 0.3,
+        "effects": []
+      },
+      {
+        "id": "call_adult",
+        "title": "去找大人帮忙",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（懂得求助）"
+          }
+        ]
+      }
+    ],
+    "tag": "childhood",
+    "priority": "minor"
+  },
+  {
+    "id": "village_festival",
+    "effects": [],
+    "title": "村里祭典",
+    "description": "丰收的季节到了，村子里举办了一年一度的祭典，到处都是热闹的摊位和欢笑声。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "branches": [
+      {
+        "id": "festival_eat",
+        "title": "大吃特吃",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（满足）"
+          }
+        ]
+      },
+      {
+        "id": "festival_dance",
+        "title": "跟着大人们跳舞",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（开心）"
+          }
+        ]
+      },
+      {
+        "id": "festival_watch_fireworks",
+        "title": "等烟花",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（美好回忆）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "stray_dog",
+    "effects": [],
+    "title": "流浪狗",
+    "description": "你在回家的路上遇到了一只脏兮兮的流浪小狗，它用湿漉漉的眼睛看着你。",
+    "minAge": 4,
+    "maxAge": 7,
+    "weight": 5,
+    "unique": true,
+    "branches": [
+      {
+        "id": "adopt_dog",
+        "title": "带它回家",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（有了伙伴）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          }
+        ]
+      },
+      {
+        "id": "share_food",
+        "title": "分给它一半馒头",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（善良）"
+          }
+        ]
+      },
+      {
+        "id": "ignore_dog",
+        "title": "害怕地跑开",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（心里不安）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "rainy_day_adventure",
+    "title": "雨日冒险",
+    "description": "下着大雨，你偷偷溜出家门，在雨中发现了一个被废弃的地窖入口...",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 4,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "enter_cellar",
+        "title": "钻进去看看",
+        "description": "你鼓起勇气，摸黑走进了地窖",
+        "probability": 0.4,
+        "riskCheck": {
+          "attribute": "spr",
+          "difficulty": 6,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（地窖中的发现）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（勇气试炼）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -8,
+            "description": "HP -8（跌落受伤）"
+          }
+        ]
+      },
+      {
+        "id": "wait_at_door",
+        "title": "在门口等雨停",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（静心聆听雨声）"
+          }
+        ]
+      },
+      {
+        "id": "run_home_rain",
+        "title": "跑回家",
+        "probability": 0.25,
+        "effects": []
+      }
+    ],
+    "tag": "adventure",
+    "priority": "minor"
+  },
+  {
+    "id": "first_competition",
+    "title": "第一次比赛",
+    "description": "村里举办了一年一度的儿童比赛，你被推上了赛场...",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "go_all_out",
+        "title": "拼尽全力",
+        "description": "你咬紧牙关，使出了全部力气",
+        "probability": 0.4,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 6,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2（全力拼搏）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（赢得喝彩）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（虽败犹荣）"
+          }
+        ]
+      },
+      {
+        "id": "strategic_forfeit",
+        "title": "策略性放弃",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（审时度势）"
+          }
+        ]
+      },
+      {
+        "id": "dirty_trick",
+        "title": "暗中使绊",
+        "description": "你趁裁判不注意，在对手脚下做了点手脚",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2,
+            "description": "魅力 -2（被发现了）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2（胜之不武）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dirty_player",
+            "value": 1,
+            "description": "学会了不择手段"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "grandma_recipes",
+    "effects": [],
+    "title": "奶奶的秘方",
+    "description": "奶奶教你做一种特殊的药膏，她说这是祖传的秘方...",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "learn_carefully",
+        "title": "认真学习",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（学会了药膏配方）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（祖孙情深）"
+          },
+          {
+            "type": "set_flag",
+            "target": "herbal_knowledge",
+            "value": true,
+            "description": "获得草药知识"
+          },
+          {
+            "type": "grant_item",
+            "target": "soul_gem",
+            "value": 1,
+            "description": "获得 🔮 灵魂宝石"
+          }
+        ]
+      },
+      {
+        "id": "absent_minded",
+        "title": "心不在焉",
+        "probability": 0.3,
+        "effects": []
+      },
+      {
+        "id": "secret_recipe",
+        "title": "偷偷加点自己的配方",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 5,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（天赋灵感）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（炸了）"
+          }
+        ],
+        "successText": "你无意中改良了配方！奶奶惊喜地看着你...",
+        "failureText": "药膏突然冒出怪烟，把你熏了个跟头！"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "river_discovery",
+    "effects": [],
+    "title": "河底发光",
+    "description": "干旱季节河水退去，你发现河底有什么东西在发光...",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "dive_in",
+        "title": "潜下去捡",
+        "probability": 0.35,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 6,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（发现了神秘宝物）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1（好运）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（差点溺水）"
+          }
+        ],
+        "successText": "你捞出了一块会发光的奇异石头！",
+        "failureText": "水流比你想象的要急，你被冲出去好几米..."
+      },
+      {
+        "id": "call_adults_river",
+        "title": "叫大人来看",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（大人夸你懂事）"
+          }
+        ]
+      },
+      {
+        "id": "remember_location",
+        "title": "记住位置以后再来",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（冷静观察）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1（留待未来）"
+          }
+        ]
+      }
+    ],
+    "tag": "adventure",
+    "priority": "minor"
+  }
+]

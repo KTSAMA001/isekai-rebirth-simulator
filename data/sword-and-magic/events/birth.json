@@ -1,0 +1,49 @@
+[
+  {
+    "id": "birth_noble",
+    "title": "降生贵族",
+    "description": "你出生在领主的庄园中，第一声啼哭响彻大厅。",
+    "minAge": 0,
+    "maxAge": 0,
+    "weight": 10,
+    "include": "attribute.mny >= 10",
+    "unique": true,
+    "effects": [],
+    "tag": "life",
+    "priority": "major"
+  },
+  {
+    "id": "birth_common",
+    "title": "平民之子",
+    "description": "你出生在一个朴素的农舍中，父亲是一个农夫。",
+    "minAge": 0,
+    "maxAge": 0,
+    "weight": 20,
+    "include": "attribute.mny >= 4",
+    "exclude": "attribute.mny >= 10",
+    "unique": true,
+    "effects": [],
+    "tag": "life",
+    "priority": "major"
+  },
+  {
+    "id": "birth_slums",
+    "title": "贫民窟的黎明",
+    "description": "你出生在王国最脏乱的街巷，第一眼看到的是漏水的屋顶。",
+    "minAge": 0,
+    "maxAge": 0,
+    "weight": 15,
+    "include": "attribute.mny <= 2",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": -1,
+        "description": "灵魂 -1"
+      }
+    ],
+    "tag": "life",
+    "priority": "major"
+  }
+]

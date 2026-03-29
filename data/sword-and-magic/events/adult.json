@@ -1,0 +1,1098 @@
+[
+  {
+    "id": "dragon_slay_attempt",
+    "title": "讨伐巨龙",
+    "description": "一头黑龙盘踞在北方的山谷，赏金高得惊人。你决定去试试。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 4,
+    "include": "attribute.str >= 14 | attribute.mag >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dragon_kill",
+        "title": "正面击杀",
+        "description": "你与巨龙正面对决！",
+        "requireCondition": "attribute.str >= 18 | attribute.mag >= 18",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_slayer",
+            "value": 1,
+            "description": "屠龙者！"
+          }
+        ]
+      },
+      {
+        "id": "dragon_near_death",
+        "title": "惨胜",
+        "description": "你赢了，但代价惨重",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "near_death",
+            "value": 1,
+            "description": "濒死体验"
+          },
+          {
+            "type": "grant_item",
+            "target": "dragon_scale",
+            "value": 1,
+            "description": "获得 🐲 龙鳞护符"
+          }
+        ]
+      },
+      {
+        "id": "dragon_defeat",
+        "title": "被龙击败",
+        "description": "你败了，但至少活着回来了",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -80,
+            "description": "HP -80"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_defeated",
+            "value": 1,
+            "description": "败北"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "weightModifiers": [
+      {
+        "condition": "has.flag.knight | has.flag.guild_member",
+        "weightMultiplier": 1.5
+      }
+    ],
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "marry_noble",
+    "title": "政治联姻",
+    "description": "你被安排与一位贵族结婚。这在王国中很常见。",
+    "minAge": 25,
+    "maxAge": 30,
+    "weight": 6,
+    "include": "attribute.chr >= 10 & attribute.mny >= 8 & has.flag.knight | has.flag.lord | has.flag.merchant_master",
+    "exclude": "has.flag.married",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "accept_noble_marriage",
+        "title": "接受联姻",
+        "description": "你穿上礼服，走上了红毯",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "married",
+            "value": 1,
+            "description": "已婚（贵族）"
+          }
+        ]
+      },
+      {
+        "id": "refuse_noble_marriage",
+        "title": "拒绝联姻",
+        "description": "\"我的婚姻不该是筹码。\"你毅然回绝",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "refused_marriage",
+            "value": 1,
+            "description": "拒绝联姻"
+          }
+        ]
+      }
+    ],
+    "tag": "romance",
+    "priority": "critical"
+  },
+  {
+    "id": "marry_adventurer",
+    "title": "与冒险者结婚",
+    "description": "你们在一次地下城探索中相识相知，决定共度余生。",
+    "minAge": 22,
+    "maxAge": 30,
+    "weight": 5,
+    "include": "attribute.chr >= 8",
+    "exclude": "has.flag.married",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "together_forever",
+        "title": "在一起",
+        "description": "你们在星空下交换了誓言",
+        "probability": 0.6,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "married",
+            "value": 1,
+            "description": "已婚（冒险者）"
+          }
+        ]
+      },
+      {
+        "id": "stay_friends",
+        "title": "保持友谊",
+        "description": "\"我们更适合做战友。\"你们相视一笑",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "true_friend",
+            "value": 1,
+            "description": "真挚友谊"
+          }
+        ]
+      }
+    ],
+    "tag": "romance",
+    "priority": "critical"
+  },
+  {
+    "id": "merchant_career",
+    "title": "商路崛起",
+    "description": "你的生意越做越大，开始涉足跨城贸易。路上的商队、海盗、税收官——每一个都是考验。",
+    "minAge": 22,
+    "maxAge": 30,
+    "weight": 5,
+    "include": "has.flag.merchant_apprentice & has.flag.merchant_apprentice",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "expand_business",
+        "title": "扩张商路",
+        "description": "你投入了大量资金开辟新商路，这是一场豪赌",
+        "probability": 0.5,
+        "riskCheck": {
+          "attribute": "int",
+          "difficulty": 14,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "merchant_master",
+            "value": 1,
+            "description": "商业大亨"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（亏损）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（花钱买教训）"
+          }
+        ],
+        "successText": "你的商队遍布王国！各地的商人都知道你的名字",
+        "failureText": "货物被海盗截了...你血本无归，但至少保住了命"
+      },
+      {
+        "id": "steady_trade",
+        "title": "稳扎稳打",
+        "description": "你选择稳妥的本地贸易路线，虽然赚得慢但风险小",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          }
+        ]
+      }
+    ],
+    "tag": "social",
+    "priority": "critical"
+  },
+  {
+    "id": "become_lord",
+    "title": "受封领主",
+    "description": "因为你的功绩，国王封你为一方领主。",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 3,
+    "include": "attribute.mny >= 10 & attribute.chr >= 8",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 3,
+        "description": "家境 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      },
+      {
+        "type": "set_flag",
+        "target": "lord",
+        "value": 1,
+        "description": "受封领主"
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "master_spell",
+    "title": "顿悟！魔法真谛",
+    "description": "你终于理解了魔法的本质——不是操控元素，而是与世界的对话。",
+    "minAge": 40,
+    "maxAge": 55,
+    "weight": 3,
+    "include": "attribute.mag >= 18 & attribute.int >= 14",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3,
+        "description": "魔力 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      },
+      {
+        "type": "set_flag",
+        "target": "archmage",
+        "value": 1,
+        "description": "大魔导师！"
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "major"
+  },
+  {
+    "id": "student_successor",
+    "title": "收徒传艺",
+    "description": "一个年轻人跪在你面前：\"请收我为徒！\"",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 8,
+    "include": "attribute.str >= 14 | attribute.mag >= 14 & has.flag.knight | has.flag.mage_graduate | has.flag.merchant_master | has.flag.famous_inventor",
+    "exclude": "has.flag.has_student | has.flag.knight",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "set_flag",
+        "target": "has_student",
+        "value": 1,
+        "description": "收了徒弟"
+      }
+    ],
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "lost_in_dungeon",
+    "title": "地下城迷失",
+    "description": "你在深层的地下城中迷路了，黑暗中有什么在注视着你。",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 5,
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -30,
+        "description": "HP -30",
+        "probability": 0.5
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": -1,
+        "description": "灵魂 -1",
+        "probability": 0.5
+      },
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": 8,
+        "description": "HP +8（找到宝藏！）",
+        "probability": 0.5
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1",
+        "probability": 0.5
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "运势 +1",
+        "probability": 0.5
+      }
+    ],
+    "unique": true,
+    "tag": "adventure",
+    "priority": "minor"
+  },
+  {
+    "id": "war_breaks_out",
+    "title": "战争爆发",
+    "description": "魔王军入侵了！所有冒险者被征召。",
+    "minAge": 40,
+    "maxAge": 55,
+    "weight": 5,
+    "effects": [],
+    "branches": [
+      {
+        "id": "war_frontline",
+        "title": "上前线",
+        "description": "你冲在最前面",
+        "requireCondition": "attribute.str >= 10",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -40,
+            "description": "HP -40"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_veteran",
+            "value": 1,
+            "description": "战争老兵"
+          }
+        ]
+      },
+      {
+        "id": "war_support",
+        "title": "后方支援",
+        "description": "你在后方提供支援",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "healer",
+            "value": 1,
+            "description": "治愈者"
+          }
+        ]
+      },
+      {
+        "id": "war_hero",
+        "title": "带队突击",
+        "description": "你带领精锐小队直取敌军主将！",
+        "requireCondition": "attribute.chr >= 15 & attribute.str >= 14",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -50,
+            "description": "HP -50"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1,
+            "description": "战争英雄！"
+          },
+          {
+            "type": "grant_item",
+            "target": "war_medal",
+            "value": 1,
+            "description": "获得 🎖️ 军功章"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "midlife_crisis",
+    "title": "中年危机",
+    "description": "\"我这辈子到底在干什么？\"你站在悬崖边，看着夕阳发呆。",
+    "minAge": 40,
+    "maxAge": 50,
+    "weight": 10,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "let_go",
+        "title": "放下执念",
+        "description": "你深吸一口气，决定放下过去的遗憾",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 5,
+            "description": "HP +5"
+          },
+          {
+            "type": "set_flag",
+            "target": "inner_peace",
+            "value": 1,
+            "description": "内心平静"
+          }
+        ]
+      },
+      {
+        "id": "persist_dream",
+        "title": "坚持梦想",
+        "description": "\"还没完！\"你攥紧拳头，重新燃起了斗志",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "never_give_up",
+            "value": 1,
+            "description": "永不放弃"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "critical"
+  },
+  {
+    "id": "reincarnated_invention",
+    "title": "前世知识变现",
+    "description": "你想起前世的配方，调出了一种这个世界从未见过的药剂——可乐。一夜之间风靡王国。",
+    "minAge": 30,
+    "maxAge": 40,
+    "weight": 1,
+    "include": "attribute.int >= 10 & has.flag.married",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 5,
+        "description": "家境 +5"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      },
+      {
+        "type": "set_flag",
+        "target": "famous_inventor",
+        "value": 1,
+        "description": "可乐发明者！"
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "minor"
+  },
+  {
+    "id": "scenic_travel",
+    "title": "远行见世面",
+    "description": "你攒够了钱，决定去邻城看看。",
+    "minAge": 25,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "teaching_others",
+    "title": "传授经验",
+    "description": "一些年轻人来向你请教经验，你很乐意分享。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      },
+      {
+        "type": "grant_item",
+        "target": "chronicle_book",
+        "value": 1,
+        "description": "获得 📖 编年史"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "old_friend_reunion",
+    "effects": [],
+    "title": "老友重逢",
+    "description": "在城里的酒馆，你遇到了多年未见的老朋友。你们曾经一起在泥巴地里打滚，如今他已是一方小有名气的商人。",
+    "minAge": 35,
+    "maxAge": 45,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "drink_together",
+        "title": "坐下来喝一杯",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（叙旧很愉快）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（人脉）"
+          }
+        ]
+      },
+      {
+        "id": "business_proposal",
+        "title": "聊起了合作生意",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（商机）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（商业头脑）"
+          }
+        ]
+      },
+      {
+        "id": "polite_decline",
+        "title": "寒暄几句后告别",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（释然）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "apprentice_contest",
+    "effects": [],
+    "title": "弟子比武大会",
+    "description": "城中举办了一年一度的弟子比武大会，各门各派的年轻弟子齐聚一堂，切磋武艺。",
+    "minAge": 35,
+    "maxAge": 45,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "coach_disciple",
+        "title": "指导自己的弟子参赛",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（师者风范）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（教学相长）"
+          }
+        ]
+      },
+      {
+        "id": "watch_and_bet",
+        "title": "在场边观战押注",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1（运气不错）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（赢了一笔）"
+          }
+        ]
+      },
+      {
+        "id": "join_exhibition",
+        "title": "上台表演助兴",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（活动筋骨）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（赢得喝彩）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "investment_opportunity",
+    "effects": [],
+    "title": "投资机会",
+    "description": "一个商人向你推荐了一个\"稳赚不赔\"的投资项目，承诺三个月内翻倍回报。",
+    "minAge": 25,
+    "maxAge": 40,
+    "weight": 4,
+    "include": "has.flag.merchant_apprentice | has.flag.merchant_master & has.flag.has_student & has.flag.has_student",
+    "unique": true,
+    "branches": [
+      {
+        "id": "invest_all",
+        "title": "全部投入",
+        "probability": 0.35,
+        "riskCheck": {
+          "attribute": "luk",
+          "difficulty": 12,
+          "scale": 3
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5,
+            "description": "家境 +5（投资大赚）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -8,
+            "description": "家境 -8（血本无归）"
+          }
+        ],
+        "successText": "三个月后商人如约而至，你赚得盆满钵满！",
+        "failureText": "商人卷款跑路了，你的积蓄化为乌有..."
+      },
+      {
+        "id": "invest_half",
+        "title": "投入一半",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（小有收益）"
+          }
+        ]
+      },
+      {
+        "id": "reject_invest",
+        "title": "拒绝",
+        "probability": 0.3,
+        "effects": []
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "mysterious_stranger",
+    "effects": [],
+    "title": "神秘旅人",
+    "description": "在旅途中你遇到了一个戴面具的旅人，他似乎知道你的过去...",
+    "minAge": 25,
+    "maxAge": 35,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "talk_to_stranger",
+        "title": "和他交谈",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（获得了隐秘知识）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（命运交织）"
+          },
+          {
+            "type": "set_flag",
+            "target": "mysterious_encounter",
+            "value": true,
+            "description": "触发了神秘遭遇"
+          }
+        ]
+      },
+      {
+        "id": "stay_alert",
+        "title": "警惕远离",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（直觉敏锐）"
+          }
+        ]
+      },
+      {
+        "id": "treat_drink",
+        "title": "请他喝酒",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（豪爽）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（请客花销）"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "old_rival",
+    "effects": [],
+    "title": "老对手来访",
+    "description": "多年未见的老对手突然来访，他看起来苍老了许多...",
+    "minAge": 40,
+    "maxAge": 60,
+    "weight": 4,
+    "unique": true,
+    "branches": [
+      {
+        "id": "warm_welcome",
+        "title": "热情招待",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（以德报怨）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（释怀）"
+          }
+        ]
+      },
+      {
+        "id": "cold_shoulder",
+        "title": "冷眼相待",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（冷静判断）"
+          }
+        ]
+      },
+      {
+        "id": "challenge_fight",
+        "title": "比试一场",
+        "probability": 0.3,
+        "riskCheck": {
+          "attribute": "str",
+          "difficulty": 12,
+          "scale": 2
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2（宝刀未老）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（赢得尊重）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15（老伤复发）"
+          }
+        ],
+        "successText": "你赢了！老对手心服口服，两人相视大笑。",
+        "failureText": "你输了一招，旧伤隐隐作痛..."
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  }
+]

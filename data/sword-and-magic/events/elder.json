@@ -1,0 +1,74 @@
+[
+  {
+    "id": "legend_spread",
+    "title": "传说的传播",
+    "description": "吟游诗人们开始传唱你的故事。",
+    "minAge": 65,
+    "maxAge": 75,
+    "weight": 8,
+    "include": "attribute.chr >= 15 & has.flag.dragon_slayer | has.flag.knight_hero | has.flag.war_hero | has.flag.archmage | has.flag.famous_inventor & has.flag.knight | has.flag.guild_member | has.flag.mage_graduate",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3,
+        "description": "魅力 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      }
+    ],
+    "unique": true,
+    "tag": "social",
+    "priority": "minor"
+  },
+  {
+    "id": "peaceful_end",
+    "title": "平静的终章",
+    "description": "你坐在门廊的摇椅上，看着孙辈们在花园里奔跑。夕阳很美。",
+    "minAge": 70,
+    "maxAge": 80,
+    "weight": 12,
+    "include": "attribute.spr >= 8",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3,
+        "description": "灵魂 +3"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "magic_breakthrough_final",
+    "title": "最后的魔法",
+    "description": "你感到自己的魔力在消散，于是决定将毕生所学注入最后一道法术。",
+    "minAge": 70,
+    "maxAge": 80,
+    "weight": 4,
+    "include": "attribute.mag >= 22",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 5,
+        "description": "魔力 +5（最后一刻的辉煌）"
+      },
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -30,
+        "description": "HP -30"
+      }
+    ],
+    "unique": true,
+    "tag": "magic",
+    "priority": "minor"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "item",
+  "type": "object",
+  "required": ["id", "name", "description", "icon", "rarity", "category", "effects", "acquireText"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "icon": { "type": "string" },
+    "rarity": { "enum": ["common", "rare", "legendary"] },
+    "category": { "enum": ["weapon", "armor", "accessory", "consumable", "special"] },
+    "effects": { "type": "array", "items": { "$ref": "shared.json#/definitions/ItemEffectDef" } },
+    "acquireText": { "type": "string" }
+  }
+}

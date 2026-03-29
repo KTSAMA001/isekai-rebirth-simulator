@@ -1,0 +1,295 @@
+[
+  {
+    "id": "world_breaking_start",
+    "title": "世界崩坏开始",
+    "description": "你感到世界在颤抖。不是地震——是世界本身的法则在瓦解。",
+    "minAge": 50,
+    "maxAge": 60,
+    "weight": 1,
+    "include": "has.talent.worldbreaker & has.flag.knight | has.flag.guild_member",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3,
+        "description": "魔力 +3"
+      },
+      {
+        "type": "set_flag",
+        "target": "world_breaking",
+        "value": 1,
+        "description": "世界崩坏开始"
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "minor"
+  },
+  {
+    "id": "retirement",
+    "title": "挂剑归隐",
+    "description": "你把武器挂在了壁炉上方，决定安度晚年。",
+    "minAge": 60,
+    "maxAge": 70,
+    "weight": 10,
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "retire_peaceful",
+        "title": "归隐山林",
+        "description": "你买了一座小木屋，在山林间过起了悠闲的日子",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 8,
+            "description": "HP +8"
+          },
+          {
+            "type": "set_flag",
+            "target": "peaceful_retirement",
+            "value": 1,
+            "description": "安享晚年"
+          }
+        ]
+      },
+      {
+        "id": "continue_adventure",
+        "title": "继续冒险",
+        "description": "\"老夫还没老到走不动路！\"你擦亮了剑",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "never_retired",
+            "value": 1,
+            "description": "永不退休"
+          }
+        ]
+      }
+    ],
+    "tag": "life",
+    "priority": "critical"
+  },
+  {
+    "id": "final_cataclysm",
+    "title": "终焉之战",
+    "description": "天空裂开，混沌涌入。世界需要一个终章。而你，就是执笔之人。",
+    "minAge": 55,
+    "maxAge": 65,
+    "weight": 1,
+    "include": "has.talent.worldbreaker & has.flag.world_breaking",
+    "effects": [],
+    "branches": [
+      {
+        "id": "destroy_world",
+        "title": "毁灭世界",
+        "description": "你选择终结一切",
+        "requireCondition": "attribute.str >= 22 | attribute.mag >= 26",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -5,
+            "description": "灵魂 -5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "体魄 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "魔力 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "world_destroyed",
+            "value": 1,
+            "description": "世界毁灭者"
+          }
+        ]
+      },
+      {
+        "id": "rebuild_world",
+        "title": "重建世界",
+        "description": "你选择重塑一切",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 5,
+            "description": "灵魂 +5"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3,
+            "description": "智慧 +3"
+          },
+          {
+            "type": "set_flag",
+            "target": "world_rebuilt",
+            "value": 1,
+            "description": "世界重建者"
+          }
+        ]
+      },
+      {
+        "id": "become_god",
+        "title": "成为新世界的神",
+        "description": "你超越了凡人的界限",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2,
+            "description": "运势 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2"
+          },
+          {
+            "type": "set_flag",
+            "target": "became_god",
+            "value": 1,
+            "description": "新世界的神！"
+          }
+        ]
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
+  },
+  {
+    "id": "legacy_question",
+    "effects": [],
+    "title": "传承之问",
+    "description": "一个年轻人来找你，想要继承你的技艺...",
+    "minAge": 50,
+    "maxAge": 65,
+    "weight": 4,
+    "include": "has.flag.has_student | has.flag.married | has.flag.lord",
+    "unique": true,
+    "branches": [
+      {
+        "id": "teach_everything",
+        "title": "倾囊相授",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（教学相长）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（受人敬仰）"
+          },
+          {
+            "type": "set_flag",
+            "target": "legacy_passed",
+            "value": true,
+            "description": "传承技艺"
+          }
+        ]
+      },
+      {
+        "id": "think_about_it",
+        "title": "考虑一下",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（沉思）"
+          }
+        ]
+      },
+      {
+        "id": "refuse_request",
+        "title": "拒绝",
+        "probability": 0.25,
+        "effects": []
+      }
+    ],
+    "tag": "life",
+    "priority": "minor"
+  }
+]
