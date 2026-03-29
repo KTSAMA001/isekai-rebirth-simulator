@@ -22,8 +22,19 @@ export class EvaluatorModule {
     )
     const lifespan = state.age
 
-    // 计算分数：属性峰值总和 * 2 + 寿命 / 2
-    const score = totalAttributePeakSum * 2 + lifespan / 2
+    // 计算分数：属性峰值加权 + 寿命奖励 + 物品奖励 + 路线奖励
+    // 20局统计：peakSum 22-104 median 59, lifespan 4-80 median 41
+    const attrScore = totalAttributePeakSum * 0.8
+    const lifespanScore = lifespan * 0.5
+    const itemScore = state.inventory.items.length * 3
+    const itemCount = state.inventory.items.length
+    // 路线奖励：有路线锚点才加分
+    let routeBonus = 0
+    if (state.routeId) {
+      const route = this.world.index.routesById?.get(state.routeId)
+      if (route) routeBonus = route.priority * 0.5
+    }
+    const score = attrScore + lifespanScore + itemScore + routeBonus
 
     // 确定评级
     const grade = this.world.scoringRule.grades.find(
