@@ -6,7 +6,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 10,
-    "include": "attribute.mny >= 8",
+    "include": "attribute.mny >= 6",
     "unique": true,
     "effects": [],
     "tag": "life",
@@ -19,8 +19,8 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 20,
-    "include": "attribute.mny >= 4",
-    "exclude": "attribute.mny >= 8",
+    "include": "attribute.mny >= 3",
+    "exclude": "attribute.mny >= 6",
     "unique": true,
     "effects": [],
     "tag": "life",
@@ -33,7 +33,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 15,
-    "include": "attribute.mny <= 3",
+    "include": "attribute.mny <= 2",
     "unique": true,
     "effects": [
       {
@@ -45,7 +45,7 @@
     ],
     "tag": "life",
     "priority": "major",
-    "exclude": "attribute.mny >= 4"
+    "exclude": "attribute.mny >= 3"
   },
   {
     "id": "birth_noble_estate",
@@ -54,7 +54,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 6,
-    "include": "attribute.mny >= 8",
+    "include": "attribute.mny >= 6",
     "effects": [
       {
         "type": "modify_attribute",
