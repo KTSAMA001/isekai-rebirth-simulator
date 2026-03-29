@@ -89,7 +89,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'magic',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'bullied',
@@ -150,7 +150,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'social',
-    priority: 'critical',
+    priority: 'major',
     unique: true,
   },
   {
@@ -219,7 +219,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'social',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'stand_up_moment',
@@ -267,7 +267,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'social',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'noble_kid_revenge',
@@ -431,7 +431,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'magic',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'squire_training',
@@ -481,7 +481,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'combat',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'first_love',
@@ -539,7 +539,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'romance',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'bullied_fight_back',
@@ -610,7 +610,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'critical',
+    priority: 'minor',
   },
   {
     id: 'recovery_period',
@@ -656,7 +656,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'life',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'knight_examination',
@@ -716,7 +716,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'combat',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'merchant_apprentice',
@@ -877,7 +877,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'magic_graduate',
@@ -941,7 +941,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'adventure',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'dragon_slay_attempt',
@@ -1352,7 +1352,7 @@ export const events: WorldEventDef[] = [
       },
     ],
     tag: 'dark',
-    priority: 'critical',
+    priority: 'major',
   },
   {
     id: 'tavern_brawl',
@@ -2660,5 +2660,83 @@ export const events: WorldEventDef[] = [
     ],
     tag: 'life',
     priority: 'minor',
+  },
+  {
+    id: 'village_festival',
+    effects: [],
+    title: '村里祭典',
+    description: '丰收的季节到了，村子里举办了一年一度的祭典，到处都是热闹的摊位和欢笑声。',
+    minAge: 3,
+    maxAge: 6,
+    weight: 5,
+    unique: true,
+    branches: [
+      {
+        id: 'festival_eat',
+        title: '大吃特吃',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（满足）' },
+        ],
+      },
+      {
+        id: 'festival_dance',
+        title: '跟着大人们跳舞',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1（开心）' },
+        ],
+      },
+      {
+        id: 'festival_watch_fireworks',
+        title: '等烟花',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: 2, description: '灵魂 +2（美好回忆）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
+  },
+  {
+    id: 'stray_dog',
+    effects: [],
+    title: '流浪狗',
+    description: '你在回家的路上遇到了一只脏兮兮的流浪小狗，它用湿漉漉的眼睛看着你。',
+    minAge: 4,
+    maxAge: 7,
+    weight: 5,
+    unique: true,
+    branches: [
+      {
+        id: 'adopt_dog',
+        title: '带它回家',
+        probability: 0.4,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（有了伙伴）' },
+          { type: 'modify_attribute', target: 'spr', value: 1, description: '灵魂 +1' },
+        ],
+      },
+      {
+        id: 'share_food',
+        title: '分给它一半馒头',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'chr', value: 1, description: '魅力 +1（善良）' },
+        ],
+      },
+      {
+        id: 'ignore_dog',
+        title: '害怕地跑开',
+        probability: 0.3,
+        effects: [
+          { type: 'modify_attribute', target: 'spr', value: -1, description: '灵魂 -1（心里不安）' },
+        ],
+      },
+    ],
+    tag: 'life',
+    priority: 'major',
   },
 ]
