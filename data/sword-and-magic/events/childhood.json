@@ -92,7 +92,13 @@
     "maxAge": 6,
     "weight": 5,
     "exclude": "has.flag.bullied_child",
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "bullied",
+        "value": true
+      }
+    ],
     "branches": [
       {
         "id": "endure",
@@ -223,7 +229,7 @@
     "description": "孤儿院的修女们对你格外温柔，教会了你认字。",
     "minAge": 4,
     "maxAge": 6,
-    "weight": 10,
+    "weight": 3,
     "include": "attribute.mny <= 2",
     "unique": true,
     "effects": [
@@ -290,7 +296,13 @@
     "weight": 8,
     "include": "has.flag.timid",
     "unique": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "bullied_repeat",
+        "value": true
+      }
+    ],
     "branches": [
       {
         "id": "endure_again",
@@ -336,7 +348,10 @@
       }
     ],
     "tag": "social",
-    "priority": "major"
+    "priority": "major",
+    "prerequisites": [
+      "has.flag.bullied_child"
+    ]
   },
   {
     "id": "stand_up_moment",

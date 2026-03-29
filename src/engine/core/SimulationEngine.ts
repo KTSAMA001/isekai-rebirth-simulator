@@ -322,7 +322,29 @@ export class SimulationEngine {
       this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
       this.pendingYearEvent = null
       this.postYearProcess()
-      return { phase: 'showing_event', event: anchorEvent, effectTexts, logEntry }
+      return { phase: 'showing_event', event: anchorEvent, eventTexts, logEntry }
+    }
+
+    // === Age 1 强制 birth 事件 ===
+    if (this.state.age === 1 && candidates.length > 0) {
+      const birthEvents = candidates.filter(e => e.id.startsWith('birth_'))
+      if (birthEvents.length > 0) {
+        const birthEvent = this.eventModule.pickEvent(birthEvents)
+        this.pendingYearEvent = birthEvent
+        this.state = {
+          ...this.state,
+          triggeredEvents: new Set([...this.state.triggeredEvents, birthEvent.id]),
+        }
+        if (birthEvent.branches && birthEvent.branches.length > 0) {
+          return { phase: 'awaiting_choice', event: birthEvent, branches: birthEvent.branches }
+        }
+        const effectTexts = this.eventModule.applyEffectsOnState(birthEvent.effects, this.state)
+        const logEntry = { age: this.state.age, eventId: birthEvent.id, title: birthEvent.title, description: birthEvent.description, effects: effectTexts }
+        this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
+        this.pendingYearEvent = null
+        this.postYearProcess()
+        return { phase: 'showing_event', event: birthEvent, effectTexts, logEntry }
+      }
     }
 
     if (candidates.length === 0) {

@@ -488,7 +488,7 @@
   },
   {
     "id": "mid_existential_crisis",
-    "title": "中年危机",
+    "title": "深夜的独白",
     "description": "你站在窗前，看着镜子里的自己。白头发多了几根，皱纹也深了。这一切，值得吗？",
     "minAge": 35,
     "maxAge": 50,
