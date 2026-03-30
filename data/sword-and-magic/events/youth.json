@@ -42,6 +42,12 @@
             "description": "获得 💎 魔力碎片"
           },
           {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（学院生活缺少体能锻炼）"
+          },
+          {
             "type": "set_flag",
             "target": "magic_academy",
             "value": true
@@ -66,6 +72,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（错过了系统学习的机会）"
           },
           {
             "type": "set_flag",
@@ -97,7 +109,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 10,
+          "difficulty": 13,
           "scale": 3
         },
         "effects": [
@@ -118,6 +130,12 @@
             "target": "magic_top_student",
             "value": 1,
             "description": "魔法优等生"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（通宵备考荒废了体能）"
           }
         ],
         "failureEffects": [
@@ -144,7 +162,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 8,
+          "difficulty": 11,
           "scale": 2
         },
         "effects": [
@@ -159,6 +177,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（作弊即使成功也心虚）"
           }
         ],
         "failureEffects": [
@@ -190,6 +214,12 @@
             "target": "mag",
             "value": 2,
             "description": "魔力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（不努力只靠天赋，缺乏系统学习）"
           },
           {
             "type": "set_flag",
@@ -225,7 +255,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 11,
           "scale": 3
         },
         "effects": [
@@ -252,6 +282,12 @@
             "target": "training_dummy",
             "value": 1,
             "description": "获得 🥊 练功桩"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（只知苦练缺乏思考）"
           }
         ],
         "failureEffects": [
@@ -296,6 +332,12 @@
             "description": "运势 +1（摸鱼也是一种智慧）"
           },
           {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（偷懒的心虚感）"
+          },
+          {
             "type": "set_flag",
             "target": "squire",
             "value": 1,
@@ -314,7 +356,7 @@
     "minAge": 12,
     "maxAge": 15,
     "weight": 8,
-    "include": "attribute.chr >= 8",
+    "include": "attribute.chr >= 5",
     "exclude": "has.flag.first_love",
     "unique": true,
     "effects": [],
@@ -326,7 +368,7 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 8,
+          "difficulty": 11,
           "scale": 3
         },
         "effects": [
@@ -347,6 +389,12 @@
             "target": "in_relationship",
             "value": 1,
             "description": "开始恋爱"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（恋爱让人头脑发昏）"
           }
         ],
         "failureEffects": [
@@ -385,6 +433,12 @@
             "description": "智慧 +1（学会思考）"
           },
           {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（暗恋使人畏缩不前）"
+          },
+          {
             "type": "set_flag",
             "target": "first_love",
             "value": 1,
@@ -403,6 +457,12 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（封闭内心，错过成长）"
           },
           {
             "type": "set_flag",
@@ -450,6 +510,12 @@
         "target": "fight_back",
         "value": 1,
         "description": "不再忍气吞声"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（以暴制暴不是最佳方案）"
       }
     ],
     "tag": "combat",
@@ -477,7 +543,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 10,
           "scale": 3
         },
         "effects": [
@@ -516,6 +582,12 @@
             "target": "old_map",
             "value": 1,
             "description": "获得 🗺️ 古旧地图"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（暗河深处的阴冷气息）"
           }
         ],
         "failureEffects": [
@@ -566,6 +638,12 @@
             "description": "运势 +1"
           },
           {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（过于谨慎错过实战锻炼）"
+          },
+          {
             "type": "set_flag",
             "target": "dungeon_first",
             "value": 1,
@@ -611,6 +689,12 @@
             "target": "hp",
             "value": 5,
             "description": "HP +5（充分休养）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（养伤期间肌肉松弛）"
           }
         ]
       },
@@ -621,7 +705,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 10,
           "scale": 2
         },
         "effects": [
@@ -660,7 +744,7 @@
     "minAge": 14,
     "maxAge": 20,
     "weight": 6,
-    "include": "attribute.chr >= 8 | attribute.mny >= 8",
+    "include": "attribute.chr >= 5 | attribute.mny >= 5",
     "exclude": "has.flag.magic_student | has.flag.knight",
     "unique": true,
     "effects": [],
@@ -690,6 +774,12 @@
             "description": "智慧 +1"
           },
           {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "体魄 -2（商人生活荒废了武艺）"
+          },
+          {
             "type": "set_flag",
             "target": "merchant_apprentice",
             "value": 1,
@@ -709,6 +799,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（自学经商交了学费）"
           }
         ],
         "successText": "你决定自学经商之道。试错是最好的老师——虽然学费有点贵。第一次倒卖亏了全部积蓄，但也学到了最宝贵的一课。"
@@ -851,6 +947,12 @@
             "description": "魅力 +1"
           },
           {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（被保护意味着依赖，自身不够强）"
+          },
+          {
             "type": "set_flag",
             "target": "has_ally",
             "value": 1,
@@ -913,7 +1015,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 6,
+          "difficulty": 8,
           "scale": 3
         },
         "effects": [
@@ -928,6 +1030,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（勇气）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（废墟里吸入过多灰尘）"
           }
         ],
         "failureEffects": [
@@ -958,6 +1066,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（好奇心得不到满足）"
           }
         ]
       },
@@ -1004,6 +1118,12 @@
         "target": "herbal_pouch",
         "value": 1,
         "description": "获得 🌿 草药袋"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（体力劳动占用了学习时间）"
       }
     ],
     "tag": "life",
@@ -1058,6 +1178,12 @@
             "target": "mny",
             "value": 1,
             "description": "家境 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（省了钱但错过了当下的快乐）"
           }
         ]
       }
@@ -1085,6 +1211,12 @@
         "target": "int",
         "value": 1,
         "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": -1,
+        "description": "体魄 -1（躺了一整夜没运动）"
       }
     ],
     "tag": "life",
@@ -1107,7 +1239,7 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 8,
+          "difficulty": 10,
           "scale": 3
         },
         "effects": [
@@ -1146,6 +1278,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（学到了）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（只敢看不敢上的怯懦）"
           }
         ]
       }
@@ -1173,6 +1311,12 @@
         "target": "mny",
         "value": 2,
         "description": "家境 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（打零工占用了学习时间）"
       }
     ],
     "tag": "life",
@@ -1205,6 +1349,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（跑完很爽）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（莽撞冲刺缺乏策略）"
           }
         ]
       },
@@ -1285,6 +1435,12 @@
             "target": "lucky_charm",
             "value": 1,
             "description": "获得 🍀 幸运符"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（战争的残酷在你心中埋下阴影）"
           }
         ]
       },
@@ -1299,6 +1455,12 @@
             "target": "int",
             "value": 2,
             "description": "智慧 +2（深入了解）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（战争故事的残酷令人不安）"
           }
         ]
       },
@@ -1313,6 +1475,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（去玩了）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（错失锻炼机会）"
           }
         ]
       }
@@ -1346,6 +1514,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1（见义勇为）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（追小偷撞翻了摊位赔了钱）"
           }
         ],
         "description": "你毫不犹豫地冲了出去，穿过拥挤的集市摊位，踢翻了水果筐，撞散了人群。小偷回头惊恐地看了你一眼，没想到一个孩子竟然追得这么紧。你越跑越快，脚步如风。"
@@ -1366,6 +1540,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（体力不如直接追击锻炼充分）"
           }
         ],
         "description": "你没有追上去，而是冷静地判断了小偷逃跑的方向，抄近路绕到了巷子的另一头。当小偷气喘吁吁地跑过来时，你张开双臂挡在他面前。小偷愣住了，随即被赶来的大人制服。"
@@ -1380,6 +1560,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（正义感）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（只喊不动手，缺乏锻炼）"
           }
         ],
         "description": "你扯开嗓子大喊：\"小偷往那边跑了！\"你的声音清脆响亮，集市上的人们纷纷循声望去。几个大人立刻朝你指的方向追了过去，而你站在原地，心跳得飞快。"
@@ -1409,6 +1595,12 @@
             "target": "chr",
             "value": 2,
             "description": "魅力 +2（正义之声）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（惹上了不必要的麻烦）"
           },
           {
             "type": "set_flag",
@@ -1443,6 +1635,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（懂得求助）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（依赖大人，自身缺乏直面问题的勇气）"
           }
         ]
       }
@@ -1473,6 +1671,12 @@
             "description": "智慧 +2（解谜天赋）"
           },
           {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（沉迷研究废寝忘食）"
+          },
+          {
             "type": "set_flag",
             "target": "treasure_hunter",
             "value": true,
@@ -1498,6 +1702,12 @@
             "target": "luk",
             "value": 1,
             "description": "运势 +1（直觉）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（藏着不用不如不捡）"
           }
         ]
       }
@@ -1532,6 +1742,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（勤学不辍）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（执念太深产生焦虑）"
           }
         ]
       },
@@ -1552,6 +1768,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（惺惺相惜）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（交朋友占用了学习时间）"
           }
         ]
       },
@@ -1566,6 +1788,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（自在）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（缺少竞争激励，训练松懈）"
           }
         ]
       }
@@ -1596,6 +1824,12 @@
             "description": "家境 +2"
           },
           {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（贪心不足）"
+          },
+          {
             "type": "set_flag",
             "target": "lucky_coin",
             "value": 1,
@@ -1620,6 +1854,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（贪图享乐荒废学业）"
           }
         ]
       },
@@ -1659,7 +1899,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 18,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -1680,6 +1920,12 @@
             "target": "potion_power",
             "value": 1,
             "description": "药水力量"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（不明液体也敢喝，脑子不好使）"
           }
         ],
         "failureEffects": [
@@ -1710,6 +1956,12 @@
             "target": "mny",
             "value": 3,
             "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（卖掉未知之物的心虚）"
           }
         ]
       },
@@ -1724,6 +1976,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（过度谨慎导致缺乏实践锻炼）"
           }
         ]
       }
@@ -1749,7 +2007,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 18,
+          "difficulty": 21,
           "scale": 3
         },
         "effects": [
@@ -1770,6 +2028,12 @@
             "target": "spirit_companion",
             "value": 1,
             "description": "灵兽同伴！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（与灵兽的精神连接消耗了体力）"
           }
         ],
         "failureEffects": [
@@ -1794,6 +2058,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（犹豫不决错失学习机会）"
           }
         ]
       },
@@ -1808,6 +2078,12 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（被恐惧支配）"
           }
         ]
       }
@@ -1837,6 +2113,12 @@
             "target": "mny",
             "value": 4,
             "description": "家境 +4"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（亲人的离世令人感伤）"
           },
           {
             "type": "set_flag",
@@ -1870,6 +2152,12 @@
             "target": "philanthropist",
             "value": 1,
             "description": "慈善家"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（冲动捐赠，未做规划）"
           }
         ]
       },
@@ -1880,7 +2168,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 14,
+          "difficulty": 16,
           "scale": 3
         },
         "effects": [
@@ -1895,6 +2183,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（金钱的诱惑令人迷失初心）"
           }
         ],
         "failureEffects": [
@@ -1919,7 +2213,7 @@
     "description": "一位富商需要一个保镖保护他前往邻城。报酬丰厚。",
     "minAge": 16,
     "maxAge": 30,
-    "weight": 2,
+    "weight": 1,
     "include": "attribute.str >= 12",
     "effects": [],
     "branches": [
@@ -1930,7 +2224,7 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 14,
+          "difficulty": 16,
           "scale": 3
         },
         "effects": [
@@ -1951,6 +2245,12 @@
             "target": "experienced_guard",
             "value": 1,
             "description": "老练保镖"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（见惯了人心的阴暗面）"
           }
         ],
         "failureEffects": [
@@ -1981,6 +2281,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（拒绝实战机会，缺乏历练）"
           }
         ]
       },
@@ -2002,6 +2308,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（斤斤计较的铜臭味）"
           }
         ]
       }
@@ -2027,7 +2339,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 18,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -2048,6 +2360,12 @@
             "target": "famous_inventor",
             "value": 1,
             "description": "著名发明家！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（长时间伏案工作损害健康）"
           }
         ],
         "failureEffects": [
@@ -2078,6 +2396,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（商人气息太重）"
           }
         ]
       },
@@ -2110,7 +2434,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -2131,6 +2455,12 @@
             "target": "champion",
             "value": 1,
             "description": "锦标赛冠军！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（胜利冲昏头脑）"
           }
         ],
         "failureEffects": [
@@ -2155,6 +2485,12 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1（观摩学习）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（只看不打被嘲笑胆小）"
           }
         ]
       },
@@ -2187,7 +2523,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -2208,6 +2544,12 @@
             "target": "legend_explorer",
             "value": 1,
             "description": "传说探索者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（传说的腐朽气息侵蚀了精神）"
           }
         ],
         "failureEffects": [
@@ -2232,6 +2574,12 @@
             "target": "int",
             "value": 2,
             "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（画地图花时间，错过了快速入手宝藏的时机）"
           }
         ]
       },
@@ -2246,6 +2594,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（组队意味着分赃）"
           }
         ]
       }
@@ -2283,6 +2637,12 @@
             "description": "家境 +2（演出收入）"
           },
           {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -2,
+            "description": "智慧 -2（舞台表演荒废学业）"
+          },
+          {
             "type": "set_flag",
             "target": "stage_mage",
             "value": 1,
@@ -2307,6 +2667,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（街头表演荒废了学业）"
           }
         ]
       },
@@ -2351,6 +2717,12 @@
             "description": "体魄 +1"
           },
           {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（沉迷研究不善社交）"
+          },
+          {
             "type": "set_flag",
             "target": "scholar_warrior",
             "value": 1,
@@ -2375,6 +2747,12 @@
             "target": "mny",
             "value": 1,
             "description": "家境 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（保安工作枯燥，思维迟钝）"
           }
         ]
       },

@@ -39,6 +39,12 @@
             "target": "dragon_slayer",
             "value": 1,
             "description": "屠龙者！"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（龙血灼伤）"
           }
         ],
         "successText": "巨龙轰然倒地，大地震颤。你站在龙尸之上，浑身是血，但活着。传说中不可战胜的巨龙——倒在了你的剑下。"
@@ -58,8 +64,8 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -30,
-            "description": "HP -30（重伤）"
+            "value": -20,
+            "description": "HP -20（重伤）"
           },
           {
             "type": "modify_attribute",
@@ -91,8 +97,8 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -35,
-            "description": "HP -35（重伤）"
+            "value": -25,
+            "description": "HP -25（重伤）"
           },
           {
             "type": "modify_attribute",
@@ -155,6 +161,12 @@
             "target": "married",
             "value": 1,
             "description": "已婚（贵族）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（政治联姻束缚自由意志）"
           }
         ],
         "successText": "婚礼盛大而冷清。你的配偶优雅得体，却像一幅精心装裱的画。从此你的命运与两个家族紧紧绑在了一起。"
@@ -176,6 +188,12 @@
             "target": "refused_marriage",
             "value": 1,
             "description": "拒绝联姻"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（得罪贵族失去商机）"
           }
         ],
         "successText": "家族长辈们大发雷霆，但你的心意已决。自由恋爱也好孤独终老也好，至少这段人生是自己的。"
@@ -219,6 +237,12 @@
             "target": "married",
             "value": 1,
             "description": "已婚（冒险者）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（冒险者生活漂泊不定）"
           }
         ],
         "successText": "你们在星空下交换了誓言。没有华丽的教堂，没有贵族的见证，只有风声和彼此的眼神。这就够了。冒险的道路上，终于不再是一个人了。"
@@ -246,6 +270,12 @@
             "target": "true_friend",
             "value": 1,
             "description": "真挚友谊"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（错失真爱的遗憾）"
           }
         ],
         "successText": "你看着对方远去的背影，没有挽留。冒险者的生命太短暂，也太危险。你选择独自前行，把那个笑容埋在了心底。"
@@ -272,7 +302,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 14,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -329,6 +359,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（逐利之心渐重）"
           }
         ]
       }
@@ -433,13 +469,13 @@
     "description": "你在深层的地下城中迷路了，黑暗中有什么在注视着你。",
     "minAge": 35,
     "maxAge": 50,
-    "weight": 5,
+    "weight": 2,
     "effects": [
       {
         "type": "modify_hp",
         "target": "hp",
-        "value": -30,
-        "description": "HP -30",
+        "value": -20,
+        "description": "HP -20",
         "probability": 0.5
       },
       {
@@ -452,8 +488,8 @@
       {
         "type": "modify_hp",
         "target": "hp",
-        "value": 8,
-        "description": "HP +8（找到宝藏！）",
+        "value": 12,
+        "description": "HP +12（找到宝藏！）",
         "probability": 0.5
       },
       {
@@ -541,6 +577,12 @@
             "target": "healer",
             "value": 1,
             "description": "治愈者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（支援物资消耗）"
           }
         ],
         "successText": "你没有上前线，而是留在家乡组织防御。老人和孩子都需要你。你挖壕沟、筑路障、训练民兵。这里也是战场。"
@@ -629,6 +671,12 @@
             "target": "inner_peace",
             "value": 1,
             "description": "内心平静"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（放下斗志身体松弛）"
           }
         ],
         "successText": "你看着镜中的自己，笑了笑。平凡不是失败，是你一路走来最好的奖赏。今晚喝一杯吧，敬自己。"
@@ -708,7 +756,7 @@
     "description": "你攒够了钱，决定去邻城看看。",
     "minAge": 25,
     "maxAge": 40,
-    "weight": 3,
+    "weight": 1,
     "unique": true,
     "effects": [
       {
@@ -725,7 +773,8 @@
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "attribute.mny >= 5"
   },
   {
     "id": "teaching_others",
@@ -784,6 +833,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1（人脉）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（请客花销）"
           }
         ],
         "description": "你叫了两杯麦酒，和老友面对面坐下。从童年的趣事聊到各自这些年的经历，杯中的酒不知不觉喝完了又续。窗外的夕阳渐渐沉下去，酒馆里亮起了油灯，你们却还舍不得道别。"
@@ -804,6 +859,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（商业头脑）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（功利心重）"
           }
         ],
         "description": "几杯酒下肚，老友压低声音说起了正事。他在邻城做皮货生意，正好需要可靠的合作伙伴。你听他分析了行情和利润，心里暗暗盘算——这或许是个不错的机会。"
@@ -818,13 +879,20 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（释然）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（错失老友机缘）"
           }
         ],
         "description": "你们寒暄了几句，但话题很快就枯竭了。毕竟这么多年没见，曾经的无话不谈已经变成了客套。你举起杯子说了声保重，转身走出了酒馆。街上的风吹来，你忽然觉得有些惆怅。"
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "attribute.chr >= 5"
   },
   {
     "id": "apprentice_contest",
@@ -852,6 +920,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（教学相长）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（参赛费用）"
           }
         ],
         "description": "你站在擂台边，目光紧紧跟随着自己的弟子。每当对手露出破绽，你就高声提醒。弟子按照你的战术一步步稳扎稳打，最终拿下了胜利。他跑下台抱住你，你拍了拍他的肩膀，心中满是欣慰。"
@@ -872,6 +946,12 @@
             "target": "mny",
             "value": 1,
             "description": "家境 +1（赢了一笔）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（赌博观感不佳）"
           }
         ],
         "description": "你找了个好位置坐下，掏出几枚银币押了那个看起来最不起眼的选手。结果那小子一路过关斩将，杀进了决赛。你赢了一小笔钱，更赢了一份好心情。比武场上刀光剑影，看台上你笑得合不拢嘴。"
@@ -892,13 +972,20 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1（赢得喝彩）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（表演中受轻伤）"
           }
         ],
         "description": "主持人邀请台下的前辈上台助兴，你欣然接受了邀请。踏上擂台的那一刻，全场的目光都聚焦在你身上。你随手展示了几招，干净利落，行云流水。台下掌声雷动，年轻弟子们的眼中满是崇拜。"
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "has.flag.has_student"
   },
   {
     "id": "investment_opportunity",
@@ -918,7 +1005,7 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 12,
+          "difficulty": 14,
           "scale": 3
         },
         "effects": [
@@ -951,6 +1038,12 @@
             "target": "mny",
             "value": 2,
             "description": "家境 +2（小有收益）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（跟风投资缺乏主见）"
           }
         ]
       },
@@ -971,8 +1064,8 @@
     "title": "神秘旅人",
     "description": "在旅途中你遇到了一个戴面具的旅人，他似乎知道你的过去...",
     "minAge": 25,
-    "maxAge": 35,
-    "weight": 4,
+    "maxAge": 30,
+    "weight": 1,
     "unique": true,
     "branches": [
       {
@@ -998,6 +1091,12 @@
             "target": "mysterious_encounter",
             "value": true,
             "description": "触发了神秘遭遇"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（卷入神秘事件影响运势）"
           }
         ]
       },
@@ -1012,6 +1111,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（直觉敏锐）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（过度警惕令人疏远）"
           }
         ]
       },
@@ -1037,7 +1142,8 @@
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "attribute.int >= 8"
   },
   {
     "id": "old_rival",
@@ -1066,6 +1172,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（释怀）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（设宴招待）"
           }
         ]
       },
@@ -1080,6 +1192,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（冷静判断）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（心存芥蒂难释怀）"
           }
         ]
       },
@@ -1090,7 +1208,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 12,
+          "difficulty": 14,
           "scale": 2
         },
         "effects": [
@@ -1120,7 +1238,8 @@
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "attribute.chr >= 5 | attribute.str >= 10"
   },
   {
     "id": "luk_lottery",
@@ -1139,7 +1258,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 22,
+          "difficulty": 24,
           "scale": 3
         },
         "effects": [
@@ -1184,6 +1303,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（小赌被人瞧不起）"
           }
         ]
       },
@@ -1216,7 +1341,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -1261,6 +1386,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（精灵之约忘却常识）"
           }
         ]
       },
@@ -1283,61 +1414,13 @@
     "minAge": 20,
     "maxAge": 50,
     "weight": 2,
-    "include": "attribute.spr >= 14",
+    "include": "attribute.spr >= 7",
     "effects": [],
     "branches": [
       {
-        "id": "meditation_breakthrough",
-        "title": "顿悟",
-        "description": "在第三十天，你看到了另一个世界",
-        "probability": 0.2,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 20,
-          "scale": 3
-        },
-        "effects": [
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": 4,
-            "description": "灵魂 +4（大悟）"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "int",
-            "value": 1,
-            "description": "智力 +1"
-          },
-          {
-            "type": "set_flag",
-            "target": "enlightened",
-            "value": 1,
-            "description": "开悟！"
-          }
-        ],
-        "failureEffects": [
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": 1,
-            "description": "灵魂 +1"
-          },
-          {
-            "type": "modify_hp",
-            "target": "hp",
-            "value": -15,
-            "description": "HP -15"
-          }
-        ],
-        "successText": "你感受到了宇宙的真理！",
-        "failureText": "什么都没发生"
-      },
-      {
-        "id": "meditation_calm",
-        "title": "内心平静",
-        "description": "收获了宁静",
-        "probability": 0.5,
+        "id": "meditation_deep",
+        "title": "闭关苦修",
+        "description": "你找了一处僻静的山洞，决定闭关修炼……",
         "effects": [
           {
             "type": "modify_attribute",
@@ -1347,36 +1430,124 @@
           },
           {
             "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（顿悟）"
+          },
+          {
+            "type": "set_flag",
+            "target": "enlightened",
+            "description": "开悟！",
+            "probability": 0.4,
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2,
+            "description": "魅力 -2（与世隔绝太久）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（闭关期间荒废生计）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_attribute",
             "target": "str",
             "value": -1,
-            "description": "体魄 -1"
+            "description": "体魄 -1（闭关荒废身体）"
           }
         ]
       },
       {
-        "id": "meditation_fail",
-        "title": "待不住",
-        "description": "三天就受不了了",
-        "probability": 0.3,
+        "id": "meditation_wander",
+        "title": "行脚修行",
+        "description": "修行不只在山洞里，你决定边走边悟。",
         "effects": [
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
-            "description": "灵魂 -1"
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +2（见多识广）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运势 +1（旅途机缘）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（旅途劳累）",
+            "probability": 0.25
           },
           {
             "type": "modify_attribute",
             "target": "mny",
             "value": -1,
-            "description": "家境 -1"
+            "description": "家境 -1（旅途花销）"
+          }
+        ]
+      },
+      {
+        "id": "meditation_seek_master",
+        "title": "寻找传说中的高人",
+        "description": "你听说某处住着一位隐世高人，决定前去拜访。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3（高人指点）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（高人指点）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（高人拒绝了你）",
+            "probability": 0.4
+          },
+          {
+            "type": "set_flag",
+            "target": "master_disciple",
+            "description": "拜入高人门下",
+            "probability": 0.3,
+            "value": true
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（寻师途中遇险）",
+            "probability": 0.2
           }
         ]
       }
     ],
     "unique": true,
     "tag": "magic",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "has.flag.enlightened"
   },
   {
     "id": "spr_curse_breaker",
@@ -1395,7 +1566,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 18,
+          "difficulty": 21,
           "scale": 3
         },
         "effects": [
@@ -1452,6 +1623,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（接触诅咒沾染晦气）"
           }
         ]
       },
@@ -1471,10 +1648,10 @@
     "id": "spr_near_death",
     "title": "濒死体验",
     "description": "一场意外让你差点丧命。意识模糊中，你看到了一条发光的通道...",
-    "minAge": 20,
-    "maxAge": 60,
+    "minAge": 30,
+    "maxAge": 50,
     "weight": 1,
-    "include": "",
+    "include": "attribute.spr >= 6",
     "effects": [
       {
         "type": "modify_hp",
@@ -1485,85 +1662,117 @@
     ],
     "branches": [
       {
-        "id": "neardeath_return",
-        "title": "回来吧",
-        "description": "你选择了回来",
-        "probability": 0.5,
+        "id": "neardeath_fight",
+        "title": "挣扎求生",
+        "description": "你不甘心就这样死去，拼尽全力挣扎……",
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "spr",
-            "value": 2,
-            "description": "灵魂 +2"
+            "target": "str",
+            "value": 3,
+            "description": "体魄 +3（劫后余生）"
           },
           {
             "type": "modify_attribute",
-            "target": "str",
+            "target": "spr",
             "value": 1,
-            "description": "体魄 +1"
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "cheated_death",
+            "description": "死里逃生！",
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（濒死创伤记忆模糊）"
           }
         ]
       },
       {
-        "id": "neardeath_fight",
-        "title": "与死神搏斗",
-        "description": "你不想死",
-        "probability": 0.3,
-        "requireCondition": "attribute.spr >= 10",
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 16,
-          "scale": 3
-        },
+        "id": "neardeath_accept",
+        "title": "平静接受命运",
+        "description": "也许这就是终点……你闭上了双眼。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4,
+            "description": "灵魂 +4（濒死感悟）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 15,
+            "description": "HP +15（奇迹生还）",
+            "probability": 0.35
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2（接受死亡的代价）",
+            "probability": 0.35
+          },
+          {
+            "type": "set_flag",
+            "target": "death_accepted",
+            "description": "与死亡和解",
+            "probability": 0.5,
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": "neardeath_bargain",
+        "title": "与死神交易",
+        "description": "你在生死边界看到了一个模糊的身影……也许可以做笔交易。",
         "effects": [
           {
             "type": "modify_attribute",
             "target": "spr",
             "value": 3,
-            "description": "灵魂 +3"
+            "description": "灵魂 +3（死神的力量）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 3,
+            "description": "运势 +3（不可思议的运气）",
+            "probability": 0.3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "家境 -3（付出了巨大代价）",
+            "probability": 0.4
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
-            "description": "智力 +1"
+            "value": -2,
+            "description": "智力 -2（记忆被取走了一部分）",
+            "probability": 0.3
           },
           {
             "type": "set_flag",
-            "target": "cheated_death",
-            "value": 1,
-            "description": "死里逃生"
-          }
-        ],
-        "failureEffects": [
-          {
-            "type": "modify_hp",
-            "target": "hp",
-            "value": -15,
-            "description": "HP -15"
-          }
-        ],
-        "successText": "你从死神手中挣脱！",
-        "failureText": "差点回不来了..."
-      },
-      {
-        "id": "neardeath_accept",
-        "title": "接受命运",
-        "description": "该走就走吧",
-        "probability": 0.2,
-        "effects": [
-          {
-            "type": "modify_attribute",
-            "target": "spr",
-            "value": -2,
-            "description": "灵魂 -2"
+            "target": "death_pact",
+            "description": "与死神签订了契约",
+            "probability": 0.5,
+            "value": true
           }
         ]
       }
     ],
     "unique": true,
     "tag": "epic",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "has.flag.enlightened | has.flag.chosen_one"
   },
   {
     "id": "spr_divine_sign",
@@ -1572,25 +1781,19 @@
     "minAge": 20,
     "maxAge": 55,
     "weight": 2,
-    "include": "attribute.spr >= 18",
+    "include": "attribute.spr >= 8",
     "effects": [],
     "branches": [
       {
-        "id": "divine_hear",
-        "title": "聆听神谕",
-        "description": "你听到了一个声音...",
-        "probability": 0.3,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 22,
-          "scale": 3
-        },
+        "id": "divine_listen",
+        "title": "倾心聆听，接受神恩",
+        "description": "你闭上双眼，让神谕充盈全身……",
         "effects": [
           {
             "type": "modify_attribute",
             "target": "spr",
             "value": 4,
-            "description": "灵魂 +4（神恩）"
+            "description": "灵魂 +4（神恩灌注）"
           },
           {
             "type": "modify_attribute",
@@ -1599,29 +1802,83 @@
             "description": "魔力 +2"
           },
           {
-            "type": "set_flag",
-            "target": "chosen_one",
-            "value": 1,
-            "description": "被选中者！"
-          }
-        ],
-        "failureEffects": [
-          {
             "type": "modify_hp",
             "target": "hp",
-            "value": -20,
-            "description": "HP -20"
+            "value": -15,
+            "description": "HP -15（承受神力冲击）",
+            "probability": 0.4
+          },
+          {
+            "type": "set_flag",
+            "target": "chosen_one",
+            "description": "被神选中！",
+            "probability": 0.3,
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "灵魂 -3（走火入魔）",
+            "probability": 0.2
+          },
+          {
+            "type": "set_flag",
+            "target": "mana_burned",
+            "description": "魔力暴走！",
+            "probability": 0.2,
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（承受神力冲击肉身）"
           }
-        ],
-        "successText": "你成为了神明的使者！",
-        "failureText": "凡人无法承受神力..."
+        ]
       },
       {
-        "id": "divine_witness",
-        "title": "做个见证者",
-        "description": "这件事太大了",
-        "probability": 0.4,
+        "id": "divine_spread",
+        "title": "将神谕传播给世人",
+        "description": "神谕不应独享，你决定将其传播开来。",
         "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "魅力 +3（传播者之名）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "家境 +1（信徒捐献）"
+          },
+          {
+            "type": "set_flag",
+            "target": "prophet",
+            "description": "成为传播者",
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（传道消耗心智）"
+          }
+        ]
+      },
+      {
+        "id": "divine_investigate",
+        "title": "独自调查神谕的真相",
+        "description": "这真的是神的声音吗？你决定一探究竟。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3,
+            "description": "智慧 +3（真相探索）"
+          },
           {
             "type": "modify_attribute",
             "target": "spr",
@@ -1629,24 +1886,24 @@
             "description": "灵魂 +1"
           },
           {
-            "type": "modify_attribute",
-            "target": "chr",
-            "value": 1,
-            "description": "魅力 +1"
-          }
-        ]
-      },
-      {
-        "id": "divine_ignore",
-        "title": "不关我事",
-        "description": "该干嘛干嘛",
-        "probability": 0.3,
-        "effects": [
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（调查途中受伤）",
+            "probability": 0.35
+          },
+          {
+            "type": "set_flag",
+            "target": "truth_seeker",
+            "description": "追寻真相",
+            "probability": 0.5,
+            "value": true
+          },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 1,
-            "description": "家境 +1"
+            "value": -1,
+            "description": "家境 -1（调查花费）"
           }
         ]
       }
@@ -1672,7 +1929,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -1717,6 +1974,12 @@
             "target": "int",
             "value": 2,
             "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（学习材料费）"
           }
         ]
       },
@@ -1756,7 +2019,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -1801,6 +2064,12 @@
             "target": "mny",
             "value": 1,
             "description": "家境 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（唯唯诺诺形象不佳）"
           }
         ]
       },
@@ -1822,6 +2091,12 @@
             "target": "tax_reformer",
             "value": 1,
             "description": "税务改革者"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（抗议冲突受伤）"
           }
         ]
       }
@@ -1848,7 +2123,7 @@
         "requireCondition": "attribute.mag >= 20",
         "riskCheck": {
           "attribute": "mag",
-          "difficulty": 22,
+          "difficulty": 26,
           "scale": 3
         },
         "effects": [
@@ -1893,6 +2168,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（沉迷魔法荒废身体）"
           }
         ]
       },
@@ -1907,6 +2188,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（浅尝辄止错失机缘）"
           }
         ]
       }
@@ -1932,7 +2219,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 22,
+          "difficulty": 26,
           "scale": 3
         },
         "effects": [
@@ -1989,6 +2276,12 @@
             "target": "mag",
             "value": 1,
             "description": "魔力 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（元素辐射侵蚀）"
           }
         ]
       },
@@ -2003,6 +2296,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（封印消耗魔力）"
           }
         ]
       }
@@ -2028,7 +2327,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "mag",
-          "difficulty": 18,
+          "difficulty": 21,
           "scale": 3
         },
         "effects": [
@@ -2080,6 +2379,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（调停奔波劳碌）"
           }
         ]
       },
@@ -2112,7 +2417,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 18,
+          "difficulty": 21,
           "scale": 3
         },
         "effects": [
@@ -2163,6 +2468,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（守城煎熬消磨意志）"
           }
         ]
       },
@@ -2195,7 +2506,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 24,
+          "difficulty": 28,
           "scale": 3
         },
         "effects": [
@@ -2228,7 +2539,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -50,
+            "value": -35,
             "description": "HP -50（龙息）"
           }
         ],
@@ -2246,6 +2557,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（组队开销）"
           }
         ]
       },
@@ -2278,7 +2595,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -2329,6 +2646,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（合伙纠纷暗藏隐患）"
           }
         ]
       },
@@ -2361,7 +2684,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "mny",
-          "difficulty": 20,
+          "difficulty": 22,
           "scale": 3
         },
         "effects": [
@@ -2412,6 +2735,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（社交应酬开销）"
           }
         ]
       },
@@ -2451,7 +2780,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 18,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -2490,6 +2819,12 @@
             "target": "mny",
             "value": 1,
             "description": "家境 +1（慢慢恢复）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（保守求安被人说没担当）"
           }
         ]
       },
@@ -2511,6 +2846,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（慷慨解囊）"
           }
         ]
       }
@@ -2536,7 +2877,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -2581,6 +2922,12 @@
             "target": "int",
             "value": 2,
             "description": "智力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（调查费用）"
           }
         ]
       },
@@ -2613,7 +2960,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "luk",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -2658,6 +3005,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（上报路费）"
           }
         ]
       },
@@ -2690,7 +3043,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -2741,6 +3094,12 @@
             "target": "mag",
             "value": 1,
             "description": "魔力 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（高强度训练受伤）"
           }
         ]
       },
@@ -2773,7 +3132,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 20,
+          "difficulty": 22,
           "scale": 3
         },
         "effects": [
@@ -2824,6 +3183,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（拒绝可疑人物被盯上）"
           }
         ]
       },
@@ -2838,6 +3203,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（调查花费）"
           }
         ]
       }
@@ -2863,7 +3234,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 26,
+          "difficulty": 30,
           "scale": 2
         },
         "effects": [
@@ -2890,7 +3261,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -50,
+            "value": -35,
             "description": "HP -50（深渊吞噬）"
           },
           {
@@ -2921,6 +3292,12 @@
             "target": "chr",
             "value": 2,
             "description": "魅力 +2（英雄）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -2,
+            "description": "魔力 -2（封印消耗大量魔力）"
           }
         ]
       },
@@ -2953,7 +3330,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 28,
+          "difficulty": 30,
           "scale": 2
         },
         "effects": [
@@ -2986,7 +3363,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -60,
+            "value": -35,
             "description": "HP -60（神罚）"
           }
         ],
@@ -3004,6 +3381,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（谦逊）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（拒绝神恩被人非议）"
           }
         ]
       },
@@ -3012,7 +3395,20 @@
         "title": "讨价还价",
         "description": "能不能简单点",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（与神对话的感悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（神力反噬）"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -3036,7 +3432,7 @@
         "probability": 0.2,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 26,
+          "difficulty": 30,
           "scale": 2
         },
         "effects": [
@@ -3063,7 +3459,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -60,
+            "value": -35,
             "description": "HP -60（致命伤）"
           }
         ],
@@ -3078,7 +3474,7 @@
         "requireCondition": "attribute.mag >= 20",
         "riskCheck": {
           "attribute": "mag",
-          "difficulty": 26,
+          "difficulty": 30,
           "scale": 2
         },
         "effects": [
@@ -3105,7 +3501,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -60,
+            "value": -35,
             "description": "HP -60"
           }
         ],
@@ -3123,6 +3519,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（支援物资消耗）"
           }
         ]
       },
@@ -3138,6 +3540,12 @@
             "target": "chr",
             "value": 2,
             "description": "魅力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（搬运平民消耗体力）"
           }
         ]
       }
@@ -3163,7 +3571,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 18,
+          "difficulty": 21,
           "scale": 3
         },
         "effects": [
@@ -3214,6 +3622,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（幕后权谋心术渐偏）"
           }
         ]
       },
@@ -3262,6 +3676,12 @@
             "target": "master_mentor",
             "value": 1,
             "description": "大师导师"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（教学耗体力）"
           }
         ]
       },
@@ -3282,6 +3702,12 @@
             "target": "famous_author",
             "value": 1,
             "description": "著名作者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（出版费用）"
           }
         ]
       },
@@ -3296,6 +3722,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（不再钻研思维退步）"
           }
         ]
       }
@@ -3310,7 +3742,7 @@
     "description": "你过去做的一些事情被翻了出来。有人拿着证据威胁你...",
     "minAge": 25,
     "maxAge": 50,
-    "weight": 2,
+    "weight": 1,
     "include": "has.flag.underworld_contact | attribute.int >= 10",
     "effects": [],
     "branches": [
@@ -3321,7 +3753,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -3387,6 +3819,12 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（以暴制暴名声受损）"
           }
         ]
       }
@@ -3502,6 +3940,12 @@
             "target": "lover_at_war",
             "value": 1,
             "description": "恋人在远征"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（离别消沉疏于社交）"
           }
         ],
         "id": "quest_parting_branch0",
@@ -3647,6 +4091,12 @@
             "target": "in_relationship",
             "value": 1,
             "description": "你们的关系更加坚定"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（独闯魔窟受伤）"
           }
         ],
         "id": "rescue_from_dungeon_branch0",
@@ -3718,6 +4168,12 @@
             "target": "mag",
             "value": 1,
             "description": "魔力 +1"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（灵魂契约消耗生命力）"
           }
         ],
         "id": "soul_bound_branch0",

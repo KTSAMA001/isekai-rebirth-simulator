@@ -18,7 +18,7 @@
         "probability": 0.6,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 12,
+          "difficulty": 14,
           "scale": 3
         },
         "effects": [
@@ -88,6 +88,12 @@
             "target": "knight",
             "value": 1,
             "description": "正式骑士（智将型）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（取巧过关引人议论）"
           }
         ]
       },
@@ -108,6 +114,12 @@
             "target": "squire_failed",
             "value": 1,
             "description": "放弃骑士之路"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（放弃考核形象受损）"
           }
         ]
       }
@@ -154,6 +166,12 @@
             "target": "guild_member",
             "value": 1,
             "description": "成为冒险者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（公会的约束失去自由）"
           }
         ],
         "successText": "公会的接待员递给你一枚铜质徽章。「欢迎加入冒险者公会。记住——互助、勇气、不抛弃同伴。」你郑重地把徽章别在了胸口。"
@@ -181,6 +199,12 @@
             "target": "solo_adventurer",
             "value": 1,
             "description": "独行侠"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（独来独往不善交际）"
           }
         ],
         "successText": "你摇摇头，独自走出了公会大门。自由是好的，但有时也会孤独。你不知道前方等待你的是什么，但脚步没有停下。"
@@ -255,7 +279,7 @@
         "probability": 0.6,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 12,
+          "difficulty": 15,
           "scale": 3
         },
         "effects": [
@@ -312,6 +336,12 @@
             "target": "luk",
             "value": 1,
             "description": "运势 +1（省力也是一种本事）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（敷衍了事名声不佳）"
           }
         ]
       }
@@ -502,6 +532,12 @@
             "target": "escaped_dark",
             "value": 1,
             "description": "逃脱诱惑"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（逃脱消耗）"
           }
         ],
         "successText": "你假装答应，趁机逃离。暗黑魔师的笑声在身后回荡：「跑吧，跑吧……你逃不掉命运。」你加快了脚步，头也不回。"
@@ -529,7 +565,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "mag",
-          "difficulty": 14,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -580,6 +616,12 @@
             "target": "int",
             "value": 2,
             "description": "智慧 +2（观察学习）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（被视为怯懦）"
           }
         ]
       },
@@ -591,7 +633,7 @@
         "requireCondition": "attribute.int >= 12",
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 14,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -612,6 +654,12 @@
             "target": "duel_champion",
             "value": 1,
             "description": "决斗冠军（智取胜）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（偏重智谋，魔法疏于修炼）"
           }
         ],
         "failureEffects": [
@@ -647,7 +695,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 16,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -722,6 +770,12 @@
             "target": "resist_dark",
             "value": 1,
             "description": "抵抗诱惑"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智力 -1（抗拒知识的代价）"
           }
         ]
       },
@@ -748,6 +802,12 @@
             "target": "trusted_by_dean",
             "value": 1,
             "description": "院长信任"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（被限制进入禁书区）"
           }
         ]
       }
@@ -772,7 +832,7 @@
         "description": "你踏上朝圣之路，寻找传说中的圣泉",
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 14,
+          "difficulty": 16,
           "scale": 3
         },
         "effects": [
@@ -849,7 +909,7 @@
         "description": "你决定与心中的黑暗抗争到底",
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 10,
+          "difficulty": 12,
           "scale": 4
         },
         "effects": [
@@ -997,7 +1057,7 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 16,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -1036,7 +1096,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -40,
+            "value": -30,
             "description": "HP -40（险些丧命）"
           },
           {
@@ -1072,6 +1132,12 @@
             "target": "luk",
             "value": 1,
             "description": "运势 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（过度谨慎消耗体力）"
           }
         ]
       },
@@ -1105,6 +1171,12 @@
             "target": "team_leader",
             "value": 1,
             "description": "团队领袖"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（团队磨合的代价）"
           }
         ]
       }
@@ -1146,6 +1218,12 @@
             "target": "heartbreak_growth",
             "value": 1,
             "description": "在痛苦中成长"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（沉迷修炼疏远社交）"
           }
         ],
         "successText": "你把痛苦化作修炼的动力。每一次挥剑、每一次冥想，都是为了不再让自己受伤。你变强了——但心上的伤疤还在。"
@@ -1201,6 +1279,12 @@
             "target": "emotional_maturity",
             "value": 1,
             "description": "情感成熟"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（心态平和后少了斗志）"
           }
         ],
         "successText": "你深吸一口气，决定释然。失去让人成长，而成长意味着你值得更好的未来。擦干眼泪，新的一天在等着你。"
@@ -1227,7 +1311,7 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 16,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -1303,6 +1387,12 @@
             "target": "knight_tactician",
             "value": 1,
             "description": "智将骑士"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（缺少正面战场磨练）"
           }
         ]
       },
@@ -1329,6 +1419,12 @@
             "target": "knight_honor",
             "value": 1,
             "description": "荣誉骑士"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（放弃战利品优先救人）"
           }
         ]
       }
@@ -1342,7 +1438,7 @@
     "description": "今晚有流星雨，整个村庄的人都出来了。",
     "minAge": 15,
     "maxAge": 25,
-    "weight": 2,
+    "weight": 1,
     "unique": true,
     "effects": [
       {
@@ -1382,6 +1478,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（听故事忘了正事）"
           }
         ]
       },
@@ -1402,12 +1504,19 @@
             "target": "traveler_cloak",
             "value": 1,
             "description": "获得 🧥 旅人斗篷"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（花光了积蓄）"
           }
         ]
       }
     ],
     "tag": "life",
-    "priority": "minor"
+    "priority": "minor",
+    "include": "attribute.mny >= 3 | attribute.chr >= 5"
   },
   {
     "id": "forest_camping",
@@ -1430,6 +1539,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（安逸消磨了斗志）"
           }
         ]
       },
@@ -1440,7 +1555,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 10,
           "scale": 2
         },
         "effects": [
@@ -1455,6 +1570,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（勇气）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（夜探森林消耗了运气）"
           }
         ],
         "failureEffects": [
@@ -1497,6 +1618,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（冒险之心）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智力 -1（好奇心压过理性）"
           }
         ]
       },
@@ -1517,6 +1644,12 @@
             "target": "str",
             "value": 1,
             "description": "体魄 +1（锻炼）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1,
+            "description": "运势 -1（安于平淡错过机遇）"
           }
         ]
       },
@@ -1537,6 +1670,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（助人为乐）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（帮朋友报酬减半）"
           }
         ]
       }
@@ -1551,7 +1690,7 @@
     "description": "在集市上你看到了一个人，心跳突然加速...",
     "minAge": 16,
     "maxAge": 22,
-    "weight": 5,
+    "weight": 2,
     "exclude": "has.flag.first_love | has.flag.never_retired",
     "weightModifiers": [
       {
@@ -1568,7 +1707,7 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 10,
+          "difficulty": 12,
           "scale": 3
         },
         "effects": [
@@ -1625,6 +1764,12 @@
             "target": "first_love",
             "value": 1,
             "description": "初恋（暗恋）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（怯于行动错失良机）"
           }
         ]
       },
@@ -1673,6 +1818,12 @@
             "target": "int",
             "value": 1,
             "description": "智慧 +1（悟出心得）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（孤独修炼疏远同伴）"
           }
         ]
       },
@@ -1683,7 +1834,7 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 11,
           "scale": 2
         },
         "effects": [
@@ -1755,6 +1906,12 @@
             "target": "prophet_dream",
             "value": 1,
             "description": "预知能力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（沉迷解梦行为怪异）"
           }
         ]
       },
@@ -1769,6 +1926,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（忽视灵性暗示）"
           }
         ]
       },
@@ -1814,7 +1977,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "mag",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -1871,6 +2034,12 @@
             "target": "researcher",
             "value": 1,
             "description": "研究者"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（未实践错失提升机会）"
           }
         ]
       },
@@ -1900,7 +2069,7 @@
     "minAge": 14,
     "maxAge": 22,
     "weight": 3,
-    "include": "attribute.chr >= 12 & attribute.int >= 8",
+    "include": "attribute.chr >= 8 | attribute.int >= 6",
     "effects": [],
     "branches": [
       {
@@ -1910,7 +2079,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -1961,6 +2130,12 @@
             "target": "int",
             "value": 1,
             "description": "智力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（辩论消耗精神）"
           }
         ]
       },
@@ -1975,6 +2150,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（临阵脱逃形象受损）"
           }
         ]
       }
@@ -2000,7 +2181,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 19,
           "scale": 3
         },
         "effects": [
@@ -2057,6 +2238,12 @@
             "target": "chr",
             "value": 1,
             "description": "魅力 +1"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": -1,
+            "description": "魔力 -1（被限制实验机会）"
           }
         ]
       },

@@ -88,7 +88,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 18,
+          "difficulty": 20,
           "scale": 3
         },
         "effects": [
@@ -135,6 +135,12 @@
             "description": "灵魂 +1（心灵平静）"
           },
           {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（与世隔绝写书）"
+          },
+          {
             "type": "set_flag",
             "target": "memoir_written",
             "value": 1,
@@ -153,6 +159,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（释怀）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智力 -1（记忆模糊）"
           }
         ]
       }
@@ -194,6 +206,12 @@
             "target": "hp",
             "value": 10,
             "description": "HP +10（欣慰）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智力 -1（年老记忆力衰退）"
           }
         ]
       },
@@ -204,7 +222,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 16,
+          "difficulty": 18,
           "scale": 3
         },
         "effects": [
@@ -269,7 +287,7 @@
         "requireCondition": "attribute.str >= 18 | attribute.mag >= 18",
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -290,7 +308,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -60,
+            "value": -35,
             "description": "HP -60（重伤）"
           },
           {
@@ -316,6 +334,12 @@
             "description": "魅力 +1（受人尊敬）"
           },
           {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（带年轻人也是体力活）"
+          },
+          {
             "type": "set_flag",
             "target": "mentor_legend",
             "value": 1,
@@ -334,6 +358,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（从容）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（被年轻人觉得你怕了）"
           }
         ]
       }
@@ -369,6 +399,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（满足）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "家境 -1（宴席花费）"
           }
         ]
       },
@@ -406,6 +442,12 @@
             "description": "魅力 +1（英明决断）"
           },
           {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（分家产的损失）"
+          },
+          {
             "type": "set_flag",
             "target": "family_legacy",
             "value": 1,
@@ -435,7 +477,7 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 16,
+          "difficulty": 19,
           "scale": 3
         },
         "effects": [
@@ -462,7 +504,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -50,
+            "value": -35,
             "description": "HP -50"
           }
         ],
@@ -501,6 +543,12 @@
             "target": "spr",
             "value": 2,
             "description": "灵魂 +2（觉悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（放弃治疗身体更差）"
           }
         ]
       }
@@ -526,7 +574,7 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 20,
+          "difficulty": 23,
           "scale": 3
         },
         "effects": [
@@ -577,6 +625,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（感悟）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（灵魂出窍的消耗）"
           }
         ]
       },
@@ -622,6 +676,12 @@
             "description": "魅力 +2（受人敬仰）"
           },
           {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "家境 -2（宝物送出去了）"
+          },
+          {
             "type": "set_flag",
             "target": "legend_legacy",
             "value": 1,
@@ -660,6 +720,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（眷恋）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（被人说吝啬）"
           }
         ]
       }
@@ -686,7 +752,7 @@
         "requireCondition": "attribute.str >= 20 | attribute.mag >= 20",
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 22,
+          "difficulty": 26,
           "scale": 3
         },
         "effects": [
@@ -707,7 +773,7 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -70,
+            "value": -35,
             "description": "HP -70（战伤）"
           }
         ],
@@ -726,6 +792,12 @@
             "target": "chr",
             "value": 2,
             "description": "魅力 +2（智囊）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（战争谋略的道德负担）"
           },
           {
             "type": "set_flag",
@@ -794,6 +866,12 @@
             "target": "luk",
             "value": 1,
             "description": "幸运 +1（花开富贵）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（年迈身体渐弱）"
           }
         ]
       },
@@ -814,6 +892,12 @@
             "target": "spr",
             "value": 1,
             "description": "灵魂 +1（宁静）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（远离社交圈）"
           }
         ]
       },
@@ -953,5 +1037,199 @@
     "unique": true,
     "tag": "epic",
     "priority": "critical"
+  },
+  {
+    "id": "elder_frail",
+    "title": "风烛残年",
+    "description": "年迈的身体越来越脆弱了。简单的散步都会气喘吁吁，上楼梯要扶着墙壁才能站稳。曾经能举起巨剑的双手，如今连茶杯都在微微颤抖。",
+    "minAge": 65,
+    "maxAge": 75,
+    "weight": 40,
+    "effects": [],
+    "branches": [
+      {
+        "id": "frail_peace",
+        "title": "安享晚年",
+        "description": "你决定放下一切，好好享受剩余的时光",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +2（内心安宁）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15（衰老）"
+          }
+        ],
+        "successText": "你坐在门廊的摇椅上，看着夕阳一点点沉入山的那一边。手中的茶杯温热，身边的猫在打盹。也许这就是最好的结局——在平静中，慢慢道别。"
+      },
+      {
+        "id": "frail_extend",
+        "title": "寻找延长寿命的方法",
+        "description": "你不愿意就这样倒下，四处寻找延寿秘术",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -20,
+            "description": "家境 -20（四处求医）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 5,
+            "description": "HP +5（续命效果）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "灵魂 -2（对死亡的恐惧）"
+          }
+        ],
+        "successText": "你找到了一位隐居的炼金术师。他给了你一瓶银色的药水，说这能再续几年。喝下去的那一刻，你确实感到精力恢复了一些——但代价是你的积蓄，以及内心深处的某个东西。"
+      }
+    ],
+    "unique": true,
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_memory_fade",
+    "title": "渐渐模糊的记忆",
+    "description": "你开始记不清一些事情了。昨天发生的事和十年前的记忆混在一起，有时叫不出老朋友的名字，有时站在家门口忘了自己要去哪里。时间在偷走你最珍贵的东西。",
+    "minAge": 70,
+    "maxAge": 80,
+    "weight": 30,
+    "effects": [],
+    "branches": [
+      {
+        "id": "memory_record",
+        "title": "记录回忆",
+        "description": "你决定把一切都写下来，趁还记得的时候",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -2,
+            "description": "智力 -2（记忆衰退）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（留下传世之作）"
+          }
+        ],
+        "successText": "你在烛光下一页一页地写。有欢笑，有泪水，有遗憾，有骄傲。写到某一段时你停下了笔——那个人的名字，你怎么也想不起来了。泪水落在羊皮纸上，模糊了墨迹。"
+      },
+      {
+        "id": "memory_present",
+        "title": "活在当下",
+        "description": "既然记不住过去，那就好好把握现在",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（随缘自在）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智力 -1（记忆模糊）"
+          }
+        ],
+        "successText": "你不再执着于回忆。每一天的阳光、每一顿饭菜、每一个微笑——这些就是活着的意义。也许忘了过去也挺好，至少不会因为遗憾而心痛了。"
+      }
+    ],
+    "unique": true,
+    "tag": "life",
+    "priority": "minor"
+  },
+  {
+    "id": "elder_final_illness",
+    "title": "最后的病榻",
+    "description": "一场突如其来的重病将你击倒在床。高烧不退，呼吸困难。医生们表情凝重地交换着眼神——这一次，恐怕不只是普通的感冒。",
+    "minAge": 70,
+    "maxAge": 80,
+    "weight": 35,
+    "include": "has.counter.age >= 72",
+    "effects": [],
+    "branches": [
+      {
+        "id": "final_treatment",
+        "title": "积极治疗",
+        "description": "倾尽所有也要活下去",
+        "probability": 0.45,
+        "riskCheck": {
+          "attribute": "con",
+          "difficulty": 15
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -25,
+            "description": "家境 -25（医疗费）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（病痛）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -40,
+            "description": "HP -40（治疗失败，病情恶化）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "体魄 -2（病入膏肓）"
+          }
+        ],
+        "successText": "经过数周的煎熬，烧终于退了。你虚弱地睁开眼睛，看到床边守候的家人露出了如释重负的表情。你知道，自己又从死神手里赢回了一些时间。",
+        "failureText": "治疗没有起效。你的身体像是被掏空了一样，连说话的力气都没有。意识在明灭之间，你听到了家人的哭泣声……"
+      },
+      {
+        "id": "final_accept",
+        "title": "接受命运",
+        "description": "你已经活得够久了，坦然面对",
+        "probability": 0.55,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +3（超脱）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -25,
+            "description": "HP -25（放弃治疗）"
+          }
+        ],
+        "successText": "你让家人都来到床前，一个一个地握住他们的手。没有眼泪，没有遗憾，只是微笑着说：「我这一生，很精彩。」窗外的月光洒在你的脸上，像是命运最后的温柔。"
+      }
+    ],
+    "unique": true,
+    "tag": "life",
+    "priority": "major"
   }
 ]
