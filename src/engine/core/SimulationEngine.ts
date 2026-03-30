@@ -465,8 +465,28 @@ export class SimulationEngine {
     }
 
     // 无分支的普通事件 → 应用效果，显示结果
+    // 先处理物品获取（必须在 cloneState 之前，因为 grantItem 直接修改 this.state）
+    const grantItemMessages: string[] = []
+    for (const fx of event.effects) {
+      if (fx.type === 'grant_item') {
+        const result = this.itemModule.grantItem(this.state, fx.target)
+        grantItemMessages.push(result.message)
+        if (result.success) {
+          const hpBonus = this.itemModule.getFlatHpBonus(fx.target)
+          if (hpBonus > 0) {
+            this.state = { ...this.state, hp: this.state.hp + hpBonus }
+          }
+        }
+      }
+    }
+
     const clonedState = this.cloneState(this.state)
     const effectTexts = this.eventModule.applyEffectsOnState(event.effects, clonedState)
+
+    // 追加物品获取提示文本
+    for (const msg of grantItemMessages) {
+      effectTexts.push(msg)
+    }
 
     // 记录日志
     const logEntry = {
