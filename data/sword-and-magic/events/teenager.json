@@ -7,7 +7,7 @@
     "maxAge": 18,
     "weight": 6,
     "include": "has.flag.squire",
-    "exclude": "has.flag.magic_student",
+    "exclude": "(has.flag.magic_student) | (has.flag.lord)",
     "unique": true,
     "effects": [],
     "branches": [
@@ -138,7 +138,7 @@
     "maxAge": 20,
     "weight": 6,
     "include": "attribute.str >= 4 | attribute.mag >= 6",
-    "exclude": "has.flag.guild_member",
+    "exclude": "has.flag.guild_member | has.flag.lord",
     "unique": true,
     "effects": [],
     "branches": [
@@ -1168,7 +1168,8 @@
       }
     ],
     "tag": "adventure",
-    "priority": "critical"
+    "priority": "critical",
+    "exclude": "has.flag.lord"
   },
   {
     "id": "heartbreak_growth",
@@ -1640,7 +1641,8 @@
       }
     ],
     "tag": "adventure",
-    "priority": "minor"
+    "priority": "minor",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "love_at_first_sight",

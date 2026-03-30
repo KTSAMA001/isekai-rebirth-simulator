@@ -520,7 +520,8 @@
     ],
     "unique": true,
     "tag": "adventure",
-    "priority": "minor"
+    "priority": "minor",
+    "exclude": "has.flag.lord"
   },
   {
     "id": "war_breaks_out",
@@ -2829,7 +2830,8 @@
     ],
     "unique": true,
     "tag": "combat",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "adv_uncharted",
@@ -2908,7 +2910,8 @@
     ],
     "unique": true,
     "tag": "exploration",
-    "priority": "minor"
+    "priority": "minor",
+    "exclude": "has.flag.lord | has.flag.political_player"
   },
   {
     "id": "dual_war_mage",
@@ -4833,7 +4836,8 @@
         ],
         "successText": "你带着货物消失了。富商暴怒地发出追杀令。你确实发财了，但以后再也不能光明正大地走在街上。"
       }
-    ]
+    ],
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "siege_defense",
@@ -5084,7 +5088,8 @@
         "successText": "事情办得干净利落。你拿到金币后手一直在抖。有些门一旦打开，就再也关不上了。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "war_campaign",
@@ -5207,7 +5212,8 @@
         "successText": "你在海里游了整整一夜才到达岸边。货没了，命还在。你赤脚走在沙滩上，开始盘算接下来的路。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord | has.flag.political_player"
   },
   {
     "id": "dungeon_hidden_floor",
@@ -5272,7 +5278,8 @@
         "successText": "你用法术重新封印了大门，并把秘密报告给了公会。你的谨慎赢得了所有人的尊重。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord"
   },
   {
     "id": "prison_break",
@@ -5325,7 +5332,8 @@
         "successText": "你四处奔走搜集证据，最终在法庭上证明了旧友的清白。整个过程耗时半年，但正义终究得到了伸张。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord | has.flag.political_player"
   },
   {
     "id": "boss_lair_assault",

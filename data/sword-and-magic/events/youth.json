@@ -230,7 +230,7 @@
     "maxAge": 14,
     "weight": 3,
     "include": "attribute.str >= 4",
-    "exclude": "has.flag.squire",
+    "exclude": "(has.flag.squire) | (has.flag.lord)",
     "unique": true,
     "effects": [],
     "branches": [
@@ -512,7 +512,7 @@
     "maxAge": 15,
     "weight": 7,
     "include": "attribute.str >= 3 | attribute.mag >= 4",
-    "exclude": "has.flag.dungeon_first",
+    "exclude": "(has.flag.dungeon_first) | (has.flag.lord)",
     "unique": true,
     "effects": [],
     "branches": [
@@ -2224,7 +2224,8 @@
     ],
     "unique": true,
     "tag": "combat",
-    "priority": "minor"
+    "priority": "minor",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "int_invention",
@@ -2397,7 +2398,8 @@
     ],
     "unique": true,
     "tag": "combat",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "has.flag.lord"
   },
   {
     "id": "adv_legendary_dungeon",
@@ -2492,7 +2494,8 @@
     ],
     "unique": true,
     "tag": "exploration",
-    "priority": "major"
+    "priority": "major",
+    "exclude": "has.flag.lord"
   },
   {
     "id": "dual_charisma_magic",
@@ -3105,7 +3108,8 @@
         "successText": "你仔细观察每个选手的招式，在心里默默记下。总有一天，你也会站在那个擂台上。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "bandit_ambush",
@@ -3182,7 +3186,8 @@
         "successText": "你拼命奔跑，终于甩掉了追兵。但那种无力感，让你下定决心要变得更强。"
       }
     ],
-    "unique": true
+    "unique": true,
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member"
   },
   {
     "id": "monster_hunt_guild",
@@ -3241,7 +3246,8 @@
         ],
         "successText": "你们配合默契，轻松拿下了魔狼。虽然赏金要分，但你收获了宝贵的战斗经验和可靠的朋友。"
       }
-    ]
+    ],
+    "exclude": "has.flag.lord | has.flag.political_player"
   },
   {
     "id": "part_time_job",
