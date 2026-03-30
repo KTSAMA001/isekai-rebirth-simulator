@@ -1472,12 +1472,12 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1530,12 +1530,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           }
         ],
         "successText": "你站在众人面前，回顾了一生的经历。当说到那些已经不在的朋友们时，你停顿了很久。最后你说：'能和你们共度此生，是我最大的幸运。'"
@@ -1573,7 +1573,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 4
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -1591,12 +1591,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 3
+            "value": 2
           }
         ],
         "successText": "你闭眼许了一个愿望。睁开眼时，一颗流星划过天际。你笑了——也许，愿望会实现的。"
@@ -1621,17 +1621,17 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "你们面对面坐着，曾经的恩怨在岁月面前显得微不足道。最后你们握了握手，互相说了声'保重'。"

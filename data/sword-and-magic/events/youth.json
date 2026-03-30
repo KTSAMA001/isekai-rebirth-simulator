@@ -2964,7 +2964,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 4
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -2988,7 +2988,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 4
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -3018,17 +3018,17 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "学者见你求学心切，留下了三个月。你跟着他走遍了大半个王国，见识了无数奇闻异事。"
@@ -3069,24 +3069,19 @@
         "requireCondition": "attribute.str >= 12",
         "effects": [
           {
+            "type": "set_flag",
+            "target": "champion",
+            "value": 1
+          },
+          {
             "type": "modify_attribute",
             "target": "str",
             "value": 3
           },
           {
             "type": "modify_attribute",
-            "target": "chr",
-            "value": 3
-          },
-          {
-            "type": "modify_attribute",
-            "target": "mny",
-            "value": 4
-          },
-          {
-            "type": "set_flag",
-            "target": "champion",
-            "value": 1
+            "target": "mag",
+            "value": 2
           }
         ],
         "successText": "最后一击！对手倒下了。全场欢呼你的名字。竞技场老板递给你一袋金币——你是新的冠军！"
@@ -3208,17 +3203,17 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 3
-          },
-          {
-            "type": "modify_attribute",
-            "target": "chr",
             "value": 2
           },
           {
             "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
             "target": "mny",
-            "value": 3
+            "value": 2
           }
         ],
         "successText": "经过三天追踪，你独自猎杀了魔狼。公会给你的赏金丰厚，你的猎人等级也提升了一级。"
@@ -3231,17 +3226,17 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "你们配合默契，轻松拿下了魔狼。虽然赏金要分，但你收获了宝贵的战斗经验和可靠的朋友。"
@@ -3265,7 +3260,7 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -3317,17 +3312,17 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "你的表演引起了一阵喝彩。有人往你的帽子里扔了铜板，还有人问你愿不愿意加入他们的巡回表演团。"
@@ -3370,17 +3365,17 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "经过一番唇枪舌战，你以三折的价格拿下了心仪的物品。围观的群众纷纷鼓掌。"
