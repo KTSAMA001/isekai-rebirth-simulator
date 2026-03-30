@@ -77,7 +77,7 @@
   "LifeRoute": {
     "type": "object",
     "required": ["id", "name", "description", "priority", "anchorEvents"],
-    "additionalProperties": false,
+    "additionalProperties": true,
     "properties": {
       "id": { "type": "string" },
       "name": { "type": "string" },
@@ -87,7 +87,9 @@
       "priority": { "type": "integer" },
       "entryFlags": { "type": "array", "items": { "type": "string" } },
       "exclusiveEvents": { "type": "array", "items": { "type": "string" } },
-      "anchorEvents": { "type": "array", "items": { "$ref": "#/definitions/RouteAnchor" } }
+      "anchorEvents": { "type": "array", "items": { "$ref": "#/definitions/RouteAnchor" } },
+      "tier": { "type": "integer", "minimum": 0 },
+      "parentRoute": { "type": "string" }
     }
   },
 

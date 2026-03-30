@@ -19,12 +19,14 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2
+            "value": 1,
+            "description": "魔力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1（被魔力暴走吓到了）"
           },
           {
             "type": "set_flag",
@@ -44,7 +46,8 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2
+            "value": 2,
+            "description": "魔力 +2"
           },
           {
             "type": "modify_hp",
@@ -65,17 +68,20 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2
+            "value": 2,
+            "description": "魔力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（精神力消耗过大）"
           },
           {
             "type": "set_flag",
@@ -88,10 +94,7 @@
       }
     ],
     "tag": "magic",
-    "priority": "major",
-    "routes": [
-      "mage"
-    ]
+    "priority": "major"
   },
   {
     "id": "bullied",
@@ -118,12 +121,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（学会隐忍）"
           },
           {
             "type": "set_flag",
@@ -148,17 +153,20 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（学会求助）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（依赖他人，自身不强壮）"
           },
           {
             "type": "set_flag",
@@ -176,14 +184,15 @@
         "requireCondition": "attribute.str >= 3",
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 7,
+          "difficulty": 4,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1"
           },
           {
             "type": "modify_hp",
@@ -230,10 +239,7 @@
     ],
     "tag": "social",
     "priority": "major",
-    "unique": true,
-    "routes": [
-      "*"
-    ]
+    "unique": true
   },
   {
     "id": "church_orphan",
@@ -248,35 +254,24 @@
       {
         "type": "modify_attribute",
         "target": "int",
-        "value": 1
+        "value": 1,
+        "description": "智慧 +1"
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
+        "value": 1,
+        "description": "灵魂 +1"
       },
       {
         "type": "grant_item",
         "target": "orphan_bracelet",
         "value": 1,
         "description": "获得 📿 孤儿手环"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "fairy_encounter",
@@ -291,35 +286,24 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
+        "value": 1,
+        "description": "灵魂 +1"
       },
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 1
+        "value": 1,
+        "description": "魔力 +1"
       },
       {
         "type": "set_flag",
         "target": "fairy_friend",
         "value": 1,
         "description": "精灵之友"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 1
       }
     ],
     "tag": "adventure",
-    "priority": "minor",
-    "routes": [
-      "mage"
-    ]
+    "priority": "minor"
   },
   {
     "id": "bullied_repeat",
@@ -347,7 +331,8 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1"
           },
           {
             "type": "set_flag",
@@ -367,12 +352,14 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（学会求助）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（仍然依赖大人保护）"
           },
           {
             "type": "set_flag",
@@ -388,9 +375,6 @@
     "priority": "major",
     "prerequisites": [
       "has.flag.bullied_child"
-    ],
-    "routes": [
-      "*"
     ]
   },
   {
@@ -411,19 +395,21 @@
         "probability": 0.5,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 5,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "set_flag",
@@ -434,7 +420,8 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2
+            "value": -1,
+            "description": "运势 -1（冒失反击，不计后果）"
           }
         ],
         "failureEffects": [
@@ -463,17 +450,20 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（用脑子解决问题）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（用脑而非力，身体仍需锻炼）"
           },
           {
             "type": "set_flag",
@@ -485,10 +475,7 @@
       }
     ],
     "tag": "social",
-    "priority": "major",
-    "routes": [
-      "*"
-    ]
+    "priority": "major"
   },
   {
     "id": "noble_kid_revenge",
@@ -509,7 +496,8 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1"
           },
           {
             "type": "set_flag",
@@ -526,14 +514,15 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
-          "difficulty": 9,
+          "difficulty": 6,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 2,
+            "description": "魅力 +2"
           },
           {
             "type": "set_flag",
@@ -544,7 +533,8 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（据理力争消耗体力）"
           }
         ],
         "failureEffects": [
@@ -579,12 +569,14 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（被人说是告密者）"
           },
           {
             "type": "set_flag",
@@ -610,29 +602,18 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 1
+        "value": 1,
+        "description": "体魄 +1"
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
+        "value": 1,
+        "description": "灵魂 +1（开心）"
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "steal_sweets",
@@ -653,12 +634,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2
+            "value": -1,
+            "description": "运势 -1（老实人不争不抢）"
           }
         ]
       },
@@ -671,12 +654,14 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2
+            "value": 1,
+            "description": "运势 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1"
           }
         ]
       },
@@ -689,21 +674,20 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1"
           }
         ]
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "first_snow",
@@ -717,24 +701,12 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": 1
+        "value": 1,
+        "description": "灵魂 +1"
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "tree_climbing",
@@ -753,22 +725,14 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 1
+        "value": 1,
+        "description": "体魄 +1"
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
+        "value": 1,
+        "description": "灵魂 +1（成就感）"
       }
     ],
     "failureEffects": [
@@ -782,10 +746,7 @@
     "successText": "你站在树顶，俯瞰整个村庄！",
     "failureText": "你从树上掉了下来...还好是草地。",
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "river_fishing",
@@ -806,17 +767,20 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 1,
+            "description": "家境 +1（卖了鱼）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（坐了一下午没运动）"
           }
         ]
       },
@@ -827,19 +791,21 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 7,
+          "difficulty": 5,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2
+            "value": -1,
+            "description": "智慧 -1（只顾蛮力没动脑子）"
           }
         ],
         "failureEffects": [
@@ -853,10 +819,7 @@
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "childhood_chase",
@@ -876,12 +839,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（开心）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（追蜻蜓跑累了）"
           }
         ],
         "description": "你屏住呼吸，小心翼翼地靠近那只停在芦苇上的蜻蜓。猛地一挥网兜——抓到了！蜻蜓在网中扑腾着透明的翅膀，阳光透过翅翼折射出七彩的光芒，美得让你屏住了呼吸。"
@@ -894,12 +859,14 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1（皮实了）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（满脸泥巴被嘲笑）"
           }
         ],
         "description": "你追着蜻蜓跑得太急，一脚踩进泥坑里，整个人扑倒在草地上。满脸泥巴的你引来小伙伴们的哄堂大笑，但你擦了擦脸上的泥，又爬起来继续跑。这点小伤算什么。"
@@ -912,12 +879,14 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（善良）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2
+            "value": -1,
+            "description": "运势 -1（放走了好运）"
           }
         ],
         "description": "你小心翼翼地把蜻蜓捧在手心里，感受它细细的爪子挠着你的掌心。你张开双手，蜻蜓犹豫了一下，然后展翅飞向蓝天。你看着它消失在阳光里，心里涌起一阵说不出的满足。",
@@ -925,10 +894,7 @@
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "childhood_hide_seek",
@@ -948,12 +914,14 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（善于观察）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（藏太久没人理）"
           }
         ],
         "description": "你找到了一个堆满干草的废弃柴房，钻进去蜷成一团，一动不动。透过干草的缝隙，你看到小伙伴们从你面前跑过去，完全没发现你。等了半天没人来找，你开始觉得有点无聊了。"
@@ -966,12 +934,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（和大家一起笑）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2
+            "value": -1,
+            "description": "运势 -1（藏得不好）"
           }
         ],
         "description": "你躲在一棵大树后面，以为藏得天衣无缝。结果刚蹲下没多久，小伙伴就绕到了你身后，拍了一下你的肩膀。你们相视大笑，笑声回荡在整个村子里。"
@@ -984,22 +954,21 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1（吓哭了）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1（胆量锻炼）"
           }
         ],
         "description": "为了不被找到，你壮着胆子钻进了村口那间传说中的鬼屋。里面黑漆漆的，风从破窗户灌进来发出呜呜的声响。你缩在角落里，越等越害怕，最后哭着跑了出来。但从此以后，你再也没有怕过黑。"
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "childhood_pet",
@@ -1019,17 +988,20 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（温柔）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2
+            "value": -1,
+            "description": "家境 -1（花零花钱买饲料）"
           }
         ],
         "description": "你小心翼翼地把受伤的小鸟捧回家，用布条给它包扎了翅膀，每天喂它吃虫子和谷物。几天后小鸟的伤好了，站在你手心上歪着头看你。你轻轻抚摸它的羽毛，心中充满了温暖。"
@@ -1049,22 +1021,21 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（懂得求助）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（依赖大人，独立性不足）"
           }
         ],
         "description": "你知道自己不会照顾受伤的小鸟，于是跑去找村里的老奶奶帮忙。老奶奶夸你心善，带着你一起给小鸟包扎。她一边处理伤口一边教你认草药，你认真地把每一步都记在心里。"
       }
     ],
     "tag": "childhood",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "village_festival",
@@ -1084,12 +1055,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（满足）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（吃太多不运动）"
           }
         ],
         "description": "祭典上的食物琳琅满目：烤全羊的香气飘散在空气中，蜂蜜面包金黄酥脆，果酒甘甜醇厚。你从东吃到西，从南吃到北，肚子溜圆，嘴角全是糖霜。这是你一年中最幸福的一天。"
@@ -1102,17 +1075,20 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（开心）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2
+            "value": -1,
+            "description": "智慧 -1（光顾着玩忘了观察）"
           }
         ],
         "description": "篝火噼啪作响，村民们手拉手围成圈跳起了丰收舞。你被大人们拉进圈里，笨拙地跟着节拍转圈。火光映红了每个人的笑脸，你也忍不住跟着笑了起来，脚步越来越轻快。"
@@ -1125,22 +1101,21 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 2,
+            "description": "灵魂 +2（美好回忆）"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2
+            "value": -1,
+            "description": "家境 -1（错过了祭典的小游戏奖品）"
           }
         ],
         "description": "你找了块草地躺下来，双手枕在脑后，等着天黑。当第一朵烟花在夜空中绽放时，你倒吸了一口凉气——金色的星屑像瀑布一样倾泻而下，照亮了整个村庄。那一刻你觉得，这个世界真的很美。"
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "stray_dog",
@@ -1161,17 +1136,20 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（有了伙伴）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2
+            "value": -1,
+            "description": "家境 -1（养狗花费）"
           }
         ]
       },
@@ -1184,12 +1162,14 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（善良）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2
+            "value": -1,
+            "description": "运势 -1（分出食物少了份好运）"
           }
         ]
       },
@@ -1202,16 +1182,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1（心里不安）"
           }
         ]
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "rainy_day_adventure",
@@ -1230,19 +1208,21 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "spr",
-          "difficulty": 8,
+          "difficulty": 6,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 2,
+            "description": "智慧 +2（地窖中的发现）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（勇气试炼）"
           },
           {
             "type": "modify_hp",
@@ -1261,12 +1241,14 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（静心聆听雨声）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（蹲久了腿麻）"
           }
         ]
       },
@@ -1279,10 +1261,7 @@
       }
     ],
     "tag": "adventure",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "first_competition",
@@ -1301,29 +1280,33 @@
         "probability": 0.4,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 6,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 2,
+            "description": "体魄 +2（全力拼搏）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（赢得喝彩）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 1,
+            "description": "体魄 +1（虽败犹荣）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2
+            "value": -1,
+            "description": "智慧 -1（只顾蛮力没动脑）"
           }
         ]
       },
@@ -1336,12 +1319,14 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（审时度势）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（主动退赛被看轻）"
           }
         ]
       },
@@ -1354,12 +1339,14 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -2,
+            "description": "魅力 -2（被发现了）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 2,
+            "description": "体魄 +2（胜之不武）"
           },
           {
             "type": "set_flag",
@@ -1371,10 +1358,7 @@
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "grandma_recipes",
@@ -1395,12 +1379,14 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（学会了药膏配方）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1,
+            "description": "灵魂 +1（祖孙情深）"
           },
           {
             "type": "set_flag",
@@ -1411,7 +1397,8 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（坐了一整天没运动）"
           },
           {
             "type": "grant_item",
@@ -1435,19 +1422,21 @@
         "probability": 0.3,
         "riskCheck": {
           "attribute": "int",
-          "difficulty": 7,
+          "difficulty": 5,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 2,
+            "description": "智慧 +2（天赋灵感）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1,
+            "description": "灵魂 -1（改祖传秘方心里不安）"
           }
         ],
         "failureEffects": [
@@ -1463,10 +1452,7 @@
       }
     ],
     "tag": "life",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "river_discovery",
@@ -1485,24 +1471,27 @@
         "probability": 0.35,
         "riskCheck": {
           "attribute": "str",
-          "difficulty": 8,
+          "difficulty": 6,
           "scale": 2
         },
         "effects": [
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 2,
+            "description": "智慧 +2（发现了神秘宝物）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2
+            "value": 1,
+            "description": "运势 +1（好运）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2
+            "value": -1,
+            "description": "体魄 -1（水下消耗大）"
           }
         ],
         "failureEffects": [
@@ -1525,12 +1514,14 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 1,
+            "description": "魅力 +1（大人夸你懂事）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2
+            "value": -1,
+            "description": "智慧 -1（没自己探索错失学习机会）"
           }
         ]
       },
@@ -1543,26 +1534,26 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 1,
+            "description": "智慧 +1（冷静观察）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2
+            "value": 1,
+            "description": "运势 +1（留待未来）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2
+            "value": -1,
+            "description": "魅力 -1（独自行动没交到朋友）"
           }
         ]
       }
     ],
     "tag": "adventure",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "child_plague",
@@ -1583,24 +1574,12 @@
         "type": "modify_attribute",
         "target": "str",
         "value": -1,
+        "description": "体魄 -1（虚弱）",
         "probability": 0.7
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": -2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": -1
       }
     ],
     "tag": "disaster",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   },
   {
     "id": "child_drowning",
@@ -1621,23 +1600,11 @@
         "type": "modify_attribute",
         "target": "spr",
         "value": 1,
+        "description": "灵魂 +1（劫后余生）",
         "probability": 0.8
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": -1
       }
     ],
     "tag": "accident",
-    "priority": "minor",
-    "routes": [
-      "*"
-    ]
+    "priority": "minor"
   }
 ]

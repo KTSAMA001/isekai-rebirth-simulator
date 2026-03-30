@@ -52,6 +52,8 @@ const schemas: Record<string, object> = {
           },
         },
       },
+      routes: { type: 'array', items: { type: 'string' } },
+      routeMode: { type: 'string', enum: ['any', 'all'] },
     },
   },
   item: {

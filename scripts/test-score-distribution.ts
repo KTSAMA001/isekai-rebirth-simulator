@@ -60,8 +60,8 @@ function runOneGame(seed: number): ScoreData {
   }
   engine.allocateAttributes(allocation)
 
-  // Simulate until death or 80
-  for (let year = 0; year < 80; year++) {
+  // Simulate until death or maxAge
+  for (let year = 0; year < 100; year++) {
     const stateBefore = engine.getState()
     if (stateBefore.hp <= 0) break
 
