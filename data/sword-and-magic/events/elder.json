@@ -1281,7 +1281,7 @@
     "description": "几个年轻的冒险者千里迢迢赶来，只为听你讲述当年的故事。",
     "minAge": 80,
     "maxAge": 95,
-    "weight": 5,
+    "weight": 1,
     "tag": "social",
     "priority": "minor",
     "branches": [
@@ -1313,7 +1313,8 @@
         ]
       }
     ],
-    "effects": []
+    "effects": [],
+    "unique": true
   },
   {
     "id": "elder_reunion",
@@ -1450,6 +1451,7 @@
         "value": 1,
         "description": "安详离世"
       }
-    ]
+    ],
+    "unique": true
   }
 ]
