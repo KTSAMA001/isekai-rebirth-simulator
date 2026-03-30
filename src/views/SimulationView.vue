@@ -175,24 +175,27 @@ function saveGame(slotId: number) {
     <!-- 紧凑状态栏 -->
     <CompactStatus :state="state" :world="world" />
 
-    <!-- 主事件区域 -->
-    <EventScene
-      :event="currentEvent"
-      :log-entry="currentLogEntry"
-      :year-phase="yearPhase"
-      :risk-rolled="currentYearResult?.riskRolled"
-      :is-success="currentYearResult?.isSuccess"
-      @typing-done="() => {}"
-    />
+    <!-- 可滚动中间区域 -->
+    <div class="sim-scroll-area">
+      <!-- 主事件区域 -->
+      <EventScene
+        :event="currentEvent"
+        :log-entry="currentLogEntry"
+        :year-phase="yearPhase"
+        :risk-rolled="currentYearResult?.riskRolled"
+        :is-success="currentYearResult?.isSuccess"
+        @typing-done="() => {}"
+      />
 
-    <!-- 选择面板 -->
-    <ChoicePanel
-      v-if="showChoices && currentBranches.length > 0"
-      :branches="currentBranches"
-      :state="state"
-      :world="world"
-      @select="selectBranch"
-    />
+      <!-- 选择面板 -->
+      <ChoicePanel
+        v-if="showChoices && currentBranches.length > 0"
+        :branches="currentBranches"
+        :state="state"
+        :world="world"
+        @select="selectBranch"
+      />
+    </div>
 
     <!-- 继续按钮 -->
     <div v-if="showContinue" class="continue-bar">
@@ -223,12 +226,19 @@ function saveGame(slotId: number) {
   overflow: hidden;
 }
 
+.sim-scroll-area {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* 顶栏 */
 .top-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
+  padding: 4px 16px;
   background: var(--bg-panel);
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
@@ -238,35 +248,35 @@ function saveGame(slotId: number) {
   background: none;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
   padding: var(--space-xs);
   -webkit-tap-highlight-color: transparent;
 }
 
 .year-label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-gold);
 }
 
 /* 继续按钮栏 */
 .continue-bar {
-  padding: var(--space-md);
+  padding: 6px 16px;
   display: flex;
   justify-content: center;
   flex-shrink: 0;
 }
 
 .continue-btn {
-  min-height: 48px;
-  min-width: 200px;
-  padding: var(--space-sm) var(--space-xl);
+  min-height: 44px;
+  min-width: 160px;
+  padding: 8px 24px;
   background: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: var(--radius-md);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -286,7 +296,7 @@ function saveGame(slotId: number) {
   background: none;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   padding: 2px 10px;
   border-radius: var(--radius-sm);
   cursor: pointer;

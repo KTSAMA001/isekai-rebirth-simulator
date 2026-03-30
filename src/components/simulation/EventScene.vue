@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, nextTick } from 'vue'
+import { watch } from 'vue'
 import { useTypewriter } from '@/composables/useTypewriter'
 import type { WorldEventDef, EventLogEntry } from '@/engine/core/types'
 
@@ -15,7 +15,7 @@ const emit = defineEmits<{
   typingDone: []
 }>()
 
-const { displayed, isTyping, type, skip, reset } = useTypewriter(35)
+const { displayed, type, reset } = useTypewriter(35)
 
 watch(() => props.event, async (newEvent) => {
   reset()
@@ -31,17 +31,10 @@ watch(() => props.yearPhase, (phase) => {
     type('什么特别的事都没发生，平平淡淡地度过了。').then(() => emit('typingDone'))
   }
 })
-
-function handleClick() {
-  if (isTyping.value) {
-    skip()
-    emit('typingDone')
-  }
-}
 </script>
 
 <template>
-  <div class="event-scene" @click="handleClick">
+  <div class="event-scene">
     <!-- 年度标题 -->
     <div v-if="logEntry" class="year-title">
       {{ logEntry.age }} 岁
@@ -50,13 +43,13 @@ function handleClick() {
     <!-- 事件卡片 -->
     <div v-if="event" class="event-card">
       <div class="event-title">{{ event.title }}</div>
-      <div class="event-desc">{{ displayed }}<span v-if="isTyping" class="cursor">|</span></div>
+      <div class="event-desc">{{ displayed }}</div>
     </div>
 
     <!-- 平淡年 -->
     <div v-else-if="yearPhase === 'mundane_year'" class="mundane-card">
       <div class="mundane-title">平静的一年</div>
-      <div class="event-desc">{{ displayed }}<span v-if="isTyping" class="cursor">|</span></div>
+      <div class="event-desc">{{ displayed }}</div>
     </div>
 
     <!-- 效果反馈 -->
@@ -75,31 +68,22 @@ function handleClick() {
         {{ eff }}
       </span>
     </div>
-
-    <!-- 点击提示 -->
-    <div v-if="isTyping" class="skip-hint">点击跳过</div>
   </div>
 </template>
 
 <style scoped>
 .event-scene {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: var(--space-lg) var(--space-md);
-  min-height: 200px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  padding: 12px 16px;
 }
 
 .year-title {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-gold);
-  margin-bottom: var(--space-md);
+  margin-bottom: 2px;
   letter-spacing: 2px;
   opacity: 0.8;
 }
@@ -107,58 +91,47 @@ function handleClick() {
 .event-card, .mundane-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border-radius: 10px;
+  padding: 14px 16px;
   width: 100%;
   max-width: 440px;
-  min-height: 120px;
   box-shadow: var(--shadow-card);
 }
 
 .event-title {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 2px;
   text-align: center;
 }
 
 .mundane-title {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-secondary);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 2px;
   text-align: center;
 }
 
 .event-desc {
   font-size: 0.9rem;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--text-secondary);
-}
-
-.cursor {
-  animation: blink 0.8s infinite;
-  color: var(--color-primary-light);
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
 }
 
 .effects-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: var(--space-md);
+  gap: 4px;
+  margin-top: 4px;
   justify-content: center;
 }
 
 .effect-chip {
-  padding: 4px 10px;
+  padding: 2px 8px;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 .effect-chip.positive {
@@ -173,9 +146,9 @@ function handleClick() {
 .risk-result {
   width: 100%;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 800;
-  padding: 8px 0 4px;
+  padding: 4px 0;
   letter-spacing: 2px;
 }
 .risk-result.risk-success {
@@ -183,11 +156,5 @@ function handleClick() {
 }
 .risk-result.risk-failure {
   color: var(--color-danger, #ef4444);
-}
-
-.skip-hint {
-  margin-top: var(--space-md);
-  font-size: 0.7rem;
-  color: var(--text-dim);
 }
 </style>

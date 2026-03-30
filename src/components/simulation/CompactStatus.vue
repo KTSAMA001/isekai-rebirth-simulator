@@ -142,7 +142,7 @@ function toggleExpand() {
 
 <style scoped>
 .compact-status {
-  padding: var(--space-sm) var(--space-md);
+  padding: 6px 16px;
   background: var(--bg-panel);
   border-bottom: 1px solid var(--border-color);
   cursor: pointer;
@@ -153,13 +153,13 @@ function toggleExpand() {
 .compact-row {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 6px;
   flex-wrap: wrap;
-  min-height: 32px;
+  min-height: 30px;
 }
 
 .age-badge {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-gold);
   background: rgba(251, 191, 36, 0.1);
@@ -169,7 +169,7 @@ function toggleExpand() {
 }
 
 .hp-mini {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--color-success);
   white-space: nowrap;
@@ -323,7 +323,7 @@ function toggleExpand() {
 }
 
 .item-name {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
@@ -364,7 +364,7 @@ function toggleExpand() {
 .item-detail-name.rarity-legendary { color: var(--rarity-legendary); }
 
 .item-detail-rarity {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 .item-detail-rarity.rarity-common { color: var(--rarity-common); }
@@ -386,7 +386,7 @@ function toggleExpand() {
 }
 
 .item-effect-line {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   padding-left: 8px;
   position: relative;

@@ -179,6 +179,10 @@ export interface WorldEventDef {
     condition: string
     weightMultiplier: number
   }>
+  /** 允许触发的事件路线ID列表，["*"] 或不填 = 所有路线可用 */
+  routes?: string[]
+  /** 路线匹配模式："any" = 匹配任一路线(默认), "all" = 必须同时拥有所有列出的路线 */
+  routeMode?: 'any' | 'all'
 }
 
 /** 成就定义 */
@@ -412,6 +416,10 @@ export interface LifeRoute {
   anchorEvents: RouteAnchor[]
   entryFlags?: string[]
   exclusiveEvents?: string[]
+  /** 路线层级 (0=commoner, 1=基础职业, 2=进阶, 3=高级, 4=传奇) */
+  tier?: number
+  /** 父路线ID，用于路线升级链 */
+  parentRoute?: string
 }
 
 // ==================== 评分结果 ====================

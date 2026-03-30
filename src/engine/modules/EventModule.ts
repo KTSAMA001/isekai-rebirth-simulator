@@ -9,6 +9,7 @@ import type {
   WorldEventDef,
   EventEffect,
   EventLogEntry,
+  LifeRoute,
 } from '../core/types'
 import type { RandomProvider } from '../core/RandomProvider'
 import type { ConditionDSL } from './ConditionDSL'
@@ -33,7 +34,7 @@ export class EventModule {
   }
 
   /** 获取当前年龄可触发的事件候选列表 */
-  getCandidates(age: number, state: GameState): WorldEventDef[] {
+  getCandidates(age: number, state: GameState, activeRoutes?: LifeRoute[] | null): WorldEventDef[] {
     const ctx = { state, world: this.world }
 
     return this.world.events.filter(event => {
@@ -55,6 +56,21 @@ export class EventModule {
         const anyMet = event.mutuallyExclusive.some(m => this.dsl.evaluate(m, ctx))
         if (anyMet) return false
       }
+      // 路线过滤：事件标记了 routes 且不是 ["*"] 时，检查当前激活路线
+      if (event.routes && event.routes.length > 0 && !event.routes.includes('*')) {
+        if (activeRoutes && activeRoutes.length > 0) {
+          const routeIds = new Set(activeRoutes.map(r => r.id))
+          const mode = event.routeMode ?? 'any'
+          if (mode === 'all') {
+            if (!event.routes.every(r => routeIds.has(r))) return false
+          } else {
+            if (!event.routes.some(r => routeIds.has(r))) return false
+          }
+        } else {
+          // 没有激活路线（commoner），非通用事件不可触发
+          return false
+        }
+      }
       return true
     }).sort((a, b) => {
       // 按优先级排序：critical > major > minor
@@ -67,10 +83,56 @@ export class EventModule {
     })
   }
 
-  /** 从候选中选择一个事件（权重随机） */
-  pickEvent(candidates: WorldEventDef[]): WorldEventDef | null {
+  /** 从候选中选择一个事件（权重随机 + 路线衰减） */
+  pickEvent(candidates: WorldEventDef[], activeRoutes?: LifeRoute[] | null): WorldEventDef | null {
     if (candidates.length === 0) return null
-    return this.random.weightedPick(candidates, e => e.weight)
+
+    // 无激活路线时，直接用原始权重
+    if (!activeRoutes || activeRoutes.length === 0) {
+      return this.random.weightedPick(candidates, e => e.weight)
+    }
+
+    // 计算路线权重衰减：角色在同一路线家族中 tier 越高，低 tier 事件权重越低
+    const weighted = candidates.map(event => {
+      let w = event.weight
+      if (event.routes && event.routes.length > 0 && !event.routes.includes('*')) {
+        const routeIds = new Set(activeRoutes.map(r => r.id))
+        // 找事件匹配的路线中最高 tier
+        let eventMaxTier = 0
+        for (const ar of activeRoutes) {
+          if (event.routes!.includes(ar.id)) {
+            eventMaxTier = Math.max(eventMaxTier, ar.tier ?? 0)
+          }
+        }
+        // 检查角色在同一路线家族中是否有更高 tier 的路线
+        for (const ar of activeRoutes) {
+          const arTier = ar.tier ?? 0
+          if (arTier > eventMaxTier && (event.routes!.includes(ar.id) || this.isSameRouteFamily(ar, event.routes!))) {
+            w *= Math.pow(0.5, arTier - eventMaxTier)
+          }
+        }
+      }
+      return { event, weight: Math.max(0.1, w) }
+    })
+
+    const totalWeight = weighted.reduce((sum, w) => sum + w.weight, 0)
+    let rand = this.random.random() * totalWeight
+    for (const { event, weight } of weighted) {
+      rand -= weight
+      if (rand <= 0) return event
+    }
+    return weighted[0].event
+  }
+
+  /** 判断两个路线是否属于同一路线家族（通过 parentRoute 链追踪） */
+  private isSameRouteFamily(route: LifeRoute, targetIds: string[], visited: string[] = []): boolean {
+    if (targetIds.includes(route.id)) return true
+    if (route.parentRoute) {
+      if (visited.includes(route.parentRoute)) return false
+      // 简化判断：只检查直接父子关系
+      return targetIds.includes(route.parentRoute)
+    }
+    return false
   }
 
   /** 执行一个事件，返回状态更新 */

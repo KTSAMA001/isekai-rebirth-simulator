@@ -335,37 +335,37 @@ export class SimulationEngine {
     this.state = newState
 
     // 获取候选事件
-    const candidates = this.eventModule.getCandidates(this.state.age, this.state)
+    const candidates = this.eventModule.getCandidates(this.state.age, this.state, this.activeRoute ? [this.activeRoute] : null)
 
     // 路线系统：检查路线切换
     this.updateRoute()
 
     // 路线系统：检查强制锚点事件
-    const anchorEvent = this.checkMandatoryAnchor()
-    if (anchorEvent) {
+    let mutableAnchorEvent = this.checkMandatoryAnchor()
+    if (mutableAnchorEvent) {
       // 锚点事件强制触发，跳过正常选择
-      this.pendingYearEvent = anchorEvent
+      this.pendingYearEvent = mutableAnchorEvent
       this.state = {
         ...this.state,
-        triggeredEvents: new Set([...this.state.triggeredEvents, anchorEvent.id]),
+        triggeredEvents: new Set([...this.state.triggeredEvents, mutableAnchorEvent.id]),
       }
-      if (anchorEvent.branches && anchorEvent.branches.length > 0) {
-        return { phase: 'awaiting_choice', event: anchorEvent, branches: anchorEvent.branches }
+      if (mutableAnchorEvent.branches && mutableAnchorEvent.branches.length > 0) {
+        return { phase: 'awaiting_choice', event: mutableAnchorEvent, branches: mutableAnchorEvent.branches }
       }
       // 无分支锚点直接执行
-      const effectTexts = this.eventModule.applyEffectsOnState(anchorEvent.effects, this.state)
-      const logEntry = { age: this.state.age, eventId: anchorEvent.id, title: anchorEvent.title, description: anchorEvent.description, effects: effectTexts }
+      const effectTexts = this.eventModule.applyEffectsOnState(mutableAnchorEvent.effects, this.state)
+      const logEntry = { age: this.state.age, eventId: mutableAnchorEvent.id, title: mutableAnchorEvent.title, description: mutableAnchorEvent.description, effects: effectTexts }
       this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
       this.pendingYearEvent = null
       this.postYearProcess()
-      return { phase: 'showing_event', event: anchorEvent, effectTexts, logEntry }
+      return { phase: 'showing_event', event: mutableAnchorEvent, effectTexts, logEntry }
     }
 
     // === Age 1 强制 birth 事件 ===
     if (this.state.age === 1 && candidates.length > 0) {
       const birthEvents = candidates.filter(e => e.id.startsWith('birth_'))
       if (birthEvents.length > 0) {
-        const birthEvent = this.eventModule.pickEvent(birthEvents)
+        let birthEvent = this.eventModule.pickEvent(birthEvents)
         if (birthEvent) {
         this.pendingYearEvent = birthEvent
         this.state = {
@@ -426,6 +426,21 @@ export class SimulationEngine {
       if ((e.priority ?? 'minor') === 'minor') {
         w *= 0.7
       }
+      // 路线权重衰减：角色在同一路线家族中 tier 越高，低 tier 事件权重越低
+      if (this.activeRoute && e.routes && e.routes.length > 0 && !e.routes.includes('*')) {
+        const eventTier = this.activeRoute.tier ?? 0
+        // 找事件匹配路线的 tier
+        const routes = this.world.manifest.routes ?? []
+        let eventRouteTier = 0
+        for (const r of routes) {
+          if (e.routes.includes(r.id)) {
+            eventRouteTier = Math.max(eventRouteTier, r.tier ?? 0)
+          }
+        }
+        if (this.activeRoute.tier != null && this.activeRoute.tier > eventRouteTier) {
+          w *= Math.pow(0.5, this.activeRoute.tier - eventRouteTier)
+        }
+      }
       return { event: e, weight: w }
     })
     let event: WorldEventDef | null = this.random.weightedPick(scored, s => s.weight).event
@@ -442,7 +457,6 @@ export class SimulationEngine {
     }
 
     if (event.branches && event.branches.length > 0) {
-      // 有分支 → 需要玩家选择
       return {
         phase: 'awaiting_choice',
         event,
@@ -840,8 +854,8 @@ export class SimulationEngine {
     }
 
     // 获取并执行事件
-    const candidates = this.eventModule.getCandidates(newState.age, newState)
-    const event = this.eventModule.pickEvent(candidates)
+    const candidates = this.eventModule.getCandidates(newState.age, newState, this.activeRoute ? [this.activeRoute] : null)
+    const event = this.eventModule.pickEvent(candidates, this.activeRoute ? [this.activeRoute] : null)
 
     if (event) {
       const branchId = branchChoices?.[event.id]
