@@ -20,13 +20,13 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2,
+            "value": 3,
             "description": "魔力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
@@ -44,7 +44,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（学院生活缺少体能锻炼）"
           },
           {
@@ -64,19 +64,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（错过了系统学习的机会）"
           },
           {
@@ -116,13 +116,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智慧 +2"
           },
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 1,
+            "value": 2,
             "description": "魔力 +1"
           },
           {
@@ -134,7 +134,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（通宵备考荒废了体能）"
           }
         ],
@@ -169,19 +169,19 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "运势 +1（运气真好）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（作弊即使成功也心虚）"
           }
         ],
@@ -212,13 +212,13 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2,
+            "value": 3,
             "description": "魔力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（不努力只靠天赋，缺乏系统学习）"
           },
           {
@@ -268,7 +268,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
@@ -286,7 +286,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（只知苦练缺乏思考）"
           }
         ],
@@ -322,19 +322,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "运势 +1（摸鱼也是一种智慧）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（偷懒的心虚感）"
           },
           {
@@ -375,7 +375,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2"
           },
           {
@@ -393,7 +393,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（恋爱让人头脑发昏）"
           }
         ],
@@ -423,19 +423,19 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（学会思考）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（暗恋使人畏缩不前）"
           },
           {
@@ -455,13 +455,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（封闭内心，错过成长）"
           },
           {
@@ -516,6 +516,18 @@
         "target": "int",
         "value": -1,
         "description": "智慧 -1（以暴制暴不是最佳方案）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "+2 str"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "+1 chr"
       }
     ],
     "tag": "combat",
@@ -550,19 +562,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "运势 +1"
           },
           {
@@ -586,7 +598,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（暗河深处的阴冷气息）"
           }
         ],
@@ -628,19 +640,19 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "运势 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（过于谨慎错过实战锻炼）"
           },
           {
@@ -675,13 +687,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
@@ -693,7 +705,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（养伤期间肌肉松弛）"
           }
         ]
@@ -712,7 +724,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
+            "value": 3,
             "description": "体魄 +2"
           },
           {
@@ -758,25 +770,25 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
+            "value": 3,
             "description": "家境 +2"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2,
+            "value": -3,
             "description": "体魄 -2（商人生活荒废了武艺）"
           },
           {
@@ -797,13 +809,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -1,
+            "value": -2,
             "description": "家境 -1（自学经商交了学费）"
           }
         ],
@@ -845,6 +857,18 @@
         "target": "dragon_awakened",
         "value": 1,
         "description": "龙血觉醒！"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3,
+        "description": "+3 mag"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "+2 spr"
       }
     ],
     "unique": true,
@@ -870,13 +894,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
+            "value": 3,
             "description": "体魄 +2"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
@@ -909,13 +933,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
+            "value": -3,
             "description": "灵魂 -2"
           },
           {
@@ -937,19 +961,19 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
+            "value": 3,
             "description": "灵魂 +2"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（被保护意味着依赖，自身不够强）"
           },
           {
@@ -992,6 +1016,18 @@
         "target": "reincarnation_memory",
         "value": 1,
         "description": "获得 🧠 转生记忆"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "+2 int"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "+2 spr"
       }
     ],
     "unique": true,
@@ -1022,19 +1058,19 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智慧 +2（发现了古老地图）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（勇气）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（废墟里吸入过多灰尘）"
           }
         ],
@@ -1064,13 +1100,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（好奇心得不到满足）"
           }
         ]
@@ -1124,6 +1160,18 @@
         "target": "int",
         "value": -1,
         "description": "智慧 -1（体力劳动占用了学习时间）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "+1 str"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "+1 chr"
       }
     ],
     "tag": "life",
@@ -1148,7 +1196,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1"
           }
         ]
@@ -1162,7 +1210,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           }
         ]
@@ -1176,13 +1224,13 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 1,
+            "value": 2,
             "description": "家境 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（省了钱但错过了当下的快乐）"
           }
         ]
@@ -1217,6 +1265,18 @@
         "target": "str",
         "value": -1,
         "description": "体魄 -1（躺了一整夜没运动）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "+2 int"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "+1 spr"
       }
     ],
     "tag": "life",
@@ -1246,13 +1306,13 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 1,
+            "value": 2,
             "description": "家境 +1（打赏）"
           }
         ],
@@ -1276,13 +1336,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（学到了）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（只敢看不敢上的怯懦）"
           }
         ]
@@ -1297,7 +1357,7 @@
     "description": "你决定在镇上的铁匠铺帮忙赚点零花钱。",
     "minAge": 14,
     "maxAge": 18,
-    "weight": 4,
+    "weight": 3,
     "unique": true,
     "effects": [
       {
@@ -1317,6 +1377,18 @@
         "target": "int",
         "value": -1,
         "description": "智慧 -1（打零工占用了学习时间）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2,
+        "description": "+2 mny"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "+1 int"
       }
     ],
     "tag": "life",
@@ -1341,19 +1413,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（跑完很爽）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（莽撞冲刺缺乏策略）"
           }
         ]
@@ -1367,13 +1439,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（懂得策略）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           }
         ]
@@ -1387,13 +1459,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1（摔出来的韧性）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（丢脸）"
           }
         ]
@@ -1421,13 +1493,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（学到经验）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1（被激励了）"
           },
           {
@@ -1439,7 +1511,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（战争的残酷在你心中埋下阴影）"
           }
         ]
@@ -1453,13 +1525,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智慧 +2（深入了解）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（战争故事的残酷令人不安）"
           }
         ]
@@ -1473,13 +1545,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（去玩了）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（错失锻炼机会）"
           }
         ]
@@ -1495,7 +1567,7 @@
     "description": "集市上有人大喊\"抓小偷！\"，一个黑影从你身边窜过。",
     "minAge": 10,
     "maxAge": 14,
-    "weight": 5,
+    "weight": 3,
     "unique": true,
     "branches": [
       {
@@ -1506,19 +1578,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1（见义勇为）"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -1,
+            "value": -2,
             "description": "家境 -1（追小偷撞翻了摊位赔了钱）"
           }
         ],
@@ -1532,19 +1604,19 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（机智）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（体力不如直接追击锻炼充分）"
           }
         ],
@@ -1558,13 +1630,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（正义感）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（只喊不动手，缺乏锻炼）"
           }
         ],
@@ -1593,13 +1665,13 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2（正义之声）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（惹上了不必要的麻烦）"
           },
           {
@@ -1619,7 +1691,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（内心不安）"
           }
         ]
@@ -1633,13 +1705,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（懂得求助）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（依赖大人，自身缺乏直面问题的勇气）"
           }
         ]
@@ -1667,13 +1739,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智慧 +2（解谜天赋）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（沉迷研究废寝忘食）"
           },
           {
@@ -1700,13 +1772,13 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "运势 +1（直觉）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（藏着不用不如不捡）"
           }
         ]
@@ -1734,19 +1806,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1（刻苦锻炼）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智慧 +1（勤学不辍）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（执念太深产生焦虑）"
           }
         ]
@@ -1760,19 +1832,19 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2（赢得友谊）"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（惺惺相惜）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（交朋友占用了学习时间）"
           }
         ]
@@ -1786,13 +1858,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（自在）"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（缺少竞争激励，训练松懈）"
           }
         ]
@@ -1820,13 +1892,13 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
+            "value": 3,
             "description": "家境 +2"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（贪心不足）"
           },
           {
@@ -1846,19 +1918,19 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1（甜蜜）"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "幸运 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（贪图享乐荒废学业）"
           }
         ]
@@ -1872,7 +1944,7 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -1,
+            "value": -2,
             "description": "幸运 -1"
           }
         ]
@@ -1906,13 +1978,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
+            "value": 3,
             "description": "体魄 +2"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
@@ -1924,7 +1996,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（不明液体也敢喝，脑子不好使）"
           }
         ],
@@ -1960,7 +2032,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（卖掉未知之物的心虚）"
           }
         ]
@@ -1974,13 +2046,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（过度谨慎导致缺乏实践锻炼）"
           }
         ]
@@ -2020,7 +2092,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 1,
+            "value": 2,
             "description": "魔力 +1"
           },
           {
@@ -2032,7 +2104,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（与灵兽的精神连接消耗了体力）"
           }
         ],
@@ -2056,13 +2128,13 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（犹豫不决错失学习机会）"
           }
         ]
@@ -2076,13 +2148,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（被恐惧支配）"
           }
         ]
@@ -2117,7 +2189,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（亲人的离世令人感伤）"
           },
           {
@@ -2138,13 +2210,13 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
+            "value": 2,
             "description": "灵魂 +1"
           },
           {
@@ -2156,7 +2228,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（冲动捐赠，未做规划）"
           }
         ]
@@ -2181,13 +2253,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（金钱的诱惑令人迷失初心）"
           }
         ],
@@ -2237,7 +2309,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
@@ -2249,7 +2321,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（见惯了人心的阴暗面）"
           }
         ],
@@ -2279,13 +2351,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（拒绝实战机会，缺乏历练）"
           }
         ]
@@ -2300,19 +2372,19 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
+            "value": 3,
             "description": "家境 +2"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（斤斤计较的铜臭味）"
           }
         ]
@@ -2346,7 +2418,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智力 +2"
           },
           {
@@ -2364,7 +2436,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -1,
+            "value": -2,
             "description": "体魄 -1（长时间伏案工作损害健康）"
           }
         ],
@@ -2388,19 +2460,19 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
+            "value": 3,
             "description": "家境 +2"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
+            "value": 2,
             "description": "智力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（商人气息太重）"
           }
         ]
@@ -2447,7 +2519,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2（勇者之名）"
           },
           {
@@ -2459,7 +2531,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（胜利冲昏头脑）"
           }
         ],
@@ -2483,13 +2555,13 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1（观摩学习）"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（只看不打被嘲笑胆小）"
           }
         ]
@@ -2548,7 +2620,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
+            "value": -2,
             "description": "灵魂 -1（传说的腐朽气息侵蚀了精神）"
           }
         ],
@@ -2572,13 +2644,13 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -1,
+            "value": -2,
             "description": "家境 -1（画地图花时间，错过了快速入手宝藏的时机）"
           }
         ]
@@ -2592,13 +2664,13 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1,
+            "value": 2,
             "description": "魅力 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -1,
+            "value": -2,
             "description": "家境 -1（组队意味着分赃）"
           }
         ]
@@ -2633,13 +2705,13 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
+            "value": 3,
             "description": "家境 +2（演出收入）"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2,
+            "value": -3,
             "description": "智慧 -2（舞台表演荒废学业）"
           },
           {
@@ -2659,19 +2731,19 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
+            "value": 3,
             "description": "魅力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
+            "value": 2,
             "description": "幸运 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（街头表演荒废了学业）"
           }
         ]
@@ -2707,19 +2779,19 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
+            "value": 3,
             "description": "智力 +2"
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
+            "value": -2,
             "description": "魅力 -1（沉迷研究不善社交）"
           },
           {
@@ -2739,19 +2811,19 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
+            "value": 2,
             "description": "体魄 +1"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 1,
+            "value": 2,
             "description": "家境 +1"
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -1,
+            "value": -2,
             "description": "智慧 -1（保安工作枯燥，思维迟钝）"
           }
         ]
@@ -2767,5 +2839,166 @@
     "unique": true,
     "tag": "social",
     "priority": "minor"
+  },
+  {
+    "id": "dating_start",
+    "title": "开始交往",
+    "description": "你对那个人的心意越来越清晰了。也许，是时候迈出这一步了。",
+    "minAge": 16,
+    "maxAge": 25,
+    "weight": 5,
+    "include": "has.flag.first_love",
+    "exclude": "has.flag.heartbroken | has.flag.dating | has.flag.engaged | has.flag.married",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "confess_formally",
+        "title": "正式告白",
+        "description": "你准备了一束亲手摘的野花，在夕阳下鼓起全部勇气——「我喜欢你，从很久以前就开始了。」",
+        "probability": 0.55,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +1（勇气的回报）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dating",
+            "value": 1,
+            "description": "开始交往"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "进入恋爱关系"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（被婉拒）"
+          },
+          {
+            "type": "set_flag",
+            "target": "heartbroken",
+            "value": 1,
+            "description": "失恋了"
+          }
+        ],
+        "successText": "对方红着脸接过了花束，轻声说——「我以为你永远不会开口呢。」",
+        "failureText": "对方沉默了很久，最后轻轻摇了摇头。花束掉在了地上，夕阳把影子拉得很长。"
+      },
+      {
+        "id": "slow_burn",
+        "title": "慢慢靠近",
+        "description": "你没有急着表白，而是开始一点一点地靠近对方的生活——一起上学、一起吃饭、一起在河边散步。",
+        "probability": 0.45,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "灵魂 +1（温暖的日子）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +1（学会经营感情）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dating",
+            "value": 1,
+            "description": "开始交往"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "进入恋爱关系"
+          }
+        ],
+        "successText": "你们之间不需要任何正式的告白。某天走在路上，手自然而然地牵在了一起。"
+      }
+    ],
+    "weightModifiers": [
+      {
+        "condition": "attribute.chr >= 10",
+        "weightMultiplier": 1.5
+      }
+    ],
+    "tag": "romance",
+    "priority": "major"
+  },
+  {
+    "id": "dating_deepen",
+    "title": "感情升温",
+    "description": "你们已经在一起一段时间了，默契越来越好，也许可以更进一步。",
+    "minAge": 18,
+    "maxAge": 28,
+    "weight": 4,
+    "include": "has.flag.dating",
+    "exclude": "has.flag.engaged | has.flag.married",
+    "unique": true,
+    "effects": [],
+    "branches": [
+      {
+        "id": "adventure_together",
+        "title": "一起冒险",
+        "description": "「我们去看看山那边有什么吧！」对方拉起你的手，眼中闪着光。你们踏上了第一次共同冒险的旅途。",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "体魄 +1（冒险锻炼）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "魅力 +1（共同经历的默契）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dating_deepen",
+            "value": 1,
+            "description": "感情加深"
+          }
+        ],
+        "successText": "你们在山洞里迷了路，却因此发现了一片地下星空——发光的蘑菇铺满了洞壁。你们靠在一起，觉得这大概就是命运吧。"
+      },
+      {
+        "id": "quiet_moments",
+        "title": "安静时光",
+        "description": "最幸福的事不是冒险，而是平凡日子里有人陪。你们在壁炉旁读书、在雨天的屋檐下看雨、在市集上分享一块烤红薯。",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "灵魂 +2（平凡的幸福）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dating_deepen",
+            "value": 1,
+            "description": "感情加深"
+          }
+        ],
+        "successText": "某天清晨，你看着对方安静睡着的脸，突然意识到——这就是你余生想要的画面。"
+      }
+    ],
+    "tag": "romance",
+    "priority": "major"
   }
 ]
