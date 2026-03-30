@@ -39,8 +39,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": -1,
-        "description": "灵魂 -1"
+        "value": -1
       }
     ],
     "tag": "life",
@@ -59,14 +58,12 @@
       {
         "type": "modify_attribute",
         "target": "mny",
-        "value": 2,
-        "description": "家境 +2（贵族出身）"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "chr",
-        "value": 1,
-        "description": "魅力 +1（教养优良）"
+        "value": 1
       },
       {
         "type": "set_flag",
@@ -85,8 +82,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 1,
-            "description": "灵魂 +1（爱的滋养）"
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -106,14 +102,12 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智力 +2（严格教育）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -1,
-            "description": "灵魂 -1（压力）"
+            "value": -1
           }
         ],
         "successText": "家庭教师每天五点准时叫你起床。礼仪、历史、剑术、魔法——排得满满当当。你偶尔想偷懒，但父亲严厉的眼神让你乖乖坐回去。"
@@ -127,14 +121,12 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 1,
-            "description": "幸运 +1（自由成长）"
+            "value": 1
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -1,
-            "description": "魅力 -1（缺乏社交）"
+            "value": -1
           }
         ],
         "successText": "父母忙着处理家族事务，几乎没时间陪你。偌大的庄园里，你最常做的事就是一个人在走廊里发呆。但你学会了独立，也学会了观察。"
@@ -156,14 +148,12 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 1,
-        "description": "体魄 +1（山野生活）"
+        "value": 1
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1,
-        "description": "灵魂 +1（贴近自然）"
+        "value": 1
       },
       {
         "type": "set_flag",
@@ -182,8 +172,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 1,
-            "description": "魔力 +1（秘术传承）"
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -203,8 +192,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 1,
-            "description": "体魄 +1（狩猎锻炼）"
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -224,14 +212,12 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -1,
-            "description": "幸运 -1（苦难童年）"
+            "value": -1
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 1,
-            "description": "智力 +1（逆境成长）"
+            "value": 1
           }
         ],
         "successText": "母亲用最后的体温温暖着你，在黎明到来前悄然闭上了眼睛。你小小的身体在晨风中颤抖，但你的哭声足够响亮——响亮到引来了路过的商队。你活了下来。"

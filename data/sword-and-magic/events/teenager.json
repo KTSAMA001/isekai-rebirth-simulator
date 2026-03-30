@@ -25,14 +25,12 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 3,
-            "description": "体魄 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -74,14 +72,12 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -92,8 +88,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（取巧过关引人议论）"
+            "value": -2
           }
         ]
       },
@@ -106,8 +101,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -118,8 +112,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（放弃考核形象受损）"
+            "value": -2
           }
         ]
       }
@@ -158,8 +151,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -170,8 +162,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1（公会的约束失去自由）"
+            "value": -2
           }
         ],
         "successText": "公会的接待员递给你一枚铜质徽章。「欢迎加入冒险者公会。记住——互助、勇气、不抛弃同伴。」你郑重地把徽章别在了胸口。"
@@ -185,14 +176,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -203,8 +192,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（独来独往不善交际）"
+            "value": -2
           }
         ],
         "successText": "你摇摇头，独自走出了公会大门。自由是好的，但有时也会孤独。你不知道前方等待你的是什么，但脚步没有停下。"
@@ -237,14 +225,12 @@
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 2,
-        "description": "魔力 +2"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "int",
-        "value": 1,
-        "description": "智慧 +1"
+        "value": 1
       },
       {
         "type": "set_flag",
@@ -255,14 +241,12 @@
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 2,
-        "description": "+2 mag"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "int",
-        "value": 2,
-        "description": "+2 int"
+        "value": 2
       }
     ],
     "weightModifiers": [
@@ -298,14 +282,12 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +3"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -340,20 +322,17 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2,
-            "description": "家境 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1（省力也是一种本事）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（敷衍了事名声不佳）"
+            "value": -2
           }
         ]
       }
@@ -379,14 +358,12 @@
       {
         "type": "modify_attribute",
         "target": "mny",
-        "value": 3,
-        "description": "家境 +3"
+        "value": 3
       },
       {
         "type": "modify_attribute",
         "target": "chr",
-        "value": 1,
-        "description": "魅力 +1"
+        "value": 1
       },
       {
         "type": "set_flag",
@@ -397,14 +374,12 @@
       {
         "type": "modify_attribute",
         "target": "chr",
-        "value": 2,
-        "description": "+2 chr"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "int",
-        "value": 1,
-        "description": "+1 int"
+        "value": 1
       }
     ],
     "unique": true,
@@ -423,20 +398,17 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 1,
-        "description": "体魄 +1"
+        "value": 1
       },
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 1,
-        "description": "魔力 +1"
+        "value": 1
       },
       {
         "type": "modify_attribute",
         "target": "chr",
-        "value": 1,
-        "description": "魅力 +1"
+        "value": 1
       },
       {
         "type": "set_flag",
@@ -453,14 +425,12 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 2,
-        "description": "+2 str"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1,
-        "description": "+1 spr"
+        "value": 1
       }
     ],
     "unique": true,
@@ -487,14 +457,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 3,
-            "description": "魔力 +3"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -3,
-            "description": "灵魂 -3"
+            "value": -3
           },
           {
             "type": "set_flag",
@@ -521,14 +489,12 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -554,14 +520,12 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -572,8 +536,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": -2,
-            "description": "魔力 -1（逃脱消耗）"
+            "value": -2
           }
         ],
         "successText": "你假装答应，趁机逃离。暗黑魔师的笑声在身后回荡：「跑吧，跑吧……你逃不掉命运。」你加快了脚步，头也不回。"
@@ -608,14 +571,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 3,
-            "description": "魔力 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -650,14 +611,12 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智慧 +2（观察学习）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（被视为怯懦）"
+            "value": -2
           }
         ]
       },
@@ -676,14 +635,12 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智慧 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -694,8 +651,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": -2,
-            "description": "魔力 -1（偏重智谋，魔法疏于修炼）"
+            "value": -2
           }
         ],
         "failureEffects": [
@@ -738,14 +694,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 4,
-            "description": "魔力 +4（禁忌之力）"
+            "value": 4
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智慧 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -798,8 +752,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -810,8 +763,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2,
-            "description": "智力 -1（抗拒知识的代价）"
+            "value": -2
           }
         ]
       },
@@ -824,14 +776,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -842,8 +792,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": -2,
-            "description": "魔力 -1（被限制进入禁书区）"
+            "value": -2
           }
         ]
       }
@@ -875,8 +824,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +3（净化成功）"
+            "value": 3
           },
           {
             "type": "modify_hp",
@@ -916,14 +864,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 4,
-            "description": "魔力 +4（黑暗增幅）"
+            "value": 4
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -4,
-            "description": "灵魂 -4"
+            "value": -4
           },
           {
             "type": "modify_hp",
@@ -952,14 +898,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +2（抗争胜利）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 2,
-            "description": "魔力 +1"
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -1007,8 +951,7 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 1,
-        "description": "体魄 +1"
+        "value": 1
       },
       {
         "type": "modify_hp",
@@ -1025,14 +968,12 @@
       {
         "type": "modify_attribute",
         "target": "str",
-        "value": 2,
-        "description": "+2 str"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "chr",
-        "value": -1,
-        "description": "-1 chr"
+        "value": -1
       }
     ],
     "weightModifiers": [
@@ -1062,14 +1003,12 @@
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 2,
-        "description": "魔力 +2"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 2,
-        "description": "灵魂 +2"
+        "value": 2
       },
       {
         "type": "modify_hp",
@@ -1086,14 +1025,12 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 2,
-        "description": "+2 spr"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "mag",
-        "value": 1,
-        "description": "+1 mag"
+        "value": 1
       }
     ],
     "tag": "adventure",
@@ -1124,20 +1061,17 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 3,
-            "description": "体魄 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 4,
-            "description": "家境 +4"
+            "value": 4
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1178,26 +1112,22 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2,
-            "description": "体魄 -1（过度谨慎消耗体力）"
+            "value": -2
           }
         ]
       },
@@ -1211,20 +1141,17 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +3"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -1235,8 +1162,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1（团队磨合的代价）"
+            "value": -2
           }
         ]
       }
@@ -1264,14 +1190,12 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智慧 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1282,8 +1206,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（沉迷修炼疏远社交）"
+            "value": -2
           }
         ],
         "successText": "你把痛苦化作修炼的动力。每一次挥剑、每一次冥想，都是为了不再让自己受伤。你变强了——但心上的伤疤还在。"
@@ -1297,14 +1220,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1（独特的冷漠气质）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1"
+            "value": -2
           },
           {
             "type": "set_flag",
@@ -1325,14 +1246,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1343,8 +1262,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2,
-            "description": "体魄 -1（心态平和后少了斗志）"
+            "value": -2
           }
         ],
         "successText": "你深吸一口气，决定释然。失去让人成长，而成长意味着你值得更好的未来。擦干眼泪，新的一天在等着你。"
@@ -1378,20 +1296,17 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 3,
-            "description": "体魄 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3,
-            "description": "魅力 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -1427,20 +1342,17 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -1451,8 +1363,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2,
-            "description": "体魄 -1（缺少正面战场磨练）"
+            "value": -2
           }
         ]
       },
@@ -1465,14 +1376,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1483,8 +1392,7 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2,
-            "description": "家境 -1（放弃战利品优先救人）"
+            "value": -2
           }
         ]
       }
@@ -1505,20 +1413,17 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1,
-        "description": "灵魂 +1"
+        "value": 1
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 2,
-        "description": "+2 spr"
+        "value": 2
       },
       {
         "type": "modify_attribute",
         "target": "luk",
-        "value": 1,
-        "description": "+1 luk"
+        "value": 1
       }
     ],
     "tag": "life",
@@ -1543,20 +1448,17 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2,
-            "description": "家境 -1（听故事忘了正事）"
+            "value": -2
           }
         ]
       },
@@ -1569,8 +1471,7 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "运势 +1"
+            "value": 2
           },
           {
             "type": "grant_item",
@@ -1581,8 +1482,7 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2,
-            "description": "家境 -1（花光了积蓄）"
+            "value": -2
           }
         ]
       }
@@ -1610,14 +1510,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": -2,
-            "description": "体魄 -1（安逸消磨了斗志）"
+            "value": -2
           }
         ]
       },
@@ -1635,20 +1533,17 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（勇气）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2,
-            "description": "运势 -1（夜探森林消耗了运气）"
+            "value": -2
           }
         ],
         "failureEffects": [
@@ -1683,20 +1578,17 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 3,
-            "description": "运势 +2（奇遇开端）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（冒险之心）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": -2,
-            "description": "智力 -1（好奇心压过理性）"
+            "value": -2
           }
         ]
       },
@@ -1709,20 +1601,17 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 3,
-            "description": "家境 +2（报酬）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1（锻炼）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": -2,
-            "description": "运势 -1（安于平淡错过机遇）"
+            "value": -2
           }
         ]
       },
@@ -1735,20 +1624,17 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3,
-            "description": "魅力 +2（友谊加深）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（助人为乐）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": -2,
-            "description": "家境 -1（帮朋友报酬减半）"
+            "value": -2
           }
         ]
       }
@@ -1787,14 +1673,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3,
-            "description": "魅力 +2（勇气可嘉）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（心动）"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1829,8 +1713,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（暗恋的滋味）"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1841,8 +1724,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（怯于行动错失良机）"
+            "value": -2
           }
         ]
       },
@@ -1883,20 +1765,17 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智慧 +1（悟出心得）"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（孤独修炼疏远同伴）"
+            "value": -2
           }
         ]
       },
@@ -1914,14 +1793,12 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2,
-            "description": "体魄 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1（发现秘密）"
+            "value": 2
           }
         ],
         "failureEffects": [
@@ -1965,14 +1842,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3,
-            "description": "灵魂 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -1983,8 +1858,7 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（沉迷解梦行为怪异）"
+            "value": -2
           }
         ]
       },
@@ -1997,14 +1871,12 @@
           {
             "type": "modify_attribute",
             "target": "luk",
-            "value": 2,
-            "description": "幸运 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1（忽视灵性暗示）"
+            "value": -2
           }
         ]
       },
@@ -2017,8 +1889,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1"
+            "value": -2
           },
           {
             "type": "modify_hp",
@@ -2057,14 +1928,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 3,
-            "description": "魔力 +3"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智力 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -2099,8 +1968,7 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智力 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -2111,8 +1979,7 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": -2,
-            "description": "魔力 -1（未实践错失提升机会）"
+            "value": -2
           }
         ]
       },
@@ -2125,8 +1992,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           }
         ]
       }
@@ -2159,14 +2025,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 3,
-            "description": "魅力 +2"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智力 +1"
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -2195,20 +2059,17 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2,
-            "description": "灵魂 -1（辩论消耗精神）"
+            "value": -2
           }
         ]
       },
@@ -2221,14 +2082,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2,
-            "description": "灵魂 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": -2,
-            "description": "魅力 -1（临阵脱逃形象受损）"
+            "value": -2
           }
         ]
       }
@@ -2261,14 +2120,12 @@
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": 3,
-            "description": "魔力 +3（禁术）"
+            "value": 3
           },
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 3,
-            "description": "智力 +2"
+            "value": 3
           },
           {
             "type": "set_flag",
@@ -2303,20 +2160,17 @@
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2,
-            "description": "智力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2,
-            "description": "魅力 +1"
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mag",
-            "value": -2,
-            "description": "魔力 -1（被限制实验机会）"
+            "value": -2
           }
         ]
       },
