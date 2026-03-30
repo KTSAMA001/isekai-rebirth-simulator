@@ -1453,5 +1453,203 @@
       }
     ],
     "unique": true
+  },
+  {
+    "id": "elder_technique_pass",
+    "title": "绝学传承",
+    "description": "你决定将毕生所学的绝学整理成册，留给后人。",
+    "minAge": 65,
+    "maxAge": 85,
+    "weight": 2,
+    "include": "has.flag.has_student",
+    "effects": [],
+    "branches": [
+      {
+        "id": "technique_complete",
+        "title": "全力编写",
+        "description": "把所有东西都记下来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "legacy_passed",
+            "value": 1
+          }
+        ],
+        "successText": "经过数月的编写，你终于完成了这部倾注毕生心血的著作。弟子们读后泪流满面——这是最珍贵的遗产。"
+      },
+      {
+        "id": "technique_oral",
+        "title": "口口相传",
+        "description": "有些东西不适合写下来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "legacy_passed",
+            "value": 1
+          }
+        ],
+        "successText": "你把最核心的技艺只传授给了最信任的弟子。'这些东西，只能用心去感受。'你这样说道。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "elder_last_feast",
+    "title": "最后的盛宴",
+    "description": "老朋友们从各地赶来，为你举办了一场盛大的聚会。",
+    "minAge": 70,
+    "maxAge": 85,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "feast_speech",
+        "title": "发表感言",
+        "description": "说点什么",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "successText": "你站在众人面前，回顾了一生的经历。当说到那些已经不在的朋友们时，你停顿了很久。最后你说：'能和你们共度此生，是我最大的幸运。'"
+      },
+      {
+        "id": "feast_listen",
+        "title": "静静听着别人说",
+        "description": "让他们去说吧",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4
+          }
+        ],
+        "successText": "朋友们一个接一个地分享和你之间的故事。你静静听着，时而微笑，时而红了眼眶。这些回忆，就是最好的礼物。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "elder_star_gazing_final",
+    "title": "最后的星空",
+    "description": "一个晴朗的夜晚，你独自来到小时候常去的那座山丘，仰望星空。",
+    "minAge": 75,
+    "maxAge": 95,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "stargazing_peace",
+        "title": "内心平静",
+        "description": "一切都很美好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "successText": "你躺在草地上，看着漫天繁星。那些曾经照亮你夜晚的星星，依然在闪烁。一切都很好。"
+      },
+      {
+        "id": "stargazing_wish",
+        "title": "许一个愿望",
+        "description": "虽然可能没用",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 3
+          }
+        ],
+        "successText": "你闭眼许了一个愿望。睁开眼时，一颗流星划过天际。你笑了——也许，愿望会实现的。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "elder_old_enemy",
+    "title": "昔日的对手",
+    "description": "你收到了一封信——来自几十年前的宿敌，他想见你最后一面。",
+    "minAge": 65,
+    "maxAge": 80,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "enemy_meet",
+        "title": "去见他",
+        "description": "都过去了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你们面对面坐着，曾经的恩怨在岁月面前显得微不足道。最后你们握了握手，互相说了声'保重'。"
+      },
+      {
+        "id": "enemy_ignore",
+        "title": "不去",
+        "description": "有些事不需要了结",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你把信放进了抽屉。有些过去，就让它过去吧。"
+      }
+    ],
+    "unique": true
   }
 ]

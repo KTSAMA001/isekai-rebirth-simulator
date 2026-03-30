@@ -5889,5 +5889,241 @@
       }
     ],
     "unique": true
+  },
+  {
+    "id": "rare_dragon_egg",
+    "title": "龙蛋",
+    "description": "在一次洞穴探险中，你发现了一枚散发着微光的龙蛋。",
+    "minAge": 20,
+    "maxAge": 40,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "dragon_raise",
+        "title": "孵化并养育幼龙",
+        "description": "这是千载难逢的机会",
+        "requireCondition": "attribute.spr >= 15 | attribute.mag >= 15",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_rider",
+            "value": 1
+          }
+        ],
+        "successText": "幼龙破壳而出，第一眼看到的就是你。从此你们之间建立了不可分割的羁绊。能骑龙翱翔天际的人，整个历史上也不过寥寥数人。"
+      },
+      {
+        "id": "dragon_sell",
+        "title": "卖给收藏家",
+        "description": "值很多钱",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 6
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2
+          }
+        ],
+        "successText": "一位富有的收藏家以天价买下了龙蛋。你用这笔钱买了一座庄园。但有时你会想，如果把它孵化了……"
+      }
+    ],
+    "unique": true,
+    "tag": "legendary"
+  },
+  {
+    "id": "rare_time_loop",
+    "title": "时间循环",
+    "description": "你在一次魔法实验中意外触发了时间循环，同一天重复了无数次。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 1,
+    "include": "attribute.mag >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "loop_learn",
+        "title": "利用循环学习一切",
+        "description": "你有无限的时间",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你利用数百次循环掌握了无数技能和知识。当你终于打破循环时，你的能力已经远超常人。"
+      },
+      {
+        "id": "loop_break_fast",
+        "title": "尽快打破循环",
+        "description": "这太不正常了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你花了几天找到了打破循环的方法。虽然错失了学习的机会，但你对时间有了更深刻的理解。"
+      }
+    ],
+    "unique": true,
+    "tag": "legendary"
+  },
+  {
+    "id": "rare_gods_gift",
+    "title": "神之恩赐",
+    "description": "在生死边缘，你感受到了来自神明的力量。",
+    "minAge": 30,
+    "maxAge": 60,
+    "weight": 1,
+    "include": "attribute.spr >= 20",
+    "effects": [],
+    "branches": [
+      {
+        "id": "god_accept",
+        "title": "接受神力",
+        "description": "这是命运的安排",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": 30,
+            "description": "HP +30（神之祝福）"
+          },
+          {
+            "type": "set_flag",
+            "target": "prophet",
+            "value": 1
+          }
+        ],
+        "successText": "一道金光笼罩了你的全身。你感到前所未有的力量在体内奔涌。从此你不再是一个普通的人，你成为了神在人间的代言人。"
+      },
+      {
+        "id": "god_refuse",
+        "title": "拒绝",
+        "description": "你只想做普通人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 3
+          }
+        ],
+        "successText": "你礼貌地拒绝了神力。神明似乎对你的选择感到意外，但尊重了你的决定。你还是你，但你的灵魂比以前更加坚定了。"
+      }
+    ],
+    "unique": true,
+    "tag": "legendary"
+  },
+  {
+    "id": "rare_reincarnation_hint",
+    "title": "前世记忆",
+    "description": "在一次深度冥想中，你想起了前世的记忆——你曾经是一个伟大的英雄。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 1,
+    "include": "attribute.spr >= 18",
+    "effects": [],
+    "branches": [
+      {
+        "id": "pastlife_embrace",
+        "title": "接纳前世的自己",
+        "description": "两世的记忆合为一体",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          }
+        ],
+        "successText": "前世的剑术、魔法和智慧像潮水般涌入你的意识。你睁开眼时，整个世界看起来都不一样了——因为你不只活了这一世。"
+      },
+      {
+        "id": "pastlife_seal",
+        "title": "封印这些记忆",
+        "description": "前世是前世，今生是今生",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你选择封印了前世的记忆。但那些经验早已融入了你的潜意识，在关键时刻会自然地帮助你。"
+      }
+    ],
+    "unique": true,
+    "tag": "legendary"
   }
 ]
