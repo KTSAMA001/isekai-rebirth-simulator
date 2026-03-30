@@ -503,13 +503,14 @@
       {
         "id": "swallow_pride",
         "title": "默默忍耐",
-        "description": "你知道得罪不起权贵，低下头认了错",
+        "description": "你知道得罪不起权贵，低下头认了错。东西没了，但至少还安全。",
         "probability": 0.35,
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "spr",
-            "value": -2
+            "target": "chr",
+            "value": -2,
+            "description": "忍气吞声让你变得不自信"
           },
           {
             "type": "set_flag",
@@ -522,7 +523,7 @@
       {
         "id": "stand_ground",
         "title": "据理力争",
-        "description": "\"是他先欺负我的！\"你不卑不亢地直视那权贵的眼睛",
+        "description": "“是他先抢我的！”你不卑不亢地直视那权贵的眼睛",
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
@@ -533,32 +534,28 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 2
+            "value": 3,
+            "description": "勇气让你的气场更强大"
           },
           {
             "type": "set_flag",
             "target": "noble_conflict",
             "value": 1,
             "description": "与权贵冲突"
-          },
-          {
-            "type": "modify_attribute",
-            "target": "str",
-            "value": -2
           }
         ],
         "failureEffects": [
           {
             "type": "modify_attribute",
-            "target": "spr",
+            "target": "chr",
             "value": -1,
-            "description": "灵魂 -1"
+            "description": "被当众羞辱"
           },
           {
             "type": "modify_hp",
             "target": "hp",
             "value": -10,
-            "description": "HP -10"
+            "description": "被推倒在地"
           },
           {
             "type": "set_flag",
@@ -567,30 +564,26 @@
             "description": "与权贵冲突"
           }
         ],
-        "successText": "权贵被你的气势镇住了，悻悻离去。你赢得了村民的尊敬",
-        "failureText": "权贵冷笑一声，把你推倒在地...\"不知天高地厚\""
+        "successText": "权贵被你的气势镇住了，悻悻离去。东西虽然没要回来，但你赢得了周围人的尊敬。",
+        "failureText": "权贵冷笑一声，一把将你推倒在地。“不知天高地厚的东西。”"
       },
       {
         "id": "report_authority",
         "title": "告到更高层",
-        "description": "你越过了那权贵，直接去找了领主的代理人",
+        "description": "你咽不下这口气，跑去找了领主的代理人。",
         "probability": 0.3,
         "effects": [
           {
             "type": "modify_attribute",
             "target": "int",
-            "value": 2
+            "value": 3,
+            "description": "学会用更聪明的方式解决问题"
           },
           {
             "type": "modify_attribute",
-            "target": "chr",
-            "value": -2
-          },
-          {
-            "type": "set_flag",
-            "target": "justice_seek",
+            "target": "mny",
             "value": 1,
-            "description": "追求正义"
+            "description": "领主代理人赏了你一点补偿"
           }
         ]
       }
