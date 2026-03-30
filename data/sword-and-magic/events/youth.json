@@ -3110,5 +3110,140 @@
         "successText": "你仔细观察每个选手的招式，在心里默默记下。总有一天，你也会站在那个擂台上。"
       }
     ]
+  },
+  {
+    "id": "bandit_ambush",
+    "title": "山贼伏击",
+    "description": "你经过一片密林时，一伙山贼从树丛中跳出挡住了去路。",
+    "minAge": 16,
+    "maxAge": 25,
+    "weight": 3,
+    "effects": [],
+    "branches": [
+      {
+        "id": "bandit_fight",
+        "title": "正面对抗",
+        "description": "拔出武器！",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（战斗伤）"
+          },
+          {
+            "type": "set_flag",
+            "target": "tough_reputation",
+            "value": 1
+          }
+        ],
+        "successText": "一番激战后，山贼们狼狈逃窜。你虽然受了些伤，但赢得漂亮。附近的旅人都知道了你的名字。"
+      },
+      {
+        "id": "bandit_negotiate",
+        "title": "谈判交钱",
+        "description": "破财消灾",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你用口才说服山贼降低赎金，最终花了少量金币安全离开。至少你全身而退了。"
+      },
+      {
+        "id": "bandit_run",
+        "title": "逃跑",
+        "description": "三十六计走为上",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ],
+        "successText": "你拼命奔跑，终于甩掉了追兵。但那种无力感，让你下定决心要变得更强。"
+      }
+    ]
+  },
+  {
+    "id": "monster_hunt_guild",
+    "title": "猎人公会任务",
+    "description": "猎人公会发布了新的悬赏任务，目标是一只伤害牲畜的魔狼。",
+    "minAge": 16,
+    "maxAge": 28,
+    "weight": 3,
+    "include": "has.flag.guild_member",
+    "effects": [],
+    "branches": [
+      {
+        "id": "hunt_solo",
+        "title": "独自接任务",
+        "description": "凭自己的力量完成",
+        "requireCondition": "attribute.str >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          }
+        ],
+        "successText": "经过三天追踪，你独自猎杀了魔狼。公会给你的赏金丰厚，你的猎人等级也提升了一级。"
+      },
+      {
+        "id": "hunt_team",
+        "title": "组队前往",
+        "description": "和公会同伴一起",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你们配合默契，轻松拿下了魔狼。虽然赏金要分，但你收获了宝贵的战斗经验和可靠的朋友。"
+      }
+    ]
   }
 ]

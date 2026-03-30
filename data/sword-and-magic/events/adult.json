@@ -4712,5 +4712,688 @@
         "successText": "成品虽然算不上杰作，但做工精良，很快就被买走了。这是一笔稳当的买卖。"
       }
     ]
+  },
+  {
+    "id": "ancient_ruins_explore",
+    "title": "远古遗迹探索",
+    "description": "探险者在荒野中发现了一座远古遗迹的入口，里面可能藏着失落的宝藏。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "ruins_enter",
+        "title": "深入探索",
+        "description": "黑暗中有什么在等待",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（陷阱）"
+          },
+          {
+            "type": "set_flag",
+            "target": "dungeon_veteran",
+            "value": 1
+          }
+        ],
+        "successText": "你穿越了层层机关和陷阱，最终在遗迹深处找到了一个密封的宝箱。里面的金币和魔法物品价值连城！"
+      },
+      {
+        "id": "ruins_map",
+        "title": "只绘制地图后离开",
+        "description": "安全第一，先搞清楚结构",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你花了几天绘制了遗迹的完整地图。这份地图后来以高价卖给了一位贵族冒险者。"
+      }
+    ]
+  },
+  {
+    "id": "mercenary_contract",
+    "title": "佣兵合同",
+    "description": "一位富商雇你护送货物穿越危险的边境地带。",
+    "minAge": 22,
+    "maxAge": 40,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "mercenary_honor",
+        "title": "忠诚完成合同",
+        "description": "不管发生什么都保护好货物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          }
+        ],
+        "successText": "一路上遭遇了三波强盗，但货物完好无损地送到了。富商非常满意，不仅付了双倍佣金，还把你推荐给了他的朋友们。"
+      },
+      {
+        "id": "mercenary_steal",
+        "title": "监守自盗",
+        "description": "货物价值连城，不如……",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -3
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_path",
+            "value": 1
+          }
+        ],
+        "successText": "你带着货物消失了。富商暴怒地发出追杀令。你确实发财了，但以后再也不能光明正大地走在街上。"
+      }
+    ]
+  },
+  {
+    "id": "siege_defense",
+    "title": "守城之战",
+    "description": "敌军围攻了你所在的城市，所有人都被召集守城。",
+    "minAge": 22,
+    "maxAge": 45,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "siege_frontline",
+        "title": "上前线战斗",
+        "description": "城墙就是最后的防线",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15（战斗）"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1
+          }
+        ],
+        "successText": "你站在城墙上浴血奋战，箭矢和碎石在你身边飞过。最终援军赶到，城保住了。你的英勇被所有人铭记。"
+      },
+      {
+        "id": "siege_support",
+        "title": "做后勤支援",
+        "description": "搬运伤员和物资",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你在后方不停地将伤员送到医馆，又把箭矢送到城墙上。虽然没有亲手杀敌，但你的贡献同样重要。"
+      }
+    ]
+  },
+  {
+    "id": "dark_cult_encounter",
+    "title": "暗黑教团",
+    "description": "你无意中发现了一个秘密教团的集会。他们正在进行某种禁忌仪式。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "cult_infiltrate",
+        "title": "潜入调查",
+        "description": "搞清楚他们在干什么",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_ritual",
+            "value": 1
+          }
+        ],
+        "successText": "你伪装成信徒潜入教团，发现他们在策划一场大规模的献祭仪式。你必须在为时已晚之前阻止这一切。"
+      },
+      {
+        "id": "cult_report",
+        "title": "向当局举报",
+        "description": "让专业人士处理",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你将情报交给了骑士团。几天后，教团被一网打尽。你获得了一笔不菲的举报奖金。"
+      },
+      {
+        "id": "cult_join",
+        "title": "加入他们",
+        "description": "禁忌的力量……让人心动",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_mage",
+            "value": 1
+          }
+        ],
+        "successText": "你跪在了暗黑祭坛前。黑暗的力量涌入你的身体，强大而令人战栗。从此你走上了一条不归路。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "desert_caravan",
+    "title": "沙漠商队",
+    "description": "一支穿越死亡沙漠的商队招募护卫，报酬非常优厚。",
+    "minAge": 25,
+    "maxAge": 40,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "caravan_guard",
+        "title": "担任护卫",
+        "description": "沙漠里危机四伏",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          }
+        ],
+        "successText": "你们遭遇了沙暴和沙虫的袭击，但最终安全抵达了目的地。沙漠的风沙磨砺了你的意志。"
+      },
+      {
+        "id": "caravan_trade",
+        "title": "以商人身份加入",
+        "description": "沿途做买卖",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你在各个绿洲城市间倒卖货物，赚了一笔。途中遇到的各种人物和故事，比利润更有价值。"
+      }
+    ]
+  },
+  {
+    "id": "assassin_contract",
+    "title": "暗杀委托",
+    "description": "一个神秘人找到你，开出了天价让你去解决一个目标。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "assassin_refuse",
+        "title": "坚决拒绝",
+        "description": "这不是你该做的事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你断然拒绝了。神秘人冷笑一声后消失在黑暗中。虽然少了大笔钱财，但你的良心是干净的。"
+      },
+      {
+        "id": "assassin_accept",
+        "title": "接下委托",
+        "description": "钱真的很诱人……",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 6
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -4
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_path",
+            "value": 1
+          }
+        ],
+        "successText": "事情办得干净利落。你拿到金币后手一直在抖。有些门一旦打开，就再也关不上了。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "war_campaign",
+    "title": "远征军",
+    "description": "王国组建远征军讨伐边境的兽人部落，征召所有能战斗的人。",
+    "minAge": 25,
+    "maxAge": 40,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "campaign_volunteer",
+        "title": "志愿参战",
+        "description": "为国而战",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_veteran",
+            "value": 1
+          }
+        ],
+        "successText": "半年的远征让你见识了真正的战争。你活了下来，但身边很多人没有。你带着军功章和一身伤疤回到家乡。"
+      },
+      {
+        "id": "campaign_dodge",
+        "title": "逃避征兵",
+        "description": "想方设法不去",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2
+          }
+        ],
+        "successText": "你用各种手段躲过了征兵。虽然被人说闲话，但至少你还活着。"
+      }
+    ]
+  },
+  {
+    "id": "pirate_attack",
+    "title": "海盗袭击",
+    "description": "你乘坐的商船遭遇了海盗袭击，船上的人一片混乱。",
+    "minAge": 18,
+    "maxAge": 35,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "pirate_fight",
+        "title": "奋起反击",
+        "description": "不能坐以待毙",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你带领船上的男人们组织了有效的抵抗，击退了海盗。船长感激地免了你的船费，还额外给了赏金。"
+      },
+      {
+        "id": "pirate_jump",
+        "title": "跳海逃生",
+        "description": "水性好，能游到岸边",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          }
+        ],
+        "successText": "你在海里游了整整一夜才到达岸边。货没了，命还在。你赤脚走在沙滩上，开始盘算接下来的路。"
+      }
+    ]
+  },
+  {
+    "id": "dungeon_hidden_floor",
+    "title": "副本隐藏层",
+    "description": "你在探索副本时发现了一道隐藏的门，门后传来诡异的光芒。",
+    "minAge": 25,
+    "maxAge": 45,
+    "weight": 1,
+    "include": "has.flag.dungeon_first",
+    "effects": [],
+    "branches": [
+      {
+        "id": "hidden_enter",
+        "title": "推门而入",
+        "description": "好奇心驱使你",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10"
+          },
+          {
+            "type": "set_flag",
+            "target": "dungeon_master",
+            "value": 1
+          }
+        ],
+        "successText": "隐藏层里是一个远古魔法实验室，各种未知的设备和配方让你大开眼界。你带走了几件珍贵的宝物和一整本魔法笔记。"
+      },
+      {
+        "id": "hidden_seal",
+        "title": "封印这扇门",
+        "description": "太危险了，不该打开",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你用法术重新封印了大门，并把秘密报告给了公会。你的谨慎赢得了所有人的尊重。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "prison_break",
+    "title": "越狱救援",
+    "description": "你的一位旧友被关进了监狱，他声称自己是被冤枉的。",
+    "minAge": 22,
+    "maxAge": 40,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "break_rescue",
+        "title": "策划越狱",
+        "description": "制定详细的逃亡计划",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "经过三周精心策划，你们成功逃出了监狱。旧友含泪道谢，立誓要报答你的恩情。"
+      },
+      {
+        "id": "break_legal",
+        "title": "走法律途径",
+        "description": "搜集证据为他翻案",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          }
+        ],
+        "successText": "你四处奔走搜集证据，最终在法庭上证明了旧友的清白。整个过程耗时半年，但正义终究得到了伸张。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "boss_lair_assault",
+    "title": "魔王城攻略",
+    "description": "各国联合组建讨伐军，目标是盘踞在北方魔王城的魔族之主。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 1,
+    "include": "attribute.str >= 16 | attribute.mag >= 16",
+    "effects": [],
+    "branches": [
+      {
+        "id": "boss_assault_lead",
+        "title": "担任先锋队长",
+        "description": "冲在最前面",
+        "requireCondition": "attribute.str >= 20 | attribute.mag >= 20",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 4
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "HP -20"
+          },
+          {
+            "type": "set_flag",
+            "target": "demon_king_slayer",
+            "value": 1
+          }
+        ],
+        "successText": "你带领先锋杀入魔王城，一路斩将搴旗。最终你亲手击败了魔族之主！你的名字将永载史册！"
+      },
+      {
+        "id": "boss_assault_support",
+        "title": "作为后勤参战",
+        "description": "在后方支援前线",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10"
+          },
+          {
+            "type": "set_flag",
+            "target": "war_hero",
+            "value": 1
+          }
+        ],
+        "successText": "你在后方负责调度物资和治愈伤员，为前线的胜利提供了关键支持。战争结束后，国王亲自嘉奖了你。"
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical"
   }
 ]
