@@ -188,7 +188,7 @@ export class EventModule {
         )
         state.attributes = result.attributes
         state.attributePeaks = result.peaks
-        return effect.description ?? `${effect.target} 设为 ${effect.value}`
+        return effect.description ?? `${this.world.index.attributesById.get(effect.target)?.name ?? effect.target} 设为 ${effect.value}`
       }
       case 'modify_hp': {
         const hpBefore = state.hp
