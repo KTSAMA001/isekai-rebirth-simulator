@@ -202,13 +202,13 @@ export class EventModule {
       }
       case 'set_flag': {
         state.flags = new Set([...state.flags, effect.target])
-        return effect.description ?? `设置标记: ${effect.target}`
+        return effect.description ?? ''
       }
       case 'remove_flag': {
         const newFlags = new Set(state.flags)
         newFlags.delete(effect.target)
         state.flags = newFlags
-        return effect.description ?? `移除标记: ${effect.target}`
+        return effect.description ?? ''
       }
       case 'add_talent': {
         if (!state.talents.selected.includes(effect.target)) {
