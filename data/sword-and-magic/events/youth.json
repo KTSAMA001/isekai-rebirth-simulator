@@ -2796,5 +2796,319 @@
     ],
     "tag": "romance",
     "priority": "major"
+  },
+  {
+    "id": "magic_theory_class",
+    "title": "魔法理论课",
+    "description": "一位老教授在学院开设了高阶魔法理论课程，名额有限。",
+    "minAge": 15,
+    "maxAge": 20,
+    "weight": 3,
+    "include": "has.flag.magic_student",
+    "effects": [],
+    "branches": [
+      {
+        "id": "enroll_theory",
+        "title": "认真听课",
+        "description": "仔细记笔记，认真钻研",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "successText": "你学到了魔法运作的底层原理，对元素的理解更深了一层。"
+      },
+      {
+        "id": "sleep_theory",
+        "title": "在后排打瞌睡",
+        "description": "理论太无聊了……",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "虽然什么都没学到，但睡了一觉精神很好。"
+      }
+    ]
+  },
+  {
+    "id": "sword_training_camp",
+    "title": "剑术训练营",
+    "description": "王国骑士团在各地举办短期剑术训练营，免费提供食宿。",
+    "minAge": 15,
+    "maxAge": 20,
+    "weight": 3,
+    "effects": [],
+    "branches": [
+      {
+        "id": "camp_train",
+        "title": "刻苦训练",
+        "description": "每天从天亮练到天黑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          },
+          {
+            "type": "set_flag",
+            "target": "squire",
+            "value": 1
+          }
+        ],
+        "successText": "你的手上磨出了厚厚的老茧，但挥剑的感觉越来越自如。"
+      },
+      {
+        "id": "camp_social",
+        "title": "混日子交朋友",
+        "description": "训练随便应付，主要去认识人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "successText": "虽然剑术没什么长进，但你交到了不少朋友，其中有几个后来成了有名的冒险者。"
+      }
+    ]
+  },
+  {
+    "id": "secret_master",
+    "title": "隐居大师",
+    "description": "在深山里遇到一位隐居的神秘高手，他似乎在寻找传人。",
+    "minAge": 15,
+    "maxAge": 22,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "master_accept",
+        "title": "拜师学艺",
+        "description": "跪下来磕三个头",
+        "requireCondition": "attribute.spr >= 8",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "has_student",
+            "value": 1
+          }
+        ],
+        "successText": "大师微微点头：'你有悟性。'从此你每日随他修炼，功力突飞猛进。"
+      },
+      {
+        "id": "master_decline",
+        "title": "婉言谢绝",
+        "description": "你不想被束缚",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "successText": "大师笑了笑：'你会回来的。'你转身离去，不知为何心里有些遗憾。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "talent_awakening",
+    "title": "天赋觉醒",
+    "description": "在一次生死危机中，你体内沉睡的力量突然觉醒了。",
+    "minAge": 16,
+    "maxAge": 22,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "awakening_magic",
+        "title": "魔力觉醒",
+        "description": "灼热的力量从体内涌出",
+        "requireCondition": "attribute.mag >= 8",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_awakened",
+            "value": 1
+          }
+        ],
+        "successText": "一道耀眼的光芒从你体内爆发，周围的人纷纷后退。你感到前所未有的力量在血管中奔涌。"
+      },
+      {
+        "id": "awakening_body",
+        "title": "武道觉醒",
+        "description": "身体变得更加强韧",
+        "requireCondition": "attribute.str >= 8",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你的感官突然变得无比敏锐，力量和速度都提升了一个层次。这个世界在你眼中变得不一样了。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "traveling_sage",
+    "title": "云游学者",
+    "description": "一位来自远方的学者路过村庄，他知识渊博，说话时旁征博引。",
+    "minAge": 15,
+    "maxAge": 22,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "sage_follow",
+        "title": "跟随学者学习",
+        "description": "请他收你为徒",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "successText": "学者见你求学心切，留下了三个月。你跟着他走遍了大半个王国，见识了无数奇闻异事。"
+      },
+      {
+        "id": "sage_listen",
+        "title": "只是旁听",
+        "description": "在广场上听他演讲",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "successText": "虽然没能和他深入交流，但他的几句话让你茅塞顿开，对世界的看法完全不同了。"
+      }
+    ]
+  },
+  {
+    "id": "underground_arena",
+    "title": "地下竞技场",
+    "description": "城镇地下的秘密竞技场，各路好手在此切磋武艺。",
+    "minAge": 18,
+    "maxAge": 30,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "arena_champion",
+        "title": "参加并夺冠",
+        "description": "一路过关斩将",
+        "requireCondition": "attribute.str >= 12",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          },
+          {
+            "type": "set_flag",
+            "target": "champion",
+            "value": 1
+          }
+        ],
+        "successText": "最后一击！对手倒下了。全场欢呼你的名字。竞技场老板递给你一袋金币——你是新的冠军！"
+      },
+      {
+        "id": "arena_learn",
+        "title": "只观战学习",
+        "description": "先看看再说",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你仔细观察每个选手的招式，在心里默默记下。总有一天，你也会站在那个擂台上。"
+      }
+    ]
   }
 ]

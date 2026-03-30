@@ -4325,5 +4325,392 @@
         "value": 1
       }
     ]
+  },
+  {
+    "id": "magic_research_breakthrough",
+    "title": "魔法研究突破",
+    "description": "经过长时间的研究，你在某个魔法领域取得了重大突破。",
+    "minAge": 28,
+    "maxAge": 45,
+    "weight": 2,
+    "include": "attribute.mag >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "research_publish",
+        "title": "公开发表",
+        "description": "让全世界分享你的发现",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_inventor",
+            "value": 1
+          }
+        ],
+        "successText": "你的论文在学术界引起轰动，无数人前来请教。你的名字第一次被写进了魔法史册。"
+      },
+      {
+        "id": "research_hoard",
+        "title": "独享成果",
+        "description": "不告诉任何人，留作底牌",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你将这个秘密深埋心底。在关键时刻，它会成为你最强大的武器。"
+      }
+    ]
+  },
+  {
+    "id": "martial_arts_master",
+    "title": "武道至境",
+    "description": "在一次与强敌的对决中，你对武道的理解突飞猛进。",
+    "minAge": 28,
+    "maxAge": 45,
+    "weight": 2,
+    "include": "attribute.str >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "martial_enlighten",
+        "title": "进入顿悟",
+        "description": "在战斗中忘记自我",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "successText": "时间仿佛停止了。你的身体在战斗中自动做出最优反应，每一击都恰到好处。这是武者梦寐以求的境界。"
+      },
+      {
+        "id": "martial_endure",
+        "title": "硬扛下来",
+        "description": "虽然没顿悟，但变得更抗打了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15"
+          }
+        ],
+        "successText": "你虽然浑身是伤，但站了起来。这次战斗让你变得更坚强了。"
+      }
+    ]
+  },
+  {
+    "id": "write_a_book",
+    "title": "著书立说",
+    "description": "你决定将自己多年的经验和知识写成一本书。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "attribute.int >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "book_bestseller",
+        "title": "倾注心血写一本好书",
+        "description": "花几年时间打磨",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "author",
+            "value": 1
+          }
+        ],
+        "successText": "你的著作出版后大受欢迎，甚至被翻译成多种语言在各国流传。后辈们把这本书当作必读经典。"
+      },
+      {
+        "id": "book_light",
+        "title": "随便写写算了",
+        "description": "记录一下自己的冒险经历",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "successText": "你的回忆录出版后反响平平，不过至少子孙后代能了解你曾经的故事了。"
+      }
+    ]
+  },
+  {
+    "id": "disciple_comes",
+    "title": "收徒传艺",
+    "description": "一个年轻人找到你，想拜你为师。",
+    "minAge": 30,
+    "maxAge": 60,
+    "weight": 2,
+    "include": "attribute.int >= 12 | attribute.str >= 12 | attribute.mag >= 12",
+    "effects": [],
+    "branches": [
+      {
+        "id": "accept_disciple",
+        "title": "收下这个弟子",
+        "description": "年轻人眼中满是期待",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "has_student",
+            "value": 1
+          }
+        ],
+        "successText": "你收下了这个弟子。看着他勤奋练习的样子，你仿佛看到了年轻时的自己。"
+      },
+      {
+        "id": "refuse_disciple",
+        "title": "拒绝",
+        "description": "你不想负这个责任",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ],
+        "successText": "年轻人的眼神暗淡下去。你转身离开时，心里有一丝不安——也许你错过了什么。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "magical_creature_tame",
+    "title": "驯服魔物",
+    "description": "你遇到了一只受伤的魔物幼崽，它看起来既可怜又危险。",
+    "minAge": 18,
+    "maxAge": 35,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "tame_creature",
+        "title": "尝试驯服",
+        "description": "小心接近它",
+        "requireCondition": "attribute.spr >= 10 | attribute.mag >= 10",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "fairy_friend",
+            "value": 1
+          }
+        ],
+        "successText": "幼崽起初警惕地看着你，但你治愈了它的伤。从此它成了你最忠诚的伙伴。"
+      },
+      {
+        "id": "kill_creature",
+        "title": "解决掉",
+        "description": "魔物就是魔物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ],
+        "successText": "你干净利落地解决了它。但你注意到它的眼神中似乎有某种……不舍。你很快把这种想法甩掉了。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "elemental_trial",
+    "title": "元素试炼",
+    "description": "一座古老的试炼塔出现在你面前，传说通过试炼者可获得元素之力。",
+    "minAge": 20,
+    "maxAge": 35,
+    "weight": 1,
+    "include": "attribute.mag >= 10",
+    "effects": [],
+    "branches": [
+      {
+        "id": "trial_fire",
+        "title": "火之试炼",
+        "description": "穿越烈焰通道",
+        "requireCondition": "attribute.mag >= 14",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（灼烧）"
+          },
+          {
+            "type": "set_flag",
+            "target": "elemental_master",
+            "value": 1
+          }
+        ],
+        "successText": "火焰在你的魔力护盾前消退。你走过烈焰通道，毫发无伤。元素之心认可了你！"
+      },
+      {
+        "id": "trial_retreat",
+        "title": "知难而退",
+        "description": "太危险了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你明智地选择了放弃。但试炼塔中传来的力量呼唤，一直萦绕在你心头。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "masterpiece_craft",
+    "title": "制作杰作",
+    "description": "在一次灵光乍现中，你创造出了令人惊叹的作品。",
+    "minAge": 25,
+    "maxAge": 50,
+    "weight": 2,
+    "include": "attribute.int >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "craft_masterpiece",
+        "title": "全力以赴",
+        "description": "把所有心血投入其中",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "这件作品超越了所有人预期。贵族和学者们争相购买，你的名声传遍了整个王国。"
+      },
+      {
+        "id": "craft_practical",
+        "title": "做实用的东西",
+        "description": "能卖钱就行",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          }
+        ],
+        "successText": "成品虽然算不上杰作，但做工精良，很快就被买走了。这是一笔稳当的买卖。"
+      }
+    ]
   }
 ]
