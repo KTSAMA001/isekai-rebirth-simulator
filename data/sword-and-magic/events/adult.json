@@ -4711,7 +4711,8 @@
         ],
         "successText": "成品虽然算不上杰作，但做工精良，很快就被买走了。这是一笔稳当的买卖。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "ancient_ruins_explore",
@@ -4774,7 +4775,8 @@
         ],
         "successText": "你花了几天绘制了遗迹的完整地图。这份地图后来以高价卖给了一位贵族冒险者。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "mercenary_contract",
@@ -4889,7 +4891,8 @@
         ],
         "successText": "你在后方不停地将伤员送到医馆，又把箭矢送到城墙上。虽然没有亲手杀敌，但你的贡献同样重要。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "dark_cult_encounter",
@@ -5139,7 +5142,8 @@
         ],
         "successText": "你用各种手段躲过了征兵。虽然被人说闲话，但至少你还活着。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "pirate_attack",
@@ -5202,7 +5206,8 @@
         ],
         "successText": "你在海里游了整整一夜才到达岸边。货没了，命还在。你赤脚走在沙滩上，开始盘算接下来的路。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "dungeon_hidden_floor",
@@ -5395,5 +5400,494 @@
     "unique": true,
     "tag": "epic",
     "priority": "critical"
+  },
+  {
+    "id": "buy_house",
+    "title": "买房置业",
+    "description": "你攒了一些钱，是时候考虑买套房子安家了。",
+    "minAge": 26,
+    "maxAge": 40,
+    "weight": 2,
+    "include": "attribute.mny >= 6",
+    "effects": [],
+    "branches": [
+      {
+        "id": "house_buy",
+        "title": "买！",
+        "description": "有自己的房子了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "homeowner",
+            "value": 1
+          }
+        ],
+        "successText": "你用积蓄在城里买了一套小房子。虽然不大，但终于有了一个属于自己的家。看着属于自己的门牌号，心里格外踏实。"
+      },
+      {
+        "id": "house_invest",
+        "title": "钱还是拿去投资吧",
+        "description": "房子不急，钱生钱更重要",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你把钱投入了几个看似靠谱的项目。虽然还没看到回报，但你相信这是更好的选择。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "harvest_festival",
+    "title": "丰收祭典",
+    "description": "一年一度的丰收祭典，整个城镇都沉浸在欢乐的气氛中。",
+    "minAge": 15,
+    "maxAge": 60,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "festival_compete",
+        "title": "参加各项比赛",
+        "description": "射箭、举重、歌唱……",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你在射箭比赛中拿了第二名，歌唱比赛中意外入了围。虽然没拿到大奖，但开心就好。"
+      },
+      {
+        "id": "festival_eat",
+        "title": "专心吃喝",
+        "description": "美食才是重点",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你从街头吃到街尾，和每个摊位的主人都聊了几句。肚子饱了，心情也好了。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "neighbor_dispute",
+    "title": "邻里纠纷",
+    "description": "你的邻居做了一件让你很恼火的事。",
+    "minAge": 26,
+    "maxAge": 60,
+    "weight": 2,
+    "include": "has.flag.homeowner",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dispute_mediate",
+        "title": "坐下来好好谈",
+        "description": "远亲不如近邻",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "经过一番长谈，你们解开了误会。邻居还送了一瓶好酒给你，从此你们成了不错的朋友。"
+      },
+      {
+        "id": "dispute_force",
+        "title": "强硬对抗",
+        "description": "不能退让",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -3
+          }
+        ],
+        "successText": "你用强硬手段解决了纠纷，但也得罪了邻居。此后两家人见面都装作没看见。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "hunting_trip",
+    "title": "狩猎之旅",
+    "description": "深秋时节，朋友们邀你一起去森林里狩猎。",
+    "minAge": 18,
+    "maxAge": 45,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "hunt_big_game",
+        "title": "追踪大型猎物",
+        "description": "来都来了，不整点大的？",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你花了整整两天追踪一头巨鹿，最终一箭命中。猎物被分给了全村，你的狩猎技术成了茶余饭后的谈资。"
+      },
+      {
+        "id": "hunt_camp",
+        "title": "主要享受露营",
+        "description": "打猎是其次，聊天才重要",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你们在星空下围篝火而坐，喝酒聊天到深夜。这些珍贵的友情时光，比任何猎物都更有价值。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "business_venture",
+    "title": "创业冒险",
+    "description": "你发现了一个商机，如果抓住的话可能会大赚一笔。",
+    "minAge": 26,
+    "maxAge": 45,
+    "weight": 2,
+    "include": "attribute.mny >= 8",
+    "effects": [],
+    "branches": [
+      {
+        "id": "venture_invest",
+        "title": "大胆投资",
+        "description": "高风险高回报",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "business_owner",
+            "value": 1
+          }
+        ],
+        "successText": "你咬牙把积蓄全部投入了进去。几个月后，投资翻了数倍！你从冒险者转型成了成功的商人。"
+      },
+      {
+        "id": "venture_conservative",
+        "title": "保守尝试",
+        "description": "先小规模试一下",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你只投入了少量资金，虽然赚得不多，但稳稳当当地没亏本。谨慎让你避免了灾难。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "community_leader",
+    "title": "社区领袖",
+    "description": "邻居们推选你担任社区的代表，负责处理公共事务。",
+    "minAge": 30,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "attribute.chr >= 14",
+    "effects": [],
+    "branches": [
+      {
+        "id": "leader_accept",
+        "title": "接受职位",
+        "description": "为大家做点事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你在社区工作中展现出了卓越的领导力。居民们对你的信任与日俱增，你的声望也越来越高。"
+      },
+      {
+        "id": "leader_decline",
+        "title": "推辞",
+        "description": "你更喜欢自由自在",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "successText": "你礼貌地推辞了。虽然有人失望，但你明白自己的性格不适合这种工作。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "pet_companion",
+    "title": "捡到流浪动物",
+    "description": "你发现了一只受伤的流浪猫，它用可怜的眼神看着你。",
+    "minAge": 10,
+    "maxAge": 50,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "pet_adopt",
+        "title": "带回家养",
+        "description": "多一个伙伴也不错",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "has_pet",
+            "value": 1
+          }
+        ],
+        "successText": "小猫很快恢复了健康，成了你最忠实的伙伴。每次冒险回来，它都在门口等你。"
+      },
+      {
+        "id": "pet_heal_release",
+        "title": "治好后放归自然",
+        "description": "让它在野外自由生活",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "successText": "你治好了它的伤，然后放回了你发现它的地方。每次路过那里，你总觉得有什么东西在暗中注视着你——那是友好的目光。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "food_culture",
+    "title": "美食之旅",
+    "description": "一位旅行厨师向你介绍了各地独特的美食文化。",
+    "minAge": 18,
+    "maxAge": 40,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "food_learn",
+        "title": "学习烹饪",
+        "description": "跟着厨师学两手",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "successText": "你学会了几个拿手好菜。后来每次露营时，大家都会期待你的料理。"
+      },
+      {
+        "id": "food_write",
+        "title": "记录下来",
+        "description": "写一本美食游记",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你把各地的美食和食谱整理成册，出版后意外地大受欢迎。原来大家对美食的热情远超想象。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "gambling_night",
+    "title": "赌场之夜",
+    "description": "朋友们拉你去地下赌场玩几把，输赢全看运气。",
+    "minAge": 20,
+    "maxAge": 45,
+    "weight": 1,
+    "effects": [],
+    "branches": [
+      {
+        "id": "gamble_win",
+        "title": "放手一搏",
+        "description": "赌一把大的",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ],
+        "successText": "你把所有筹码押了上去——赢了！你兴奋地抱住桌子上的金币，但朋友们看你的眼神变了。"
+      },
+      {
+        "id": "gamble_quit",
+        "title": "见好就收",
+        "description": "不玩了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你在赢了一点之后就退出了。朋友们继续玩，而你回到房间安安稳稳地睡了。知足常乐。"
+      },
+      {
+        "id": "gamble_lose",
+        "title": "输光了",
+        "description": "手气太差了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3
+          }
+        ],
+        "successText": "你输掉了一切。走在回家的路上，你发誓再也不踏入赌场一步。这个教训比任何金币都珍贵。"
+      }
+    ],
+    "unique": true
   }
 ]

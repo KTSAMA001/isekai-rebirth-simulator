@@ -3109,7 +3109,8 @@
         ],
         "successText": "你仔细观察每个选手的招式，在心里默默记下。总有一天，你也会站在那个擂台上。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "bandit_ambush",
@@ -3185,7 +3186,8 @@
         ],
         "successText": "你拼命奔跑，终于甩掉了追兵。但那种无力感，让你下定决心要变得更强。"
       }
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "monster_hunt_guild",
@@ -3245,5 +3247,158 @@
         "successText": "你们配合默契，轻松拿下了魔狼。虽然赏金要分，但你收获了宝贵的战斗经验和可靠的朋友。"
       }
     ]
+  },
+  {
+    "id": "part_time_job",
+    "title": "打工赚零花钱",
+    "description": "村庄里有人招临时工，虽然报酬不多，但胜在轻松。",
+    "minAge": 14,
+    "maxAge": 18,
+    "weight": 3,
+    "effects": [],
+    "branches": [
+      {
+        "id": "job_hard",
+        "title": "认真干活",
+        "description": "雇主说什么做什么",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "successText": "你加班加点完成了所有工作，雇主对你很满意，额外给了你一些奖励。"
+      },
+      {
+        "id": "job_slack",
+        "title": "摸鱼",
+        "description": "能混就混",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "successText": "你整天都在摸鱼，但神奇的是，该干的活居然都莫名其妙地完成了。"
+      }
+    ]
+  },
+  {
+    "id": "street_performer",
+    "title": "街头表演",
+    "description": "城镇广场上有人在表演魔术和杂耍，围观的人很多。",
+    "minAge": 15,
+    "maxAge": 30,
+    "weight": 2,
+    "effects": [],
+    "branches": [
+      {
+        "id": "perform_join",
+        "title": "上去表演",
+        "description": "你也来一段",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "successText": "你的表演引起了一阵喝彩。有人往你的帽子里扔了铜板，还有人问你愿不愿意加入他们的巡回表演团。"
+      },
+      {
+        "id": "perform_watch",
+        "title": "只当观众",
+        "description": "欣赏就好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你认真观察了表演者的技巧，学到了不少东西。其中有些手法如果用在战斗中，可能会很有趣。"
+      }
+    ],
+    "unique": true
+  },
+  {
+    "id": "market_haggling",
+    "title": "集市砍价",
+    "description": "集市上有一个商人卖的东西非常有趣，但价格太贵了。",
+    "minAge": 15,
+    "maxAge": 30,
+    "weight": 3,
+    "effects": [],
+    "branches": [
+      {
+        "id": "haggle_win",
+        "title": "砍价大师",
+        "description": "用三寸不烂之舌",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "经过一番唇枪舌战，你以三折的价格拿下了心仪的物品。围观的群众纷纷鼓掌。"
+      },
+      {
+        "id": "haggle_give_up",
+        "title": "算了，买不起",
+        "description": "太贵了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "successText": "你忍痛放弃了那个物品。但这个经历让你学会了理财的重要性。"
+      }
+    ],
+    "unique": true
   }
 ]
