@@ -3543,5 +3543,272 @@
     "routes": [
       "*"
     ]
+  },
+  {
+    "id": "guild_recruitment",
+    "title": "冒险者公会招募",
+    "description": "镇上的冒险者公会贴出了招募告示：「无论出身，只要你有勇气和实力，就能成为冒险者！」你站在告示牌前，心中涌起一股冲动。",
+    "minAge": 14,
+    "maxAge": 18,
+    "weight": 4,
+    "include": "attribute.str >= 3 | attribute.mag >= 4",
+    "exclude": "has.flag.guild_member | has.flag.lord",
+    "effects": [],
+    "branches": [
+      {
+        "id": "join_guild",
+        "title": "报名参加",
+        "description": "你走进公会大门，向接待员递上了自己的名字",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "guild_member",
+            "value": 1,
+            "description": "加入冒险者公会"
+          }
+        ],
+        "successText": "接待员看了看你，递过一枚铜质徽章：「从今天起，你就是冒险者公会的一员了。记住，公会不问出身，只看实力。」你握着徽章，感到一种前所未有的归属感。"
+      },
+      {
+        "id": "hesitate_guild",
+        "title": "犹豫观望",
+        "description": "你看了看告示，觉得还没准备好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "successText": "你在告示牌前站了很久，最终还是转身离开了。也许下次再路过时，你会做出不同的选择。"
+      },
+      {
+        "id": "refuse_guild",
+        "title": "拒绝机会",
+        "description": "冒险者的生活太危险了，你不感兴趣",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "successText": "你摇了摇头，转身去集市上做起了小买卖。冒险者的生活虽然刺激，但安稳的日子也不错。"
+      }
+    ],
+    "tag": "adventure",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "squire_opportunity",
+    "title": "骑士侍从选拔",
+    "description": "一位路过的骑士在镇上设擂比武，宣布将收一名侍从。围观的人群议论纷纷——成为骑士侍从，是踏入贵族与武道世界的第一步。",
+    "minAge": 14,
+    "maxAge": 18,
+    "weight": 3,
+    "include": "attribute.str >= 5 & attribute.chr >= 3",
+    "exclude": "has.flag.knight | has.flag.magic_student | has.flag.lord",
+    "effects": [],
+    "branches": [
+      {
+        "id": "become_squire",
+        "title": "拜师学艺",
+        "description": "你走上前去，向骑士表明了决心",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "knight",
+            "value": 1,
+            "description": "成为骑士侍从"
+          }
+        ],
+        "successText": "骑士审视了你一番，点了点头：「你的体格不错，眼神也很坚定。从明天起，跟着我训练吧。」他递给你一把木剑，比你想的要沉——但你的心里充满了骄傲。"
+      },
+      {
+        "id": "watch_squire",
+        "title": "观望",
+        "description": "你挤在人群里看了一会热闹，但没有上前",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "successText": "你看着那些勇敢的年轻人一个个上前挑战，心里既羡慕又犹豫。没关系，来日方长。"
+      },
+      {
+        "id": "refuse_squire",
+        "title": "拒绝",
+        "description": "骑士的规矩太多了，不适合你",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "successText": "你默默离开了人群，决定用自己的方式闯出一片天地。"
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "merchant_guidance",
+    "title": "商人学徒招募",
+    "description": "集市上最大的商行贴出了学徒招募令。老板是个精明的半精灵，据说只要入了他门下，不出五年就能独立经营。条件是——得会说话，还得有点本钱。",
+    "minAge": 14,
+    "maxAge": 20,
+    "weight": 3,
+    "include": "attribute.chr >= 4 | attribute.mny >= 3",
+    "exclude": "has.flag.merchant_apprentice | has.flag.magic_student | has.flag.knight | has.flag.lord",
+    "effects": [],
+    "branches": [
+      {
+        "id": "join_merchant",
+        "title": "拜师学商",
+        "description": "你找到商行老板，表达了自己的意愿",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "merchant_apprentice",
+            "value": 1,
+            "description": "成为商人学徒"
+          }
+        ],
+        "successText": "半精灵老板打量了你一番，露出一个意味深长的微笑：「有眼光。来吧，先学学怎么把一块钱的货卖成三块。」你从此开始了与账本、货物和人情世故打交道的日子。"
+      },
+      {
+        "id": "help_days",
+        "title": "帮忙几天",
+        "description": "你先去帮几天忙看看情况",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "successText": "你帮着搬了几天货，学到了一些皮毛。老板看你手脚勤快，说随时欢迎你来正式拜师。"
+      },
+      {
+        "id": "refuse_merchant",
+        "title": "拒绝",
+        "description": "你对数钱没什么兴趣",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "successText": "你摇了摇头，继续走自己的路。赚钱的方式有很多种，不一定非得当商人。"
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "scholar_guidance",
+    "title": "学者收徒",
+    "description": "城里来了一位云游学者，在酒馆里高谈阔论。他说正在寻找一个聪明的年轻人，愿意跟他学习天文、历史和炼金术。条件很简单——够聪明，够好学。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 2,
+    "include": "attribute.int >= 10 & attribute.spr >= 5",
+    "exclude": "has.flag.has_student | has.flag.magic_student | has.flag.knight | has.flag.lord",
+    "effects": [],
+    "branches": [
+      {
+        "id": "study_scholar",
+        "title": "拜师求教",
+        "description": "你走到学者面前，表达了求学的渴望",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "has_student",
+            "value": 1,
+            "description": "成为学者弟子"
+          }
+        ],
+        "successText": "学者听了你几句对答，眼中闪过一丝惊喜：「孺子可教也！」他翻开一本厚重的书卷，从此你跟着他走遍了大陆的图书馆和遗迹，见识了常人难以想象的世界。"
+      },
+      {
+        "id": "self_study",
+        "title": "潜心自学",
+        "description": "你借了几本书，决定自己研究",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "successText": "你从学者那里借了几本入门书籍，在烛光下一页一页地翻阅。虽然没有师父指点，但知识的魅力已经深深吸引了你。"
+      },
+      {
+        "id": "refuse_scholar",
+        "title": "拒绝",
+        "description": "你对学术没什么兴趣",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "successText": "你礼貌地谢绝了学者的好意。学术这条路，或许并不适合现在的你。"
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
   }
 ]

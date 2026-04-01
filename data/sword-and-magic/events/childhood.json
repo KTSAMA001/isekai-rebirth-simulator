@@ -492,8 +492,8 @@
   },
   {
     "id": "noble_kid_revenge",
-    "title": "权贵的孩子",
-    "description": "一个穿着华丽的同龄孩子当街抢走了你的东西，周围的人视而不见——大家都知道他父亲是谁。",
+    "title": "权贵的欺凌",
+    "description": "一个穿着锦缎的贵族孩子当街抢走了你的东西，还朝你吐了口唾沫。路人们纷纷移开目光——谁都知道他父亲是镇上有头有脸的人物。",
     "minAge": 5,
     "maxAge": 9,
     "weight": 1,
@@ -502,28 +502,28 @@
     "branches": [
       {
         "id": "swallow_pride",
-        "title": "默默忍耐",
-        "description": "你知道得罪不起权贵，低下头认了错。东西没了，但至少还安全。",
+        "title": "咽下这口气",
+        "description": "算了……惹不起，还是认个怂吧。",
         "probability": 0.35,
         "effects": [
           {
             "type": "modify_attribute",
             "target": "chr",
             "value": -2,
-            "description": "忍气吞声让你变得不自信"
+            "description": "你低下了头，从此遇到不公总先退让"
           },
           {
             "type": "set_flag",
             "target": "noble_grudge",
             "value": 1,
-            "description": "对权贵的怨恨"
+            "description": "但心里的火，你没有忘"
           }
         ]
       },
       {
         "id": "stand_ground",
-        "title": "据理力争",
-        "description": "“是他先抢我的！”你不卑不亢地直视那权贵的眼睛",
+        "title": "把东西还给我",
+        "description": "你攥紧拳头，一步都不退。这个年纪的你还不懂什么叫权势，只知道属于自己的不能丢。",
         "probability": 0.35,
         "riskCheck": {
           "attribute": "chr",
@@ -535,13 +535,13 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 3,
-            "description": "勇气让你的气场更强大"
+            "description": "你第一次站出来反抗，浑身发抖但目光坚定"
           },
           {
             "type": "set_flag",
             "target": "noble_conflict",
             "value": 1,
-            "description": "与权贵冲突"
+            "description": "与权贵正面冲突"
           }
         ],
         "failureEffects": [
@@ -549,41 +549,41 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -1,
-            "description": "被当众羞辱"
+            "description": "被当众推倒，周围人指指点点"
           },
           {
             "type": "modify_hp",
             "target": "hp",
             "value": -10,
-            "description": "被推倒在地"
+            "description": "擦破了好几处"
           },
           {
             "type": "set_flag",
             "target": "noble_conflict",
             "value": 1,
-            "description": "与权贵冲突"
+            "description": "与权贵正面冲突"
           }
         ],
-        "successText": "权贵被你的气势镇住了，悻悻离去。东西虽然没要回来，但你赢得了周围人的尊敬。",
-        "failureText": "权贵冷笑一声，一把将你推倒在地。“不知天高地厚的东西。”"
+        "successText": "那个贵族孩子没想到你敢还手，吓得把东西一扔就跑。你蹲下捡起来的时候，发现手还在发抖。",
+        "failureText": "贵族孩子身边的家仆一把将你推倒在地，你的膝盖磕在碎石上，鲜血渗了出来。他得意地扬长而去。"
       },
       {
         "id": "report_authority",
-        "title": "告到更高层",
-        "description": "你咽不下这口气，跑去找了领主的代理人。",
+        "title": "去找管事的说理",
+        "description": "你不跟这种小孩纠缠——大人有大人的规矩，得找管事的人评评理。",
         "probability": 0.3,
         "effects": [
           {
             "type": "modify_attribute",
             "target": "int",
             "value": 3,
-            "description": "学会用更聪明的方式解决问题"
+            "description": "虽然管事只是敷衍了事，但你学会了绕开问题找更上层"
           },
           {
             "type": "modify_attribute",
             "target": "mny",
             "value": 1,
-            "description": "领主代理人赏了你一点补偿"
+            "description": "管事为了打发你，随手扔了几枚铜币"
           }
         ]
       }
@@ -1629,6 +1629,74 @@
     ],
     "tag": "accident",
     "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "magic_academy_letter",
+    "title": "魔法学院来信",
+    "description": "一天早晨，一只发光的水晶猫头鹰停在了你的窗台上，嘴里衔着一封紫色蜡封的信。信上写着你的名字——这是皇家魔法学院的入学邀请！",
+    "minAge": 7,
+    "maxAge": 10,
+    "weight": 4,
+    "include": "attribute.mag >= 5",
+    "exclude": "has.flag.magic_student | has.flag.knight",
+    "effects": [],
+    "branches": [
+      {
+        "id": "enroll_magic",
+        "title": "入学就读",
+        "description": "你激动地拆开信，决定踏上魔法之路",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "magic_student",
+            "value": 1,
+            "description": "成为魔法学生"
+          }
+        ],
+        "successText": "你握着那封信，手心微微发烫。水晶猫头鹰歪了歪头，似乎在等你做出决定。你深吸一口气，点了点头——从此，你的人生将与魔法紧密相连。"
+      },
+      {
+        "id": "ask_parents_magic",
+        "title": "请家长决定",
+        "description": "你拿着信跑去找父母，让他们帮你做主",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "successText": "父母看完信后沉默了很久。最终他们决定再等等，让你多了解一下外面的世界再做选择。水晶猫头鹰等了一整天，最终化作星光消散了。"
+      },
+      {
+        "id": "refuse_magic",
+        "title": "婉拒入学",
+        "description": "\"我还太小了，不想被关在塔里读书。\"",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "successText": "你把信塞进了抽屉。水晶猫头鹰失望地叫了一声，振翅飞走了。也许以后还会有机会……也许不会。"
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
     "routes": [
       "*"
     ]
