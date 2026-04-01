@@ -12,34 +12,34 @@
       "title": "平凡一生",
       "description": "度过了一段普通而平静的人生",
       "minScore": 80,
-      "maxScore": 100
+      "maxScore": 130
     },
     {
       "grade": "B",
       "title": "小有成就",
       "description": "在某个领域取得了一定的成就",
-      "minScore": 100,
-      "maxScore": 150
+      "minScore": 130,
+      "maxScore": 200
     },
     {
       "grade": "A",
       "title": "声名远扬",
       "description": "你的名字被许多人铭记",
-      "minScore": 150,
-      "maxScore": 200
+      "minScore": 200,
+      "maxScore": 280
     },
     {
       "grade": "S",
       "title": "传奇人生",
       "description": "你的人生堪称一段传奇",
-      "minScore": 200,
-      "maxScore": 250
+      "minScore": 280,
+      "maxScore": 380
     },
     {
       "grade": "SS",
       "title": "不朽传说",
       "description": "你的传说将永远流传于世",
-      "minScore": 250,
+      "minScore": 380,
       "maxScore": null
     }
   ]
