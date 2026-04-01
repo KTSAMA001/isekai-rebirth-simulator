@@ -1,0 +1,362 @@
+[
+  {
+    "id": "eva_genius",
+    "title": "天赋异禀",
+    "description": "你的才华如同夜空中最亮的星，世人仰望，却无人能及。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.int >= 25 & attribute.mag >= 25"
+  },
+  {
+    "id": "eva_juggernaut",
+    "title": "不可阻挡",
+    "description": "没有什么能拦得住你。你的拳头就是最好的通行证。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.str >= 30"
+  },
+  {
+    "id": "eva_silver_tongue",
+    "title": "三寸不烂之舌",
+    "description": "你用语言征服了人心。有人靠剑，有人靠魔法，而你靠嘴。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.chr >= 30"
+  },
+  {
+    "id": "eva_fortune_child",
+    "title": "天选之人",
+    "description": "运气从来不是偶然。你就是那个被世界选中的孩子。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.luk >= 30"
+  },
+  {
+    "id": "eva_rich_lord",
+    "title": "富甲一方",
+    "description": "金币堆积如山，商队绵延数里。整个王国最富有的冒险者，就是你。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.mny >= 30"
+  },
+  {
+    "id": "eva_ancient_soul",
+    "title": "千年之魂",
+    "description": "你拥有远超这个时代理解的灵魂力量。连神明都对你投以注视。",
+    "rarity": "legendary",
+    "priority": 15,
+    "condition": "attribute.spr >= 35"
+  },
+  {
+    "id": "eva_all_rounder",
+    "title": "六边形战士",
+    "description": "没有短板，全面发展。你是那种让人嫉妒的存在——什么都行，什么都好。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "attribute.str >= 15 & attribute.mag >= 15 & attribute.chr >= 15 & attribute.int >= 15 & attribute.luk >= 15 & attribute.spr >= 15"
+  },
+  {
+    "id": "eva_late_bloomer",
+    "title": "大器晚成",
+    "description": "前半生平平无奇，后半生光芒万丈。有些人就是需要多一点时间。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.age >= 60 & state.lifespan >= 80"
+  },
+  {
+    "id": "eva_live_fast",
+    "title": "燃烧殆尽",
+    "description": "你像一颗流星，划过夜空，短暂而耀眼。虽然短暂，但无人能忘记你的光芒。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.age <= 30 & state.eventLog.length >= 15"
+  },
+  {
+    "id": "eva_lonely_road",
+    "title": "孤独旅人",
+    "description": "你的路是自己走的。没有同伴，没有爱人，只有脚下的路和头顶的星空。",
+    "rarity": "common",
+    "priority": 3,
+    "condition": "!has.flag.married & !has.flag.in_relationship & state.age >= 40"
+  },
+  {
+    "id": "eva_love_bird",
+    "title": "命中注定",
+    "description": "你找到了此生挚爱。在这个充满战争和魔法的世界里，这是最珍贵的东西。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.married & state.age <= 25"
+  },
+  {
+    "id": "eva_survivor",
+    "title": "九死一生",
+    "description": "你从死亡边缘回来了。不是一次，是很多次。阎王见了你都得叹气。",
+    "rarity": "rare",
+    "priority": 8,
+    "condition": "state.hp <= 5"
+  },
+  {
+    "id": "eva_war_hero",
+    "title": "战争英雄",
+    "description": "当魔王军入侵时，你站在了最前面。历史会记住你的名字。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.war_veteran"
+  },
+  {
+    "id": "eva_dragon_slayer",
+    "title": "屠龙者",
+    "description": "龙？不过是多了一个翅膀的蜥蜴罢了。——你，大概会这么想。",
+    "rarity": "legendary",
+    "priority": 15,
+    "condition": "has.flag.dragon_slay"
+  },
+  {
+    "id": "eva_merchant_empire",
+    "title": "商业帝国",
+    "description": "从学徒到巨头，你用一枚铜币撬动了整个王国的经济。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.merchant_apprentice & attribute.mny >= 25"
+  },
+  {
+    "id": "eva_dark_path",
+    "title": "暗影行者",
+    "description": "你触碰了黑暗的力量。有些人说你是堕落了，但你更愿意称之为…解放。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.dark_magic"
+  },
+  {
+    "id": "eva_noble_enemies",
+    "title": "与虎谋皮",
+    "description": "你跟权贵打过交道，吃过亏，也赢过。在这个世界里，能活着就是胜利。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.noble_conflict | has.flag.noble_grudge"
+  },
+  {
+    "id": "eva_bookworm",
+    "title": "书虫",
+    "description": "你的脑袋里装了一个图书馆。别人打架的时候，你在看书。结果你赢了。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.has_student | attribute.int >= 20"
+  },
+  {
+    "id": "eva_collector",
+    "title": "收藏家",
+    "description": "你的背包里塞满了宝贝。每一件都有一段故事，每一段故事都是你的人生。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.inventory.items.length >= 3"
+  },
+  {
+    "id": "eva_guild_leader",
+    "title": "公会之主",
+    "description": "从一个无名小卒到掌管一方势力。这个世界，你说了算。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.guild_leader"
+  },
+  {
+    "id": "eva_lord_of_land",
+    "title": "一方之主",
+    "description": "你拥有了属于自己的领地。城堡、卫兵、农田——都是你的。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.lord"
+  },
+  {
+    "id": "eva_master_crafter",
+    "title": "匠心独运",
+    "description": "你打造的东西，别人用一辈子都不会坏。他们都说，你的作品里有魔法。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.craftsman"
+  },
+  {
+    "id": "eva_hundred_years",
+    "title": "长命百岁",
+    "description": "一百岁。在这个充斥着战争、怪物和阴谋的世界里，你活过了一整个世纪。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "state.age >= 95"
+  },
+  {
+    "id": "eva_child_prodigy",
+    "title": "少年天才",
+    "description": "十岁就踏入了魔法学院的大门。教授们说，他们从来没有见过这样的学生。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.magic_student & state.age <= 13"
+  },
+  {
+    "id": "eva_explorer",
+    "title": "世界尽头的旅人",
+    "description": "你到过这个世界最危险的地方，而且活着回来了。地图上那些空白区域，就是你走过的路。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.guild_member & state.eventLog.length >= 30"
+  },
+  {
+    "id": "eva_beggar_start",
+    "title": "从泥沼中崛起",
+    "description": "你出生在最卑微的角落，但命运挡不住你。每一步都是往上走。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.birth == 'slums' & state.age >= 50"
+  },
+  {
+    "id": "eva_noble_birth",
+    "title": "含着金钥匙出生",
+    "description": "一出生就站在了别人一辈子都到不了的高度。但高处不胜寒，不是吗？",
+    "rarity": "common",
+    "priority": 3,
+    "condition": "state.birth == 'noble'"
+  },
+  {
+    "id": "eva_wild_child",
+    "title": "荒野之子",
+    "description": "大自然教会了你生存法则。文明世界的规矩在你这里不太好使。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.birth == 'wilderness' & attribute.str >= 20"
+  },
+  {
+    "id": "eva_tournament_champion",
+    "title": "骑士冠军",
+    "description": "你击败了所有对手，举起了冠军之剑。从今天起，你是王国最强的骑士。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.knight & attribute.str >= 25"
+  },
+  {
+    "id": "eva_scholars_dream",
+    "title": "学界泰斗",
+    "description": "你的研究成果改写了教科书。每一本新书都会引用你的名字。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.famous_inventor | has.flag.has_student"
+  },
+  {
+    "id": "eva_demon_hunter",
+    "title": "恶魔猎人",
+    "description": "黑暗中有什么东西在窥视这个世界。而你，是站在它们面前的那个人。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.demon_hunt"
+  },
+  {
+    "id": "eva_cursed_one",
+    "title": "被诅咒之人",
+    "description": "诅咒如影随形，但你从未放弃。带着诅咒活到现在，这本身就是一个奇迹。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.cursed"
+  },
+  {
+    "id": "eva_peaceful_life",
+    "title": "岁月静好",
+    "description": "没有惊天动地的冒险，没有载入史册的壮举。但你的每一天都是平静而温暖的。",
+    "rarity": "common",
+    "priority": 3,
+    "condition": "!has.flag.guild_member & !has.flag.knight & !has.flag.magic_student & !has.flag.merchant_apprentice & state.age >= 50"
+  },
+  {
+    "id": "eva_reincarnated",
+    "title": "转世的记忆",
+    "description": "你隐约记得前世的一些片段。也许这就是为什么你总觉得这个世界似曾相识。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.reincarnated_memory"
+  },
+  {
+    "id": "eva_eventful_life",
+    "title": "跌宕起伏",
+    "description": "你的人生像一本小说——而且是最精彩的那种。翻开任何一页都是故事。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.eventLog.length >= 40"
+  },
+  {
+    "id": "eva_kingmaker",
+    "title": "幕后操盘手",
+    "description": "国王坐在王座上，但你才是真正下棋的人。权力的游戏，你赢了。",
+    "rarity": "legendary",
+    "priority": 15,
+    "condition": "has.flag.council_member"
+  },
+  {
+    "id": "eva_barely_made_it",
+    "title": "命悬一线",
+    "description": "你的人生就是一场危机公关。每一次都觉得这次真的完了，但每一次你都活了下来。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.near_death"
+  },
+  {
+    "id": "eva_elemental_master",
+    "title": "元素主宰",
+    "description": "火、水、风、土——四大元素在你手中如臂使指。自然的意志，由你来传达。",
+    "rarity": "legendary",
+    "priority": 15,
+    "condition": "has.flag.elemental_mastery & attribute.mag >= 25"
+  },
+  {
+    "id": "eva_philosopher",
+    "title": "大隐隐于市",
+    "description": "你不追求名利，不渴求权力。你觉得，看夕阳落山比拯救世界更重要。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "attribute.spr >= 20 & attribute.int >= 15 & !has.flag.lord"
+  },
+  {
+    "id": "eva_village_hero",
+    "title": "小镇英雄",
+    "description": "你可能没有拯救世界，但你拯救了这个小镇。对这里的每个人来说，你就是英雄。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "state.eventLog.length >= 10 & state.eventLog.length <= 25 & !has.flag.lord"
+  },
+  {
+    "id": "eva_tragic_hero",
+    "title": "悲情英雄",
+    "description": "你失去了挚爱，但你没有被击倒。痛苦让你更加强大——也更孤独。",
+    "rarity": "rare",
+    "priority": 8,
+    "condition": "has.flag.lover_death"
+  },
+  {
+    "id": "eva_double_life",
+    "title": "双面人生",
+    "description": "白天是受人尊敬的学者，晚上是令人闻风丧胆的冒险者。两个世界，你都活得很精彩。",
+    "rarity": "rare",
+    "priority": 8,
+    "condition": "has.flag.magic_student & has.flag.guild_member"
+  },
+  {
+    "id": "eva_item_master",
+    "title": "传说中的收藏",
+    "description": "传说级别的宝物在你手中，像是它们终于找到了真正的主人。",
+    "rarity": "legendary",
+    "priority": 12,
+    "condition": "state.inventory.items.length >= 3 & state.inventory.items.some(i => i.rarity == 'legendary')"
+  },
+  {
+    "id": "eva_justice_seeker",
+    "title": "正义的代价",
+    "description": "你选择了正义，代价是伤痕累累。但你不后悔。有些东西比活着更重要。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.justice_seek & attribute.chr >= 15"
+  },
+  {
+    "id": "eva_disciple_master",
+    "title": "桃李满天下",
+    "description": "你教会了别人你所学的一切。知识的火种，不会因为你离去而熄灭。",
+    "rarity": "common",
+    "priority": 5,
+    "condition": "has.flag.has_student & state.age >= 50"
+  }
+]

@@ -1,6 +1,6 @@
 [
   {
-    "id": "magic_academy_notice",
+    "id": "magic_academy_enrollment",
     "title": "魔法学院来信",
     "description": "一只水晶蝴蝶送来了魔力学院的入学通知。",
     "minAge": 7,
@@ -666,7 +666,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1173,7 +1173,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       },
@@ -1494,7 +1494,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -2891,7 +2891,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -2945,7 +2945,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "虽然什么都没学到，但睡了一觉精神很好。"
@@ -3477,7 +3477,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -3551,8 +3551,8 @@
     "minAge": 14,
     "maxAge": 18,
     "weight": 4,
-    "include": "attribute.str >= 3 | attribute.mag >= 4",
-    "exclude": "has.flag.guild_member | has.flag.lord",
+    "include": "attribute.str >= 3 | attribute.mag >= 3",
+    "exclude": "has.flag.guild_member | has.flag.magic_student | has.flag.knight | has.flag.lord",
     "effects": [],
     "branches": [
       {
@@ -3614,7 +3614,7 @@
     "minAge": 14,
     "maxAge": 18,
     "weight": 3,
-    "include": "attribute.str >= 5 & attribute.chr >= 3",
+    "include": "attribute.str >= 5",
     "exclude": "has.flag.knight | has.flag.magic_student | has.flag.lord",
     "effects": [],
     "branches": [
@@ -3626,7 +3626,7 @@
           {
             "type": "modify_attribute",
             "target": "str",
-            "value": 2
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -3694,12 +3694,12 @@
           {
             "type": "modify_attribute",
             "target": "chr",
-            "value": 1
+            "value": 2
           },
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 1
           },
           {
             "type": "set_flag",
@@ -3750,7 +3750,7 @@
     "minAge": 20,
     "maxAge": 30,
     "weight": 2,
-    "include": "attribute.int >= 10 & attribute.spr >= 5",
+    "include": "attribute.int >= 10",
     "exclude": "has.flag.has_student | has.flag.magic_student | has.flag.knight | has.flag.lord",
     "effects": [],
     "branches": [
@@ -3766,7 +3766,7 @@
           },
           {
             "type": "modify_attribute",
-            "target": "spr",
+            "target": "chr",
             "value": 1
           },
           {

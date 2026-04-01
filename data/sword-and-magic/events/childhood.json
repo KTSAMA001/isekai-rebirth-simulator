@@ -869,7 +869,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -959,7 +959,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1077,7 +1077,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1118,7 +1118,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1159,7 +1159,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1235,7 +1235,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_hp",
@@ -1254,7 +1254,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1393,7 +1393,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "set_flag",

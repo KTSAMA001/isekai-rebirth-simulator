@@ -218,7 +218,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -230,6 +230,18 @@
             "target": "engaged",
             "value": 1,
             "description": "订婚了"
+          },
+          {
+            "type": "set_flag",
+            "target": "married",
+            "value": 1,
+            "description": "结婚了"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "关系确认"
           },
           {
             "type": "modify_attribute",
@@ -688,7 +700,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -812,7 +824,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 2
+        "value": 1
       },
       {
         "type": "modify_attribute",
@@ -934,7 +946,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1159,7 +1171,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1420,7 +1432,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -3236,7 +3248,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 5
+            "value": 4
           },
           {
             "type": "modify_attribute",
@@ -3277,7 +3289,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -3330,7 +3342,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 6
+            "value": 5
           },
           {
             "type": "modify_attribute",
@@ -3369,7 +3381,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -3387,7 +3399,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -3773,7 +3785,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -3997,7 +4009,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -4156,7 +4168,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -4302,7 +4314,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "set_flag",
@@ -4378,7 +4390,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -4427,7 +4439,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -5841,7 +5853,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -5955,7 +5967,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ],
         "successText": "你礼貌地推辞了。虽然有人失望，但你明白自己的性格不适合这种工作。"
@@ -5983,7 +5995,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -6044,7 +6056,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -6118,7 +6130,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -6311,7 +6323,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -6385,7 +6397,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -6413,7 +6425,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",

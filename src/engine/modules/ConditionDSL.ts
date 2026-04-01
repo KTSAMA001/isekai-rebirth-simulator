@@ -59,6 +59,8 @@ export class ConditionDSL {
         return ctx.state.achievements.unlocked.includes(id)
       case 'flag':
         return ctx.state.flags.has(id)
+      case 'counter':
+        return (ctx.state.counters.get(id) ?? 0) > 0
       default:
         return false
     }

@@ -267,6 +267,8 @@ export interface WorldInstance {
   items: WorldItemDef[]
   presets: WorldPresetDef[]
   scoringRule: WorldScoringRule
+  /** 人生评价定义 */
+  evaluations?: LifeEvaluation[]
   /** 索引映射，加速查找 */
   index: {
     attributesById: Map<string, WorldAttributeDef>
@@ -425,6 +427,14 @@ export interface LifeRoute {
 // ==================== 评分结果 ====================
 
 /** 评分详情 */
+export interface LifeEvaluation {
+  id: string
+  title: string
+  description: string
+  rarity: 'common' | 'rare' | 'legendary'
+  priority: number
+}
+
 export interface EvaluationResult {
   score: number
   grade: string
@@ -435,4 +445,5 @@ export interface EvaluationResult {
     lifespan: number
     breakdown: { category: string; value: number }[]
   }
+  evaluations?: LifeEvaluation[]
 }

@@ -183,7 +183,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -378,7 +378,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -898,7 +898,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1017,7 +1017,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           }
         ],
         "successText": "你独自走到山顶，仰望星空。身体越来越轻，仿佛要融入那片无垠的夜空。也许这就是归宿——回到星辰之中。"
@@ -1051,7 +1051,7 @@
     "description": "年迈的身体越来越脆弱了。简单的散步都会气喘吁吁，上楼梯要扶着墙壁才能站稳。曾经能举起巨剑的双手，如今连茶杯都在微微颤抖。",
     "minAge": 65,
     "maxAge": 88,
-    "weight": 40,
+    "weight": 18,
     "effects": [],
     "branches": [
       {
@@ -1113,7 +1113,7 @@
     "description": "你开始记不清一些事情了。昨天发生的事和十年前的记忆混在一起，有时叫不出老朋友的名字，有时站在家门口忘了自己要去哪里。时间在偷走你最珍贵的东西。",
     "minAge": 70,
     "maxAge": 92,
-    "weight": 30,
+    "weight": 12,
     "effects": [],
     "branches": [
       {
@@ -1168,8 +1168,8 @@
     "description": "一场突如其来的重病将你击倒在床。高烧不退，呼吸困难。医生们表情凝重地交换着眼神——这一次，恐怕不只是普通的感冒。",
     "minAge": 70,
     "maxAge": 90,
-    "weight": 35,
-    "include": "has.counter.age >= 72",
+    "weight": 16,
+    "include": "age >= 72",
     "effects": [],
     "branches": [
       {
@@ -1220,7 +1220,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -1259,7 +1259,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       },
@@ -1351,7 +1351,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       },
@@ -1407,7 +1407,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           }
         ]
       }
@@ -1648,7 +1648,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",

@@ -105,9 +105,11 @@ function runOneGame(gameNum: number) {
 
   // Simulation loop — same pattern as test-simulation.ts
   for (let safety = 0; safety < 100; safety++) {
+    if (engine.state.phase === 'finished') break
+    
     const yearResult = engine.startYear(engine.state)
     
-    if (engine.state.phase === 'finished' || engine.state.isDead) break
+    if (engine.state.phase === 'finished') break
 
     if (yearResult.phase === 'awaiting_choice' && yearResult.branches && yearResult.branches.length > 0) {
       const branch = pickBranch(engine.state, yearResult.branches)

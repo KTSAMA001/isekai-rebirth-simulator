@@ -231,6 +231,7 @@ import attributesData from '../../../data/sword-and-magic/attributes.json'
 import talentsData from '../../../data/sword-and-magic/talents.json'
 import itemsData from '../../../data/sword-and-magic/items.json'
 import achievementsData from '../../../data/sword-and-magic/achievements.json'
+import evaluationsData from '../../../data/sword-and-magic/evaluations.json'
 import presetsData from '../../../data/sword-and-magic/presets.json'
 import rulesData from '../../../data/sword-and-magic/rules.json'
 import eventsBirthData from '../../../data/sword-and-magic/events/birth.json'
@@ -293,5 +294,6 @@ export function loadWorldData() {
     items,
     presets,
     scoringRule,
+    evaluations: evaluationsData as any[],
   }
 }

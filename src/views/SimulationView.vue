@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
@@ -70,7 +70,16 @@ onMounted(() => {
       }
       if (state.value?.phase === 'simulating') {
         advanceToNextInteraction()
+      } else if (state.value?.phase === 'awaiting_choice' || state.value?.phase === 'showing_event') {
+        // 已停在交互节点，不需要再推演
+      } else if (state.value?.phase === 'finished') {
+        router.replace({
+          name: 'result',
+          params: { worldId: props.worldId, playId: gameStore.state.meta.playId },
+        })
       }
+      // 确保恢复后立即保存一次
+      nextTick(() => gameStore.autoSave())
       return
     }
   }

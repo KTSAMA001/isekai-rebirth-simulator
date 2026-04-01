@@ -72,7 +72,7 @@ export class SimulationEngine {
     this.attrModule = new AttributeModule(world)
     this.talentModule = new TalentModule(world, this.random)
     this.eventModule = new EventModule(world, this.random, this.dsl, this.attrModule)
-    this.evaluatorModule = new EvaluatorModule(world)
+    this.evaluatorModule = new EvaluatorModule(world, world.evaluations)
     this.achievementModule = new AchievementModule(world, this.dsl)
     this.itemModule = new ItemModule(world, this.dsl)
   }
@@ -271,21 +271,25 @@ export class SimulationEngine {
   private regenHp(): void {
     const regen = this.initialStrRegen
     const initHp = this.computeInitHp()
-    // 软上限：初始HP × 1.3 + 年龄×0.4
-    const softCap = Math.floor(initHp * 1.3 + this.state.age * 0.4)
+    const age = this.state.age
+    // 软上限：30岁后随年龄下降，模拟衰老
+    // 公式: initHp * (1.1 - (age-30)*0.005)
+    // 30岁=×1.1, 40岁=×1.05, 50岁=×1.0, 60岁=×0.95, 70岁=×0.90, 80岁=×0.85
+    const softCap = Math.max(Math.floor(initHp * (1.1 - (age - 30) * 0.005)), 20)
     // 物品HP恢复加成
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
     // 物品HP软上限修正
     const capModifier = this.itemModule.getHpCapModifier(this.state)
     const modifiedCap = Math.max(softCap * (1 + capModifier), 20)
-    
-    // 年龄衰减：55岁后开始自然衰老，75岁后急剧
+
+    // 年龄衰减：40岁开始轻微，之后加速
     let ageDecay = 0
-    const age = this.state.age
-    if (age >= 75) ageDecay = 3
-    else if (age >= 65) ageDecay = 2
-    else if (age >= 55) ageDecay = 1
-    
+    if (age >= 80) ageDecay = 8
+    else if (age >= 70) ageDecay = 6
+    else if (age >= 60) ageDecay = 4
+    else if (age >= 50) ageDecay = 2
+    else if (age >= 40) ageDecay = 1
+
     const newHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
     this.state = {
       ...this.state,
@@ -334,11 +338,11 @@ export class SimulationEngine {
 
     this.state = newState
 
-    // 获取候选事件
-    const candidates = this.eventModule.getCandidates(this.state.age, this.state, this.activeRoute ? [this.activeRoute] : null)
-
-    // 路线系统：检查路线切换
+    // 路线系统：检查路线切换（必须在 getCandidates 之前，确保入口 flag 对事件筛选可见）
     this.updateRoute()
+
+    // 获取候选事件（此时 state 已包含路线入口 flag）
+    const candidates = this.eventModule.getCandidates(this.state.age, this.state, this.activeRoute ? [this.activeRoute] : null)
 
     // 路线系统：检查强制锚点事件
     let mutableAnchorEvent = this.checkMandatoryAnchor()
@@ -710,6 +714,7 @@ export class SimulationEngine {
           gradeTitle: result.gradeTitle,
           gradeDescription: result.gradeDescription,
           lifespan: newState.age,
+          evaluations: result.evaluations,
         },
       }
     }
@@ -915,6 +920,7 @@ export class SimulationEngine {
           gradeTitle: result.gradeTitle,
           gradeDescription: result.gradeDescription,
           lifespan: newState.age,
+          evaluations: result.evaluations,
         },
       }
     }
@@ -939,6 +945,7 @@ export class SimulationEngine {
         gradeTitle: result.gradeTitle,
         gradeDescription: result.gradeDescription,
         lifespan: this.state.age,
+        evaluations: result.evaluations,
       },
     }
 

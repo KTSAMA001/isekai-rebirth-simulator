@@ -6,15 +6,17 @@ import { loadWorldData } from './data-loader'
 
 /** 创建剑与魔法世界实例 */
 export function createSwordAndMagicWorld() {
-  const { manifest, attributes, talents, events, achievements, items, presets, scoringRule } = loadWorldData()
-  return createWorldInstance(
-    manifest,
-    attributes,
-    talents,
-    events,
-    achievements,
-    items,
-    presets,
-    scoringRule
+  const data = loadWorldData()
+  const world = createWorldInstance(
+    data.manifest,
+    data.attributes,
+    data.talents,
+    data.events,
+    data.achievements,
+    data.items,
+    data.presets,
+    data.scoringRule
   )
+  world.evaluations = data.evaluations
+  return world
 }

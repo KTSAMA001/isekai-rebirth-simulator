@@ -61,7 +61,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -391,7 +391,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       },
@@ -544,7 +544,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -693,7 +693,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -859,7 +859,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       },
@@ -1366,7 +1366,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           }
         ]
       }
@@ -1768,7 +1768,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -1797,7 +1797,7 @@
     "description": "多年的冒险生涯开始在你身上留下痕迹。曾经轻松举起的巨剑，如今握起来有些吃力了。膝盖在阴天会隐隐作痛，而镜中的白发也越来越多。",
     "minAge": 45,
     "maxAge": 55,
-    "weight": 30,
+    "weight": 12,
     "effects": [],
     "branches": [
       {
@@ -1864,7 +1864,7 @@
     "description": "年轻时受过的伤开始反复发作。每到深夜，肩膀的箭伤、腰部的摔伤、还有那道从左臂延伸到胸口的爪痕，都在无声地提醒你——你不再是当年那个不知疲倦的冒险者了。",
     "minAge": 45,
     "maxAge": 60,
-    "weight": 25,
+    "weight": 10,
     "effects": [],
     "branches": [
       {
@@ -1921,7 +1921,7 @@
     "description": "你发现瞄准目标时越来越吃力了。法术偶尔偏了几寸，弓箭再也无法百步穿杨。是不是该承认，你的眼睛已经开始背叛你了？",
     "minAge": 50,
     "maxAge": 60,
-    "weight": 20,
+    "weight": 8,
     "effects": [],
     "branches": [
       {
@@ -1976,7 +1976,7 @@
     "description": "你发现自己不如从前那么敏捷了。闪避变得吃力，反应也慢了半拍。上个月那次战斗中，你差点没能躲开哥布林的飞刀——这在十年前是不可能的。",
     "minAge": 50,
     "maxAge": 65,
-    "weight": 25,
+    "weight": 10,
     "effects": [],
     "branches": [
       {
@@ -2043,7 +2043,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -2170,7 +2170,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_hp",
@@ -2209,7 +2209,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",

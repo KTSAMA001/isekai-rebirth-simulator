@@ -18,6 +18,9 @@ const world = computed(() => worldStore.worlds.find(w => w.manifest.id === props
 const state = computed(() => gameStore.state)
 const result = computed(() => state.value?.result)
 
+// 人生评价
+const evaluations = computed(() => result.value?.evaluations ?? [])
+
 const showContent = ref(false)
 
 onMounted(() => {
@@ -71,6 +74,10 @@ function playAgain() {
 function goHome() {
   gameStore.resetGame()
   router.push('/')
+}
+
+function rarityEmoji(r: string): string {
+  return { common: '✦', rare: '✧', legendary: '♛' }[r] ?? '✦'
 }
 </script>
 
@@ -131,6 +138,25 @@ function goHome() {
           <div class="timeline-age">{{ evt.age }}岁</div>
           <div class="timeline-content">
             <div class="timeline-title">{{ evt.title }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 人生评价 -->
+    <section v-if="evaluations.length > 0" class="section">
+      <h3 class="section-title">人生评价</h3>
+      <div class="eval-list">
+        <div
+          v-for="eva in evaluations"
+          :key="eva.id"
+          class="eval-item card"
+          :class="`rarity-${eva.rarity}`"
+        >
+          <div class="eval-rarity">{{ rarityEmoji(eva.rarity) }}</div>
+          <div class="eval-content">
+            <div class="eval-title">{{ eva.title }}</div>
+            <div class="eval-desc">{{ eva.description }}</div>
           </div>
         </div>
       </div>
@@ -297,6 +323,46 @@ function goHome() {
 .timeline-title {
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+/* 人生评价 */
+.eval-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.eval-item {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-left: 3px solid var(--border-color);
+}
+
+.eval-item.rarity-common { border-left-color: #888; }
+.eval-item.rarity-rare { border-left-color: #6ea8fe; }
+.eval-item.rarity-legendary { border-left-color: #ffd700; }
+
+.eval-rarity {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  line-height: 2.4;
+}
+
+.eval-content { flex: 1; }
+
+.eval-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.eval-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 /* 成就 */

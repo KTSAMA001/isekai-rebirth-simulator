@@ -1288,7 +1288,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",
@@ -1461,12 +1461,12 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 1
+        "value": 0
       },
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 2
+        "value": 1
       },
       {
         "type": "modify_attribute",
@@ -1564,7 +1564,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "modify_attribute",
@@ -1774,7 +1774,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 2
+            "value": 1
           },
           {
             "type": "set_flag",
