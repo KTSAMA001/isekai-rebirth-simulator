@@ -2016,7 +2016,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 3
+            "value": 2
           },
           {
             "type": "modify_attribute",

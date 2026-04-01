@@ -49,7 +49,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 3
+        "value": 2
       },
       {
         "type": "modify_attribute",
@@ -600,7 +600,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 4
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -1431,7 +1431,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 3
+        "value": 2
       },
       {
         "type": "set_flag",
@@ -1442,7 +1442,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 3
+        "value": 2
       },
       {
         "type": "modify_attribute",
@@ -1473,7 +1473,7 @@
       {
         "type": "modify_attribute",
         "target": "spr",
-        "value": 3
+        "value": 2
       },
       {
         "type": "set_flag",
@@ -1620,7 +1620,7 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": 4
+            "value": 3
           }
         ],
         "successText": "朋友们一个接一个地分享和你之间的故事。你静静听着，时而微笑，时而红了眼眶。这些回忆，就是最好的礼物。"
