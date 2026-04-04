@@ -3,6 +3,7 @@ import { ref, computed, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorldStore } from '@/stores/worldStore'
 import { useGameStore } from '@/stores/gameStore'
+import { useProgressStore } from '@/stores/progressStore'
 import TalentDraft from '@/components/setup/TalentDraft.vue'
 import AttributeAllocate from '@/components/setup/AttributeAllocate.vue'
 import type { WorldTalentDef, Gender } from '@/engine/core/types'
@@ -14,6 +15,7 @@ const props = defineProps<{
 const router = useRouter()
 const worldStore = useWorldStore()
 const gameStore = useGameStore()
+const progressStore = useProgressStore()
 
 // 步骤: 0=身份+姓名, 1=种族+性别, 2=天赋抽取, 3=属性分配
 const step = ref(0)
@@ -30,7 +32,14 @@ const world = computed(() => {
   return worldStore.worlds.find(w => w.manifest.id === props.worldId)
 })
 
-const presets = computed(() => world.value?.presets ?? [])
+const presets = computed(() => {
+  const raw = world.value?.presets ?? []
+  const totalAch = world.value?.achievements?.length ?? 0
+  return raw.map(p => ({
+    ...p,
+    locked: p.locked && !progressStore.isPresetUnlocked(p.id, totalAch),
+  }))
+})
 
 const selectedPreset = computed(() => {
   if (!selectedPresetId.value) return null
@@ -235,6 +244,7 @@ function goBack() {
           </div>
           <div class="preset-title">{{ preset.title }}</div>
           <div class="preset-desc">{{ preset.description }}</div>
+          <div v-if="preset.locked && preset.unlockCondition" class="preset-unlock-hint">🔒 {{ preset.unlockCondition }}</div>
           <div v-if="preset.attributes && Object.keys(preset.attributes).length" class="preset-attrs">
             <span
               v-for="(val, key) in preset.attributes" :key="key"
@@ -545,6 +555,13 @@ function goBack() {
 .preset-desc {
   font-size: 0.8rem;
   color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.preset-unlock-hint {
+  font-size: 0.7rem;
+  color: var(--gold);
+  opacity: 0.8;
   margin-bottom: 6px;
 }
 

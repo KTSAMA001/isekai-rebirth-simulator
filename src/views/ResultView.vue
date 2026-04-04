@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
+import { useProgressStore } from '@/stores/progressStore'
 import FinalGrade from '@/components/result/FinalGrade.vue'
 import { exportAsJSON, exportAsText, copyChronicleToClipboard } from '@/utils/export'
 
@@ -14,6 +15,7 @@ const props = defineProps<{
 const router = useRouter()
 const gameStore = useGameStore()
 const worldStore = useWorldStore()
+const progressStore = useProgressStore()
 
 const world = computed(() => worldStore.worlds.find(w => w.manifest.id === props.worldId))
 const state = computed(() => gameStore.state)
@@ -28,6 +30,13 @@ onMounted(() => {
   if (!gameStore.state || gameStore.state.meta.playId !== props.playId) {
     router.replace('/')
     return
+  }
+  // 记录本局进度（解锁预设用）
+  if (gameStore.state.phase === 'finished') {
+    progressStore.recordGameCompletion(
+      gameStore.state.meta.playId,
+      gameStore.state.achievements.unlocked,
+    )
   }
   setTimeout(() => { showContent.value = true }, 300)
 })
