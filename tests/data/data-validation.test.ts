@@ -107,6 +107,19 @@ describe('数据文件校验', () => {
         }
       }
     })
+
+    it('出身类天赋都属于同一 exclusiveGroup', () => {
+      const originIds = [
+        'peasant_birth', 'town_kid', 'apprentice', 'forest_child', 'merchant_blood',
+        'noble_born', 'orphan', 'street_rascal', 'monastery_upbringing', 'fisherman_child',
+        'traveling_minstrel', 'blacksmith_apprentice', 'healer_lineage', 'stable_boy', 'tavern_child',
+      ]
+      for (const id of originIds) {
+        const talent = talents.find((t: any) => t.id === id)
+        expect(talent).toBeDefined()
+        expect(talent.exclusiveGroup).toBe('origin')
+      }
+    })
   })
 
   describe('events (全部事件文件)', () => {
@@ -189,6 +202,12 @@ describe('数据文件校验', () => {
           }
         }
       }
+    })
+
+    it('双胞胎出生事件需要双生魂天赋', () => {
+      const twinEvent = allEvents.find((e: any) => e.id === 'human_twin_birth')
+      expect(twinEvent).toBeDefined()
+      expect(twinEvent.include).toContain('has.talent.twin_souls')
     })
   })
 

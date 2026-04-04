@@ -124,6 +124,8 @@ export interface WorldTalentDef {
   icon: string
   effects: TalentEffect[]
   conditions?: string
+  /** 互斥分组：同组天赋只能选择一个（如 origin 出身组） */
+  exclusiveGroup?: string
   mutuallyExclusive?: string[]
   replaceTalent?: string
   inheritable?: boolean

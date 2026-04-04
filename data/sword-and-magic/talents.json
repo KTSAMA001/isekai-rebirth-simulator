@@ -13,6 +13,7 @@
         "description": "体魄 +1"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -35,6 +36,7 @@
         "description": "智慧 +1"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -57,6 +59,7 @@
         "description": "智慧 +1"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -79,6 +82,7 @@
         "description": "魔力 +1"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -145,6 +149,7 @@
         "description": "魅力 +1"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -161,6 +166,7 @@
         "description": "家境 +5"
       }
     ],
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -285,6 +291,7 @@
       }
     ],
     "conditions": "mny <= 2",
+    "exclusiveGroup": "origin",
     "draftWeight": 100
   },
   {
@@ -534,6 +541,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -556,6 +564,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -584,6 +593,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -606,6 +616,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -628,6 +639,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -650,6 +662,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -672,6 +685,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {
@@ -694,6 +708,7 @@
       }
     ],
     "icon": "⭐",
+    "exclusiveGroup": "origin",
     "draftWeight": 10
   },
   {

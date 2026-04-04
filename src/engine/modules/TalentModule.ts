@@ -109,9 +109,21 @@ export class TalentModule {
 
       const def = this.world.index.talentsById.get(id)
 
-      // 检查是否与已接受的天赋互斥
+      // 检查是否与已接受的天赋属于同一互斥分组
       let isConflicting = false
-      if (def?.mutuallyExclusive) {
+      if (def?.exclusiveGroup) {
+        for (const acceptedId of acceptedSet) {
+          const acceptedDef = this.world.index.talentsById.get(acceptedId)
+          if (acceptedDef?.exclusiveGroup === def.exclusiveGroup) {
+            conflicts.push(`${id} 与 ${acceptedId} 同属 ${def.exclusiveGroup} 组，已跳过 ${id}`)
+            isConflicting = true
+            break
+          }
+        }
+      }
+
+      // 检查是否与已接受的天赋互斥
+      if (!isConflicting && def?.mutuallyExclusive) {
         for (const excludeId of def.mutuallyExclusive) {
           if (acceptedSet.has(excludeId)) {
             conflicts.push(`${id} 与 ${excludeId} 互斥，已跳过 ${id}`)

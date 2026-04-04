@@ -134,6 +134,18 @@ describe('TalentModule', () => {
       expect(selected).toEqual(['a'])
       expect(conflicts.length).toBeGreaterThan(0)
     })
+
+    it('同 exclusiveGroup 的天赋只能选择一个', () => {
+      const talents = [
+        makeTalent('origin_a', { exclusiveGroup: 'origin' }),
+        makeTalent('origin_b', { exclusiveGroup: 'origin' }),
+        makeTalent('normal'),
+      ]
+      const mod = createModule(talents)
+      const { selected, conflicts } = mod.selectTalents(['origin_a', 'origin_b', 'normal'], ['origin_a', 'origin_b', 'normal'], 3)
+      expect(selected).toEqual(['origin_a', 'normal'])
+      expect(conflicts.length).toBeGreaterThan(0)
+    })
   })
 
   describe('getActiveEffects()', () => {

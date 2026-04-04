@@ -109,6 +109,7 @@ const schemas: Record<string, object> = {
       rarity: { enum: ['common', 'rare', 'legendary'] },
       icon: { type: 'string' },
       effects: { type: 'array', items: { $ref: '#/definitions/EventEffect' } },
+      exclusiveGroup: { type: 'string' },
       draftWeight: { type: 'integer', minimum: 0 },
       requireRace: { type: 'array', items: { type: 'string' } },
       requireGender: { enum: ['male', 'female'] },

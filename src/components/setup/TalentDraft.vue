@@ -22,11 +22,38 @@ const rarityLabel: Record<string, string> = {
 
 const canConfirm = computed(() => selectedIds.value.size === props.maxSelect)
 
+const talentMap = computed(() => new Map(props.talents.map(t => [t.id, t])))
+
+function getConflictReason(talent: WorldTalentDef): string | null {
+  if (selectedIds.value.has(talent.id)) return null
+
+  for (const selectedId of selectedIds.value) {
+    const selectedTalent = talentMap.value.get(selectedId)
+    if (!selectedTalent) continue
+
+    if (talent.exclusiveGroup && selectedTalent.exclusiveGroup === talent.exclusiveGroup) {
+      if (talent.exclusiveGroup === 'origin') {
+        return '出身类天赋只能选一个'
+      }
+      return '同组天赋只能选一个'
+    }
+
+    if (talent.mutuallyExclusive?.includes(selectedId) || selectedTalent.mutuallyExclusive?.includes(talent.id)) {
+      return `与「${selectedTalent.name}」互斥`
+    }
+  }
+
+  return null
+}
+
 function toggleTalent(id: string) {
+  const talent = talentMap.value.get(id)
+  if (!talent) return
+
   const next = new Set(selectedIds.value)
   if (next.has(id)) {
     next.delete(id)
-  } else if (next.size < props.maxSelect) {
+  } else if (next.size < props.maxSelect && !getConflictReason(talent)) {
     next.add(id)
   }
   selectedIds.value = next
@@ -55,7 +82,7 @@ function confirm() {
         class="talent-card"
         :class="[
           `rarity-${talent.rarity}`,
-          { selected: selectedIds.has(talent.id) }
+          { selected: selectedIds.has(talent.id), blocked: !selectedIds.has(talent.id) && !!getConflictReason(talent) }
         ]"
         @click="toggleTalent(talent.id)"
       >
@@ -65,6 +92,9 @@ function confirm() {
         <div class="talent-icon">{{ talent.icon }}</div>
         <div class="talent-name">{{ talent.name }}</div>
         <div class="talent-desc">{{ talent.description }}</div>
+        <div v-if="!selectedIds.has(talent.id) && getConflictReason(talent)" class="talent-conflict">
+          {{ getConflictReason(talent) }}
+        </div>
         <div class="talent-effects">
           <span v-for="(eff, i) in talent.effects" :key="i" class="effect-tag" :class="eff.value && eff.value > 0 ? 'positive' : 'negative'">
             {{ eff.description }}
@@ -139,6 +169,9 @@ function confirm() {
   border-color: var(--color-primary);
   background: rgba(139, 92, 246, 0.1);
 }
+.talent-card.blocked {
+  opacity: 0.55;
+}
 .talent-card.selected.rarity-rare { border-color: var(--rarity-rare); background: rgba(192, 132, 252, 0.1); }
 .talent-card.selected.rarity-legendary { border-color: var(--rarity-legendary); background: rgba(251, 191, 36, 0.08); }
 
@@ -168,6 +201,13 @@ function confirm() {
   text-align: center;
   margin-bottom: 6px;
   line-height: 1.3;
+}
+
+.talent-conflict {
+  font-size: 0.65rem;
+  color: var(--text-gold);
+  text-align: center;
+  margin-bottom: 6px;
 }
 
 .talent-effects {
