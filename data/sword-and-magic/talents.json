@@ -723,6 +723,10 @@
     "name": "精灵血脉",
     "description": "远祖中有精灵的血统，赋予你超凡的感知和魔力亲和。",
     "rarity": "rare",
+    "requireRace": [
+      "human",
+      "goblin"
+    ],
     "effects": [
       {
         "type": "modify_attribute",
@@ -1047,5 +1051,542 @@
     ],
     "icon": "🌟",
     "draftWeight": 1
+  },
+  {
+    "id": "human_adaptability",
+    "name": "万能适应",
+    "description": "人类最大的天赋不是力量或魔法，而是对任何环境的适应力。",
+    "rarity": "common",
+    "icon": "🔄",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_ambition",
+    "name": "燃烧的野心",
+    "description": "短暂的寿命反而点燃了不甘平凡的火焰。人类总想在有限时间里留下永恒的痕迹。",
+    "rarity": "rare",
+    "icon": "🔥",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 3,
+        "description": "家境 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": -1,
+        "description": "灵魂 -1（急躁）"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ]
+  },
+  {
+    "id": "elven_harmony",
+    "name": "世界树共鸣",
+    "description": "与世界树的古老联结让你天生便能感受到魔力的流动。在森林中时，你的灵魂会与树叶一起轻轻颤动。",
+    "rarity": "common",
+    "icon": "🌿",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elven_timeless_gaze",
+    "name": "千年之瞳",
+    "description": "精灵的双眼曾见证王朝更替、大陆沉浮。漫长岁月沉淀的智慧让你对万物洞若观火。",
+    "rarity": "rare",
+    "icon": "👁️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 3,
+        "description": "智慧 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "魅力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": -1,
+        "description": "体魄 -1（文弱）"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ]
+  },
+  {
+    "id": "goblin_cunning",
+    "name": "哥布林式狡黠",
+    "description": "在垃圾堆里长大的你学会了一件事：比你大的东西，就要比它聪明；比你聪明的东西，就要比它幸运。",
+    "rarity": "common",
+    "icon": "🎲",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "幸运 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_chaos_born",
+    "name": "混沌宠儿",
+    "description": "当其他种族在秩序中寻找安全时，哥布林在混乱中如鱼得水。越是不可能的事，越容易发生在你身上。",
+    "rarity": "rare",
+    "icon": "🃏",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 4,
+        "description": "幸运 +4"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": -2,
+        "description": "魅力 -2（格格不入）"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "human_male_valor",
+    "name": "不屈斗志",
+    "description": "从小在街头打架和冒险故事中长大的男孩，骨子里流淌着不服输的热血。即使被击倒，也会咬牙站起来。",
+    "rarity": "common",
+    "icon": "🔥",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "human_male_ambition_fire",
+    "name": "开拓者之焰",
+    "description": "人类男性总有一种冲动——翻过那座山，看看山那边有什么。这种不安分的探索欲驱动着一代又一代人类开疆拓土。",
+    "rarity": "rare",
+    "icon": "⛰️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "幸运 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "human_female_grace",
+    "name": "坚韧之心",
+    "description": "在这个对女性并不友善的世界里，她学会了用温柔掩藏锋芒，用坚韧编织命运。看似柔弱，内心比钢铁还硬。",
+    "rarity": "common",
+    "icon": "💎",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "human_female_weaver",
+    "name": "命运织者",
+    "description": "人类女性天生善于编织关系网——从宫廷到集市，从教堂到酒馆。她的每一句话、每一个微笑，都在悄悄改变着周围人的命运。",
+    "rarity": "rare",
+    "icon": "🕸️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "魅力 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "human"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "elf_male_lorekeeper",
+    "name": "星辰守望者",
+    "description": "精灵男性常在星空下沉思数百年。他们是古老知识的守护者，能从星辰的轨迹中读出被遗忘的历史。",
+    "rarity": "common",
+    "icon": "⭐",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "elf_male_bladesinger",
+    "name": "剑歌者",
+    "description": "精灵男性中极少数同时精通剑术与魔法的天才。他们的战斗如同舞蹈，剑光与咒语交织成致命的华尔兹。",
+    "rarity": "rare",
+    "icon": "⚔️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1,
+        "description": "魔力 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "elf_female_moonweaver",
+    "name": "月光织女",
+    "description": "精灵女性与月光有着神秘的共鸣。在满月之夜，她们能将月辉凝聚成丝，编织出连大法师都羡慕的魔法织物。",
+    "rarity": "common",
+    "icon": "🌙",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "elf_female_lifesinger",
+    "name": "生命吟唱者",
+    "description": "精灵女性的歌声能唤醒沉睡的种子、治愈受伤的心灵。她们是世界树最虔诚的侍女，用歌声维系着森林的生命之力。",
+    "rarity": "rare",
+    "icon": "🎵",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "elf"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "goblin_male_scrapper",
+    "name": "废品王",
+    "description": "哥布林男性从小就在垃圾堆里摸爬滚打，练就了一身从废料中淘出宝贝的本事。别人丢弃的东西，在他手里都能变成趁手的武器。",
+    "rarity": "common",
+    "icon": "🔧",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1,
+        "description": "幸运 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "goblin_male_berserker",
+    "name": "暴走小鬼",
+    "description": "个头虽小，怒气可不小。哥布林男性被逼到绝境时会爆发出惊人的战斗力，像一颗绿色的小炮弹冲向敌人。",
+    "rarity": "rare",
+    "icon": "💥",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 3,
+        "description": "体魄 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": -1,
+        "description": "智慧 -1（暴走时不用脑子）"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "goblin_female_trickster",
+    "name": "诡计多端",
+    "description": "哥布林女性或许更矮小，但她们的脑子可比那些只知道打架的男性灵光得多。一个微笑、一句谎话、一个圈套——猎物就到手了。",
+    "rarity": "common",
+    "icon": "🎭",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "goblin_female_fortune",
+    "name": "幸运星",
+    "description": "据说哥布林女性比男性更受混沌之神眷顾。她们的运气好得不可思议——摔下悬崖会掉进宝矿，被怪物追赶会撞见隐藏宝箱。",
+    "rarity": "rare",
+    "icon": "🌟",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 3,
+        "description": "幸运 +3"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "goblin"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "wanderer_instinct",
+    "name": "旅人的直觉",
+    "description": "常年漂泊在外的人，总能在关键时刻察觉到危险和机遇。",
+    "rarity": "common",
+    "icon": "🧭",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2,
+        "description": "运势 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requirePreset": [
+      "random_1"
+    ]
+  },
+  {
+    "id": "explorer_curiosity",
+    "name": "好奇者的洞察",
+    "description": "对世界充满好奇的人，总能发现别人忽略的细节。",
+    "rarity": "common",
+    "icon": "🔍",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1,
+        "description": "魔力 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requirePreset": [
+      "random_2"
+    ]
+  },
+  {
+    "id": "veterans_legacy",
+    "name": "战场遗风",
+    "description": "父辈在战场上淬炼出的经验，通过血脉和教导传承给了你。",
+    "rarity": "common",
+    "icon": "🛡️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2,
+        "description": "灵魂 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requirePreset": [
+      "random_3"
+    ]
   }
 ]

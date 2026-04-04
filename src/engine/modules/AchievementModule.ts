@@ -19,10 +19,20 @@ export class AchievementModule {
   checkAchievements(state: GameState): string[] {
     const ctx = { state, world: this.world }
     const newlyUnlocked: string[] = []
+    const playerRace = state.character.race
+    const playerGender = state.character.gender
 
     for (const ach of this.world.achievements) {
       // 已解锁则跳过
       if (state.achievements.unlocked.includes(ach.id)) continue
+      // 种族过滤：成就指定了种族列表时，玩家种族必须在其中
+      if (ach.races && ach.races.length > 0 && playerRace) {
+        if (!ach.races.includes(playerRace)) continue
+      }
+      // 性别过滤：成就指定了性别列表时，玩家性别必须在其中
+      if (ach.genders && ach.genders.length > 0 && playerGender) {
+        if (!ach.genders.includes(playerGender)) continue
+      }
       // 检查条件
       if (this.dsl.evaluate(ach.condition, ctx)) {
         newlyUnlocked.push(ach.id)

@@ -4,8 +4,9 @@
  * initGame → draftTalents → selectTalents → allocateAttributes → simulateYear × N → finish
  */
 
-import type { EventEffect, GameState, LifeRoute, WorldInstance, WorldEventDef, YearResult } from './types'
+import type { EventEffect, GameState, Gender, LifeRoute, WorldInstance, WorldEventDef, YearResult, DiceCheckResult } from './types'
 import { RandomProvider } from './RandomProvider'
+import { cloneState } from './stateUtils'
 import { AttributeModule } from '../modules/AttributeModule'
 import { TalentModule } from '../modules/TalentModule'
 import { EventModule } from '../modules/EventModule'
@@ -13,6 +14,7 @@ import { ConditionDSL } from '../modules/ConditionDSL'
 import { EvaluatorModule } from '../modules/EvaluatorModule'
 import { AchievementModule } from '../modules/AchievementModule'
 import { ItemModule } from '../modules/ItemModule'
+import { DiceModule } from '../modules/DiceModule'
 
 /** 生成简短唯一 ID */
 function generatePlayId(): string {
@@ -29,6 +31,7 @@ export class SimulationEngine {
   private evaluatorModule: EvaluatorModule
   private achievementModule: AchievementModule
   private itemModule: ItemModule
+  private diceModule: DiceModule
   private dsl: ConditionDSL
   /** 基于初始体魄的固定恢复量（allocateAttributes 时计算，不再随属性成长增长） */
   private initialStrRegen = 1
@@ -36,6 +39,8 @@ export class SimulationEngine {
   private activeRoute: LifeRoute | null = null
   /** 已触发的路线锚点事件（key = "routeId:eventId"） */
   private routeAnchorsTriggered: Set<string> = new Set()
+  /** 本局实际最大年龄（受种族寿命范围影响） */
+  private effectiveMaxAge = 0
 
   /** 从已保存的状态恢复引擎 */
   static restoreFromState(state: GameState, world: WorldInstance): SimulationEngine {
@@ -62,6 +67,12 @@ export class SimulationEngine {
       }
     }
 
+    // 恢复种族寿命上限
+    engine.effectiveMaxAge = state.effectiveMaxAge ?? world.manifest.maxAge
+
+    // 重建 activeRoute：根据当前状态重新评估路线条件
+    engine.updateRoute()
+
     return engine
   }
 
@@ -75,10 +86,11 @@ export class SimulationEngine {
     this.evaluatorModule = new EvaluatorModule(world, world.evaluations)
     this.achievementModule = new AchievementModule(world, this.dsl)
     this.itemModule = new ItemModule(world, this.dsl)
+    this.diceModule = new DiceModule(this.random)
   }
 
   /** 初始化新游戏 */
-  initGame(characterName: string, presetId?: string): GameState {
+  initGame(characterName: string, presetId?: string, race?: string, gender?: Gender): GameState {
     // 查找预设
     const preset = presetId ? this.world.presets.find(p => p.id === presetId) : undefined
     const attrs = this.attrModule.initAttributes()
@@ -92,8 +104,37 @@ export class SimulationEngine {
       }
     }
 
+    // 应用种族属性修正
+    const raceDef = race ? this.world.races?.find(r => r.id === race) : undefined
+    if (raceDef) {
+      for (const mod of raceDef.attributeModifiers) {
+        const max = this.world.attributes.find(a => a.id === mod.attributeId)?.max ?? 99
+        const min = this.world.attributes.find(a => a.id === mod.attributeId)?.min ?? 0
+        attrs[mod.attributeId] = Math.max(min, Math.min((attrs[mod.attributeId] ?? 0) + mod.value, max))
+      }
+      // 应用种族×性别属性修正
+      if (gender && raceDef.genderModifiers) {
+        const genderMod = raceDef.genderModifiers.find(g => g.gender === gender)
+        if (genderMod?.attributeModifiers) {
+          for (const mod of genderMod.attributeModifiers) {
+            const max = this.world.attributes.find(a => a.id === mod.attributeId)?.max ?? 99
+            const min = this.world.attributes.find(a => a.id === mod.attributeId)?.min ?? 0
+            attrs[mod.attributeId] = Math.max(min, Math.min((attrs[mod.attributeId] ?? 0) + mod.value, max))
+          }
+        }
+      }
+    }
+
     for (const key of Object.keys(attrs)) {
       peaks[key] = attrs[key]
+    }
+
+    // 计算本局最大年龄：种族有 lifespanRange 则在范围内随机，否则使用世界默认值
+    if (raceDef?.lifespanRange) {
+      const [minLife, maxLife] = raceDef.lifespanRange
+      this.effectiveMaxAge = minLife + Math.floor(this.random.next() * (maxLife - minLife + 1))
+    } else {
+      this.effectiveMaxAge = this.world.manifest.maxAge
     }
 
     this.state = {
@@ -106,6 +147,8 @@ export class SimulationEngine {
       },
       character: {
         name: characterName || '无名之人',
+        gender,
+        race,
       },
       attributes: attrs,
       attributeHistory: [this.attrModule.snapshot(attrs, 0)],
@@ -117,6 +160,7 @@ export class SimulationEngine {
       },
       age: 0,
       hp: 0, // 会在下面重新计算
+      maxHpBonus: 0,
       flags: new Set<string>(),
       counters: new Map<string, number>(),
       triggeredEvents: new Set<string>(),
@@ -127,6 +171,7 @@ export class SimulationEngine {
       },
       inventory: { items: [], maxSlots: 3 },
       talentPenalty: 0,
+      effectiveMaxAge: this.effectiveMaxAge,
       phase: 'talent-draft',
     }
 
@@ -149,7 +194,10 @@ export class SimulationEngine {
     const { drafted } = this.talentModule.draftTalents(
       [],
       this.state.talents.inherited,
-      this.world.manifest.talentDraftCount
+      this.world.manifest.talentDraftCount,
+      this.state.character.race,
+      this.state.character.gender,
+      this.state.meta.presetId
     )
 
     this.state = {
@@ -280,13 +328,14 @@ export class SimulationEngine {
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
     // 物品HP软上限修正
     const capModifier = this.itemModule.getHpCapModifier(this.state)
-    const modifiedCap = Math.max(softCap * (1 + capModifier), 20)
+    const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 20)
 
-    // 年龄衰减：40岁开始轻微，之后加速
+    // 年龄衰减：40岁开始轻微，之后渐进加速
     let ageDecay = 0
-    if (age >= 80) ageDecay = 8
-    else if (age >= 70) ageDecay = 6
-    else if (age >= 60) ageDecay = 4
+    if (age >= 90) ageDecay = 5
+    else if (age >= 80) ageDecay = 4
+    else if (age >= 70) ageDecay = 3
+    else if (age >= 60) ageDecay = 2
     else if (age >= 50) ageDecay = 2
     else if (age >= 40) ageDecay = 1
 
@@ -325,7 +374,7 @@ export class SimulationEngine {
     // 应用天赋触发效果
     if (talentEffects.length > 0) {
       for (const effect of talentEffects) {
-        if (effect.type === 'modify_attribute' && effect.value !== undefined) {
+        if ((effect.type === 'modify_attribute' || effect.type === 'trigger_on_age') && effect.value !== undefined) {
           const result = this.attrModule.modify(
             newState.attributes,
             newState.attributePeaks,
@@ -390,8 +439,9 @@ export class SimulationEngine {
     }
 
     if (candidates.length === 0) {
-      // 平淡年
+      // 平淡年：仍需执行年度后处理（死亡检查等）
       this.pendingYearEvent = null
+      this.postYearProcess()
       return { phase: 'mundane_year', event: null }
     }
 
@@ -484,7 +534,7 @@ export class SimulationEngine {
       }
     }
 
-    const clonedState = this.cloneState(this.state)
+    const clonedState = cloneState(this.state)
     const effectTexts = this.eventModule.applyEffectsOnState(event.effects, clonedState)
 
     // 追加物品获取提示文本
@@ -532,9 +582,24 @@ export class SimulationEngine {
     let riskRolled = false
     let chosenEffects: EventEffect[]
     let resultText: string | undefined
+    let diceCheckResult: DiceCheckResult | undefined
 
-    // 风险判定
-    if (branch.riskCheck) {
+    // D20 骰判定（优先级高于旧版 riskCheck）
+    if (branch.diceCheck) {
+      riskRolled = true
+      diceCheckResult = this.diceModule.resolve(branch.diceCheck, this.state)
+      isSuccess = diceCheckResult.success
+
+      if (isSuccess) {
+        chosenEffects = [...event.effects, ...branch.effects]
+        resultText = branch.successText
+      } else {
+        chosenEffects = [...event.effects, ...(branch.failureEffects ?? branch.effects)]
+        resultText = branch.failureText
+      }
+    }
+    // 旧版风险判定（向后兼容）
+    else if (branch.riskCheck) {
       riskRolled = true
       const rc = branch.riskCheck
       const attrValue = this.state.attributes[rc.attribute] ?? 0
@@ -570,7 +635,7 @@ export class SimulationEngine {
       }
     }
 
-    const clonedState = this.cloneState(this.state)
+    const clonedState = cloneState(this.state)
     const effectTexts = this.eventModule.applyEffectsOnState(chosenEffects, clonedState)
 
     // 追加物品获取提示文本
@@ -583,14 +648,19 @@ export class SimulationEngine {
       effectTexts.push(resultText)
     }
 
-    // 记录日志
-    const logEntry = {
+    // 记录日志（含分支详情，用于故事导出）
+    const logEntry: import('./types').EventLogEntry = {
       age: this.state.age,
       eventId: event.id,
       title: event.title,
       description: event.description,
       effects: effectTexts,
       branchId,
+      branchTitle: branch.title,
+      branchDescription: branch.description,
+      resultText,
+      riskRolled,
+      isSuccess,
     }
     clonedState.eventLog = [...this.state.eventLog, logEntry]
 
@@ -607,6 +677,7 @@ export class SimulationEngine {
       logEntry,
       isSuccess,
       riskRolled,
+      diceCheckResult,
     }
   }
 
@@ -701,8 +772,8 @@ export class SimulationEngine {
       }
     }
 
-    // 检查死亡
-    const dead = newState.hp <= 0 || newState.age >= this.world.manifest.maxAge
+    // 检查死亡（使用种族寿命上限）
+    const dead = newState.hp <= 0 || newState.age >= this.effectiveMaxAge
     if (dead) {
       newState = { ...newState, phase: 'finished' }
       const result = this.evaluatorModule.calculate(newState)
@@ -720,33 +791,6 @@ export class SimulationEngine {
     }
 
     this.state = newState
-  }
-
-  /** 深克隆 GameState */
-  private cloneState(state: GameState): GameState {
-    return {
-      ...state,
-      attributes: { ...state.attributes },
-      attributePeaks: { ...state.attributePeaks },
-      talents: {
-        selected: [...state.talents.selected],
-        draftPool: [...state.talents.draftPool],
-        inherited: [...state.talents.inherited],
-      },
-      flags: new Set(state.flags),
-      counters: new Map(state.counters),
-      triggeredEvents: new Set(state.triggeredEvents),
-      eventLog: [...state.eventLog],
-      achievements: {
-        unlocked: [...state.achievements.unlocked],
-        progress: { ...state.achievements.progress },
-      },
-      inventory: {
-        ...state.inventory,
-        items: [...state.inventory.items],
-      },
-      attributeHistory: [...state.attributeHistory],
-    }
   }
 
   // ==================== 路线系统 ====================
@@ -865,7 +909,7 @@ export class SimulationEngine {
     // 应用天赋触发效果
     if (talentEffects.length > 0) {
       for (const effect of talentEffects) {
-        if (effect.type === 'modify_attribute' && effect.value !== undefined) {
+        if ((effect.type === 'modify_attribute' || effect.type === 'trigger_on_age') && effect.value !== undefined) {
           const result = this.attrModule.modify(
             newState.attributes,
             newState.attributePeaks,
@@ -887,8 +931,8 @@ export class SimulationEngine {
       newState = this.eventModule.resolveEvent(event, newState, branchId)
     }
 
-    // 检查死亡条件
-    const dead = newState.hp <= 0 || newState.age >= this.world.manifest.maxAge
+    // 检查死亡条件（使用种族寿命上限）
+    const dead = newState.hp <= 0 || newState.age >= this.effectiveMaxAge
 
     // 记录属性快照
     const snapshot = this.attrModule.snapshot(newState.attributes, newState.age)

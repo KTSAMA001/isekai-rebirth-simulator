@@ -3,7 +3,7 @@
  * 管理天赋抽取、选择、效果触发
  */
 
-import type { WorldInstance, GameState, TalentEffect } from '../core/types'
+import type { WorldInstance, GameState, TalentEffect, Gender } from '../core/types'
 import type { RandomProvider } from '../core/RandomProvider'
 
 export class TalentModule {
@@ -19,17 +19,56 @@ export class TalentModule {
   draftTalents(
     existingTalents: string[],
     inheritedTalents: string[],
-    count: number
+    count: number,
+    raceId?: string,
+    gender?: Gender,
+    presetId?: string
   ): { drafted: string[]; replacements: { original: string; replacement: string }[] } {
     // 构建可用天赋池（排除已继承的）
     const inheritedSet = new Set(inheritedTalents)
     const available = this.world.talents.filter(t => !inheritedSet.has(t.id))
 
-    // 按权重抽取
-    const drafted = this.random.pickN(
-      available,
-      count
-    ).map(t => t.id)
+    // 查找种族专属天赋ID
+    const exclusiveIds: string[] = []
+    if (raceId && this.world.races) {
+      const raceDef = this.world.races.find(r => r.id === raceId)
+      if (raceDef?.exclusiveTalents) {
+        exclusiveIds.push(...raceDef.exclusiveTalents)
+      }
+      // 性别专属天赋
+      if (gender && raceDef?.genderModifiers) {
+        const gm = raceDef.genderModifiers.find(g => g.gender === gender)
+        if (gm?.exclusiveTalents) {
+          exclusiveIds.push(...gm.exclusiveTalents)
+        }
+      }
+    }
+    // 预设专属天赋
+    if (presetId) {
+      const presetDef = this.world.presets.find(p => p.id === presetId)
+      if (presetDef?.exclusiveTalents) {
+        exclusiveIds.push(...presetDef.exclusiveTalents)
+      }
+    }
+
+    // 按权重抽取（排除专属天赋；排除当前种族被禁的天赋；按种族/性别/预设过滤）
+    const exclusiveSet = new Set(exclusiveIds)
+    const normalPool = available.filter(t => {
+      // 排除专属天赋（它们保底加入）
+      if (exclusiveSet.has(t.id)) return false
+      // 种族白名单
+      if (t.requireRace?.length && (!raceId || !t.requireRace.includes(raceId))) return false
+      // 性别限定
+      if (t.requireGender && t.requireGender !== gender) return false
+      // 预设限定
+      if (t.requirePreset?.length && (!presetId || !t.requirePreset.includes(presetId))) return false
+      return true
+    })
+    const normalCount = Math.max(0, count - exclusiveIds.length)
+    const drafted = this.random.pickN(normalPool, normalCount).map(t => t.id)
+
+    // 专属天赋保底加入
+    drafted.push(...exclusiveIds.filter(id => !inheritedSet.has(id)))
 
     // 处理替换天赋
     const replacements: { original: string; replacement: string }[] = []

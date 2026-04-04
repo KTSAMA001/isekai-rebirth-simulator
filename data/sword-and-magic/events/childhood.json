@@ -91,7 +91,13 @@
     "priority": "major",
     "routes": [
       "mage"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "title": "魔力苏醒·精灵之血",
+        "description": "你体内的精灵血脉在沉睡多年后突然苏醒。与人类的魔力暴走不同，精灵的魔力觉醒如同花朵绽放——美丽而自然。你的周围开始飘起金色的光点，空气中充满了世界树的芬芳。"
+      }
+    }
   },
   {
     "id": "bullied",
@@ -136,6 +142,12 @@
             "target": "timid",
             "value": 1,
             "description": "胆怯"
+          },
+          {
+            "type": "set_flag",
+            "target": "deep_observer",
+            "value": true,
+            "description": "隐藏的观察力"
           }
         ]
       },
@@ -174,11 +186,6 @@
         "description": "你握紧拳头冲了上去！",
         "probability": 0.3,
         "requireCondition": "attribute.str >= 3",
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 7,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -219,7 +226,12 @@
           }
         ],
         "successText": "虽然挨了几拳，但你让他们知道你不是好惹的！",
-        "failureText": "你冲了上去，但对方太壮了...你被打得鼻青脸肿"
+        "failureText": "你冲了上去，但对方太壮了...你被打得鼻青脸肿",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13"
+        }
       }
     ],
     "weightModifiers": [
@@ -233,7 +245,22 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "title": "被嘲笑的尖耳朵",
+        "description": "其他孩子揪着你的尖耳朵嘲笑你是'活了太久的妖怪'。精灵在人类社会中总是显得格格不入——你的同龄人已经开始长大，而你看起来还像刚出生。"
+      },
+      "goblin": {
+        "title": "矮小的绿皮",
+        "description": "你被一群孩子围住了。'臭哥布林！','偷东西的小怪物！'——这些话你已经听了无数遍。身为哥布林，你从小就明白：这个世界对你的种族充满偏见。"
+      }
+    },
+    "genderVariants": {
+      "female": {
+        "description": "你被几个大孩子围住了。他们嘲笑你'女孩子就该待在家里'，还抢走了你的东西。但你的眼中没有泪水，只有倔强的光芒。"
+      }
+    }
   },
   {
     "id": "church_orphan",
@@ -244,38 +271,61 @@
     "weight": 3,
     "include": "attribute.mny <= 2",
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "grant_item",
-        "target": "orphan_bracelet",
-        "value": 1,
-        "description": "获得 📿 孤儿手环"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "branches": [
+      {
+        "id": "stay_church",
+        "title": "留在教会",
+        "description": "教会的温暖让你安心，你决定留下来帮忙。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          },
+          {
+            "type": "grant_item",
+            "value": 1,
+            "target": "holy_pendant"
+          }
+        ]
+      },
+      {
+        "id": "leave_church",
+        "title": "溜出去玩",
+        "description": "外面的世界更吸引你，你偷偷溜出了教会的大门。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "luk"
+          },
+          {
+            "type": "modify_attribute",
+            "value": -1,
+            "target": "spr"
+          }
+        ]
+      }
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -287,39 +337,68 @@
     "weight": 3,
     "include": "attribute.luk >= 6 & attribute.spr >= 4",
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 1
-      },
-      {
-        "type": "set_flag",
-        "target": "fairy_friend",
-        "value": 1,
-        "description": "精灵之友"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "adventure",
     "priority": "minor",
     "routes": [
       "mage"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "talk_fairy",
+        "title": "和精灵说话",
+        "description": "你鼓起勇气和那个发光的小东西搭话。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "mag"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          },
+          {
+            "type": "set_flag",
+            "value": 1,
+            "target": "fairy_friend"
+          }
+        ]
+      },
+      {
+        "id": "catch_fairy",
+        "title": "试着抓住它",
+        "description": "瓶子！你需要一个瓶子！",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "luk"
+          },
+          {
+            "type": "modify_attribute",
+            "value": -1,
+            "target": "mag"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "title": "妖精族的远亲",
+        "description": "在森林深处，你遇到了一只小妖精。她看到你的尖耳朵后惊喜地叫了起来：'精灵宝宝！好久没见到你们族的小家伙了！'妖精和精灵有着古老的血缘关系，她对你格外亲切。"
+      },
+      "goblin": {
+        "title": "不速之客",
+        "description": "你在翻垃圾堆时发现了一只被困在瓶子里的小妖精。她看到你时先是一脸惊恐，然后发现你并没有恶意。'一个...善良的哥布林？真稀奇。'她犹豫地说。"
+      }
+    }
   },
   {
     "id": "bullied_repeat",
@@ -354,6 +433,18 @@
             "target": "timid_deep",
             "value": 1,
             "description": "深度胆怯"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "忍耐中磨炼心智"
+          },
+          {
+            "type": "set_flag",
+            "target": "deep_observer",
+            "value": 1,
+            "description": "成为了敏锐的观察者"
           }
         ],
         "successText": "你低着头忍了下来。眼泪掉在泥土里，没有人看到。但你心里暗暗发誓——总有一天，你会变得强大到不需要再忍受这些。"
@@ -391,7 +482,13 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "又被欺负了",
+        "description": "那群人类孩子又出现了，这次他们堵住了你回地洞的路。你的背抵着墙壁，看着他们一步步逼近。身为哥布林，你从小就知道——跑不掉的时候，就得用脑子。"
+      }
+    }
   },
   {
     "id": "stand_up_moment",
@@ -409,11 +506,6 @@
         "title": "正面反击",
         "description": "\"够了！\"你攥紧拳头站了起来，眼中是连你自己都陌生的怒火",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 8,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -452,7 +544,12 @@
           }
         ],
         "successText": "你一拳打在了带头那人的鼻子上！他们惊愕地看着你，再也不敢来犯",
-        "failureText": "你还是打不过，但你眼中的勇气让他们犹豫了...暂时"
+        "failureText": "你还是打不过，但你眼中的勇气让他们犹豫了...暂时",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13"
+        }
       },
       {
         "id": "seek_help_smart",
@@ -488,7 +585,13 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "不再逃跑",
+        "description": "又一群人类小鬼来找茬。但这次不一样——你掏出藏在裤兜里的辣椒粉猛地撒了出去！趁他们揉眼睛的时候，你一溜烟钻进了下水道。得意的笑声在管道里回荡。"
+      }
+    }
   },
   {
     "id": "noble_kid_revenge",
@@ -517,6 +620,11 @@
             "target": "noble_grudge",
             "value": 1,
             "description": "但心里的火，你没有忘"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
           }
         ]
       },
@@ -525,11 +633,6 @@
         "title": "把东西还给我",
         "description": "你攥紧拳头，一步都不退。这个年纪的你还不懂什么叫权势，只知道属于自己的不能丢。",
         "probability": 0.35,
-        "riskCheck": {
-          "attribute": "chr",
-          "difficulty": 9,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -565,7 +668,12 @@
           }
         ],
         "successText": "那个贵族孩子没想到你敢还手，吓得把东西一扔就跑。你蹲下捡起来的时候，发现手还在发抖。",
-        "failureText": "贵族孩子身边的家仆一把将你推倒在地，你的膝盖磕在碎石上，鲜血渗了出来。他得意地扬长而去。"
+        "failureText": "贵族孩子身边的家仆一把将你推倒在地，你的膝盖磕在碎石上，鲜血渗了出来。他得意地扬长而去。",
+        "diceCheck": {
+          "attribute": "chr",
+          "dc": 14,
+          "description": "魅力判定 DC14"
+        }
       },
       {
         "id": "report_authority",
@@ -589,7 +697,13 @@
       }
     ],
     "tag": "social",
-    "priority": "major"
+    "priority": "major",
+    "raceVariants": {
+      "goblin": {
+        "title": "人类孩子的石头",
+        "description": "一群人类孩子发现了你。他们捡起石头朝你扔过来——\"脏哥布林！滚回下水道去！\"你夹着脑袋狂奔，心里发誓总有一天要让他们后悔。"
+      }
+    }
   },
   {
     "id": "childhood_play",
@@ -599,33 +713,56 @@
     "maxAge": 6,
     "weight": 5,
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "childhood",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "play_lead",
+        "title": "当孩子王",
+        "description": "你站在泥堆最高处，指挥大家冲锋。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "chr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          }
+        ]
+      },
+      {
+        "id": "play_smart",
+        "title": "挖陷阱偷袭",
+        "description": "直接冲太蠢了，你在后面挖了个大坑。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "luk"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你在古老的森林中玩耍。精灵孩子的游戏总是与自然相关——追逐萤火虫、和树精说话、让花朵在掌心绽放。每一棵树都是你的朋友。"
+      },
+      "goblin": {
+        "description": "你和其他哥布林小鬼在废品堆里翻找'宝藏'。一个生锈的齿轮、一块奇怪的石头、一段断掉的魔杖——在哥布林眼里，这些都是价值连城的珍宝。你们还发明了一个新游戏：谁能把石头扔得最准。"
+      }
+    }
   },
   {
     "id": "steal_sweets",
@@ -652,6 +789,18 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "诚实的品格"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "大人原谅了你"
           }
         ]
       },
@@ -670,6 +819,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "编故事的能力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "侥幸没被拆穿"
           }
         ]
       },
@@ -688,6 +849,11 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
           }
         ]
       }
@@ -696,7 +862,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "哥布林的第一次'采购'",
+        "description": "你盯上了面包铺的蜂蜜糖。哥布林天生就有一种本能——如果一个东西没有被看住，那它就是属于你的。你的小手已经在不知不觉中伸了出去。"
+      }
+    }
   },
   {
     "id": "first_snow",
@@ -706,28 +878,54 @@
     "maxAge": 8,
     "weight": 2,
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "childhood",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "snow_play",
+        "title": "堆雪人",
+        "description": "你堆了一个歪歪扭扭但很有个性的雪人。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          }
+        ]
+      },
+      {
+        "id": "snow_fight",
+        "title": "打雪仗",
+        "description": "雪球战争爆发了，你挨了三发但也命中了五发。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "int"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "第一场雪",
+        "description": "你从地道口探出头，发现外面的世界变白了。你从没见过这种东西——冷冰冰的白色粉末从天上掉下来。你抓了一把塞进嘴里，又惊又喜。"
+      }
+    }
   },
   {
     "id": "tree_climbing",
@@ -737,33 +935,7 @@
     "maxAge": 10,
     "weight": 4,
     "unique": true,
-    "riskCheck": {
-      "attribute": "str",
-      "difficulty": 5,
-      "scale": 2
-    },
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "failureEffects": [
       {
         "type": "modify_hp",
@@ -778,7 +950,73 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "climb_top",
+        "title": "爬到最高处",
+        "description": "其他孩子都不敢了，但你决定继续往上爬。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13 — 你的手臂够不够有力？"
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "value": -15,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          }
+        ],
+        "successText": "你成功爬到了树顶！远方的山脉和河流尽收眼底。",
+        "failureText": "一根树枝断了，你摔了下来。疼得哇哇大哭，但还想再试一次。"
+      },
+      {
+        "id": "climb_safe",
+        "title": "稳妥地看风景",
+        "description": "爬到一半就停下来，在树杈上坐着看远方。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "向上攀爬",
+        "description": "你挑战攀爬地下城里最高的排水管道。管壁又湿又滑，但你那灵活的小爪子找到了每一个凹点。爬到顶端时，你第一次从排水口看到了外面的天空。"
+      }
+    }
   },
   {
     "id": "river_fishing",
@@ -818,11 +1056,6 @@
         "title": "直接下水",
         "description": "等什么鱼？你卷起裤腿就跳进了河里，双手在水中胡乱扑腾。河水比你想象的要急，但你还是凭着蛮力抓住了一条滑溜溜的大鱼。当然，也呛了好几口水。",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 7,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -833,6 +1066,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "在水中锻炼了体力"
           }
         ],
         "failureEffects": [
@@ -842,14 +1081,27 @@
             "value": -5,
             "description": "HP -5（被水冲走）"
           }
-        ]
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13"
+        },
+        "successText": "力量与勇气的结合让你完美地完成了挑战。（力量提升了）",
+        "failureText": "你咬紧牙关，但终究还是败下阵来。（HP -5（被水冲走））"
       }
     ],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "下水道捞宝",
+        "description": "你和几个小伙伴拿着自制的网兜，蹲在下水道的汇流处。人类扔掉的东西会从这里冲下来——有时候能捞到铜币甚至银首饰。今天运气怎么样？"
+      }
+    }
   },
   {
     "id": "childhood_chase",
@@ -875,6 +1127,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "追上小伙伴获得认可"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "追逐中锻炼了腿脚"
           }
         ],
         "description": "你屏住呼吸，小心翼翼地靠近那只停在芦苇上的蜻蜓。猛地一挥网兜——抓到了！蜻蜓在网中扑腾着透明的翅膀，阳光透过翅翼折射出七彩的光芒，美得让你屏住了呼吸。"
@@ -893,6 +1157,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "跌倒后学会更小心"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "擦伤后更坚强"
           }
         ],
         "description": "你追着蜻蜓跑得太急，一脚踩进泥坑里，整个人扑倒在草地上。满脸泥巴的你引来小伙伴们的哄堂大笑，但你擦了擦脸上的泥，又爬起来继续跑。这点小伤算什么。"
@@ -911,6 +1187,18 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不争不抢的洒脱"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "观察追逐中他人的策略"
           }
         ],
         "description": "你小心翼翼地把蜻蜓捧在手心里，感受它细细的爪子挠着你的掌心。你张开双手，蜻蜓犹豫了一下，然后展翅飞向蓝天。你看着它消失在阳光里，心里涌起一阵说不出的满足。",
@@ -947,6 +1235,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "善于观察地形"
           }
         ],
         "description": "你找到了一个堆满干草的废弃柴房，钻进去蜷成一团，一动不动。透过干草的缝隙，你看到小伙伴们从你面前跑过去，完全没发现你。等了半天没人来找，你开始觉得有点无聊了。"
@@ -965,6 +1259,17 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "朋友们觉得你很可爱"
           }
         ],
         "description": "你躲在一棵大树后面，以为藏得天衣无缝。结果刚蹲下没多久，小伙伴就绕到了你身后，拍了一下你的肩膀。你们相视大笑，笑声回荡在整个村子里。"
@@ -983,6 +1288,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "克服了恐惧"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "冒险精神"
           }
         ],
         "description": "为了不被找到，你壮着胆子钻进了村口那间传说中的鬼屋。里面黑漆漆的，风从破窗户灌进来发出呜呜的声响。你缩在角落里，越等越害怕，最后哭着跑了出来。但从此以后，你再也没有怕过黑。"
@@ -992,7 +1309,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地洞捉迷藏",
+        "description": "你和小伙伴在四通八达的地下管道里玩捉迷藏。哥布林天生的夜视能力让这个游戏更加刺激——你找到了一条谁都不知道的秘密通道，藏了整整一下午。"
+      }
+    }
   },
   {
     "id": "childhood_pet",
@@ -1031,7 +1354,20 @@
         "id": "leave_bird",
         "title": "看了一眼就走了",
         "probability": 0.3,
-        "effects": [],
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "让它自由的善良"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "理解了自然规律"
+          }
+        ],
         "description": "你看了小鸟一眼，觉得它可能活不了了。你低下头走开了，但走了几步又回头看了一眼。小鸟还在那里叫着，你咬了咬牙，最终还是没有回头。那个声音在你心里留了很久。"
       },
       {
@@ -1048,6 +1384,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "求助的社交能力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "知道什么时候该找帮手"
           }
         ],
         "description": "你知道自己不会照顾受伤的小鸟，于是跑去找村里的老奶奶帮忙。老奶奶夸你心善，带着你一起给小鸟包扎。她一边处理伤口一边教你认草药，你认真地把每一步都记在心里。"
@@ -1057,7 +1405,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "收养了一只大老鼠",
+        "description": "你在废墟里发现了一只受伤的巨鼠，它的后腿被夹子夹住了。你小心地帮它解开，用嚼烂的草叶包扎伤口。它舔了舔你的手指，从此成了你最忠实的伙伴。"
+      }
+    }
   },
   {
     "id": "village_festival",
@@ -1083,6 +1437,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "美食带来好心情"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "吃饱了有力气"
           }
         ],
         "description": "祭典上的食物琳琅满目：烤全羊的香气飘散在空气中，蜂蜜面包金黄酥脆，果酒甘甜醇厚。你从东吃到西，从南吃到北，肚子溜圆，嘴角全是糖霜。这是你一年中最幸福的一天。"
@@ -1124,6 +1490,18 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "烟花下的感动"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "烟花中感受到的魔力"
           }
         ],
         "description": "你找了块草地躺下来，双手枕在脑后，等着天黑。当第一朵烟花在夜空中绽放时，你倒吸了一口凉气——金色的星屑像瀑布一样倾泻而下，照亮了整个村庄。那一刻你觉得，这个世界真的很美。"
@@ -1133,7 +1511,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "废品集市",
+        "description": "一年一度的废品交换大会开始了！哥布林们把攒了一年的\"宝贝\"摆出来——生锈的盔甲碎片、奇怪的矿石、来路不明的魔法道具。整个地下城热闹非凡，空气中弥漫着烤虫子的香味。"
+      }
+    }
   },
   {
     "id": "stray_dog",
@@ -1183,6 +1567,11 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
           }
         ]
       },
@@ -1195,7 +1584,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
           }
         ]
       }
@@ -1204,7 +1598,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地洞里的生物",
+        "description": "你在回巢的路上遇到了一只脏兮兮的洞鼠崽。它瑟瑟发抖地缩在角落里，显然是被鼠群抛弃了。你决定……"
+      }
+    }
   },
   {
     "id": "rainy_day_adventure",
@@ -1221,11 +1621,6 @@
         "title": "钻进去看看",
         "description": "你鼓起勇气，摸黑走进了地窖",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 8,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1243,7 +1638,14 @@
             "value": -8,
             "description": "HP -8（跌落受伤）"
           }
-        ]
+        ],
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 13,
+          "description": "灵魂判定 DC13"
+        },
+        "successText": "内心的力量指引着你，你感受到了灵魂深处的共鸣。（智慧提升了）",
+        "failureText": "灵魂深处的恐惧吞噬了你的勇气，你退缩了。（HP -8（跌落受伤））"
       },
       {
         "id": "wait_at_door",
@@ -1260,6 +1662,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "观察雨水的思考"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "宁静等待的耐心"
           }
         ]
       },
@@ -1268,7 +1682,20 @@
         "title": "跑回家",
         "description": "地窖入口散发出的阴冷气息让你打了个寒颤。你转身在雨中一路飞奔回家，把湿漉漉的自己裹进了温暖的被窝。",
         "probability": 0.25,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "在雨中奔跑的体力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "恰好在暴雨前到家"
+          }
+        ]
       }
     ],
     "tag": "adventure",
@@ -1292,11 +1719,6 @@
         "title": "拼尽全力",
         "description": "你咬紧牙关，使出了全部力气",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 8,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1318,7 +1740,14 @@
             "target": "int",
             "value": -2
           }
-        ]
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13"
+        },
+        "successText": "你用力量证明了自己的实力。（力量提升了）",
+        "failureText": "力不从心，这次的挑战超出了你身体的极限。（智慧下降了）"
       },
       {
         "id": "strategic_forfeit",
@@ -1335,6 +1764,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "战略性放弃是种智慧"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "接受失败的豁达"
           }
         ]
       },
@@ -1367,7 +1808,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "第一次赌博",
+        "description": "部落里的大人们在玩骰子赌博。你偷偷加入了一局——赌注是三颗闪亮的玻璃珠。结果……"
+      }
+    }
   },
   {
     "id": "grandma_recipes",
@@ -1419,18 +1866,26 @@
         "title": "心不在焉",
         "description": "你嘴上应着奶奶的话，心思却早已飞到了窗外那棵大树上。等你回过神来，药膏已经熬糊了，奶奶无奈地摇了摇头。",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "虽然心不在焉但很温暖"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "意外发现了有趣的东西"
+          }
+        ]
       },
       {
         "id": "secret_recipe",
         "title": "偷偷加点自己的配方",
         "description": "趁着奶奶转身的空当，你偷偷往锅里加了几种自采的草药。你的直觉告诉你这样做会有意想不到的效果，但结果究竟是惊喜还是灾难，只有试了才知道。",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 7,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1441,6 +1896,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "意外发现的乐趣"
           }
         ],
         "failureEffects": [
@@ -1452,14 +1913,25 @@
           }
         ],
         "successText": "你无意中改良了配方！奶奶惊喜地看着你...",
-        "failureText": "药膏突然冒出怪烟，把你熏了个跟头！"
+        "failureText": "药膏突然冒出怪烟，把你熏了个跟头！",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 13,
+          "description": "智慧判定 DC13"
+        }
       }
     ],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "长老的秘方",
+        "description": "部落里最老的哥布林教你调配一种特殊的药膏——用蘑菇、泥巴和一种你叫不出名字的虫子做的。\"抹上这个，什么伤都能好。\"她咧嘴笑着说。"
+      }
+    }
   },
   {
     "id": "river_discovery",
@@ -1476,11 +1948,6 @@
         "title": "潜下去捡",
         "description": "你深吸一口气扎进浑浊的河水中，伸手去够那团幽幽的荧光。水下的世界比你想象的更加深邃，暗流涌动间似乎有什么古老的力量在苏醒。",
         "probability": 0.35,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 8,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1507,7 +1974,12 @@
           }
         ],
         "successText": "你捞出了一块会发光的奇异石头！",
-        "failureText": "水流比你想象的要急，你被冲出去好几米..."
+        "failureText": "水流比你想象的要急，你被冲出去好几米...",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13"
+        }
       },
       {
         "id": "call_adults_river",
@@ -1524,6 +1996,18 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "大人夸你懂事"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "谨慎的性格"
           }
         ]
       },
@@ -1564,36 +2048,103 @@
     "minAge": 5,
     "maxAge": 12,
     "weight": 0.5,
-    "effects": [
-      {
-        "type": "modify_hp",
-        "target": "hp",
-        "value": -50,
-        "description": "HP -50（重病）",
-        "probability": 0.3
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": -1,
-        "probability": 0.7
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": -2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": -1
-      }
-    ],
+    "effects": [],
     "tag": "disaster",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "plague_rest",
+        "title": "乖乖休息",
+        "description": "你躺在床上，任由苦涩的药汁灌进喉咙。",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "value": -30,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "静养中的内心平静"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "静养期间阅读了很多书"
+          }
+        ]
+      },
+      {
+        "id": "plague_resist",
+        "title": "偷偷去外面晒太阳",
+        "description": "你受不了房间里的药味，趁大人不注意溜了出去。",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "value": -45,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "luk"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "大病初愈后体质反而增强"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "对疾病有了理解"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13 — 你的身体扛得住吗？"
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "value": -55,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": -2,
+            "target": "str"
+          }
+        ],
+        "successText": "阳光好像真的有用，你第二天就退烧了。",
+        "failureText": "你的病情加重了，差点没挺过来。"
+      }
+    ],
+    "unique": true,
+    "raceVariants": {
+      "goblin": {
+        "title": "瘟疫蔓延",
+        "description": "地下城里爆发了一场可怕的瘟疫。对哥布林来说，拥挤潮湿的环境让疾病传播得更快。部落里已经有好几个人倒下了……"
+      }
+    }
   },
   {
     "id": "child_drowning",
@@ -1602,36 +2153,79 @@
     "minAge": 5,
     "maxAge": 12,
     "weight": 0.3,
-    "effects": [
-      {
-        "type": "modify_hp",
-        "target": "hp",
-        "value": -40,
-        "description": "HP -40（溺水）",
-        "probability": 0.2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1,
-        "probability": 0.8
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": -1
-      }
-    ],
+    "effects": [],
     "tag": "accident",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "drowning_struggle",
+        "title": "拼命挣扎",
+        "description": "你疯狂扑腾，什么姿势都试了一遍。",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "value": -30,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "挣扎中激发的求生本能"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 13,
+          "description": "体魄判定 DC13 — 你能自己游上岸吗？"
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "value": -45,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": -1,
+            "target": "str"
+          }
+        ],
+        "successText": "你居然真的自己爬上了岸，还顺便学会了狗刨。",
+        "failureText": "你呛了好多水，幸好有人路过把你拉了上来。"
+      },
+      {
+        "id": "drowning_calm",
+        "title": "冷静地仰面漂浮",
+        "description": "你记起有人说过，不要挣扎，先让自己浮起来。",
+        "effects": [
+          {
+            "type": "modify_hp",
+            "value": -20,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          }
+        ]
+      }
+    ],
+    "unique": true
   },
   {
     "id": "magic_academy_letter",
@@ -1677,6 +2271,11 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
           }
         ],
         "successText": "父母看完信后沉默了很久。最终他们决定再等等，让你多了解一下外面的世界再做选择。水晶猫头鹰等了一整天，最终化作星光消散了。"
@@ -1688,7 +2287,12 @@
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "mny",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
             "value": 1
           }
         ],
@@ -1699,6 +2303,1960 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "unique": true,
+    "raceVariants": {
+      "goblin": {
+        "title": "奇怪的录取通知",
+        "description": "一天，一只脏兮兮的乌鸦叼着一封信落在你面前。信上写着你的名字——某个不知名的地下魔法组织邀请你加入。他们说你有\"混乱天赋\"，这在哥布林中极为罕见。"
+      }
+    }
+  },
+  {
+    "id": "elf_world_tree_pilgrimage",
+    "title": "世界树巡礼",
+    "description": "按照精灵族的传统，每个精灵在幼年时都要前往世界树之根进行巡礼。古老的树根在地底延伸数百里，散发着温暖的金色光芒。你伸出手触摸树根，感受到了来自远古的回应。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 6,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2,
+        "description": "魔力 +2（世界树的馈赠）"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "set_flag",
+        "target": "world_tree_blessed",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "listen_to_tree",
+        "title": "静心聆听世界树的声音",
+        "description": "你闭上眼睛，用精灵的天赋感知世界树的低语。",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（聆听古老的智慧）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1"
+          }
+        ]
+      },
+      {
+        "id": "absorb_mana",
+        "title": "尝试吸收世界树的魔力",
+        "description": "你大胆地尝试从树根中引导魔力进入自己的身体。",
+        "probability": 0.35,
+        "diceCheck": {
+          "attribute": "mag",
+          "dc": 12,
+          "description": "魔力判定 DC12 — 你需要足够的天赋来承受世界树的力量"
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 4,
+            "description": "魔力 +4（世界树之力涌入）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（魔力冲击）"
+          },
+          {
+            "type": "set_flag",
+            "target": "world_tree_empowered",
+            "value": 1
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "HP -15（魔力反噬）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1（即便失败也有微弱收获）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（经历了考验）"
+          }
+        ],
+        "successText": "世界树的力量如潮水般涌入你的身体，你感到自己与整片森林融为一体。虽然身体承受了巨大的冲击，但你的魔力得到了质的飞跃。",
+        "failureText": "过于庞大的魔力将你弹飞了出去。你躺在地上大口喘气，鼻血流了一地。树根上传来一阵低沉的嗡鸣，像是在轻声责备你的贪心。"
+      },
+      {
+        "id": "plant_seed",
+        "title": "在树根旁种下一颗种子",
+        "description": "你从口袋里掏出一颗橡果，虔诚地种在世界树根旁。",
+        "probability": 0.25,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（世界树认可了你的虔诚）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1"
+          },
+          {
+            "type": "set_flag",
+            "target": "planted_seed_at_tree",
+            "value": 1
+          }
+        ]
+      }
     ]
+  },
+  {
+    "id": "goblin_scavenger_instinct",
+    "title": "天生的寻宝者",
+    "description": "你在垃圾堆里翻找时，本能地被一个角落吸引了。其他哥布林都说那里没什么好东西，但你的直觉从来不会骗你。你扒开一层层废品，发现了一个闪闪发光的东西。",
+    "minAge": 3,
+    "maxAge": 8,
+    "weight": 6,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "magic_trinket",
+        "title": "一枚残破的魔法饰物",
+        "description": "那是一枚被丢弃的魔法护符，虽然已经破损，但还残留着微弱的魔力。",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2（魔法护符的残留力量）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（好眼光！）"
+          }
+        ]
+      },
+      {
+        "id": "gold_coins",
+        "title": "一小袋被遗忘的金币",
+        "description": "居然是真金！在这种地方找到金币，你的运气真是没话说。",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3（意外之财）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      },
+      {
+        "id": "cursed_item",
+        "title": "一个奇怪的黑色盒子",
+        "description": "盒子上刻满了你看不懂的符文，打开它可能会有好事，也可能……",
+        "probability": 0.25,
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 12,
+          "description": "幸运判定 DC12 — 让我们看看你的运气"
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "魔力 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（混沌的祝福）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（诅咒爆发）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（虽然炸了但你还活着）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（吸取教训）"
+          }
+        ],
+        "successText": "盒子打开后释放出一道彩色的光芒。里面居然是一本古老的魔法入门书——虽然是给人类小孩看的，但对哥布林来说已经是宝贝了。",
+        "failureText": "盒子爆炸了。你被硫磺味的烟雾熏得直咳嗽，头发都烧焦了。但你还活着——哥布林的生命力不是盖的。"
+      }
+    ]
+  },
+  {
+    "id": "human_village_festival",
+    "title": "村庄丰收祭",
+    "description": "一年一度的丰收祭到来了，人类村庄挂满了彩旗。你第一次被允许参加夜晚的篝火舞会。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "human_village_festival_br0",
+        "title": "在广场上尽情跳舞",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定在广场上尽情跳舞——也许这是最好的选择。"
+      },
+      {
+        "id": "human_village_festival_br1",
+        "title": "偷偷溜去看花火工坊",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了偷偷溜去看花火工坊，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "human_apprentice_smith",
+    "title": "铁匠铺学徒",
+    "description": "镇上的铁匠看中了你结实的体格，问你父母是否愿意让你当学徒。",
+    "minAge": 7,
+    "maxAge": 10,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "human_apprentice_smith_br0",
+        "title": "接受学徒工作",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "smith_apprentice",
+            "value": true
+          }
+        ],
+        "description": "你深吸一口气，决定接受学徒工作。"
+      },
+      {
+        "id": "human_apprentice_smith_br1",
+        "title": "婉拒，继续自由玩耍",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了婉拒，继续自由玩耍。"
+      }
+    ]
+  },
+  {
+    "id": "human_street_gang",
+    "title": "街头少年团",
+    "description": "邻居家的孩子们组成了一个小帮派，你被邀请加入。",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "human_street_gang_br0",
+        "title": "加入他们的冒险",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你没有犹豫，果断地加入他们的冒险。"
+      },
+      {
+        "id": "human_street_gang_br1",
+        "title": "告诉大人们",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了告诉大人们，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "elf_first_treesong",
+    "title": "第一次听见树歌",
+    "description": "清晨独自漫步林间，你突然听到一棵千年古树低沉的吟唱。精灵长辈说，这是树灵在与你对话。",
+    "minAge": 4,
+    "maxAge": 10,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "elf_first_treesong_br0",
+        "title": "尝试用魔力回应树灵",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "description": "你选择了尝试用魔力回应树灵，静静等待结果。"
+      },
+      {
+        "id": "elf_first_treesong_br1",
+        "title": "静静聆听直到黄昏",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了静静聆听直到黄昏，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "elf_starlight_bath",
+    "title": "星光沐浴",
+    "description": "精灵的传统——在满月之夜将幼儿浸入银辉泉水中。据说这能唤醒沉睡的魔力血脉。",
+    "minAge": 3,
+    "maxAge": 6,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "elf_starlight_bath_br0",
+        "title": "平静地接受洗礼",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你深吸一口气，决定平静地接受洗礼。"
+      },
+      {
+        "id": "elf_starlight_bath_br1",
+        "title": "好奇地捕捉水中光斑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了好奇地捕捉水中光斑。"
+      }
+    ]
+  },
+  {
+    "id": "elf_elvish_calligraphy",
+    "title": "古精灵文书法课",
+    "description": "精灵的启蒙教育从学习古精灵文开始。那些优美的符文据说蕴含着远古的魔力。",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "elf_elvish_calligraphy_br0",
+        "title": "专注练字，追求完美",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你选择了专注练字，追求完美，静静等待结果。"
+      },
+      {
+        "id": "elf_elvish_calligraphy_br1",
+        "title": "用符文画画玩",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了用符文画画玩。"
+      }
+    ]
+  },
+  {
+    "id": "elf_animal_friend",
+    "title": "林间小鹿",
+    "description": "一头白色的小鹿走到你面前，毫不畏惧地蹭了蹭你的手心。精灵长辈说这是好兆头。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "goblin_trash_treasure",
+    "title": "垃圾堆里的宝物",
+    "description": "你在人类城镇的垃圾堆中翻到了一本字迹模糊的书。虽然大部分看不懂，但图画很有趣。",
+    "minAge": 3,
+    "maxAge": 8,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "goblin_trash_treasure_br0",
+        "title": "藏起来慢慢研究",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定藏起来慢慢研究——也许这是最好的选择。"
+      },
+      {
+        "id": "goblin_trash_treasure_br1",
+        "title": "拿去跟同伴换食物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了拿去跟同伴换食物。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_tunnel_race",
+    "title": "地洞竞速",
+    "description": "哥布林幼崽们的传统游戏——在地下洞穴里赛跑。谁先到达终点就能多吃一顿虫子。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "goblin_tunnel_race_br0",
+        "title": "拼命跑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你选择了拼命跑，静静等待结果。"
+      },
+      {
+        "id": "goblin_tunnel_race_br1",
+        "title": "走捷径（作弊）",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定走捷径（作弊）——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_survival_lesson",
+    "title": "生存第一课",
+    "description": "哥布林的教育很简单——族长把你扔进黑暗的洞穴，让你自己找到出口。",
+    "minAge": 4,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "branches": [
+      {
+        "id": "goblin_survival_lesson_br0",
+        "title": "用嗅觉找到出口",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定用嗅觉找到出口——也许这是最好的选择。"
+      },
+      {
+        "id": "goblin_survival_lesson_br1",
+        "title": "大哭，直到有人来救",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了大哭，直到有人来救。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_shiny_collection",
+    "title": "闪亮收藏",
+    "description": "你开始收集一切闪闪发光的东西——碎玻璃、铜币、水晶碎片。哥布林天生就对亮晶晶的东西着迷。",
+    "minAge": 3,
+    "maxAge": 9,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "rainbow_mushroom",
+    "title": "七彩蘑菇",
+    "description": "你在地上捡到一颗发光的七彩蘑菇。传说中，这种蘑菇百年才出现一次。",
+    "minAge": 10,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": true,
+    "include": "attribute.luk >= 30",
+    "effects": [],
+    "branches": [
+      {
+        "id": "rainbow_mushroom_br0",
+        "title": "吃掉它",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定吃掉它——也许这是最好的选择。"
+      },
+      {
+        "id": "rainbow_mushroom_br1",
+        "title": "拿去卖个好价",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 5
+          }
+        ],
+        "description": "你权衡利弊后，选择了拿去卖个好价。"
+      },
+      {
+        "id": "rainbow_mushroom_br2",
+        "title": "种在花盆里",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定种在花盆里——也许这是最好的选择。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "七彩蘑菇",
+        "description": "你在地下深处捡到一颗发出七色光芒的蘑菇。老哥布林们说这种东西百年才出现一次——吃了会变强，也可能会爆炸。你小心翼翼地藏进了口袋。"
+      }
+    }
+  },
+  {
+    "id": "lucky_coin_found",
+    "title": "幸运金币",
+    "description": "路边闪闪发光的东西吸引了你的注意。竟然是一枚刻着古老符文的金币。",
+    "minAge": 8,
+    "maxAge": 70,
+    "weight": 2,
+    "unique": true,
+    "include": "attribute.luk >= 25",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "kindness_of_stranger",
+    "title": "陌生人的善意",
+    "description": "在你最困难的时候，一个素不相识的旅人分享了他的面包和水。世上还是好人多。",
+    "minAge": 10,
+    "maxAge": 60,
+    "weight": 3,
+    "unique": true,
+    "include": "attribute.mny <= 5",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "陌生人的善意",
+        "description": "你饿得快晕过去的时候，一个路过的矮人商人把半块面包递给了你。\"拿去吧，小家伙。\"他没有像其他人那样露出厌恶的表情。这份温暖你记了很久。"
+      }
+    }
+  },
+  {
+    "id": "child_lost_in_woods",
+    "title": "迷路",
+    "description": "你在林子里玩耍时迷了路。太阳下山了，四周一片漆黑，你只能靠直觉摸索方向。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_lost_in_woods_br0",
+        "title": "跟着星星走",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了跟着星星走。"
+      },
+      {
+        "id": "child_lost_in_woods_br1",
+        "title": "大声呼救",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了大声呼救，静静等待结果。"
+      },
+      {
+        "id": "child_lost_in_woods_br2",
+        "title": "找个树洞躲到天亮",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了找个树洞躲到天亮。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "迷失地面",
+        "description": "你好奇地爬出了地面，想看看外面的世界。等你反应过来，已经分不清哪个洞口是回去的路了。太阳刺痛了你的眼睛——地面世界对哥布林来说又大又亮又危险。"
+      }
+    }
+  },
+  {
+    "id": "child_stray_animal",
+    "title": "收养流浪动物",
+    "description": "你在路边发现了一只受伤的小动物。它用怯生生的眼神看着你。",
+    "minAge": 4,
+    "maxAge": 9,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_stray_animal_br0",
+        "title": "带回家照顾",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "has_pet",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了带回家照顾。"
+      },
+      {
+        "id": "child_stray_animal_br1",
+        "title": "给它食物后离开",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了给它食物后离开，静静等待结果。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你在林间发现了一只受伤的月银蝶。它翅膀上发出微弱的光芒，正在慢慢熄灭。"
+      },
+      "goblin": {
+        "description": "你发现了一只被陷阱夹住腿的洞鼠。它拼命挣扎，向你发出求救般的吱吱声。"
+      }
+    }
+  },
+  {
+    "id": "child_first_fight",
+    "title": "第一次打架",
+    "description": "有个比你大的孩子抢走了你的东西，你决定要不要还手。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 5,
+    "unique": true,
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_first_fight_br0",
+        "title": "挥拳反击",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "fighter_spirit",
+            "value": true
+          }
+        ],
+        "description": "你鼓起勇气，决定挥拳反击。"
+      },
+      {
+        "id": "child_first_fight_br1",
+        "title": "忍住，找大人告状",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定忍住，找大人告状——也许这是最好的选择。"
+      },
+      {
+        "id": "child_first_fight_br2",
+        "title": "用技巧躲避",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了用技巧躲避。"
+      }
+    ]
+  },
+  {
+    "id": "child_dream_flying",
+    "title": "会飞的梦",
+    "description": "你做了一个奇异的梦——你在云层之上飞翔，看到了壮丽的大地。醒来后，你总觉得那不只是梦。",
+    "minAge": 3,
+    "maxAge": 8,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "child_river_adventure",
+    "title": "河边探险",
+    "description": "你和小伙伴偷偷跑到河边玩耍，发现了一个隐藏的小瀑布和一片秘密花园。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "exploration",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_river_adventure_br0",
+        "title": "探索瀑布后面的洞穴",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "经过一番思考，你选择了探索瀑布后面的洞穴。"
+      },
+      {
+        "id": "child_river_adventure_br1",
+        "title": "在花园里采集花草",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了在花园里采集花草，静静等待结果。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地下暗河探险",
+        "description": "你和小伙伴偷偷顺着一条地下暗河往深处游去，发现了一处从没人去过的洞穴，里面长满了发光的蘑菇，像一座地下花园。"
+      }
+    }
+  },
+  {
+    "id": "child_night_sky",
+    "title": "仰望星空",
+    "description": "某个夜晚你独自爬上屋顶，看到了此生最美的星空。一颗流星划过天际。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "goblin": {
+        "title": "第一次看星空",
+        "description": "某个夜晚你偷偷爬出地洞，抬头看到了此生最美的景象——满天的星星。在地下生活的哥布林很少有机会看到这些。一颗流星划过，你赶紧许了个愿。"
+      }
+    }
+  },
+  {
+    "id": "child_cooking_adventure",
+    "title": "第一次做饭",
+    "description": "你决定给家人做一顿饭。过程手忙脚乱，但结果……",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_cooking_adventure_br0",
+        "title": "认真按步骤来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定认真按步骤来——也许这是最好的选择。"
+      },
+      {
+        "id": "child_cooking_adventure_br1",
+        "title": "随便乱搞创新菜",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定随便乱搞创新菜——也许这是最好的选择。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "第一次做饭",
+        "description": "你决定给家人做顿饭。收集了下水道里的蘑菇、一只刚抓来的洞鼠、还有从人类那里偷来的香料。过程手忙脚乱——但成品意外地还不错？"
+      }
+    }
+  },
+  {
+    "id": "human_church_school",
+    "title": "教会学堂",
+    "description": "人类城镇的孩子大多在教会开办的学堂启蒙。你学会了读写和基本的算术。",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_harvest_help",
+    "title": "帮忙收割",
+    "description": "秋收时节，每个人类孩子都要下地帮忙。虽然辛苦，但丰收的喜悦是实实在在的。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_butterfly_dance",
+    "title": "蝶舞课堂",
+    "description": "精灵孩子通过模仿蝴蝶的飞舞来学习身体的协调与优雅。你的动作意外地灵活。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_seed_planting",
+    "title": "种下第一棵树",
+    "description": "精灵的传统——每个孩子都要亲手种下一棵树苗，并在此后的漫长岁月中看着它长大。",
+    "minAge": 5,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_cave_painting",
+    "title": "洞穴壁画",
+    "description": "你用石头和泥巴在洞穴墙壁上涂鸦。画的是你见过的怪兽和闪亮的宝物。其他小哥布林都来围观。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_insect_feast",
+    "title": "虫虫大餐",
+    "description": "你发现了一窝肥美的甲虫幼虫。对哥布林来说，这可是难得的美味佳肴！",
+    "minAge": 3,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "random_weather_blessing",
+    "title": "好天气",
+    "description": "今天天气特别好。阳光明媚，微风轻拂，让人心情愉快。",
+    "minAge": 5,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": false,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "random_found_coin",
+    "title": "捡到硬币",
+    "description": "你在路上捡到了一枚硬币。虽然价值不大，但让你觉得今天运气不错。",
+    "minAge": 5,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": false,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "random_good_meal",
+    "title": "丰盛的一餐",
+    "description": "今天吃到了特别好吃的东西。满足感从胃里扩散到全身。",
+    "minAge": 5,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": false,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "goblin": {
+        "description": "你发现了一窝特别肥美的虫子。对哥布林来说，这简直是山珍海味！"
+      }
+    }
+  },
+  {
+    "id": "random_minor_injury",
+    "title": "小伤",
+    "description": "不小心弄伤了自己。不严重，但有点疼。",
+    "minAge": 5,
+    "maxAge": 70,
+    "weight": 2,
+    "unique": false,
+    "priority": "minor",
+    "tag": "accident",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_bedtime_story",
+    "title": "母亲的睡前故事",
+    "description": "母亲每晚都会讲勇者击败魔王的故事。你听得入迷，梦想有一天也能成为那样的英雄。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_fathers_sword",
+    "title": "父亲的旧剑",
+    "description": "你在阁楼发现了父亲年轻时用过的剑。虽然生锈了，但握在手里时有一种奇妙的重量感。",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_fathers_sword_br0",
+        "title": "偷偷练习挥剑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "description": "你选择了偷偷练习挥剑，静静等待结果。"
+      },
+      {
+        "id": "human_fathers_sword_br1",
+        "title": "小心翼翼地放回原处",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定小心翼翼地放回原处——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "human_market_day",
+    "title": "赶集日",
+    "description": "父母带你去镇上赶集。琳琅满目的商品让你目不暇接，走丢了三次。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_neighbor_grandpa",
+    "title": "隔壁老爷爷的故事",
+    "description": "隔壁的退休老兵总爱给孩子们讲他年轻时征战四方的故事。真假难辨，但很精彩。",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_prayer_class",
+    "title": "祈祷课",
+    "description": "人类的孩子从小就要学习向诸神祈祷。虽然你不太理解意义，但跪下时膝盖很疼。",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_dewdrop_game",
+    "title": "露珠捉迷藏",
+    "description": "精灵孩子们最喜欢在清晨的露珠间捉迷藏。你的透明翅膀——哦不对，你没有翅膀，但你跑得特别快。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_moonlight_lullaby",
+    "title": "月光摇篮曲",
+    "description": "精灵母亲用古精灵语唱着摇篮曲。据说这首歌传唱了千年，每个精灵都会唱。",
+    "minAge": 2,
+    "maxAge": 5,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_first_magic_spark",
+    "title": "第一缕魔火",
+    "description": "你在手心里点燃了第一缕魔力之火——虽然只是针尖大小的光点，但长辈们纷纷鼓掌。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_herb_gathering",
+    "title": "采药课",
+    "description": "长辈带你去森林里辨认各种药草。精灵的草药学是数千年知识的结晶。",
+    "minAge": 5,
+    "maxAge": 9,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_talking_to_tree",
+    "title": "与树对话",
+    "description": "你学会了精灵与植物沟通的基础技巧。虽然树木的回应很慢，但你确实感受到了一丝温暖。",
+    "minAge": 5,
+    "maxAge": 10,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_first_heist",
+    "title": "第一次偷东西",
+    "description": "哥布林孩子的成长仪式——从人类的菜园里偷一根萝卜回来。你紧张得心都快跳出来了。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_first_heist_br0",
+        "title": "快速偷到跑回来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你选择了快速偷到跑回来，静静等待结果。"
+      },
+      {
+        "id": "goblin_first_heist_br1",
+        "title": "被发现了拼命逃",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了被发现了拼命逃。"
+      },
+      {
+        "id": "goblin_first_heist_br2",
+        "title": "不想偷，自己去挖野菜",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了不想偷，自己去挖野菜。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_mushroom_garden",
+    "title": "蘑菇花园",
+    "description": "你在洞穴的角落发现了一些发光的蘑菇。你每天都来浇……口水，它们居然越长越大。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_rock_language",
+    "title": "石头记号",
+    "description": "哥布林没有文字，但你发明了一套用石头排列组合表示意思的记号。小伙伴们觉得你是天才。",
+    "minAge": 4,
+    "maxAge": 8,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "childhood",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_big_brother",
+    "title": "大孩子的保护",
+    "description": "部落里一个大你几岁的哥布林总是罩着你。虽然他脾气不好，但你知道他是真心的。",
+    "minAge": 3,
+    "maxAge": 7,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "true_friend",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_human_toy",
+    "title": "人类的玩具",
+    "description": "你在垃圾堆里捡到了一个人类孩子丢掉的布娃娃。虽然脏兮兮的，但对你来说这是宝贝。",
+    "minAge": 2,
+    "maxAge": 6,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
   }
 ]

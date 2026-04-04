@@ -182,7 +182,7 @@ export class EvaluatorModule {
         const test = (slot: typeof state.inventory.items[number]) => {
           const itemDef = itemsById.get(slot.itemId)
           if (!itemDef) return false
-          const actual = (itemDef as Record<string, unknown>)[propName]
+          const actual = (itemDef as unknown as Record<string, unknown>)[propName]
           if (typeof actual === 'number') {
             return this.compare(actual, op, Number(targetValue))
           }

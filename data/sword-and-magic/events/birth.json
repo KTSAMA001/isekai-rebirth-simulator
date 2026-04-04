@@ -13,7 +13,15 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你出生在精灵贵族的银叶宫殿中。世界树的光辉透过水晶穹顶洒落，长老们用古精灵语吟唱祝福。你的家族在翡翠密林中统治了上千年。"
+      },
+      "goblin": {
+        "description": "你出生在哥布林王的垃圾山宫殿里——好吧，那其实是一座建在废品堆上的巨大洞穴。但在哥布林社会中，这已经是最顶级的豪宅了。你的父母掌控着地下黑市最大的贸易网络。"
+      }
+    }
   },
   {
     "id": "birth_common",
@@ -21,7 +29,7 @@
     "description": "你出生在一个朴素的农舍中，父亲是一个农夫。",
     "minAge": 1,
     "maxAge": 1,
-    "weight": 20,
+    "weight": 10,
     "include": "attribute.mny >= 3",
     "exclude": "attribute.mny >= 6",
     "unique": true,
@@ -30,7 +38,15 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你出生在世界树外围的普通精灵居所。虽然不是名门望族，但精灵天生的优雅让一切都显得宁静而美好。你的父母是普通的织梦师，编织着森林的日常魔法。"
+      },
+      "goblin": {
+        "description": "你出生在地下城市的某个普通洞穴里。四周是蘑菇灯和废铁装饰，空气中弥漫着铁锈和蘑菇汤的味道。对哥布林来说，这就是平凡而温暖的家。"
+      }
+    }
   },
   {
     "id": "birth_slums",
@@ -38,7 +54,7 @@
     "description": "你出生在王国最脏乱的街巷，第一眼看到的是漏水的屋顶。",
     "minAge": 1,
     "maxAge": 1,
-    "weight": 15,
+    "weight": 8,
     "include": "attribute.mny <= 2",
     "unique": true,
     "effects": [
@@ -53,7 +69,15 @@
     "exclude": "attribute.mny >= 3",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你出生在精灵社会的边缘——被驱逐出世界树庇护的流浪精灵聚落。在这里，古老的优雅已经褪色，取而代之的是为生存而挣扎的日常。"
+      },
+      "goblin": {
+        "description": "你出生在下水道最深处的角落，连其他哥布林都不愿去的地方。你的第一声啼哭被污水的回声淹没。但哥布林有句老话：出生越低，爬得越高。"
+      }
+    }
   },
   {
     "id": "birth_noble_estate",
@@ -136,6 +160,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "学会了独立"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "孤独中的自我学习"
           }
         ],
         "successText": "父母忙着处理家族事务，几乎没时间陪你。偌大的庄园里，你最常做的事就是一个人在走廊里发呆。但你学会了独立，也学会了观察。"
@@ -146,6 +182,10 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -230,6 +270,18 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "荒野求生的生命力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "被好心人收养"
           }
         ],
         "successText": "母亲用最后的体温温暖着你，在黎明到来前悄然闭上了眼睛。你小小的身体在晨风中颤抖，但你的哭声足够响亮——响亮到引来了路过的商队。你活了下来。"
@@ -240,6 +292,631 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你在远离世界树的荒野中降生。也许你的父母是被放逐的精灵，也许他们只是热爱自由。林间的风声取代了长老的祝福，野花的芬芳取代了宫殿的薰香。"
+      },
+      "goblin": {
+        "description": "你出生在荒野的某个坑洞里，头顶是星空而不是洞穴顶。这在哥布林中极为罕见——大多数哥布林一辈子都不会看到这么开阔的天空。或许这预示着你不凡的命运。"
+      }
+    }
+  },
+  {
+    "id": "birth_human_farm",
+    "title": "农家子弟",
+    "description": "你出生在一个普通的人类农庄。黎明时分，公鸡的啼叫声伴随着你的第一声啼哭。父亲正在田间劳作，母亲在邻居的帮助下生下了你。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 8,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_human_merchant",
+    "title": "商人之家",
+    "description": "你出生在城镇最繁华的商业街上。你父亲经营着一间杂货铺，从你第一天起就闻着香料和木材的气味长大。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 6,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_human_soldier",
+    "title": "军人之后",
+    "description": "你的父亲是王国边境军团的一名老兵。你在兵营旁的简陋住所中降生，第一个听到的声音是号角。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_elf_starfall",
+    "title": "星陨之夜",
+    "description": "你出生在一场罕见的流星雨之夜。精灵长老们认为这是星辰庇佑的征兆，你被赋予了一个包含'星光'之意的古精灵名字。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_elf_forest_edge",
+    "title": "林缘之子",
+    "description": "你出生在精灵领地的边境，这里是古森林与人类世界的交界。你的家族是精灵中少有的与人类保持交流的一支。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 7,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_elf_worldtree",
+    "title": "世界树下",
+    "description": "你出生在世界树根须环绕的圣地。新生儿浸润在世界树的魔力之中，据说这里出生的精灵天生与自然有更深的联结。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_elf_craftsman",
+    "title": "工匠之家",
+    "description": "你出生在精灵工匠世家。家中摆满了精美的月银饰品和魔法器具，你的家族世代为精灵王室制作礼仪用品。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 6,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_goblin_sewer",
+    "title": "下水道新生",
+    "description": "你出生在人类城市的下水道里。这里潮湿阴暗，但对哥布林来说已经是不错的住所。你的母亲一边觅食一边照顾你。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 8,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_goblin_tribe",
+    "title": "部落之子",
+    "description": "你出生在荒野中的哥布林部落。篝火映照着用兽骨搭成的帐篷，族长用一块黑石在你额头上画了一个记号。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 7,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_goblin_merchant",
+    "title": "黑市世家",
+    "description": "你出生在一个经营地下交易的哥布林家族。你的父母虽是哥布林，却靠着精明的头脑积累了令人意外的财富。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_goblin_wild",
+    "title": "荒野遗孤",
+    "description": "你不知道自己的父母是谁。最早的记忆是独自蜷缩在一个树洞里，靠啃树根和抓虫子存活。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {}
+  },
+  {
+    "id": "birth_twins",
+    "title": "双生子",
+    "description": "你并非独自来到这个世界——你有一个双胞胎。从出生起，你们就注定要分享一切。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "unique": true,
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "elf": {
+        "description": "你和你的双胞胎姐妹/兄弟在同一棵银杏树下降生。精灵双胞胎极为罕见，长老们视为吉兆。"
+      },
+      "goblin": {
+        "description": "你和你的双胞胎在洞穴里抢着出生。哥布林双胞胎通常会从小就开始竞争——谁先抢到食物谁就多吃一口。"
+      }
+    }
+  },
+  {
+    "id": "birth_storm",
+    "title": "暴风夜",
+    "description": "你出生在一场罕见的暴风雨之夜。雷声与你的啼哭声交织在一起，仿佛天地都在为你的降生震动。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "goblin": {
+        "title": "暴风夜降生",
+        "description": "你出生在一场罕见的暴风雨之夜。地面的雨水灌进了下水道，部落的老哥布林说这是不祥之兆。但你的母亲紧紧抱着你，在雷声中低声哼唱着古老的哥布林摇篮曲。"
+      }
+    }
+  },
+  {
+    "id": "birth_eclipse",
+    "title": "日蚀之日",
+    "description": "日蚀之日出生的孩子，据说会拥有不同寻常的命运。产婆看到天空变暗时，倒吸了一口冷气。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "unique": true,
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "goblin": {
+        "title": "日蚀之子",
+        "description": "日蚀之日出生的哥布林，传说中会拥有异于常人的好运气。部落的萨满对着你念了一通谁也听不懂的咒语，然后郑重宣布：\"这个崽子，不一般。\""
+      }
+    }
+  },
+  {
+    "id": "human_noble_birth_v4",
+    "title": "贵族家庭",
+    "description": "你出生在一个人类贵族家庭。虽然不是什么大贵族，但比普通人家要体面得多。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "noble_birth",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_twin_birth",
+    "title": "双胞胎",
+    "description": "你和一个兄弟/姐妹同时降生。从此人生路上多了一个最好的伙伴。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_ancient_tree_born",
+    "title": "古树之下出生",
+    "description": "你在精灵最古老的一棵树下降生。接生的长老说，这棵树在你出生时发出了微光。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_starfall_birth",
+    "title": "流星之夜降生",
+    "description": "你出生的那个夜晚，天空划过了一道壮观的流星。精灵占星师说这是极罕见的吉兆。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 1,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_biggest_litter",
+    "title": "最大的一窝",
+    "description": "你是六胞胎中最小的一个。在哥布林社会里，多胞胎是力量的象征。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_trash_heap_born",
+    "title": "垃圾堆里出生",
+    "description": "你的母亲在城市垃圾场旁边生下了你。虽然出身卑微，但你的眼睛格外明亮。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
   }
 ]

@@ -34,6 +34,7 @@ interface SerializedGameState {
   talents: GameState['talents']
   age: number
   hp: number
+  maxHpBonus: number
   flags: string[]
   counters: Record<string, number>
   triggeredEvents: string[]
@@ -239,14 +240,14 @@ export const useGameStore = defineStore('game', () => {
   // ==================== 游戏逻辑 ====================
 
   /** 初始化新游戏 */
-  function initGame(characterName: string, presetId?: string) {
+  function initGame(characterName: string, presetId?: string, race?: string, gender?: import('@/engine/core/types').Gender) {
     const worldStore = useWorldStore()
     const world = worldStore.getCurrentWorld()
     if (!world) throw new Error('未选择世界')
 
     clearAutoSave()
     engine.value = new SimulationEngine(world)
-    state.value = engine.value.initGame(characterName, presetId)
+    state.value = engine.value.initGame(characterName, presetId, race, gender)
   }
 
   /** 抽取天赋 */

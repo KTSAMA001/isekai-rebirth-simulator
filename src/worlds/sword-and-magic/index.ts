@@ -15,7 +15,8 @@ export function createSwordAndMagicWorld() {
     data.achievements,
     data.items,
     data.presets,
-    data.scoringRule
+    data.scoringRule,
+    data.races
   )
   world.evaluations = data.evaluations
   return world

@@ -5,28 +5,48 @@
     "description": "吟游诗人们开始传唱你的故事。",
     "minAge": 65,
     "maxAge": 88,
-    "weight": 8,
+    "weight": 3,
     "include": "attribute.chr >= 15 & has.flag.dragon_slayer | has.flag.knight_hero | has.flag.war_hero | has.flag.archmage | has.flag.famous_inventor & has.flag.knight | has.flag.guild_member | has.flag.mage_graduate",
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 3
+        "id": "enjoy_fame",
+        "title": "享受名声",
+        "description": "你欣然接受世人的赞誉，享受着传奇带来的荣耀。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ]
       },
       {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 3
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 2
+        "id": "stay_humble",
+        "title": "低调行事",
+        "description": "你选择远离喧嚣，在平静中度过晚年。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ]
       }
     ],
     "unique": true,
@@ -34,7 +54,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "传说的传播",
+        "description": "年轻的哥布林开始传颂你的故事——那个从垃圾堆里爬出来，最终成为大首领/大商人/传奇盗贼的哥布林。你的名字成了部落的骄傲。"
+      }
+    }
   },
   {
     "id": "peaceful_end",
@@ -42,7 +68,7 @@
     "description": "你坐在门廊的摇椅上，看着孙辈们在花园里奔跑。夕阳很美。",
     "minAge": 70,
     "maxAge": 88,
-    "weight": 12,
+    "weight": 4,
     "include": "attribute.spr >= 8",
     "unique": true,
     "effects": [
@@ -61,7 +87,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "洞穴深处的夕阳",
+        "description": "你裹着破布毯子缩在洞穴最深处。小哥布林们在你面前跑来跑去，叽叽喳喳地吵闹。一束光从远处的洞口渗进来。你还能看到这一切，就很好。"
+      }
+    }
   },
   {
     "id": "magic_breakthrough_final",
@@ -71,27 +103,61 @@
     "maxAge": 90,
     "weight": 4,
     "include": "attribute.mag >= 22",
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 5
+        "id": "breakthrough_limit",
+        "title": "突破极限",
+        "description": "你拼尽全力突破魔法的最终界限，力量暴涨，但生命也在急剧消耗。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "transcendent",
+            "value": true
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ]
       },
       {
-        "type": "modify_hp",
-        "target": "hp",
-        "value": -30,
-        "description": "HP -30"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 3
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 2
+        "id": "steady_research",
+        "title": "稳健研究",
+        "description": "你选择了稳妥的研究路径，虽然进步有限，但保持了身心的平衡。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ]
       }
     ],
     "unique": true,
@@ -116,11 +182,6 @@
         "title": "传世之作",
         "description": "你的回忆录轰动全国",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 20,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -137,6 +198,12 @@
             "target": "famous_author",
             "value": 1,
             "description": "著名作家"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "写作消耗体力"
           }
         ],
         "failureEffects": [
@@ -148,7 +215,12 @@
           }
         ],
         "successText": "你的故事被翻译成了五种语言！吟游诗人争相传唱",
-        "failureText": "写完之后你发现……读的人只有你自己"
+        "failureText": "写完之后你发现……读的人只有你自己",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "memoir_private",
@@ -189,6 +261,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "放下过去的释然"
           }
         ]
       }
@@ -198,7 +276,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你决定用精灵古语撰写回忆录。几百年的人生，即使以精灵的记忆力，也有太多细节在岁月中模糊。你拿起那支用世界树枝制成的笔，开始记录你漫长一生中的每一个重要瞬间。"
+      },
+      "goblin": {
+        "description": "你决定写回忆录——虽然大半个哥布林社会都是文盲。你用炭笔在废纸上歪歪扭扭地写下自己的故事。谁知道呢，也许有一天，某个年轻的哥布林会从你的故事中找到活下去的勇气。"
+      }
+    }
   },
   {
     "id": "elder_disciple_visit",
@@ -207,7 +293,7 @@
     "minAge": 55,
     "maxAge": 90,
     "weight": 4,
-    "include": "has.flag.guild_member | has.flag.magic_graduate | has.flag.knight | attribute.chr >= 12",
+    "include": "has.flag.guild_member | has.flag.mage_graduate | has.flag.knight | attribute.chr >= 12",
     "effects": [],
     "branches": [
       {
@@ -244,11 +330,6 @@
         "title": "求师指点",
         "description": "学生遇到困难来求助",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 18,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -271,7 +352,12 @@
           }
         ],
         "successText": "你的一句话点醒了困惑中的学生",
-        "failureText": "你发现自己已经跟不上时代了……"
+        "failureText": "你发现自己已经跟不上时代了……",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "disciple_disappoint",
@@ -283,6 +369,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "反思自己的教导方式"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "失望中也有关爱"
           }
         ]
       }
@@ -310,11 +408,6 @@
         "description": "你拿起老伙计（武器/法杖），义无反顾",
         "probability": 0.3,
         "requireCondition": "attribute.str >= 18 | attribute.mag >= 18",
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 23,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -343,7 +436,12 @@
           }
         ],
         "successText": "你打败了地下城之主！所有人都在传颂你的名字",
-        "failureText": "你被怪物击飞了出去……老了就是老了"
+        "failureText": "你被怪物击飞了出去……老了就是老了",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 18,
+          "description": "体魄判定 DC18"
+        }
       },
       {
         "id": "last_adv_guide",
@@ -384,6 +482,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "不冒险也是一种智慧"
           }
         ]
       }
@@ -393,7 +497,13 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "老骨头的最后冒险",
+        "description": "听说深处的废弃矿道又被发现了新洞穴。你的心跳加速了——哥布林的探索欲可不会因为掉了几颗牙就消失。你抓起锈迹斑斑的匕首，踉跄着走了出去。"
+      }
+    }
   },
   {
     "id": "elder_family_reunion",
@@ -445,6 +555,23 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "争吵中也理解了家人的想法"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "吵完之后的释然"
           }
         ]
       },
@@ -469,6 +596,12 @@
             "target": "family_legacy",
             "value": 1,
             "description": "家族传承"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "传承的意义"
           }
         ]
       }
@@ -478,7 +611,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "满巢的热闹",
+        "description": "你的后代们都回来了。洞穴里挤满了大大小小的哥布林，吵吵闹闹、推推搡搡。烤虫子的香味弥漫在空气中。这是你最满足的时刻。"
+      }
+    }
   },
   {
     "id": "elder_illness",
@@ -495,11 +634,6 @@
         "title": "积极治疗",
         "description": "你四处求医问药",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 19,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -511,6 +645,12 @@
             "target": "hp",
             "value": -30,
             "description": "HP -30"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "与病魔抗争的坚强意志"
           }
         ],
         "failureEffects": [
@@ -528,7 +668,12 @@
           }
         ],
         "successText": "在草药师的帮助下，你的病情得到了控制",
-        "failureText": "疾病比你想象的更严重……"
+        "failureText": "疾病比你想象的更严重……",
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 17,
+          "description": "灵魂判定 DC17"
+        }
       },
       {
         "id": "illness_magic",
@@ -547,6 +692,18 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "研究治疗魔法获得的知识"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "治疗魔法的实践"
           }
         ]
       },
@@ -565,6 +722,12 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "坦然接受命运的大智慧"
           }
         ]
       }
@@ -583,7 +746,7 @@
     "minAge": 55,
     "maxAge": 90,
     "weight": 3,
-    "include": "attribute.spr >= 15 | has.flag.dragon_blood | has.flag.demon_heritage",
+    "include": "attribute.spr >= 15 | has.talent.dragon_blood | has.talent.demon_heritage",
     "effects": [],
     "branches": [
       {
@@ -591,11 +754,6 @@
         "title": "灵魂升华",
         "description": "你领悟了生命的真谛",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 23,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -612,6 +770,18 @@
             "target": "spirit_ascended",
             "value": 1,
             "description": "灵魂升华！"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "灵魂试炼的身体负担"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "灵魂升华的身体代价"
           }
         ],
         "failureEffects": [
@@ -623,7 +793,12 @@
           }
         ],
         "successText": "你感受到了前所未有的平静和力量",
-        "failureText": "灵力暴走，你差点就回不来了……"
+        "failureText": "灵力暴走，你差点就回不来了……",
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 18,
+          "description": "灵魂判定 DC18"
+        }
       },
       {
         "id": "spirit_insight",
@@ -657,7 +832,12 @@
           {
             "type": "modify_attribute",
             "target": "spr",
-            "value": -2
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
           }
         ]
       }
@@ -700,6 +880,11 @@
             "target": "legend_legacy",
             "value": 1,
             "description": "传说传承"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
           }
         ]
       },
@@ -730,6 +915,11 @@
           {
             "type": "modify_attribute",
             "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
             "value": 2
           },
           {
@@ -763,11 +953,6 @@
         "description": "你主动请缨",
         "probability": 0.3,
         "requireCondition": "attribute.str >= 20 | attribute.mag >= 20",
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 26,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -790,7 +975,12 @@
           }
         ],
         "successText": "老将军一马当先，击退了敌军！",
-        "failureText": "你在战场上倒下了……但你的勇气激励了所有人"
+        "failureText": "你在战场上倒下了……但你的勇气激励了所有人",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 19,
+          "description": "体魄判定 DC19"
+        }
       },
       {
         "id": "crisis_strategist",
@@ -833,6 +1023,18 @@
             "target": "hp",
             "value": -20,
             "description": "HP -20（疲惫）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "疏散群众获得爱戴"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "保护他人的温暖"
           }
         ]
       }
@@ -842,7 +1044,13 @@
     "priority": "critical",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地面战争来了",
+        "description": "地面的战争终于波及到了地下。无论年轻还是年老，每个哥布林都被召集起来——要么帮忙设陷阱，要么帮忙转移物资。你拖着老迈的身体站了起来。"
+      }
+    }
   },
   {
     "id": "elder_peaceful_days",
@@ -881,6 +1089,23 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "和邻居聊天的快乐"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "观察植物的知识"
           }
         ]
       },
@@ -917,6 +1142,11 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
           }
         ]
       }
@@ -926,7 +1156,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "安静的日子",
+        "description": "你搬到了一个很深很安静的小洞穴。每天数数自己的收藏品，给发光蘑菇浇水，听地下暗河的水声。对一个老哥布林来说，这就是幸福。"
+      }
+    }
   },
   {
     "id": "elder_final_counting",
@@ -997,6 +1233,11 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10
           }
         ],
         "successText": "你拔出了那把跟随你一生的旧剑。最后一个敌人站在面前——是衰老本身。你笑了，向它发起最后的冲锋。"
@@ -1051,7 +1292,7 @@
     "description": "年迈的身体越来越脆弱了。简单的散步都会气喘吁吁，上楼梯要扶着墙壁才能站稳。曾经能举起巨剑的双手，如今连茶杯都在微微颤抖。",
     "minAge": 65,
     "maxAge": 88,
-    "weight": 18,
+    "weight": 6,
     "effects": [],
     "branches": [
       {
@@ -1095,6 +1336,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "领悟生命的意义"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "病中的思考"
           }
         ],
         "successText": "你找到了一位隐居的炼金术师。他给了你一瓶银色的药水，说这能再续几年。喝下去的那一刻，你确实感到精力恢复了一些——但代价是你的积蓄，以及内心深处的某个东西。"
@@ -1105,7 +1358,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "精灵不会像人类那样明显衰老——你的外表看起来还是几百年前的样子。但你的灵魂感到了一种前所未有的疲倦，仿佛世界树的生命力正在从你身上缓缓抽离。"
+      },
+      "goblin": {
+        "description": "你已经活得比大多数哥布林都要久了。你佝偻的身躯在年轻哥布林眼中是传奇——'那个还活着的老家伙'。你的每一天都是奇迹，你的每一个故事都值得被记住。"
+      }
+    }
   },
   {
     "id": "elder_memory_fade",
@@ -1113,7 +1374,7 @@
     "description": "你开始记不清一些事情了。昨天发生的事和十年前的记忆混在一起，有时叫不出老朋友的名字，有时站在家门口忘了自己要去哪里。时间在偷走你最珍贵的东西。",
     "minAge": 70,
     "maxAge": 92,
-    "weight": 12,
+    "weight": 4,
     "effects": [],
     "branches": [
       {
@@ -1131,6 +1392,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "记录的过程整理了思维"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "留给后人的宝贵文字"
           }
         ],
         "successText": "你在烛光下一页一页地写。有欢笑，有泪水，有遗憾，有骄傲。写到某一段时你停下了笔——那个人的名字，你怎么也想不起来了。泪水落在羊皮纸上，模糊了墨迹。"
@@ -1150,6 +1423,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "活在当下的哲学"
           }
         ],
         "successText": "你不再执着于回忆。每一天的阳光、每一顿饭菜、每一个微笑——这些就是活着的意义。也许忘了过去也挺好，至少不会因为遗憾而心痛了。"
@@ -1168,7 +1447,7 @@
     "description": "一场突如其来的重病将你击倒在床。高烧不退，呼吸困难。医生们表情凝重地交换着眼神——这一次，恐怕不只是普通的感冒。",
     "minAge": 70,
     "maxAge": 90,
-    "weight": 16,
+    "weight": 5,
     "include": "age >= 72",
     "effects": [],
     "branches": [
@@ -1177,10 +1456,6 @@
         "title": "积极治疗",
         "description": "倾尽所有也要活下去",
         "probability": 0.45,
-        "riskCheck": {
-          "attribute": "con",
-          "difficulty": 15
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1192,6 +1467,18 @@
             "target": "hp",
             "value": -10,
             "description": "HP -10（病痛）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "不放弃的意志"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "家人的陪伴"
           }
         ],
         "failureEffects": [
@@ -1209,7 +1496,12 @@
           }
         ],
         "successText": "经过数周的煎熬，烧终于退了。你虚弱地睁开眼睛，看到床边守候的家人露出了如释重负的表情。你知道，自己又从死神手里赢回了一些时间。",
-        "failureText": "治疗没有起效。你的身体像是被掏空了一样，连说话的力气都没有。意识在明灭之间，你听到了家人的哭泣声……"
+        "failureText": "治疗没有起效。你的身体像是被掏空了一样，连说话的力气都没有。意识在明灭之间，你听到了家人的哭泣声……",
+        "diceCheck": {
+          "attribute": "con",
+          "dc": 16,
+          "description": "con判定 DC16"
+        }
       },
       {
         "id": "final_accept",
@@ -1227,6 +1519,12 @@
             "target": "hp",
             "value": -25,
             "description": "HP -25（放弃治疗）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "坦然面对死亡的大智慧"
           }
         ],
         "successText": "你让家人都来到床前，一个一个地握住他们的手。没有眼泪，没有遗憾，只是微笑着说：「我这一生，很精彩。」窗外的月光洒在你的脸上，像是命运最后的温柔。"
@@ -1297,32 +1595,51 @@
     "unique": true,
     "tag": "epic",
     "priority": "major",
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 2
+        "id": "accept_honor",
+        "title": "接受荣誉",
+        "description": "你接受了世人给予的荣誉和头衔，但平静的生活从此不再。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "legendary_hero",
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          }
+        ]
       },
       {
-        "type": "set_flag",
-        "target": "legend_confirmed",
-        "value": 1,
-        "description": "传奇被历史铭记"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": 2
+        "id": "humble_response",
+        "title": "谦逊回应",
+        "description": "你谦虚地表示自己只是做了该做的事，选择继续平静的生活。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ]
       }
     ],
     "routes": [
@@ -1353,7 +1670,8 @@
             "target": "spr",
             "value": 1
           }
-        ]
+        ],
+        "description": "面对抉择，你决定倾囊相授——也许这是最好的选择。"
       },
       {
         "id": "test_them",
@@ -1364,7 +1682,8 @@
             "target": "str",
             "value": 2
           }
-        ]
+        ],
+        "description": "你权衡利弊后，选择了先考验他们。"
       }
     ],
     "effects": [],
@@ -1398,7 +1717,8 @@
             "target": "chr",
             "value": 2
           }
-        ]
+        ],
+        "description": "你选择了热泪盈眶，静静等待结果。"
       },
       {
         "id": "quiet_nod",
@@ -1409,7 +1729,8 @@
             "target": "spr",
             "value": 2
           }
-        ]
+        ],
+        "description": "你权衡利弊后，选择了相视一笑。"
       }
     ],
     "effects": [],
@@ -1427,27 +1748,46 @@
     "unique": true,
     "tag": "epic",
     "priority": "major",
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
+        "id": "enjoy_retirement",
+        "title": "退休享受",
+        "description": "你选择彻底放下一切，在和平中享受晚年时光。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ]
       },
       {
-        "type": "set_flag",
-        "target": "peace_witnessed",
-        "value": 1,
-        "description": "见证和平"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 2
+        "id": "continue_guard",
+        "title": "继续守护",
+        "description": "虽然世界和平了，但你选择继续磨砺自己，以防万一。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5
+          }
+        ]
       }
     ],
     "routes": [
@@ -1464,42 +1804,71 @@
     "unique": true,
     "tag": "life",
     "priority": "major",
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 5
+        "id": "grand_celebration",
+        "title": "盛大庆典",
+        "description": "你决定举办一场盛大的百岁庆典，邀请所有亲朋好友。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5
+          }
+        ]
       },
       {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      },
-      {
-        "type": "set_flag",
-        "target": "centenarian",
-        "value": 1,
-        "description": "百岁人瑞"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "luk",
-        "value": 3
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
+        "id": "quiet_reflection",
+        "title": "静默回顾",
+        "description": "你选择独自一人，安静地回顾这漫长的一生。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ]
       }
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "races": [
+      "human",
+      "elf"
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "不老传说",
+        "description": "你已经活得比大多数哥布林都长。整个部落都来庆祝——在短命的哥布林社会，你的年纪本身就是一个传奇。年轻的哥布林们争相听你讲故事，你觉得自己可以再活一百年。"
+      }
+    }
   },
   {
     "id": "elder_natural_death",
@@ -1507,7 +1876,7 @@
     "description": "你坐在窗边的摇椅上，阳光暖暖地洒在身上。往事如走马灯般闪过——那些冒险、那些人、那些笑容。你微微一笑，闭上了眼睛。",
     "minAge": 85,
     "maxAge": 100,
-    "weight": 10,
+    "weight": 4,
     "tag": "life",
     "priority": "major",
     "effects": [
@@ -1521,7 +1890,13 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "安详的离去",
+        "description": "你缩在自己的小窝里，身边堆满了一辈子攒下的\"宝贝\"。一块闪亮的矿石、一枚磨损的铜币、那只大老鼠的牙齿……你摸着这些东西，嘴角微微上翘，轻轻闭上了眼睛。"
+      }
+    }
   },
   {
     "id": "elder_technique_pass",
@@ -1575,6 +1950,12 @@
             "type": "set_flag",
             "target": "legacy_passed",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "传授消耗了最后的体力"
           }
         ],
         "successText": "你把最核心的技艺只传授给了最信任的弟子。'这些东西，只能用心去感受。'你这样说道。"
@@ -1629,7 +2010,13 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "最后的盛宴",
+        "description": "老朋友们从各个聚落赶来——那些还活着的老哥布林。你们围坐在篝火旁，喝着按年份酿制的蘑菇酒，聊着那些年轻时的疯狂事迹。"
+      }
+    }
   },
   {
     "id": "elder_star_gazing_final",
@@ -1647,13 +2034,13 @@
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "spr",
-            "value": 2
+            "value": 3,
+            "target": "spr"
           },
           {
             "type": "modify_attribute",
-            "target": "luk",
-            "value": 2
+            "value": 1,
+            "target": "chr"
           }
         ],
         "successText": "你躺在草地上，看着漫天繁星。那些曾经照亮你夜晚的星星，依然在闪烁。一切都很好。"
@@ -1665,22 +2052,64 @@
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "spr",
-            "value": 2
+            "value": 3,
+            "target": "luk"
           },
           {
             "type": "modify_attribute",
-            "target": "luk",
-            "value": 2
+            "value": 1,
+            "target": "spr"
           }
         ],
         "successText": "你闭眼许了一个愿望。睁开眼时，一颗流星划过天际。你笑了——也许，愿望会实现的。"
+      },
+      {
+        "id": "stargazing_count",
+        "title": "数星星",
+        "description": "你开始数星星，数着数着就睡着了。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "spr"
+          }
+        ],
+        "successText": "你数到了第两千三百颗的时候，在温暖的夜风中安然入睡。梦里，每颗星星都是你经历过的故事。"
+      },
+      {
+        "id": "stargazing_count",
+        "title": "数星星",
+        "description": "你开始数星星，数着数着就睡着了。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "spr"
+          }
+        ],
+        "successText": "你数到了第两千三百颗的时候，在温暖的夜风中安然入睡。梦里，每颗星星都是你经历过的故事。"
       }
     ],
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "最后的星空",
+        "description": "你踉跄着爬出了地洞——也许是最后一次了。夜空很美，跟你第一次看到它的时候一样。你还记得那个夜晚——一个从没见过星星的哥布林小孩，惊得长大了嘴巴。"
+      }
+    }
   },
   {
     "id": "elder_old_enemy",
@@ -1710,6 +2139,11 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1
           }
         ],
         "successText": "你们面对面坐着，曾经的恩怨在岁月面前显得微不足道。最后你们握了握手，互相说了声'保重'。"
@@ -1732,5 +2166,1379 @@
     "routes": [
       "*"
     ]
+  },
+  {
+    "id": "elf_memory_garden_elder",
+    "title": "记忆花园",
+    "description": "精灵用魔力将珍贵的记忆封存在水晶花中。你的花园已经种满了数百年的回忆。",
+    "minAge": 120,
+    "maxAge": 300,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "elf_last_song",
+    "title": "最后的歌",
+    "description": "精灵在感知到终焉将近时，会唱一首歌。这首歌会融入森林，成为永恒的回响。",
+    "minAge": 300,
+    "maxAge": 500,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "elf_teaching_young",
+    "title": "教导下一代",
+    "description": "年轻的精灵们围坐在你身边，听你讲述数百年来的见闻。他们的眼中满是崇敬。",
+    "minAge": 100,
+    "maxAge": 400,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "elder_last_journey",
+    "title": "最后的旅途",
+    "description": "你决定在腿脚还能走的时候，再做一次旅行。去看看年轻时想去却没去的地方。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elder_last_journey_br0",
+        "title": "去海边看日出",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你选择了去海边看日出，静静等待结果。"
+      },
+      {
+        "id": "elder_last_journey_br1",
+        "title": "重访冒险过的地方",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "经过一番思考，你选择了重访冒险过的地方。"
+      },
+      {
+        "id": "elder_last_journey_br2",
+        "title": "去从未踏足的远方",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了去从未踏足的远方。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "最后的旅途",
+        "description": "你决定在腿脚还能走的时候，去看看那个传说中最深最远的地下洞穴——据说那里有一面完全由水晶组成的墙壁，在黑暗中散发着幽蓝的光。"
+      }
+    }
+  },
+  {
+    "id": "elder_garden_peace",
+    "title": "花园时光",
+    "description": "你拥有了一座小花园。每天浇水、除草、看花开花落，成了最享受的事。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "",
+    "raceVariants": {
+      "goblin": {
+        "title": "蘑菇花园",
+        "description": "你在洞穴的一角培育了一片发光蘑菇。每天浇水、通风、看它们忽明忽暗。对一个走过了这么多路的老哥布林来说，这种安宁比金子还珍贵。"
+      }
+    }
+  },
+  {
+    "id": "elder_passing_wisdom",
+    "title": "智者之言",
+    "description": "年轻人特地远道而来向你请教。你的人生经历本身就是一部教科书。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": "attribute.int >= 15 | attribute.mag >= 15 | attribute.str >= 20"
+  },
+  {
+    "id": "elder_old_letters",
+    "title": "旧日书信",
+    "description": "整理遗物时，你翻出了一箱泛黄的书信。每一封都承载着一段过去的故事。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elder_unexpected_visitor",
+    "title": "意外的来访者",
+    "description": "一个你已经快忘记的人出现在你家门前。原来你年轻时随手帮过的忙，改变了对方的一生。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elder_dream_fulfilled",
+    "title": "完成心愿",
+    "description": "你终于做到了那件一直放在心里的事。尽管来得很晚，但终究没有遗憾。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elder_sunset_watching",
+    "title": "夕阳",
+    "description": "你坐在门前看着夕阳慢慢沉入地平线。这个画面你看过无数次，但今天格外美丽。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elder_miracle_recovery",
+    "title": "奇迹般的康复",
+    "description": "所有人都以为你撑不过这个冬天了，但春天来临时你又精神奕奕地站了起来。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": 5
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "attribute.luk >= 12"
+  },
+  {
+    "id": "elder_autobiography",
+    "title": "自传",
+    "description": "一位作家听说了你传奇的人生故事，想为你写一本传记。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.chr >= 15",
+    "branches": [
+      {
+        "id": "elder_autobiography_br0",
+        "title": "欣然同意",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "famous_author",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了欣然同意。"
+      },
+      {
+        "id": "elder_autobiography_br1",
+        "title": "有些事不想公开",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了有些事不想公开。"
+      }
+    ]
+  },
+  {
+    "id": "elder_final_gift",
+    "title": "最后的礼物",
+    "description": "你把自己最珍贵的东西送给了一个你认为最配得上的人。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_grandchild_story",
+    "title": "给孙辈讲故事",
+    "description": "孙子们围坐在你膝边，央求你讲冒险故事。你挑了一段最精彩的经历……当然加了很多夸张。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_village_elder",
+    "title": "德高望重",
+    "description": "你已经是村子里最年长的人了。大家有什么拿不定主意的事都来问你。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_final_prayer",
+    "title": "最后的祈祷",
+    "description": "你在深夜独自来到神殿，向诸神做了一生中最后的祈祷。不是为自己，而是为后代。",
+    "minAge": 65,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_fading_magic",
+    "title": "魔力的消退",
+    "description": "你感到体内的魔力在缓慢减弱。对精灵来说，这是生命终章的第一个信号。",
+    "minAge": 200,
+    "maxAge": 450,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": -1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_return_to_forest",
+    "title": "回归森林",
+    "description": "在外游历了漫长的岁月后，你回到了出生的那片森林。树木似乎认出了你，枝叶轻轻摇曳。",
+    "minAge": 150,
+    "maxAge": 400,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_eternal_sleep",
+    "title": "永恒之眠",
+    "description": "精灵不会像人类那样衰老死去。当他们感到疲倦时，会选择进入永恒的沉眠，与大地融为一体。",
+    "minAge": 350,
+    "maxAge": 500,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 5
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_passing_crown",
+    "title": "传承",
+    "description": "你决定将自己数百年来积累的知识和魔力结晶传给下一代最有才华的精灵。",
+    "minAge": 200,
+    "maxAge": 500,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "legacy_passed",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_tribe_legacy",
+    "title": "部落的记忆",
+    "description": "你让年轻的哥布林们记住部落的历史——尽管哥布林没有文字，你用口述把一切传了下去。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_last_invention",
+    "title": "最后的发明",
+    "description": "你用尽毕生的智慧造出了最后一件作品。它不完美，但饱含了你全部的心血。",
+    "minAge": 25,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "famous_inventor",
+        "value": true
+      }
+    ],
+    "include": "attribute.int >= 15"
+  },
+  {
+    "id": "goblin_sage",
+    "title": "哥布林贤者",
+    "description": "活到这个岁数的哥布林，在整个种族中都屈指可数。其他部落的哥布林不远千里来拜访你。",
+    "minAge": 30,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "goblin_sage",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_rocking_chair",
+    "title": "摇椅上的午后",
+    "description": "你坐在门前的摇椅上晒太阳。路过的孩子们向你打招呼，你笑着挥手。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_old_battlefield",
+    "title": "重访战场",
+    "description": "你回到了年轻时打过仗的地方。曾经的战场如今长满了野花，只有一块斑驳的纪念碑记录着过去。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": "has.flag.military_service | has.flag.war_veteran"
+  },
+  {
+    "id": "human_last_toast",
+    "title": "最后一杯酒",
+    "description": "你独自坐在曾经常去的酒馆角落，要了一杯老酒。酒还是那个味道，人却少了很多。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_family_photo",
+    "title": "全家聚会",
+    "description": "子女们从各地赶来团聚。你看着满堂的儿孙，觉得这辈子没白活。",
+    "minAge": 60,
+    "maxAge": 80,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_craft_mastery",
+    "title": "手艺的巅峰",
+    "description": "你打造了此生最完美的一件作品。年轻时的不足，此刻全都弥补了。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "attribute.int >= 15"
+  },
+  {
+    "id": "elf_ancient_memory_share",
+    "title": "千年记忆分享",
+    "description": "你将数百年的记忆编织成魔力水晶，存放在精灵图书馆中。后人可以通过触摸水晶体验你的一生。",
+    "minAge": 250,
+    "maxAge": 500,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_farewell_ceremony",
+    "title": "告别仪式",
+    "description": "精灵们为你举行了盛大的告别仪式。不是葬礼，而是感恩你漫长一生的贡献。",
+    "minAge": 350,
+    "maxAge": 500,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 4
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_star_communion",
+    "title": "与星辰对话",
+    "description": "在极高龄的精灵中，有些人开始能听到星辰的低语。那是来自宇宙深处的智慧。",
+    "minAge": 300,
+    "maxAge": 500,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": "attribute.mag >= 30"
+  },
+  {
+    "id": "elf_final_bloom",
+    "title": "最后的绽放",
+    "description": "你童年种下的那棵树终于开出了第一朵花。等了数百年，此刻你热泪盈眶。",
+    "minAge": 200,
+    "maxAge": 500,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 4
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_longest_living",
+    "title": "最长寿的哥布林",
+    "description": "你已经成为方圆百里最长寿的哥布林。其他部落派使者来拜访，想知道你长寿的秘诀。",
+    "minAge": 30,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_longest_living_br0",
+        "title": "大方分享养生之道",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了大方分享养生之道，静静等待结果。"
+      },
+      {
+        "id": "goblin_longest_living_br1",
+        "title": "胡编乱造一通",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你选择了胡编乱造一通，静静等待结果。"
+      },
+      {
+        "id": "goblin_longest_living_br2",
+        "title": "编一个离谱的故事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定编一个离谱的故事——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_sunset_hill",
+    "title": "山丘上的日落",
+    "description": "你爬上了部落旁最高的山丘看日落。哥布林的一生虽然短暂，但你觉得自己活得精彩。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_buried_treasure_reveal",
+    "title": "公开藏宝地点",
+    "description": "你终于告诉了最信任的年轻哥布林那个藏宝洞穴的位置。看着他狂喜的表情，你笑了。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_dream_of_equality",
+    "title": "平等之梦",
+    "description": "你临终前的愿望是——将来有一天，哥布林不再被人看轻。你把这个信念传给了后辈。",
+    "minAge": 30,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 4
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_last_trick",
+    "title": "最后的恶作剧",
+    "description": "临走前你还不忘给年轻人挖了个坑。洞穴入口的陷阱会在你走后给某个不小心的后辈一个'惊喜'。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_retirement_cottage",
+    "title": "退休小屋",
+    "description": "你在乡下造了一间小屋，打算安度余生。花园里种满了妻子最爱的花。",
+    "minAge": 55,
+    "maxAge": 75,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_village_historian",
+    "title": "村庄史官",
+    "description": "你开始把村子几百年来的故事记录下来。虽然不知道会不会有人看，但总得有人记住这些。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_grandchild_laughter",
+    "title": "孙辈的笑声",
+    "description": "孙子孙女在院子里追逐打闹。你怎么看都看不腻。",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_starlight_legacy",
+    "title": "星光遗产",
+    "description": "你将毕生研究的星辰魔法整理成册，留给后代。这套理论或许百年后才会被人理解。",
+    "minAge": 300,
+    "maxAge": 500,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "legacy_passed",
+        "value": true
+      }
+    ],
+    "include": "attribute.mag >= 25"
+  },
+  {
+    "id": "elf_last_spring",
+    "title": "最后的春天",
+    "description": "你知道这可能是你经历的最后一个春天了。花开得和几百年前一模一样，你却再也不一样了。",
+    "minAge": 350,
+    "maxAge": 500,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 4
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_tribal_legend",
+    "title": "部落传说",
+    "description": "你的故事已经变成了部落的传说。年轻哥布林在篝火边讲述你的冒险，虽然越传越离谱。",
+    "minAge": 30,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_mechanical_heart",
+    "title": "机械心脏",
+    "description": "你造了一颗发条驱动的机械心脏。虽然它不能真的跳动，但你觉得这是你一生中最完美的作品。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "attribute.int >= 15"
+  },
+  {
+    "id": "goblin_final_feast_elder",
+    "title": "最后的盛宴",
+    "description": "你为全部落办了一场盛大的宴会。不是告别，只是想看大家吃得开心的样子。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
   }
 ]

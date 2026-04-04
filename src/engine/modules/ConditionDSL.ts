@@ -88,7 +88,7 @@ export class ConditionDSL {
     // age
     if (attr === 'age') return ctx.state.age
     // lifespan
-    if (attr === 'lifespan') return ctx.state.age
+    if (attr === 'lifespan') return ctx.state.effectiveMaxAge ?? 100
     // event.count.id
     if (attr.startsWith('event.count.')) {
       const eventId = attr.substring('event.count.'.length)
@@ -100,6 +100,14 @@ export class ConditionDSL {
     }
     // hp
     if (attr === 'hp') return ctx.state.hp
+    // character.race / character.gender — 角色种族和性别
+    if (attr === 'character.race') return ctx.state.character.race ?? ''
+    if (attr === 'character.gender') return ctx.state.character.gender ?? ''
+    // counter.id — 计数器值
+    if (attr.startsWith('counter.')) {
+      const counterId = attr.substring('counter.'.length)
+      return ctx.state.counters.get(counterId) ?? 0
+    }
     return 0
   }
 
@@ -244,9 +252,16 @@ class DSLParser {
     if (numStr && numStr !== '-') {
       return parseFloat(numStr)
     }
-    // 字符串
+    // 字符串：读取直到分隔符
     this.pos = start
-    return ''
+    let strVal = ''
+    while (this.pos < this.expr.length) {
+      const c = this.expr[this.pos]
+      if (c === ' ' || c === ')' || c === '&' || c === '|') break
+      strVal += c
+      this.pos++
+    }
+    return strVal.trim()
   }
 
   private readUntil(...stops: string[]): string {

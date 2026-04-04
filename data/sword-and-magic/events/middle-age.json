@@ -2,37 +2,17 @@
   {
     "id": "world_breaking_start",
     "title": "世界崩坏开始",
-    "description": "你感到世界在颤抖。不是地震——是世界本身的法则在瓦解。",
+    "description": "你感到世界在颤抖。不是地震——是世界本身的法则在瓦解。面对世界的崩坏，你选择——",
     "minAge": 50,
     "maxAge": 60,
     "weight": 1,
-    "include": "has.talent.worldbreaker & has.flag.knight | has.flag.guild_member",
+    "include": "has.talent.worldbreaker & (has.flag.knight | has.flag.guild_member)",
     "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 3
-      },
       {
         "type": "set_flag",
         "target": "world_breaking",
         "value": 1,
         "description": "世界崩坏开始"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": -2
       }
     ],
     "unique": true,
@@ -40,6 +20,97 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "branches": [
+      {
+        "id": "breaking_fight",
+        "title": "挺身对抗崩坏",
+        "description": "用你的力量尝试修补世界的裂痕",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "吸收了崩坏中溢出的魔力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "对抗崩坏的肉体强化"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "目睹世界崩塌的精神创伤"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -15,
+            "description": "对抗虚空的代价"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "mag",
+          "dc": 14,
+          "description": "尝试用魔力修补世界裂痕"
+        },
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "虽然失败但吸收了一点魔力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "失败带来深深的挫败感"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "反噬的伤害"
+          }
+        ],
+        "successText": "你的力量与崩坏的法则碰撞，世界的裂痕在你面前缓缓愈合。虽然只是暂时的，但你赢得了时间。",
+        "failureText": "崩坏的力量超出了你的想象，反噬让你痛苦不堪。世界的裂痕依旧在扩大。"
+      },
+      {
+        "id": "breaking_survive",
+        "title": "保全自己和周围的人",
+        "description": "不去对抗不可抗力，而是保护身边的人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "守护他人的信念"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "领导疏散获得爱戴"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "在混乱中感悟到的魔力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "奔波中的体力消耗"
+          }
+        ]
+      }
     ]
   },
   {
@@ -48,7 +119,7 @@
     "description": "你把武器挂在了壁炉上方，决定安度晚年。",
     "minAge": 60,
     "maxAge": 70,
-    "weight": 10,
+    "weight": 5,
     "unique": true,
     "effects": [],
     "branches": [
@@ -79,6 +150,11 @@
             "target": "peaceful_retirement",
             "value": 1,
             "description": "安享晚年"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
           }
         ],
         "successText": "你放下了刀剑，在乡间买了一栋小屋。每天的日出日落都格外美丽，年轻时错过的风景，如今终于有时间慢慢欣赏。"
@@ -119,7 +195,13 @@
     "priority": "critical",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "放下匕首",
+        "description": "你把那把跟了你半辈子的匕首插在火堆旁的石头上，决定不再冒险了。对哥布林来说，能活到这个年纪就已经是传奇。"
+      }
+    }
   },
   {
     "id": "final_cataclysm",
@@ -239,6 +321,31 @@
             "value": 3
           },
           {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -2
+          },
+          {
             "type": "modify_hp",
             "target": "hp",
             "value": -30,
@@ -249,6 +356,18 @@
             "target": "became_god",
             "value": 1,
             "description": "新世界的神！"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "承受创世之力的代价"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -3,
+            "description": "失去凡人情感"
           }
         ],
         "successText": "毁灭的力量涌入你的身体，与你融为一体。你不再是凡人了——但你还记得曾经作为人类的一切。也许这就是最好的结局。"
@@ -316,6 +435,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "深思熟虑"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不急于做决定的智慧"
           }
         ]
       },
@@ -324,7 +455,20 @@
         "title": "拒绝",
         "description": "你摇了摇头，告诉年轻人这条路没有捷径。有些技艺是要靠自己去闯出来的，旁人教不了，也替不了。",
         "probability": 0.25,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "拒绝的果断"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "省下了麻烦事的开销"
+          }
+        ]
       }
     ],
     "tag": "life",
@@ -340,7 +484,7 @@
     "minAge": 35,
     "maxAge": 50,
     "weight": 4,
-    "include": "attribute.chr >= 12 & attribute.int >= 12",
+    "include": "has.flag.parent & attribute.chr >= 12 & attribute.int >= 12",
     "effects": [],
     "branches": [
       {
@@ -348,11 +492,6 @@
         "title": "青出于蓝",
         "description": "孩子的天赋让你惊讶",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 18,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -369,6 +508,12 @@
             "target": "great_parent",
             "value": 1,
             "description": "优秀导师"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "教育的劳心"
           }
         ],
         "failureEffects": [
@@ -380,7 +525,12 @@
           }
         ],
         "successText": "孩子展现出了惊人的天赋！",
-        "failureText": "教导的过程比想象中困难"
+        "failureText": "教导的过程比想象中困难",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "heir_average",
@@ -410,6 +560,24 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "反思教育方式"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "学会放手"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "最终和孩子和解了"
           }
         ]
       }
@@ -436,11 +604,6 @@
         "title": "参与密谋",
         "description": "你决定加入这场权力游戏",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 21,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -457,6 +620,12 @@
             "target": "political_player",
             "value": 1,
             "description": "政客"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "政治阴谋的精神折磨"
           }
         ],
         "failureEffects": [
@@ -474,7 +643,12 @@
           }
         ],
         "successText": "宰相倒台了！你在新政权中获得了重要地位",
-        "failureText": "密谋败露，你差点丢了脑袋"
+        "failureText": "密谋败露，你差点丢了脑袋",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 18,
+          "description": "智慧判定 DC18"
+        }
       },
       {
         "id": "plot_inform",
@@ -509,6 +683,12 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "拒绝阴谋的正气"
           }
         ]
       }
@@ -518,6 +698,10 @@
     "priority": "major",
     "routes": [
       "merchant"
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -535,11 +719,6 @@
         "title": "找到新目标",
         "description": "你重新燃起了对生活的热情",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 16,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -561,7 +740,12 @@
           }
         ],
         "successText": "你终于明白，人生的意义在于体验本身",
-        "failureText": "你越来越消沉……"
+        "failureText": "你越来越消沉……",
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 16,
+          "description": "灵魂判定 DC16"
+        }
       },
       {
         "id": "crisis_travel",
@@ -601,6 +785,24 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2,
+            "description": "绝望中感应到了魔力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "触底反弹的觉悟"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "酒醒后的深刻反思"
           }
         ]
       }
@@ -610,7 +812,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "深夜的独白",
+        "description": "哥布林的寿命太短了。你坐在黑暗中，数着自己掉落的又一颗牙齿。手指关节开始发疼，眼睛也不如从前锐利。再过几年你就会像那些老哥布林一样蜷缩在角落。这一切……值得吗？"
+      }
+    }
   },
   {
     "id": "mid_found_school",
@@ -627,11 +835,6 @@
         "title": "门庭若市",
         "description": "你的学校名声远播",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "chr",
-          "difficulty": 19,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -648,6 +851,12 @@
             "target": "founder",
             "value": 1,
             "description": "开山立派！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "办学的持续投入"
           }
         ],
         "failureEffects": [
@@ -659,7 +868,12 @@
           }
         ],
         "successText": "各地学子慕名而来！",
-        "failureText": "没有人愿意来你的学校……"
+        "failureText": "没有人愿意来你的学校……",
+        "diceCheck": {
+          "attribute": "chr",
+          "dc": 17,
+          "description": "魅力判定 DC17"
+        }
       },
       {
         "id": "school_small",
@@ -699,6 +913,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "省下的资金用于投资"
           }
         ]
       }
@@ -708,7 +928,13 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "哥布林学堂",
+        "description": "你决定教部落里的小哥布林读写和算数。你知道，懂人类的文字在交易中有多大的优势——你不希望下一代再吃你吃过的亏。"
+      }
+    }
   },
   {
     "id": "mid_old_enemy",
@@ -726,11 +952,6 @@
         "description": "有什么账，算清楚",
         "probability": 0.3,
         "requireCondition": "attribute.str >= 10 | attribute.mag >= 10",
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 18,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -759,7 +980,12 @@
           }
         ],
         "successText": "一招制敌！这是你实力的证明",
-        "failureText": "对方比你想的更强……"
+        "failureText": "对方比你想的更强……",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 17,
+          "description": "体魄判定 DC17"
+        }
       },
       {
         "id": "enemy_negotiate",
@@ -795,6 +1021,24 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "隐忍的智慧"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "暗中观察学到了东西"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "暂避风头的运气"
           }
         ]
       }
@@ -842,6 +1086,12 @@
             "target": "adopted_child",
             "value": 1,
             "description": "养子女"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "照顾孩子的辛劳"
           }
         ]
       },
@@ -860,6 +1110,24 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "捐赠获得社区赞誉"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "善行的宁静"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "善行给你带来好运"
           }
         ]
       },
@@ -868,7 +1136,14 @@
         "title": "无视",
         "description": "街上可怜的人太多了",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "省下了养育费用"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -893,11 +1168,6 @@
         "title": "仁政爱民",
         "description": "你致力于让领地繁荣",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 19,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -914,6 +1184,12 @@
             "target": "beloved_lord",
             "value": 1,
             "description": "仁慈领主"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "治理的沉重责任"
           }
         ],
         "failureEffects": [
@@ -925,7 +1201,12 @@
           }
         ],
         "successText": "你的领地成为了王国最富庶的地方！",
-        "failureText": "治理比打仗难多了"
+        "failureText": "治理比打仗难多了",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "lord_military",
@@ -986,6 +1267,10 @@
     "priority": "major",
     "routes": [
       "merchant"
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -1003,11 +1288,6 @@
         "title": "重大发现",
         "description": "研究过程中你有了突破性发现",
         "probability": 0.2,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 22,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1024,6 +1304,12 @@
             "target": "great_scholar",
             "value": 1,
             "description": "大学者！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "经年累月的案牍劳形"
           }
         ],
         "failureEffects": [
@@ -1035,7 +1321,12 @@
           }
         ],
         "successText": "你的论文轰动了整个学术界！",
-        "failureText": "研究走进了死胡同……"
+        "failureText": "研究走进了死胡同……",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 18,
+          "description": "智慧判定 DC18"
+        }
       },
       {
         "id": "scholar_useful",
@@ -1071,7 +1362,20 @@
         "title": "太无聊了不写了",
         "description": "写作确实不是你的强项",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "放下学术压力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "有更多时间锻炼身体"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -1096,11 +1400,6 @@
         "title": "挑战新地城",
         "description": "听说有一座新发现的地下城",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 20,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1117,6 +1416,18 @@
             "target": "ancient_relic",
             "value": 1,
             "description": "获得 🏺 远古遗物"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "年龄带来的战斗代价"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "中年冒险的精神疲惫"
           }
         ],
         "failureEffects": [
@@ -1128,7 +1439,12 @@
           }
         ],
         "successText": "你从地城深处带回了传说中的宝物！",
-        "failureText": "这次冒险代价不小"
+        "failureText": "这次冒险代价不小",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 17,
+          "description": "体魄判定 DC17"
+        }
       },
       {
         "id": "return_bounty",
@@ -1151,6 +1467,11 @@
             "target": "hp",
             "value": -10,
             "description": "HP -10（赏金任务有风险）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
           }
         ]
       },
@@ -1200,11 +1521,6 @@
         "title": "大成功！",
         "description": "魔法阵发出耀眼的光芒",
         "probability": 0.2,
-        "riskCheck": {
-          "attribute": "mag",
-          "difficulty": 23,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1221,6 +1537,18 @@
             "target": "forbidden_knowledge",
             "value": 1,
             "description": "禁忌知识！"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "实验的魔力反噬"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "实验透支体力"
           }
         ],
         "failureEffects": [
@@ -1238,7 +1566,12 @@
           }
         ],
         "successText": "你感受到了前所未有的魔法力量在体内涌动！",
-        "failureText": "轰——实验炸了"
+        "failureText": "轰——实验炸了",
+        "diceCheck": {
+          "attribute": "mag",
+          "dc": 18,
+          "description": "魔力判定 DC18"
+        }
       },
       {
         "id": "experiment_partial",
@@ -1261,6 +1594,12 @@
             "target": "hp",
             "value": -10,
             "description": "HP -10（小规模魔法反噬）"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（实验消耗）"
           }
         ]
       },
@@ -1279,6 +1618,18 @@
             "type": "modify_attribute",
             "target": "mag",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "远离危险的安心"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "保全了身体"
           }
         ]
       }
@@ -1305,11 +1656,6 @@
         "title": "梭哈！",
         "description": "全押！",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "luk",
-          "difficulty": 20,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1321,6 +1667,12 @@
             "target": "lucky_gambler",
             "value": 1,
             "description": "赌神！"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "赌博的罪恶感"
           }
         ],
         "failureEffects": [
@@ -1332,7 +1684,12 @@
           }
         ],
         "successText": "你赢了！整个赌场都在为你鼓掌",
-        "failureText": "你输得只剩一条裤衩……"
+        "failureText": "你输得只剩一条裤衩……",
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 17,
+          "description": "运势判定 DC17"
+        }
       },
       {
         "id": "gamble_small",
@@ -1354,6 +1711,11 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
           }
         ]
       },
@@ -1393,11 +1755,6 @@
         "title": "智取胜过",
         "description": "以策略击败对手",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 18,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1414,6 +1771,12 @@
             "target": "business_tycoon",
             "value": 1,
             "description": "商业巨头"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "商战中的道德挣扎"
           }
         ],
         "failureEffects": [
@@ -1425,7 +1788,12 @@
           }
         ],
         "successText": "对手灰溜溜地退出了市场！",
-        "failureText": "你被打得措手不及"
+        "failureText": "你被打得措手不及",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "rivalry_cooperate",
@@ -1466,6 +1834,18 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "不与人争的豁达"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "退让反而避开了陷阱"
           }
         ]
       }
@@ -1490,14 +1870,6 @@
     "maxAge": 50,
     "include": "has.flag.married",
     "weight": 3,
-    "riskCheck": {
-      "attribute": "int",
-      "successBonus": 0.05,
-      "baseChance": 0.4,
-      "failureHpDamage": 20,
-      "failureDescription": "仪式失败了。诅咒反噬到了你身上，那个人的眼神从希望变成了空洞。",
-      "successDescription": "你的法术成功了！诅咒像黑烟一样从那个人的身体里被抽离。但你的头发白了一半。"
-    },
     "branches": [
       {
         "description": "你毫不犹豫地开始了仪式——十年的寿命算什么",
@@ -1517,6 +1889,11 @@
             "target": "hp",
             "value": -15,
             "description": "HP -15（献祭十年寿命）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
           }
         ],
         "id": "lover_curse_branch0",
@@ -1656,7 +2033,13 @@
     "exclude": "has.flag.widowed",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "噩耗",
+        "description": "那群出去打探消息的哥布林回来了，但少了一个。一个浑身是血的同伴把一枚你再熟悉不过的小铜铃递到你手里。\"对不起……\" 你什么都听不见了。"
+      }
+    }
   },
   {
     "id": "protect_family",
@@ -1671,36 +2054,64 @@
     "maxAge": 55,
     "include": "has.flag.married | has.flag.parent",
     "weight": 4,
-    "riskCheck": {
-      "attribute": "str",
-      "successBonus": 0.04,
-      "baseChance": 0.45,
-      "failureHpDamage": 30,
-      "failureDescription": "暗狼的速度比你想象的快得多。它的利爪划过你的胸口，你在地上滚了几圈，勉强爬起来挡在了门口。",
-      "successDescription": "你挡在门口，一刀砍下了暗狼的头颅。孩子们的哭声停了——不是因为安全了，是因为被你的怒吼吓住了。"
-    },
-    "effects": [
+    "effects": [],
+    "branches": [
       {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
+        "id": "fight_enemy",
+        "title": "正面迎敌",
+        "description": "你选择挺身而出，正面与威胁对抗。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10
+          }
+        ]
       },
       {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
+        "id": "evacuate_family",
+        "title": "转移家人",
+        "description": "你优先确保家人的安全，放弃了家园。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          }
+        ]
       }
     ],
     "unique": true,
     "exclude": "has.flag.protect_family",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "巢穴入侵者",
+        "description": "深夜，孩子们的哭声把你惊醒。你抓起匕首推开门——一只暗蛛正在你的巢穴门口吐丝。它的八只眼睛死死盯着里面的方向。"
+      }
+    }
   },
   {
     "id": "widowed_wanderer",
@@ -1757,6 +2168,12 @@
             "value": -10,
             "description": "HP -10（伤痕累累）",
             "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "独自旅行找回自己"
           }
         ],
         "id": "widowed_wanderer_branch1",
@@ -1789,7 +2206,13 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "失去之后的游荡",
+        "description": "你已经不记得自己走了多久。从地洞到地洞，从黑市到黑市。喝掉了多少瓶蘑菇酒。世界对你来说只剩下灰色。"
+      }
+    }
   },
   {
     "id": "mid_body_decline",
@@ -1797,7 +2220,7 @@
     "description": "多年的冒险生涯开始在你身上留下痕迹。曾经轻松举起的巨剑，如今握起来有些吃力了。膝盖在阴天会隐隐作痛，而镜中的白发也越来越多。",
     "minAge": 45,
     "maxAge": 55,
-    "weight": 12,
+    "weight": 5,
     "effects": [],
     "branches": [
       {
@@ -1821,6 +2244,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "接受现实的平静"
           }
         ],
         "successText": "你放下了手中的重剑，换上了轻便的长剑。虽然力量不如从前，但你的经验足以弥补一切。岁月带走的是蛮力，留下的是智慧。"
@@ -1846,6 +2275,23 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "不甘心的背后是深思"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "运动让身体反而更好了"
           }
         ],
         "successText": "每天天不亮你就起来跑步、举石锁、劈木桩。年轻人看着你的训练量都咋舌。肌肉在酸痛中重新紧实——但你注意到，恢复的时间确实比以前长了许多。"
@@ -1856,7 +2302,17 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "title": "精灵的微恙",
+        "description": "精灵很少生病，但你的身体发出了微弱的警告信号。也许是数百年来积累的魔力波动，也许是世界树力量的衰退——总之你第一次感受到了身体的脆弱。"
+      },
+      "goblin": {
+        "title": "哥布林式衰老",
+        "description": "你的关节开始嘎吱作响，眼睛也没以前那么亮了。在哥布林社会，你这个年纪已经算是'老不死的'了。但你的脑子还是一样灵光——至少你自己这么认为。"
+      }
+    }
   },
   {
     "id": "mid_chronic_pain",
@@ -1864,7 +2320,7 @@
     "description": "年轻时受过的伤开始反复发作。每到深夜，肩膀的箭伤、腰部的摔伤、还有那道从左臂延伸到胸口的爪痕，都在无声地提醒你——你不再是当年那个不知疲倦的冒险者了。",
     "minAge": 45,
     "maxAge": 60,
-    "weight": 10,
+    "weight": 4,
     "effects": [],
     "branches": [
       {
@@ -1883,6 +2339,18 @@
             "target": "hp",
             "value": 10,
             "description": "HP +10（治疗效果）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "积极面对疾病的勇气"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "了解了医疗知识"
           }
         ],
         "successText": "治疗师用温热的魔力包裹住你的旧伤，疼痛逐渐消退。虽然花了不少钱，但至少今晚能睡个好觉了。治疗师临走时意味深长地说：「阁下，该学会和身体和解了。」"
@@ -1903,6 +2371,28 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "set_flag",
+            "target": "tough_spirit",
+            "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "苦痛中锻炼的意志如钢"
+          },
+          {
+            "type": "set_flag",
+            "target": "iron_will",
+            "value": 1,
+            "description": "获得钢铁意志"
           }
         ],
         "successText": "你咬着牙继续日常训练。疼痛？习惯了。但深夜里，那些旧伤像是约好了一样同时发作，让你不得不承认——逞强和坚强，是两回事。"
@@ -1913,7 +2403,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "旧伤复发",
+        "description": "年轻时偷东西被打断过的手指又开始疼了。那次被人类踢到的肋骨也在阴天隐隐作痛。哥布林的身体本来就不耐磨损——你还能撑几年？"
+      }
+    }
   },
   {
     "id": "mid_vision_decline",
@@ -1921,7 +2417,7 @@
     "description": "你发现瞄准目标时越来越吃力了。法术偶尔偏了几寸，弓箭再也无法百步穿杨。是不是该承认，你的眼睛已经开始背叛你了？",
     "minAge": 50,
     "maxAge": 60,
-    "weight": 8,
+    "weight": 3,
     "effects": [],
     "branches": [
       {
@@ -1939,6 +2435,18 @@
             "type": "modify_attribute",
             "target": "mag",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "眼镜带来更清晰的视野"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "学者风范"
           }
         ],
         "successText": "魔导工匠为你打造了一副精致的水晶镜片。当第一次透过它看世界时，你惊讶地发现——原来树叶的纹理如此清晰。工匠笑着说：「欢迎回到清晰的世界，阁下。」"
@@ -1958,6 +2466,18 @@
             "type": "modify_attribute",
             "target": "mag",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "经验弥补了视力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "淡然接受的心境"
           }
         ],
         "successText": "你开始改变战斗风格——不再依赖精确瞄准，而是凭借多年的战场直觉。闭上眼睛也能感知到敌人的位置，这种本事，是年轻时用无数次危险换来的。"
@@ -1976,7 +2496,7 @@
     "description": "你发现自己不如从前那么敏捷了。闪避变得吃力，反应也慢了半拍。上个月那次战斗中，你差点没能躲开哥布林的飞刀——这在十年前是不可能的。",
     "minAge": 50,
     "maxAge": 65,
-    "weight": 10,
+    "weight": 4,
     "effects": [],
     "branches": [
       {
@@ -1994,6 +2514,11 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
           }
         ],
         "successText": "你不再追求速度和力量的极致，转而磨炼技术和判断力。老猎人说得好：「跑不过兔子，就得比兔子更聪明。」你开始享受这种以智取胜的战斗方式。"
@@ -2014,6 +2539,18 @@
             "target": "hp",
             "value": -20,
             "description": "HP -20（过度训练消耗）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "坚持锻炼的成果"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不服老的精神"
           }
         ],
         "successText": "你咬牙维持着年轻时的高强度训练。肌肉在哀嚎，关节在抗议——但你硬是撑了下来。可是每次训练后的恢复时间越来越长，深夜的心悸也越来越频繁。身体在用它的方式告诉你：够了。"
@@ -2024,7 +2561,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "迟缓的脚步",
+        "description": "你发现自己不如从前灵活了。闪避变得吃力，偷东西也没以前利索了。上次差点被人类抓住——这在几年前是不可能的。"
+      }
+    }
   },
   {
     "id": "mid_legacy_review",
@@ -2067,6 +2610,11 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
           }
         ],
         "successText": "你在纸上列出了所有遗憾。但看完之后，你把它烧掉了——因为过去无法改变，未来才是重点。"
@@ -2075,7 +2623,13 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "回首半生",
+        "description": "对哥布林来说，你已经算是老家伙了。你坐在洞穴深处，回忆这些年偷过的东西、骗过的人、赚到的金币。值得。"
+      }
+    }
   },
   {
     "id": "mid_apprentice_success",
@@ -2124,6 +2678,11 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1
           }
         ],
         "successText": "弟子虽然有些失望，但还是留了下来。多一个人帮忙，日子确实轻松了不少。"
@@ -2182,6 +2741,12 @@
             "type": "modify_attribute",
             "target": "str",
             "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "药剂的副作用"
           }
         ],
         "successText": "药剂入口的瞬间，你感到全身充满了年轻时的活力。白发中甚至冒出了几根黑丝。"
@@ -2233,6 +2798,11 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -2
           }
         ],
         "successText": "邻居们对你的花园赞不绝口。你泡了一壶好茶，大家在花丛中聊了一个下午。"
@@ -2242,5 +2812,1914 @@
     "routes": [
       "*"
     ]
+  },
+  {
+    "id": "human_grandchildren",
+    "title": "含饴弄孙",
+    "description": "孙辈出生了。看着小小的生命，你想起了自己年轻时的模样。",
+    "minAge": 45,
+    "maxAge": 70,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "human_memoir_writing",
+    "title": "撰写回忆录",
+    "description": "你决定把这辈子经历的故事写下来。或许有一天，后人会从中获得启发。",
+    "minAge": 50,
+    "maxAge": 75,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "human_legacy_decision",
+    "title": "遗产安排",
+    "description": "人到暮年，该考虑身后事了。你的积蓄应该留给谁？",
+    "minAge": 55,
+    "maxAge": 80,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "human_legacy_decision_br0",
+        "title": "平均分给子女",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你选择了平均分给子女，静静等待结果。"
+      },
+      {
+        "id": "human_legacy_decision_br1",
+        "title": "捐给神殿",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你权衡利弊后，选择了捐给神殿。"
+      },
+      {
+        "id": "human_legacy_decision_br2",
+        "title": "全部留给自己享受",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了全部留给自己享受。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_elder_wisdom",
+    "title": "老哥布林的智慧",
+    "description": "在哥布林部落，能活到这个岁数的都被视为智者。年轻人开始来找你请教问题。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "goblin_final_feast",
+    "title": "最后的盛宴",
+    "description": "按照哥布林的传统，当一个哥布林觉得自己时日无多时，会为部落举办一场盛大的宴会。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "goblin_treasure_map",
+    "title": "藏宝图",
+    "description": "你这辈子收集的所有闪亮物品都埋在了一个秘密地点。你画了一张藏宝图……但只有哥布林才看得懂。",
+    "minAge": 25,
+    "maxAge": 38,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "mid_old_friend_reunion",
+    "title": "故友重逢",
+    "description": "你在一个意想不到的地方遇到了多年未见的老朋友。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_old_friend_reunion_br0",
+        "title": "彻夜长谈",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你选择了彻夜长谈，静静等待结果。"
+      },
+      {
+        "id": "mid_old_friend_reunion_br1",
+        "title": "一起再冒险一次",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你鼓起勇气，决定一起再冒险一次。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "故友重逢",
+        "description": "你在黑市偶遇了以前一起长大的哥布林。他瘦了很多，但笑容没变。你们蹲在角落里分了一瓶蘑菇酒，像小时候一样。"
+      }
+    }
+  },
+  {
+    "id": "mid_life_reflection",
+    "title": "人生回顾",
+    "description": "某个安静的夜晚，你独自坐在窗前，回顾这些年走过的路。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "mid_natural_disaster",
+    "title": "天灾",
+    "description": "一场严重的自然灾害袭击了这片地区。洪水/地震/干旱让人们苦不堪言。",
+    "minAge": 30,
+    "maxAge": 60,
+    "weight": 3,
+    "unique": true,
+    "priority": "major",
+    "tag": "disaster",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_natural_disaster_br0",
+        "title": "组织救援",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定组织救援——也许这是最好的选择。"
+      },
+      {
+        "id": "mid_natural_disaster_br1",
+        "title": "捐出积蓄帮助重建",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "philanthropist",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定捐出积蓄帮助重建——也许这是最好的选择。这可能带来灵魂提升了，但也伴随着风险。"
+      },
+      {
+        "id": "mid_natural_disaster_br2",
+        "title": "保护好自己和家人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你选择了保护好自己和家人，静静等待结果。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地下洪水",
+        "description": "地面上的连日暴雨让地下水位猛涨，你的巢穴和储物间全被淹了。哥布林们在齐腰深的水里拼命转移物资。"
+      }
+    }
+  },
+  {
+    "id": "mid_property_acquisition",
+    "title": "置办产业",
+    "description": "你有了足够的积蓄，是时候考虑买一间属于自己的房子了。",
+    "minAge": 30,
+    "maxAge": 50,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.mny >= 12",
+    "branches": [
+      {
+        "id": "mid_property_acquisition_br0",
+        "title": "买一栋城镇宅邸",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -5
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "homeowner",
+            "value": true
+          }
+        ],
+        "description": "你选择了买一栋城镇宅邸，静静等待结果。这可能带来魅力提升了，但也伴随着风险。"
+      },
+      {
+        "id": "mid_property_acquisition_br1",
+        "title": "买一块农田",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "homeowner",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定买一块农田——也许这是最好的选择。这可能带来力量提升了，但也伴随着风险。"
+      },
+      {
+        "id": "mid_property_acquisition_br2",
+        "title": "继续攒钱",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定继续攒钱——也许这是最好的选择。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "扩大地盘",
+        "description": "你积攒了足够的资源，是时候扩大自己的领地了——把隔壁那个废弃的洞穴打通，做成仓库。当然，得先\"说服\"那里的蜘蛛搬家。"
+      }
+    }
+  },
+  {
+    "id": "mid_mentoring_youth",
+    "title": "指导年轻人",
+    "description": "一个充满热情但缺乏经验的年轻人向你请教。你看到了曾经的自己。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_mentoring_youth_br0",
+        "title": "倾囊相授",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "has_student",
+            "value": true
+          }
+        ],
+        "description": "你选择了倾囊相授，静静等待结果。"
+      },
+      {
+        "id": "mid_mentoring_youth_br1",
+        "title": "给几个建议就行",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了给几个建议就行，静静等待结果。"
+      },
+      {
+        "id": "mid_mentoring_youth_br2",
+        "title": "让他自己去经历",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了让他自己去经历，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "mid_health_scare",
+    "title": "健康警报",
+    "description": "你突然感到一阵剧烈的胸痛。这是身体在提醒你——你已经不再年轻了。",
+    "minAge": 40,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -2
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_health_scare_br0",
+        "title": "去找治疗师",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1
+          }
+        ],
+        "description": "你权衡利弊后，选择了去找治疗师。这可能带来灵魂提升了，但也伴随着风险。"
+      },
+      {
+        "id": "mid_health_scare_br1",
+        "title": "开始每天锻炼",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "description": "你选择了开始每天锻炼，静静等待结果。"
+      },
+      {
+        "id": "mid_health_scare_br2",
+        "title": "不当回事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": -1
+          }
+        ],
+        "description": "你选择了不当回事，静静等待结果。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "身体警报",
+        "description": "你突然剧烈咳血。对短命的哥布林来说，这意味着你的身体已经在衰退了。年轻的部落成员用异样的眼光看着你——在哥布林社会，病弱就意味着被淘汰。"
+      }
+    }
+  },
+  {
+    "id": "mid_legacy_project",
+    "title": "留下遗产",
+    "description": "你开始思考——你想为这个世界留下什么？",
+    "minAge": 40,
+    "maxAge": 60,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_legacy_project_br0",
+        "title": "写一本书",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "author",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了写一本书。"
+      },
+      {
+        "id": "mid_legacy_project_br1",
+        "title": "建一所学校",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -4
+          },
+          {
+            "type": "set_flag",
+            "target": "school_founder",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定建一所学校——也许这是最好的选择。这可能带来魅力提升了，但也伴随着风险。"
+      },
+      {
+        "id": "mid_legacy_project_br2",
+        "title": "培养继承人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "has_successor",
+            "value": true
+          }
+        ],
+        "requireCondition": "has.flag.parent",
+        "description": "你选择了培养继承人，静静等待结果。"
+      },
+      {
+        "id": "mid_legacy_project_br3",
+        "title": "创建一个基金会",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "philanthropist",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了创建一个基金会。这可能带来魅力提升了，但也伴随着风险。"
+      }
+    ]
+  },
+  {
+    "id": "elf_watching_generations",
+    "title": "看着世代更替",
+    "description": "你认识的人类朋友已经是第三代了。他们叫你'奶奶/爷爷'虽然你看起来还很年轻。",
+    "minAge": 60,
+    "maxAge": 150,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_magic_research",
+    "title": "魔法论文",
+    "description": "你在魔法研究上取得了一个小突破。精灵学院希望你发表一篇论文。",
+    "minAge": 50,
+    "maxAge": 200,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.mag >= 20",
+    "branches": [
+      {
+        "id": "elf_magic_research_br0",
+        "title": "发表论文",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "你选择了发表论文，静静等待结果。"
+      },
+      {
+        "id": "elf_magic_research_br1",
+        "title": "继续深入研究",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          }
+        ],
+        "description": "你深吸一口气，决定继续深入研究。"
+      }
+    ]
+  },
+  {
+    "id": "elf_tree_grown",
+    "title": "你种的树长大了",
+    "description": "童年时种下的那棵小树苗，已经长成了参天大树。你在它的树荫下小憩。",
+    "minAge": 50,
+    "maxAge": 200,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_elder_respect",
+    "title": "受人尊敬的老哥布林",
+    "description": "在哥布林社会中，你已经是少有的长寿者。年轻的哥布林开始叫你'老祖宗'。",
+    "minAge": 25,
+    "maxAge": 35,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_trade_empire_mid",
+    "title": "贸易帝国",
+    "description": "从一个拾荒者到如今的地下贸易网络之主。哥布林的商业基因在你身上发挥到了极致。",
+    "minAge": 20,
+    "maxAge": 35,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 5
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "goblin_merchant_king",
+        "value": true
+      }
+    ],
+    "include": "attribute.mny >= 15 & attribute.int >= 12"
+  },
+  {
+    "id": "goblin_peace_treaty",
+    "title": "和平条约",
+    "description": "你代表哥布林部落与附近的人类城镇签订了互不侵犯协议。历史性的时刻。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.chr >= 12 & attribute.int >= 10",
+    "branches": [
+      {
+        "id": "goblin_peace_treaty_br0",
+        "title": "以诚意打动对方",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "diplomat",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了以诚意打动对方。"
+      },
+      {
+        "id": "goblin_peace_treaty_br1",
+        "title": "展示哥布林的实力作为筹码",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定展示哥布林的实力作为筹码——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "human_midlife_crisis",
+    "title": "中年危机",
+    "description": "你突然对目前的生活感到不满。年轻时的梦想，还有几个实现了？",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_midlife_crisis_br0",
+        "title": "重拾年轻时的爱好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了重拾年轻时的爱好。"
+      },
+      {
+        "id": "human_midlife_crisis_br1",
+        "title": "制定新的人生目标",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你选择了制定新的人生目标，静静等待结果。"
+      },
+      {
+        "id": "human_midlife_crisis_br2",
+        "title": "接受现实，知足常乐",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "经过一番思考，你选择了接受现实，知足常乐。"
+      }
+    ]
+  },
+  {
+    "id": "human_family_tradition",
+    "title": "传承家族手艺",
+    "description": "你决定把家族的手艺传给下一代。这门技术已经传了好几代人了。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "family_legacy",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_son_leaves_home",
+    "title": "孩子离家",
+    "description": "你的孩子收拾行囊准备出门闯荡。看着背影，你既骄傲又不舍。",
+    "minAge": 40,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "has.flag.parent"
+  },
+  {
+    "id": "human_old_war_buddy",
+    "title": "战友的来信",
+    "description": "你收到了一封来自老战友的信。对方邀请你重聚，一起回忆那些峥嵘岁月。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": "has.flag.military_service"
+  },
+  {
+    "id": "human_community_leader",
+    "title": "社区领袖",
+    "description": "邻居们推举你做社区的代表。大大小小的事务都来找你商量。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "attribute.chr >= 12"
+  },
+  {
+    "id": "human_autumn_harvest_feast",
+    "title": "丰年宴",
+    "description": "今年收成特别好。全村人一起举办了盛大的庆祝宴会，你作为长辈被请上了首席。",
+    "minAge": 40,
+    "maxAge": 60,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_temple_donation",
+    "title": "神殿捐赠",
+    "description": "你向神殿捐了一笔钱。牧师为你祈福，并在捐赠人名录上刻下了你的名字。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.mny >= 8",
+    "branches": [
+      {
+        "id": "human_temple_donation_br0",
+        "title": "慷慨解囊",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你权衡利弊后，选择了慷慨解囊。这可能带来灵魂提升了，但也伴随着风险。"
+      },
+      {
+        "id": "human_temple_donation_br1",
+        "title": "适度捐赠",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了适度捐赠。这可能带来灵魂提升了，但也伴随着风险。"
+      }
+    ]
+  },
+  {
+    "id": "elf_wisdom_council_seat",
+    "title": "贤者之席",
+    "description": "经过数百年的积累，你终于被邀请正式加入精灵贤者会。这是精灵社会最高的智慧殿堂。",
+    "minAge": 100,
+    "maxAge": 300,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "council_member",
+        "value": true
+      }
+    ],
+    "include": "attribute.int >= 20 | attribute.mag >= 25"
+  },
+  {
+    "id": "elf_time_perception",
+    "title": "时间的感知",
+    "description": "你开始察觉到精灵与其他种族截然不同的时间感——一个人类的一生，不过是你午后小憩的光景。",
+    "minAge": 100,
+    "maxAge": 250,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_silver_harp",
+    "title": "银竖琴",
+    "description": "你终于掌握了精灵银竖琴的全部技法。据说精通此琴的精灵，琴声能治愈心灵的创伤。",
+    "minAge": 80,
+    "maxAge": 200,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_dragon_alliance",
+    "title": "与龙族结盟",
+    "description": "古精灵与龙族曾有深厚的渊源。一条年迈的银龙主动找到你，提议恢复古老的盟约。",
+    "minAge": 100,
+    "maxAge": 300,
+    "weight": 1,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "legendary",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.mag >= 25 & attribute.chr >= 15",
+    "branches": [
+      {
+        "id": "elf_dragon_alliance_br0",
+        "title": "接受盟约",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_rider",
+            "value": true
+          }
+        ],
+        "description": "你没有犹豫，果断地接受盟约。"
+      },
+      {
+        "id": "elf_dragon_alliance_br1",
+        "title": "谨慎考虑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了谨慎考虑，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "elf_forest_expansion",
+    "title": "拓展森林",
+    "description": "你领导了一项精灵的伟大工程——用魔法将古森林的边界向外扩展。新的树木在你的魔力下破土而出。",
+    "minAge": 80,
+    "maxAge": 250,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": "attribute.mag >= 18"
+  },
+  {
+    "id": "goblin_legacy_hoard",
+    "title": "传家宝库",
+    "description": "你一辈子收集的闪亮物品已经堆满了三个洞穴。是时候想想怎么处置了。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_legacy_hoard_br0",
+        "title": "设置机关保护",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了设置机关保护。"
+      },
+      {
+        "id": "goblin_legacy_hoard_br1",
+        "title": "分给族中的孩子们",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了分给族中的孩子们。"
+      },
+      {
+        "id": "goblin_legacy_hoard_br2",
+        "title": "出售变现",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          }
+        ],
+        "description": "你权衡利弊后，选择了出售变现。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_school_founder",
+    "title": "哥布林学校",
+    "description": "你做了一件前所未有的事——为哥布林的孩子们开办了一所学校。教他们读写、算数和基本的机械知识。",
+    "minAge": 20,
+    "maxAge": 33,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "major",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "school_founder",
+        "value": true
+      }
+    ],
+    "include": "attribute.int >= 15"
+  },
+  {
+    "id": "goblin_old_bones_ache",
+    "title": "骨头疼",
+    "description": "哥布林老得快。你的关节开始咔咔作响，爬洞穴比以前费力多了。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_wise_counsel",
+    "title": "调解纠纷",
+    "description": "两个年轻哥布林在争夺地盘。你作为部落长辈被请来裁决。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_wise_counsel_br0",
+        "title": "公正裁决",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了公正裁决，静静等待结果。"
+      },
+      {
+        "id": "goblin_wise_counsel_br1",
+        "title": "让他们打一架",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了让他们打一架。"
+      },
+      {
+        "id": "goblin_wise_counsel_br2",
+        "title": "偏向有才能的那个",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定偏向有才能的那个——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_recipe_book",
+    "title": "食谱大全",
+    "description": "你决定把这辈子研究出来的所有食谱画在兽皮卷上。虽然对人类来说可能有点重口味。",
+    "minAge": 20,
+    "maxAge": 35,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_mentor_youth",
+    "title": "指导年轻人",
+    "description": "一个年轻人慕名而来拜你为师。看着对方热切的眼神，你想起了曾经的自己。",
+    "minAge": 38,
+    "maxAge": 55,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "has_student",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_land_dispute",
+    "title": "土地纠纷",
+    "description": "邻居声称你的围墙占了他家的地。这种事在人类村庄每天都在发生。",
+    "minAge": 35,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_land_dispute_br0",
+        "title": "找村长仲裁",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定找村长仲裁——也许这是最好的选择。"
+      },
+      {
+        "id": "human_land_dispute_br1",
+        "title": "让一步算了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了让一步算了。"
+      },
+      {
+        "id": "human_land_dispute_br2",
+        "title": "绝不退让",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了绝不退让。"
+      }
+    ]
+  },
+  {
+    "id": "human_grey_hair",
+    "title": "第一根白发",
+    "description": "你在镜子里发现了第一根白发。人类的寿命就是这样，还没感觉年轻够久，岁月就来催了。",
+    "minAge": 35,
+    "maxAge": 50,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_memory_garden",
+    "title": "记忆花园",
+    "description": "你开辟了一座用魔法植物记录记忆的花园。每朵花都是一段过往。走入其中就像翻阅人生。",
+    "minAge": 100,
+    "maxAge": 300,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_young_elf_mentor",
+    "title": "指导年轻精灵",
+    "description": "一个精灵少年被交到你手下培养。你用百年的经验为他规划成长道路。",
+    "minAge": 80,
+    "maxAge": 250,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "has_student",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_world_tree_sickness",
+    "title": "世界树之疾",
+    "description": "世界树的一根枝条开始枯萎。精灵们人人自危。你被指派去调查原因。",
+    "minAge": 100,
+    "maxAge": 300,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elf_world_tree_sickness_br0",
+        "title": "深入树根调查",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "经过一番思考，你选择了深入树根调查。"
+      },
+      {
+        "id": "elf_world_tree_sickness_br1",
+        "title": "召集长老会议",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定召集长老会议——也许这是最好的选择。"
+      },
+      {
+        "id": "elf_world_tree_sickness_br2",
+        "title": "用自身魔力尝试治愈",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "你权衡利弊后，选择了用自身魔力尝试治愈。这可能带来魔力提升了，但也伴随着风险。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_chief_council",
+    "title": "首领议事会",
+    "description": "多个哥布林部落的首领聚在一起商讨大事。你作为资深长辈被邀请参议。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_trade_alliance",
+    "title": "贸易联盟",
+    "description": "你提议几个哥布林部落联合起来做生意，形成一个贸易联盟。大家犹豫了很久才同意。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "attribute.chr >= 12"
+  },
+  {
+    "id": "goblin_passing_the_torch",
+    "title": "传承手艺",
+    "description": "你把自己独创的机关制造技术教给了最聪明的年轻哥布林。希望他能比你走得更远。",
+    "minAge": 22,
+    "maxAge": 35,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "has_successor",
+        "value": true
+      }
+    ],
+    "include": ""
   }
 ]

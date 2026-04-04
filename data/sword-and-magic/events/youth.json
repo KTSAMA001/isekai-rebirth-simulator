@@ -48,6 +48,12 @@
             "type": "set_flag",
             "target": "magic_academy",
             "value": true
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "高昂的学院费用"
           }
         ],
         "successText": "当你推开学院大门的那一刻，空气中弥漫的魔力让你全身颤栗。一位白发教授看了你的入学通知书，微微点头：「有趣……你的魔力波动很特别。」"
@@ -86,7 +92,17 @@
     "priority": "critical",
     "routes": [
       "mage"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "title": "魔法学院入学·精灵生",
+        "description": "学院收到了你的入学申请后格外兴奋——精灵学生总是最受欢迎的。你天生的魔力亲和让导师们赞不绝口，但你也感受到了其他种族学生投来的复杂目光。"
+      },
+      "goblin": {
+        "title": "魔法学院入学·历史首位",
+        "description": "你可能是这所魔法学院历史上第一个哥布林学生。入学面试官看到你时愣了三秒，然后反复确认了五遍你的成绩单。不管怎样，你的魔力测试结果是货真价实的。"
+      }
+    }
   },
   {
     "id": "magic_exam",
@@ -104,11 +120,6 @@
         "title": "全力备考",
         "description": "你通宵达旦地复习，把每一个咒语都背得滚瓜烂熟",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 13,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -147,18 +158,18 @@
           }
         ],
         "successText": "你拿到了全年级第三名！教授对你刮目相看",
-        "failureText": "你拼尽全力，勉强及格...下次要更努力"
+        "failureText": "你拼尽全力，勉强及格...下次要更努力",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 15,
+          "description": "智慧判定 DC15"
+        }
       },
       {
         "id": "cheat_exam",
         "title": "考前突击",
         "description": "你在袖子里藏了一张小抄...希望能蒙混过关",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "luk",
-          "difficulty": 11,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -191,7 +202,12 @@
           }
         ],
         "successText": "居然蒙混过关了！但你心里知道这不是长久之计",
-        "failureText": "考官当场抓住了你的小抄...你被罚站了一整天"
+        "failureText": "考官当场抓住了你的小抄...你被罚站了一整天",
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 14,
+          "description": "运势判定 DC14"
+        }
       },
       {
         "id": "natural_talent",
@@ -245,11 +261,6 @@
         "title": "全力修炼",
         "description": "你咬牙坚持，手上的茧比谁都厚",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 11,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -277,6 +288,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "高强度训练的身体损耗"
           }
         ],
         "failureEffects": [
@@ -300,7 +317,12 @@
           }
         ],
         "successText": "训练师的目光从轻视变成了赞许",
-        "failureText": "你拼尽了全力，但还是差了一点...明天继续"
+        "failureText": "你拼尽了全力，但还是差了一点...明天继续",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 14,
+          "description": "体魄判定 DC14"
+        }
       },
       {
         "id": "slack_off",
@@ -336,7 +358,13 @@
     "priority": "major",
     "routes": [
       "knight"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "最小的侍从",
+        "description": "当你说要成为骑士侍从时，所有人都笑了。一个身高只到人类膝盖的哥布林，要穿上铠甲挥舞长剑？但你的眼中燃烧着不输任何人的决心。"
+      }
+    }
   },
   {
     "id": "first_love",
@@ -355,11 +383,6 @@
         "title": "表白",
         "description": "你鼓起勇气递上了一封手写的信",
         "probability": 0.35,
-        "riskCheck": {
-          "attribute": "chr",
-          "difficulty": 11,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -399,7 +422,12 @@
           }
         ],
         "successText": "TA红着脸点了点头...",
-        "failureText": "TA笑了笑说...我们还是做朋友吧"
+        "failureText": "TA笑了笑说...我们还是做朋友吧",
+        "diceCheck": {
+          "attribute": "chr",
+          "dc": 14,
+          "description": "魅力判定 DC14"
+        }
       },
       {
         "id": "secret_crush",
@@ -451,6 +479,11 @@
             "target": "first_love",
             "value": 1,
             "description": "初恋（放弃）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
           }
         ]
       }
@@ -465,7 +498,23 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你感受到了一种从未有过的悸动。作为精灵，这份感情来得格外缓慢而深沉——精灵的初恋往往会持续几十年甚至上百年。长老们说，精灵一生只会真正爱一次。"
+      },
+      "goblin": {
+        "description": "你的心跳突然加速。哥布林的恋爱来得快去得也快——毕竟寿命只有几十年，没时间慢慢来。你鼓起勇气，用哥布林式的方式表达爱意：往对方头上扔了一朵花。"
+      }
+    },
+    "genderVariants": {
+      "male": {
+        "description": "你注意到一个女孩经常出现在你的视线中。她的笑容让你莫名心跳加速，你开始不自觉地整理自己的衣着。少年的初恋，笨拙而真挚。"
+      },
+      "female": {
+        "description": "你注意到一个少年经常在你身旁逗留。每次四目相对时他都会慌张地别过头去。你心中涌起一种奇妙的悸动，像是春天第一朵花悄悄绽放。"
+      }
+    }
   },
   {
     "id": "bullied_fight_back",
@@ -477,39 +526,7 @@
     "include": "attribute.str >= 6",
     "exclude": "has.flag.fight_back",
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "set_flag",
-        "target": "fight_back",
-        "value": 1,
-        "description": "不再忍气吞声"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "combat",
     "priority": "major",
     "prerequisites": [
@@ -517,6 +534,66 @@
     ],
     "routes": [
       "*"
+    ],
+    "branches": [
+      {
+        "id": "fight_punch",
+        "title": "直接动手",
+        "description": "你一拳砸在带头的那个人鼻子上。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          },
+          {
+            "type": "set_flag",
+            "value": 1,
+            "target": "fighter_spirit"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 14,
+          "description": "体魄判定 DC14 — 你打得过他吗？"
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "value": -15,
+            "target": "hp"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "spr"
+          }
+        ],
+        "successText": "一拳下去，对方鼻血直流。从此没人敢再欺负你。",
+        "failureText": "你被反揍了一顿，但没有人嘲笑你——因为你敢站出来。"
+      },
+      {
+        "id": "fight_smart",
+        "title": "找老师告状",
+        "description": "暴力不能解决问题，但权威可以。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          }
+        ]
+      }
     ]
   },
   {
@@ -536,11 +613,6 @@
         "title": "深入探索",
         "description": "你决定沿着地下河往深处走，也许能发现什么宝物",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 10,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -579,6 +651,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "深入地牢的伤害"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "地牢深处的阴影记忆"
           }
         ],
         "failureEffects": [
@@ -608,7 +692,12 @@
           }
         ],
         "successText": "你在河的尽头发现了一处隐藏的宝藏室！",
-        "failureText": "脚下一滑，你掉进了暗河...好不容易才爬上来"
+        "failureText": "脚下一滑，你掉进了暗河...好不容易才爬上来",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 14,
+          "description": "体魄判定 DC14"
+        }
       },
       {
         "id": "explore_cautious",
@@ -691,11 +780,6 @@
         "title": "偷偷锻炼",
         "description": "趁着没人注意，你在房间里做俯卧撑和深蹲",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 10,
-          "scale": 2
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -718,7 +802,12 @@
           }
         ],
         "successText": "你的努力没有白费，伤愈后的你比受伤前更强了！",
-        "failureText": "伤口又裂开了...你被骂了一顿"
+        "failureText": "伤口又裂开了...你被骂了一顿",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 14,
+          "description": "体魄判定 DC14"
+        }
       }
     ],
     "tag": "life",
@@ -789,6 +878,18 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "坚持自己道路的意志"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "用自己的方式学习经济"
           }
         ],
         "successText": "你决定自学经商之道。试错是最好的老师——虽然学费有点贵。第一次倒卖亏了全部积蓄，但也学到了最宝贵的一课。"
@@ -798,7 +899,18 @@
     "priority": "critical",
     "routes": [
       "merchant"
-    ]
+    ],
+    "genderVariants": {
+      "female": {
+        "description": "女性商人虽然不常见，但你的掌柜并不介意——'赚钱只看能力，不看性别。'你从记账开始学起，很快就展现出了过人的商业嗅觉。"
+      }
+    },
+    "raceVariants": {
+      "goblin": {
+        "title": "黑市学徒",
+        "description": "一位哥布林老商人注意到了你的精明。\"小子，想不想学点真本事？\"他经营着地下城最大的黑市摊位，据说连人类商会都要给他面子。"
+      }
+    }
   },
   {
     "id": "dragon_awakening",
@@ -808,45 +920,58 @@
     "maxAge": 14,
     "weight": 1,
     "include": "has.talent.dragon_blood",
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 2
-      },
-      {
-        "type": "modify_max_hp_bonus",
-        "target": "max_hp",
-        "value": 50,
-        "description": "HP上限 +50（龙血强化）"
-      },
-      {
-        "type": "set_flag",
-        "target": "dragon_awakened",
-        "value": 1,
-        "description": "龙血觉醒！"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mag",
-        "value": 3
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      }
-    ],
+    "effects": [],
     "unique": true,
     "tag": "epic",
     "priority": "minor",
     "routes": [
       "mage"
+    ],
+    "branches": [
+      {
+        "id": "dragon_embrace",
+        "title": "拥抱这股力量",
+        "description": "滚烫的力量在血管里奔涌，你张开双臂迎接它。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 3,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "mag"
+          },
+          {
+            "type": "modify_max_hp_bonus",
+            "value": 50,
+            "target": "max_hp_bonus"
+          }
+        ]
+      },
+      {
+        "id": "dragon_suppress",
+        "title": "压抑龙血",
+        "description": "这力量太危险了，你咬紧牙关将它封印回去。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 3,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_max_hp_bonus",
+            "value": 20,
+            "target": "max_hp_bonus"
+          }
+        ]
+      }
     ]
   },
   {
@@ -888,7 +1013,13 @@
             "description": "成为逃犯"
           }
         ],
-        "successText": "你拼命奔跑，躲进了小巷。心跳声大得像打鼓。等到外面安静下来，你才发现自己浑身都在发抖。但至少——你还活着。"
+        "successText": "你拼命奔跑，躲进了小巷。心跳声大得像打鼓。等到外面安静下来，你才发现自己浑身都在发抖。但至少——你还活着。",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 15,
+          "description": "体魄判定 DC15 — 你能逃脱猎魔骑士吗？"
+        },
+        "failureText": "力不从心，这次的挑战超出了你身体的极限。（HP -30）"
       },
       {
         "id": "power_rampage",
@@ -957,6 +1088,10 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -967,40 +1102,59 @@
     "maxAge": 10,
     "weight": 1,
     "include": "has.talent.reincarnated",
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 2
-      },
-      {
-        "type": "set_flag",
-        "target": "reincarnated",
-        "value": 1,
-        "description": "前世觉醒"
-      },
-      {
-        "type": "grant_item",
-        "target": "reincarnation_memory",
-        "value": 1,
-        "description": "获得 🧠 转生记忆"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 2
-      }
-    ],
+    "effects": [],
     "unique": true,
     "tag": "epic",
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "branches": [
+      {
+        "id": "memory_accept",
+        "title": "接受前世记忆",
+        "description": "另一个世界的知识如潮水般涌入脑海。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 3,
+            "target": "int"
+          },
+          {
+            "type": "set_flag",
+            "value": 1,
+            "target": "reincarnated"
+          },
+          {
+            "type": "grant_item",
+            "value": 1,
+            "target": "otherworld_knowledge"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "前世记忆带来的精神负担"
+          }
+        ]
+      },
+      {
+        "id": "memory_reject",
+        "title": "拒绝前世记忆",
+        "description": "你不是那个人，你是你自己。你用力把那些画面推出脑海。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 3,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "str"
+          }
+        ]
+      }
     ]
   },
   {
@@ -1018,11 +1172,6 @@
         "title": "推门进去",
         "description": "你深吸一口气，用力推开了吱呀作响的木门。屋内灰尘弥漫，蛛网遍布，角落里隐约能看到一些古老的书卷。你的心跳加速，但好奇心驱使你一步步深入这座被遗忘的建筑。",
         "probability": 0.5,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 8,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1055,7 +1204,12 @@
           }
         ],
         "successText": "你发现了一本泛黄的古书和一张画满符号的地图！",
-        "failureText": "一只蝙蝠突然飞到你脸上！你落荒而逃..."
+        "failureText": "一只蝙蝠突然飞到你脸上！你落荒而逃...",
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 13,
+          "description": "灵魂判定 DC13"
+        }
       },
       {
         "id": "peek_from_outside",
@@ -1072,6 +1226,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "远距离观察也有收获"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "谨慎的判断"
           }
         ]
       },
@@ -1080,14 +1246,33 @@
         "title": "不敢靠近",
         "description": "光是走到门口你就感到一阵莫名的寒意。你打了个哆嗦，转身跑回了村里。也许有些秘密，还是留给更勇敢的人去揭开吧。",
         "probability": 0.2,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "逃跑也需要体力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "及时跑掉避免了危险"
+          }
+        ]
       }
     ],
     "tag": "adventure",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "废弃矿道探险",
+        "description": "深层地下有一条被封死的古矿道，传说里面有整面墙的矿石结晶。有个胆大的哥布林砸开了封条——现在谁敢先进去？"
+      }
+    }
   },
   {
     "id": "help_farmer",
@@ -1097,49 +1282,59 @@
     "maxAge": 15,
     "weight": 5,
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mny",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
-      },
-      {
-        "type": "grant_item",
-        "target": "herbal_pouch",
-        "value": 1,
-        "description": "获得 🌿 草药袋"
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "chr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "help_work",
+        "title": "帮忙割麦",
+        "description": "你撸起袖子下了田。太阳很毒，但汗水的滋味还不错。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "mny"
+          }
+        ]
+      },
+      {
+        "id": "help_organize",
+        "title": "帮忙协调人手",
+        "description": "你发现组织效率比蛮干更重要。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "mny"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "帮老哥布林搬家",
+        "description": "部落里年纪最大的老哥布林被迫搬离了原来的巢穴。你帮他把那堆\"宝贝\"——其实全是破铜烂铁和旧零件——搬到了新地方。老头给了你一颗闪闪发光的石头作为谢礼。"
+      }
+    }
   },
   {
     "id": "wander_market",
@@ -1161,6 +1356,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "精神 -1（沉迷书中）"
           }
         ]
       },
@@ -1174,6 +1375,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "运气 +1（小确幸）"
           }
         ]
       },
@@ -1186,7 +1393,7 @@
           {
             "type": "modify_attribute",
             "target": "mny",
-            "value": 2
+            "value": 3
           },
           {
             "type": "modify_attribute",
@@ -1210,37 +1417,47 @@
     "maxAge": 20,
     "weight": 3,
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "spr",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "branches": [
+      {
+        "id": "gaze_meditate",
+        "title": "冥想",
+        "description": "在繁星下闭上眼睛，感受宇宙的脉动。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "spr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "mag"
+          }
+        ]
+      },
+      {
+        "id": "gaze_navigate",
+        "title": "研究星座导航",
+        "description": "你尝试用星星来判断方向和季节。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "luk"
+          }
+        ]
+      }
     ]
   },
   {
@@ -1258,11 +1475,6 @@
         "title": "上台尝试",
         "description": "你鼓起勇气跳上了临时搭建的木板台，模仿着刚才看到的花式翻跟头。围观的人群投来好奇的目光，成败在此一举。",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "chr",
-          "difficulty": 10,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1284,7 +1496,12 @@
           }
         ],
         "successText": "你的表演让全场沸腾！",
-        "failureText": "你摔了个狗吃屎...尴尬。"
+        "failureText": "你摔了个狗吃屎...尴尬。",
+        "diceCheck": {
+          "attribute": "chr",
+          "dc": 14,
+          "description": "魅力判定 DC14"
+        }
       },
       {
         "id": "just_watch",
@@ -1301,6 +1518,18 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "享受他人表演的专注"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "学到了表演技巧"
           }
         ]
       }
@@ -1319,38 +1548,59 @@
     "maxAge": 18,
     "weight": 3,
     "unique": true,
-    "effects": [
-      {
-        "type": "modify_attribute",
-        "target": "str",
-        "value": 1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mny",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": -1
-      },
-      {
-        "type": "modify_attribute",
-        "target": "mny",
-        "value": 2
-      },
-      {
-        "type": "modify_attribute",
-        "target": "int",
-        "value": 1
-      }
-    ],
+    "effects": [],
     "tag": "life",
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "branches": [
+      {
+        "id": "work_labor",
+        "title": "去码头扛货",
+        "description": "活很累，但报酬不错。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "str"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 2,
+            "target": "mny"
+          }
+        ]
+      },
+      {
+        "id": "work_clerk",
+        "title": "在商店当学徒",
+        "description": "虽然挣得少，但学到的东西更多。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "int"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "chr"
+          },
+          {
+            "type": "modify_attribute",
+            "value": 1,
+            "target": "mny"
+          }
+        ]
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "黑市打工",
+        "description": "你在地下黑市找了份活：帮走私商人分拣货物。工钱不多，但你学到了辨别魔药和假币的本事。偶尔还能顺走一两件\"没人认领的东西\"。"
+      }
+    }
   },
   {
     "id": "village_race",
@@ -1418,6 +1668,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "跌倒了爬起来"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "大家为你的坚持鼓掌"
           }
         ]
       }
@@ -1426,7 +1688,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "矿车大赛",
+        "description": "哥布林聚落一年一度的矿车大赛！参赛者要骑着自己改装的矿车穿过一条充满陷阱和弯道的废弃矿道。第一名不仅有奖品，还能在部落里横着走一整年。"
+      }
+    }
   },
   {
     "id": "old_soldier_story",
@@ -1464,6 +1732,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "请老兵喝了顿酒"
           }
         ]
       },
@@ -1500,6 +1774,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "路上捡到一枚铜币"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "用省下的时间去赚钱"
           }
         ]
       }
@@ -1580,6 +1866,12 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "警觉的公民精神获得赞赏"
           }
         ],
         "description": "你扯开嗓子大喊：\"小偷往那边跑了！\"你的声音清脆响亮，集市上的人们纷纷循声望去。几个大人立刻朝你指的方向追了过去，而你站在原地，心跳得飞快。"
@@ -1635,6 +1927,24 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "旁观者清"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "避开了纠纷"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不卷入是非的安宁"
           }
         ]
       },
@@ -1653,6 +1963,12 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "妥善处理纠纷的社交能力"
           }
         ]
       }
@@ -1661,7 +1977,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "部落纷争",
+        "description": "两个哥布林家族因为一块矿脉的归属争吵不休。按照传统，这种纠纷应该用赌博来解决——但这次双方都输不起。"
+      }
+    }
   },
   {
     "id": "lost_treasure_map",
@@ -1702,7 +2024,18 @@
         "title": "扔掉它",
         "description": "你觉得这不过是块没用的破石头，随手扔回了河里。石头沉入水中时，似乎闪过一道微弱的金光，但你没有回头。",
         "probability": 0.3,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ]
       },
       {
         "id": "hide_it",
@@ -1719,6 +2052,18 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "留着悬念的期待"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "也许以后用得上"
           }
         ]
       }
@@ -1759,6 +2104,11 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
           }
         ]
       },
@@ -1800,6 +2150,16 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
           }
         ]
       }
@@ -1808,7 +2168,13 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "部落里的对手",
+        "description": "部落里出现了一个和你同龄的哥布林，什么都要跟你比——比谁攒的闪亮零件多、比谁跑得快、比谁敢偷更危险的东西。大家总是拿你们做比较。"
+      }
+    }
   },
   {
     "id": "luk_lucky_coin",
@@ -1877,6 +2243,18 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "缘来缘去，不执着"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "失去后更珍惜拥有的"
           }
         ]
       }
@@ -1903,11 +2281,6 @@
         "title": "一口闷！",
         "description": "YOLO！",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "luk",
-          "difficulty": 20,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -1946,7 +2319,12 @@
           }
         ],
         "successText": "全身充满了力量！",
-        "failureText": "肚子好疼...下次不乱喝了"
+        "failureText": "肚子好疼...下次不乱喝了",
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 17,
+          "description": "运势判定 DC17"
+        }
       },
       {
         "id": "potion_sell",
@@ -1981,6 +2359,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不贪心的美德"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "不明药水少碰为妙"
           }
         ]
       }
@@ -2007,11 +2397,6 @@
         "title": "伸出手",
         "description": "你慢慢靠近它",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "spr",
-          "difficulty": 21,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2044,7 +2429,12 @@
           }
         ],
         "successText": "灵兽轻轻蹭了你的手！",
-        "failureText": "灵兽转身离去..."
+        "failureText": "灵兽转身离去...",
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 18,
+          "description": "灵魂判定 DC18"
+        }
       },
       {
         "id": "spirit_watch",
@@ -2061,6 +2451,18 @@
             "type": "modify_attribute",
             "target": "int",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "静观灵兽的和谐"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "观察自然的学问"
           }
         ]
       },
@@ -2079,6 +2481,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "逃跑时的全力冲刺"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "没被灵兽追上的幸运"
           }
         ]
       }
@@ -2159,11 +2573,6 @@
         "title": "投资",
         "description": "钱生钱",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 16,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2179,6 +2588,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "投资的不安"
           }
         ],
         "failureEffects": [
@@ -2190,7 +2605,12 @@
           }
         ],
         "successText": "投资回报不错！",
-        "failureText": "血本无归..."
+        "failureText": "血本无归...",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 16,
+          "description": "智慧判定 DC16"
+        }
       }
     ],
     "unique": true,
@@ -2215,11 +2635,6 @@
         "title": "接任务",
         "description": "正好锻炼一下",
         "probability": 0.4,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 16,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2258,7 +2673,12 @@
           }
         ],
         "successText": "成功保护了商人！",
-        "failureText": "遇到强敌..."
+        "failureText": "遇到强敌...",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 16,
+          "description": "体魄判定 DC16"
+        }
       },
       {
         "id": "guard_decline",
@@ -2275,6 +2695,18 @@
             "type": "modify_attribute",
             "target": "str",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不做暴力工作的内心宁静"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "去做了更有意义的事"
           }
         ]
       },
@@ -2326,11 +2758,6 @@
         "title": "动手制造",
         "description": "想法不实现就是空想",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "int",
-          "difficulty": 20,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2363,7 +2790,12 @@
           }
         ],
         "successText": "你的发明引起了轰动！",
-        "failureText": "理论上可行，实际上不行"
+        "failureText": "理论上可行，实际上不行",
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 17,
+          "description": "智慧判定 DC17"
+        }
       },
       {
         "id": "invention_patent",
@@ -2393,7 +2825,20 @@
         "title": "忘了",
         "description": "想不起来了",
         "probability": 0.4,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "不被灵感束缚的自由"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "也许别人会发明出来"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -2418,11 +2863,6 @@
         "title": "参加比赛",
         "description": "是时候证明自己了",
         "probability": 0.2,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 23,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2455,7 +2895,12 @@
           }
         ],
         "successText": "你击败了所有对手，获得了勇者称号！",
-        "failureText": "半决赛遇到了一个怪物般的对手..."
+        "failureText": "半决赛遇到了一个怪物般的对手...",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 18,
+          "description": "体魄判定 DC18"
+        }
       },
       {
         "id": "tournament_watch",
@@ -2472,6 +2917,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "旁观学到了武术招式"
           }
         ]
       },
@@ -2480,7 +2931,20 @@
         "title": "不感兴趣",
         "description": "比赛而已",
         "probability": 0.4,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "做自己想做的事"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1,
+            "description": "在别处找到了赚钱机会"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -2489,6 +2953,10 @@
     "exclude": "has.flag.lord",
     "routes": [
       "knight"
+    ],
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -2506,11 +2974,6 @@
         "title": "进入！",
         "description": "你就是为了这种时刻而活",
         "probability": 0.3,
-        "riskCheck": {
-          "attribute": "str",
-          "difficulty": 23,
-          "scale": 3
-        },
         "effects": [
           {
             "type": "modify_attribute",
@@ -2532,6 +2995,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "传说地下城的累累伤痕"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "传说地下城的精神创伤"
           }
         ],
         "failureEffects": [
@@ -2543,7 +3018,12 @@
           }
         ],
         "successText": "你征服了传说地下城！满载而归！",
-        "failureText": "差点被机关压扁..."
+        "failureText": "差点被机关压扁...",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 18,
+          "description": "体魄判定 DC18"
+        }
       },
       {
         "id": "dungeon_map",
@@ -2578,6 +3058,12 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "组队合作的默契与友谊"
           }
         ]
       }
@@ -2657,7 +3143,14 @@
         "title": "不感兴趣",
         "description": "我可不是小丑",
         "probability": 0.4,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "保持自我的定力"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -2736,7 +3229,20 @@
         "title": "辞职",
         "description": "有更好的事做",
         "probability": 0.4,
-        "effects": []
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "知道自己不适合就放弃也是智慧"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "避免了受伤的危险"
+          }
+        ]
       }
     ],
     "unique": true,
@@ -2828,6 +3334,12 @@
             "target": "in_relationship",
             "value": 1,
             "description": "进入恋爱关系"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "约会开销"
           }
         ],
         "successText": "你们之间不需要任何正式的告白。某天走在路上，手自然而然地牵在了一起。"
@@ -2953,7 +3465,8 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "sword_training_camp",
@@ -3008,6 +3521,11 @@
     ],
     "routes": [
       "knight"
+    ],
+    "unique": true,
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -3039,6 +3557,12 @@
             "type": "set_flag",
             "target": "has_student",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "严苛修行导致身体劳损"
           }
         ],
         "successText": "大师微微点头：'你有悟性。'从此你每日随他修炼，功力突飞猛进。"
@@ -3096,6 +3620,18 @@
             "type": "set_flag",
             "target": "dragon_awakened",
             "value": 1
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "觉醒时的魔力暴走"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "失控的恐惧"
           }
         ],
         "successText": "一道耀眼的光芒从你体内爆发，周围的人纷纷后退。你感到前所未有的力量在血管中奔涌。"
@@ -3171,6 +3707,11 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
           }
         ],
         "successText": "虽然没能和他深入交流，但他的几句话让你茅塞顿开，对世界的看法完全不同了。"
@@ -3178,7 +3719,8 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "underground_arena",
@@ -3209,6 +3751,12 @@
             "type": "modify_attribute",
             "target": "mag",
             "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "战斗中的累积伤害"
           }
         ],
         "successText": "最后一击！对手倒下了。全场欢呼你的名字。竞技场老板递给你一袋金币——你是新的冠军！"
@@ -3236,7 +3784,13 @@
     "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地下竞技场",
+        "description": "哥布林聚落深处的秘密竞技场。规矩很简单：只要不出人命，什么手段都行。狡猾的哥布林选手经常用陷阱、烟雾弹和暗器赢得比赛。"
+      }
+    }
   },
   {
     "id": "bandit_ambush",
@@ -3308,6 +3862,18 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "逃跑的速度锻炼了体能"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "成功脱身的运气"
           }
         ],
         "successText": "你拼命奔跑，终于甩掉了追兵。但那种无力感，让你下定决心要变得更强。"
@@ -3380,7 +3946,8 @@
     "exclude": "has.flag.lord | has.flag.political_player",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "part_time_job",
@@ -3435,7 +4002,14 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "unique": true,
+    "raceVariants": {
+      "goblin": {
+        "title": "临时活计",
+        "description": "有人需要一个\"不引人注目的小家伙\"去完成一项工作。报酬不错，但内容嘛……不能多问。这种活在哥布林圈子里不稀奇。"
+      }
+    }
   },
   {
     "id": "street_performer",
@@ -3465,6 +4039,12 @@
             "type": "modify_attribute",
             "target": "mag",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -2,
+            "description": "智力 -2（荒废学业）"
           }
         ],
         "successText": "你的表演引起了一阵喝彩。有人往你的帽子里扔了铜板，还有人问你愿不愿意加入他们的巡回表演团。"
@@ -3491,7 +4071,13 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地面世界的表演",
+        "description": "你戴着兜帽混在人群中，看一个人类在广场上表演魔术。当他让一枚金币消失时，你差点叫出声——那手法也太粗糙了，任何一个哥布林小偷都做得比他好。"
+      }
+    }
   },
   {
     "id": "market_haggling",
@@ -3521,6 +4107,12 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "讨价还价伤了点面子"
           }
         ],
         "successText": "经过一番唇枪舌战，你以三折的价格拿下了心仪的物品。围观的群众纷纷鼓掌。"
@@ -3570,6 +4162,12 @@
             "target": "guild_member",
             "value": 1,
             "description": "加入冒险者公会"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（冒险者公会的庇佑）"
           }
         ],
         "successText": "接待员看了看你，递过一枚铜质徽章：「从今天起，你就是冒险者公会的一员了。记住，公会不问出身，只看实力。」你握着徽章，感到一种前所未有的归属感。"
@@ -3583,6 +4181,18 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "犹豫中发现了真正想要的"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "内省中感应到了魔力波动"
           }
         ],
         "successText": "你在告示牌前站了很久，最终还是转身离开了。也许下次再路过时，你会做出不同的选择。"
@@ -3596,6 +4206,17 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "公会的人不太高兴"
           }
         ],
         "successText": "你摇了摇头，转身去集市上做起了小买卖。冒险者的生活虽然刺激，但安稳的日子也不错。"
@@ -3605,7 +4226,14 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "unique": true,
+    "raceVariants": {
+      "goblin": {
+        "title": "冒险者公会？",
+        "description": "你在人类城镇的告示栏上看到了冒险者公会的招募告示：\"无论出身，只要有勇气。\"你犹豫了——他们说的\"无论出身\"，真的包括哥布林吗？"
+      }
+    }
   },
   {
     "id": "squire_opportunity",
@@ -3649,7 +4277,12 @@
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "luk",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
             "value": 1
           }
         ],
@@ -3663,6 +4296,11 @@
           {
             "type": "modify_attribute",
             "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
             "value": 1
           }
         ],
@@ -3673,6 +4311,11 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "unique": true,
+    "races": [
+      "human",
+      "elf"
     ]
   },
   {
@@ -3719,6 +4362,11 @@
             "type": "modify_attribute",
             "target": "mny",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
           }
         ],
         "successText": "你帮着搬了几天货，学到了一些皮毛。老板看你手脚勤快，说随时欢迎你来正式拜师。"
@@ -3731,6 +4379,11 @@
           {
             "type": "modify_attribute",
             "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
             "value": 1
           }
         ],
@@ -3741,7 +4394,8 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "unique": true
   },
   {
     "id": "scholar_guidance",
@@ -3774,6 +4428,18 @@
             "target": "has_student",
             "value": 1,
             "description": "成为学者弟子"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "交了一些学费"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵性 +1（学术的灵感激发）"
           }
         ],
         "successText": "学者听了你几句对答，眼中闪过一丝惊喜：「孺子可教也！」他翻开一本厚重的书卷，从此你跟着他走遍了大陆的图书馆和遗迹，见识了常人难以想象的世界。"
@@ -3787,6 +4453,18 @@
             "type": "modify_attribute",
             "target": "int",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "独立思考的沉淀"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "用实践代替理论"
           }
         ],
         "successText": "你从学者那里借了几本入门书籍，在烛光下一页一页地翻阅。虽然没有师父指点，但知识的魅力已经深深吸引了你。"
@@ -3798,8 +4476,13 @@
         "effects": [
           {
             "type": "modify_attribute",
-            "target": "chr",
+            "target": "int",
             "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
           }
         ],
         "successText": "你礼貌地谢绝了学者的好意。学术这条路，或许并不适合现在的你。"
@@ -3809,6 +4492,3295 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "unique": true,
+    "raceVariants": {
+      "goblin": {
+        "title": "地下学者",
+        "description": "一个被人类社会驱逐的老学者躲进了哥布林聚落。他说愿意教会一个聪明的哥布林读书写字和炼金术，条件是帮他弄到研究材料。"
+      }
+    }
+  },
+  {
+    "id": "goblin_underground_race",
+    "title": "地下竞速赛",
+    "description": "哥布林社区每年最盛大的活动——地下竞速赛！参赛者骑着各种改装的矿车在废弃矿道中疯狂飞驰。奖品是一大袋闪闪发光的零件和一整年的'冠军'头衔。",
+    "minAge": 8,
+    "maxAge": 20,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "race_smart",
+        "title": "用智慧取胜——走近路",
+        "description": "你提前侦察了矿道，发现了一条没人知道的捷径。",
+        "probability": 0.35,
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 12,
+          "description": "智慧判定 DC12 — 需要精确计算最优路线"
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "智慧 +2（策略取胜）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（奖品）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "魅力 +1（冠军光环）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（摔了一跤）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（下次勘察得更仔细）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1（至少没受重伤）"
+          }
+        ],
+        "successText": "你的矿车从一条隐藏的通道里冲出，直接到达了终点！观众们目瞪口呆。虽然有人抗议你作弊，但哥布林的规则很简单：谁先到就是赢家。",
+        "failureText": "捷径坍塌了！你和矿车一起摔进了一个泥坑。等你爬出来时，比赛已经结束了。"
+      },
+      {
+        "id": "race_lucky",
+        "title": "靠运气——闭眼冲！",
+        "description": "哥布林不需要计划，只需要运气。你闭上眼睛猛踩油门。",
+        "probability": 0.35,
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 11,
+          "description": "幸运判定 DC11 — 纯粹靠命"
+        },
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2,
+            "description": "幸运 +2"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（奖品）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（肾上腺素）"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "HP -5（撞墙了）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "体魄 +1（哥布林越摔越耐摔）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（勇气可嘉）"
+          }
+        ],
+        "successText": "你的矿车在最后一个弯道神奇地避开了所有障碍物，以不可思议的速度冲过终点线。这就是哥布林的运气！",
+        "failureText": "你的矿车一头撞进了墙壁。你从废墟中爬出来，吐出一颗牙齿，朝围观的同族竖起大拇指：'没事！'"
+      },
+      {
+        "id": "race_cheat",
+        "title": "做手脚——给其他人的矿车动点小机关",
+        "description": "真正的哥布林从不公平竞争。你提前给几个对手的矿车轮子上涂了滑油。",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（鬼点子多）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "家境 +2（奖品）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "魅力 -1（被人嫌弃）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1,
+            "description": "幸运 +1"
+          }
+        ]
+      }
     ]
+  },
+  {
+    "id": "human_ambition_awakens",
+    "title": "野心觉醒",
+    "description": "你从小就知道人类的寿命不长——最多百年。但也许正因为如此，你心中燃烧着一团不愿熄灭的火焰。你不甘于平凡，你想要在有限的生命中留下印记。",
+    "minAge": 12,
+    "maxAge": 18,
+    "weight": 5,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "seek_power",
+        "title": "追求力量——成为最强的战士",
+        "description": "你决定锻炼自己的身体，用拳头和剑来开辟自己的道路。",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "体魄 +3（努力锻炼）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "灵魂 +1（坚定的意志）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": -1,
+            "description": "智慧 -1（把时间花在了训练上）"
+          }
+        ]
+      },
+      {
+        "id": "seek_knowledge",
+        "title": "追求知识——成为最博学的学者",
+        "description": "精灵有几百年来学习，而你只有几十年。那就用十倍的努力来弥补吧。",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3,
+            "description": "智慧 +3（拼命学习）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1,
+            "description": "魔力 +1（知识带来的灵感）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "体魄 -1（整天泡在图书馆）"
+          }
+        ]
+      },
+      {
+        "id": "seek_wealth",
+        "title": "追求财富——成为最富有的人",
+        "description": "金钱可以买到时间、安全和影响力。你决定先从赚钱开始。",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "家境 +3"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "智慧 +1（商业头脑）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "灵魂 -1（铜臭气）"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "human_kingdom_draft",
+    "title": "王国征兵令",
+    "description": "边境告急，王国下达征兵令。每个适龄人类男子都收到了召集通知。",
+    "minAge": 18,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "genders": [
+      "male"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "human_kingdom_draft_br0",
+        "title": "响应号召入伍",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "military_service",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定响应号召入伍——也许这是最好的选择。"
+      },
+      {
+        "id": "human_kingdom_draft_br1",
+        "title": "花钱找人顶替",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -5
+          }
+        ],
+        "description": "面对抉择，你决定花钱找人顶替——也许这是最好的选择。"
+      },
+      {
+        "id": "human_kingdom_draft_br2",
+        "title": "逃入深山避难",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定逃入深山避难——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "human_marriage_proposal",
+    "title": "家族联姻",
+    "description": "你的家人安排了一门亲事。对方家庭条件不错，但你们素未谋面。",
+    "minAge": 18,
+    "maxAge": 28,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "human_marriage_proposal_br0",
+        "title": "接受安排",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          }
+        ],
+        "description": "你没有犹豫，果断地接受安排。"
+      },
+      {
+        "id": "human_marriage_proposal_br1",
+        "title": "拒绝，要找自己喜欢的人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了拒绝，要找自己喜欢的人。"
+      }
+    ]
+  },
+  {
+    "id": "human_tavern_brawl",
+    "title": "酒馆斗殴",
+    "description": "人类酒馆里一言不合就开打，这是常有的事。今晚你也被卷入其中。",
+    "minAge": 18,
+    "maxAge": 40,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "human_tavern_brawl_br0",
+        "title": "挥拳就上",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了挥拳就上。"
+      },
+      {
+        "id": "human_tavern_brawl_br1",
+        "title": "调停双方",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了调停双方。"
+      },
+      {
+        "id": "human_tavern_brawl_br2",
+        "title": "趁乱偷酒喝",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了趁乱偷酒喝。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_black_market",
+    "title": "黑市交易",
+    "description": "哥布林在各个城镇的地下黑市都有自己的关系网。有人找你帮忙倒卖一批来路不明的货物。",
+    "minAge": 14,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "goblin_black_market_br0",
+        "title": "接下生意",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 4
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了接下生意。"
+      },
+      {
+        "id": "goblin_black_market_br1",
+        "title": "拒绝，太危险了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定拒绝，太危险了——也许这是最好的选择。"
+      },
+      {
+        "id": "goblin_black_market_br2",
+        "title": "举报给官方换赏金",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "你选择了举报给官方换赏金，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_mechanical_genius",
+    "title": "机关天赋",
+    "description": "你用废铁和树枝搭了一个自动捕鼠器，其精巧的设计让一个矮人工匠都刮目相看。",
+    "minAge": 13,
+    "maxAge": 25,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 3
+      }
+    ],
+    "branches": [
+      {
+        "id": "goblin_mechanical_genius_br0",
+        "title": "跟矮人学习机械",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "goblin_mechanic",
+            "value": true
+          }
+        ],
+        "description": "你选择了跟矮人学习机械，静静等待结果。"
+      },
+      {
+        "id": "goblin_mechanical_genius_br1",
+        "title": "把机关拿去卖钱",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          }
+        ],
+        "description": "面对抉择，你决定把机关拿去卖钱——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_warchief_duel",
+    "title": "首领争夺战",
+    "description": "部落首领年老体衰，按照哥布林的规矩，任何成年哥布林都可以挑战首领之位。",
+    "minAge": 15,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "goblin_warchief_duel_br0",
+        "title": "发起挑战",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "你深吸一口气，决定发起挑战。"
+      },
+      {
+        "id": "goblin_warchief_duel_br1",
+        "title": "支持另一个候选人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了支持另一个候选人，静静等待结果。"
+      },
+      {
+        "id": "goblin_warchief_duel_br2",
+        "title": "保持中立",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了保持中立。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_cook_master",
+    "title": "暗黑料理大师",
+    "description": "你用各种匪夷所思的食材做出了意外美味的料理。消息传开后，连人类冒险者都慕名而来。",
+    "minAge": 14,
+    "maxAge": 25,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "arena_champion_invite",
+    "title": "竞技场的邀请",
+    "description": "你的实力被竞技场主办方注意到了，邀请你参加本年度的王国武斗大会。",
+    "minAge": 18,
+    "maxAge": 50,
+    "weight": 3,
+    "unique": true,
+    "include": "attribute.str >= 35",
+    "effects": [],
+    "branches": [
+      {
+        "id": "arena_champion_invite_br0",
+        "title": "参加比赛",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了参加比赛。"
+      },
+      {
+        "id": "arena_champion_invite_br1",
+        "title": "拒绝，低调行事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了拒绝，低调行事。"
+      }
+    ],
+    "raceVariants": {
+      "goblin": {
+        "title": "地下竞技场的邀请",
+        "description": "你的实力被地下竞技场的主办人注意到了。他邀请你参加本年度的锦标赛——奖金丰厚，而且据说有人类赌场在幕后下注。"
+      }
+    }
+  },
+  {
+    "id": "mountain_bandit_leader",
+    "title": "山贼头子的挑战",
+    "description": "恶名昭彰的山贼头子听闻你的武力，特地下山来找你单挑。",
+    "minAge": 20,
+    "maxAge": 45,
+    "weight": 2,
+    "unique": true,
+    "include": "attribute.str >= 40",
+    "effects": [],
+    "branches": [
+      {
+        "id": "mountain_bandit_leader_br0",
+        "title": "接受挑战",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 12
+        },
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2
+          }
+        ],
+        "description": "你毅然选择了接受挑战，迈出了关键的一步。",
+        "successText": "你用力量证明了自己的实力。（力量提升了）",
+        "failureText": "力不从心，这次的挑战超出了你身体的极限。（力量下降了）"
+      },
+      {
+        "id": "mountain_bandit_leader_br1",
+        "title": "设个圈套",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你选择了设个圈套，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "noble_admirer",
+    "title": "贵族的追慕",
+    "description": "一位来访的贵族对你的风采赞叹不已，邀请你出席下月的皇家舞会。",
+    "minAge": 18,
+    "maxAge": 50,
+    "weight": 2,
+    "unique": true,
+    "include": "attribute.chr >= 35",
+    "effects": [],
+    "branches": [
+      {
+        "id": "noble_admirer_br0",
+        "title": "盛装出席",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "description": "你选择了盛装出席，静静等待结果。"
+      },
+      {
+        "id": "noble_admirer_br1",
+        "title": "礼貌地推辞",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了礼貌地推辞。"
+      }
+    ],
+    "races": [
+      "human",
+      "elf"
+    ]
+  },
+  {
+    "id": "divine_vision",
+    "title": "神谕",
+    "description": "梦中，一个模糊的声音向你传达了某种信息。醒来后你记得每一个字。",
+    "minAge": 20,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": true,
+    "include": "attribute.spr >= 35",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "branches": [
+      {
+        "id": "divine_vision_br0",
+        "title": "遵循神谕行事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定遵循神谕行事——也许这是最好的选择。"
+      },
+      {
+        "id": "divine_vision_br1",
+        "title": "记录下来慢慢研究",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了记录下来慢慢研究。"
+      }
+    ]
+  },
+  {
+    "id": "youth_dungeon_first",
+    "title": "第一次进入地下城",
+    "description": "你终于有了足够的实力踏入传说中的地下城。阴暗的入口散发着潮湿和腐朽的气味。",
+    "minAge": 16,
+    "maxAge": 24,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.str >= 10 | attribute.mag >= 10",
+    "branches": [
+      {
+        "id": "youth_dungeon_first_br0",
+        "title": "小心翼翼地推进",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dungeon_first",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了小心翼翼地推进。"
+      },
+      {
+        "id": "youth_dungeon_first_br1",
+        "title": "大胆冲锋",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "dungeon_first",
+            "value": true
+          }
+        ],
+        "description": "你深吸一口气，决定大胆冲锋。"
+      },
+      {
+        "id": "youth_dungeon_first_br2",
+        "title": "在入口研究机关",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "dungeon_first",
+            "value": true
+          }
+        ],
+        "description": "你选择了在入口研究机关，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "youth_first_love",
+    "title": "怦然心动",
+    "description": "你在某个平凡的日子，遇到了让你心跳加速的那个人。",
+    "minAge": 16,
+    "maxAge": 23,
+    "weight": 5,
+    "unique": true,
+    "priority": "minor",
+    "tag": "romance",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_first_love_br0",
+        "title": "鼓起勇气搭话",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "first_love",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了鼓起勇气搭话。"
+      },
+      {
+        "id": "youth_first_love_br1",
+        "title": "默默关注",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你选择了默默关注，静静等待结果。"
+      },
+      {
+        "id": "youth_first_love_br2",
+        "title": "写一封匿名信",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了写一封匿名信，静静等待结果。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "在月光花田中，你第一次注意到那个精灵。数百年的生命中，这一刻你永远不会忘记。"
+      },
+      "goblin": {
+        "description": "对方是你在黑市认识的。虽然哥布林不太讲究浪漫，但你的心跳确实快了几拍。"
+      }
+    }
+  },
+  {
+    "id": "youth_caravan_guard",
+    "title": "商队护卫",
+    "description": "一支商队在招募护卫。虽然报酬不高，但可以免费跟着旅行。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.str >= 8",
+    "branches": [
+      {
+        "id": "youth_caravan_guard_br0",
+        "title": "报名参加",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了报名参加，静静等待结果。"
+      },
+      {
+        "id": "youth_caravan_guard_br1",
+        "title": "不去，太危险了",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了不去，太危险了。"
+      }
+    ]
+  },
+  {
+    "id": "youth_crisis_crossroad",
+    "title": "命运的十字路口",
+    "description": "你站在人生的十字路口。是时候决定今后的方向了。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_crisis_crossroad_br0",
+        "title": "踏上冒险旅途",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你毅然选择了踏上冒险旅途，迈出了关键的一步。"
+      },
+      {
+        "id": "youth_crisis_crossroad_br1",
+        "title": "拜师学艺",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了拜师学艺。"
+      },
+      {
+        "id": "youth_crisis_crossroad_br2",
+        "title": "开始经商",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了开始经商，静静等待结果。"
+      },
+      {
+        "id": "youth_crisis_crossroad_br3",
+        "title": "参军报国",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定参军报国——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "youth_tavern_rumor",
+    "title": "酒馆传闻",
+    "description": "酒馆里有人在讨论一个刺激的消息。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 4,
+    "unique": false,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_tavern_rumor_br0",
+        "title": "凑过去听",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了凑过去听，静静等待结果。"
+      },
+      {
+        "id": "youth_tavern_rumor_br1",
+        "title": "请对方喝一杯套话",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1
+          }
+        ],
+        "description": "你权衡利弊后，选择了请对方喝一杯套话。这可能带来魅力提升了，但也伴随着风险。"
+      },
+      {
+        "id": "youth_tavern_rumor_br2",
+        "title": "不关自己的事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了不关自己的事，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "youth_bandit_ambush",
+    "title": "路遇山贼",
+    "description": "你在旅途中遭遇了一伙山贼的伏击。对方有四五个人，凶神恶煞。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_bandit_ambush_br0",
+        "title": "战斗！",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 10
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -3
+          }
+        ],
+        "description": "你鼓起勇气，决定战斗！。",
+        "successText": "你用力量证明了自己的实力。（力量提升了）",
+        "failureText": "你的力量还不够……勉强应对后，留下了不少遗憾。（生命值下降了）"
+      },
+      {
+        "id": "youth_bandit_ambush_br1",
+        "title": "交出财物保命",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3
+          }
+        ],
+        "description": "你权衡利弊后，选择了交出财物保命。"
+      },
+      {
+        "id": "youth_bandit_ambush_br2",
+        "title": "施展魔法吓退他们",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "diceCheck": {
+          "attribute": "mag",
+          "dc": 10
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "你选择了施展魔法吓退他们，静静等待结果。",
+        "successText": "你对魔法的掌控令人叹服，施法过程行云流水。（魔力提升了）",
+        "failureText": "法术在最后一刻偏离了方向，结果令人失望。（生命值下降了）"
+      }
+    ]
+  },
+  {
+    "id": "youth_mysterious_stranger",
+    "title": "神秘旅人",
+    "description": "一个蒙面旅人在路边向你提出了一个奇怪的请求。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_mysterious_stranger_br0",
+        "title": "帮助他",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "mysterious_encounter",
+            "value": true
+          }
+        ],
+        "description": "你权衡利弊后，选择了帮助他。"
+      },
+      {
+        "id": "youth_mysterious_stranger_br1",
+        "title": "谨慎地拒绝",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了谨慎地拒绝。"
+      }
+    ]
+  },
+  {
+    "id": "youth_gambling_den",
+    "title": "赌场诱惑",
+    "description": "你被朋友带到了一家地下赌场。灯光昏暗，空气中弥漫着硬币的金属气息。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_gambling_den_br0",
+        "title": "小赌怡情",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 8
+        },
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          }
+        ],
+        "description": "你权衡利弊后，选择了小赌怡情。",
+        "successText": "难以置信的好运降临——一切都恰到好处！（运势提升了）",
+        "failureText": "命运之神似乎在开玩笑，一连串的意外让局面急转直下。（金钱下降了）"
+      },
+      {
+        "id": "youth_gambling_den_br1",
+        "title": "观察赌局找规律",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你选择了观察赌局找规律，静静等待结果。"
+      },
+      {
+        "id": "youth_gambling_den_br2",
+        "title": "转头就走",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了转头就走。"
+      }
+    ]
+  },
+  {
+    "id": "elf_first_century",
+    "title": "第一个百年",
+    "description": "对精灵来说，第一个百年只是童年的延续。但你已经开始思考——漫长的生命到底应该如何度过？",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_crystal_weaving",
+    "title": "水晶织法",
+    "description": "精灵的传统工艺——用魔力将水晶拉丝成线，编织成轻薄如蝉翼的防护衣。你第一次尝试。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elf_crystal_weaving_br0",
+        "title": "专心编织",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了专心编织。"
+      },
+      {
+        "id": "elf_crystal_weaving_br1",
+        "title": "融入自己的创意",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定融入自己的创意——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_scrap_invention",
+    "title": "废品发明",
+    "description": "你用人类丢弃的废品造了一辆简陋的运货车。虽然嘎吱作响，但确实能用！",
+    "minAge": 14,
+    "maxAge": 20,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_alliance",
+    "title": "异族联盟",
+    "description": "你遇到一个不歧视哥布林的人类冒险者。也许哥布林不必永远活在社会底层？",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_alliance_br0",
+        "title": "建立友谊",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "has_ally",
+            "value": true
+          }
+        ],
+        "description": "你选择了建立友谊，静静等待结果。"
+      },
+      {
+        "id": "goblin_alliance_br1",
+        "title": "保持警惕",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定保持警惕——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "human_conscription",
+    "title": "征兵通告",
+    "description": "王国边境出现了魔兽潮，各城镇张贴了征兵布告。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_conscription_br0",
+        "title": "报名参军",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "military_service",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定报名参军——也许这是最好的选择。"
+      },
+      {
+        "id": "human_conscription_br1",
+        "title": "加入冒险者工会应对",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "guild_member",
+            "value": true
+          }
+        ],
+        "description": "你深吸一口气，决定加入冒险者工会应对。"
+      },
+      {
+        "id": "human_conscription_br2",
+        "title": "逃避征召",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了逃避征召。"
+      }
+    ]
+  },
+  {
+    "id": "human_market_stall",
+    "title": "市场摆摊",
+    "description": "你攒了些钱和货物，决定在集市上租个摊位试试运气。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_market_stall_br0",
+        "title": "卖自己做的手工品",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了卖自己做的手工品。"
+      },
+      {
+        "id": "human_market_stall_br1",
+        "title": "低买高卖赚差价",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          }
+        ],
+        "diceCheck": {
+          "attribute": "int",
+          "dc": 8
+        },
+        "failureEffects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          }
+        ],
+        "description": "面对抉择，你决定低买高卖赚差价——也许这是最好的选择。",
+        "successText": "凭借出众的智慧，你看穿了事物的本质。（金钱提升了）",
+        "failureText": "本以为万无一失的计划，却在执行中出了纰漏。（金钱下降了）"
+      },
+      {
+        "id": "human_market_stall_br2",
+        "title": "帮别人吆喝赚佣金",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "你选择了帮别人吆喝赚佣金，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "human_guild_initiation",
+    "title": "工会入会仪式",
+    "description": "冒险者工会的入会考验——独自完成一项D级任务。虽然是最低级别，但对新人来说已经够刺激了。",
+    "minAge": 17,
+    "maxAge": 22,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_guild_initiation_br0",
+        "title": "认真完成任务",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "guild_member",
+            "value": true
+          }
+        ],
+        "description": "你选择了认真完成任务，静静等待结果。"
+      },
+      {
+        "id": "human_guild_initiation_br1",
+        "title": "用巧计过关",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "guild_member",
+            "value": true
+          }
+        ],
+        "description": "面对抉择，你决定用巧计过关——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "human_romance_at_inn",
+    "title": "旅馆邂逅",
+    "description": "在旅途中投宿的旅馆里，你遇到了一个有趣的人。你们聊了整晚。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "romance",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_noble_encounter",
+    "title": "偶遇贵族",
+    "description": "你在路上偶然帮助了一位遇到麻烦的贵族青年。对方对你颇为感激。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_noble_encounter_br0",
+        "title": "保持联系",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了保持联系。"
+      },
+      {
+        "id": "human_noble_encounter_br1",
+        "title": "不卑不亢地告辞",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了不卑不亢地告辞。"
+      }
+    ]
+  },
+  {
+    "id": "human_war_draft_letter",
+    "title": "战争通知书",
+    "description": "信箱里躺着一封盖有王室印章的信——前线需要更多士兵。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_war_draft_letter_br0",
+        "title": "响应号召",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "military_service",
+            "value": true
+          }
+        ],
+        "description": "你选择了响应号召，静静等待结果。"
+      },
+      {
+        "id": "human_war_draft_letter_br1",
+        "title": "寻找替代方案",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你选择了寻找替代方案，静静等待结果。"
+      },
+      {
+        "id": "human_war_draft_letter_br2",
+        "title": "躲避征召",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          }
+        ],
+        "description": "你权衡利弊后，选择了躲避征召。这可能带来运势提升了，但也伴随着风险。"
+      }
+    ]
+  },
+  {
+    "id": "human_farm_inheritance",
+    "title": "继承农庄",
+    "description": "父亲上了年纪，开始考虑把家里的农庄交给你打理。",
+    "minAge": 20,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_farm_inheritance_br0",
+        "title": "接手农庄",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "homeowner",
+            "value": true
+          }
+        ],
+        "description": "你选择了接手农庄，静静等待结果。"
+      },
+      {
+        "id": "human_farm_inheritance_br1",
+        "title": "交给兄弟姐妹",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了交给兄弟姐妹。"
+      },
+      {
+        "id": "human_farm_inheritance_br2",
+        "title": "卖掉农庄出去闯荡",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "经过一番思考，你选择了卖掉农庄出去闯荡。"
+      }
+    ]
+  },
+  {
+    "id": "human_arena_debut",
+    "title": "竞技场初登场",
+    "description": "你报名参加了城市竞技场的新人赛。观众席上的喧嚣声让你热血沸腾。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.str >= 12",
+    "branches": [
+      {
+        "id": "human_arena_debut_br0",
+        "title": "正面迎战",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 10
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "你选择了正面迎战，静静等待结果。",
+        "successText": "力量与勇气的结合让你完美地完成了挑战。（力量提升了）",
+        "failureText": "你的力量还不够……勉强应对后，留下了不少遗憾。（生命值下降了）"
+      },
+      {
+        "id": "human_arena_debut_br1",
+        "title": "观察对手后再行动",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你选择了观察对手后再行动，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "elf_human_city_visit",
+    "title": "初访人类城市",
+    "description": "你第一次踏入人类的城市。嘈杂的叫卖声、刺鼻的烟火味、拥挤的街道——与宁静的森林截然不同。",
+    "minAge": 18,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "exploration",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": "",
+    "branches": [
+      {
+        "id": "elf_human_city_visit_br0",
+        "title": "深入了解人类文化",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "经过一番思考，你选择了深入了解人类文化。"
+      },
+      {
+        "id": "elf_human_city_visit_br1",
+        "title": "觉得太吵赶紧回森林",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定觉得太吵赶紧回森林——也许这是最好的选择。"
+      },
+      {
+        "id": "elf_human_city_visit_br2",
+        "title": "尝试人类的食物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你选择了尝试人类的食物，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "elf_magic_duel",
+    "title": "魔法决斗",
+    "description": "一位同龄的精灵向你发起了魔法决斗。这是精灵们切磋实力的传统方式。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.mag >= 10",
+    "branches": [
+      {
+        "id": "elf_magic_duel_br0",
+        "title": "全力以赴",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "diceCheck": {
+          "attribute": "mag",
+          "dc": 10
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "面对抉择，你决定全力以赴——也许这是最好的选择。",
+        "successText": "魔力的光芒在你掌心绽放，一切尽在掌控之中。（魔力提升了）",
+        "failureText": "法术在最后一刻偏离了方向，结果令人失望。（生命值下降了）"
+      },
+      {
+        "id": "elf_magic_duel_br1",
+        "title": "巧妙防守寻找破绽",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定巧妙防守寻找破绽——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "elf_starlight_weaving",
+    "title": "星光织衣",
+    "description": "你学会了用月光和星辉编织衣物的古法。这种技艺只有精灵才能掌握。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_world_tree_communion",
+    "title": "与世界树共鸣",
+    "description": "你在世界树前冥想时，突然感受到了它数千年的记忆碎片。那种浩瀚让你几乎窒息。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "world_tree_blessed",
+        "value": true
+      }
+    ],
+    "include": "attribute.mag >= 12"
+  },
+  {
+    "id": "elf_ranger_path",
+    "title": "游侠之路",
+    "description": "你决定成为一名精灵游侠——守护森林边境，巡逻于内外之间。",
+    "minAge": 18,
+    "maxAge": 28,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_ancient_language",
+    "title": "远古精灵语",
+    "description": "你在古卷中发现了一种比现代精灵语更古老的语言。这是上古精灵使用的语言，蕴含着失落的魔法。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.int >= 12",
+    "branches": [
+      {
+        "id": "elf_ancient_language_br0",
+        "title": "花时间破译",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          }
+        ],
+        "description": "你权衡利弊后，选择了花时间破译。"
+      },
+      {
+        "id": "elf_ancient_language_br1",
+        "title": "请教长老",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了请教长老。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_merchant_debut",
+    "title": "第一笔生意",
+    "description": "你用修好的废品在黑市上完成了第一笔交易。虽然只赚了几个铜板，但意义重大。",
+    "minAge": 14,
+    "maxAge": 20,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_explosive_mastery",
+    "title": "爆炸大师",
+    "description": "你对可燃物的理解已经达到了艺术级别。一点点火药粉末在你手里就能创造出惊天动地的效果。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "include": "attribute.int >= 10"
+  },
+  {
+    "id": "goblin_sewer_kingdom",
+    "title": "下水道王国",
+    "description": "你在城市下水道里建立了一个据点。逐渐地，越来越多的哥布林来投靠你。",
+    "minAge": 15,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.chr >= 8",
+    "branches": [
+      {
+        "id": "goblin_sewer_kingdom_br0",
+        "title": "当一个好首领",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了当一个好首领。"
+      },
+      {
+        "id": "goblin_sewer_kingdom_br1",
+        "title": "利用手下谋利",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你选择了利用手下谋利，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_disguise_adventure",
+    "title": "伪装冒险",
+    "description": "你披着斗蓬伪装成矮人，报名参加了一支冒险者小队。内心极度紧张。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_disguise_adventure_br0",
+        "title": "小心翼翼不露馅",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了小心翼翼不露馅。"
+      },
+      {
+        "id": "goblin_disguise_adventure_br1",
+        "title": "意外暴露身份",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "has_ally",
+            "value": true
+          }
+        ],
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 10
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你权衡利弊后，选择了意外暴露身份。",
+        "successText": "难以置信的好运降临——一切都恰到好处！（魅力提升了）",
+        "failureText": "倒霉的事情一件接一件，你哭笑不得。（生命值下降了）"
+      }
+    ]
+  },
+  {
+    "id": "goblin_treasure_dive",
+    "title": "寻宝潜水",
+    "description": "传说河底沉着一艘古船的残骸。你憋了一口气潜了下去。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_treasure_dive_br0",
+        "title": "搜刮宝物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你选择了搜刮宝物，静静等待结果。"
+      },
+      {
+        "id": "goblin_treasure_dive_br1",
+        "title": "小心探索",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你深吸一口气，决定小心探索。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_weapon_crafting",
+    "title": "自制武器",
+    "description": "你用捡来的金属片、骨头和皮革造了一把独一无二的武器。虽然丑陋，但出奇地好用。",
+    "minAge": 14,
+    "maxAge": 20,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_militia_training",
+    "title": "民兵训练",
+    "description": "你报名参加了城镇的民兵训练。每天清晨出操，练习长矛阵型和基本剑术。",
+    "minAge": 17,
+    "maxAge": 22,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_first_hunt",
+    "title": "第一次狩猎",
+    "description": "你跟着猎人们第一次进入深林狩猎。那种跟踪猎物的紧张感让你全身的感官都活了过来。",
+    "minAge": 17,
+    "maxAge": 22,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_first_hunt_br0",
+        "title": "独自追踪猎物",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定独自追踪猎物——也许这是最好的选择。"
+      },
+      {
+        "id": "human_first_hunt_br1",
+        "title": "配合老手行动",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你选择了配合老手行动，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "human_apprentice_scholar",
+    "title": "学徒生涯",
+    "description": "你被城里的学者收为学徒。整理书架、抄写手稿、为师父泡茶——学问就是从这些琐事中慢慢积累的。",
+    "minAge": 17,
+    "maxAge": 23,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_river_crossing",
+    "title": "涉险渡河",
+    "description": "暴雨中桥被冲垮了。你必须趟着齐腰的洪水把药送到对岸的村庄。",
+    "minAge": 18,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "adventure",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "human_river_crossing_br0",
+        "title": "咬牙趟过去",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 9
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "你选择了咬牙趟过去，静静等待结果。",
+        "successText": "你用力量证明了自己的实力。（力量提升了）",
+        "failureText": "你咬紧牙关，但终究还是败下阵来。（生命值下降了）"
+      },
+      {
+        "id": "human_river_crossing_br1",
+        "title": "绕远路走山道",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择了绕远路走山道，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "human_church_service",
+    "title": "教会服务",
+    "description": "你在当地教会做了一段时间的义工。帮助穷人、安慰病患，这让你看到了人间更多的面貌。",
+    "minAge": 17,
+    "maxAge": 24,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "human_horse_taming",
+    "title": "驯马",
+    "description": "牧场主给了你一匹性格暴烈的野马。花了整整三天，你终于能骑着它在草原上奔跑了。",
+    "minAge": 18,
+    "maxAge": 23,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_moonwell_ritual",
+    "title": "月池仪式",
+    "description": "你参加了精灵成年后的第一次月池仪式。银色的池水映照出你未来的可能性。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_beast_tongue",
+    "title": "兽语习得",
+    "description": "你学会了与森林中的鸟兽交流的技巧。一只老鹰成了你的信使。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_healing_spring",
+    "title": "治愈之泉",
+    "description": "你发现了一处隐藏在深林中的治愈之泉。泉水拥有修复伤口的魔力。",
+    "minAge": 18,
+    "maxAge": 28,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "exploration",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "forest_healer",
+        "value": true
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "elf_dwarf_trade",
+    "title": "与矮人贸易",
+    "description": "精灵和矮人之间虽然文化差异巨大，但贸易却是互惠的。你第一次担任贸易代表。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elf_dwarf_trade_br0",
+        "title": "公平交易",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定公平交易——也许这是最好的选择。"
+      },
+      {
+        "id": "elf_dwarf_trade_br1",
+        "title": "尽量多换些矮人铁器",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          }
+        ],
+        "description": "面对抉择，你决定尽量多换些矮人铁器——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "elf_spirit_deer",
+    "title": "灵鹿相伴",
+    "description": "一头散发着柔光的灵鹿出现在你身边，不肯离去。这是森林之灵选中守护者的征兆。",
+    "minAge": 18,
+    "maxAge": 28,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "spirit_companion",
+        "value": true
+      }
+    ],
+    "include": "attribute.spr >= 10"
+  },
+  {
+    "id": "elf_painting_century",
+    "title": "百年画作",
+    "description": "你开始创作一幅需要数十年才能完成的壁画。每一笔都记录着你对世界的感悟。",
+    "minAge": 20,
+    "maxAge": 30,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_clockwork_toy",
+    "title": "发条玩具",
+    "description": "你用齿轮和弹簧造了一个能自己走路的小机器人。虽然走两步就倒，但这是个开始。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_black_market_stall",
+    "title": "黑市摊位",
+    "description": "你在城市的黑市租了一个小摊位。卖一些人类不屑一顾但矮人愿意买的东西。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_rat_race",
+    "title": "洞鼠竞速",
+    "description": "哥布林部落间的洞鼠竞速大赛！你骑着你的洞鼠冲在最前面——至少在摔下来之前。",
+    "minAge": 14,
+    "maxAge": 20,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "goblin_rat_race_br0",
+        "title": "玩命冲刺",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "diceCheck": {
+          "attribute": "luk",
+          "dc": 8
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -1
+          }
+        ],
+        "description": "你鼓起勇气，决定玩命冲刺。",
+        "successText": "命运之神在关键时刻眷顾了你！（力量提升了）",
+        "failureText": "倒霉的事情一件接一件，你哭笑不得。（生命值下降了）"
+      },
+      {
+        "id": "goblin_rat_race_br1",
+        "title": "中途改走捷径",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定中途改走捷径——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_alchemy_accident",
+    "title": "炼金事故",
+    "description": "你在调配药剂时搞错了比例。爆炸把你的半张脸染成了紫色，但你发现了一种新配方。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -1
+      }
+    ],
+    "include": ""
+  },
+  {
+    "id": "goblin_first_boss_fight",
+    "title": "挑战头领",
+    "description": "你觉得现在的部落头领太无能了。按照哥布林的规矩，想上位就得打一架。",
+    "minAge": 16,
+    "maxAge": 22,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "combat",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "attribute.str >= 10",
+    "branches": [
+      {
+        "id": "goblin_first_boss_fight_br0",
+        "title": "正面挑战",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          }
+        ],
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 11
+        },
+        "failureEffects": [
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -3
+          }
+        ],
+        "description": "你深吸一口气，决定正面挑战。",
+        "successText": "你用力量证明了自己的实力。（力量提升了）",
+        "failureText": "你咬紧牙关，但终究还是败下阵来。（生命值下降了）"
+      },
+      {
+        "id": "goblin_first_boss_fight_br1",
+        "title": "用阴谋让他下台",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "面对抉择，你决定用阴谋让他下台——也许这是最好的选择。"
+      }
+    ]
+  },
+  {
+    "id": "goblin_human_language",
+    "title": "学会人类语言",
+    "description": "你花了大半年的时间偷听人类说话，终于能说一口蹩脚但能听懂的人类语了。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "include": ""
   }
 ]

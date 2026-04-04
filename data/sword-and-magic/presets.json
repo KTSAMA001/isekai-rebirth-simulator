@@ -8,31 +8,40 @@
       "int": 1,
       "luk": 1
     },
-    "locked": false
+    "locked": false,
+    "exclusiveTalents": [
+      "wanderer_instinct"
+    ]
   },
   {
     "id": "random_2",
     "name": "莉娜",
-    "title": "好奇心旺盛的少女",
-    "description": "邻家女孩，性格温和善良，拥有不为人知的潜能。",
+    "title": "好奇的探索者",
+    "description": "对世间万物充满好奇，温和善良的性格下藏着不为人知的潜能。",
     "attributes": {
-      "spr": 1,
+      "int": 1,
       "chr": 1
     },
-    "locked": false
+    "locked": false,
+    "exclusiveTalents": [
+      "explorer_curiosity"
+    ]
   },
   {
     "id": "random_3",
     "name": "加隆",
-    "title": "老兵之子",
-    "description": "矿山长大的少年，强壮而坚韧，梦想成为骑士。",
+    "title": "老兵之后",
+    "description": "在军营中长大，从小耳濡目染刀光剑影，强壮而坚韧，梦想成为骑士。",
     "attributes": {
       "str": 2
     },
     "talents": [
       "fighter_instinct"
     ],
-    "locked": false
+    "locked": false,
+    "exclusiveTalents": [
+      "veterans_legacy"
+    ]
   },
   {
     "id": "reincarnator",

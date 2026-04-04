@@ -311,16 +311,15 @@ function runOneGame(seed: number, personality: Personality): ScoreData {
 
   const decisions: DecisionLog[] = []
 
-  // Simulate until death or maxAge
-  for (let year = 0; year < 100; year++) {
+  // Simulate until death or maxAge (引擎内部会处理死亡判定)
+  for (let year = 0; year < 500; year++) {
     const stateBefore = engine.getState()
-    if (stateBefore.hp <= 0) break
+    if (stateBefore.hp <= 0 || stateBefore.phase === 'finished') break
 
     const yearResult = engine.startYear()
     const stateAfter = engine.getState()
 
-    if (stateAfter.hp <= 0) break
-    if (stateAfter.age >= 80) break
+    if (stateAfter.hp <= 0 || stateAfter.phase === 'finished') break
 
     if (yearResult.phase === 'awaiting_choice' && yearResult.event && yearResult.branches && yearResult.branches.length > 0) {
       const available = yearResult.branches.filter(b => {

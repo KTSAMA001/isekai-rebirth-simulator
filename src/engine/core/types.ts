@@ -3,6 +3,88 @@
  * 所有引擎模块共享的接口和类型
  */
 
+// ==================== 种族 & 性别 ====================
+
+/** 性别 */
+export type Gender = 'male' | 'female' | 'other'
+
+/** 种族属性修正 */
+export interface RaceAttributeModifier {
+  /** 属性ID */
+  attributeId: string
+  /** 修正值（正/负） */
+  value: number
+}
+
+/** 种族性别差异修正 */
+export interface GenderModifier {
+  gender: Gender
+  /** 属性修正 */
+  attributeModifiers?: RaceAttributeModifier[]
+  /** 专属天赋池（额外可抽取的天赋ID） */
+  exclusiveTalents?: string[]
+}
+
+/** 种族定义 */
+export interface WorldRaceDef {
+  id: string
+  name: string
+  icon: string
+  description: string
+  /** 种族简介（用于种族选择界面展示） */
+  lore: string
+  /** 是否可选（false = 界面显示但灰色不可选） */
+  playable: boolean
+  /** 寿命范围 [最小, 最大] */
+  lifespanRange: [number, number]
+  /** 基础属性修正（相对于世界默认值） */
+  attributeModifiers: RaceAttributeModifier[]
+  /** 性别差异修正 */
+  genderModifiers?: GenderModifier[]
+  /** 种族专属天赋池（额外可抽取的天赋ID） */
+  exclusiveTalents?: string[]
+  /** 种族专属路线ID列表 */
+  exclusiveRoutes?: string[]
+  /** 种族专属事件目录名（如 "elf"），用于加载 events/{race}/ 下的事件 */
+  eventDir?: string
+  /** 主题色（用于UI种族主题切换） */
+  themeColor?: string
+}
+
+// ==================== 骰判定系统（D20） ====================
+
+/** D20 骰判定配置（参考 博德之门3） */
+export interface DiceCheck {
+  /** 判定依据的属性ID（如 str, mag, chr） */
+  attribute: string
+  /** 难度等级 DC（D20 + 属性修正 >= DC 则成功） */
+  dc: number
+  /** 判定描述文本（如"力量判定 DC15 — 你需要足够强壮才能..."） */
+  description?: string
+  /** 是否有优势（掷两次取高） */
+  advantage?: boolean
+  /** 是否有劣势（掷两次取低） */
+  disadvantage?: boolean
+}
+
+/** 骰判定结果 */
+export interface DiceCheckResult {
+  /** 是否成功 */
+  success: boolean
+  /** 掷出的原始骰值(1-20) */
+  roll: number
+  /** 属性修正值 */
+  modifier: number
+  /** 最终结果 = roll + modifier */
+  total: number
+  /** 需要达到的DC */
+  dc: number
+  /** 是否大成功（natural 20） */
+  criticalSuccess: boolean
+  /** 是否大失败（natural 1） */
+  criticalFailure: boolean
+}
+
 // ==================== 世界包数据格式 ====================
 
 /** 属性定义 */
@@ -48,11 +130,17 @@ export interface WorldTalentDef {
   flavorText?: string
   /** 抽取权重，默认按稀有度：common=100, rare=10, legendary=1 */
   draftWeight?: number
+  /** 限定种族 — 仅这些种族可抽取（不填 = 不限制） */
+  requireRace?: string[]
+  /** 限定性别 — 仅该性别可抽取 */
+  requireGender?: Gender
+  /** 限定预设（身份） — 仅该预设可抽取 */
+  requirePreset?: string[]
 }
 
 /** 事件效果 */
 export interface EventEffect {
-  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'remove_flag' | 'modify_hp' | 'set_counter' | 'modify_counter' | 'grant_item'
+  type: 'modify_attribute' | 'set_attribute' | 'add_talent' | 'trigger_event' | 'set_flag' | 'remove_flag' | 'modify_hp' | 'set_counter' | 'modify_counter' | 'grant_item' | 'modify_max_hp_bonus'
   target: string
   value: number
   probability?: number
@@ -140,9 +228,11 @@ export interface EventBranch {
   nextEvents?: string[]
   /** 选择此分支的前置条件 */
   requireCondition?: string
-  /** 风险判定（可选，有风险的选择才需要） */
+  /** 风险判定（可选，有风险的选择才需要）— 旧版 sigmoid 曲线 */
   riskCheck?: RiskCheck
-  /** 失败时的效果（如果 riskCheck 存在且判定失败时使用，否则使用 effects） */
+  /** D20 骰判定（可选）— 新版，参考BG3。优先级高于 riskCheck */
+  diceCheck?: DiceCheck
+  /** 失败时的效果（如果 riskCheck/diceCheck 存在且判定失败时使用，否则使用 effects） */
   failureEffects?: EventEffect[]
   /** 成功时的描述文字 */
   successText?: string
@@ -183,6 +273,22 @@ export interface WorldEventDef {
   routes?: string[]
   /** 路线匹配模式："any" = 匹配任一路线(默认), "all" = 必须同时拥有所有列出的路线 */
   routeMode?: 'any' | 'all'
+  /** 允许触发的种族ID列表，不填 = 所有种族可用 */
+  races?: string[]
+  /** 允许触发的性别，不填 = 所有性别可用 */
+  genders?: Gender[]
+  /** 种族变体：同一事件在不同种族下的文本/分支覆盖 */
+  raceVariants?: Record<string, {
+    title?: string
+    description?: string
+    branches?: EventBranch[]
+    effects?: EventEffect[]
+  }>
+  /** 性别变体：同一事件在不同性别下的文本覆盖 */
+  genderVariants?: Record<Gender, {
+    title?: string
+    description?: string
+  }>
 }
 
 /** 成就定义 */
@@ -195,6 +301,10 @@ export interface WorldAchievementDef {
   condition: string
   category: string
   reward?: string
+  /** 限定种族（为空或不填 = 所有种族可解锁） */
+  races?: string[]
+  /** 限定性别（为空或不填 = 所有性别可解锁） */
+  genders?: string[]
 }
 
 /** 评分分段 */
@@ -219,6 +329,8 @@ export interface WorldPresetDef {
   description: string
   attributes: Record<string, number>
   talents?: string[]
+  /** 身份专属天赋（保底加入抽取池） */
+  exclusiveTalents?: string[]
   locked: boolean
   unlockCondition?: string
 }
@@ -251,6 +363,8 @@ export interface WorldManifest {
     achievements: string
     presets: string
     rules: string
+    /** 种族定义文件 */
+    races?: string
   }
   routes?: LifeRoute[]
 }
@@ -267,6 +381,8 @@ export interface WorldInstance {
   items: WorldItemDef[]
   presets: WorldPresetDef[]
   scoringRule: WorldScoringRule
+  /** 种族定义 */
+  races?: WorldRaceDef[]
   /** 人生评价定义 */
   evaluations?: LifeEvaluation[]
   /** 索引映射，加速查找 */
@@ -288,6 +404,16 @@ export interface EventLogEntry {
   description: string
   effects: string[]
   branchId?: string
+  /** 选择的分支标题 */
+  branchTitle?: string
+  /** 选择的分支描述 */
+  branchDescription?: string
+  /** 判定结果描述（successText 或 failureText） */
+  resultText?: string
+  /** 是否进行了判定（diceCheck / riskCheck） */
+  riskRolled?: boolean
+  /** 判定是否成功 */
+  isSuccess?: boolean
 }
 
 /** 属性快照 */
@@ -297,7 +423,7 @@ export interface AttributeSnapshot {
 }
 
 /** 游戏阶段 */
-export type GamePhase = 'init' | 'talent-draft' | 'attribute-allocate' | 'simulating' | 'finished'
+export type GamePhase = 'init' | 'talent-draft' | 'attribute-allocate' | 'simulating' | 'awaiting_choice' | 'showing_event' | 'finished'
 
 /** 游戏结算结果 */
 export interface GameResult {
@@ -306,6 +432,7 @@ export interface GameResult {
   gradeTitle: string
   gradeDescription: string
   lifespan: number
+  evaluations?: LifeEvaluation[]
 }
 
 /** 游戏状态 */
@@ -319,7 +446,10 @@ export interface GameState {
   }
   character: {
     name: string
-    gender?: string
+    /** 性别 */
+    gender?: Gender
+    /** 种族ID */
+    race?: string
   }
   attributes: Record<string, number>
   attributeHistory: AttributeSnapshot[]
@@ -331,6 +461,8 @@ export interface GameState {
   }
   age: number
   hp: number
+  /** HP 上限加成（来自事件效果，如龙血觉醒） */
+  maxHpBonus: number
   flags: Set<string>
   counters: Map<string, number>
   triggeredEvents: Set<string>
@@ -344,6 +476,8 @@ export interface GameState {
   /** 天赋负面修正总值（扣减可分配点数） */
   talentPenalty: number
   phase: GamePhase
+  /** 本局实际最大年龄（受种族寿命影响，用于存档恢复） */
+  effectiveMaxAge?: number
   result?: GameResult
   /** 当前年份需要玩家选择的事件分支 */
   pendingBranch?: {
@@ -395,6 +529,8 @@ export interface YearResult {
   isSuccess?: boolean
   /** 是否进行了风险判定 */
   riskRolled?: boolean
+  /** D20 骰判定详细结果（仅 diceCheck 时有值） */
+  diceCheckResult?: DiceCheckResult
 }
 
 // ==================== 生命周期路线 ====================

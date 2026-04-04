@@ -424,5 +424,45 @@
       }
     ],
     "acquireText": "获得 🏺 远古遗物 — 智力每年成长+0.5, 所有判定+15%"
+  },
+  {
+    "id": "holy_pendant",
+    "name": "圣光坠饰",
+    "description": "教会赠予的银质坠饰，散发着温暖的光辉。",
+    "icon": "✝️",
+    "rarity": "common",
+    "category": "accessory",
+    "effects": [
+      {
+        "type": "hp_regen_bonus",
+        "value": 1
+      },
+      {
+        "type": "attr_passive_growth",
+        "target": "spr",
+        "value": 0.3
+      }
+    ],
+    "acquireText": "获得 ✝️ 圣光坠饰 — 每年恢复+1HP，灵性成长+0.3/年"
+  },
+  {
+    "id": "otherworld_knowledge",
+    "name": "异界知识",
+    "description": "来自前世的零碎记忆，化作了一卷泛着微光的手稿。",
+    "icon": "📜",
+    "rarity": "rare",
+    "category": "special",
+    "effects": [
+      {
+        "type": "attr_passive_growth",
+        "target": "int",
+        "value": 0.5
+      },
+      {
+        "type": "skill_check_bonus",
+        "value": 0.1
+      }
+    ],
+    "acquireText": "获得 📜 异界知识 — 智力成长+0.5/年，判定+10%"
   }
 ]

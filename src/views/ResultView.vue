@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
 import FinalGrade from '@/components/result/FinalGrade.vue'
+import { exportAsJSON, exportAsText, copyChronicleToClipboard } from '@/utils/export'
 
 const props = defineProps<{
   worldId: string
@@ -78,6 +79,28 @@ function goHome() {
 
 function rarityEmoji(r: string): string {
   return { common: '✦', rare: '✧', legendary: '♛' }[r] ?? '✦'
+}
+
+// 导出功能
+const copySuccess = ref(false)
+
+function handleExportJSON() {
+  if (!state.value) return
+  exportAsJSON(state.value)
+}
+
+function handleExportText() {
+  if (!state.value) return
+  exportAsText(state.value, world.value)
+}
+
+async function handleCopyChronicle() {
+  if (!state.value) return
+  const ok = await copyChronicleToClipboard(state.value, world.value)
+  if (ok) {
+    copySuccess.value = true
+    setTimeout(() => { copySuccess.value = false }, 2000)
+  }
 }
 </script>
 
@@ -173,6 +196,22 @@ function rarityEmoji(r: string): string {
             <div class="achieve-desc">{{ ach!.description }}</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- 导出功能 -->
+    <section class="section">
+      <h3 class="section-title">导出回放</h3>
+      <div class="export-grid">
+        <button class="btn btn-export" @click="handleCopyChronicle">
+          {{ copySuccess ? '✓ 已复制' : '📋 复制编年史' }}
+        </button>
+        <button class="btn btn-export" @click="handleExportText">
+          📝 导出文本
+        </button>
+        <button class="btn btn-export" @click="handleExportJSON">
+          📦 导出存档
+        </button>
       </div>
     </section>
 
@@ -396,5 +435,34 @@ function rarityEmoji(r: string): string {
 /* 操作按钮 */
 .result-actions {
   margin-top: var(--space-2xl);
+}
+
+/* 导出按钮 */
+.export-grid {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.btn-export {
+  flex: 1;
+  min-width: 100px;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.8rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-export:hover {
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.btn-export:active {
+  transform: scale(0.97);
 }
 </style>

@@ -12,6 +12,7 @@ import type {
   WorldItemDef,
   WorldPresetDef,
   WorldScoringRule,
+  WorldRaceDef,
 } from '../../engine/core/types'
 
 // ==================== Schema 定义 ====================
@@ -27,8 +28,8 @@ const schemas: Record<string, object> = {
       id: { type: 'string' },
       title: { type: 'string' },
       description: { type: 'string' },
-      minAge: { type: 'integer', minimum: 0, maximum: 100 },
-      maxAge: { type: 'integer', minimum: 0, maximum: 100 },
+      minAge: { type: 'integer', minimum: 0, maximum: 1000 },
+      maxAge: { type: 'integer', minimum: 0, maximum: 1000 },
       weight: { type: 'number', minimum: 0 },
       include: { type: 'string' },
       exclude: { type: 'string' },
@@ -54,6 +55,32 @@ const schemas: Record<string, object> = {
       },
       routes: { type: 'array', items: { type: 'string' } },
       routeMode: { type: 'string', enum: ['any', 'all'] },
+      races: { type: 'array', items: { type: 'string' } },
+      genders: { type: 'array', items: { type: 'string', enum: ['male', 'female', 'other'] } },
+      raceVariants: {
+        type: 'object',
+        additionalProperties: {
+          type: 'object',
+          additionalProperties: true,
+          properties: {
+            title: { type: 'string' },
+            description: { type: 'string' },
+            branches: { type: 'array', items: { $ref: '#/definitions/EventBranch' } },
+            effects: { type: 'array', items: { $ref: '#/definitions/EventEffect' } },
+          },
+        },
+      },
+      genderVariants: {
+        type: 'object',
+        additionalProperties: {
+          type: 'object',
+          additionalProperties: true,
+          properties: {
+            title: { type: 'string' },
+            description: { type: 'string' },
+          },
+        },
+      },
     },
   },
   item: {
@@ -82,7 +109,10 @@ const schemas: Record<string, object> = {
       rarity: { enum: ['common', 'rare', 'legendary'] },
       icon: { type: 'string' },
       effects: { type: 'array', items: { $ref: '#/definitions/EventEffect' } },
-      draftWeight: { type: 'integer', minimum: 1 },
+      draftWeight: { type: 'integer', minimum: 0 },
+      requireRace: { type: 'array', items: { type: 'string' } },
+      requireGender: { enum: ['male', 'female'] },
+      requirePreset: { type: 'array', items: { type: 'string' } },
     },
   },
   attribute: {
@@ -115,6 +145,8 @@ const schemas: Record<string, object> = {
       condition: { type: 'string' },
       category: { type: 'string' },
       reward: { type: 'string' },
+      races: { type: 'array', items: { type: 'string' } },
+      genders: { type: 'array', items: { type: 'string' } },
     },
   },
   preset: {
@@ -128,6 +160,7 @@ const schemas: Record<string, object> = {
       description: { type: 'string' },
       attributes: { type: 'object', additionalProperties: { type: 'integer' } },
       talents: { type: 'array', items: { type: 'string' } },
+      exclusiveTalents: { type: 'array', items: { type: 'string' } },
       locked: { type: 'boolean' },
       unlockCondition: { type: 'string' },
     },
@@ -241,6 +274,7 @@ import eventsTeenagerData from '../../../data/sword-and-magic/events/teenager.js
 import eventsAdultData from '../../../data/sword-and-magic/events/adult.json'
 import eventsMiddleAgeData from '../../../data/sword-and-magic/events/middle-age.json'
 import eventsElderData from '../../../data/sword-and-magic/events/elder.json'
+import racesData from '../../../data/sword-and-magic/races.json'
 
 /** 加载并校验所有世界数据 */
 export function loadWorldData() {
@@ -285,6 +319,9 @@ export function loadWorldData() {
     }
   }
 
+  // 种族数据（无需严格 schema 校验，直接类型断言）
+  const races = racesData as unknown as WorldRaceDef[]
+
   return {
     manifest,
     attributes,
@@ -295,5 +332,6 @@ export function loadWorldData() {
     presets,
     scoringRule,
     evaluations: evaluationsData as any[],
+    races,
   }
 }

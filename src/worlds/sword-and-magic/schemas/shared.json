@@ -28,6 +28,19 @@
     }
   },
 
+  "DiceCheck": {
+    "type": "object",
+    "required": ["attribute", "dc"],
+    "additionalProperties": false,
+    "properties": {
+      "attribute": { "type": "string" },
+      "dc": { "type": "number" },
+      "description": { "type": "string" },
+      "advantage": { "type": "boolean" },
+      "disadvantage": { "type": "boolean" }
+    }
+  },
+
   "EventBranch": {
     "type": "object",
     "required": ["id", "title", "effects"],
@@ -41,6 +54,7 @@
       "nextEvents": { "type": "array", "items": { "type": "string" } },
       "requireCondition": { "type": "string" },
       "riskCheck": { "$ref": "#/definitions/RiskCheck" },
+      "diceCheck": { "$ref": "#/definitions/DiceCheck" },
       "failureEffects": { "type": "array", "items": { "$ref": "#/definitions/EventEffect" } },
       "successText": { "type": "string" },
       "failureText": { "type": "string" }

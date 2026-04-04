@@ -5,8 +5,17 @@
     "description": "完成第一局游戏",
     "icon": "🌍",
     "hidden": false,
-    "condition": "event.count.birth_noble >= 1 | event.count.birth_common >= 1 | event.count.birth_slums >= 1",
-    "category": "progress"
+    "condition": "age >= 1",
+    "category": "进度"
+  },
+  {
+    "id": "ten_lives",
+    "name": "轮回十世",
+    "description": "完成10局游戏",
+    "icon": "🔄",
+    "hidden": true,
+    "condition": "age >= 1",
+    "category": "进度"
   },
   {
     "id": "longevity",
@@ -15,115 +24,7 @@
     "icon": "🕐",
     "hidden": false,
     "condition": "lifespan >= 80",
-    "category": "life"
-  },
-  {
-    "id": "knight_ascending",
-    "name": "骑士之道",
-    "description": "成为骑士并赢得荣耀",
-    "icon": "⚔️",
-    "hidden": false,
-    "condition": "has.flag.knight & has.flag.knight_honor",
-    "category": "route"
-  },
-  {
-    "id": "knight_hero_ach",
-    "name": "王国之盾",
-    "description": "成为骑士并率领冲锋，最终成为英雄",
-    "icon": "🛡️",
-    "hidden": false,
-    "condition": "has.flag.knight & has.flag.knight_honor & has.flag.knight_hero",
-    "category": "route"
-  },
-  {
-    "id": "mage_path",
-    "name": "魔法学院之路",
-    "description": "从入学到毕业，完成魔法师养成",
-    "icon": "📚",
-    "hidden": false,
-    "condition": "has.flag.magic_student & has.flag.mage_graduate",
-    "category": "route"
-  },
-  {
-    "id": "merchant_empire",
-    "name": "商业帝国",
-    "description": "从学徒到大商人，建立自己的商业版图",
-    "icon": "💰",
-    "hidden": false,
-    "condition": "has.flag.merchant_apprentice & has.flag.merchant_master",
-    "category": "route"
-  },
-  {
-    "id": "adventurer_legend",
-    "name": "冒险者传说",
-    "description": "加入公会、深入地下城、成为地下城大师",
-    "icon": "🗺️",
-    "hidden": false,
-    "condition": "has.flag.guild_member & has.flag.dungeon_veteran & has.flag.dungeon_master",
-    "category": "route"
-  },
-  {
-    "id": "dragon_slayer_ach",
-    "name": "屠龙者",
-    "description": "讨伐巨龙并取得胜利",
-    "icon": "🐉",
-    "hidden": false,
-    "condition": "has.flag.dragon_slayer",
-    "category": "combat"
-  },
-  {
-    "id": "dragon_near_death",
-    "name": "龙口余生",
-    "description": "在讨伐巨龙中险些丧命但活了下来",
-    "icon": "💀",
-    "hidden": true,
-    "condition": "has.flag.near_death & event.count.dragon_slay_attempt >= 1 & lifespan >= 40",
-    "category": "combat"
-  },
-  {
-    "id": "war_hero_ach",
-    "name": "战争英雄",
-    "description": "在战争中存活并成为英雄",
-    "icon": "🎖️",
-    "hidden": false,
-    "condition": "has.flag.war_hero & lifespan >= 50",
-    "category": "combat"
-  },
-  {
-    "id": "duel_champion_ach",
-    "name": "决斗冠军",
-    "description": "以堂堂正正的方式赢得决斗",
-    "icon": "🤺",
-    "hidden": true,
-    "condition": "has.flag.duel_champion",
-    "category": "combat"
-  },
-  {
-    "id": "archmage_ach",
-    "name": "大贤者",
-    "description": "达到魔法师的最高境界",
-    "icon": "🧙",
-    "hidden": false,
-    "condition": "has.flag.archmage",
-    "category": "magic"
-  },
-  {
-    "id": "forbidden_knowledge",
-    "name": "禁忌的代价",
-    "description": "翻开禁书但最终抵抗住了黑暗诱惑",
-    "icon": "📕",
-    "hidden": true,
-    "condition": "has.flag.dark_path & has.flag.resist_dark",
-    "category": "magic"
-  },
-  {
-    "id": "dark_savior",
-    "name": "黑暗救赎",
-    "description": "走上暗黑之路但最终逃离并活下来",
-    "icon": "🕯️",
-    "hidden": true,
-    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & lifespan >= 50",
-    "category": "magic"
+    "category": "人生"
   },
   {
     "id": "rags_to_riches",
@@ -132,7 +33,7 @@
     "icon": "👑",
     "hidden": true,
     "condition": "event.count.birth_slums >= 1 & has.flag.lord",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "slum_survivor",
@@ -141,7 +42,7 @@
     "icon": "🌱",
     "hidden": true,
     "condition": "event.count.birth_slums >= 1 & lifespan >= 70",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "noble_born_knight",
@@ -150,7 +51,7 @@
     "icon": "🏰",
     "hidden": true,
     "condition": "event.count.birth_noble >= 1 & has.flag.knight_hero",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "legacy_master",
@@ -159,7 +60,7 @@
     "icon": "🎓",
     "hidden": false,
     "condition": "has.flag.has_student & has.flag.legacy_passed",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "love_and_war",
@@ -168,16 +69,16 @@
     "icon": "💍",
     "hidden": true,
     "condition": "has.flag.married & has.flag.war_hero & lifespan >= 60",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "eternal_wanderer",
     "name": "永远的旅人",
-    "description": "活到60岁且从未成为领主或骑士",
+    "description": "加入公会后活到60岁，却从未定居",
     "icon": "🧳",
     "hidden": true,
     "condition": "lifespan >= 60 & has.flag.guild_member",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "never_back_down",
@@ -186,7 +87,7 @@
     "icon": "🔥",
     "hidden": true,
     "condition": "has.flag.bullied_child & has.flag.fight_back & has.flag.knight_hero",
-    "category": "life"
+    "category": "人生"
   },
   {
     "id": "merchant_lord",
@@ -195,7 +96,205 @@
     "icon": "🏗️",
     "hidden": true,
     "condition": "has.flag.merchant_master & has.flag.lord",
-    "category": "life"
+    "category": "人生"
+  },
+  {
+    "id": "loving_family",
+    "name": "天伦之乐",
+    "description": "结婚、生子、留下传承",
+    "icon": "👨‍👩‍👧",
+    "hidden": false,
+    "condition": "has.flag.married & has.flag.parent & has.flag.has_successor",
+    "category": "人生"
+  },
+  {
+    "id": "widowed_hero",
+    "name": "丧偶之痛",
+    "description": "失去伴侣后仍然坚强地活到60岁",
+    "icon": "🥀",
+    "hidden": true,
+    "condition": "has.flag.widowed & lifespan >= 60",
+    "category": "人生"
+  },
+  {
+    "id": "scholar_warrior",
+    "name": "文武双全",
+    "description": "智慧和体魄峰值同时达到30",
+    "icon": "📖⚔️",
+    "hidden": true,
+    "condition": "attribute.peak.str >= 30 & attribute.peak.int >= 30",
+    "category": "人生"
+  },
+  {
+    "id": "peaceful_ending",
+    "name": "落叶归根",
+    "description": "安详地度过晚年",
+    "icon": "🍂",
+    "hidden": true,
+    "condition": "has.flag.peaceful_retirement & lifespan >= 70",
+    "category": "人生"
+  },
+  {
+    "id": "knight_ascending",
+    "name": "骑士之道",
+    "description": "成为骑士并赢得荣耀",
+    "icon": "⚔️",
+    "hidden": false,
+    "condition": "has.flag.knight & has.flag.knight_honor",
+    "category": "路线"
+  },
+  {
+    "id": "knight_hero_ach",
+    "name": "王国之盾",
+    "description": "成为骑士并率领冲锋，最终成为英雄",
+    "icon": "🛡️",
+    "hidden": false,
+    "condition": "has.flag.knight & has.flag.knight_honor & has.flag.knight_hero",
+    "category": "路线"
+  },
+  {
+    "id": "mage_path",
+    "name": "魔法学院之路",
+    "description": "从入学到毕业，完成魔法师养成",
+    "icon": "📚",
+    "hidden": false,
+    "condition": "has.flag.magic_student & has.flag.mage_graduate",
+    "category": "路线"
+  },
+  {
+    "id": "merchant_empire",
+    "name": "商业帝国",
+    "description": "从学徒到大商人，建立自己的商业版图",
+    "icon": "💰",
+    "hidden": false,
+    "condition": "has.flag.merchant_apprentice & has.flag.merchant_master",
+    "category": "路线"
+  },
+  {
+    "id": "adventurer_legend",
+    "name": "冒险者传说",
+    "description": "加入公会、深入地下城、成为地下城大师",
+    "icon": "🗺️",
+    "hidden": false,
+    "condition": "has.flag.guild_member & has.flag.dungeon_veteran & has.flag.dungeon_master",
+    "category": "路线"
+  },
+  {
+    "id": "tower_master_ach",
+    "name": "高塔之主",
+    "description": "成为魔法塔主人",
+    "icon": "🗼",
+    "hidden": true,
+    "condition": "has.flag.tower_master",
+    "category": "路线"
+  },
+  {
+    "id": "school_founder_ach",
+    "name": "教育先驱",
+    "description": "创办学校，传播知识",
+    "icon": "🏫",
+    "hidden": false,
+    "condition": "has.flag.school_founder",
+    "category": "路线"
+  },
+  {
+    "id": "dragon_slayer_ach",
+    "name": "屠龙者",
+    "description": "讨伐巨龙并取得胜利",
+    "icon": "🐉",
+    "hidden": false,
+    "condition": "has.flag.dragon_slayer",
+    "category": "战斗"
+  },
+  {
+    "id": "dragon_near_death",
+    "name": "龙口余生",
+    "description": "在讨伐巨龙中险些丧命但活了下来",
+    "icon": "💀",
+    "hidden": true,
+    "condition": "has.flag.near_death & has.flag.dragon_defeated & lifespan >= 40",
+    "category": "战斗"
+  },
+  {
+    "id": "war_hero_ach",
+    "name": "战争英雄",
+    "description": "在战争中存活并成为英雄",
+    "icon": "🎖️",
+    "hidden": false,
+    "condition": "has.flag.war_hero & lifespan >= 50",
+    "category": "战斗"
+  },
+  {
+    "id": "duel_champion_ach",
+    "name": "决斗冠军",
+    "description": "以堂堂正正的方式赢得决斗",
+    "icon": "🤺",
+    "hidden": true,
+    "condition": "has.flag.champion",
+    "category": "战斗"
+  },
+  {
+    "id": "demon_king_slayer_ach",
+    "name": "魔王终结者",
+    "description": "讨伐魔王",
+    "icon": "👿",
+    "hidden": true,
+    "condition": "has.flag.demon_king_slayer",
+    "category": "战斗"
+  },
+  {
+    "id": "warriors_death_ach",
+    "name": "战士之死",
+    "description": "在战斗中壮烈牺牲",
+    "icon": "⚰️",
+    "hidden": true,
+    "condition": "has.flag.warriors_death",
+    "category": "战斗"
+  },
+  {
+    "id": "archmage_ach",
+    "name": "大贤者",
+    "description": "达到魔法师的最高境界",
+    "icon": "🧙",
+    "hidden": false,
+    "condition": "has.flag.archmage",
+    "category": "魔法"
+  },
+  {
+    "id": "forbidden_knowledge",
+    "name": "禁忌的代价",
+    "description": "翻开禁书但最终抵抗住了黑暗诱惑",
+    "icon": "📕",
+    "hidden": true,
+    "condition": "has.flag.dark_path & has.flag.resist_dark",
+    "category": "魔法"
+  },
+  {
+    "id": "dark_savior",
+    "name": "黑暗救赎",
+    "description": "走上暗黑之路但最终逃离并活下来",
+    "icon": "🕯️",
+    "hidden": true,
+    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & lifespan >= 50",
+    "category": "魔法"
+  },
+  {
+    "id": "elemental_lord_ach",
+    "name": "元素之主",
+    "description": "掌握元素魔法的至高力量",
+    "icon": "🌊",
+    "hidden": true,
+    "condition": "has.flag.elemental_lord",
+    "category": "魔法"
+  },
+  {
+    "id": "war_mage_ach",
+    "name": "战争法师",
+    "description": "同时掌握武艺和魔法的战场术士",
+    "icon": "⚡",
+    "hidden": true,
+    "condition": "has.flag.war_mage",
+    "category": "魔法"
   },
   {
     "id": "iron_body",
@@ -204,7 +303,7 @@
     "icon": "💪",
     "hidden": false,
     "condition": "attribute.peak.str >= 40",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "wisdom_peak",
@@ -213,7 +312,7 @@
     "icon": "👁️",
     "hidden": false,
     "condition": "attribute.peak.int >= 40",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "beauty_supreme",
@@ -222,7 +321,7 @@
     "icon": "💎",
     "hidden": false,
     "condition": "attribute.peak.chr >= 40",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "archmage_body",
@@ -231,7 +330,7 @@
     "icon": "✨",
     "hidden": false,
     "condition": "attribute.peak.mag >= 40",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "soul_pure",
@@ -240,7 +339,7 @@
     "icon": "🌙",
     "hidden": false,
     "condition": "attribute.peak.spr >= 40",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "lucky_star",
@@ -249,7 +348,7 @@
     "icon": "🌟",
     "hidden": false,
     "condition": "attribute.peak.luk >= 30",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "wealth_peak",
@@ -258,7 +357,7 @@
     "icon": "🪙",
     "hidden": false,
     "condition": "attribute.peak.mny >= 30",
-    "category": "attribute"
+    "category": "属性"
   },
   {
     "id": "hero_ach",
@@ -266,8 +365,8 @@
     "description": "完成勇者之旅并拯救世界",
     "icon": "🗡️",
     "hidden": false,
-    "condition": "has.flag.hero_journey & has.flag.world_rebuilt",
-    "category": "epic"
+    "condition": "has.flag.legendary_hero | (has.flag.kingdom_hero & has.flag.world_rebuilt)",
+    "category": "史诗"
   },
   {
     "id": "dark_lord_ach",
@@ -276,7 +375,7 @@
     "icon": "🌑",
     "hidden": false,
     "condition": "has.flag.dark_embraced & has.flag.world_destroyed",
-    "category": "epic"
+    "category": "史诗"
   },
   {
     "id": "world_breaker_ach",
@@ -285,25 +384,16 @@
     "icon": "☄️",
     "hidden": false,
     "condition": "has.flag.world_breaking & has.flag.world_rebuilt",
-    "category": "epic"
-  },
-  {
-    "id": "reincarnator_ach",
-    "name": "转生者的逆袭",
-    "description": "利用前世知识成为著名发明家",
-    "icon": "🥤",
-    "hidden": true,
-    "condition": "has.flag.reincarnated & has.flag.famous_inventor",
-    "category": "secret"
+    "category": "史诗"
   },
   {
     "id": "dragon_knight",
     "name": "龙骑士",
-    "description": "觉醒龙血并成为骑士英雄",
+    "description": "骑乘巨龙翱翔天际",
     "icon": "🐲",
     "hidden": true,
-    "condition": "has.talent.dragon_blood & has.flag.knight_hero",
-    "category": "epic"
+    "condition": "has.flag.dragon_rider",
+    "category": "史诗"
   },
   {
     "id": "demon_slayer",
@@ -312,7 +402,475 @@
     "icon": "😈",
     "hidden": true,
     "condition": "has.talent.demon_heritage & has.flag.dragon_slayer",
-    "category": "epic"
+    "category": "史诗"
+  },
+  {
+    "id": "divine_champion_ach",
+    "name": "神之代行者",
+    "description": "成为神选之人并完成使命",
+    "icon": "✝️",
+    "hidden": true,
+    "condition": "has.flag.divine_champion",
+    "category": "史诗"
+  },
+  {
+    "id": "ascended_ach",
+    "name": "超越凡人",
+    "description": "通过修炼超越了种族的极限",
+    "icon": "🌌",
+    "hidden": true,
+    "condition": "has.flag.ascended | has.flag.transcendent",
+    "category": "史诗"
+  },
+  {
+    "id": "undying_legend_ach",
+    "name": "不朽传说",
+    "description": "你的故事将永远流传",
+    "icon": "📜",
+    "hidden": true,
+    "condition": "has.flag.undying_legend",
+    "category": "史诗"
+  },
+  {
+    "id": "human_adaptability",
+    "name": "人类的适应力",
+    "description": "作为人类，在三个不同领域都有所建树",
+    "icon": "🧬",
+    "hidden": false,
+    "condition": "attribute.peak.str >= 20 & attribute.peak.int >= 20 & attribute.peak.chr >= 20",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_soldier_honor",
+    "name": "共和国之子",
+    "description": "应征入伍并成为战争英雄",
+    "icon": "🪖",
+    "hidden": false,
+    "condition": "has.flag.military_service & has.flag.war_hero",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_smith_master",
+    "name": "铁匠传承",
+    "description": "从铁匠学徒到名满天下",
+    "icon": "🔨",
+    "hidden": true,
+    "condition": "has.flag.smith_apprentice & has.flag.famous_inventor",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_family_dynasty",
+    "name": "家族荣光",
+    "description": "继承家族传统，结婚生子，延续血脉",
+    "icon": "🏠",
+    "hidden": false,
+    "condition": "has.flag.family_legacy & has.flag.married & has.flag.parent",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_tavern_king",
+    "name": "酒馆之王",
+    "description": "从酒馆打架到经营自己的酒馆",
+    "icon": "🍺",
+    "hidden": true,
+    "condition": "has.flag.tavern_fighter & has.flag.business_owner",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_diplomat_ach",
+    "name": "和平缔造者",
+    "description": "作为人类外交官促成和平",
+    "icon": "🕊️",
+    "hidden": true,
+    "condition": "has.flag.diplomat & has.flag.royal_recognized",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_self_made",
+    "name": "白手起家",
+    "description": "从平民出身到拥有自己的事业",
+    "icon": "🏡",
+    "hidden": false,
+    "condition": "event.count.birth_common >= 1 & has.flag.homeowner & has.flag.business_owner",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_guild_legend",
+    "name": "公会传奇",
+    "description": "加入冒险者公会并创立自己的公会",
+    "icon": "⚜️",
+    "hidden": true,
+    "condition": "has.flag.guild_member & has.flag.guild_founder",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_orphan_hero",
+    "name": "孤儿的逆袭",
+    "description": "被收养的孩子最终成为英雄",
+    "icon": "🌅",
+    "hidden": true,
+    "condition": "has.flag.adopted_child & has.flag.knight_hero",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "human_centenarian",
+    "name": "人瑞",
+    "description": "作为短命种族突破百年大关",
+    "icon": "🎂",
+    "hidden": true,
+    "condition": "lifespan >= 90",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "elf_worldtree_blessed",
+    "name": "世界树的祝福",
+    "description": "获得世界树的认可和力量",
+    "icon": "🌳",
+    "hidden": false,
+    "condition": "has.flag.world_tree_blessed",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_worldtree_guardian",
+    "name": "世界树守护者",
+    "description": "成为世界树守护者候选人",
+    "icon": "🛡️🌳",
+    "hidden": true,
+    "condition": "has.flag.worldtree_candidate",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_star_song_ach",
+    "name": "星歌传唱者",
+    "description": "掌握精灵最古老的星歌魔法",
+    "icon": "🌠",
+    "hidden": false,
+    "condition": "has.flag.star_song_master",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_forest_healer_ach",
+    "name": "森林的治愈者",
+    "description": "治愈被腐化的森林",
+    "icon": "🌿",
+    "hidden": false,
+    "condition": "has.flag.forest_healer",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_spirit_bond",
+    "name": "灵魂契约",
+    "description": "与灵兽建立永恒的联结",
+    "icon": "🦌",
+    "hidden": true,
+    "condition": "has.flag.spirit_companion",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_dragon_bond",
+    "name": "龙之盟友",
+    "description": "作为精灵与龙族建立古老的联盟",
+    "icon": "🐉🧝",
+    "hidden": true,
+    "condition": "has.flag.dragon_rider",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_council_seat",
+    "name": "长老院之席",
+    "description": "进入精灵长老评议会",
+    "icon": "🏛️",
+    "hidden": false,
+    "condition": "has.flag.council_member",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_reclusive_sage",
+    "name": "隐世贤者",
+    "description": "选择隐居，远离尘世纷扰",
+    "icon": "🏔️",
+    "hidden": true,
+    "condition": "has.flag.elf_reclusive & lifespan >= 200",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_magic_pinnacle",
+    "name": "魔法的极致",
+    "description": "精灵天生的魔力达到极限",
+    "icon": "💫",
+    "hidden": true,
+    "condition": "attribute.peak.mag >= 45 & attribute.peak.spr >= 35",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "elf_mentor_legacy",
+    "name": "千年师徒",
+    "description": "将精灵的智慧传承给下一代",
+    "icon": "📖",
+    "hidden": false,
+    "condition": "has.flag.has_student & has.flag.legacy_passed",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "goblin_trade_king",
+    "name": "地下商王",
+    "description": "建立哥布林最大的贸易帝国",
+    "icon": "💎🐀",
+    "hidden": false,
+    "condition": "has.flag.goblin_merchant_king",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_mechanic_ach",
+    "name": "疯狂发明家",
+    "description": "成为哥布林最伟大的机械天才",
+    "icon": "⚙️",
+    "hidden": false,
+    "condition": "has.flag.goblin_mechanic & has.flag.famous_inventor",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_sage_ach",
+    "name": "哥布林贤者",
+    "description": "在短暂的一生中悟出了真理",
+    "icon": "🧠",
+    "hidden": true,
+    "condition": "has.flag.goblin_sage",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_diplomat_ach",
+    "name": "种族之桥",
+    "description": "作为哥布林与其他种族建立外交关系",
+    "icon": "🤝",
+    "hidden": false,
+    "condition": "has.flag.diplomat",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_school_ach",
+    "name": "下水道学院",
+    "description": "创办属于哥布林的学校",
+    "icon": "📐",
+    "hidden": true,
+    "condition": "has.flag.school_founder",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_info_broker_ach",
+    "name": "情报之网",
+    "description": "构建遍布地下世界的情报网络",
+    "icon": "🕸️",
+    "hidden": true,
+    "condition": "has.flag.info_broker",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_pioneer_ach",
+    "name": "地下帝国",
+    "description": "开拓出属于哥布林的新领地",
+    "icon": "⛏️",
+    "hidden": true,
+    "condition": "has.flag.pioneer",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_long_life",
+    "name": "老而弥坚",
+    "description": "作为哥布林活到极限寿命",
+    "icon": "⏳",
+    "hidden": true,
+    "condition": "lifespan >= 38",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_tycoon",
+    "name": "利润至上",
+    "description": "家境峰值达到极高水平",
+    "icon": "💰🐀",
+    "hidden": false,
+    "condition": "attribute.peak.mny >= 35",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "goblin_interracial_love",
+    "name": "跨越种族的爱",
+    "description": "哥布林与其他种族成功结婚",
+    "icon": "💚",
+    "hidden": true,
+    "condition": "has.flag.married",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "female_warrior",
+    "name": "铁娘子",
+    "description": "以女性之身成为骑士英雄",
+    "icon": "👸⚔️",
+    "hidden": true,
+    "condition": "has.flag.knight_hero",
+    "category": "性别",
+    "genders": [
+      "female"
+    ]
+  },
+  {
+    "id": "female_archmage",
+    "name": "魔导之母",
+    "description": "以女性之身成为大贤者",
+    "icon": "👸✨",
+    "hidden": true,
+    "condition": "has.flag.archmage",
+    "category": "性别",
+    "genders": [
+      "female"
+    ]
+  },
+  {
+    "id": "female_merchant_queen",
+    "name": "商业女王",
+    "description": "以女性之身成为商业巨头并受封领主",
+    "icon": "👸💰",
+    "hidden": true,
+    "condition": "has.flag.merchant_master & has.flag.lord",
+    "category": "性别",
+    "genders": [
+      "female"
+    ]
+  },
+  {
+    "id": "male_beauty",
+    "name": "倾国之貌",
+    "description": "以男性之身达到绝世魅力",
+    "icon": "🤴💎",
+    "hidden": true,
+    "condition": "attribute.peak.chr >= 40",
+    "category": "性别",
+    "genders": [
+      "male"
+    ]
+  },
+  {
+    "id": "male_great_father",
+    "name": "慈父之心",
+    "description": "成为父亲并留下传承",
+    "icon": "🤴👶",
+    "hidden": true,
+    "condition": "has.flag.parent & has.flag.great_parent & has.flag.has_successor",
+    "category": "性别",
+    "genders": [
+      "male"
+    ]
+  },
+  {
+    "id": "single_mother_warrior",
+    "name": "坚强的母亲",
+    "description": "独自抚养孩子并保护家庭",
+    "icon": "🤱⚔️",
+    "hidden": true,
+    "condition": "has.flag.parent & has.flag.protect_family",
+    "category": "性别",
+    "genders": [
+      "female"
+    ]
+  },
+  {
+    "id": "reincarnator_ach",
+    "name": "转生者的逆袭",
+    "description": "利用前世知识成为著名发明家",
+    "icon": "🥤",
+    "hidden": true,
+    "condition": "has.flag.reincarnated & has.flag.famous_inventor",
+    "category": "秘密"
   },
   {
     "id": "speedrun",
@@ -321,7 +879,7 @@
     "icon": "⚡",
     "hidden": true,
     "condition": "lifespan <= 25",
-    "category": "secret"
+    "category": "秘密"
   },
   {
     "id": "centenarian",
@@ -329,8 +887,8 @@
     "description": "属性峰值总和超过150",
     "icon": "🏆",
     "hidden": true,
-    "condition": "attribute.peak.chr + attribute.peak.int + attribute.peak.str + attribute.peak.mny + attribute.peak.spr + attribute.peak.mag + attribute.peak.luk >= 150",
-    "category": "secret"
+    "condition": "attribute.peak.chr >= 20 & attribute.peak.int >= 20 & attribute.peak.str >= 20 & attribute.peak.mny >= 20 & attribute.peak.spr >= 20 & attribute.peak.mag >= 20 & attribute.peak.luk >= 20",
+    "category": "秘密"
   },
   {
     "id": "fairy_companion",
@@ -338,8 +896,8 @@
     "description": "与精灵成为朋友并重逢",
     "icon": "🧚",
     "hidden": true,
-    "condition": "has.flag.fairy_friend & has.flag.fairy_friend_return & lifespan >= 60",
-    "category": "secret"
+    "condition": "has.flag.fairy_friend & lifespan >= 60",
+    "category": "秘密"
   },
   {
     "id": "eternal_peace",
@@ -348,7 +906,7 @@
     "icon": "🌿",
     "hidden": true,
     "condition": "has.flag.peaceful_retirement & lifespan >= 80",
-    "category": "secret"
+    "category": "秘密"
   },
   {
     "id": "master_of_all",
@@ -357,15 +915,60 @@
     "icon": "⬡",
     "hidden": true,
     "condition": "attribute.peak.str >= 20 & attribute.peak.int >= 20 & attribute.peak.chr >= 20 & attribute.peak.mag >= 20 & attribute.peak.spr >= 20 & attribute.peak.luk >= 20 & attribute.peak.mny >= 20",
-    "category": "secret"
+    "category": "秘密"
+  },
+  {
+    "id": "cheated_death_ach",
+    "name": "死神规避",
+    "description": "从死亡边缘逃脱",
+    "icon": "💀✨",
+    "hidden": true,
+    "condition": "has.flag.cheated_death",
+    "category": "秘密"
+  },
+  {
+    "id": "dark_and_light",
+    "name": "亦正亦邪",
+    "description": "既走过黑暗之路，又抵抗了诱惑",
+    "icon": "☯️",
+    "hidden": true,
+    "condition": "has.flag.dark_path & has.flag.resist_dark & has.flag.knight",
+    "category": "秘密"
+  },
+  {
+    "id": "famous_author_ach",
+    "name": "笔尖人生",
+    "description": "成为著名作家",
+    "icon": "✒️",
+    "hidden": true,
+    "condition": "has.flag.famous_author | has.flag.memoir_written",
+    "category": "秘密"
+  },
+  {
+    "id": "lucky_gambler_ach",
+    "name": "赌神",
+    "description": "在赌博中大获全胜",
+    "icon": "🎰",
+    "hidden": true,
+    "condition": "has.flag.lucky_gambler & attribute.peak.luk >= 20",
+    "category": "秘密"
+  },
+  {
+    "id": "solo_adventurer_ach",
+    "name": "孤狼",
+    "description": "独自踏上冒险之路",
+    "icon": "🐺",
+    "hidden": true,
+    "condition": "has.flag.solo_adventurer & has.flag.dungeon_veteran",
+    "category": "秘密"
   },
   {
     "id": "completionist",
     "name": "全成就",
-    "description": "解锁所有其他成就",
+    "description": "解锁所有其他 95 个成就",
     "icon": "👑",
     "hidden": true,
-    "condition": "achievement.count >= 39",
-    "category": "secret"
+    "condition": "achievement.count >= 95",
+    "category": "秘密"
   }
 ]

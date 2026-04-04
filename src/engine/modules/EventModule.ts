@@ -12,6 +12,7 @@ import type {
   LifeRoute,
 } from '../core/types'
 import type { RandomProvider } from '../core/RandomProvider'
+import { cloneState } from '../core/stateUtils'
 import type { ConditionDSL } from './ConditionDSL'
 import type { AttributeModule } from './AttributeModule'
 
@@ -20,6 +21,9 @@ export class EventModule {
   private random: RandomProvider
   private dsl: ConditionDSL
   private attrModule: AttributeModule
+
+  /** 人类基准寿命（[70,100] 中点），用于跨种族年龄缩放 */
+  private static readonly HUMAN_BASELINE_LIFESPAN = 85
 
   constructor(
     world: WorldInstance,
@@ -33,15 +37,50 @@ export class EventModule {
     this.attrModule = attrModule
   }
 
+  /**
+   * 计算事件的等效年龄范围（按种族寿命比例缩放）
+   * - 出生/婴儿事件（maxAge <= 1）：不缩放，确保所有种族第一年都能触发
+   * - 种族专属事件（races 只包含当前种族）：不缩放，已用种族实际年龄
+   * - 通用事件/多种族事件：以人类寿命为基准按比例缩放
+   */
+  private getScaledAgeRange(event: WorldEventDef, playerRace: string | undefined, lifespanRatio: number): [number, number] {
+    // 出生/婴儿事件不缩放：游戏首个时间刻 age=1，缩放会导致短寿命种族无法触发
+    if (event.maxAge <= 1) {
+      return [event.minAge, event.maxAge]
+    }
+    // 种族专属事件不需要缩放
+    const isRaceExclusive = event.races && event.races.length === 1 && event.races[0] === playerRace
+    if (isRaceExclusive || lifespanRatio === 1) {
+      return [event.minAge, event.maxAge]
+    }
+    return [
+      Math.round(event.minAge * lifespanRatio),
+      Math.round(event.maxAge * lifespanRatio),
+    ]
+  }
+
   /** 获取当前年龄可触发的事件候选列表 */
   getCandidates(age: number, state: GameState, activeRoutes?: LifeRoute[] | null): WorldEventDef[] {
     const ctx = { state, world: this.world }
+    const playerRace = state.character.race
+    const playerGender = state.character.gender
+    // 寿命缩放比例：角色实际寿命 / 人类基准寿命
+    const lifespanRatio = (state.effectiveMaxAge ?? EventModule.HUMAN_BASELINE_LIFESPAN) / EventModule.HUMAN_BASELINE_LIFESPAN
 
     return this.world.events.filter(event => {
-      // 年龄范围
-      if (age < event.minAge || age > event.maxAge) return false
+      // 年龄范围（按种族寿命比例缩放）
+      const [scaledMin, scaledMax] = this.getScaledAgeRange(event, playerRace, lifespanRatio)
+      if (age < scaledMin || age > scaledMax) return false
       // unique 事件去重
       if (event.unique && state.triggeredEvents.has(event.id)) return false
+      // 种族过滤：事件指定了种族列表时，玩家种族必须在其中
+      if (event.races && event.races.length > 0 && playerRace) {
+        if (!event.races.includes(playerRace)) return false
+      }
+      // 性别过滤：事件指定了性别列表时，玩家性别必须在其中
+      if (event.genders && event.genders.length > 0 && playerGender) {
+        if (!event.genders.includes(playerGender)) return false
+      }
       // include 条件
       if (event.include && !this.dsl.evaluate(event.include, ctx)) return false
       // exclude 条件
@@ -116,7 +155,7 @@ export class EventModule {
     })
 
     const totalWeight = weighted.reduce((sum, w) => sum + w.weight, 0)
-    let rand = this.random.random() * totalWeight
+    let rand = this.random.next() * totalWeight
     for (const { event, weight } of weighted) {
       rand -= weight
       if (rand <= 0) return event
@@ -135,26 +174,62 @@ export class EventModule {
     return false
   }
 
+  /** 解析种族/性别变体，返回覆盖后的事件视图 */
+  private resolveVariants(event: WorldEventDef, state: GameState): {
+    title: string
+    description: string
+    branches?: typeof event.branches
+    effects: EventEffect[]
+  } {
+    let title = event.title
+    let description = event.description
+    let branches = event.branches
+    let effects = [...event.effects]
+
+    // 种族变体覆盖
+    const playerRace = state.character.race
+    if (playerRace && event.raceVariants?.[playerRace]) {
+      const rv = event.raceVariants[playerRace]
+      if (rv.title) title = rv.title
+      if (rv.description) description = rv.description
+      if (rv.branches) branches = rv.branches
+      if (rv.effects) effects = [...rv.effects]
+    }
+
+    // 性别变体覆盖（仅覆盖文本，不覆盖分支/效果）
+    const playerGender = state.character.gender
+    if (playerGender && event.genderVariants?.[playerGender]) {
+      const gv = event.genderVariants[playerGender]
+      if (gv.title) title = gv.title
+      if (gv.description) description = gv.description
+    }
+
+    return { title, description, branches, effects }
+  }
+
   /** 执行一个事件，返回状态更新 */
   resolveEvent(
     event: WorldEventDef,
     state: GameState,
     branchId?: string
   ): GameState {
-    const newState = this.cloneState(state)
+    const newState = cloneState(state)
 
     // 记录已触发
     newState.triggeredEvents = new Set([...state.triggeredEvents, event.id])
 
+    // 解析种族/性别变体
+    const resolved = this.resolveVariants(event, newState)
+
     // 收集实际效果
-    let effects: EventEffect[] = [...event.effects]
+    let effects: EventEffect[] = [...resolved.effects]
     let chosenBranchId = branchId
 
     // 处理分支
-    if (event.branches && event.branches.length > 0) {
+    if (resolved.branches && resolved.branches.length > 0) {
       if (branchId) {
         // 玩家已选择分支
-        const branch = event.branches.find(b => b.id === branchId)
+        const branch = resolved.branches.find(b => b.id === branchId)
         if (branch) {
           effects = [...effects, ...branch.effects]
         }
@@ -162,9 +237,9 @@ export class EventModule {
         // 需要玩家选择 - 设置 pendingBranch
         newState.pendingBranch = {
           eventId: event.id,
-          eventTitle: event.title,
-          eventDescription: event.description,
-          branches: event.branches,
+          eventTitle: resolved.title,
+          eventDescription: resolved.description,
+          branches: resolved.branches,
         }
         // 先应用基础效果
         const effectTexts = this.applyEffects(effects, newState)
@@ -173,8 +248,8 @@ export class EventModule {
           {
             age: state.age,
             eventId: event.id,
-            title: event.title,
-            description: event.description,
+            title: resolved.title,
+            description: resolved.description,
             effects: effectTexts,
           },
         ]
@@ -189,8 +264,8 @@ export class EventModule {
     const logEntry: EventLogEntry = {
       age: state.age,
       eventId: event.id,
-      title: event.title,
-      description: event.description,
+      title: resolved.title,
+      description: resolved.description,
       effects: effectTexts,
       branchId: chosenBranchId,
     }
@@ -298,40 +373,27 @@ export class EventModule {
         const nextEvent = this.world.index.eventsById.get(effect.target)
         if (nextEvent) {
           const innerState = this.resolveEvent(nextEvent, state)
-          // 合并内部事件日志
-          Object.assign(state, innerState)
+          // 选择性合并内部事件结果（避免 Object.assign 覆盖整个 state 引用）
+          state.hp = innerState.hp
+          state.attributes = innerState.attributes
+          state.attributePeaks = innerState.attributePeaks
+          state.flags = innerState.flags
+          state.counters = innerState.counters
+          state.talents = innerState.talents
+          state.maxHpBonus = innerState.maxHpBonus
+          state.eventLog = innerState.eventLog
+          state.triggeredEvents = innerState.triggeredEvents
+          state.inventory = innerState.inventory
         }
         return effect.description ?? `触发事件: ${effect.target}`
       }
+      case 'modify_max_hp_bonus': {
+        state.maxHpBonus = (state.maxHpBonus ?? 0) + effect.value
+        const sign = effect.value >= 0 ? '+' : ''
+        return effect.description ?? `HP上限加成 ${sign}${effect.value}`
+      }
       default:
         return ''
-    }
-  }
-
-  /** 深克隆 GameState */
-  private cloneState(state: GameState): GameState {
-    return {
-      ...state,
-      attributes: { ...state.attributes },
-      attributePeaks: { ...state.attributePeaks },
-      talents: {
-        selected: [...state.talents.selected],
-        draftPool: [...state.talents.draftPool],
-        inherited: [...state.talents.inherited],
-      },
-      flags: new Set(state.flags),
-      counters: new Map(state.counters),
-      triggeredEvents: new Set(state.triggeredEvents),
-      eventLog: [...state.eventLog],
-      achievements: {
-        unlocked: [...state.achievements.unlocked],
-        progress: { ...state.achievements.progress },
-      },
-      inventory: {
-        ...state.inventory,
-        items: [...state.inventory.items],
-      },
-      attributeHistory: [...state.attributeHistory],
     }
   }
 }

@@ -13,7 +13,21 @@ import type {
   WorldItemDef,
   WorldPresetDef,
   WorldScoringRule,
+  WorldRaceDef,
 } from '../core/types'
+
+/** 构建世界实例参数 */
+export interface CreateWorldOptions {
+  manifest: WorldManifest
+  attributes: WorldAttributeDef[]
+  talents: WorldTalentDef[]
+  events: WorldEventDef[]
+  achievements: WorldAchievementDef[]
+  items?: WorldItemDef[]
+  presets: WorldPresetDef[]
+  scoringRule: WorldScoringRule
+  races?: WorldRaceDef[]
+}
 
 /** 构建世界实例 */
 export function createWorldInstance(
@@ -24,7 +38,8 @@ export function createWorldInstance(
   achievements: WorldAchievementDef[],
   items: WorldItemDef[] = [],
   presets: WorldPresetDef[],
-  scoringRule: WorldScoringRule
+  scoringRule: WorldScoringRule,
+  races?: WorldRaceDef[]
 ): IWorldInstance {
   // 构建索引
   const attributesById = new Map<string, WorldAttributeDef>()
@@ -56,6 +71,7 @@ export function createWorldInstance(
     items,
     presets,
     scoringRule,
+    races,
     index: {
       attributesById,
       talentsById,
