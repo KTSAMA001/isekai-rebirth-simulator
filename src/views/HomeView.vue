@@ -279,10 +279,6 @@ const autoSlot = ref<SaveSlot | null>(null)
 .world-desc {
   font-size: 0.8rem;
   color: var(--text-secondary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .world-tags {
