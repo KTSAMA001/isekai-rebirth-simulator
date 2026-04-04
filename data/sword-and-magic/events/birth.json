@@ -918,5 +918,1132 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "birth_sharp_eyes",
+    "title": "目光过人的婴孩",
+    "description": "你刚出生时便睁着眼四处打量，仿佛急着把这个世界记下来。产婆说，这孩子将来多半聪明得很。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 8 & attribute.luk >= 6",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_sturdy_cry",
+    "title": "中气十足的第一声",
+    "description": "你的第一声啼哭震得木窗都在发颤。邻里纷纷探头，说这孩子骨子里带着一股硬劲。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "include": "attribute.str >= 8 & attribute.spr >= 6",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_silver_tongue_house",
+    "title": "会来事的孩子",
+    "description": "明明只是襁褓中的婴儿，你却总能用咿呀声逗得满屋子人笑起来。家里人都说，你长大后一定很会说话。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.chr >= 8 & attribute.int >= 5",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_arcane_cradle",
+    "title": "魔力摇篮",
+    "description": "你出生的房间里，油灯无风自明，水盆表面泛起细碎的涟漪。懂行的人一看就明白：这孩子天生亲近魔力。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mag >= 8 & attribute.int >= 7",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_hard_luck_child",
+    "title": "逆风而生",
+    "description": "你的出生并不顺利，家里穷，天也阴，接生过程更是波折不断。可你偏偏顽强地活了下来。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.spr >= 7 & attribute.luk <= 2",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": -1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_gilded_cradle",
+    "title": "金饰摇篮",
+    "description": "你的摇篮上挂着真正的金铃，婴儿房里铺着厚厚的地毯。你还不懂什么叫富贵，但富贵已经先认识了你。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mny >= 8 & attribute.chr >= 6",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_ashen_hut",
+    "title": "灰烬小屋",
+    "description": "你出生的小屋里到处是烟灰和破布，连热水都得现烧。这样的开局并不体面，但至少你学会了活下去。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mny <= 1 & attribute.str >= 6",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_fortune_smile",
+    "title": "命运微笑",
+    "description": "你出生时，窗边恰好飞来一只停驻许久的白鸟，接着外头就有人捡到了丢失多年的戒指。人们说，这孩子身上带着好运。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.luk >= 9",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_quiet_observer",
+    "title": "安静的旁观者",
+    "description": "别的婴儿总在哭闹，你却异常安静，只是睁着眼看着来来往往的人，像是在默默记下他们的表情。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 7 & attribute.chr <= 3",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_blazing_temperament",
+    "title": "火气旺盛",
+    "description": "你的小手总是攥得紧紧的，稍一受惊就挥舞个不停。老人们笑着说，这孩子将来不是战士，就是个不服输的狠角色。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.str >= 7 & attribute.mag >= 6",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_human_barracks_child",
+    "title": "军营旁的降生",
+    "description": "你出生在人类边境军营外的小屋里。长号、甲胄和马嘶声，就是你听见的第一批人间动静。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.str >= 8 & attribute.mny <= 4",
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "genders": [
+      "male"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "barracks_birth",
+        "value": 1,
+        "description": "军营出身"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_human_midwife_prophecy",
+    "title": "产婆的预言",
+    "description": "人类村庄的老产婆抱起你时，忽然沉默了很久。她说这孩子命硬，日后多半能把全家的命数都往上扛一截。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.spr >= 8 & attribute.chr >= 5",
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "genders": [
+      "female"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_human_market_noise",
+    "title": "集市的喧闹声",
+    "description": "你出生在城镇集市后的住处，窗外整日都是吆喝声、讨价还价声和车轮轧过石板路的声音。你的人生从一开始就贴着人群。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "include": "attribute.chr >= 7 & attribute.mny >= 4",
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_human_monastery_bell",
+    "title": "钟声中的诞生",
+    "description": "你降生时恰逢修道院敲响晨钟。庄严的钟声一圈圈扩散，连母亲都说，你像是被某种宁静托着来到人间。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.spr >= 8 & attribute.int >= 6",
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_human_river_trade",
+    "title": "河港之家",
+    "description": "你出生在货船来往不绝的河港边。家里人忙着装货卸货，而你从第一天起就闻惯了潮气、木箱和远方的味道。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mny >= 5 & attribute.luk >= 6",
+    "unique": true,
+    "races": [
+      "human"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_elf_dewleaf_cradle",
+    "title": "晨露摇篮",
+    "description": "你出生在世界树外圈的露叶庭院。清晨的露珠聚而不散，像一层细光覆在摇篮边缘。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mag >= 8 & attribute.spr >= 7",
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "tag": "magic",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_elf_archive_cradle",
+    "title": "古卷书库旁",
+    "description": "你出生的房间紧挨着精灵古卷书库，窗外常能听见长老们低声讨论历史与星象。你的第一份摇篮曲，是翻动书页的声音。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 9",
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_elf_songwind",
+    "title": "歌风庭院",
+    "description": "你出生那天，林间风穿过银铃与薄叶，发出近乎合唱般的回响。很多精灵都说，这样的孩子天生适合与人相处，也适合被人记住。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.chr >= 8 & attribute.mag >= 6",
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_elf_moon_pool",
+    "title": "月池之畔",
+    "description": "你出生在映着月光的静水池边。精灵女性们用古老歌谣祝福你，池面上那轮圆月迟迟没有散去。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.mag >= 8 & attribute.chr >= 7",
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "genders": [
+      "female"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_elf_star_ledger",
+    "title": "星图旁的男孩",
+    "description": "你降生时，守夜的男精灵正伏案记录星图。长老说你来得正好，像是专挑群星排列最清晰的一晚。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 8 & attribute.mag >= 7",
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "genders": [
+      "male"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goblin_black_market",
+    "title": "黑市后巷",
+    "description": "你出生在哥布林黑市后巷的小棚里。外头是讨价还价和暗号声，里头是母亲裹着你，满脸疲惫却眼神发亮。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "include": "attribute.int >= 6 & attribute.mny >= 3",
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goblin_fungus_nursery",
+    "title": "菌灯育婴穴",
+    "description": "你出生在点满荧光菌灯的育婴穴里。按哥布林标准来说，这里已经算干净体面，甚至还有半锅热汤。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 3,
+    "include": "attribute.spr >= 6 & attribute.luk >= 8",
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 2
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goblin_collapse_tunnel",
+    "title": "塌方隧道外",
+    "description": "你出生前一天，洞穴隧道刚塌过一次。所有人都以为这孩子八成保不住，结果你偏偏哭得最响。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.str >= 6 & attribute.spr >= 7",
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goblin_scrap_crib",
+    "title": "废铁摇篮",
+    "description": "你的摇篮是一只改造过的工具箱，边角磨得发亮。你一出生就对反光的金属玩意儿伸手，像是天然知道什么东西值钱。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 5 & attribute.luk >= 7",
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "genders": [
+      "male"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goblin_whisper_daughter",
+    "title": "会笑的坏点子",
+    "description": "你出生没多久就会盯着人看，然后突然咧嘴一笑。部落里的女哥布林都说，这孩子以后准擅长哄骗和绕弯子。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "attribute.int >= 6 & attribute.chr >= 3",
+    "unique": true,
+    "races": [
+      "goblin"
+    ],
+    "genders": [
+      "female"
+    ],
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_reincarnated_memory_seed",
+    "title": "记忆残响",
+    "description": "你还在襁褓中时就偶尔露出不合年龄的神情，像是在努力回想什么。大人们只当你古怪，只有你自己知道，那不只是错觉。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.reincarnated | has.talent.time_traveler",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_dragon_blood_omen",
+    "title": "龙血征兆",
+    "description": "你出生时体温高得吓人，连水盆里的水都像被烫暖了几分。老人们不敢多说，只默默把门口的火盆添得更旺。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.dragon_blood | has.talent.ancient_dragon_soul",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "dragon_omen_birth",
+        "value": 1,
+        "description": "龙血异兆"
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_goddess_kiss",
+    "title": "神恩吻额",
+    "description": "接生完成后，有人说看到一缕淡光在你额头上停了片刻。也有人说那只是烛火折射，但没人敢真的把它当成巧合。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.blessed_by_goddess | has.talent.divine_chosen",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_cursed_name",
+    "title": "不被祝福的名字",
+    "description": "你刚出生时，屋里最老的人便皱起了眉头，说最好晚些再给孩子起名。仿佛有些东西，不愿这么早承认你的存在。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.cursed_mark",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": -1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "cursed_birth",
+        "value": 1,
+        "description": "不祥之生"
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_orphaned_crib",
+    "title": "无主的摇篮",
+    "description": "你被裹在旧毯子里送到了别人家门口。没有人知道你真正的姓氏，也没有人知道为什么有人非得把你藏起来。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.orphan",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": -1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_merchant_ledger",
+    "title": "账本边上的婴儿",
+    "description": "你出生那天，家里的账房还在核对月末流水。母亲躺着休息，父亲却一边抱你一边盘算这月的利润。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.merchant_blood",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 2
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_royal_astrologer",
+    "title": "被记进谱牒的孩子",
+    "description": "你出生的日期、时辰、星位，全都被郑重写进了家族谱牒。不是每个孩子都配得上这种排场。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.royal_lineage | has.talent.noble_born",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "lineage_marked",
+        "value": 1,
+        "description": "被谱牒记录"
+      }
+    ],
+    "tag": "social",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_shadow_curtain",
+    "title": "影幕降生",
+    "description": "你出生那会儿，屋外明明有人走过，窗纸上却没留下影子。年长者都本能地压低了声音，不想惊扰什么。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.shadow_born",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "shadow_birth",
+        "value": 1,
+        "description": "暗影伴生"
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_star_messenger",
+    "title": "星与月的见证",
+    "description": "你出生那天，夜空格外清澈，连不懂星象的人都觉得这夜色亮得不寻常。有人说是星降，也有人说是月在偏爱你。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.star_fallen | has.talent.moonlit_blessing",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_prophecy_ink",
+    "title": "预言写下的一笔",
+    "description": "在你出生前，村里或城里就已经有人梦到过这个夜晚。等你真的哭出声时，他们反而沉默了，像是终于等到了某件早知会发生的事。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.prophet_eye",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_beast_friend",
+    "title": "兽群没有敌意",
+    "description": "你出生时，门外原本躁动的牲畜忽然安静下来，连最不听话的那只也老老实实伏在地上。大人们面面相觑，觉得你有点邪门。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.beast_tamer",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "luk",
+        "value": 1
+      }
+    ],
+    "tag": "life",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "birth_twin_echo",
+    "title": "回声成双",
+    "description": "你哭第一声时，屋里的人都愣了一下，因为那声音像是同时响了两次。没人能解释，但每个人都听见了。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 2,
+    "include": "has.talent.twin_souls",
+    "unique": true,
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": 1
+      }
+    ],
+    "tag": "magic",
+    "priority": "major",
+    "routes": [
+      "*"
+    ]
   }
 ]

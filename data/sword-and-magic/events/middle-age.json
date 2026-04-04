@@ -1941,7 +1941,7 @@
     ],
     "minAge": 25,
     "maxAge": 50,
-    "include": "has.flag.married",
+    "include": "has.flag.lover_at_war & (has.flag.in_relationship | has.flag.married)",
     "weight": 3,
     "branches": [
       {
@@ -1957,6 +1957,12 @@
             "type": "remove_flag",
             "target": "married",
             "description": "失去配偶",
+            "value": 1
+          },
+          {
+            "type": "remove_flag",
+            "target": "lover_at_war",
+            "description": "远征的等待结束了",
             "value": 1
           },
           {
@@ -2004,6 +2010,12 @@
             "type": "remove_flag",
             "target": "married",
             "description": "失去配偶",
+            "value": 1
+          },
+          {
+            "type": "remove_flag",
+            "target": "lover_at_war",
+            "description": "远征的等待结束了",
             "value": 1
           },
           {

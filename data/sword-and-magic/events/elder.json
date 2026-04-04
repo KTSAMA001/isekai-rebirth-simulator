@@ -512,7 +512,7 @@
     "minAge": 50,
     "maxAge": 90,
     "weight": 5,
-    "include": "attribute.chr >= 10 & attribute.mny >= 8",
+    "include": "has.flag.parent & attribute.chr >= 10 & attribute.mny >= 8",
     "effects": [],
     "branches": [
       {
@@ -1167,11 +1167,11 @@
   {
     "id": "elder_final_counting",
     "title": "生命的终点",
-    "description": "你感觉到了——这一次，时间不会再给你机会了。你的一生，该做个了结了。",
+    "description": "你感觉到了——生命之火只剩最后一点余烬。这一次，你真的走到了尽头。",
     "minAge": 65,
     "maxAge": 88,
     "weight": 2,
-    "include": "",
+    "include": "hp <= 12",
     "effects": [],
     "branches": [
       {
@@ -1191,6 +1191,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -12,
+            "description": "HP -12（燃尽最后的生命）"
           }
         ],
         "successText": "你站在万人之前，最后一次开口。一生的故事化作传奇，在人群中流传。你不朽的名字，将铭刻在这片大陆的历史之中。"
@@ -1212,6 +1218,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -12,
+            "description": "HP -12（安详地走完最后一程）"
           }
         ],
         "successText": "你被亲人朋友们围绕着。孩子们的眼中满是敬爱，老友们的眼中满是感慨。这一生，有人爱过你——这就够了。"
@@ -1237,7 +1249,8 @@
           {
             "type": "modify_hp",
             "target": "hp",
-            "value": -10
+            "value": -12,
+            "description": "HP -12（燃尽最后的战意）"
           }
         ],
         "successText": "你拔出了那把跟随你一生的旧剑。最后一个敌人站在面前——是衰老本身。你笑了，向它发起最后的冲锋。"
@@ -1259,6 +1272,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -12,
+            "description": "HP -12（化入星光）"
           }
         ],
         "successText": "你独自走到山顶，仰望星空。身体越来越轻，仿佛要融入那片无垠的夜空。也许这就是归宿——回到星辰之中。"
@@ -1274,6 +1293,12 @@
             "target": "quiet_end",
             "value": 1,
             "description": "悄然而逝"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -12,
+            "description": "HP -12（悄然走到终点）"
           }
         ],
         "successText": "你在窗前静静地看着四季变换。春天的花、夏天的雨、秋天的叶、冬天的雪……每一个都是独一无二的礼物。你闭上了眼睛，微笑着。"
@@ -2949,7 +2974,7 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "has.flag.parent"
   },
   {
     "id": "human_craft_mastery",

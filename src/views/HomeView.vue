@@ -153,6 +153,9 @@ const autoSlot = ref<SaveSlot | null>(null)
           </template>
         </div>
       </div>
+      <p class="local-storage-note text-xs text-muted">
+        存档、成就与身份解锁仅保存在当前浏览器本地，不会上传到云端。
+      </p>
     </section>
 
     <!-- 底部信息 -->
@@ -305,6 +308,11 @@ const autoSlot = ref<SaveSlot | null>(null)
 /* 继续游戏区域 */
 .save-section {
   margin-top: var(--space-lg);
+}
+
+.local-storage-note {
+  margin-top: var(--space-sm);
+  padding-left: var(--space-xs);
 }
 
 .save-card {
