@@ -1,6 +1,6 @@
 ---
 name: isekai-rebirth-simulator
-description: 异世界重生模拟器项目的开发技能。涵盖事件/成就/天赋/种族/物品/评语/预设/属性的内容添加、数据校验、Flag一致性检查、DSL条件编写、引擎模块接口、测试编写。当用户提到异世界重生模拟器、isekai-rebirth-simulator、添加事件/成就/天赋/种族、校验数据、检查Flag、写DSL条件、写游戏测试、修改引擎模块时触发。即使用户只是说"加个事件"、"写个成就"、"检查一下数据"、"跑一下测试"，只要当前工作区是 isekai-rebirth-simulator 项目就应该触发。
+description: 异世界重生模拟器项目的开发技能。涵盖事件/成就/天赋/种族/物品/评语/预设/属性的内容添加、数据校验、Flag一致性检查、DSL条件编写、引擎模块接口、测试编写、CI/CD部署。当用户提到异世界重生模拟器、isekai-rebirth-simulator、添加事件/成就/天赋/种族、校验数据、检查Flag、写DSL条件、写游戏测试、修改引擎模块、部署/发布/推送/更新远端/同步仓库时触发。即使用户只是说"加个事件"、"写个成就"、"检查一下数据"、"跑一下测试"、"更新一下远端"、"部署上去"，只要当前工作区是 isekai-rebirth-simulator 项目就应该触发。
 ---
 
 # 异世界重生模拟器 — 项目开发技能
@@ -363,3 +363,68 @@ Debug.Log($"KT---{功能}---{内容}---{DateTime.Now:HH:mm:ss}");
 // 示例（虽然本项目是 Vue/TS，但有需要时使用）
 console.log(`KT---EventModule---事件池候选 ${candidates.length} 个---${new Date().toLocaleTimeString()}`);
 ```
+
+---
+
+## 部署与 CI/CD
+
+### 部署架构
+
+- **托管平台：** GitHub Pages（静态托管，无后端）
+- **仓库：** `KTSAMA001/isekai-rebirth-simulator`（public，免费计划不支持私有仓库 Pages）
+- **线上地址：** https://ktsama001.github.io/isekai-rebirth-simulator/
+- **自动部署：** 推送到 `master` 分支后，GitHub Actions 自动构建并部署
+- **工作流文件：** `.github/workflows/deploy.yml`
+
+### 部署流程
+
+```
+git push origin master
+  → GitHub Actions 触发
+    → npm ci --legacy-peer-deps
+    → VITE_BASE=/<仓库名>/ npm run build
+    → upload-pages-artifact (dist/)
+    → deploy-pages
+  → 线上更新（通常 1-2 分钟）
+```
+
+### 关键配置要点
+
+1. **Base 路径：** `vite.config.ts` 中 `base` 通过 `process.env.VITE_BASE ?? '/'` 动态注入。本地开发为 `/`，CI 中为 `/<仓库名>/`
+2. **依赖安装：** 必须使用 `--legacy-peer-deps`，因为 `vite-plugin-pwa` 的 peer dependency 未声明 Vite 8 兼容
+3. **全局常量类型：** Vite `define` 注入的全局常量（如 `__APP_VERSION__`）必须在 `src/env.d.ts` 中声明 `declare const`，否则 `vue-tsc` 编译会报错导致 CI 失败
+4. **Hash 路由：** 使用 `createWebHashHistory()`，无需服务端 URL 重写，兼容所有静态托管
+5. **PWA Service Worker：** 构建产物包含 SW，用户首次访问后可离线使用，再次访问自动更新缓存
+
+### 常用运维命令
+
+```bash
+# 提交并推送（自动触发部署）
+git add -A && git commit -m "feat: <描述>" && git push
+
+# 检查最新部署状态
+gh api repos/KTSAMA001/isekai-rebirth-simulator/actions/runs \
+  --jq '.workflow_runs[0] | "\(.status) \(.conclusion // "进行中") \(.head_sha[:7])"'
+
+# 查看部署失败日志
+gh api repos/KTSAMA001/isekai-rebirth-simulator/actions/runs/<RUN_ID>/jobs \
+  --jq '.jobs[0].id' | xargs -I{} gh api repos/KTSAMA001/isekai-rebirth-simulator/actions/jobs/{}/logs 2>&1 | tail -30
+
+# 本地模拟 CI 构建（验证不会失败）
+VITE_BASE=/isekai-rebirth-simulator/ npm run build
+
+# 手动触发部署
+gh workflow run deploy.yml
+
+# 确认远端同步状态
+git fetch origin && git log --oneline origin/master -3
+```
+
+### 常见部署问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| CI 构建失败：TS2552 找不到全局变量 | Vite `define` 的常量缺少类型声明 | 在 `src/env.d.ts` 添加 `declare const` |
+| Pages 返回 404 | 仓库为 private（免费计划限制） | 改为 public |
+| 线上内容未更新 | 浏览器/PWA 缓存 | `Cmd+Shift+R` 强制刷新 |
+| 线上版本落后 | 最新一次 Actions 运行失败 | 用上面的命令检查失败原因 |
