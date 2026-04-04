@@ -3470,9 +3470,9 @@
   {
     "id": "elf_watching_generations",
     "title": "看着世代更替",
-    "description": "你认识的人类朋友已经是第三代了。他们叫你'奶奶/爷爷'虽然你看起来还很年轻。",
-    "minAge": 60,
-    "maxAge": 150,
+    "description": "你最初认识的人类朋友已经老去，他们的子女也已长大成人。他们叫你'奶奶/爷爷'，虽然你看起来还很年轻。",
+    "minAge": 100,
+    "maxAge": 200,
     "weight": 4,
     "unique": true,
     "races": [
@@ -3967,9 +3967,9 @@
   {
     "id": "elf_wisdom_council_seat",
     "title": "贤者之席",
-    "description": "经过数百年的积累，你终于被邀请正式加入精灵贤者会。这是精灵社会最高的智慧殿堂。",
-    "minAge": 100,
-    "maxAge": 300,
+    "description": "经过漫长岁月的积累，你终于被邀请正式加入精灵贤者会。这是精灵社会最高的智慧殿堂。",
+    "minAge": 150,
+    "maxAge": 400,
     "weight": 2,
     "unique": true,
     "races": [
@@ -3993,7 +3993,7 @@
       },
       {
         "type": "set_flag",
-        "target": "council_member",
+        "target": "elf_sage_council",
         "value": true
       }
     ],
@@ -4002,9 +4002,9 @@
   {
     "id": "elf_time_perception",
     "title": "时间的感知",
-    "description": "你开始察觉到精灵与其他种族截然不同的时间感——一个人类的一生，不过是你午后小憩的光景。",
-    "minAge": 100,
-    "maxAge": 250,
+    "description": "你开始察觉到精灵与其他种族截然不同的时间感——你已经送别了太多短寿的朋友，他们的一生在你的记忆中不过是短短一瞬。",
+    "minAge": 300,
+    "maxAge": 500,
     "weight": 4,
     "unique": true,
     "races": [

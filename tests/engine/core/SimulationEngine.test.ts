@@ -454,7 +454,7 @@ describe('SimulationEngine', () => {
       expect(state.phase).toBe('finished')
     })
 
-    it('age >= effectiveMaxAge 触发死亡', () => {
+    it('短寿命种族通过HP自然衰减死亡', () => {
       const world = makeWorld({
         races: [makeRace('mayfly', { lifespanRange: [3, 3] })],
       })
@@ -462,8 +462,8 @@ describe('SimulationEngine', () => {
       engine.initGame('短命', undefined, 'mayfly')
       engine.draftTalents()
       engine.allocateAttributes({})
-      // 推演到寿命上限
-      for (let i = 0; i < 5; i++) {
+      // 推演足够多年，HP自然衰减应导致死亡
+      for (let i = 0; i < 20; i++) {
         if (engine.getState().phase !== 'simulating') break
         const result = engine.startYear()
         if (result.phase === 'awaiting_choice' && result.branches) {
@@ -471,6 +471,8 @@ describe('SimulationEngine', () => {
         }
       }
       expect(engine.getState().phase).toBe('finished')
+      // 寿命极短的种族应在合理范围内死亡
+      expect(engine.getState().age).toBeLessThanOrEqual(15)
     })
 
     it('免死物品阻止死亡', () => {

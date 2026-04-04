@@ -2062,7 +2062,7 @@
     ],
     "tag": "adventure",
     "priority": "minor",
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ],
@@ -2911,7 +2911,7 @@
     "branches": [
       {
         "id": "learn_song",
-        "title": "花费数年学习星辰之歌",
+        "title": "全身心学习星辰之歌",
         "description": "你全身心投入到古老咒文的研究中。精灵语的每一个音节都蕴含着宇宙的秘密。",
         "probability": 0.4,
         "diceCheck": {

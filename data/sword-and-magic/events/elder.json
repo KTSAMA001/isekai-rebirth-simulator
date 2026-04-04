@@ -2080,24 +2080,6 @@
           }
         ],
         "successText": "你数到了第两千三百颗的时候，在温暖的夜风中安然入睡。梦里，每颗星星都是你经历过的故事。"
-      },
-      {
-        "id": "stargazing_count",
-        "title": "数星星",
-        "description": "你开始数星星，数着数着就睡着了。",
-        "effects": [
-          {
-            "type": "modify_attribute",
-            "value": 2,
-            "target": "int"
-          },
-          {
-            "type": "modify_attribute",
-            "value": 2,
-            "target": "spr"
-          }
-        ],
-        "successText": "你数到了第两千三百颗的时候，在温暖的夜风中安然入睡。梦里，每颗星星都是你经历过的故事。"
       }
     ],
     "unique": true,

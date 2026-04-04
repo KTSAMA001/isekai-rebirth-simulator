@@ -315,29 +315,44 @@ export class SimulationEngine {
     return 25 + str * 3
   }
 
-  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 年龄衰减 */
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 年龄衰减
+   *  所有衰老阈值基于 lifeRatio（age / effectiveMaxAge），适配不同种族寿命
+   */
   private regenHp(): void {
     const regen = this.initialStrRegen
     const initHp = this.computeInitHp()
     const age = this.state.age
-    // 软上限：30岁后随年龄下降，模拟衰老
-    // 公式: initHp * (1.1 - (age-30)*0.005)
-    // 30岁=×1.1, 40岁=×1.05, 50岁=×1.0, 60岁=×0.95, 70岁=×0.90, 80岁=×0.85
-    const softCap = Math.max(Math.floor(initHp * (1.1 - (age - 30) * 0.005)), 20)
+    const maxAge = this.effectiveMaxAge
+    const lifeRatio = age / maxAge
+
+    // 软上限：巅峰期(lifeRatio≤0.35)为 ×1.1，之后逐步衰减
+    // 到 lifeRatio=1.0 降至 ×0.7，最低 ×0.3
+    const primeAge = maxAge * 0.35
+    const declinePerYear = 0.4 / (maxAge * 0.65)
+    const softCapMultiplier = Math.max(1.1 - Math.max(0, age - primeAge) * declinePerYear, 0.3)
+    const softCap = Math.max(Math.floor(initHp * softCapMultiplier), 20)
     // 物品HP恢复加成
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
     // 物品HP软上限修正
     const capModifier = this.itemModule.getHpCapModifier(this.state)
     const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 20)
 
-    // 年龄衰减：40岁开始轻微，之后渐进加速
+    // 年龄衰减：基于生命比例，后半生逐步加速
+    // 目标：对平均体魄(regen≈4)角色，在 lifeRatio≈0.92 时 net regen≈0
+    // 使角色在接近 effectiveMaxAge 时自然死亡
     let ageDecay = 0
-    if (age >= 90) ageDecay = 5
-    else if (age >= 80) ageDecay = 4
-    else if (age >= 70) ageDecay = 3
-    else if (age >= 60) ageDecay = 2
-    else if (age >= 50) ageDecay = 2
-    else if (age >= 40) ageDecay = 1
+    if (lifeRatio >= 1.1) ageDecay = 10
+    else if (lifeRatio >= 1.0) ageDecay = 7
+    else if (lifeRatio >= 0.92) ageDecay = 4
+    else if (lifeRatio >= 0.85) ageDecay = 3
+    else if (lifeRatio >= 0.78) ageDecay = 2
+    else if (lifeRatio >= 0.68) ageDecay = 1
+
+    // 超出预期寿命：额外加速衰老，确保不会永生
+    if (lifeRatio > 1.0) {
+      const overageRatio = lifeRatio - 1.0
+      ageDecay += Math.floor(overageRatio * 30)
+    }
 
     const newHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
     this.state = {
@@ -772,8 +787,8 @@ export class SimulationEngine {
       }
     }
 
-    // 检查死亡（使用种族寿命上限）
-    const dead = newState.hp <= 0 || newState.age >= this.effectiveMaxAge
+    // 检查死亡（纯 HP 驱动，寿命通过 HP 自然衰减控制）
+    const dead = newState.hp <= 0
     if (dead) {
       newState = { ...newState, phase: 'finished' }
       const result = this.evaluatorModule.calculate(newState)
@@ -893,6 +908,9 @@ export class SimulationEngine {
       throw new Error(`当前阶段 ${this.state.phase} 不允许推演`)
     }
 
+    // HP 恢复与衰减
+    this.regenHp()
+
     // 年龄 +1
     let newState = {
       ...this.state,
@@ -931,8 +949,29 @@ export class SimulationEngine {
       newState = this.eventModule.resolveEvent(event, newState, branchId)
     }
 
-    // 检查死亡条件（使用种族寿命上限）
-    const dead = newState.hp <= 0 || newState.age >= this.effectiveMaxAge
+    // 濒死判定：HP ≤ 10 且 > 0 时，有概率直接死亡或奇迹生还
+    if (newState.hp > 0 && newState.hp <= 10) {
+      const roll = this.random.next()
+      if (roll < 0.20) {
+        newState = { ...newState, hp: 0 }
+      } else if (roll < 0.35) {
+        newState = { ...newState, hp: newState.hp + 18 }
+        newState.flags = new Set([...newState.flags, 'miracle_survival'])
+      } else {
+        newState.flags = new Set([...newState.flags, 'near_death'])
+      }
+    }
+
+    // 免死效果检查
+    if (newState.hp <= 0) {
+      const deathSaveHp = this.itemModule.consumeDeathSave(newState)
+      if (deathSaveHp > 0) {
+        newState = { ...newState, hp: deathSaveHp }
+      }
+    }
+
+    // 检查死亡条件（纯 HP 驱动）
+    const dead = newState.hp <= 0
 
     // 记录属性快照
     const snapshot = this.attrModule.snapshot(newState.attributes, newState.age)

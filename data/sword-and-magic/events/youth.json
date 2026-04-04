@@ -2738,7 +2738,7 @@
     "unique": true,
     "tag": "combat",
     "priority": "minor",
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ]
@@ -3781,7 +3781,7 @@
       }
     ],
     "unique": true,
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ],
@@ -3880,7 +3880,7 @@
       }
     ],
     "unique": true,
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ]

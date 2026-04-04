@@ -288,6 +288,14 @@
     "condition": "has.flag.council_member"
   },
   {
+    "id": "eva_elf_sage",
+    "title": "千年沉淀",
+    "description": "岁月是精灵最好的老师。你在贤者会中沉默地倾听、思考、领悟——当你终于开口时，所有人都安静下来。",
+    "rarity": "legendary",
+    "priority": 14,
+    "condition": "has.flag.elf_sage_council"
+  },
+  {
     "id": "eva_barely_made_it",
     "title": "命悬一线",
     "description": "你的人生就是一场危机公关。每一次都觉得这次真的完了，但每一次你都活了下来。",

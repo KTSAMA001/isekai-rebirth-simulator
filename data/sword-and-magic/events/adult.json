@@ -3677,7 +3677,7 @@
     "unique": true,
     "tag": "combat",
     "priority": "major",
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ]
@@ -4775,7 +4775,7 @@
     "minAge": 16,
     "maxAge": 25,
     "include": "has.flag.dating",
-    "exclude": "has.flag.married | has.flag.starlight_promise",
+    "exclude": "has.flag.married | has.flag.starlight_promise | has.flag.eloped",
     "weight": 6,
     "effects": [],
     "branches": [
@@ -4860,7 +4860,7 @@
     "minAge": 14,
     "maxAge": 22,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.festival_dance",
+    "exclude": "has.flag.married | has.flag.festival_dance | has.flag.eloped",
     "weight": 5,
     "effects": [],
     "branches": [
@@ -4941,7 +4941,7 @@
     "minAge": 18,
     "maxAge": 35,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.quest_parting",
+    "exclude": "has.flag.married | has.flag.quest_parting | has.flag.eloped",
     "weight": 5,
     "branches": [
       {
@@ -5033,6 +5033,18 @@
       {
         "description": "你们决定一起逃跑，去没有人认识你们的地方开始新生活",
         "effects": [
+          {
+            "type": "set_flag",
+            "target": "eloped",
+            "value": 1,
+            "description": "私奔状态"
+          },
+          {
+            "type": "remove_flag",
+            "target": "dating",
+            "value": 1,
+            "description": "离开原有社交关系"
+          },
           {
             "type": "modify_attribute",
             "target": "spr",
@@ -5220,7 +5232,7 @@
     "minAge": 20,
     "maxAge": 35,
     "include": "has.flag.dating",
-    "exclude": "has.flag.married | has.flag.soul_bound",
+    "exclude": "has.flag.married | has.flag.soul_bound | has.flag.eloped",
     "weight": 3,
     "branches": [
       {
@@ -5383,7 +5395,7 @@
     "maxAge": 35,
     "weight": 4,
     "include": "has.flag.dating_deepen",
-    "exclude": "has.flag.engaged|has.flag.married",
+    "exclude": "has.flag.engaged|has.flag.married|has.flag.eloped",
     "unique": true,
     "tag": "romance",
     "priority": "major",
@@ -6256,7 +6268,7 @@
         "successText": "你带着货物消失了。富商暴怒地发出追杀令。你确实发财了，但以后再也不能光明正大地走在街上。"
       }
     ],
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ],
@@ -6530,7 +6542,7 @@
       }
     ],
     "unique": true,
-    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member",
+    "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
     ]
@@ -10123,7 +10135,7 @@
   {
     "id": "elf_eternal_garden",
     "title": "永恒花园",
-    "description": "你花了数十年时间培育了一座魔法花园。四季常开的花朵吸引了无数精灵前来观赏。",
+    "description": "你悉心培育了一座魔法花园。四季常开的花朵吸引了无数精灵前来观赏。",
     "minAge": 50,
     "maxAge": 150,
     "weight": 3,
@@ -11442,5 +11454,130 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "dragon_youngling_growth",
+    "title": "幼龙成长",
+    "description": "你的幼龙开始展露惊人的成长速度。它的鳞片从柔软变得坚硬如铁，双翼也足以撑起你的体重了。你们之间的心灵链接越来越强——有时你甚至能感受到它的情感。",
+    "minAge": 25,
+    "maxAge": 55,
+    "weight": 5,
+    "unique": true,
+    "priority": "major",
+    "tag": "legendary",
+    "routes": ["*"],
+    "include": "has.flag.dragon_rider",
+    "exclude": "has.flag.dragon_grown",
+    "effects": [
+      { "type": "modify_attribute", "target": "spr", "value": 3, "description": "心灵链接加深" },
+      { "type": "modify_attribute", "target": "chr", "value": 2, "description": "龙骑士的威严" },
+      { "type": "set_flag", "target": "dragon_grown", "value": 1 }
+    ],
+    "branches": [
+      {
+        "id": "dragon_train_flight",
+        "title": "与幼龙一起练习飞行",
+        "description": "你小心翼翼地爬上它的背。幼龙扑扇着翅膀，摇摇晃晃地升空——风声灌满你的耳朵。",
+        "effects": [
+          { "type": "modify_attribute", "target": "str", "value": 2, "description": "飞行训练增强体魄" },
+          { "type": "modify_attribute", "target": "luk", "value": 1 }
+        ],
+        "diceCheck": { "attribute": "spr", "dc": 12, "description": "灵魂判定 DC12 — 需要与龙心意相通" },
+        "successText": "你们配合得越来越默契。幼龙载着你在云层间穿梭，整个世界在你脚下展开。",
+        "failureText": "幼龙突然来了个急转弯，你差点摔下去。看来默契还需要时间磨合。",
+        "failureEffects": [
+          { "type": "modify_hp", "target": "hp", "value": -8 }
+        ]
+      },
+      {
+        "id": "dragon_let_free",
+        "title": "让它自由地探索世界",
+        "description": "你解开了束缚它的绳索。龙不应该被圈养——你选择信任它会回来。",
+        "effects": [
+          { "type": "modify_attribute", "target": "spr", "value": 3 },
+          { "type": "modify_attribute", "target": "chr", "value": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dragon_sky_patrol",
+    "title": "龙背巡游",
+    "description": "你的龙已经完全长成。今天，你骑着它飞上了最高的云层。整片大陆在你的视野中铺展开来——山川、河流、城镇，一切都小得像玩具。",
+    "minAge": 30,
+    "maxAge": 65,
+    "weight": 3,
+    "unique": true,
+    "priority": "major",
+    "tag": "legendary",
+    "routes": ["*"],
+    "include": "has.flag.dragon_grown",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dragon_patrol_border",
+        "title": "巡视边境，威慑敌人",
+        "description": "巨龙的影子掠过边境线，敌国的哨兵吓得四散奔逃。有些战争不需要打响就已经赢了。",
+        "effects": [
+          { "type": "modify_attribute", "target": "chr", "value": 3, "description": "龙骑士的威名远播" },
+          { "type": "modify_attribute", "target": "str", "value": 1 },
+          { "type": "set_flag", "target": "dragon_patrol", "value": 1, "description": "龙骑士巡游" }
+        ]
+      },
+      {
+        "id": "dragon_explore_sky",
+        "title": "向未知的天际飞去",
+        "description": "你拍了拍龙的脖子，指向地图上没有标记的方向。是时候去看看世界的尽头了。",
+        "effects": [
+          { "type": "modify_attribute", "target": "int", "value": 2, "description": "龙背上的见闻" },
+          { "type": "modify_attribute", "target": "spr", "value": 2 },
+          { "type": "modify_attribute", "target": "luk", "value": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dragon_ultimate_bond",
+    "title": "龙之试炼",
+    "description": "你的龙带你来到了一座古老的火山口。这里是巨龙的圣地——只有通过试炼的骑士，才能获得龙族真正的认可。",
+    "minAge": 35,
+    "maxAge": 80,
+    "weight": 2,
+    "unique": true,
+    "priority": "critical",
+    "tag": "legendary",
+    "routes": ["*"],
+    "include": "has.flag.dragon_grown",
+    "exclude": "has.flag.dragon_bond_complete",
+    "effects": [],
+    "branches": [
+      {
+        "id": "dragon_trial_accept",
+        "title": "接受龙之试炼",
+        "description": "你走入火山口中央的熔岩之环。极度的高温让你几乎窒息，但龙的目光给了你力量。",
+        "effects": [
+          { "type": "modify_attribute", "target": "spr", "value": 5, "description": "龙魂共鸣" },
+          { "type": "modify_attribute", "target": "mag", "value": 3, "description": "龙焰赐予的魔力" },
+          { "type": "modify_attribute", "target": "chr", "value": 2, "description": "真正的龙骑士" },
+          { "type": "set_flag", "target": "dragon_bond_complete", "value": 1 }
+        ],
+        "diceCheck": { "attribute": "spr", "dc": 18, "description": "灵魂判定 DC18 — 你的灵魂能否承受龙焰的洗礼？" },
+        "successText": "龙焰包裹了你的全身，但你感受到的不是灼烧，而是温暖。当火焰散去时，你的瞳孔中映着龙族的竖瞳。从此你们不再是骑手与坐骑——你们是真正的伙伴。",
+        "failureText": "你在龙焰面前退缩了。龙低下头，用鼻子轻轻蹭了蹭你，似乎在说：没关系，以后再来。",
+        "failureEffects": [
+          { "type": "modify_hp", "target": "hp", "value": -20, "description": "龙焰灼伤" },
+          { "type": "modify_attribute", "target": "spr", "value": 2, "description": "虽败犹荣" }
+        ]
+      },
+      {
+        "id": "dragon_trial_decline",
+        "title": "你们之间不需要试炼来证明",
+        "description": "你拍了拍龙的翅膀，转身离去。有些羁绊不需要仪式来确认。",
+        "effects": [
+          { "type": "modify_attribute", "target": "spr", "value": 3 },
+          { "type": "modify_attribute", "target": "int", "value": 2 }
+        ]
+      }
+    ]
   }
 ]

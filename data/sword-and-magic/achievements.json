@@ -629,7 +629,7 @@
     "description": "进入精灵长老评议会",
     "icon": "🏛️",
     "hidden": false,
-    "condition": "has.flag.council_member",
+    "condition": "has.flag.elf_sage_council",
     "category": "精灵",
     "races": [
       "elf"
