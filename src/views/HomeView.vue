@@ -65,6 +65,8 @@ function formatTime(ts: number): string {
   return `${month}-${day} ${hour}:${min}`
 }
 
+const appVersion = __APP_VERSION__
+
 /** 判断是否可以继续（仅自动存档有"继续"按钮） */
 const autoSlot = ref<SaveSlot | null>(null)
 </script>
@@ -156,7 +158,7 @@ const autoSlot = ref<SaveSlot | null>(null)
     <!-- 底部信息 -->
     <footer class="home-footer">
       <p class="text-muted text-sm text-center">
-        Phase 1 MVP &middot; 剑与魔法
+        v{{ appVersion }} &middot; 剑与魔法
       </p>
     </footer>
   </div>

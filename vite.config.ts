@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import { readFileSync } from 'fs'
+
+const pkg = JSON.parse(readFileSync(resolve(__dirname, 'package.json'), 'utf-8'))
 
 // GitHub Pages 部署时通过环境变量注入 base 路径
 // 本地开发时 base 为 '/'
@@ -58,6 +61,9 @@ export default defineConfig({
       },
     }),
   ],
+  define: {
+    __APP_VERSION__: JSON.stringify(pkg.version),
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
