@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useWorldStore } from '@/stores/worldStore'
+import { useProgressStore } from '@/stores/progressStore'
 
 const worldStore = useWorldStore()
+const progressStore = useProgressStore()
 
 // 目前只有一个世界
 const world = computed(() => worldStore.worlds[0])
@@ -11,6 +13,11 @@ const world = computed(() => worldStore.worlds[0])
 const categoryOrder: Record<string, number> = {
   '进度': 0, '人生': 1, '路线': 2, '战斗': 3, '魔法': 4, '属性': 5,
   '史诗': 6, '人类': 7, '精灵': 8, '哥布林': 9, '性别': 10, '秘密': 11,
+}
+
+/** 判断成就是否已解锁（跨局累计） */
+function isUnlocked(achId: string): boolean {
+  return progressStore.unlockedAchievements.has(achId)
 }
 
 // 按分类分组（排序）
@@ -28,7 +35,10 @@ const categorized = computed(() => {
 
 // 统计
 const totalCount = computed(() => world.value?.achievements.length ?? 0)
-const hiddenCount = computed(() => world.value?.achievements.filter(a => a.hidden).length ?? 0)
+const unlockedCount = computed(() => {
+  if (!world.value) return 0
+  return world.value.achievements.filter(a => isUnlocked(a.id)).length
+})
 
 /** 种族标签映射 */
 const raceLabels: Record<string, string> = {
@@ -59,30 +69,55 @@ function getGenderTags(ach: typeof world.value.achievements[0]): string[] {
 
     <div v-else class="categories">
       <div class="ach-summary text-center mb-md">
-        <span class="text-xs text-muted">共 {{ totalCount }} 个成就 · {{ hiddenCount }} 个隐藏</span>
+        <span class="text-xs text-muted">已解锁 {{ unlockedCount }} / {{ totalCount }}</span>
       </div>
 
       <section v-for="[cat, achList] in categorized" :key="cat" class="category">
         <h3 class="cat-title">
           {{ cat }}
-          <span class="cat-count">{{ achList.length }}</span>
+          <span class="cat-count">{{ achList.filter(a => isUnlocked(a.id)).length }}/{{ achList.length }}</span>
         </h3>
         <div class="ach-grid">
           <div
             v-for="ach in achList"
             :key="ach.id"
             class="ach-card card"
-            :class="{ locked: ach.hidden }"
+            :class="{ locked: !isUnlocked(ach.id), unlocked: isUnlocked(ach.id) }"
           >
-            <div class="ach-icon">{{ ach.hidden ? '❓' : ach.icon }}</div>
-            <div class="ach-info">
-              <div class="ach-name-row">
-                <span class="ach-name">{{ ach.hidden ? '???' : ach.name }}</span>
-                <span v-for="tag in getRaceTags(ach)" :key="tag" class="tag tag-race">{{ tag }}</span>
-                <span v-for="tag in getGenderTags(ach)" :key="tag" class="tag tag-gender">{{ tag }}</span>
+            <!-- 已解锁：显示完整信息 -->
+            <template v-if="isUnlocked(ach.id)">
+              <div class="ach-icon">{{ ach.icon }}</div>
+              <div class="ach-info">
+                <div class="ach-name-row">
+                  <span class="ach-name">{{ ach.name }}</span>
+                  <span class="tag tag-unlocked">✓</span>
+                  <span v-for="tag in getRaceTags(ach)" :key="tag" class="tag tag-race">{{ tag }}</span>
+                  <span v-for="tag in getGenderTags(ach)" :key="tag" class="tag tag-gender">{{ tag }}</span>
+                </div>
+                <div class="ach-desc">{{ ach.description }}</div>
               </div>
-              <div class="ach-desc">{{ ach.hidden ? '隐藏成就' : ach.description }}</div>
-            </div>
+            </template>
+            <!-- 未解锁 + 非隐藏：显示名称，描述模糊 -->
+            <template v-else-if="!ach.hidden">
+              <div class="ach-icon ach-icon-locked">{{ ach.icon }}</div>
+              <div class="ach-info">
+                <div class="ach-name-row">
+                  <span class="ach-name">{{ ach.name }}</span>
+                  <span class="tag tag-locked">🔒</span>
+                </div>
+                <div class="ach-desc">未解锁</div>
+              </div>
+            </template>
+            <!-- 未解锁 + 隐藏：完全隐藏 -->
+            <template v-else>
+              <div class="ach-icon ach-icon-locked">❓</div>
+              <div class="ach-info">
+                <div class="ach-name-row">
+                  <span class="ach-name">???</span>
+                </div>
+                <div class="ach-desc">隐藏成就</div>
+              </div>
+            </template>
           </div>
         </div>
       </section>
@@ -138,7 +173,27 @@ function getGenderTags(ach: typeof world.value.achievements[0]): string[] {
 }
 
 .ach-card.locked {
-  opacity: 0.5;
+  opacity: 0.45;
+}
+
+.ach-card.unlocked {
+  border-left: 2px solid var(--gold);
+}
+
+.ach-icon-locked {
+  filter: grayscale(1);
+}
+
+.tag-unlocked {
+  background: rgba(80, 200, 120, 0.2);
+  color: #50c878;
+  border: 1px solid rgba(80, 200, 120, 0.3);
+}
+
+.tag-locked {
+  background: rgba(150, 150, 150, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(150, 150, 150, 0.2);
 }
 
 .ach-icon {
