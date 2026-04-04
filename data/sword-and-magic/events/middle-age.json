@@ -1518,8 +1518,8 @@
     "branches": [
       {
         "id": "experiment_success",
-        "title": "大成功！",
-        "description": "魔法阵发出耀眼的光芒",
+        "title": "全力激活魔法阵",
+        "description": "你决定全力施展，将魔力注入魔法阵的每一个符文",
         "probability": 0.2,
         "effects": [
           {
@@ -1575,8 +1575,8 @@
       },
       {
         "id": "experiment_partial",
-        "title": "部分成功",
-        "description": "虽然没有完全成功，但学到了很多",
+        "title": "谨慎地小规模尝试",
+        "description": "你决定只激活魔法阵的一部分，看看效果",
         "probability": 0.4,
         "effects": [
           {
@@ -2821,6 +2821,7 @@
     "maxAge": 70,
     "weight": 4,
     "unique": true,
+    "include": "has.flag.parent",
     "races": [
       "human"
     ],

@@ -23,7 +23,7 @@
     "description": "活到80岁",
     "icon": "🕐",
     "hidden": false,
-    "condition": "lifespan >= 80",
+    "condition": "age >= 80",
     "category": "人生"
   },
   {
@@ -41,7 +41,7 @@
     "description": "出身贫民窟，活到70岁",
     "icon": "🌱",
     "hidden": true,
-    "condition": "event.count.birth_slums >= 1 & lifespan >= 70",
+    "condition": "event.count.birth_slums >= 1 & age >= 70",
     "category": "人生"
   },
   {
@@ -68,7 +68,7 @@
     "description": "结婚并经历战争，最终活到60岁",
     "icon": "💍",
     "hidden": true,
-    "condition": "has.flag.married & has.flag.war_hero & lifespan >= 60",
+    "condition": "has.flag.married & has.flag.war_hero & age >= 60",
     "category": "人生"
   },
   {
@@ -77,7 +77,7 @@
     "description": "加入公会后活到60岁，却从未定居",
     "icon": "🧳",
     "hidden": true,
-    "condition": "lifespan >= 60 & has.flag.guild_member",
+    "condition": "age >= 60 & has.flag.guild_member",
     "category": "人生"
   },
   {
@@ -113,7 +113,7 @@
     "description": "失去伴侣后仍然坚强地活到60岁",
     "icon": "🥀",
     "hidden": true,
-    "condition": "has.flag.widowed & lifespan >= 60",
+    "condition": "has.flag.widowed & age >= 60",
     "category": "人生"
   },
   {
@@ -131,7 +131,7 @@
     "description": "安详地度过晚年",
     "icon": "🍂",
     "hidden": true,
-    "condition": "has.flag.peaceful_retirement & lifespan >= 70",
+    "condition": "has.flag.peaceful_retirement & age >= 70",
     "category": "人生"
   },
   {
@@ -212,7 +212,7 @@
     "description": "在讨伐巨龙中险些丧命但活了下来",
     "icon": "💀",
     "hidden": true,
-    "condition": "has.flag.near_death & has.flag.dragon_defeated & lifespan >= 40",
+    "condition": "has.flag.near_death & has.flag.dragon_defeated & age >= 40",
     "category": "战斗"
   },
   {
@@ -221,7 +221,7 @@
     "description": "在战争中存活并成为英雄",
     "icon": "🎖️",
     "hidden": false,
-    "condition": "has.flag.war_hero & lifespan >= 50",
+    "condition": "has.flag.war_hero & age >= 50",
     "category": "战斗"
   },
   {
@@ -275,7 +275,7 @@
     "description": "走上暗黑之路但最终逃离并活下来",
     "icon": "🕯️",
     "hidden": true,
-    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & lifespan >= 50",
+    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & age >= 50",
     "category": "魔法"
   },
   {
@@ -545,7 +545,7 @@
     "description": "作为短命种族突破百年大关",
     "icon": "🎂",
     "hidden": true,
-    "condition": "lifespan >= 90",
+    "condition": "age >= 100",
     "category": "人类",
     "races": [
       "human"
@@ -641,7 +641,7 @@
     "description": "选择隐居，远离尘世纷扰",
     "icon": "🏔️",
     "hidden": true,
-    "condition": "has.flag.elf_reclusive & lifespan >= 200",
+    "condition": "has.flag.elf_reclusive & age >= 200",
     "category": "精灵",
     "races": [
       "elf"
@@ -761,7 +761,7 @@
     "description": "作为哥布林活到极限寿命",
     "icon": "⏳",
     "hidden": true,
-    "condition": "lifespan >= 38",
+    "condition": "age >= 38",
     "category": "哥布林",
     "races": [
       "goblin"
@@ -896,7 +896,7 @@
     "description": "与精灵成为朋友并重逢",
     "icon": "🧚",
     "hidden": true,
-    "condition": "has.flag.fairy_friend & lifespan >= 60",
+    "condition": "has.flag.fairy_friend & age >= 60",
     "category": "秘密"
   },
   {
@@ -905,7 +905,7 @@
     "description": "成为领主并平静地活到80岁",
     "icon": "🌿",
     "hidden": true,
-    "condition": "has.flag.peaceful_retirement & lifespan >= 80",
+    "condition": "has.flag.peaceful_retirement & age >= 80",
     "category": "秘密"
   },
   {

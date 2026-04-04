@@ -2543,6 +2543,7 @@
     "maxAge": 75,
     "weight": 5,
     "unique": true,
+    "include": "has.flag.parent",
     "races": [
       "human"
     ],
@@ -3351,6 +3352,7 @@
     "maxAge": 80,
     "weight": 5,
     "unique": true,
+    "include": "has.flag.parent",
     "races": [
       "human"
     ],
