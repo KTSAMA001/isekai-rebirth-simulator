@@ -26,18 +26,18 @@ interface Particle {
 
 /* ---------- 配置 ---------- */
 const CFG = {
-  maxParticles: 14,
-  spawnRate: 1.2,       // 每秒生成
-  minLife: 8,
-  maxLife: 18,
-  minSize: 0.5,
-  maxSize: 1.8,
-  fadeIn: 0.20,         // 前 20% 淡入
-  fadeOut: 0.28,        // 后 28% 淡出
-  glowScale: 2.8,       // 光晕半径 = 核心 × 此值
+  maxParticles: 18,
+  spawnRate: 1.6,       // 每秒生成
+  minLife: 7,
+  maxLife: 17,
+  minSize: 0.6,
+  maxSize: 2.0,
+  fadeIn: 0.18,         // 前 18% 淡入
+  fadeOut: 0.25,        // 后 25% 淡出
+  glowScale: 3.0,       // 光晕半径 = 核心 × 此值
   hueMin: 34,
   hueMax: 52,           // 金~琥珀
-  globalAlpha: 0.30,    // 全局透明度上限
+  globalAlpha: 0.40,    // 全局透明度上限
 }
 
 /* ---------- 工具 ---------- */
@@ -69,7 +69,7 @@ function spawn(): Particle {
     driftSpeed: rand(0.3, 1.0),
     phase: rand(0, Math.PI * 2),
     hue: rand(CFG.hueMin, CFG.hueMax),
-    brightness: rand(0.20, 0.45),
+    brightness: rand(0.28, 0.55),
     twinkleSpeed: rand(2, 6),
     twinkleDepth: rand(0.05, 0.35),
   }
@@ -116,9 +116,9 @@ function draw() {
 
     // 外层柔光晕
     const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gr)
-    glow.addColorStop(0,   `hsla(${p.hue}, 70%, 60%, ${a * 0.15})`)
-    glow.addColorStop(0.35, `hsla(${p.hue}, 65%, 52%, ${a * 0.04})`)
-    glow.addColorStop(1,   `hsla(${p.hue}, 55%, 45%, 0)`)
+    glow.addColorStop(0,   `hsla(${p.hue}, 75%, 64%, ${a * 0.20})`)
+    glow.addColorStop(0.35, `hsla(${p.hue}, 68%, 55%, ${a * 0.06})`)
+    glow.addColorStop(1,   `hsla(${p.hue}, 58%, 48%, 0)`)
     ctx.fillStyle = glow
     ctx.beginPath()
     ctx.arc(p.x, p.y, gr, 0, Math.PI * 2)
@@ -126,8 +126,8 @@ function draw() {
 
     // 核心亮点
     const core = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r)
-    core.addColorStop(0, `hsla(${p.hue}, 45%, 85%, ${a * 0.45})`)
-    core.addColorStop(1, `hsla(${p.hue}, 70%, 58%, ${a * 0.08})`)
+    core.addColorStop(0, `hsla(${p.hue}, 48%, 88%, ${a * 0.55})`)
+    core.addColorStop(1, `hsla(${p.hue}, 75%, 62%, ${a * 0.12})`)
     ctx.fillStyle = core
     ctx.beginPath()
     ctx.arc(p.x, p.y, r, 0, Math.PI * 2)
