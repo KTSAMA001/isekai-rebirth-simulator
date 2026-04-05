@@ -234,6 +234,35 @@ describe('数据文件校验', () => {
       expect(familyPhoto.include).toBe('has.flag.parent')
       expect(grandchildLaughter.include).toBe('has.flag.parent')
     })
+
+    it('明确年龄语义事件不能被跨种族年龄缩放扭曲', () => {
+      const centenarianEvent = allEvents.find((e: any) => e.id === 'centenarian_celebration')
+      const midlifeReview = allEvents.find((e: any) => e.id === 'mid_legacy_review')
+
+      expect(centenarianEvent).toBeDefined()
+      expect(centenarianEvent.races).toEqual(['human'])
+      expect(centenarianEvent.minAge).toBe(100)
+      expect(centenarianEvent.maxAge).toBe(100)
+      expect(centenarianEvent.include).toBe('age == 100')
+
+      expect(midlifeReview).toBeDefined()
+      expect(midlifeReview.description).not.toContain('五十岁')
+      expect(midlifeReview.raceVariants?.elf?.description).toContain('人生的中段')
+    })
+
+    it('独自降生与童年照料者文案保持一致', () => {
+      const stealSweets = allEvents.find((e: any) => e.id === 'steal_sweets')
+      const birthFile = loadJson('events/birth.json')
+      const wildBirth = birthFile
+        .flatMap((event: any) => event.branches ?? [])
+        .find((branch: any) => branch.id === 'wild_orphan')
+
+      expect(wildBirth).toBeDefined()
+      expect(wildBirth.successText).toContain('新的家')
+      expect(stealSweets).toBeDefined()
+      expect(stealSweets.description).toContain('照顾你的大人')
+      expect(stealSweets.description).not.toContain('妈妈')
+    })
   })
 
   describe('achievements.json', () => {

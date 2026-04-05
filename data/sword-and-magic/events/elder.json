@@ -1823,9 +1823,10 @@
     "id": "centenarian_celebration",
     "title": "百岁庆典",
     "description": "一百岁了。整个城镇都来庆祝。国王派来了使者，送上了一枚荣誉勋章。",
-    "minAge": 95,
+    "minAge": 100,
     "maxAge": 100,
     "weight": 8,
+    "include": "age == 100",
     "unique": true,
     "tag": "life",
     "priority": "major",
@@ -1885,15 +1886,8 @@
       "*"
     ],
     "races": [
-      "human",
-      "elf"
-    ],
-    "raceVariants": {
-      "goblin": {
-        "title": "不老传说",
-        "description": "你已经活得比大多数哥布林都长。整个部落都来庆祝——在短命的哥布林社会，你的年纪本身就是一个传奇。年轻的哥布林们争相听你讲故事，你觉得自己可以再活一百年。"
-      }
-    }
+      "human"
+    ]
   },
   {
     "id": "elder_natural_death",
