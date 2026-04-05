@@ -7,16 +7,16 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { WorldInstance } from '@/engine/core/types'
 import { worldRegistry } from '@/engine/world/WorldRegistry'
-import { createSwordAndMagicWorld } from '@/worlds/sword-and-magic'
 
 export const useWorldStore = defineStore('world', () => {
   const worlds = ref<WorldInstance[]>([])
   const currentWorldId = ref<string | null>(null)
 
   /** 初始化内置世界 */
-  function initBuiltinWorlds() {
+  async function initBuiltinWorlds() {
+    const { createSwordAndMagicWorld } = await import('@/worlds/sword-and-magic')
     const swordAndMagic = createSwordAndMagicWorld()
-    worldRegistry.register(swordAndMagic)
+    worldRegistry.register(await swordAndMagic)
     worlds.value = worldRegistry.getAll()
   }
 

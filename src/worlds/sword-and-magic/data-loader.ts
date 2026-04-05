@@ -257,28 +257,44 @@ function validate<T>(data: unknown, schemaName: string, fileName: string): T {
 
 // ==================== 数据加载 ====================
 
-// JSON 数据将在 T2-T5 中逐步创建
-// 这里先导出占位，后续任务填充 import
-
-import manifestData from '../../../data/sword-and-magic/manifest.json'
-import attributesData from '../../../data/sword-and-magic/attributes.json'
-import talentsData from '../../../data/sword-and-magic/talents.json'
-import itemsData from '../../../data/sword-and-magic/items.json'
-import achievementsData from '../../../data/sword-and-magic/achievements.json'
-import evaluationsData from '../../../data/sword-and-magic/evaluations.json'
-import presetsData from '../../../data/sword-and-magic/presets.json'
-import rulesData from '../../../data/sword-and-magic/rules.json'
-import eventsBirthData from '../../../data/sword-and-magic/events/birth.json'
-import eventsChildhoodData from '../../../data/sword-and-magic/events/childhood.json'
-import eventsYouthData from '../../../data/sword-and-magic/events/youth.json'
-import eventsTeenagerData from '../../../data/sword-and-magic/events/teenager.json'
-import eventsAdultData from '../../../data/sword-and-magic/events/adult.json'
-import eventsMiddleAgeData from '../../../data/sword-and-magic/events/middle-age.json'
-import eventsElderData from '../../../data/sword-and-magic/events/elder.json'
-import racesData from '../../../data/sword-and-magic/races.json'
-
 /** 加载并校验所有世界数据 */
-export function loadWorldData() {
+export async function loadWorldData() {
+  const [
+    { default: manifestData },
+    { default: attributesData },
+    { default: talentsData },
+    { default: itemsData },
+    { default: achievementsData },
+    { default: evaluationsData },
+    { default: presetsData },
+    { default: rulesData },
+    { default: eventsBirthData },
+    { default: eventsChildhoodData },
+    { default: eventsYouthData },
+    { default: eventsTeenagerData },
+    { default: eventsAdultData },
+    { default: eventsMiddleAgeData },
+    { default: eventsElderData },
+    { default: racesData },
+  ] = await Promise.all([
+    import('../../../data/sword-and-magic/manifest.json'),
+    import('../../../data/sword-and-magic/attributes.json'),
+    import('../../../data/sword-and-magic/talents.json'),
+    import('../../../data/sword-and-magic/items.json'),
+    import('../../../data/sword-and-magic/achievements.json'),
+    import('../../../data/sword-and-magic/evaluations.json'),
+    import('../../../data/sword-and-magic/presets.json'),
+    import('../../../data/sword-and-magic/rules.json'),
+    import('../../../data/sword-and-magic/events/birth.json'),
+    import('../../../data/sword-and-magic/events/childhood.json'),
+    import('../../../data/sword-and-magic/events/youth.json'),
+    import('../../../data/sword-and-magic/events/teenager.json'),
+    import('../../../data/sword-and-magic/events/adult.json'),
+    import('../../../data/sword-and-magic/events/middle-age.json'),
+    import('../../../data/sword-and-magic/events/elder.json'),
+    import('../../../data/sword-and-magic/races.json'),
+  ])
+
   // 校验各数据文件
   const manifest = validate<WorldManifest>(manifestData, 'manifest', 'manifest.json')
   const attributes = validate<WorldAttributeDef[]>(attributesData, 'attribute', 'attributes.json')

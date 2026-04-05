@@ -5,8 +5,8 @@ import { createWorldInstance } from '../../engine/world/WorldInstance'
 import { loadWorldData } from './data-loader'
 
 /** 创建剑与魔法世界实例 */
-export function createSwordAndMagicWorld() {
-  const data = loadWorldData()
+export async function createSwordAndMagicWorld() {
+  const data = await loadWorldData()
   const world = createWorldInstance(
     data.manifest,
     data.attributes,

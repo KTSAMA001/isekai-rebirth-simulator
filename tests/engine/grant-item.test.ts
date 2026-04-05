@@ -8,8 +8,8 @@ import { SimulationEngine } from '../../src/engine/core/SimulationEngine'
 import type { WorldEventDef } from '../../src/engine/core/types'
 
 describe('grant_item 提示文本', () => {
-  it('resolveBranch 中 grant_item 的 acquireText 出现在 effectTexts', () => {
-    const world = createSwordAndMagicWorld()
+  it('resolveBranch 中 grant_item 的 acquireText 出现在 effectTexts', async () => {
+    const world = await createSwordAndMagicWorld()
     const engine = new SimulationEngine(world, 42)
 
     // 初始化游戏
@@ -48,8 +48,8 @@ describe('grant_item 提示文本', () => {
     expect(finalState.inventory.items.some(s => s.itemId === 'dragon_scale')).toBe(true)
   })
 
-  it('背包已满时 grant_item 失败消息也出现在 effectTexts', () => {
-    const world = createSwordAndMagicWorld()
+  it('背包已满时 grant_item 失败消息也出现在 effectTexts', async () => {
+    const world = await createSwordAndMagicWorld()
     const engine = new SimulationEngine(world, 42)
 
     engine.initGame('测试勇者')

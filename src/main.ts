@@ -19,27 +19,31 @@ app.config.errorHandler = (err, vm, info) => {
   document.body.innerHTML += `<pre style="color:red;padding:20px;background:#111;position:fixed;top:0;left:0;right:0;z-index:99999;font-size:14px;max-height:50vh;overflow:auto">Vue Error: ${info}\n${err}</pre>`
 }
 
-// 初始化内置世界
-try {
-  const worldStore = useWorldStore()
-  worldStore.initBuiltinWorlds()
-} catch (e) {
-  console.error('KT---世界初始化失败---', e)
-  document.body.innerHTML = `<pre style="color:red;padding:20px;background:#111;font-size:14px;white-space:pre-wrap">世界初始化失败:\n${e}\n\n${(e as Error).stack ?? ''}</pre>`
+async function bootstrap() {
+  try {
+    const worldStore = useWorldStore()
+    await worldStore.initBuiltinWorlds()
+  } catch (e) {
+    console.error('KT---世界初始化失败---', e)
+    document.body.innerHTML = `<pre style="color:red;padding:20px;background:#111;font-size:14px;white-space:pre-wrap">世界初始化失败:\n${e}\n\n${(e as Error).stack ?? ''}</pre>`
+    return
+  }
+
+  app.mount('#app')
+  registerPwa()
+
+  // 开发模式调试 API
+  if (import.meta.env.DEV) {
+    const gameStore = useGameStore()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).__game = gameStore
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).__startYear = () => gameStore.startYear()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).__resolveBranch = (id: string) => gameStore.resolveBranch(id)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).__skipYear = () => gameStore.skipYear()
+  }
 }
 
-app.mount('#app')
-registerPwa()
-
-// 开发模式调试 API
-if (import.meta.env.DEV) {
-  const gameStore = useGameStore()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(window as any).__game = gameStore
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(window as any).__startYear = () => gameStore.startYear()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(window as any).__resolveBranch = (id: string) => gameStore.resolveBranch(id)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ;(window as any).__skipYear = () => gameStore.skipYear()
-}
+void bootstrap()

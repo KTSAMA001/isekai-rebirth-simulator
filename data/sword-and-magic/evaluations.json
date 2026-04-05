@@ -366,5 +366,45 @@
     "rarity": "common",
     "priority": 5,
     "condition": "has.flag.has_student & state.age >= 50"
+  },
+  {
+    "id": "eva_dwarf_oathkeeper",
+    "title": "守誓的山民",
+    "description": "你在龙族旧迹前立过誓，也在漫长岁月里把那份誓言一直扛到了最后。对矮人而言，这比夸耀任何一件作品都更重。",
+    "rarity": "rare",
+    "priority": 11,
+    "condition": "has.flag.dwarf_dragon_vow"
+  },
+  {
+    "id": "eva_dwarf_masterwork",
+    "title": "炉火铸名",
+    "description": "你没有把一生浪费在空谈上，而是让名字和手艺一起留在了铁与石里。你的作品会替你继续活很多年。",
+    "rarity": "rare",
+    "priority": 12,
+    "condition": "has.flag.dwarf_has_masterwork"
+  },
+  {
+    "id": "eva_dwarf_holdfast",
+    "title": "铁砧壁垒",
+    "description": "警报响起时，有人慌乱，有人后退，而你站在了最该站的位置。要塞能稳住，不只是因为岩石够厚，也因为你没退。",
+    "rarity": "rare",
+    "priority": 12,
+    "condition": "has.flag.dwarf_hold_defender"
+  },
+  {
+    "id": "eva_dwarf_legacy_flame",
+    "title": "师火不熄",
+    "description": "你不仅留下了值得铭记的作品，也把真正的火候、规矩与信誉交给了后来的人。这样的火，比炉火烧得更久。",
+    "rarity": "legendary",
+    "priority": 15,
+    "condition": "has.flag.dwarf_has_masterwork & has.flag.dwarf_has_apprentice"
+  },
+  {
+    "id": "eva_dwarf_long_watch",
+    "title": "百年炉守",
+    "description": "你的人生并不靠喧哗取胜，而是靠一次次落锤、巡炉、守夜和不肯松手的责任堆出来。百年之后，你自己也成了石厅故事的一部分。",
+    "rarity": "legendary",
+    "priority": 14,
+    "condition": "has.flag.dwarf_has_masterwork & state.age >= 140"
   }
 ]

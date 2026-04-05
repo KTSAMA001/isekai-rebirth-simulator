@@ -167,7 +167,7 @@ def check_dsl_syntax(expr: str) -> list[str]:
 
         # 比较表达式: attribute.xxx >= N, lifespan >= N, hp >= N, event.count.xxx >= N, age >= N, etc.
         cmp_match = re.match(
-            r'^(attribute\.peak\.\w+|attribute\.\w+|event\.count\.\w+|achievement\.count|lifespan|hp|age|counter\.\w+|character\.race|character\.gender)\s*'
+            r'^(attribute\.peak\.\w+|attribute\.\w+|event\.count\.\w+|achievement\.count|lifespan|hp|age|counter\.\w+|character\.race|character\.gender|result\.score|result\.grade)\s*'
             r'(==|!=|>=|<=|>|<)\s*'
             r'(.+)$',
             token
@@ -175,7 +175,7 @@ def check_dsl_syntax(expr: str) -> list[str]:
         if cmp_match:
             left, op, right = cmp_match.groups()
             # 检查右侧是否为合法值
-            if left.startswith("character."):
+            if left.startswith("character.") or left == "result.grade":
                 # 字符串比较，右侧应为标识符
                 if not re.match(r'^[a-zA-Z_]\w*$', right):
                     errors.append(f"比较值应为标识符: '{right}'")
