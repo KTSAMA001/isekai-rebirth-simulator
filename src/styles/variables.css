@@ -1,49 +1,49 @@
 /* ==================== 异世界主题 CSS 变量 ==================== */
 :root {
-  /* 主色调 */
-  --color-primary: #8b5cf6;
-  --color-primary-light: #a78bfa;
-  --color-primary-dark: #7c3aed;
-  --color-secondary: #d946ef;
-  --color-secondary-light: #e879f9;
+  /* 主色调 — 暖金中世纪奇幻 */
+  --color-primary: #c9a227;
+  --color-primary-light: #d4a373;
+  --color-primary-dark: #8b6914;
+  --color-secondary: #e26d5c;
+  --color-secondary-light: #e8926c;
 
-  /* 背景 */
-  --bg-main: #0f0a1a;
-  --bg-card: #1a1128;
-  --bg-card-hover: #231740;
-  --bg-overlay: rgba(15, 10, 26, 0.85);
-  --bg-panel: #160f24;
+  /* 背景 — 深暖棕（中世纪酒馆暗角） */
+  --bg-main: #1a1410;
+  --bg-card: #241e17;
+  --bg-card-hover: #2e261d;
+  --bg-overlay: rgba(26, 20, 16, 0.9);
+  --bg-panel: #1f1912;
 
-  /* 文字 */
-  --text-primary: #e2e8f0;
-  --text-secondary: #a0aec0;
-  --text-muted: #64748b;
+  /* 文字 — 羊皮纸暖白 */
+  --text-primary: #e8d5c4;
+  --text-secondary: #9e8e7e;
+  --text-muted: #6b5d50;
   --text-gold: #fbbf24;
-  --text-dim: #475569;
+  --text-dim: #4a3f35;
 
-  /* 边框 */
-  --border-color: #2d2042;
-  --border-glow: rgba(139, 92, 246, 0.3);
+  /* 边框 — 暗木 */
+  --border-color: #3d3024;
+  --border-glow: rgba(201, 162, 39, 0.25);
 
   /* 稀有度颜色 */
-  --rarity-common: #60a5fa;
-  --rarity-rare: #c084fc;
+  --rarity-common: #8bb8c4;
+  --rarity-rare: #b48edd;
   --rarity-legendary: #fbbf24;
 
   /* 评级颜色 */
-  --grade-d: #64748b;
-  --grade-c: #60a5fa;
+  --grade-d: #6b5d50;
+  --grade-c: #8bb8c4;
   --grade-b: #4ade80;
   --grade-a: #fbbf24;
-  --grade-s: #c084fc;
-  --grade-ss: #f472b6;
+  --grade-s: #b48edd;
+  --grade-ss: #e26d5c;
   --grade-sss: #ef4444;
 
   /* 状态色 */
   --color-success: #4ade80;
   --color-danger: #ef4444;
   --color-warning: #fbbf24;
-  --color-info: #60a5fa;
+  --color-info: #8bb8c4;
 
   /* 间距 */
   --space-xs: 4px;
@@ -63,9 +63,9 @@
   --font-main: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   --font-title: 'Georgia', 'Noto Serif SC', serif;
 
-  /* 阴影 */
+  /* 阴影 — 去霓虹，改暖金微光 */
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.2);
+  --shadow-glow: 0 0 15px rgba(201, 162, 39, 0.15);
   --shadow-gold: 0 0 20px rgba(251, 191, 36, 0.3);
 
   /* 过渡 */

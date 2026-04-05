@@ -250,7 +250,7 @@ function confirm() {
 
 .bonus-tag {
   padding: 2px 10px;
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(201, 162, 39, 0.1);
   color: var(--color-primary-light);
   border-radius: var(--radius-sm);
   font-size: 0.75rem;

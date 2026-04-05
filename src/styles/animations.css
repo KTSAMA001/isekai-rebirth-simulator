@@ -46,8 +46,8 @@
 
 /* 魔法光效 */
 @keyframes magicGlow {
-  0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.3); }
-  50% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.6), 0 0 50px rgba(217, 70, 239, 0.2); }
+  0%, 100% { box-shadow: 0 0 5px rgba(201, 162, 39, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.5), 0 0 50px rgba(226, 109, 92, 0.15); }
 }
 
 /* 打字机闪烁光标 */

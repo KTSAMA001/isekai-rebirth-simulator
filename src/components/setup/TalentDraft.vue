@@ -158,8 +158,8 @@ function confirm() {
   transform: scale(0.97);
 }
 
-.talent-card.rarity-common { border-color: rgba(96, 165, 250, 0.3); }
-.talent-card.rarity-rare { border-color: rgba(192, 132, 252, 0.4); }
+.talent-card.rarity-common { border-color: rgba(139, 184, 196, 0.3); }
+.talent-card.rarity-rare { border-color: rgba(180, 142, 221, 0.4); }
 .talent-card.rarity-legendary {
   border-color: rgba(251, 191, 36, 0.5);
   box-shadow: inset 0 0 20px rgba(251, 191, 36, 0.05);
@@ -167,12 +167,12 @@ function confirm() {
 
 .talent-card.selected {
   border-color: var(--color-primary);
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(201, 162, 39, 0.1);
 }
 .talent-card.blocked {
   opacity: 0.55;
 }
-.talent-card.selected.rarity-rare { border-color: var(--rarity-rare); background: rgba(192, 132, 252, 0.1); }
+.talent-card.selected.rarity-rare { border-color: var(--rarity-rare); background: rgba(180, 142, 221, 0.1); }
 .talent-card.selected.rarity-legendary { border-color: var(--rarity-legendary); background: rgba(251, 191, 36, 0.08); }
 
 .talent-rarity-tag {

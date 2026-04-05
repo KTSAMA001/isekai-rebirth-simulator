@@ -143,11 +143,11 @@ function getUnlockText(branch: EventBranch): string {
 }
 
 .choice-btn.choice-risk {
-  border-left: 3px solid rgba(167, 139, 250, 0.4);
+  border-left: 3px solid rgba(201, 162, 39, 0.4);
 }
 
 .choice-btn.choice-risk:hover {
-  background: rgba(167, 139, 250, 0.06);
+  background: rgba(201, 162, 39, 0.06);
 }
 
 .choice-indicator {
@@ -175,7 +175,7 @@ function getUnlockText(branch: EventBranch): string {
 .risk-hint {
   order: 2;
   font-size: 0.72rem;
-  color: var(--color-primary-light, #a78bfa);
+  color: var(--color-primary-light, #d4a373);
   flex-shrink: 0;
   white-space: nowrap;
 }

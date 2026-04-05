@@ -256,11 +256,11 @@ function itemTooltip(item: { def: any; slot: any }) {
   font-weight: 600;
 }
 .talent-tag.rarity-common {
-  background: rgba(96, 165, 250, 0.12);
+  background: rgba(139, 184, 196, 0.12);
   color: var(--rarity-common);
 }
 .talent-tag.rarity-rare {
-  background: rgba(192, 132, 252, 0.12);
+  background: rgba(180, 142, 221, 0.12);
   color: var(--rarity-rare);
 }
 .talent-tag.rarity-legendary {
@@ -330,11 +330,11 @@ function itemTooltip(item: { def: any; slot: any }) {
 }
 
 .item-slot.rarity-common {
-  background: rgba(96, 165, 250, 0.08);
+  background: rgba(139, 184, 196, 0.08);
 }
 
 .item-slot.rarity-rare {
-  background: rgba(192, 132, 252, 0.08);
+  background: rgba(180, 142, 221, 0.08);
 }
 
 .item-slot.rarity-legendary {

@@ -187,7 +187,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   transform: translate(-50%, -50%);
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.12), transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -246,7 +246,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), transparent);
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.05), transparent);
   pointer-events: none;
 }
 
@@ -293,7 +293,7 @@ const autoSlot = ref<SaveSlot | null>(null)
 
 .world-tag {
   padding: 1px 8px;
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(201, 162, 39, 0.1);
   color: var(--color-primary-light);
   border-radius: var(--radius-sm);
   font-size: 0.7rem;

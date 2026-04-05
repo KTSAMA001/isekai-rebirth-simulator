@@ -69,13 +69,13 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
   color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35);
 }
 .btn-primary:active {
   transform: translateY(0);
@@ -98,7 +98,7 @@ button {
 
 .btn-gold {
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #1a1128;
+  color: #241e17;
   box-shadow: var(--shadow-gold);
 }
 .btn-gold:hover {
@@ -166,8 +166,8 @@ button {
   font-weight: 600;
 }
 
-.tag-common { background: rgba(96, 165, 250, 0.15); color: var(--rarity-common); }
-.tag-rare { background: rgba(192, 132, 252, 0.15); color: var(--rarity-rare); }
+.tag-common { background: rgba(139, 184, 196, 0.15); color: var(--rarity-common); }
+.tag-rare { background: rgba(180, 142, 221, 0.15); color: var(--rarity-rare); }
 .tag-legendary { background: rgba(251, 191, 36, 0.15); color: var(--rarity-legendary); }
 
 /* ==================== 属性条 ==================== */

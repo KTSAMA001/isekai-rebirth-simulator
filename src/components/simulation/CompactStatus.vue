@@ -199,8 +199,8 @@ function toggleExpand() {
   padding: 1px 4px;
   border-radius: 4px;
 }
-.talent-chip.rarity-common { background: rgba(96, 165, 250, 0.15); }
-.talent-chip.rarity-rare { background: rgba(192, 132, 252, 0.15); }
+.talent-chip.rarity-common { background: rgba(139, 184, 196, 0.15); }
+.talent-chip.rarity-rare { background: rgba(180, 142, 221, 0.15); }
 .talent-chip.rarity-legendary { background: rgba(251, 191, 36, 0.15); }
 
 .expand-icon {
@@ -266,8 +266,8 @@ function toggleExpand() {
   font-size: 0.7rem;
   font-weight: 600;
 }
-.talent-detail-tag.rarity-common { background: rgba(96, 165, 250, 0.12); color: var(--rarity-common); }
-.talent-detail-tag.rarity-rare { background: rgba(192, 132, 252, 0.12); color: var(--rarity-rare); }
+.talent-detail-tag.rarity-common { background: rgba(139, 184, 196, 0.12); color: var(--rarity-common); }
+.talent-detail-tag.rarity-rare { background: rgba(180, 142, 221, 0.12); color: var(--rarity-rare); }
 .talent-detail-tag.rarity-legendary { background: rgba(251, 191, 36, 0.12); color: var(--rarity-legendary); }
 
 /* 物品栏 */
@@ -331,8 +331,8 @@ function toggleExpand() {
   max-width: 60px;
 }
 
-.item-slot.rarity-common { background: rgba(96, 165, 250, 0.08); }
-.item-slot.rarity-rare { background: rgba(192, 132, 252, 0.08); }
+.item-slot.rarity-common { background: rgba(139, 184, 196, 0.08); }
+.item-slot.rarity-rare { background: rgba(180, 142, 221, 0.08); }
 .item-slot.rarity-legendary { background: rgba(251, 191, 36, 0.08); }
 
 /* 物品详情面板 */

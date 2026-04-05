@@ -475,7 +475,7 @@ function goBack() {
 .step.active .step-dot {
   border-color: var(--color-primary);
   color: var(--color-primary-light);
-  background: rgba(139, 92, 246, 0.15);
+  background: rgba(201, 162, 39, 0.15);
 }
 
 .step.done .step-dot {
@@ -529,8 +529,8 @@ function goBack() {
 }
 .preset-card.selected {
   border-color: var(--color-primary);
-  background: rgba(139, 92, 246, 0.08);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+  background: rgba(201, 162, 39, 0.08);
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.2);
 }
 .preset-card.locked {
   opacity: 0.5;
@@ -702,8 +702,8 @@ function goBack() {
 }
 .race-card.selected {
   border-color: var(--color-primary);
-  background: rgba(139, 92, 246, 0.08);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+  background: rgba(201, 162, 39, 0.08);
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.2);
 }
 .race-card.locked {
   opacity: 0.55;
@@ -810,8 +810,8 @@ function goBack() {
 }
 .gender-card.selected {
   border-color: var(--color-primary);
-  background: rgba(139, 92, 246, 0.08);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+  background: rgba(201, 162, 39, 0.08);
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.2);
 }
 
 .gender-icon {

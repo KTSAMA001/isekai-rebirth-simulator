@@ -44,9 +44,7 @@ const router = useRouter()
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-md);
-  background: var(--bg-overlay);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-panel);
   border-bottom: 1px solid var(--border-color);
 }
 
