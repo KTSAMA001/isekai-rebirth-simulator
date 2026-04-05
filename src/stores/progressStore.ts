@@ -87,8 +87,8 @@ export const useProgressStore = defineStore('progress', () => {
         // 解锁「屠龙者」成就
         return unlockedAchievements.value.has('dragon_slayer_ach')
       case 'worldbreaker_preset':
-        // 解锁全部其他成就（排除自身依赖的成就，避免死锁）
-        return progress.value.unlockedAchievements.length >= totalAchievementCount
+        // 完成终焉路线之一：毁灭世界或经历终焉后重建文明
+        return unlockedAchievements.value.has('dark_lord_ach') || unlockedAchievements.value.has('world_breaker_ach')
       default:
         return true
     }

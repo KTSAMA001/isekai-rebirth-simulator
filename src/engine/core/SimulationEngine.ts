@@ -726,6 +726,20 @@ export class SimulationEngine {
     this.postYearProcessCore()
   }
 
+  /** 检查并写回本轮新解锁的成就 */
+  private applyAchievements(state: GameState): GameState {
+    const newAchievements = this.achievementModule.checkAchievements(state)
+    if (newAchievements.length === 0) return state
+
+    return {
+      ...state,
+      achievements: {
+        unlocked: [...state.achievements.unlocked, ...newAchievements],
+        progress: { ...state.achievements.progress },
+      },
+    }
+  }
+
   /** 后处理核心逻辑：快照、成就、死亡检查 */
   private postYearProcessCore(): void {
     const snapshot = this.attrModule.snapshot(this.state.attributes, this.state.age)
@@ -752,16 +766,7 @@ export class SimulationEngine {
     }
 
     // 检查成就
-    const newAchievements = this.achievementModule.checkAchievements(newState)
-    if (newAchievements.length > 0) {
-      newState = {
-        ...newState,
-        achievements: {
-          unlocked: [...newState.achievements.unlocked, ...newAchievements],
-          progress: { ...newState.achievements.progress },
-        },
-      }
-    }
+    newState = this.applyAchievements(newState)
 
     // 濒死判定：HP ≤ 10 且 > 0 时，有概率直接死亡或奇迹生还
     if (newState.hp > 0 && newState.hp <= 10) {
@@ -803,6 +808,7 @@ export class SimulationEngine {
           evaluations: result.evaluations,
         },
       }
+      newState = this.applyAchievements(newState)
     }
 
     this.state = newState
@@ -981,16 +987,7 @@ export class SimulationEngine {
     }
 
     // 检查成就
-    const newAchievements = this.achievementModule.checkAchievements(newState)
-    if (newAchievements.length > 0) {
-      newState = {
-        ...newState,
-        achievements: {
-          unlocked: [...newState.achievements.unlocked, ...newAchievements],
-          progress: { ...newState.achievements.progress },
-        },
-      }
-    }
+    newState = this.applyAchievements(newState)
 
     if (dead) {
       newState = { ...newState, phase: 'finished' }
@@ -1006,6 +1003,7 @@ export class SimulationEngine {
           evaluations: result.evaluations,
         },
       }
+      newState = this.applyAchievements(newState)
     }
 
     this.state = newState
@@ -1031,6 +1029,8 @@ export class SimulationEngine {
         evaluations: result.evaluations,
       },
     }
+
+    this.state = this.applyAchievements(this.state)
 
     return this.getState()
   }

@@ -963,12 +963,213 @@
     "category": "秘密"
   },
   {
-    "id": "completionist",
-    "name": "全成就",
-    "description": "解锁所有其他 95 个成就",
+    "id": "era_remembered",
+    "name": "时代留名",
+    "description": "结算得分达到220以上",
+    "icon": "🪶",
+    "hidden": false,
+    "condition": "result.score >= 220",
+    "category": "终局"
+  },
+  {
+    "id": "legendary_epilogue",
+    "name": "传奇谢幕",
+    "description": "结算得分达到280以上",
+    "icon": "🌠",
+    "hidden": false,
+    "condition": "result.score >= 280",
+    "category": "终局"
+  },
+  {
+    "id": "immortal_epilogue",
+    "name": "不朽谢幕",
+    "description": "结算得分达到380以上",
     "icon": "👑",
     "hidden": true,
-    "condition": "achievement.count >= 95",
+    "condition": "result.score >= 380",
+    "category": "终局"
+  },
+  {
+    "id": "balanced_finale",
+    "name": "临终仍从容",
+    "description": "结算时体魄、智慧、魅力、灵魂都保持在18以上",
+    "icon": "⚖️",
+    "hidden": true,
+    "condition": "attribute.str >= 18 & attribute.int >= 18 & attribute.chr >= 18 & attribute.spr >= 18 & result.score >= 200",
+    "category": "终局"
+  },
+  {
+    "id": "arcane_reserve_final",
+    "name": "魔潮未尽",
+    "description": "结算时智慧和魔力都达到25以上",
+    "icon": "🔭",
+    "hidden": true,
+    "condition": "attribute.int >= 25 & attribute.mag >= 25 & result.score >= 150",
+    "category": "终局"
+  },
+  {
+    "id": "iron_will_to_end",
+    "name": "战至终章",
+    "description": "活过半百后，仍保有强健体魄与坚定灵魂",
+    "icon": "🗿",
+    "hidden": true,
+    "condition": "age >= 50 & attribute.str >= 25 & attribute.spr >= 20 & result.score >= 150",
+    "category": "终局"
+  },
+  {
+    "id": "fortune_smile_final",
+    "name": "命运厚待",
+    "description": "结算时运势达到25以上，且人生得分不低",
+    "icon": "🍀",
+    "hidden": true,
+    "condition": "attribute.luk >= 25 & result.score >= 200",
+    "category": "终局"
+  },
+  {
+    "id": "century_witness",
+    "name": "百年见证者",
+    "description": "实际活到100岁以上",
+    "icon": "⌛",
+    "hidden": false,
+    "condition": "lifespan >= 100",
+    "category": "终局"
+  },
+  {
+    "id": "elf_long_cycle",
+    "name": "长歌一阕",
+    "description": "作为精灵，活过180年的漫长岁月",
+    "icon": "🎼",
+    "hidden": false,
+    "condition": "lifespan >= 180",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "goblin_beyond_fate",
+    "name": "逆命的绿皮",
+    "description": "作为哥布林，活过50岁",
+    "icon": "🕯️",
+    "hidden": true,
+    "condition": "lifespan >= 50",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "human_kingdom_pillar",
+    "name": "王国脊梁",
+    "description": "作为人类，活过70岁并取得传奇级人生评分",
+    "icon": "🏛️",
+    "hidden": false,
+    "condition": "lifespan >= 70 & result.score >= 280",
+    "category": "人类",
+    "races": [
+      "human"
+    ]
+  },
+  {
+    "id": "elf_starlight_legacy_final",
+    "name": "星辉写进晚年",
+    "description": "作为精灵，从最初抄录星图到晚年最后一次观星",
+    "icon": "🌌",
+    "hidden": true,
+    "condition": "event.count.elf_first_star_copy >= 1 & event.count.elder_star_gazing_final >= 1",
+    "category": "精灵",
+    "races": [
+      "elf"
+    ]
+  },
+  {
+    "id": "goblin_civilizer",
+    "name": "垃圾堆里的文明火种",
+    "description": "作为哥布林，同时建立商业地位并创办学校",
+    "icon": "🛠️",
+    "hidden": true,
+    "condition": "has.flag.goblin_merchant_king & has.flag.school_founder",
+    "category": "哥布林",
+    "races": [
+      "goblin"
+    ]
+  },
+  {
+    "id": "female_peace_maker",
+    "name": "银舌使者",
+    "description": "以女性之身促成外交成果并获得王室认可",
+    "icon": "🕊️",
+    "hidden": true,
+    "condition": "has.flag.diplomat & has.flag.royal_recognized",
+    "category": "性别",
+    "genders": [
+      "female"
+    ]
+  },
+  {
+    "id": "male_memoir_keeper",
+    "name": "家史执笔人",
+    "description": "以男性之身写下回忆录并见证家族延续到孙辈",
+    "icon": "📚",
+    "hidden": true,
+    "condition": "has.flag.memoir_written & has.flag.great_parent",
+    "category": "性别",
+    "genders": [
+      "male"
+    ]
+  },
+  {
+    "id": "starry_lifetime",
+    "name": "仰望同一片星空",
+    "description": "从童年夜观星空，到晚年最后一次抬头",
+    "icon": "🌙",
+    "hidden": true,
+    "condition": "event.count.child_night_sky >= 1 & event.count.elder_star_gazing_final >= 1",
+    "category": "事件"
+  },
+  {
+    "id": "legacy_of_students",
+    "name": "门生仍记得你",
+    "description": "成年时开始授业，晚年仍有弟子前来探望",
+    "icon": "🎓",
+    "hidden": true,
+    "condition": "event.count.adult_teaching_offer >= 1 & event.count.elder_disciple_visit >= 1",
+    "category": "事件"
+  },
+  {
+    "id": "memories_in_hands",
+    "name": "旧物有温度",
+    "description": "成年时拾回旧日纪念，晚年再一次整理回忆",
+    "icon": "🧺",
+    "hidden": true,
+    "condition": "event.count.adult_restore_keepsake >= 1 & event.count.elder_sort_keepsakes >= 1",
+    "category": "事件"
+  },
+  {
+    "id": "miracle_afterglow",
+    "name": "奇迹余晖",
+    "description": "曾从濒死中奇迹生还，并最终活出精彩人生",
+    "icon": "✨",
+    "hidden": true,
+    "condition": "has.flag.miracle_survival & result.score >= 200",
+    "category": "秘密"
+  },
+  {
+    "id": "restless_legend",
+    "name": "直到最后都未停步",
+    "description": "从未真正退休，仍一路走到高龄",
+    "icon": "🥾",
+    "hidden": true,
+    "condition": "has.flag.never_retired & lifespan >= 80",
+    "category": "秘密"
+  },
+  {
+    "id": "completionist",
+    "name": "全成就",
+    "description": "解锁所有其他 115 个成就",
+    "icon": "👑",
+    "hidden": true,
+    "condition": "achievement.count >= 115",
     "category": "秘密"
   }
 ]

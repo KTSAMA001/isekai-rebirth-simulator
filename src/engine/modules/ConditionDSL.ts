@@ -8,7 +8,8 @@
  *   atom       := '(' expression ')' | comparison
  *   comparison := identifier op value
  *   identifier := 'attribute.id' | 'age' | 'has.talent.id' | 'flag.name' |
- *                 'event.count.id' | 'achievement.count' | 'lifespan'
+ *                 'event.count.id' | 'achievement.count' | 'lifespan' |
+ *                 'result.score' | 'result.grade' | 'result.lifespan'
  *   op         := '==' | '!=' | '>=' | '<=' | '>' | '<'
  *   value      := number | string
  */
@@ -87,8 +88,13 @@ export class ConditionDSL {
     }
     // age
     if (attr === 'age') return ctx.state.age
-    // lifespan
-    if (attr === 'lifespan') return ctx.state.effectiveMaxAge ?? 100
+    // lifespan / result.lifespan — 实际活到的岁数；仅结算后可用
+    if (attr === 'lifespan' || attr === 'result.lifespan') {
+      return ctx.state.result?.lifespan ?? Number.NaN
+    }
+    // result.score / result.grade — 仅在结算后存在
+    if (attr === 'result.score') return ctx.state.result?.score ?? Number.NaN
+    if (attr === 'result.grade') return ctx.state.result?.grade ?? ''
     // event.count.id
     if (attr.startsWith('event.count.')) {
       const eventId = attr.substring('event.count.'.length)
@@ -112,6 +118,7 @@ export class ConditionDSL {
   }
 
   private compareNumbers(a: number, op: CompareOp, b: number): boolean {
+    if (Number.isNaN(a) || Number.isNaN(b)) return false
     switch (op) {
       case '==': return a === b
       case '!=': return a !== b

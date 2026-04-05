@@ -579,6 +579,23 @@ describe('SimulationEngine', () => {
       expect(state.result!.grade).toBeDefined()
     })
 
+    it('结算后会解锁依赖 result 的成就', () => {
+      const engine = createEngine({
+        achievements: [makeAchievement('ending_grade', 'result.grade==A')],
+        scoringRule: {
+          grades: [
+            { minScore: 0, maxScore: null as unknown as number, grade: 'A', title: '传奇', description: '' },
+          ],
+        },
+      })
+      initToSimulating(engine)
+
+      const state = engine.finish()
+
+      expect(state.result?.grade).toBe('A')
+      expect(state.achievements.unlocked).toContain('ending_grade')
+    })
+
     it('阶段检查', () => {
       const engine = createEngine()
       engine.initGame('测试')

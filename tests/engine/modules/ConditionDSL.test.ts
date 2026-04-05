@@ -58,9 +58,17 @@ describe('ConditionDSL', () => {
       expect(dsl.evaluate('age>=18', ctx({ age: 10 }))).toBe(false)
     })
 
-    it('lifespan >= 80', () => {
-      expect(dsl.evaluate('lifespan>=80', ctx({ effectiveMaxAge: 85 }))).toBe(true)
-      expect(dsl.evaluate('lifespan>=80', ctx({ effectiveMaxAge: 50 }))).toBe(false)
+    it('lifespan 仅在结算后使用实际寿命', () => {
+      expect(dsl.evaluate('lifespan>=80', ctx({ age: 85 }))).toBe(false)
+      expect(dsl.evaluate('lifespan>=80', ctx({ age: 50 }))).toBe(false)
+      expect(dsl.evaluate('lifespan<=25', ctx({ age: 10 }))).toBe(false)
+
+      const finished = ctx({
+        age: 40,
+        result: { score: 123, grade: 'B', gradeTitle: '不错', gradeDescription: '', lifespan: 92 },
+      })
+      expect(dsl.evaluate('lifespan>=80', finished)).toBe(true)
+      expect(dsl.evaluate('result.lifespan>=90', finished)).toBe(true)
     })
 
     it('hp < 30', () => {
@@ -132,6 +140,21 @@ describe('ConditionDSL', () => {
     it('character.gender == female', () => {
       expect(dsl.evaluate('character.gender==female', ctx({ character: { name: '测试', gender: 'female' } }))).toBe(true)
       expect(dsl.evaluate('character.gender==male', ctx({ character: { name: '测试', gender: 'female' } }))).toBe(false)
+    })
+  })
+
+  describe('result.score / result.grade', () => {
+    it('支持按结算分数和等级判断', () => {
+      expect(dsl.evaluate('result.score>=1', ctx())).toBe(false)
+      expect(dsl.evaluate('result.grade==S', ctx())).toBe(false)
+
+      const c = ctx({
+        result: { score: 288, grade: 'S', gradeTitle: '传奇人生', gradeDescription: '', lifespan: 77 },
+      })
+      expect(dsl.evaluate('result.score>=280', c)).toBe(true)
+      expect(dsl.evaluate('result.score>=380', c)).toBe(false)
+      expect(dsl.evaluate('result.grade==S', c)).toBe(true)
+      expect(dsl.evaluate('result.grade==A', c)).toBe(false)
     })
   })
 
