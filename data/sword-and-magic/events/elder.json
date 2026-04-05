@@ -1473,7 +1473,7 @@
     "minAge": 70,
     "maxAge": 90,
     "weight": 5,
-    "include": "age >= 72",
+    "include": "age >= 72 & hp <= 35",
     "effects": [],
     "branches": [
       {
@@ -1560,7 +1560,13 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "raceVariants": {
+      "dwarf": {
+        "title": "矿石之病",
+        "description": "你的呼吸越来越沉重——百年的矿尘终于在你的肺中积下了最后一层。老矮人们管这叫'矿石之病'，几乎每个活得够久的矿工都会经历。你躺在石床上，听着远处传来的锤击声，心想：至少这一生，没有白费。"
+      }
+    }
   },
   {
     "id": "elder_apprentice_return",
@@ -1896,6 +1902,7 @@
     "minAge": 85,
     "maxAge": 100,
     "weight": 4,
+    "include": "hp <= 25",
     "tag": "life",
     "priority": "major",
     "effects": [
@@ -1904,6 +1911,12 @@
         "target": "quiet_end",
         "value": 1,
         "description": "安详离世"
+      },
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -30,
+        "description": "HP -30（安详离世）"
       }
     ],
     "unique": true,
@@ -1914,6 +1927,10 @@
       "goblin": {
         "title": "安详的离去",
         "description": "你缩在自己的小窝里，身边堆满了一辈子攒下的\"宝贝\"。一块闪亮的矿石、一枚磨损的铜币、那只大老鼠的牙齿……你摸着这些东西，嘴角微微上翘，轻轻闭上了眼睛。"
+      },
+      "dwarf": {
+        "title": "最后的炉火",
+        "description": "你坐在锻造炉旁的老椅子上，火光映着你满是皱纹的脸。你伸出布满老茧的手，最后一次抚摸那把陪伴了你一生的锤子。\"好活儿……\"你低声说完最后一句话，像一座山一样安静地闭上了眼睛。"
       }
     }
   },

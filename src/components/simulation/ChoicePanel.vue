@@ -169,7 +169,6 @@ function getUnlockText(branch: EventBranch): string {
   order: 1;
   font-size: 0.85rem;
   font-weight: 700;
-  white-space: nowrap;
 }
 
 .risk-hint {
