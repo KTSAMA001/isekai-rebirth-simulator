@@ -102,3 +102,79 @@
 .animate-gold-pulse { animation: goldPulse 2s ease-in-out infinite; }
 .animate-magic-glow { animation: magicGlow 2s ease-in-out infinite; }
 .animate-float { animation: float 3s ease-in-out infinite; }
+
+/* ==================== 奇幻增强动画 ==================== */
+
+/* 符文发光脉冲 — 用于重要文字 */
+@keyframes runePulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgba(255, 215, 0, 0.4),
+      0 0 8px rgba(255, 215, 0, 0.15);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(255, 215, 0, 0.6),
+      0 0 20px rgba(255, 215, 0, 0.25),
+      0 0 30px rgba(255, 215, 0, 0.1);
+  }
+}
+.animate-rune-pulse { animation: runePulse 2.5s ease-in-out infinite; }
+
+/* 光线扫描 — 用于卡片 */
+.light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.light-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.06),
+    rgba(255, 215, 0, 0.12),
+    rgba(255, 215, 0, 0.06),
+    transparent
+  );
+  animation: lightSweep 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes lightSweep {
+  0% { left: -100%; }
+  45% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* 烛光闪烁 — 用于面板微妙光照变化 */
+@keyframes candleFlicker {
+  0%   { opacity: 1; }
+  5%   { opacity: 0.92; }
+  10%  { opacity: 1; }
+  15%  { opacity: 0.95; }
+  25%  { opacity: 1; }
+  30%  { opacity: 0.88; }
+  50%  { opacity: 1; }
+  70%  { opacity: 0.96; }
+  80%  { opacity: 0.91; }
+  100% { opacity: 1; }
+}
+
+/* 无障碍：尊重用户动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gold-pulse,
+  .animate-magic-glow,
+  .animate-float,
+  .animate-rune-pulse {
+    animation: none;
+  }
+  .light-sweep::after {
+    animation: none;
+    display: none;
+  }
+}

@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorldStore } from '@/stores/worldStore'
 import { useGameStore, type SaveSlot } from '@/stores/gameStore'
+import GameIcon from '@/components/common/GameIcon.vue'
 
 const router = useRouter()
 const worldStore = useWorldStore()
@@ -77,7 +78,7 @@ const autoSlot = ref<SaveSlot | null>(null)
     <section class="hero">
       <div class="hero-glow"></div>
       <h2 class="hero-title animate-fade-in">
-        <span class="hero-emoji">🌍</span>
+        <GameIcon name="sparkle" size="2.5rem" class="hero-icon" />
         <br />
         转生吧
       </h2>
@@ -90,7 +91,7 @@ const autoSlot = ref<SaveSlot | null>(null)
     <section v-if="saveSlots[0]" class="save-section">
       <h3 class="section-title">继续游戏</h3>
       <div class="save-card card card-glow" @click="continueGame(0)">
-        <div class="save-icon">📖</div>
+        <div class="save-icon"><GameIcon name="book" size="1.5rem" /></div>
         <div class="save-info">
           <div class="save-name">{{ saveSlots[0]!.characterName }}</div>
           <div class="save-detail">
@@ -185,17 +186,21 @@ const autoSlot = ref<SaveSlot | null>(null)
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(201, 162, 39, 0.12), transparent 70%);
+  width: 280px;
+  height: 280px;
+  background:
+    radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 40%, rgba(201, 162, 39, 0.12) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  animation: candleFlicker 4s ease-in-out infinite;
 }
 
-.hero-emoji {
-  font-size: 3rem;
+.hero-icon {
   display: block;
-  margin-bottom: var(--space-sm);
+  margin: 0 auto var(--space-sm);
+  color: var(--text-gold);
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.4));
 }
 
 .hero-title {
@@ -205,6 +210,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   color: var(--text-gold);
   text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
   margin-bottom: var(--space-sm);
+  letter-spacing: 2px;
 }
 
 .hero-subtitle {
@@ -219,6 +225,17 @@ const autoSlot = ref<SaveSlot | null>(null)
   color: var(--text-secondary);
   margin-bottom: var(--space-md);
   padding-left: var(--space-xs);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.section-title::before {
+  content: '';
+  width: 3px;
+  height: 1em;
+  background: linear-gradient(180deg, var(--color-primary), transparent);
+  border-radius: 2px;
 }
 
 /* 世界列表 */
@@ -246,12 +263,18 @@ const autoSlot = ref<SaveSlot | null>(null)
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(201, 162, 39, 0.05), transparent);
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.06), transparent 60%);
   pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.world-card:hover::before {
+  opacity: 1.5;
 }
 
 .world-card:active {
   transform: scale(0.98);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .world-icon {
@@ -328,8 +351,9 @@ const autoSlot = ref<SaveSlot | null>(null)
 }
 
 .save-icon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
+  color: var(--text-gold);
 }
 
 .save-info {

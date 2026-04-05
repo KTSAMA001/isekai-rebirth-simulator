@@ -17,7 +17,12 @@ html {
 
 body {
   font-family: var(--font-main);
-  background: var(--bg-main);
+  background:
+    /* 微妙烛光环境光 */
+    radial-gradient(ellipse at 50% 15%, rgba(200, 168, 110, 0.06) 0%, transparent 60%),
+    /* 底部到顶部渐变 */
+    linear-gradient(180deg, var(--bg-main) 0%, #0d0b08 100%);
+  background-color: var(--bg-main);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -71,29 +76,43 @@ button {
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
   color: white;
-  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
+  box-shadow:
+    0 4px 15px rgba(201, 162, 39, 0.25),
+    inset 0 1px 0 rgba(255, 215, 0, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-primary);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.35);
+  box-shadow:
+    0 6px 20px rgba(201, 162, 39, 0.35),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3);
 }
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  filter: saturate(0.5);
 }
 
 .btn-ghost {
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 .btn-ghost:hover {
   border-color: var(--color-primary);
   color: var(--color-primary-light);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 215, 0, 0.08),
+    0 0 8px rgba(201, 162, 39, 0.1);
 }
 
 .btn-gold {
@@ -120,8 +139,12 @@ button {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  box-shadow: var(--shadow-card);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255, 215, 0, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all var(--transition-normal);
+  position: relative;
 }
 
 .card:hover {
@@ -137,6 +160,7 @@ button {
   font-family: var(--font-title);
   font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: 1px;
 }
 
 .title-lg {
@@ -189,18 +213,57 @@ button {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(61, 48, 36, 0.3);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: linear-gradient(180deg, var(--color-primary-dark), var(--border-color));
   border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
 }
 
 /* ==================== 分割线 ==================== */
 .divider {
   height: 1px;
-  background: var(--border-color);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color) 20%,
+    var(--color-primary-dark) 50%,
+    var(--border-color) 80%,
+    transparent
+  );
   margin: var(--space-md) 0;
+}
+
+/* 装饰分隔线（带中央菱形） */
+.divider-ornate {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: var(--space-md) 0;
+  height: 12px;
+}
+.divider-ornate::before,
+.divider-ornate::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+.divider-ornate::before {
+  background: linear-gradient(90deg, transparent, var(--color-primary));
+}
+.divider-ornate::after {
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+}
+.divider-ornate-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--color-primary);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  margin: 0 4px;
 }
 
 /* ==================== 文字辅助 ==================== */

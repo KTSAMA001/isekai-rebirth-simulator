@@ -6,6 +6,7 @@ import { useGameStore } from '@/stores/gameStore'
 import { useProgressStore } from '@/stores/progressStore'
 import TalentDraft from '@/components/setup/TalentDraft.vue'
 import AttributeAllocate from '@/components/setup/AttributeAllocate.vue'
+import GameIcon from '@/components/common/GameIcon.vue'
 import type { WorldTalentDef, Gender } from '@/engine/core/types'
 
 const props = defineProps<{
@@ -244,11 +245,11 @@ function goBack() {
         >
           <div class="preset-header">
             <span class="preset-name">{{ preset.name }}</span>
-            <span v-if="preset.locked" class="lock-tag">🔒</span>
+            <span v-if="preset.locked" class="lock-tag"><GameIcon name="lock" size="0.85rem" /></span>
           </div>
           <div class="preset-title">{{ preset.title }}</div>
           <div class="preset-desc">{{ preset.description }}</div>
-          <div v-if="preset.locked && preset.unlockCondition" class="preset-unlock-hint">🔒 {{ preset.unlockCondition }}</div>
+          <div v-if="preset.locked && preset.unlockCondition" class="preset-unlock-hint"><GameIcon name="lock" size="0.75rem" /> {{ preset.unlockCondition }}</div>
           <div v-if="preset.attributes && Object.keys(preset.attributes).length" class="preset-attrs">
             <span
               v-for="(val, key) in preset.attributes" :key="key"
@@ -535,6 +536,7 @@ function goBack() {
 .preset-card.locked {
   opacity: 0.5;
   cursor: not-allowed;
+  filter: saturate(0.4) sepia(0.15);
 }
 
 .preset-header {
@@ -634,13 +636,18 @@ function goBack() {
   border-radius: var(--radius-md);
   background: var(--bg-card);
   color: var(--text-primary);
+  font-family: var(--font-main);
   font-size: 1rem;
   text-align: center;
   outline: none;
-  transition: border-color var(--transition-normal);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .name-input:focus {
   border-color: var(--color-primary);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 8px rgba(201, 162, 39, 0.15);
 }
 .name-input::placeholder {
   color: var(--text-muted);

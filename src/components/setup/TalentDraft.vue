@@ -159,10 +159,35 @@ function confirm() {
 }
 
 .talent-card.rarity-common { border-color: rgba(139, 184, 196, 0.3); }
-.talent-card.rarity-rare { border-color: rgba(180, 142, 221, 0.4); }
+.talent-card.rarity-rare {
+  border-color: rgba(180, 142, 221, 0.4);
+  box-shadow: inset 0 0 15px rgba(180, 142, 221, 0.04);
+}
 .talent-card.rarity-legendary {
   border-color: rgba(251, 191, 36, 0.5);
-  box-shadow: inset 0 0 20px rgba(251, 191, 36, 0.05);
+  box-shadow:
+    inset 0 0 20px rgba(251, 191, 36, 0.05),
+    0 0 8px rgba(255, 215, 0, 0.1);
+  /* 光线扫描 */
+  overflow: hidden;
+}
+.talent-card.rarity-legendary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.06),
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 215, 0, 0.06),
+    transparent
+  );
+  animation: lightSweep 5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .talent-card.selected {
