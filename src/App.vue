@@ -65,13 +65,17 @@ const router = useRouter()
   mix-blend-mode: overlay;
 }
 
-/* 暗角效果 */
+/* 暗角效果 — 仅顶部微妙渐变，不遮挡滚动内容 */
 .vignette-layer {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
   z-index: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.5);
+  background:
+    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
 }
 
 .app-wrapper {
