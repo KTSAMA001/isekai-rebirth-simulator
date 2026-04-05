@@ -7782,5 +7782,370 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "elf_memory_crystal_practice",
+    "title": "记忆晶花",
+    "description": "你学会把一段记忆封进晶花，供百年后的同胞重新触碰。对精灵来说，能保存记忆的人也在保存文明。",
+    "minAge": 20,
+    "maxAge": 50,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_archive_apprentice & (attribute.int >= 12 | attribute.mag >= 10)",
+    "branches": [
+      {
+        "id": "elf_memory_crystal_practice_br0",
+        "title": "封存丰收祭的欢笑",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_memory_curator",
+            "value": true,
+            "description": "开始保存记忆"
+          }
+        ],
+        "description": "你选择先保存温暖的片段，认为文明应该先记住为何值得延续。"
+      },
+      {
+        "id": "elf_memory_crystal_practice_br1",
+        "title": "抢救濒失的族史",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_memory_curator",
+            "value": true,
+            "description": "开始保存记忆"
+          }
+        ],
+        "description": "你把一段几乎无人记得的迁徙史封进晶花，决心不让它彻底消失。"
+      }
+    ]
+  },
+  {
+    "id": "elf_canopy_watch",
+    "title": "枝冠守望",
+    "description": "你被派去巡视枝冠步道与根须井口。对世界树一系的精灵来说，这是第一次真正承担守望职责。",
+    "minAge": 20,
+    "maxAge": 60,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_sapling_oath & (attribute.spr >= 10 | attribute.mag >= 10)",
+    "branches": [
+      {
+        "id": "elf_canopy_watch_br0",
+        "title": "守住通往泉眼的路",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_canopy_guardian",
+            "value": true,
+            "description": "枝冠守望者"
+          }
+        ],
+        "description": "你选择守住最常有族人往来的泉眼小径，让每一次经过都平安无事。"
+      },
+      {
+        "id": "elf_canopy_watch_br1",
+        "title": "检查根须的细小裂缝",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_canopy_guardian",
+            "value": true,
+            "description": "枝冠守望者"
+          }
+        ],
+        "description": "你更关心那些肉眼几乎看不见的裂缝，因为真正的危险往往先从细处开始。"
+      }
+    ]
+  },
+  {
+    "id": "elf_observatory_apprentice",
+    "title": "观星台学徒",
+    "description": "你被允许在高枝观星台值夜，记录星轨、风向与月潮。精灵认为，能在长夜中保持专注的人才配听见星声。",
+    "minAge": 20,
+    "maxAge": 50,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_star_apprentice & (attribute.int >= 12 | attribute.mag >= 12)",
+    "branches": [
+      {
+        "id": "elf_observatory_apprentice_br0",
+        "title": "计算星轨偏差",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_astral_student",
+            "value": true,
+            "description": "观星台学徒"
+          }
+        ],
+        "description": "你更相信数字与轨迹，把每一夜的星位偏差都刻进晶板。"
+      },
+      {
+        "id": "elf_observatory_apprentice_br1",
+        "title": "闭目聆听星声",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_astral_student",
+            "value": true,
+            "description": "观星台学徒"
+          }
+        ],
+        "description": "你学着老占星师的样子闭上眼睛，只靠魔力去感受群星间的呼吸。"
+      }
+    ]
+  },
+  {
+    "id": "youth_shared_roof",
+    "title": "同住一檐下",
+    "description": "因为求学、谋生或赶路，你和几位同龄人暂时挤在同一间住处、驿站阁楼、树屋或地洞里。王国城镇里的日子不便宜，热闹和摩擦一样都不少。",
+    "minAge": 16,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_shared_roof_br0",
+        "title": "把日子打理顺",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你主动把账目、值夜和杂务都理顺了，连驿站老板和附近摊贩都开始觉得你们这群年轻人终于像样了。"
+      },
+      {
+        "id": "youth_shared_roof_br1",
+        "title": "每晚聊到很晚",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你们总会在熄灯之后继续低声交谈，聊理想、聊烦恼，也聊明天够不够钱去公会接活或者交学院学费。"
+      },
+      {
+        "id": "youth_shared_roof_br2",
+        "title": "保留自己的节奏",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你和他们相处得不错，但始终留出自己的空间，也因此更快看清自己到底想留在城里、走向边境，还是投身别的道路。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "因为求学、游历或短暂驻留人类城市，你和几位同龄人暂时住进同一间树屋、学舍或驿站阁楼。对于长寿的精灵来说，这种短促而拥挤的生活反倒新鲜。"
+      },
+      "goblin": {
+        "description": "为了谋生或避风头，你和几位同龄哥布林暂时挤在同一处窝棚、废弃地窖或下水道岔口。地方小得离谱，但总比一个人挨饿强。"
+      }
+    }
+  },
+  {
+    "id": "youth_short_term_job",
+    "title": "临时差事",
+    "description": "你接到一份只做几天或几周的临时差事。也许是给冒险者公会搬补给、替神殿抄名录、给商队押货，报酬不一定丰厚，但常常能让人见识到此前没见过的世界。",
+    "minAge": 18,
+    "maxAge": 32,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_short_term_job_br0",
+        "title": "老老实实做完",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你按部就班把差事做完，虽然不惊艳，但无论是公会前台、商队管事还是神殿执事，都愿意下次继续找你。"
+      },
+      {
+        "id": "youth_short_term_job_br1",
+        "title": "顺便学门手艺",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你做着做着就开始留意门道，等差事结束时，你已经从商队、工坊或抄写桌边偷学了几招很实用的本事。"
+      },
+      {
+        "id": "youth_short_term_job_br2",
+        "title": "多结识几个人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你把差事当成认识人的机会，最后带回来的不只是报酬，还有公会前台、驿站老板或小商贩那几张以后可能用得上的熟脸。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你接到一份只做几天或几周的临时差事。也许是替世界树外圈的巡守记录名册，也许是帮人类学舍誊抄卷轴，短暂，却足够让你看见不同生活。"
+      },
+      "goblin": {
+        "description": "你接到一份只做几天或几周的临时差事。可能是替黑市望风、给商人搬货，或者钻进别人不愿去的狭窄地方，钱不多，但活总能长见识。"
+      }
+    }
   }
 ]

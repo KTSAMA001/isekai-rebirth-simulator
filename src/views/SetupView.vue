@@ -46,15 +46,19 @@ const selectedPreset = computed(() => {
   return presets.value.find(p => p.id === selectedPresetId.value) ?? null
 })
 
-// 可玩种族列表
-const playableRaces = computed(() => {
-  return (world.value?.races ?? []).filter(r => r.playable !== false)
+// 种族列表（未开放种族也展示，但不可选择）
+const allRaces = computed(() => {
+  return world.value?.races ?? []
 })
+
+function isRaceLocked(race: { playable: boolean }) {
+  return race.playable === false
+}
 
 // 当前选中种族的定义
 const selectedRaceDef = computed(() => {
   if (!selectedRace.value) return null
-  return playableRaces.value.find(r => r.id === selectedRace.value) ?? null
+  return allRaces.value.find(r => r.id === selectedRace.value) ?? null
 })
 
 // 当前性别修正
@@ -293,18 +297,22 @@ function goBack() {
       <!-- 种族卡片 -->
       <div class="race-grid">
         <div
-          v-for="race in playableRaces"
+          v-for="race in allRaces"
           :key="race.id"
           class="race-card card"
-          :class="{ selected: selectedRace === race.id }"
-          @click="selectedRace = race.id"
+          :class="{ selected: selectedRace === race.id, locked: isRaceLocked(race) }"
+          @click="!isRaceLocked(race) && (selectedRace = race.id)"
         >
-          <div class="race-icon-name">
-            <span class="race-icon">{{ race.icon }}</span>
-            <span class="race-name">{{ race.name }}</span>
+          <div class="race-card-header">
+            <div class="race-icon-name">
+              <span class="race-icon">{{ race.icon }}</span>
+              <span class="race-name">{{ race.name }}</span>
+            </div>
+            <span v-if="isRaceLocked(race)" class="race-lock-tag">暂未开放</span>
           </div>
           <div class="race-lifespan">寿命 {{ race.lifespanRange[0] }}~{{ race.lifespanRange[1] }}</div>
           <div class="race-desc">{{ race.description }}</div>
+          <div v-if="isRaceLocked(race)" class="race-lock-hint">当前版本展示设定，暂不可选择</div>
           <div v-if="race.attributeModifiers?.length" class="race-mods">
             <span
               v-for="mod in race.attributeModifiers"
@@ -689,13 +697,25 @@ function goBack() {
   transition: all var(--transition-normal);
   border: 2px solid transparent;
 }
-.race-card:hover {
+.race-card:hover:not(.locked) {
   border-color: var(--color-primary);
 }
 .race-card.selected {
   border-color: var(--color-primary);
   background: rgba(139, 92, 246, 0.08);
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+}
+.race-card.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: saturate(0.7);
+}
+
+.race-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .race-icon-name {
@@ -725,6 +745,22 @@ function goBack() {
 .race-desc {
   font-size: 0.8rem;
   color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.race-lock-tag {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.race-lock-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 

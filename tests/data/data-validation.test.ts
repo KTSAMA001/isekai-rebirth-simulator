@@ -22,6 +22,10 @@ function loadEventsDir(): any[] {
   return allEvents
 }
 
+function effectSetsFlag(effects: any[] | undefined, flag: string) {
+  return effects?.some((fx: any) => fx.type === 'set_flag' && fx.target === flag) ?? false
+}
+
 describe('数据文件校验', () => {
   describe('manifest.json', () => {
     it('存在且结构正确', () => {
@@ -262,6 +266,85 @@ describe('数据文件校验', () => {
       expect(stealSweets).toBeDefined()
       expect(stealSweets.description).toContain('照顾你的大人')
       expect(stealSweets.description).not.toContain('妈妈')
+    })
+
+    it('精灵长生路线从出生到晚年有完整承接', () => {
+      const findEvent = (id: string) => allEvents.find((e: any) => e.id === id)
+      const allBranchesSetFlag = (event: any, flag: string) =>
+        event?.branches?.every((branch: any) => effectSetsFlag(branch.effects, flag))
+
+      const worldtreeBirths = ['birth_elf_worldtree', 'elf_ancient_tree_born']
+      for (const id of worldtreeBirths) {
+        const event = findEvent(id)
+        expect(event).toBeDefined()
+        expect(effectSetsFlag(event.effects, 'elf_worldtree_child')).toBe(true)
+      }
+
+      const archiveBirth = findEvent('birth_elf_archive_cradle')
+      expect(archiveBirth).toBeDefined()
+      expect(effectSetsFlag(archiveBirth.effects, 'elf_archive_lineage')).toBe(true)
+
+      const starBirths = ['birth_elf_starfall', 'elf_starfall_birth', 'birth_elf_star_ledger']
+      for (const id of starBirths) {
+        const event = findEvent(id)
+        expect(event).toBeDefined()
+        expect(effectSetsFlag(event.effects, 'elf_starborn')).toBe(true)
+      }
+
+      const archiveChild = findEvent('elf_archive_first_catalog')
+      const archiveYouth = findEvent('elf_memory_crystal_practice')
+      const archiveAdult = findEvent('elf_memory_greenhouse')
+      const archiveMiddle = findEvent('elf_memory_garden')
+      const archiveElder = findEvent('elf_memory_garden_elder')
+      const archiveLegacy = findEvent('elf_ancient_memory_share')
+
+      expect(archiveChild.include).toContain('has.flag.elf_archive_lineage')
+      expect(allBranchesSetFlag(archiveChild, 'elf_archive_apprentice')).toBe(true)
+      expect(archiveYouth.include).toContain('has.flag.elf_archive_apprentice')
+      expect(allBranchesSetFlag(archiveYouth, 'elf_memory_curator')).toBe(true)
+      expect(archiveAdult.include).toContain('has.flag.elf_memory_curator')
+      expect(allBranchesSetFlag(archiveAdult, 'elf_memory_garden_seed')).toBe(true)
+      expect(archiveMiddle.include).toBe('has.flag.elf_memory_garden_seed')
+      expect(effectSetsFlag(archiveMiddle.effects, 'elf_memory_garden_keeper')).toBe(true)
+      expect(archiveElder.include).toBe('has.flag.elf_memory_garden_keeper')
+      expect(archiveLegacy.include).toBe('has.flag.elf_memory_garden_keeper')
+
+      const worldtreeChild = findEvent('elf_sapling_oath')
+      const worldtreeYouth = findEvent('elf_canopy_watch')
+      const worldtreeAdult = findEvent('elf_rootward_oath')
+      const worldtreeMiddle = findEvent('elf_tree_grown')
+      const worldtreeCrisis = findEvent('elf_world_tree_sickness')
+      const worldtreeReturn = findEvent('elf_return_to_forest')
+      const worldtreeFinal = findEvent('elf_final_bloom')
+
+      expect(worldtreeChild.include).toContain('has.flag.elf_worldtree_child')
+      expect(allBranchesSetFlag(worldtreeChild, 'elf_sapling_oath')).toBe(true)
+      expect(worldtreeYouth.include).toContain('has.flag.elf_sapling_oath')
+      expect(allBranchesSetFlag(worldtreeYouth, 'elf_canopy_guardian')).toBe(true)
+      expect(worldtreeAdult.include).toContain('has.flag.elf_canopy_guardian')
+      expect(allBranchesSetFlag(worldtreeAdult, 'elf_forest_keeper')).toBe(true)
+      expect(worldtreeMiddle.include).toBe('has.flag.elf_canopy_guardian')
+      expect(worldtreeCrisis.include).toBe('has.flag.elf_forest_keeper')
+      expect(worldtreeReturn.include).toBe('has.flag.elf_forest_keeper')
+      expect(worldtreeFinal.include).toBe('has.flag.elf_forest_keeper')
+
+      const starChild = findEvent('elf_first_star_copy')
+      const starYouth = findEvent('elf_observatory_apprentice')
+      const starAdult = findEvent('elf_comet_ledger')
+      const starMiddle = findEvent('elf_century_star_codex')
+      const starCommunion = findEvent('elf_star_communion')
+      const starLegacy = findEvent('elf_starlight_legacy')
+
+      expect(starChild.include).toContain('has.flag.elf_starborn')
+      expect(allBranchesSetFlag(starChild, 'elf_star_apprentice')).toBe(true)
+      expect(starYouth.include).toContain('has.flag.elf_star_apprentice')
+      expect(allBranchesSetFlag(starYouth, 'elf_astral_student')).toBe(true)
+      expect(starAdult.include).toContain('has.flag.elf_astral_student')
+      expect(allBranchesSetFlag(starAdult, 'elf_star_chronicler')).toBe(true)
+      expect(starMiddle.include).toBe('has.flag.elf_star_chronicler')
+      expect(allBranchesSetFlag(starMiddle, 'elf_star_codex_written')).toBe(true)
+      expect(starCommunion.include).toContain('has.flag.elf_star_codex_written')
+      expect(starLegacy.include).toContain('has.flag.elf_star_codex_written')
     })
   })
 

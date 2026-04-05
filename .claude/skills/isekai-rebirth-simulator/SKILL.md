@@ -11,7 +11,7 @@ description: 异世界重生模拟器项目的开发技能。涵盖事件/成就
 
 **技术栈：** Vue 3.5 + Vite 8 + TypeScript 5.9 + Pinia + Vitest
 
-**项目路径：** `/Users/ktsama/Projects/isekai-rebirth-simulator/`
+**项目路径：** 当前工作区根目录
 
 ---
 

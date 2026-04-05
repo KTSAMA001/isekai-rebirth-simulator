@@ -5713,5 +5713,164 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "teen_first_errand",
+    "title": "第一次独自办事",
+    "description": "长辈第一次把一件真正的差事交给你独自完成。不管是去王国集市换东西、往冒险者公会送口信，还是替人跑一趟神殿外的摊位，你都得自己拿主意。",
+    "minAge": 12,
+    "maxAge": 18,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "teen_first_errand_br0",
+        "title": "稳稳办妥",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你把差事从头到尾办得妥妥当当，连王都街钟与集市收摊的时间都算得很准。"
+      },
+      {
+        "id": "teen_first_errand_br1",
+        "title": "顺路多看一圈",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你办完正事后忍不住多绕了几条路，把公会门口的告示、街角的摊位和驿站外的路都记进了脑子里。"
+      },
+      {
+        "id": "teen_first_errand_br2",
+        "title": "顺手帮别人一把",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "路上有人在搬货、找路或和摊贩争执，你停下脚步搭了把手，结果这趟差事办得比预想更值。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "长辈第一次把一件真正的差事交给你独自完成。也许是穿过世界树外圈的步道送信，也许是去林缘集市换东西，总之这回没有人会替你决定。"
+      },
+      "goblin": {
+        "description": "部落长辈第一次把一件正经差事交给你独自完成。也许是去黑市换零件，也许是穿过下水道把消息送到另一窝哥布林手里，这回只能靠你自己。"
+      }
+    }
+  },
+  {
+    "id": "teen_future_talk",
+    "title": "夜谈未来",
+    "description": "某个安静的夜晚，你和同龄人坐在墙头、树枝、屋顶或者洞口边，聊起以后是想去王国闯荡、进皇家魔法学院、加入冒险者公会，还是干脆守着自己的家过一生。",
+    "minAge": 13,
+    "maxAge": 19,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "teen_future_talk_br0",
+        "title": "认真说出愿望",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你第一次认真把自己的愿望说出口，连自己都被那份笃定吓了一跳。那一刻，未来第一次像王都城墙一样有了轮廓。"
+      },
+      {
+        "id": "teen_future_talk_br1",
+        "title": "安静听别人讲",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你没抢着发言，而是认真听完每个人的打算，突然觉得从王国边境到地城秘境，世界比想象中大得多。"
+      },
+      {
+        "id": "teen_future_talk_br2",
+        "title": "把气氛炒热",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          }
+        ],
+        "description": "你用玩笑和夸张的想象把大家都逗笑了，从当上屠龙英雄讲到开遍大陆的酒馆，但那一夜的轻松仍然留在所有人心里。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "某个安静的夜晚，你和同龄精灵坐在枝台或树屋边，聊起以后是去观星台、去世界树根厅，还是离开森林看看短命种族的世界。"
+      },
+      "goblin": {
+        "description": "某个安静的夜晚，你和同龄哥布林挤在洞口边，聊起以后是去黑市发财、混进人类城镇、加入盗贼团，还是当个能活很久的老滑头。"
+      }
+    }
   }
 ]

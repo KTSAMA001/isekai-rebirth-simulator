@@ -4258,5 +4258,216 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "elf_archive_first_catalog",
+    "title": "书库里的第一份编目",
+    "description": "你被允许进入长老书库的外环，替他们整理散落的叶卷与薄晶板。对幼年精灵来说，这是近乎成人礼的信任。",
+    "minAge": 6,
+    "maxAge": 16,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_archive_lineage",
+    "branches": [
+      {
+        "id": "elf_archive_first_catalog_br0",
+        "title": "按年代认真归档",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_archive_apprentice",
+            "value": true,
+            "description": "书库学徒"
+          }
+        ],
+        "description": "你花了很久，把每一卷古籍都按年代与主题重新排列。"
+      },
+      {
+        "id": "elf_archive_first_catalog_br1",
+        "title": "追问卷轴背后的故事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_archive_apprentice",
+            "value": true,
+            "description": "书库学徒"
+          }
+        ],
+        "description": "你一边整理，一边缠着长老讲述每卷书背后的来历。"
+      }
+    ]
+  },
+  {
+    "id": "elf_sapling_oath",
+    "title": "幼树誓约",
+    "description": "长老把一颗从世界树上自然脱落的种子交到你掌心，告诉你：精灵的一生若够长，就该守住一件会比自己更久的东西。",
+    "minAge": 6,
+    "maxAge": 18,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_worldtree_child",
+    "branches": [
+      {
+        "id": "elf_sapling_oath_br0",
+        "title": "亲手种下它",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_sapling_oath",
+            "value": true,
+            "description": "与幼树立誓"
+          }
+        ],
+        "description": "你把种子埋进湿润的土里，决定往后每年都来看它。"
+      },
+      {
+        "id": "elf_sapling_oath_br1",
+        "title": "先为它起名",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_sapling_oath",
+            "value": true,
+            "description": "与幼树立誓"
+          }
+        ],
+        "description": "你念出一个只属于你和这株幼树的名字，把誓言轻声说给树根听。"
+      }
+    ]
+  },
+  {
+    "id": "elf_first_star_copy",
+    "title": "第一次誊抄星图",
+    "description": "你第一次被允许留到深夜，在薄霜般透明的晶板上誊抄古星图。月色很冷，你的手却稳得惊人。",
+    "minAge": 6,
+    "maxAge": 16,
+    "weight": 3,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "minor",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_starborn",
+    "branches": [
+      {
+        "id": "elf_first_star_copy_br0",
+        "title": "依照古星历誊抄",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_apprentice",
+            "value": true,
+            "description": "初学观星"
+          }
+        ],
+        "description": "你严格照着旧历抄写，不放过任何一个细微标记。"
+      },
+      {
+        "id": "elf_first_star_copy_br1",
+        "title": "补上自己看见的偏移",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_apprentice",
+            "value": true,
+            "description": "初学观星"
+          }
+        ],
+        "description": "你偷偷把自己观测到的偏差也记了上去，觉得某颗星正在慢慢偏离古人的记录。"
+      }
+    ]
   }
 ]

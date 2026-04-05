@@ -416,6 +416,12 @@
         "type": "modify_attribute",
         "target": "luk",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_starborn",
+        "value": true,
+        "description": "星辰注视之子"
       }
     ],
     "include": "",
@@ -478,6 +484,12 @@
         "type": "modify_attribute",
         "target": "spr",
         "value": 2
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_worldtree_child",
+        "value": true,
+        "description": "世界树眷顾"
       }
     ],
     "include": "",
@@ -825,6 +837,12 @@
         "type": "modify_attribute",
         "target": "spr",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_worldtree_child",
+        "value": true,
+        "description": "古树记名"
       }
     ],
     "include": ""
@@ -855,6 +873,12 @@
         "type": "modify_attribute",
         "target": "mag",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_starborn",
+        "value": true,
+        "description": "星象所钟"
       }
     ],
     "include": ""
@@ -1393,6 +1417,12 @@
         "type": "modify_attribute",
         "target": "mag",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_archive_lineage",
+        "value": true,
+        "description": "书库门前长大"
       }
     ],
     "tag": "life",
@@ -1499,6 +1529,12 @@
         "type": "modify_attribute",
         "target": "luk",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_starborn",
+        "value": true,
+        "description": "自幼近星图"
       }
     ],
     "tag": "life",

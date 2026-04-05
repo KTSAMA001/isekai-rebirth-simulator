@@ -3588,7 +3588,7 @@
         "value": 3
       }
     ],
-    "include": ""
+    "include": "has.flag.elf_canopy_guardian"
   },
   {
     "id": "goblin_elder_respect",
@@ -4534,9 +4534,15 @@
         "type": "modify_attribute",
         "target": "mag",
         "value": 1
+      },
+      {
+        "type": "set_flag",
+        "target": "elf_memory_garden_keeper",
+        "value": true,
+        "description": "记忆花园守护者"
       }
     ],
-    "include": ""
+    "include": "has.flag.elf_memory_garden_seed"
   },
   {
     "id": "elf_young_elf_mentor",
@@ -4585,7 +4591,7 @@
       "*"
     ],
     "effects": [],
-    "include": "",
+    "include": "has.flag.elf_forest_keeper",
     "branches": [
       {
         "id": "elf_world_tree_sickness_br0",
@@ -4642,6 +4648,73 @@
           }
         ],
         "description": "你权衡利弊后，选择了用自身魔力尝试治愈。这可能带来魔力提升了，但也伴随着风险。"
+      }
+    ]
+  },
+  {
+    "id": "elf_century_star_codex",
+    "title": "百年星历",
+    "description": "你花了近百年整理不同季节、不同纪年的星轨差异，准备写成一部只有精灵才写得完的星历。",
+    "minAge": 140,
+    "maxAge": 280,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_star_chronicler",
+    "branches": [
+      {
+        "id": "elf_century_star_codex_br0",
+        "title": "刊行给观星院",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_codex_written",
+            "value": true,
+            "description": "百年星历成书"
+          }
+        ],
+        "description": "你决定把这套星历交给观星院，让后来的精灵都能站在你的计算之上继续眺望。"
+      },
+      {
+        "id": "elf_century_star_codex_br1",
+        "title": "封入水晶穹顶",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_codex_written",
+            "value": true,
+            "description": "百年星历成书"
+          }
+        ],
+        "description": "你把星历写进观星台的水晶穹顶，让每个抬头的人都能从光纹中读到你的推演。"
       }
     ]
   },
@@ -4744,5 +4817,159 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "midlife_new_craft",
+    "title": "半路学艺",
+    "description": "你忽然觉得，人生走到这里还远没到定型的时候。于是你决定认真学一门此前从未深究过的手艺，也许来自王国工坊、神殿书房、商队营地，或者旅途中偶然见过的异乡人。",
+    "minAge": 35,
+    "maxAge": 60,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "midlife_new_craft_br0",
+        "title": "学点能打动人的",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你选了琴、画、歌或别的能打动人的技艺，让自己的日子在酒馆灯火、神殿回声和节庆夜晚里多了点柔软的亮光。"
+      },
+      {
+        "id": "midlife_new_craft_br1",
+        "title": "学点实用的",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你挑了一门能真正派上用场的手艺，练得手上起茧，也练出了久违的踏实感。无论是在王国城镇还是边境营地，这都是真本事。"
+      },
+      {
+        "id": "midlife_new_craft_br2",
+        "title": "学点能留下来的",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你更想学那些能记录、能传递、能被后来者继续用下去的本事，像抄写、制图、讲史，或别的能穿过岁月留下来的手艺。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你忽然觉得，漫长人生走到这里还远没到定型的时候。于是你决定认真学一门此前从未深究过的手艺，也许来自世界树的古老传统，也许来自短命种族的新奇方法。"
+      },
+      "goblin": {
+        "description": "你忽然觉得，虽然哥布林的一生短得很，但也没必要只会原来那几手。于是你决定认真学一门此前从未深究过的新手艺。"
+      }
+    }
+  },
+  {
+    "id": "mid_familiar_place_changes",
+    "title": "熟悉的地方变了",
+    "description": "你曾经很熟悉的一处地方正在悄悄改变。也许是王国城镇扩了街、驿站换了路、集市搬了位置，老路被改了方向，旧摊贩换了面孔，连空气里的味道都和以前不同。",
+    "minAge": 38,
+    "maxAge": 65,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_familiar_place_changes_br0",
+        "title": "参与新的模样",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你没有只站在旁边感慨，而是卷起袖子参与进去，试着让新变化也带一点你的痕迹，不至于让这地方彻底变成陌生人的城镇。"
+      },
+      {
+        "id": "mid_familiar_place_changes_br1",
+        "title": "记住旧时模样",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你花时间把旧日的细节一一记下，不让那些曾经陪伴自己的街巷、摊位和旧招牌轻易被冲散。"
+      },
+      {
+        "id": "mid_familiar_place_changes_br2",
+        "title": "转身去看新的地方",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你意识到留恋并不等于停下，于是把目光投向更远处，准备再去看看王国别的城、边境的路，或者还没到过的秘境入口。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你曾经很熟悉的一处地方正在悄悄改变。也许是林缘聚落添了人类商路，也许是世界树外圈的步道不再只属于精灵，连风里的味道都和从前不同。"
+      },
+      "goblin": {
+        "description": "你曾经很熟悉的一处地方正在悄悄改变。也许是下水道被封了一截，也许是黑市搬了位置，连惯常藏东西的角落都开始让你认不出来。"
+      }
+    }
   }
 ]

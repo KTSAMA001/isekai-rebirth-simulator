@@ -2185,7 +2185,8 @@
         "target": "spr",
         "value": 3
       }
-    ]
+    ],
+    "include": "has.flag.elf_memory_garden_keeper"
   },
   {
     "id": "elf_last_song",
@@ -2695,7 +2696,7 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "has.flag.elf_forest_keeper"
   },
   {
     "id": "elf_eternal_sleep",
@@ -3030,7 +3031,7 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "has.flag.elf_memory_garden_keeper"
   },
   {
     "id": "elf_farewell_ceremony",
@@ -3090,7 +3091,7 @@
         "value": 3
       }
     ],
-    "include": "attribute.mag >= 30"
+    "include": "attribute.mag >= 30 & has.flag.elf_star_codex_written"
   },
   {
     "id": "elf_final_bloom",
@@ -3115,7 +3116,7 @@
         "value": 4
       }
     ],
-    "include": ""
+    "include": "has.flag.elf_forest_keeper"
   },
   {
     "id": "goblin_longest_living",
@@ -3423,7 +3424,7 @@
         "value": true
       }
     ],
-    "include": "attribute.mag >= 25"
+    "include": "attribute.mag >= 25 & has.flag.elf_star_codex_written"
   },
   {
     "id": "elf_last_spring",
@@ -3539,5 +3540,149 @@
       }
     ],
     "include": ""
+  },
+  {
+    "id": "elder_sort_keepsakes",
+    "title": "整理珍藏",
+    "description": "你把多年积攒下来的箱子和抽屉一一打开。里面有旅途中带回的地城小物、集市换来的纪念、神殿赐下的护符，很多东西已经不值钱了，但每一件都还带着旧日的温度。",
+    "minAge": 55,
+    "maxAge": 90,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elder_sort_keepsakes_br0",
+        "title": "分给该拿的人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你把东西一件件送出去，觉得这些陪过自己的物件，从王国旅人到家中晚辈，继续陪别人也很好。"
+      },
+      {
+        "id": "elder_sort_keepsakes_br1",
+        "title": "把来历都记下来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你给许多旧物都补上了来历和故事，免得后来的人只看到它们，却不知道它们曾经走过哪些集市、驿站和战后的年月。"
+      },
+      {
+        "id": "elder_sort_keepsakes_br2",
+        "title": "留下一只最后的箱子",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你只留下最舍不得动的一箱，像给自己保留了一小块谁也拿不走的旧时光。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你把多年积攒下来的箱子和抽屉一一打开。里面有月银小器、旧晶花、世界树落叶和远行时带回的人类物件，很多都已失去原本用途，却仍旧带着时间的光。"
+      },
+      "goblin": {
+        "description": "你把多年积攒下来的箱子和破袋子一一打开。里面有闪亮的小废铁、捡来的齿轮、从黑市换到的怪东西，很多都不值钱，但每一件你都舍不得随便丢。"
+      }
+    }
+  },
+  {
+    "id": "elder_feast_missing_names",
+    "title": "席间空位",
+    "description": "节日或团聚又一次来了。可能是王国冬祭、神殿庆典后的家宴，或只是某个照旧摆起桌子的晚上。灯还是那样亮，饭还是那样香，只是席间有些位置再也不会坐上当年的人了。",
+    "minAge": 58,
+    "maxAge": 90,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "elder_feast_missing_names_br0",
+        "title": "为他们举杯",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你为那些不在场的人轻轻举杯，觉得思念并不一定要说得很大声，酒和灯火会替你记得。"
+      },
+      {
+        "id": "elder_feast_missing_names_br1",
+        "title": "把他们的故事讲下去",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你没有避开那些名字，而是把他们的笑声、脾气和往事一点点讲给后来人听，让桌边的人知道曾经有谁一起走过这些年月。"
+      },
+      {
+        "id": "elder_feast_missing_names_br2",
+        "title": "静静点几盏灯",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你只是安静地点起几盏灯，让光替你把没说出口的话都留在这一晚，也照见那些不在场却仍被记得的人。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "节日或团聚又一次来了。也许是林间长宴，也许是世界树外圈的季节庆典。灯与花都还在，只是席间有些位置再也不会坐上当年的人了。"
+      },
+      "goblin": {
+        "description": "部落又一次围着火堆开宴了。肉还是照样抢，酒还是照样呛，只是火堆边总有几个熟悉的位置，已经很久没人吵闹了。"
+      }
+    }
   }
 ]

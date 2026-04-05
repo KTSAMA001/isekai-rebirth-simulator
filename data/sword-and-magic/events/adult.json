@@ -11635,5 +11635,370 @@
         ]
       }
     ]
+  },
+  {
+    "id": "elf_memory_greenhouse",
+    "title": "记忆温室",
+    "description": "你开始尝试用活体魔法植物保存历史，而不只是把它们写在纸页上。书库长老认为这是大胆而危险的想法。",
+    "minAge": 60,
+    "maxAge": 140,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_memory_curator & attribute.int >= 15",
+    "branches": [
+      {
+        "id": "elf_memory_greenhouse_br0",
+        "title": "向族人开放试验温室",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_memory_garden_seed",
+            "value": true,
+            "description": "记忆花园雏形"
+          }
+        ],
+        "description": "你决定让更多人走进试验温室，看看记忆是否也能被温柔地栽种。"
+      },
+      {
+        "id": "elf_memory_greenhouse_br1",
+        "title": "先保存最古老的创伤记忆",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_memory_garden_seed",
+            "value": true,
+            "description": "记忆花园雏形"
+          }
+        ],
+        "description": "你认为真正该先被保存的，不是荣耀，而是族人最怕再忘记的伤痛。"
+      }
+    ]
+  },
+  {
+    "id": "elf_rootward_oath",
+    "title": "根须守望任命",
+    "description": "你正式被记入世界树守望名册。你的名字会刻在根厅石壁上，提醒后来者是谁守过这片森林。",
+    "minAge": 60,
+    "maxAge": 140,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_canopy_guardian & (attribute.spr >= 12 | attribute.mag >= 14)",
+    "branches": [
+      {
+        "id": "elf_rootward_oath_br0",
+        "title": "留在根厅值守",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_forest_keeper",
+            "value": true,
+            "description": "世界树守望者"
+          }
+        ],
+        "description": "你把自己交给根厅与年轮，准备守住最深处也最安静的地方。"
+      },
+      {
+        "id": "elf_rootward_oath_br1",
+        "title": "巡行林境边界",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_forest_keeper",
+            "value": true,
+            "description": "世界树守望者"
+          }
+        ],
+        "description": "你选择巡查森林边界，因为你知道威胁往往来自树荫之外。"
+      }
+    ]
+  },
+  {
+    "id": "elf_comet_ledger",
+    "title": "彗尾纪年法",
+    "description": "你提出用彗星回归校正精灵旧历。这套算法可能改变精灵记录历史与施法的方式。",
+    "minAge": 60,
+    "maxAge": 150,
+    "weight": 2,
+    "unique": true,
+    "races": [
+      "elf"
+    ],
+    "priority": "major",
+    "tag": "magic",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.elf_astral_student & (attribute.mag >= 16 | attribute.int >= 16)",
+    "branches": [
+      {
+        "id": "elf_comet_ledger_br0",
+        "title": "写成理论手稿",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_chronicler",
+            "value": true,
+            "description": "星历编纂者"
+          }
+        ],
+        "description": "你把推演写成一套严密的理论，希望后来的观星者不必再从头摸索。"
+      },
+      {
+        "id": "elf_comet_ledger_br1",
+        "title": "改写成观星仪式",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "elf_star_chronicler",
+            "value": true,
+            "description": "星历编纂者"
+          }
+        ],
+        "description": "你把算法融进仪式，让观星者在施法时也能直接感受彗尾回归的节律。"
+      }
+    ]
+  },
+  {
+    "id": "adult_restore_keepsake",
+    "title": "修缮旧物",
+    "description": "你翻出一件陪伴自己多年的旧物。可能是王国集市上买来的旧挂坠、旅途中带回的地城纪念、学院时代的徽章，或一把用得发亮的小工具。它已经磨损得厉害，但你突然不想让它就这样坏掉。",
+    "minAge": 26,
+    "maxAge": 45,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "adult_restore_keepsake_br0",
+        "title": "自己动手修好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你耐着性子把它一点点修好。旧物虽然还是旧物，却像从你走过的王都街巷和旅途尘土里重新活了过来。"
+      },
+      {
+        "id": "adult_restore_keepsake_br1",
+        "title": "找懂行的人帮忙",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你找来真正懂这门手艺的人，也许是集市老匠、神殿旁修器铺的店主，花了些代价，但也让旧物重获新生。"
+      },
+      {
+        "id": "adult_restore_keepsake_br2",
+        "title": "保留它的伤痕",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你只是简单清理了一下，没有刻意抹去岁月留下的痕迹。那些划痕、磕碰和褪色反而让它更像你的人生了。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你翻出一件陪伴自己多年的旧物。可能是早年离开世界树时带上的叶纹胸针、古卷夹页，或一件微微失去光泽的月银器。它已经磨损得厉害，但你突然不想让它就这样坏掉。"
+      },
+      "goblin": {
+        "description": "你翻出一件陪伴自己多年的旧物。也许是从垃圾堆里捡来的齿轮、第一次赚钱买下的匕首，或者一块一直舍不得卖的亮晶晶废铁。它已经破旧得厉害，但你突然不想让它就这样散掉。"
+      }
+    }
+  },
+  {
+    "id": "adult_neighborhood_request",
+    "title": "邻里的请求",
+    "description": "你生活的地方遇到了一件反复拖着没人处理的麻烦事。可能是王国街区的排水、驿站外的烂路、神殿旁的纠纷，最后大家不约而同地把目光投向了你。",
+    "minAge": 28,
+    "maxAge": 50,
+    "weight": 4,
+    "unique": true,
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "adult_neighborhood_request_br0",
+        "title": "组织大家一起做",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你把人手、材料和时间都安排妥当，连附近摊贩、公会跑腿和街区住户都被你调动起来，原本谁都懒得碰的麻烦终于被推动起来了。"
+      },
+      {
+        "id": "adult_neighborhood_request_br1",
+        "title": "自己先顶上去",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          }
+        ],
+        "description": "你懒得再等别人点头，干脆自己先上。事情是解决了，人也确实累得够呛，连第二天去集市都觉得胳膊发酸。"
+      },
+      {
+        "id": "adult_neighborhood_request_br2",
+        "title": "出资把事办成",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你选择最直接的办法，把缺的人手和材料都补齐，让这件拖延许久、连街区执事都嫌麻烦的事终于有了结果。"
+      }
+    ],
+    "raceVariants": {
+      "elf": {
+        "description": "你生活的地方遇到了一件反复拖着没人处理的麻烦事。也许是林缘道路、也许是树桥养护，也许是与人类邻里的边界争执，最后大家不约而同地把目光投向了你。"
+      },
+      "goblin": {
+        "description": "你窝里的地盘遇到了一件反复拖着没人处理的麻烦事。可能是漏水、塌洞、分赃不均，最后大家骂骂咧咧地吵了一圈，还是把目光投向了你。"
+      }
+    }
   }
 ]

@@ -11,6 +11,7 @@ import {
   explainOpenClawError,
   generateStorySource,
   loadOpenClawSettings,
+  probeOpenClawToken,
   requestOpenClawStory,
   saveOpenClawSettings,
 } from '@/utils/story'
@@ -98,6 +99,9 @@ const isGeneratingStory = ref(false)
 const showOpenClawSettings = ref(false)
 const openClawEndpoint = ref(DEFAULT_OPENCLAW_ENDPOINT)
 const openClawToken = ref('')
+const isProbing = ref(false)
+const probeMessage = ref('')
+const probeNeedsToken = ref<boolean | null>(null)
 
 const storySource = computed(() => {
   if (!state.value || !world.value) return ''
@@ -140,11 +144,6 @@ async function handleGenerateStory() {
     showOpenClawSettings.value = true
     return
   }
-  if (!openClawToken.value.trim()) {
-    storyError.value = '请先填写 OpenClaw Token'
-    showOpenClawSettings.value = true
-    return
-  }
 
   isGeneratingStory.value = true
   storyError.value = ''
@@ -161,17 +160,38 @@ async function handleGenerateStory() {
   }
 }
 
-onMounted(() => {
-  const settings = loadOpenClawSettings()
+async function handleProbeToken() {
+  isProbing.value = true
+  probeMessage.value = ''
+  probeNeedsToken.value = null
+  try {
+    const result = await probeOpenClawToken(openClawEndpoint.value)
+    probeMessage.value = result.message
+    probeNeedsToken.value = result.required
+  } finally {
+    isProbing.value = false
+  }
+}
+
+let savePending = false
+async function debouncedSave() {
+  if (savePending) return
+  savePending = true
+  await saveOpenClawSettings({
+    endpoint: openClawEndpoint.value,
+    token: openClawToken.value,
+  })
+  savePending = false
+}
+
+onMounted(async () => {
+  const settings = await loadOpenClawSettings()
   openClawEndpoint.value = settings.endpoint
   openClawToken.value = settings.token
 })
 
 watch([openClawEndpoint, openClawToken], () => {
-  saveOpenClawSettings({
-    endpoint: openClawEndpoint.value,
-    token: openClawToken.value,
-  })
+  debouncedSave()
 })
 </script>
 
@@ -305,7 +325,8 @@ watch([openClawEndpoint, openClawToken], () => {
     <section class="section">
       <h3 class="section-title">OpenClaw 故事生成</h3>
       <p class="section-hint">
-        会把当前世界书与完整人生编年史整理后发送到你配置的 OpenClaw 地址。地址与 Token 仅保存在当前浏览器。
+        把当前世界书与完整人生编年史整理后发送到你配置的 OpenClaw 地址生成故事。
+        地址与 Token 保存在当前浏览器中，Token 会经过加密后存储。
       </p>
 
       <button class="btn btn-export settings-toggle" @click="showOpenClawSettings = !showOpenClawSettings">
@@ -322,17 +343,31 @@ watch([openClawEndpoint, openClawToken], () => {
           placeholder="http://127.0.0.1:18789/v1/responses"
         >
 
-        <label class="field-label" for="openclaw-token">OpenClaw Token</label>
+        <div class="probe-row">
+          <button class="btn btn-export btn-probe" :disabled="isProbing" @click="handleProbeToken">
+            {{ isProbing ? '探测中…' : '🔍 探测连接' }}
+          </button>
+          <span v-if="probeMessage" class="probe-message" :class="{ 'probe-ok': probeNeedsToken === false, 'probe-warn': probeNeedsToken === true, 'probe-err': probeNeedsToken === null }">
+            {{ probeMessage }}
+          </span>
+        </div>
+        <div class="field-hint probe-explain">
+          探测会向上面的地址发送一个空请求以检查是否需要 Token 认证，不会发送任何编年史内容。
+        </div>
+
+        <label class="field-label" for="openclaw-token">OpenClaw Token（可选）</label>
         <input
           id="openclaw-token"
           v-model="openClawToken"
           class="field-input"
           type="password"
-          placeholder="Bearer Token"
+          placeholder="留空则不发送 Authorization 头"
         >
 
         <div class="field-hint">
-          已验证 Responses API 可用，模型名固定为 openclaw。若部署版页面提示网络错误，通常是目标地址未开启浏览器跨域访问。
+          Token 会经过 AES-GCM 加密后保存到本地浏览器存储中。
+          若 OpenClaw 网关无需鉴权可留空；若需要 Token，
+          可通过 <code>openclaw config get gateway.auth</code> 或查阅 OpenClaw 配置文件获取。
         </div>
       </div>
 
@@ -696,6 +731,47 @@ watch([openClawEndpoint, openClawToken], () => {
   font-size: 0.74rem;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+.field-hint code {
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  font-size: 0.72rem;
+  word-break: break-all;
+}
+
+.probe-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.btn-probe {
+  flex: 0 0 auto;
+}
+
+.probe-message {
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.probe-ok {
+  color: var(--color-success);
+}
+
+.probe-warn {
+  color: var(--text-gold);
+}
+
+.probe-err {
+  color: var(--color-danger);
+}
+
+.probe-explain {
+  margin-bottom: var(--space-md);
 }
 
 .story-error {

@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import type { GameState, WorldInstance } from '@/engine/core/types'
 import {
+  createOpenClawHeaders,
+  decryptToken,
+  encryptToken,
   extractOpenClawText,
   generateStorySource,
   generateWorldbook,
@@ -111,6 +114,17 @@ describe('story utils', () => {
     expect(normalizeOpenClawEndpoint('http://127.0.0.1:18789/v1/responses')).toBe('http://127.0.0.1:18789/v1/responses')
   })
 
+  it('仅在提供 token 时附带 Authorization 头', () => {
+    expect(createOpenClawHeaders('')).toEqual({
+      'Content-Type': 'application/json',
+    })
+
+    expect(createOpenClawHeaders('abc123')).toEqual({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer abc123',
+    })
+  })
+
   it('世界书文本包含核心世界信息', () => {
     const text = generateWorldbook(mockWorld)
     expect(text).toContain('【世界书】')
@@ -140,5 +154,23 @@ describe('story utils', () => {
       ],
     })
     expect(text).toBe('第一段\n\n第二段')
+  })
+
+  it('加密后的 token 能正确解密', async () => {
+    const original = 'my-secret-token-abc123'
+    const encrypted = await encryptToken(original)
+    expect(encrypted).toMatch(/^enc:/)
+    const decrypted = await decryptToken(encrypted)
+    expect(decrypted).toBe(original)
+  })
+
+  it('空 token 加密后仍为空', async () => {
+    expect(await encryptToken('')).toBe('')
+    expect(await encryptToken('  ')).toBe('')
+  })
+
+  it('解密向后兼容未加密的旧值', async () => {
+    expect(await decryptToken('plain-old-token')).toBe('plain-old-token')
+    expect(await decryptToken('')).toBe('')
   })
 })

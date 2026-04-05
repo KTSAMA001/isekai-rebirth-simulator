@@ -5,9 +5,17 @@ export const DEFAULT_OPENCLAW_ENDPOINT = 'http://localhost:18789/v1/responses'
 export const OPENCLAW_MODEL = 'openclaw'
 
 const OPENCLAW_SETTINGS_STORAGE_KEY = 'isekai_openclaw_settings'
+const OPENCLAW_CRYPTO_SALT = 'isekai-rebirth-openclaw-v1'
 
 export interface OpenClawSettings {
   endpoint: string
+  token: string
+}
+
+/** localStorage 中实际存储的格式（token 可能是加密后的） */
+interface StoredOpenClawSettings {
+  endpoint: string
+  /** 加密后的 token，格式 "enc:iv_hex:ciphertext_hex" */
   token: string
 }
 
@@ -24,6 +32,80 @@ interface OpenClawResponsePayload {
   }>
 }
 
+/** Token 探测结果 */
+export interface TokenProbeResult {
+  /** 探测是否成功完成（不管是否需要 token） */
+  ok: boolean
+  /** 是否需要 token */
+  required: boolean
+  /** 给用户的说明 */
+  message: string
+}
+
+// ─── 加密工具 ───
+
+/** 从 origin + 固定盐派生 AES-GCM 密钥 */
+async function deriveTokenKey(): Promise<CryptoKey> {
+  const encoder = new TextEncoder()
+  const origin = typeof location !== 'undefined' ? location.origin : 'isekai-local'
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(origin),
+    'PBKDF2',
+    false,
+    ['deriveKey'],
+  )
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt: encoder.encode(OPENCLAW_CRYPTO_SALT), iterations: 100_000, hash: 'SHA-256' },
+    keyMaterial,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt'],
+  )
+}
+
+function bufToHex(buf: ArrayBuffer): string {
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+function hexToBuf(hex: string): ArrayBuffer {
+  const bytes = new Uint8Array(hex.length / 2)
+  for (let i = 0; i < bytes.length; i++) bytes[i] = parseInt(hex.slice(i * 2, i * 2 + 2), 16)
+  return bytes.buffer as ArrayBuffer
+}
+
+/** 加密 token，返回 "enc:iv_hex:ciphertext_hex" */
+export async function encryptToken(token: string): Promise<string> {
+  if (!token.trim()) return ''
+  const key = await deriveTokenKey()
+  const iv = crypto.getRandomValues(new Uint8Array(12))
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    new TextEncoder().encode(token.trim()),
+  )
+  return `enc:${bufToHex(iv.buffer as ArrayBuffer)}:${bufToHex(ciphertext)}`
+}
+
+/** 解密 token，支持向后兼容未加密的旧值 */
+export async function decryptToken(stored: string): Promise<string> {
+  if (!stored) return ''
+  if (!stored.startsWith('enc:')) return stored // 向后兼容：旧的明文 token
+  const parts = stored.split(':')
+  if (parts.length !== 3) return ''
+  const iv = new Uint8Array(hexToBuf(parts[1]))
+  const ciphertext = hexToBuf(parts[2])
+  try {
+    const key = await deriveTokenKey()
+    const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
+    return new TextDecoder().decode(plainBuf)
+  } catch {
+    return '' // 密钥不匹配（换了 origin）则视为无 token
+  }
+}
+
+// ─── 设置读写 ───
+
 export function normalizeOpenClawEndpoint(input: string): string {
   const trimmed = input.trim()
   if (!trimmed) return DEFAULT_OPENCLAW_ENDPOINT
@@ -31,7 +113,7 @@ export function normalizeOpenClawEndpoint(input: string): string {
   return `${trimmed.replace(/\/+$/, '')}/v1/responses`
 }
 
-export function loadOpenClawSettings(): OpenClawSettings {
+export async function loadOpenClawSettings(): Promise<OpenClawSettings> {
   if (typeof localStorage === 'undefined') {
     return { endpoint: DEFAULT_OPENCLAW_ENDPOINT, token: '' }
   }
@@ -42,22 +124,59 @@ export function loadOpenClawSettings(): OpenClawSettings {
   }
 
   try {
-    const parsed = JSON.parse(raw) as Partial<OpenClawSettings>
+    const parsed = JSON.parse(raw) as Partial<StoredOpenClawSettings>
+    const token = await decryptToken(parsed.token?.trim() || '')
     return {
       endpoint: parsed.endpoint?.trim() || DEFAULT_OPENCLAW_ENDPOINT,
-      token: parsed.token?.trim() || '',
+      token,
     }
   } catch {
     return { endpoint: DEFAULT_OPENCLAW_ENDPOINT, token: '' }
   }
 }
 
-export function saveOpenClawSettings(settings: OpenClawSettings): void {
+export async function saveOpenClawSettings(settings: OpenClawSettings): Promise<void> {
   if (typeof localStorage === 'undefined') return
+  const encryptedToken = await encryptToken(settings.token)
   localStorage.setItem(OPENCLAW_SETTINGS_STORAGE_KEY, JSON.stringify({
     endpoint: normalizeOpenClawEndpoint(settings.endpoint),
-    token: settings.token.trim(),
+    token: encryptedToken,
   }))
+}
+
+// ─── Token 探测 ───
+
+/**
+ * 探测指定 OpenClaw endpoint 是否需要 token。
+ * 会向目标地址发送一个极小的请求来判断认证需求。
+ */
+export async function probeOpenClawToken(endpoint: string): Promise<TokenProbeResult> {
+  const url = normalizeOpenClawEndpoint(endpoint)
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: OPENCLAW_MODEL, input: '' }),
+    })
+    if (res.status === 401) {
+      return { ok: true, required: true, message: '目标 OpenClaw 网关需要 Token 认证。请在下方手动填入 Token。' }
+    }
+    // 2xx 或其他非 401 都说明不需要 token（可能有其他错误，但至少不是认证问题）
+    return { ok: true, required: false, message: '目标 OpenClaw 网关无需 Token，可以直接发送。' }
+  } catch {
+    return { ok: false, required: false, message: '无法连接到目标地址。请确认 OpenClaw 正在运行且地址正确。' }
+  }
+}
+
+export function createOpenClawHeaders(token: string): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  }
+  const trimmedToken = token.trim()
+  if (trimmedToken) {
+    headers.Authorization = `Bearer ${trimmedToken}`
+  }
+  return headers
 }
 
 export function generateWorldbook(world: WorldInstance): string {
@@ -144,6 +263,9 @@ export function explainOpenClawError(error: unknown): string {
     return '浏览器无法直接访问当前 OpenClaw 地址。已确认本地 API 可用，但当前网关不支持跨域预检；请改用支持 CORS 的内网地址，或配置同源反向代理。'
   }
   if (error instanceof Error) {
+    if (/Unauthorized|401/i.test(error.message)) {
+      return '当前 OpenClaw 网关要求 Bearer token。已实测默认 localhost:18789 在无 token 时会返回 401 Unauthorized；如果你使用的是无需鉴权的内网地址，可以留空 token 直接发送。'
+    }
     return error.message
   }
   return 'OpenClaw 请求失败，请检查地址、Token 和网络连通性。'
@@ -153,10 +275,7 @@ export async function requestOpenClawStory(options: OpenClawSettings & { sourceT
   const endpoint = normalizeOpenClawEndpoint(options.endpoint)
   const response = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${options.token.trim()}`,
-    },
+    headers: createOpenClawHeaders(options.token),
     body: JSON.stringify({
       model: OPENCLAW_MODEL,
       input: options.sourceText,
