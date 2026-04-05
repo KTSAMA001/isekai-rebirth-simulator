@@ -1,20 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
 import { useProgressStore } from '@/stores/progressStore'
 import FinalGrade from '@/components/result/FinalGrade.vue'
 import { exportAsJSON, exportAsText, copyChronicleToClipboard, copyTextToClipboard } from '@/utils/export'
-import {
-  DEFAULT_OPENCLAW_ENDPOINT,
-  explainOpenClawError,
-  generateStorySource,
-  loadOpenClawSettings,
-  probeOpenClawToken,
-  requestOpenClawStory,
-  saveOpenClawSettings,
-} from '@/utils/story'
+import { generateStorySource } from '@/utils/story'
 
 const props = defineProps<{
   worldId: string
@@ -93,15 +85,6 @@ function rarityEmoji(r: string): string {
 // 导出功能
 const copySuccess = ref(false)
 const storySourceCopied = ref(false)
-const generatedStory = ref('')
-const storyError = ref('')
-const isGeneratingStory = ref(false)
-const showOpenClawSettings = ref(false)
-const openClawEndpoint = ref(DEFAULT_OPENCLAW_ENDPOINT)
-const openClawToken = ref('')
-const isProbing = ref(false)
-const probeMessage = ref('')
-const probeNeedsToken = ref<boolean | null>(null)
 
 const storySource = computed(() => {
   if (!state.value || !world.value) return ''
@@ -135,64 +118,6 @@ async function handleCopyStorySource() {
     setTimeout(() => { storySourceCopied.value = false }, 2000)
   }
 }
-
-async function handleGenerateStory() {
-  if (!storySource.value) return
-
-  if (!openClawEndpoint.value.trim()) {
-    storyError.value = '请先填写 OpenClaw 地址'
-    showOpenClawSettings.value = true
-    return
-  }
-
-  isGeneratingStory.value = true
-  storyError.value = ''
-  try {
-    generatedStory.value = await requestOpenClawStory({
-      endpoint: openClawEndpoint.value,
-      token: openClawToken.value,
-      sourceText: storySource.value,
-    })
-  } catch (error) {
-    storyError.value = explainOpenClawError(error)
-  } finally {
-    isGeneratingStory.value = false
-  }
-}
-
-async function handleProbeToken() {
-  isProbing.value = true
-  probeMessage.value = ''
-  probeNeedsToken.value = null
-  try {
-    const result = await probeOpenClawToken(openClawEndpoint.value)
-    probeMessage.value = result.message
-    probeNeedsToken.value = result.required
-  } finally {
-    isProbing.value = false
-  }
-}
-
-let savePending = false
-async function debouncedSave() {
-  if (savePending) return
-  savePending = true
-  await saveOpenClawSettings({
-    endpoint: openClawEndpoint.value,
-    token: openClawToken.value,
-  })
-  savePending = false
-}
-
-onMounted(async () => {
-  const settings = await loadOpenClawSettings()
-  openClawEndpoint.value = settings.endpoint
-  openClawToken.value = settings.token
-})
-
-watch([openClawEndpoint, openClawToken], () => {
-  debouncedSave()
-})
 </script>
 
 <template>
@@ -323,68 +248,15 @@ watch([openClawEndpoint, openClawToken], () => {
     </section>
 
     <section class="section">
-      <h3 class="section-title">OpenClaw 故事生成</h3>
+      <h3 class="section-title">AI 故事生成</h3>
       <p class="section-hint">
-        把当前世界书与完整人生编年史整理后发送到你配置的 OpenClaw 地址生成故事。
-        地址与 Token 保存在当前浏览器中，Token 会经过加密后存储。
+        复制世界书与编年史后，粘贴到任意 AI 对话程序（如 ChatGPT、Claude、通义千问等）即可生成完整的异世界人生故事。
       </p>
-
-      <button class="btn btn-export settings-toggle" @click="showOpenClawSettings = !showOpenClawSettings">
-        {{ showOpenClawSettings ? '收起连接设置' : '展开连接设置' }}
-      </button>
-
-      <div v-if="showOpenClawSettings" class="openclaw-settings card">
-        <label class="field-label" for="openclaw-endpoint">OpenClaw 地址</label>
-        <input
-          id="openclaw-endpoint"
-          v-model.trim="openClawEndpoint"
-          class="field-input"
-          type="text"
-          placeholder="http://127.0.0.1:18789/v1/responses"
-        >
-
-        <div class="probe-row">
-          <button class="btn btn-export btn-probe" :disabled="isProbing" @click="handleProbeToken">
-            {{ isProbing ? '探测中…' : '🔍 探测连接' }}
-          </button>
-          <span v-if="probeMessage" class="probe-message" :class="{ 'probe-ok': probeNeedsToken === false, 'probe-warn': probeNeedsToken === true, 'probe-err': probeNeedsToken === null }">
-            {{ probeMessage }}
-          </span>
-        </div>
-        <div class="field-hint probe-explain">
-          探测会向上面的地址发送一个空请求以检查是否需要 Token 认证，不会发送任何编年史内容。
-        </div>
-
-        <label class="field-label" for="openclaw-token">OpenClaw Token（可选）</label>
-        <input
-          id="openclaw-token"
-          v-model="openClawToken"
-          class="field-input"
-          type="password"
-          placeholder="留空则不发送 Authorization 头"
-        >
-
-        <div class="field-hint">
-          Token 会经过 AES-GCM 加密后保存到本地浏览器存储中。
-          若 OpenClaw 网关无需鉴权可留空；若需要 Token，
-          可通过 <code>openclaw config get gateway.auth</code> 或查阅 OpenClaw 配置文件获取。
-        </div>
-      </div>
 
       <div class="export-grid">
         <button class="btn btn-export" @click="handleCopyStorySource">
-          {{ storySourceCopied ? '✓ 已复制素材' : '📚 复制世界书+编年史' }}
+          {{ storySourceCopied ? '✓ 已复制' : '📚 复制世界书+编年史' }}
         </button>
-        <button class="btn btn-export" :disabled="isGeneratingStory" @click="handleGenerateStory">
-          {{ isGeneratingStory ? '生成中…' : '🪶 发送到 OpenClaw 生成故事' }}
-        </button>
-      </div>
-
-      <div v-if="storyError" class="story-error">{{ storyError }}</div>
-
-      <div v-if="generatedStory" class="story-output card">
-        <div class="story-output-title">OpenClaw 生成结果</div>
-        <pre class="story-output-text">{{ generatedStory }}</pre>
       </div>
     </section>
 
@@ -698,106 +570,5 @@ watch([openClawEndpoint, openClawToken], () => {
 
 .btn-export:active {
   transform: scale(0.97);
-}
-
-.settings-toggle {
-  margin-bottom: var(--space-sm);
-}
-
-.openclaw-settings {
-  padding: var(--space-md);
-  margin-bottom: var(--space-sm);
-}
-
-.field-label {
-  display: block;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.field-input {
-  width: 100%;
-  padding: 10px 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  margin-bottom: var(--space-sm);
-}
-
-.field-hint {
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.field-hint code {
-  padding: 1px 5px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-  font-size: 0.72rem;
-  word-break: break-all;
-}
-
-.probe-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-xs);
-  flex-wrap: wrap;
-}
-
-.btn-probe {
-  flex: 0 0 auto;
-}
-
-.probe-message {
-  font-size: 0.76rem;
-  line-height: 1.4;
-}
-
-.probe-ok {
-  color: var(--color-success);
-}
-
-.probe-warn {
-  color: var(--text-gold);
-}
-
-.probe-err {
-  color: var(--color-danger);
-}
-
-.probe-explain {
-  margin-bottom: var(--space-md);
-}
-
-.story-error {
-  margin-top: var(--space-sm);
-  font-size: 0.8rem;
-  color: var(--color-danger);
-  line-height: 1.5;
-}
-
-.story-output {
-  margin-top: var(--space-md);
-  padding: var(--space-md);
-}
-
-.story-output-title {
-  font-weight: 700;
-  color: var(--text-gold);
-  margin-bottom: var(--space-sm);
-}
-
-.story-output-text {
-  margin: 0;
-  white-space: pre-wrap;
-  font-family: inherit;
-  font-size: 0.82rem;
-  line-height: 1.75;
-  color: var(--text-primary);
 }
 </style>
