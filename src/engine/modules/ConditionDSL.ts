@@ -14,7 +14,7 @@
  *   value      := number | string
  */
 
-import type { ConditionAST, CompareOp, ConditionContext } from '../core/types'
+import type { ConditionAST, CompareOp, ConditionContext, WorldInstance } from '../core/types'
 
 export class ConditionDSL {
   /** 在上下文中求值条件字符串 */
@@ -28,6 +28,96 @@ export class ConditionDSL {
   parse(expr: string): ConditionAST {
     const parser = new DSLParser(expr)
     return parser.parseExpression()
+  }
+
+  /** 操作符的人类可读映射 */
+  private static readonly OP_DISPLAY: Record<string, string> = {
+    '>=': '≥', '<=': '≤', '>': '>', '<': '<', '==': '=', '!=': '≠',
+  }
+
+  /** 常见 flag 的中文描述 */
+  private static readonly FLAG_DESCRIPTIONS: Record<string, string> = {
+    married: '已婚', divorced: '已离婚', guild_member: '公会成员',
+    mage_graduate: '魔法学院毕业', squire: '侍从经验',
+    dungeon_first: '首次地下城探索', fairy_friend: '精灵之友',
+    fight_back: '曾反抗霸凌', bullied_child: '曾被欺负',
+    first_love: '初恋经历', dark_mage_path: '暗黑魔道',
+    hero_path: '英雄之路', dragon_slayer: '屠龙者',
+    has_student: '收有弟子', noble_title: '贵族头衔', cursed: '被诅咒',
+    magic_student: '魔法学徒', knight: '骑士身份',
+    merchant_apprentice: '商人学徒', famous_inventor: '著名发明家',
+    in_debt: '负债中',
+  }
+
+  /** 将条件表达式转为人类可读文本 */
+  describe(expr: string, world?: WorldInstance): string {
+    if (!expr || expr.trim() === '') return ''
+    const ast = this.parse(expr.trim())
+    return this.describeNode(ast, world)
+  }
+
+  /** 递归将 AST 节点转为可读文本 */
+  private describeNode(node: ConditionAST, world?: WorldInstance): string {
+    switch (node.type) {
+      case 'literal':
+        return node.value ? '（始终满足）' : '（始终不满足）'
+      case 'and':
+        return node.children.map(c => this.describeNode(c, world)).join('，')
+      case 'or':
+        return node.children.map(c => this.describeNode(c, world)).join('或')
+      case 'has':
+        return this.describeHas(node.kind, node.id, world)
+      case 'flag':
+        return ConditionDSL.FLAG_DESCRIPTIONS[node.name] ?? node.name
+      case 'comparison':
+        return this.describeComparison(node.attr, node.op, node.value, world)
+      default:
+        return '（未知条件）'
+    }
+  }
+
+  /** 描述 has.xxx.xxx 条件 */
+  private describeHas(kind: string, id: string, world?: WorldInstance): string {
+    switch (kind) {
+      case 'talent': {
+        const name = world?.index.talentsById.get(id)?.name ?? id
+        return `天赋「${name}」`
+      }
+      case 'flag':
+        return ConditionDSL.FLAG_DESCRIPTIONS[id] ?? id
+      case 'event':
+        return `经历过「${id}」`
+      case 'achievement':
+        return `成就「${id}」`
+      case 'counter':
+        return `${id} > 0`
+      default:
+        return `${kind}.${id}`
+    }
+  }
+
+  /** 描述比较条件 */
+  private describeComparison(attr: string, op: CompareOp, value: number | string, world?: WorldInstance): string {
+    const opText = ConditionDSL.OP_DISPLAY[op] ?? op
+    if (attr.startsWith('attribute.')) {
+      const field = attr.substring('attribute.'.length)
+      if (field.startsWith('peak.')) {
+        const peakId = field.substring('peak.'.length)
+        const name = world?.index.attributesById.get(peakId)?.name ?? peakId
+        return `${name}峰值 ${opText} ${value}`
+      }
+      const name = world?.index.attributesById.get(field)?.name ?? field
+      return `${name} ${opText} ${value}`
+    }
+    if (attr === 'hp') return `生命值 ${opText} ${value}`
+    if (attr === 'age') return `年龄 ${opText} ${value}`
+    if (attr.startsWith('counter.')) {
+      const counterId = attr.substring('counter.'.length)
+      return `${counterId} ${opText} ${value}`
+    }
+    if (attr === 'character.race') return `种族 ${opText} ${value}`
+    if (attr === 'character.gender') return `性别 ${opText} ${value}`
+    return `${attr} ${opText} ${value}`
   }
 
   /** 求值 AST 节点 */

@@ -220,6 +220,14 @@ export interface RiskCheck {
   scale?: number
 }
 
+/** 分支资源消耗 */
+export interface BranchCost {
+  /** 消耗的属性 ID（通常为 mny） */
+  attribute: string
+  /** 消耗数量（正数，会从属性中扣除） */
+  amount: number
+}
+
 /** 事件分支 */
 export interface EventBranch {
   id: string
@@ -227,9 +235,10 @@ export interface EventBranch {
   description: string
   probability?: number
   effects: EventEffect[]
-  nextEvents?: string[]
   /** 选择此分支的前置条件 */
   requireCondition?: string
+  /** 资源消耗（选择时自动扣除，不足则锁定分支） */
+  cost?: BranchCost
   /** 风险判定（可选，有风险的选择才需要）— 旧版 sigmoid 曲线 */
   riskCheck?: RiskCheck
   /** D20 骰判定（可选）— 新版，参考BG3。优先级高于 riskCheck */

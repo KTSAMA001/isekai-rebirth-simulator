@@ -16,6 +16,7 @@
         "title": "全力应考",
         "description": "你回忆着这些年所有的训练，剑术、骑术、礼仪——一切为了今天",
         "probability": 0.6,
+        "requireCondition": "attribute.str >= 8",
         "effects": [
           {
             "type": "modify_attribute",

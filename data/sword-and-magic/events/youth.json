@@ -4143,7 +4143,7 @@
     "minAge": 14,
     "maxAge": 18,
     "weight": 4,
-    "include": "attribute.str >= 3 | attribute.mag >= 3",
+    "include": "attribute.str >= 6 | attribute.mag >= 6",
     "exclude": "has.flag.guild_member | has.flag.magic_student | has.flag.knight | has.flag.lord",
     "effects": [],
     "branches": [
@@ -4325,7 +4325,7 @@
     "minAge": 14,
     "maxAge": 20,
     "weight": 3,
-    "include": "attribute.chr >= 4 | attribute.mny >= 3",
+    "include": "attribute.chr >= 6 | attribute.mny >= 6",
     "exclude": "has.flag.merchant_apprentice | has.flag.magic_student | has.flag.knight | has.flag.lord",
     "effects": [],
     "branches": [
@@ -6038,7 +6038,7 @@
       "*"
     ],
     "effects": [],
-    "include": "",
+    "include": "attribute.str >= 5",
     "branches": [
       {
         "id": "human_conscription_br0",
@@ -6060,6 +6060,7 @@
       {
         "id": "human_conscription_br1",
         "title": "加入冒险者工会应对",
+        "requireCondition": "attribute.str >= 4 | attribute.mag >= 4",
         "effects": [
           {
             "type": "modify_attribute",
@@ -6190,7 +6191,7 @@
       "*"
     ],
     "effects": [],
-    "include": "",
+    "include": "attribute.str >= 5 | attribute.luk >= 8",
     "branches": [
       {
         "id": "human_guild_initiation_br0",

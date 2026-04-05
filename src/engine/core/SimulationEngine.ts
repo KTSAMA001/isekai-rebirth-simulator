@@ -593,6 +593,31 @@ export class SimulationEngine {
       throw new Error(`分支 ${branchId} 不存在`)
     }
 
+    // 引擎层强制校验分支前置条件（UI 层已锁定，此为安全兜底）
+    if (branch.requireCondition) {
+      const ctx = { state: this.state, world: this.world }
+      const conditions = branch.requireCondition.split(',').map(c => c.trim())
+      const allMet = conditions.every(c => this.dsl.evaluate(c, ctx))
+      if (!allMet) {
+        throw new Error(`分支 ${branchId} 的前置条件不满足: ${branch.requireCondition}`)
+      }
+    }
+
+    // 资源消耗校验与扣除
+    if (branch.cost) {
+      const currentValue = this.state.attributes[branch.cost.attribute] ?? 0
+      if (currentValue < branch.cost.amount) {
+        throw new Error(`分支 ${branchId} 资源不足: ${branch.cost.attribute} 需要 ${branch.cost.amount}，当前 ${currentValue}`)
+      }
+      // 扣除资源
+      const result = this.attrModule.modify(
+        this.state.attributes,
+        this.state.attributePeaks,
+        [{ attribute: branch.cost.attribute, value: -branch.cost.amount }]
+      )
+      this.state = { ...this.state, attributes: result.attributes, attributePeaks: result.peaks }
+    }
+
     let isSuccess: boolean | undefined
     let riskRolled = false
     let chosenEffects: EventEffect[]

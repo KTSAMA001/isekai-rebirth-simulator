@@ -51,8 +51,15 @@
       "description": { "type": "string" },
       "probability": { "type": "number", "minimum": 0, "maximum": 1 },
       "effects": { "type": "array", "items": { "$ref": "#/definitions/EventEffect" } },
-      "nextEvents": { "type": "array", "items": { "type": "string" } },
       "requireCondition": { "type": "string" },
+      "cost": {
+        "type": "object",
+        "properties": {
+          "attribute": { "type": "string" },
+          "amount": { "type": "number", "minimum": 1 }
+        },
+        "required": ["attribute", "amount"]
+      },
       "riskCheck": { "$ref": "#/definitions/RiskCheck" },
       "diceCheck": { "$ref": "#/definitions/DiceCheck" },
       "failureEffects": { "type": "array", "items": { "$ref": "#/definitions/EventEffect" } },
