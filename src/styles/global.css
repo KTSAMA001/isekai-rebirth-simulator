@@ -17,12 +17,7 @@ html {
 
 body {
   font-family: var(--font-main);
-  background:
-    /* 微妙烛光环境光 */
-    radial-gradient(ellipse at 50% 15%, rgba(200, 168, 110, 0.06) 0%, transparent 60%),
-    /* 底部到顶部渐变 */
-    linear-gradient(180deg, var(--bg-main) 0%, #0d0b08 100%);
-  background-color: var(--bg-main);
+  background: var(--bg-main);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;

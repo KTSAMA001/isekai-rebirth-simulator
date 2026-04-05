@@ -8,17 +8,7 @@ const router = useRouter()
 
 <template>
   <div class="app-wrapper">
-    <!-- SVG 噪点滤镜定义（不渲染，仅供 CSS 引用） -->
-    <svg class="svg-defs" aria-hidden="true">
-      <defs>
-        <filter id="noise-grain">
-          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-      </defs>
-    </svg>
-    <!-- 全局纹理层 -->
-    <div class="texture-layer" aria-hidden="true"></div>
+    <div class="god-ray-layer" aria-hidden="true"></div>
     <div class="vignette-layer" aria-hidden="true"></div>
     <!-- 萤火虫粒子 -->
     <AmbientParticles />
@@ -46,36 +36,65 @@ const router = useRouter()
 </template>
 
 <style scoped>
-/* SVG 定义元素隐藏 */
-.svg-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-/* 全局噪点纹理层 */
-.texture-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  filter: url(#noise-grain);
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-}
-
-/* 暗角效果 — 仅顶部微妙渐变，不遮挡滚动内容 */
-.vignette-layer {
+/* 上帝光 — 实色渐变 + screen 混合 */
+.god-ray-layer {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
+  height: 86vh;
   z-index: 0;
   pointer-events: none;
+  mix-blend-mode: screen;
   background:
-    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
+    radial-gradient(
+      ellipse 46% 64% at 50% 0%,
+      var(--stage-light-core) 0%,
+      var(--stage-light-core) 6%,
+      var(--stage-light-soft) 18%,
+      var(--stage-light-mid) 38%,
+      rgb(0 0 0) 80%
+    ),
+    radial-gradient(
+      ellipse 80% 96% at 50% -2%,
+      var(--stage-light-soft) 0%,
+      var(--stage-light-mid) 24%,
+      rgb(0 0 0) 78%
+    ),
+    radial-gradient(
+      ellipse 120% 60% at 50% 0%,
+      var(--stage-light-mid) 0%,
+      rgb(0 0 0) 72%
+    );
+  background-repeat: no-repeat;
+  will-change: opacity;
+  animation: godRayBreathing 8s ease-in-out infinite;
+}
+
+/* 暗角 — 实色渐变 + multiply 混合 */
+.vignette-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    ellipse 138% 108% at 50% 42%,
+    rgb(255 255 255) 42%,
+    var(--stage-vignette-mid) 74%,
+    var(--stage-vignette-edge) 100%
+  );
+}
+
+/* 噪声抖动层 — 覆盖全屏，用高频灰度噪声打破渐变色带 */
+.app-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
 }
 
 .app-wrapper {
@@ -84,6 +103,8 @@ const router = useRouter()
   flex-direction: column;
   position: relative;
   z-index: 1;
+  isolation: isolate;
+  background: var(--bg-main);
 }
 
 .app-header {

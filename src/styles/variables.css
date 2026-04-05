@@ -14,6 +14,13 @@
   --bg-overlay: rgba(26, 20, 16, 0.9);
   --bg-panel: #1f1912;
 
+  /* 舞台光影层颜色 - 默认 sRGB 回退 */
+  --stage-light-core: rgb(148 112 48);
+  --stage-light-soft: rgb(96 72 30);
+  --stage-light-mid: rgb(48 34 14);
+  --stage-vignette-mid: rgb(214 198 176);
+  --stage-vignette-edge: rgb(156 136 112);
+
   /* 文字 — 羊皮纸暖白 */
   --text-primary: #e8d5c4;
   --text-secondary: #9e8e7e;
@@ -76,4 +83,17 @@
   /* 布局 */
   --max-width: 480px;
   --header-height: 56px;
+}
+
+@media (color-gamut: p3) {
+  @supports (color: color(display-p3 0 0 0)) {
+    :root {
+      /* 广色域下交给浏览器使用 HD 颜色管线，减少深色渐变条带 */
+      --stage-light-core: color(display-p3 0.60 0.46 0.20);
+      --stage-light-soft: color(display-p3 0.39 0.29 0.12);
+      --stage-light-mid: color(display-p3 0.20 0.14 0.06);
+      --stage-vignette-mid: color(display-p3 0.84 0.78 0.70);
+      --stage-vignette-edge: color(display-p3 0.61 0.53 0.44);
+    }
+  }
 }

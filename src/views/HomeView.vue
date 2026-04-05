@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWorldStore } from '@/stores/worldStore'
 import { useGameStore, type SaveSlot } from '@/stores/gameStore'
@@ -11,8 +11,15 @@ const gameStore = useGameStore()
 
 const saveSlots = ref<(SaveSlot | null)[]>([])
 
+/** 开场动画状态 */
+const sceneReady = ref(false)
+
 onMounted(() => {
   refreshSaves()
+  // 等下一帧再触发开场动画，确保 DOM 已渲染
+  nextTick(() => {
+    requestAnimationFrame(() => { sceneReady.value = true })
+  })
 })
 
 function refreshSaves() {
@@ -73,22 +80,20 @@ const autoSlot = ref<SaveSlot | null>(null)
 </script>
 
 <template>
-  <div class="page-container home">
+  <div class="page-container home" :class="{ 'scene-enter': sceneReady }">
     <!-- 英雄区 -->
     <section class="hero">
       <div class="hero-glow"></div>
-      <h2 class="hero-title animate-fade-in">
-        <GameIcon name="sparkle" size="2.5rem" class="hero-icon" />
-        <br />
-        转生吧
-      </h2>
-      <p class="hero-subtitle animate-slide-up">
-        在异世界开始你的第二人生
-      </p>
+      <div class="hero-emblem entrance-1">
+        <GameIcon name="sparkle" size="3rem" class="hero-icon" />
+      </div>
+      <h2 class="hero-title entrance-2">转生吧</h2>
+      <p class="hero-subtitle entrance-3">在异世界开始你的第二人生</p>
+      <div class="hero-divider entrance-3"></div>
     </section>
 
     <!-- 自动存档 / 继续游戏 -->
-    <section v-if="saveSlots[0]" class="save-section">
+    <section v-if="saveSlots[0]" class="save-section entrance-4">
       <h3 class="section-title">继续游戏</h3>
       <div class="save-card card card-glow" @click="continueGame(0)">
         <div class="save-icon"><GameIcon name="book" size="1.5rem" /></div>
@@ -105,13 +110,13 @@ const autoSlot = ref<SaveSlot | null>(null)
     </section>
 
     <!-- 世界选择 -->
-    <section class="world-section">
+    <section class="world-section entrance-5">
       <h3 class="section-title">选择你的世界</h3>
       <div class="world-list">
         <div
           v-for="world in worldStore.worlds"
           :key="world.manifest.id"
-          class="world-card card card-glow stagger-item"
+          class="world-card card light-sweep"
           @click="startGame(world.manifest.id)"
         >
           <div class="world-icon">{{ world.manifest.icon }}</div>
@@ -129,7 +134,7 @@ const autoSlot = ref<SaveSlot | null>(null)
     </section>
 
     <!-- 存档管理 -->
-    <section class="save-section">
+    <section class="save-section entrance-6">
       <h3 class="section-title">存档管理</h3>
       <div class="manual-slots">
         <div
@@ -160,7 +165,7 @@ const autoSlot = ref<SaveSlot | null>(null)
     </section>
 
     <!-- 底部信息 -->
-    <footer class="home-footer">
+    <footer class="home-footer entrance-6">
       <p class="text-muted text-sm text-center">
         v{{ appVersion }} &middot; 剑与魔法
       </p>
@@ -174,11 +179,39 @@ const autoSlot = ref<SaveSlot | null>(null)
   padding-bottom: var(--space-2xl);
 }
 
-/* 英雄区 */
+/* ==================== 开场入场动画系统 ==================== */
+
+/* 各入场元素初始状态：透明 + 向上偏移 */
+.entrance-1,
+.entrance-2,
+.entrance-3,
+.entrance-4,
+.entrance-5,
+.entrance-6 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+              transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* 场景就绪后各元素依次浮现 */
+.scene-enter .entrance-1 { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.scene-enter .entrance-2 { opacity: 1; transform: translateY(0); transition-delay: 0.35s; }
+.scene-enter .entrance-3 { opacity: 1; transform: translateY(0); transition-delay: 0.55s; }
+.scene-enter .entrance-4 { opacity: 1; transform: translateY(0); transition-delay: 0.75s; }
+.scene-enter .entrance-5 { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
+.scene-enter .entrance-6 { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+
+/* ==================== 英雄区 ==================== */
 .hero {
   text-align: center;
-  padding: var(--space-2xl) 0 var(--space-xl);
+  padding: var(--space-2xl) 0 var(--space-lg);
   position: relative;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-glow {
@@ -186,39 +219,62 @@ const autoSlot = ref<SaveSlot | null>(null)
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
   background:
-    radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 40%, rgba(201, 162, 39, 0.12) 0%, transparent 70%);
+    radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 40%, rgba(201, 162, 39, 0.14) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   animation: candleFlicker 4s ease-in-out infinite;
 }
 
+/* 星星徽章 */
+.hero-emblem {
+  position: relative;
+  color: var(--text-gold);
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.5));
+  margin-bottom: var(--space-md);
+}
+
 .hero-icon {
   display: block;
-  margin: 0 auto var(--space-sm);
   color: var(--text-gold);
-  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.4));
 }
 
 .hero-title {
   font-family: var(--font-title);
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 800;
   color: var(--text-gold);
-  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-  margin-bottom: var(--space-sm);
-  letter-spacing: 2px;
+  text-shadow: 0 0 24px rgba(251, 191, 36, 0.35);
+  margin-bottom: var(--space-xs);
+  letter-spacing: 4px;
 }
 
 .hero-subtitle {
   color: var(--text-secondary);
   font-size: 1rem;
+  letter-spacing: 2px;
 }
 
-/* 区域标题 */
+/* 英雄区装饰分隔线 */
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  margin-top: var(--space-lg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary-dark) 30%,
+    var(--color-primary) 50%,
+    var(--color-primary-dark) 70%,
+    transparent
+  );
+  opacity: 0.5;
+}
+
+/* ==================== 区域标题 ==================== */
 .section-title {
   font-family: var(--font-title);
   font-size: 1.1rem;
@@ -238,7 +294,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   border-radius: 2px;
 }
 
-/* 世界列表 */
+/* ==================== 世界选择 ==================== */
 .world-section {
   margin-top: var(--space-xl);
 }
@@ -257,6 +313,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   padding: var(--space-lg);
   position: relative;
   overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .world-card::before {
@@ -268,6 +325,10 @@ const autoSlot = ref<SaveSlot | null>(null)
   transition: opacity var(--transition-normal);
 }
 
+.world-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card), 0 0 20px rgba(201, 162, 39, 0.08);
+}
 .world-card:hover::before {
   opacity: 1.5;
 }
@@ -326,9 +387,14 @@ const autoSlot = ref<SaveSlot | null>(null)
   font-size: 1.2rem;
   color: var(--text-muted);
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+.world-card:hover .world-arrow {
+  transform: translateX(3px);
+  color: var(--text-gold);
 }
 
-/* 继续游戏区域 */
+/* ==================== 继续游戏 / 存档 ==================== */
 .save-section {
   margin-top: var(--space-lg);
 }
@@ -344,6 +410,7 @@ const autoSlot = ref<SaveSlot | null>(null)
   gap: var(--space-md);
   cursor: pointer;
   padding: var(--space-md) var(--space-lg);
+  transition: transform var(--transition-fast);
 }
 
 .save-card:active {
@@ -449,5 +516,15 @@ const autoSlot = ref<SaveSlot | null>(null)
 
 .home-footer {
   margin-top: var(--space-2xl);
+}
+
+/* ==================== 无障碍 ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .entrance-1, .entrance-2, .entrance-3,
+  .entrance-4, .entrance-5, .entrance-6 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 </style>
