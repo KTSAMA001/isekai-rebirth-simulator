@@ -29,6 +29,8 @@ const yearPhase = computed(() => currentYearResult.value?.phase ?? null)
 
 // 年度日志（用于 EventScene 展示效果）
 const currentLogEntry = computed(() => currentYearResult.value?.logEntry)
+const isSceneTyping = ref(false)
+const eventSceneRef = ref<{ skipTyping: () => void } | null>(null)
 
 // 是否显示"继续"按钮
 const showContinue = computed(() => {
@@ -40,6 +42,11 @@ const showContinue = computed(() => {
 // 是否显示选择面板
 const showChoices = computed(() => {
   return currentYearResult.value?.phase === 'awaiting_choice'
+})
+
+const continueLabel = computed(() => {
+  if (isFinished.value) return '查看结局'
+  return isSceneTyping.value ? '跳过文本' : '继续'
 })
 
 const isFinished = computed(() => state.value?.phase === 'finished')
@@ -131,11 +138,20 @@ function selectBranch(branchId: string) {
 
 /** 继续（直接推进到下一个交互节点） */
 function continueNext() {
+  if (isSceneTyping.value) {
+    eventSceneRef.value?.skipTyping()
+    return
+  }
+
   if (isFinished.value) {
     checkFinished()
     return
   }
   advanceToNextInteraction()
+}
+
+function handleTypingStateChange(value: boolean) {
+  isSceneTyping.value = value
 }
 
 /** 检查是否结束 */
@@ -188,12 +204,13 @@ function saveGame(slotId: number) {
     <div class="sim-scroll-area">
       <!-- 主事件区域 -->
       <EventScene
+        ref="eventSceneRef"
         :event="currentEvent"
         :log-entry="currentLogEntry"
         :year-phase="yearPhase"
         :risk-rolled="currentYearResult?.riskRolled"
         :is-success="currentYearResult?.isSuccess"
-        @typing-done="() => {}"
+        @typing-state-change="handleTypingStateChange"
       />
 
       <!-- 选择面板 -->
@@ -209,7 +226,7 @@ function saveGame(slotId: number) {
     <!-- 继续按钮 -->
     <div v-if="showContinue" class="continue-bar">
       <button class="continue-btn" @click="continueNext">
-        {{ isFinished ? '查看结局' : '继续' }}
+        {{ continueLabel }}
       </button>
     </div>
 

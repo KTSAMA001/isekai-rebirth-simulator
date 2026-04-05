@@ -360,6 +360,62 @@
     ]
   },
   {
+    "id": "adult_first_child",
+    "title": "初为人父母",
+    "description": "家里传来了新生儿的啼哭。你第一次真正意识到，自己的人生从此不再只属于自己。",
+    "minAge": 24,
+    "maxAge": 42,
+    "weight": 12,
+    "include": "has.flag.married",
+    "exclude": "has.flag.parent | has.flag.widowed",
+    "unique": true,
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "parent",
+        "value": 1,
+        "description": "为人父母"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -2,
+        "description": "养育孩子的开销"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": -1,
+        "description": "照顾孩子的劳累"
+      }
+    ],
+    "tag": "life",
+    "priority": "minor",
+    "routes": [
+      "*"
+    ],
+    "genderVariants": {
+      "male": {
+        "title": "成为父亲",
+        "description": "当婴儿第一次在你怀里安静下来时，你忽然明白了责任的重量。从今往后，你不只是丈夫，也是一个父亲了。"
+      },
+      "female": {
+        "title": "成为母亲",
+        "description": "你抱着刚来到这个世界的小生命，疲惫得几乎睁不开眼，却仍感到一种前所未有的坚定。你的人生，被重新命名了。"
+      }
+    }
+  },
+  {
     "id": "merchant_career",
     "title": "商路崛起",
     "description": "你的生意越做越大，开始涉足跨城贸易。路上的商队、海盗、税收官——每一个都是考验。",

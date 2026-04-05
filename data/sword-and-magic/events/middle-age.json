@@ -1088,6 +1088,12 @@
             "description": "养子女"
           },
           {
+            "type": "set_flag",
+            "target": "parent",
+            "value": 1,
+            "description": "成为父母"
+          },
+          {
             "type": "modify_attribute",
             "target": "str",
             "value": -1,

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '@/stores/gameStore'
 import { useWorldStore } from '@/stores/worldStore'
 import { useProgressStore } from '@/stores/progressStore'
 import FinalGrade from '@/components/result/FinalGrade.vue'
-import { exportAsJSON, exportAsText, copyChronicleToClipboard } from '@/utils/export'
+import { exportAsJSON, exportAsText, copyChronicleToClipboard, copyTextToClipboard } from '@/utils/export'
+import {
+  DEFAULT_OPENCLAW_ENDPOINT,
+  explainOpenClawError,
+  generateStorySource,
+  loadOpenClawSettings,
+  requestOpenClawStory,
+  saveOpenClawSettings,
+} from '@/utils/story'
 
 const props = defineProps<{
   worldId: string
@@ -57,16 +65,7 @@ const peakStats = computed(() => {
     }))
 })
 
-// 关键事件（选取有意义的）
-const keyEvents = computed(() => {
-  if (!state.value) return []
-  return state.value.eventLog.filter((_, i) => {
-    // 每隔几个取一个，或取最后几个
-    const total = state.value!.eventLog.length
-    if (total <= 10) return true
-    return i < 3 || i > total - 4 || i % Math.floor(total / 8) === 0
-  })
-})
+const chronicleEntries = computed(() => state.value?.eventLog ?? [])
 
 // 已解锁成就
 const unlockedAchievements = computed(() => {
@@ -92,6 +91,18 @@ function rarityEmoji(r: string): string {
 
 // 导出功能
 const copySuccess = ref(false)
+const storySourceCopied = ref(false)
+const generatedStory = ref('')
+const storyError = ref('')
+const isGeneratingStory = ref(false)
+const showOpenClawSettings = ref(false)
+const openClawEndpoint = ref(DEFAULT_OPENCLAW_ENDPOINT)
+const openClawToken = ref('')
+
+const storySource = computed(() => {
+  if (!state.value || !world.value) return ''
+  return generateStorySource(state.value, world.value)
+})
 
 function handleExportJSON() {
   if (!state.value) return
@@ -111,6 +122,57 @@ async function handleCopyChronicle() {
     setTimeout(() => { copySuccess.value = false }, 2000)
   }
 }
+
+async function handleCopyStorySource() {
+  if (!storySource.value) return
+  const ok = await copyTextToClipboard(storySource.value)
+  if (ok) {
+    storySourceCopied.value = true
+    setTimeout(() => { storySourceCopied.value = false }, 2000)
+  }
+}
+
+async function handleGenerateStory() {
+  if (!storySource.value) return
+
+  if (!openClawEndpoint.value.trim()) {
+    storyError.value = '请先填写 OpenClaw 地址'
+    showOpenClawSettings.value = true
+    return
+  }
+  if (!openClawToken.value.trim()) {
+    storyError.value = '请先填写 OpenClaw Token'
+    showOpenClawSettings.value = true
+    return
+  }
+
+  isGeneratingStory.value = true
+  storyError.value = ''
+  try {
+    generatedStory.value = await requestOpenClawStory({
+      endpoint: openClawEndpoint.value,
+      token: openClawToken.value,
+      sourceText: storySource.value,
+    })
+  } catch (error) {
+    storyError.value = explainOpenClawError(error)
+  } finally {
+    isGeneratingStory.value = false
+  }
+}
+
+onMounted(() => {
+  const settings = loadOpenClawSettings()
+  openClawEndpoint.value = settings.endpoint
+  openClawToken.value = settings.token
+})
+
+watch([openClawEndpoint, openClawToken], () => {
+  saveOpenClawSettings({
+    endpoint: openClawEndpoint.value,
+    token: openClawToken.value,
+  })
+})
 </script>
 
 <template>
@@ -163,13 +225,29 @@ async function handleCopyChronicle() {
     </section>
 
     <!-- 人生回顾 -->
-    <section v-if="keyEvents.length > 0" class="section">
-      <h3 class="section-title">人生回顾</h3>
+    <section v-if="chronicleEntries.length > 0" class="section">
+      <h3 class="section-title">人生编年史</h3>
       <div class="timeline">
-        <div v-for="(evt, i) in keyEvents" :key="i" class="timeline-item">
+        <div v-for="(evt, i) in chronicleEntries" :key="`${evt.eventId}-${i}`" class="timeline-item">
           <div class="timeline-age">{{ evt.age }}岁</div>
           <div class="timeline-content">
             <div class="timeline-title">{{ evt.title }}</div>
+            <div v-if="evt.description" class="timeline-desc">{{ evt.description }}</div>
+            <div v-if="evt.branchTitle" class="timeline-branch">选择：{{ evt.branchTitle }}</div>
+            <div v-if="evt.branchDescription" class="timeline-branch-desc">{{ evt.branchDescription }}</div>
+            <div v-if="evt.resultText" class="timeline-result" :class="evt.riskRolled ? (evt.isSuccess ? 'success' : 'failure') : ''">
+              {{ evt.resultText }}
+            </div>
+            <div v-if="evt.effects.length > 0" class="timeline-effects">
+              <span
+                v-for="(effect, effectIndex) in evt.effects"
+                :key="effectIndex"
+                class="timeline-effect-chip"
+                :class="effect.includes('-') ? 'negative' : 'positive'"
+              >
+                {{ effect }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -224,6 +302,57 @@ async function handleCopyChronicle() {
       </div>
     </section>
 
+    <section class="section">
+      <h3 class="section-title">OpenClaw 故事生成</h3>
+      <p class="section-hint">
+        会把当前世界书与完整人生编年史整理后发送到你配置的 OpenClaw 地址。地址与 Token 仅保存在当前浏览器。
+      </p>
+
+      <button class="btn btn-export settings-toggle" @click="showOpenClawSettings = !showOpenClawSettings">
+        {{ showOpenClawSettings ? '收起连接设置' : '展开连接设置' }}
+      </button>
+
+      <div v-if="showOpenClawSettings" class="openclaw-settings card">
+        <label class="field-label" for="openclaw-endpoint">OpenClaw 地址</label>
+        <input
+          id="openclaw-endpoint"
+          v-model.trim="openClawEndpoint"
+          class="field-input"
+          type="text"
+          placeholder="http://127.0.0.1:18789/v1/responses"
+        >
+
+        <label class="field-label" for="openclaw-token">OpenClaw Token</label>
+        <input
+          id="openclaw-token"
+          v-model="openClawToken"
+          class="field-input"
+          type="password"
+          placeholder="Bearer Token"
+        >
+
+        <div class="field-hint">
+          已验证 Responses API 可用，模型名固定为 openclaw。若部署版页面提示网络错误，通常是目标地址未开启浏览器跨域访问。
+        </div>
+      </div>
+
+      <div class="export-grid">
+        <button class="btn btn-export" @click="handleCopyStorySource">
+          {{ storySourceCopied ? '✓ 已复制素材' : '📚 复制世界书+编年史' }}
+        </button>
+        <button class="btn btn-export" :disabled="isGeneratingStory" @click="handleGenerateStory">
+          {{ isGeneratingStory ? '生成中…' : '🪶 发送到 OpenClaw 生成故事' }}
+        </button>
+      </div>
+
+      <div v-if="storyError" class="story-error">{{ storyError }}</div>
+
+      <div v-if="generatedStory" class="story-output card">
+        <div class="story-output-title">OpenClaw 生成结果</div>
+        <pre class="story-output-text">{{ generatedStory }}</pre>
+      </div>
+    </section>
+
     <!-- 操作 -->
     <div class="result-actions">
       <button class="btn btn-gold btn-block" @click="playAgain">再来一局</button>
@@ -272,6 +401,13 @@ async function handleCopyChronicle() {
   font-size: 1rem;
   color: var(--text-gold);
   margin-bottom: var(--space-md);
+}
+
+.section-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
 }
 
 /* 属性峰值 */
@@ -373,6 +509,55 @@ async function handleCopyChronicle() {
   font-weight: 600;
 }
 
+.timeline-desc,
+.timeline-branch-desc,
+.timeline-result {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.timeline-branch {
+  margin-top: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-gold);
+}
+
+.timeline-result.success {
+  color: var(--color-success);
+}
+
+.timeline-result.failure {
+  color: var(--color-danger);
+}
+
+.timeline-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.timeline-effect-chip {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.timeline-effect-chip.positive {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-success);
+}
+
+.timeline-effect-chip.negative {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--color-danger);
+}
+
 /* 人生评价 */
 .eval-list {
   display: flex;
@@ -471,7 +656,72 @@ async function handleCopyChronicle() {
   color: var(--text-primary);
 }
 
+.btn-export:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .btn-export:active {
   transform: scale(0.97);
+}
+
+.settings-toggle {
+  margin-bottom: var(--space-sm);
+}
+
+.openclaw-settings {
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.field-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.field-hint {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.story-error {
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--color-danger);
+  line-height: 1.5;
+}
+
+.story-output {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+}
+
+.story-output-title {
+  font-weight: 700;
+  color: var(--text-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.story-output-text {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--text-primary);
 }
 </style>

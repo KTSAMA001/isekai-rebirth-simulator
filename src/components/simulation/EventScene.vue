@@ -13,22 +13,37 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   typingDone: []
+  typingStateChange: [value: boolean]
 }>()
 
-const { displayed, type, reset } = useTypewriter(35)
+const { displayed, isTyping, type, skip, reset } = useTypewriter(35)
+
+function skipTyping() {
+  skip()
+}
+
+defineExpose({
+  skipTyping,
+})
+
+watch(isTyping, (value, oldValue) => {
+  emit('typingStateChange', value)
+  if (oldValue && !value) {
+    emit('typingDone')
+  }
+})
 
 watch(() => props.event, async (newEvent) => {
   reset()
   if (newEvent) {
     await type(newEvent.description)
-    emit('typingDone')
   }
 }, { immediate: true })
 
 watch(() => props.yearPhase, (phase) => {
   if (phase === 'mundane_year') {
     reset()
-    type('什么特别的事都没发生，平平淡淡地度过了。').then(() => emit('typingDone'))
+    void type('什么特别的事都没发生，平平淡淡地度过了。')
   }
 })
 </script>

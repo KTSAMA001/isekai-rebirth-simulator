@@ -69,7 +69,7 @@
     "minAge": 70,
     "maxAge": 88,
     "weight": 4,
-    "include": "attribute.spr >= 8",
+    "include": "attribute.spr >= 8 & has.flag.parent",
     "unique": true,
     "effects": [
       {
@@ -2385,8 +2385,7 @@
         "target": "spr",
         "value": 2
       }
-    ],
-    "include": ""
+    ]
   },
   {
     "id": "elder_unexpected_visitor",
@@ -2412,8 +2411,7 @@
         "target": "chr",
         "value": 1
       }
-    ],
-    "include": ""
+    ]
   },
   {
     "id": "elder_dream_fulfilled",
@@ -2588,8 +2586,7 @@
         "target": "spr",
         "value": 2
       }
-    ],
-    "include": ""
+    ]
   },
   {
     "id": "human_village_elder",
@@ -3397,8 +3394,7 @@
         "target": "chr",
         "value": 1
       }
-    ],
-    "include": ""
+    ]
   },
   {
     "id": "elf_starlight_legacy",

@@ -148,6 +148,16 @@ export async function copyChronicleToClipboard(state: GameState, world?: WorldIn
   }
 }
 
+/** 复制任意文本到剪贴板 */
+export async function copyTextToClipboard(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    return false
+  }
+}
+
 // ==================== 工具函数 ====================
 
 function downloadBlob(blob: Blob, filename: string): void {

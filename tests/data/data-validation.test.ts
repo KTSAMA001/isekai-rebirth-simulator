@@ -209,6 +209,31 @@ describe('数据文件校验', () => {
       expect(twinEvent).toBeDefined()
       expect(twinEvent.include).toContain('has.talent.twin_souls')
     })
+
+    it('parent 状态既可由婚后生育获得，也可由收养获得', () => {
+      const childbirthEvent = allEvents.find((e: any) => e.id === 'adult_first_child')
+      expect(childbirthEvent).toBeDefined()
+      expect(childbirthEvent.include).toContain('has.flag.married')
+      expect(childbirthEvent.exclude).toContain('has.flag.parent')
+      expect(childbirthEvent.effects.some((fx: any) => fx.type === 'set_flag' && fx.target === 'parent')).toBe(true)
+
+      const adoptEvent = allEvents.find((e: any) => e.id === 'mid_adopt_orphan')
+      const adoptBranch = adoptEvent?.branches?.find((branch: any) => branch.id === 'adopt_take')
+      expect(adoptBranch).toBeDefined()
+      expect(adoptBranch.effects.some((fx: any) => fx.type === 'set_flag' && fx.target === 'parent')).toBe(true)
+    })
+
+    it('家庭相关晚年事件必须要求 parent 状态', () => {
+      const peacefulEnd = allEvents.find((e: any) => e.id === 'peaceful_end')
+      const grandchildStory = allEvents.find((e: any) => e.id === 'human_grandchild_story')
+      const familyPhoto = allEvents.find((e: any) => e.id === 'human_family_photo')
+      const grandchildLaughter = allEvents.find((e: any) => e.id === 'human_grandchild_laughter')
+
+      expect(peacefulEnd.include).toContain('has.flag.parent')
+      expect(grandchildStory.include).toBe('has.flag.parent')
+      expect(familyPhoto.include).toBe('has.flag.parent')
+      expect(grandchildLaughter.include).toBe('has.flag.parent')
+    })
   })
 
   describe('achievements.json', () => {
