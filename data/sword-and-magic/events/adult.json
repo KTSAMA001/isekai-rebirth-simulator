@@ -12000,5 +12000,190 @@
         "description": "你窝里的地盘遇到了一件反复拖着没人处理的麻烦事。可能是漏水、塌洞、分赃不均，最后大家骂骂咧咧地吵了一圈，还是把目光投向了你。"
       }
     }
+  },
+  {
+    "id": "adult_dwarf_masterwork",
+    "title": "打造传世之作",
+    "description": "矮人一生是否值得被铭记，常常要看有没有一件真正属于自己的作品。到了这个年纪，你终于决定把多年的技艺、脾气和名字都敲进一件作品里。",
+    "minAge": 60,
+    "maxAge": 95,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_master_smith | has.flag.dwarf_master_keeper | has.flag.dwarf_master_miner",
+    "branches": [
+      {
+        "id": "adult_dwarf_masterwork_br0",
+        "title": "锻成最可靠的兵甲",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_masterwork",
+            "value": true,
+            "description": "完成一件值得铭记的作品"
+          }
+        ],
+        "description": "你决定做一件真正能陪主人活过战火与年月的兵甲。它也许不华丽，却足以让很多人记住你的手艺。"
+      },
+      {
+        "id": "adult_dwarf_masterwork_br1",
+        "title": "做一套精巧的机关系统",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_masterwork",
+            "value": true,
+            "description": "完成一件值得铭记的作品"
+          }
+        ],
+        "description": "你把自己对矿井、门闸和锁扣的理解全融进一套机关里，让后来看见的人都忍不住低头研究它的构造。"
+      },
+      {
+        "id": "adult_dwarf_masterwork_br2",
+        "title": "修好要塞最重要的主炉",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_masterwork",
+            "value": true,
+            "description": "完成一件值得铭记的作品"
+          }
+        ],
+        "description": "你没有为自己锻一把名器，而是把最关键的主炉修到前所未有的稳定。很多老矮人都说，这同样配得上被写进石厅。"
+      }
+    ]
+  },
+  {
+    "id": "adult_dwarf_hold_alarm",
+    "title": "要塞警报",
+    "description": "某段矿区与外廊突然传来急促警报。也许是岩石巨人闯进了外层坑道，也许是火蜥蜴群受惊乱窜，总之铁砧要塞需要有人立刻做决定。",
+    "minAge": 70,
+    "maxAge": 110,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "adult_dwarf_hold_alarm_br0",
+        "title": "扛盾守住最窄的入口",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -2
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_hold_defender",
+            "value": true,
+            "description": "在要塞警报中亲自顶住前线"
+          }
+        ],
+        "description": "你知道宽阔处守不住，就把人手全压在最窄的口子上。铁与岩的轰鸣里，你硬是把第一波冲击给顶了回去。"
+      },
+      {
+        "id": "adult_dwarf_hold_alarm_br1",
+        "title": "指挥封锁与疏散",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_hold_defender",
+            "value": true,
+            "description": "在要塞警报中亲自顶住前线"
+          }
+        ],
+        "description": "你一边封闸、一边调人、一边让运矿车逆向腾出通道。等混乱过去时，很多人才意识到自己是被你一声声吼着保住的。"
+      },
+      {
+        "id": "adult_dwarf_hold_alarm_br2",
+        "title": "启动遗迹留下的旧机关",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_hold_defender",
+            "value": true,
+            "description": "在要塞警报中亲自顶住前线"
+          }
+        ],
+        "description": "你冒险启用了遗迹时代留下的老机关，巨响震得整段坑道都在发抖。它不够优雅，但在最关键的时候确实派上了用场。"
+      }
+    ]
   }
 ]

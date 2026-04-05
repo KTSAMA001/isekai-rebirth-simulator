@@ -1530,6 +1530,172 @@
     "requireGender": "female"
   },
   {
+    "id": "dwarf_stoneblood",
+    "name": "石脉之血",
+    "description": "龙族塑造矮人时，把山体的厚重、矿脉的韧性和熔岩的余温一并留在了血脉里。你天生就比多数人更经打，也更能扛住漫长劳作。",
+    "rarity": "common",
+    "icon": "🪨",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_forge_memory",
+    "name": "炉火传忆",
+    "description": "矮人的知识常沿着铁砧、锤痕和口授师承往下传。你总能从旧器物、旧工序和前人留下的火候里读出真正有用的经验。",
+    "rarity": "rare",
+    "icon": "🔥",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "智慧 +2"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mag",
+        "value": -1,
+        "description": "魔力 -1（更依赖手艺与经验）"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_male_shieldbeard",
+    "name": "盾须之勇",
+    "description": "许多矮人男性从少年起就被教导：先挡住第一下，再谈反击。能站稳的人，才有资格守住氏族的门。",
+    "rarity": "common",
+    "icon": "🛡️",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2,
+        "description": "体魄 +2"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "dwarf_male_tunnel_warden",
+    "name": "坑道守望",
+    "description": "在黑暗坑道里守夜久了，脚步、风向与落石前的细微颤动都会变成你的语言。你知道什么时候该前进，什么时候该叫停。",
+    "rarity": "rare",
+    "icon": "🏮",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 1,
+        "description": "体魄 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ],
+    "requireGender": "male"
+  },
+  {
+    "id": "dwarf_female_runekeeper",
+    "name": "炉纹巧手",
+    "description": "许多矮人女性自幼就在铭牌、账册、家徽和炉纹之间长大。她们熟悉的不只是符号本身，更是符号背后的火候、秩序与承诺。",
+    "rarity": "common",
+    "icon": "🧱",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "智慧 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ],
+    "requireGender": "female"
+  },
+  {
+    "id": "dwarf_female_clan_brewer",
+    "name": "氏族酒母",
+    "description": "在矮人的宴席与议事桌上，酒桶和炉火一样能稳住人心。谁掌握了酒曲、火候与敬杯的节奏，谁就更懂得如何维系氏族间的情面与信任。",
+    "rarity": "rare",
+    "icon": "🍺",
+    "effects": [
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "魅力 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1,
+        "description": "家境 +1"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 1,
+        "description": "灵魂 +1"
+      }
+    ],
+    "draftWeight": 0,
+    "requireRace": [
+      "dwarf"
+    ],
+    "requireGender": "female"
+  },
+  {
     "id": "wanderer_instinct",
     "name": "旅人的直觉",
     "description": "常年漂泊在外的人，总能在关键时刻察觉到危险和机遇。",

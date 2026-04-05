@@ -792,6 +792,126 @@
     ]
   },
   {
+    "id": "dwarf_dragon_vow_ach",
+    "name": "龙迹守誓者",
+    "description": "作为矮人，在龙族旧迹前立下守望誓言。",
+    "icon": "🐉",
+    "hidden": false,
+    "condition": "has.flag.dwarf_dragon_vow",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_masterwork_ach",
+    "name": "传世之作",
+    "description": "打造出足以让石厅记住的矮人作品。",
+    "icon": "🔨",
+    "hidden": false,
+    "condition": "has.flag.dwarf_has_masterwork",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_holdfast_ach",
+    "name": "铁砧壁垒",
+    "description": "在要塞警报中守住氏族与工坊。",
+    "icon": "🛡️",
+    "hidden": true,
+    "condition": "has.flag.dwarf_hold_defender",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_ore_whisperer",
+    "name": "矿脉低语者",
+    "description": "听见矿脉的呼唤，并真正把它变成氏族的收获。",
+    "icon": "⛏️",
+    "hidden": true,
+    "condition": "(has.flag.dwarf_master_miner | has.flag.dwarf_ore_sense) & event.count.youth_dwarf_ore_vein_call >= 1",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_hall_name",
+    "name": "名入石厅",
+    "description": "让自己的名字被刻入祖墙石厅，成为氏族共同记忆的一部分。",
+    "icon": "🪨",
+    "hidden": false,
+    "condition": "event.count.mid_dwarf_name_in_hall >= 1",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_apprentice_legacy",
+    "name": "师火相传",
+    "description": "留下传世作品，又把手艺真正传给下一代。",
+    "icon": "🏮",
+    "hidden": false,
+    "condition": "has.flag.dwarf_has_masterwork & has.flag.dwarf_has_apprentice",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_surface_broker",
+    "name": "山路与商路",
+    "description": "走过地表商路，也让矮人的作品与信誉被更多外族接受。",
+    "icon": "🛒",
+    "hidden": true,
+    "condition": "event.count.youth_dwarf_surface_caravan >= 1 & attribute.peak.mny >= 20",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_long_watch",
+    "name": "百年炉守",
+    "description": "作为矮人，活过150年的漫长岁月。",
+    "icon": "⌛",
+    "hidden": false,
+    "condition": "lifespan >= 150",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_forge_to_ember",
+    "name": "从炉边初啼到最后巡炉",
+    "description": "从出生时听着锤声，到晚年仍亲自走到主炉边。",
+    "icon": "🔥",
+    "hidden": true,
+    "condition": "event.count.birth_dwarf_forge_ember >= 1 & event.count.elder_dwarf_last_inspection >= 1",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
+    "id": "dwarf_dragonfire_legacy",
+    "name": "旧龙火仍在",
+    "description": "年轻时守望龙迹，年老后仍参与决定龙族遗产的去向。",
+    "icon": "🏔️",
+    "hidden": true,
+    "condition": "has.flag.dwarf_dragon_vow & event.count.elder_dwarf_dragonfire_watch >= 1",
+    "category": "矮人",
+    "races": [
+      "dwarf"
+    ]
+  },
+  {
     "id": "female_warrior",
     "name": "铁娘子",
     "description": "以女性之身成为骑士英雄",

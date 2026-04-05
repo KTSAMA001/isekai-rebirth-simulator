@@ -2081,5 +2081,72 @@
     "routes": [
       "*"
     ]
+  },
+  {
+    "id": "birth_dwarf_forge_ember",
+    "title": "炉边初啼",
+    "description": "你出生在铁砧要塞深处，产房外就是终年不熄的熔炉。长辈们说，矮人婴儿第一次听见的若是风箱与铁锤声，这一生多半会与炉火结缘。",
+    "minAge": 1,
+    "maxAge": 1,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "birth_dwarf_forge_ember_br0",
+        "title": "在炉火边安静下来",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_born_at_forge",
+            "value": true,
+            "description": "出生时便与炉火亲近"
+          }
+        ],
+        "description": "别的婴儿会被轰鸣声吓哭，你却在风箱鼓动与锤声起落间渐渐安静，像认出了这里本就该是你的地方。"
+      },
+      {
+        "id": "birth_dwarf_forge_ember_br1",
+        "title": "攥住那块温热矿石",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_ore_sense",
+            "value": true,
+            "description": "对矿脉有天然触感"
+          }
+        ],
+        "description": "有人把一块刚离矿车不久的温热矿石放到襁褓边，你的小手竟下意识抓得很紧，惹得屋里一阵大笑。"
+      }
+    ]
   }
 ]

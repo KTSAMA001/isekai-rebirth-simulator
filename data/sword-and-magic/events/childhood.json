@@ -4469,5 +4469,144 @@
         "description": "你偷偷把自己观测到的偏差也记了上去，觉得某颗星正在慢慢偏离古人的记录。"
       }
     ]
+  },
+  {
+    "id": "child_dwarf_first_hammer",
+    "title": "第一次握锤",
+    "description": "在铁砧要塞，孩子会很早接触真正的工具。某天，长辈把一柄比你手掌还重的小锤放到你面前，认真得像在交付一件圣物。",
+    "minAge": 4,
+    "maxAge": 12,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_dwarf_first_hammer_br0",
+        "title": "先练稳稳落锤",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你没急着追求火花四溅，只是一遍遍练习最基础的起手和落点，把手腕练得比同龄人更稳。"
+      },
+      {
+        "id": "child_dwarf_first_hammer_br1",
+        "title": "先学听炉火说话",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你发现真正难的不是挥锤，而是分辨火焰什么时候太躁、什么时候正好。长辈点点头，说你耳朵比手更早开窍。"
+      },
+      {
+        "id": "child_dwarf_first_hammer_br2",
+        "title": "偷偷敲自己的花纹",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你趁大人不注意，在废料片上敲出歪歪扭扭的记号。作品很稚嫩，但已经有了点只属于你的脾气。"
+      }
+    ]
+  },
+  {
+    "id": "child_dwarf_surface_fair",
+    "title": "第一次去地表集市",
+    "description": "跟随氏族商队去人类集市，是不少年轻矮人的必修课。地表的风、光和四通八达的道路让你浑身不自在，但铁砧要塞又离不开这些交易。",
+    "minAge": 8,
+    "maxAge": 16,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "child_dwarf_surface_fair_br0",
+        "title": "寸步不离商队",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "你把每一个货箱和每一张账单都盯得很紧，回去时已经记住了不少人类商人的讨价还价路数。"
+      },
+      {
+        "id": "child_dwarf_surface_fair_br1",
+        "title": "努力记住地表的方向",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你一路默背街口、旗帜和屋顶的形状，生怕自己一转弯就把氏族车队跟丢。虽然还是绕了两次路，但总算没闹大笑话。"
+      },
+      {
+        "id": "child_dwarf_surface_fair_br2",
+        "title": "盯着别人家的工艺看",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
+        ],
+        "description": "你对人类和哥布林摊位上的小机关看得格外认真，回山时脑子里已经装了一堆想改进的点子。"
+      }
+    ]
   }
 ]

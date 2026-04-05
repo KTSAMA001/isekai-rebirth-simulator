@@ -182,9 +182,9 @@
     "id": "dwarf",
     "name": "矮人",
     "icon": "⛏️",
-    "description": "坚韧的山中种族，精于锻造和采矿。",
-    "lore": "矮人王国深埋于群山之下，他们的锻炉从未熄灭。据说矮人的胡子每长一寸，锻造技艺就精进一分。他们固执、好酒、重义气，是最可靠的盟友，也是最难缠的敌人。",
-    "playable": false,
+    "description": "龙族创造的山中种族，居于炽焰山脉的铁砧要塞，擅长锻造、采矿与守护古老遗迹。",
+    "lore": "矮人世代居住在炽焰山脉的铁砧要塞，据说最初由龙族亲手创造，用来开采魔矿与看守遗迹。他们把炉火视作神圣象征，相信龙息化作炉焰，能照见一个工匠是否值得托付作品与誓言。矮人社会最看重的不是金币，而是作品、师承与信誉：一个师傅只带一个徒弟，一件传世之作足以让名字被石厅铭记百年。他们在地下几乎不会迷路，却常在地表道路上为方向发愁；但只要谈到矿脉、铁砧与守护龙族旧迹，他们依然是大陆上最可靠的一群人。",
+    "playable": true,
     "lifespanRange": [
       120,
       200
@@ -207,6 +207,38 @@
         "value": -5
       }
     ],
+    "genderModifiers": [
+      {
+        "gender": "male",
+        "attributeModifiers": [
+          {
+            "attributeId": "str",
+            "value": 2
+          }
+        ],
+        "exclusiveTalents": ["dwarf_male_shieldbeard", "dwarf_male_tunnel_warden"]
+      },
+      {
+        "gender": "female",
+        "attributeModifiers": [
+          {
+            "attributeId": "int",
+            "value": 1
+          },
+          {
+            "attributeId": "spr",
+            "value": 1
+          }
+        ],
+        "exclusiveTalents": ["dwarf_female_runekeeper", "dwarf_female_clan_brewer"]
+      }
+    ],
+    "exclusiveTalents": [
+      "dwarf_stoneblood",
+      "dwarf_forge_memory"
+    ],
+    "exclusiveRoutes": [],
+    "eventDir": "dwarf",
     "themeColor": "#d97706"
   },
   {

@@ -5873,5 +5873,173 @@
         "description": "某个安静的夜晚，你和同龄哥布林挤在洞口边，聊起以后是去黑市发财、混进人类城镇、加入盗贼团，还是当个能活很久的老滑头。"
       }
     }
+  },
+  {
+    "id": "teen_dwarf_choose_master",
+    "title": "拜师之日",
+    "description": "在矮人社会里，真正的成年往往从拜师开始。氏族长辈把你带到石厅中央，让你在众人面前选择未来要跟随的那位师傅。",
+    "minAge": 16,
+    "maxAge": 30,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "major",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "teen_dwarf_choose_master_br0",
+        "title": "跟锻炉师傅学火候",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_master_smith",
+            "value": true,
+            "description": "选择锻造一脉"
+          }
+        ],
+        "description": "你站到最老练的炉匠身前行礼，从今天起，风箱、铁砧和火候就是你每天都得面对的老师。"
+      },
+      {
+        "id": "teen_dwarf_choose_master_br1",
+        "title": "跟矿脉向导学听石",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_master_miner",
+            "value": true,
+            "description": "选择采矿一脉"
+          }
+        ],
+        "description": "你跟着最熟悉坑道回声的老矿工低头行礼，决定去学习怎么在黑暗里分辨矿脉、空洞和危险。"
+      },
+      {
+        "id": "teen_dwarf_choose_master_br2",
+        "title": "跟守库匠学铭文与账册",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_master_keeper",
+            "value": true,
+            "description": "选择守库记录一脉"
+          }
+        ],
+        "description": "你选择的不是最响亮的锤声，而是最安静的石柜、铭牌和账册。师傅说，真正的传承不只在武器里，也在记下名字和工序的人手里。"
+      }
+    ]
+  },
+  {
+    "id": "teen_dwarf_dragon_relic_vigil",
+    "title": "守望龙族旧迹",
+    "description": "每隔几年，年轻的矮人都会被带去炽焰山脉深处的古老遗迹守夜。没人知道沉睡的龙族是否真的还能听见，但仪式千百年来从未中断。",
+    "minAge": 20,
+    "maxAge": 35,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "teen_dwarf_dragon_relic_vigil_br0",
+        "title": "向遗迹行最庄重的礼",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_dragon_vow",
+            "value": true,
+            "description": "立下守望龙迹的誓言"
+          }
+        ],
+        "description": "你把额头轻轻抵在冰冷石壁上，按长辈教导默诵誓词，忽然觉得那些沉睡了太久的名字依然有重量。"
+      },
+      {
+        "id": "teen_dwarf_dragon_relic_vigil_br1",
+        "title": "研究遗迹的机关结构",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "与其只是跪拜，你更想知道这些机关究竟如何运作。你守了一夜，也悄悄把不少齿轮咬合和锁扣结构记进了心里。"
+      },
+      {
+        "id": "teen_dwarf_dragon_relic_vigil_br2",
+        "title": "记下每条通道与暗门",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你把敬畏转成最实际的工作，把每一条岔路、每一道暗门都默记下来，心想总有人会在未来用得上。"
+      }
+    ]
   }
 ]

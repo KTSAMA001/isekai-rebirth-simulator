@@ -4971,5 +4971,167 @@
         "description": "你曾经很熟悉的一处地方正在悄悄改变。也许是下水道被封了一截，也许是黑市搬了位置，连惯常藏东西的角落都开始让你认不出来。"
       }
     }
+  },
+  {
+    "id": "mid_dwarf_name_in_hall",
+    "title": "名字刻上石厅",
+    "description": "矮人的名字若能被刻进石厅，通常意味着他留下了足够分量的作品或功绩。看着石匠把你的姓氏一笔笔刻进岩壁，你忽然第一次真正意识到岁月已经走了多远。",
+    "minAge": 100,
+    "maxAge": 145,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_has_masterwork | has.flag.dwarf_hold_defender | has.flag.dwarf_reliable_name",
+    "branches": [
+      {
+        "id": "mid_dwarf_name_in_hall_br0",
+        "title": "把作品名刻在自己名前面",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你坚持先刻作品、后刻姓名，觉得真正值得被记住的不是你本人，而是那件能替你继续说话的东西。"
+      },
+      {
+        "id": "mid_dwarf_name_in_hall_br1",
+        "title": "把师傅的名字也一并刻上",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你不肯让自己的名字单独占一整块石面，执意要求把师傅的名字也一并刻上。石厅因此显得更厚重了几分。"
+      },
+      {
+        "id": "mid_dwarf_name_in_hall_br2",
+        "title": "把工序和誓词留给后来人",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你觉得空有名字没什么用，于是在石厅附页里仔细留下工序、材料和誓词，让后来的人能真正接住这份传承。"
+      }
+    ]
+  },
+  {
+    "id": "mid_dwarf_apprentice_oath",
+    "title": "轮到你收徒了",
+    "description": "师徒制是矮人社会真正的骨架。走到这个年纪，长辈们不再问你还能做出什么，而是问你愿不愿意把自己会的东西交给下一个名字。",
+    "minAge": 105,
+    "maxAge": 150,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "mid_dwarf_apprentice_oath_br0",
+        "title": "先把规矩立得很严",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_apprentice",
+            "value": true,
+            "description": "开始把手艺传给下一代"
+          }
+        ],
+        "description": "你从第一天起就把规矩讲得很重：火候不能糊弄，名字不能乱签，誓言不能随口说。徒弟苦着脸，但学得很快。"
+      },
+      {
+        "id": "mid_dwarf_apprentice_oath_br1",
+        "title": "带着他一起进坑道和工坊",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_apprentice",
+            "value": true,
+            "description": "开始把手艺传给下一代"
+          }
+        ],
+        "description": "你懒得讲空话，干脆直接带着徒弟去最热的工坊和最黑的坑道，让他在跟着你吃灰和烫手的过程中学会真本事。"
+      },
+      {
+        "id": "mid_dwarf_apprentice_oath_br2",
+        "title": "先教他什么叫信誉",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_has_apprentice",
+            "value": true,
+            "description": "开始把手艺传给下一代"
+          }
+        ],
+        "description": "你没先教锤法，而是先带徒弟去看那些因为偷工减料而被砸碎的旧器物。你告诉他，真正撑得久的从来不只是铁。"
+      }
+    ]
   }
 ]

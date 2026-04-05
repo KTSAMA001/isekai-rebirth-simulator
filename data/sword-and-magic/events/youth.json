@@ -8148,5 +8148,232 @@
         "description": "你接到一份只做几天或几周的临时差事。可能是替黑市望风、给商人搬货，或者钻进别人不愿去的狭窄地方，钱不多，但活总能长见识。"
       }
     }
+  },
+  {
+    "id": "youth_dwarf_ore_vein_call",
+    "title": "矿脉在呼唤",
+    "description": "深入坑道时，你忽然在脚底与掌心之间感到一种极轻微的震颤。老矿工们说，这就是矮人感知矿脉的位置时会有的感觉。",
+    "minAge": 28,
+    "maxAge": 55,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_master_miner | has.flag.dwarf_ore_sense",
+    "branches": [
+      {
+        "id": "youth_dwarf_ore_vein_call_br0",
+        "title": "亲手勘定这条矿脉",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          }
+        ],
+        "description": "你带着人一点点敲开岩层，最后真的找到了藏得极深的好矿。氏族的账房看你的眼神立刻不一样了。"
+      },
+      {
+        "id": "youth_dwarf_ore_vein_call_br1",
+        "title": "先把坑道加固好",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你没有急着动手挖，而是先检查支架、通风和回撤路线。矿石没跑，但一个稳妥的决定救下了好几条命。"
+      },
+      {
+        "id": "youth_dwarf_ore_vein_call_br2",
+        "title": "把功劳分给整支小队",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你坚持把发现矿脉的功劳记在整支小队名下。钱少拿了一点，但往后很多人都愿意跟你一起下最黑的那段坑道。"
+      }
+    ]
+  },
+  {
+    "id": "youth_dwarf_first_commission",
+    "title": "第一份真正的委托",
+    "description": "你终于接到一份能代表自己名号的正式委托。也许是为人类骑士打兵器、为商队修机关，或给要塞库房做一件必须经得起百年使用的东西。",
+    "minAge": 32,
+    "maxAge": 60,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_master_smith | has.flag.dwarf_master_keeper | has.flag.dwarf_born_at_forge",
+    "branches": [
+      {
+        "id": "youth_dwarf_first_commission_br0",
+        "title": "把它做成最耐用的",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "你不追求花哨，只求它能在风雨和战火里多撑十年。收货的人嘴上没夸，回头却默默又下了一单。"
+      },
+      {
+        "id": "youth_dwarf_first_commission_br1",
+        "title": "刻上誓词与家徽",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          }
+        ],
+        "description": "你把制作者的名字、用途和誓词刻进作品里，觉得真正的好东西就该让后来人知道它从哪里来。"
+      },
+      {
+        "id": "youth_dwarf_first_commission_br2",
+        "title": "坚持不偷工减料",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1
+          },
+          {
+            "type": "set_flag",
+            "target": "dwarf_reliable_name",
+            "value": true,
+            "description": "以信誉立住名号"
+          }
+        ],
+        "description": "你明知道掺点次料也没人看得出来，却还是把不合格的零件全砸回炉里。赚得少了些，名声却干净得发亮。"
+      }
+    ]
+  },
+  {
+    "id": "youth_dwarf_surface_caravan",
+    "title": "走一趟地表商路",
+    "description": "铁砧要塞离不开与人类王国的贸易。你被派去护送商队，第一次长时间走在没有岩顶和矿灯作参照的地表道路上，整个人都觉得别扭。",
+    "minAge": 35,
+    "maxAge": 65,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "",
+    "branches": [
+      {
+        "id": "youth_dwarf_surface_caravan_br0",
+        "title": "硬记地表的路标",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
+        ],
+        "description": "你一路背桥梁、驿站和路碑的位置，像学一门完全陌生的语言。虽然笨拙，但终究还是学会了几分地表人的走法。"
+      },
+      {
+        "id": "youth_dwarf_surface_caravan_br1",
+        "title": "只盯紧货箱和账目",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你承认自己在地表方向感不行，于是干脆把心思全放在货箱、账目和成交数字上。至少这些东西比路更不会骗人。"
+      },
+      {
+        "id": "youth_dwarf_surface_caravan_br2",
+        "title": "和人类商人把酒言欢",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 1
+          }
+        ],
+        "description": "你发现地表人未必懂锻造，但懂得买卖与面子。几杯酒下肚后，原本冷硬的交易也慢慢变成了可以长期往来的关系。"
+      }
+    ]
   }
 ]

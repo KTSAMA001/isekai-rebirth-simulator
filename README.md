@@ -26,6 +26,7 @@
 │   └── worlds/           # 世界观定义
 ├── data/                 # 游戏数据（事件、物品、天赋等）
 │   └── sword-and-magic/  # 「剑与魔法」世界数据
+│       └── lore/         # 世界书设定文档（种族、地理、势力、魔法体系、编年史）
 ├── tests/                # 测试用例
 ├── public/               # 静态资源 & PWA 图标
 ├── .github/workflows/    # CI/CD 工作流

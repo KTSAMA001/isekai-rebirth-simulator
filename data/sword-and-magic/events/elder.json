@@ -3684,5 +3684,144 @@
         "description": "部落又一次围着火堆开宴了。肉还是照样抢，酒还是照样呛，只是火堆边总有几个熟悉的位置，已经很久没人吵闹了。"
       }
     }
+  },
+  {
+    "id": "elder_dwarf_last_inspection",
+    "title": "最后一次巡炉",
+    "description": "年纪大了以后，很多矮人仍会坚持去主炉边走一圈，看看火色、听听风箱、摸摸铁砧。那不是不肯放手，只是想确认自己守了一辈子的东西还好好的。",
+    "minAge": 150,
+    "maxAge": 190,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "life",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_has_masterwork | has.flag.dwarf_has_apprentice",
+    "branches": [
+      {
+        "id": "elder_dwarf_last_inspection_br0",
+        "title": "亲手补上最后一锤",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          }
+        ],
+        "description": "你还是没忍住，亲手把某个细节又敲得更顺眼了些。旁边的年轻人哭笑不得，只能承认你对火候的执念确实有资格活这么久。"
+      },
+      {
+        "id": "elder_dwarf_last_inspection_br1",
+        "title": "把最后的诀窍讲给徒弟",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你把那些只会在火光角度、金属回音和手腕轻重之间传递的诀窍，一句一句讲给徒弟听，像把一段生命慢慢挪到另一个人身上。"
+      },
+      {
+        "id": "elder_dwarf_last_inspection_br2",
+        "title": "只是在炉边静静坐会儿",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          }
+        ],
+        "description": "你什么都没改，只是坐在熟悉的热浪边听锤声一下一下落下，觉得这一辈子大概已经没有什么非得再证明的了。"
+      }
+    ]
+  },
+  {
+    "id": "elder_dwarf_dragonfire_watch",
+    "title": "守着旧龙火的人",
+    "description": "又有人提起炽焰山脉深处那些沉睡的龙与遗迹。年轻矮人争论着未来该继续守、该更积极研究，还是该把更多秘密拿去和地表交换，而你成了被反复请来给意见的人。",
+    "minAge": 160,
+    "maxAge": 198,
+    "weight": 4,
+    "unique": true,
+    "races": [
+      "dwarf"
+    ],
+    "priority": "minor",
+    "tag": "social",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "include": "has.flag.dwarf_dragon_vow | has.flag.dwarf_hold_defender | has.flag.dwarf_has_masterwork",
+    "branches": [
+      {
+        "id": "elder_dwarf_dragonfire_watch_br0",
+        "title": "继续像祖辈那样守着",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你说遗迹之所以能留到今天，就是因为一代代人知道什么该守、什么不该碰。很多年轻人听完后，难得地没再急着争。"
+      },
+      {
+        "id": "elder_dwarf_dragonfire_watch_br1",
+        "title": "让年轻人也看看更大的世界",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          }
+        ],
+        "description": "你承认传统重要，但也提醒他们别把整座山活成一间密不透风的仓库。该守的守，该学地表人的地方也得学。"
+      },
+      {
+        "id": "elder_dwarf_dragonfire_watch_br2",
+        "title": "把这些争论都刻成故事",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
+        ],
+        "description": "你没有急着替后人做完所有决定，而是把这一代的分歧、犹豫和勇气全刻进石板里，留给更后面的人自己判断。"
+      }
+    ]
   }
 ]
