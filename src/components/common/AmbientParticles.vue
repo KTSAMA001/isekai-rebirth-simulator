@@ -26,17 +26,18 @@ interface Particle {
 
 /* ---------- 配置 ---------- */
 const CFG = {
-  maxParticles: 38,
-  spawnRate: 3.5,       // 每秒生成
-  minLife: 6,
-  maxLife: 16,
-  minSize: 1.2,
-  maxSize: 3.8,
-  fadeIn: 0.12,         // 前 12% 淡入
-  fadeOut: 0.18,        // 后 18% 淡出
-  glowScale: 5,         // 光晕半径 = 核心 × 此值
+  maxParticles: 14,
+  spawnRate: 1.2,       // 每秒生成
+  minLife: 8,
+  maxLife: 18,
+  minSize: 0.5,
+  maxSize: 1.8,
+  fadeIn: 0.20,         // 前 20% 淡入
+  fadeOut: 0.28,        // 后 28% 淡出
+  glowScale: 2.8,       // 光晕半径 = 核心 × 此值
   hueMin: 34,
   hueMax: 52,           // 金~琥珀
+  globalAlpha: 0.30,    // 全局透明度上限
 }
 
 /* ---------- 工具 ---------- */
@@ -68,7 +69,7 @@ function spawn(): Particle {
     driftSpeed: rand(0.3, 1.0),
     phase: rand(0, Math.PI * 2),
     hue: rand(CFG.hueMin, CFG.hueMax),
-    brightness: rand(0.55, 1),
+    brightness: rand(0.20, 0.45),
     twinkleSpeed: rand(2, 6),
     twinkleDepth: rand(0.05, 0.35),
   }
@@ -83,7 +84,7 @@ function alpha(p: Particle): number {
   else a = 1
   // 叠加闪烁
   const twinkle = 1 - p.twinkleDepth * (0.5 + 0.5 * Math.sin(p.age * p.twinkleSpeed))
-  return a * p.brightness * twinkle
+  return a * p.brightness * twinkle * CFG.globalAlpha
 }
 
 /* ---------- 更新 ---------- */
@@ -115,9 +116,9 @@ function draw() {
 
     // 外层柔光晕
     const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gr)
-    glow.addColorStop(0,   `hsla(${p.hue}, 80%, 68%, ${a * 0.35})`)
-    glow.addColorStop(0.35, `hsla(${p.hue}, 72%, 58%, ${a * 0.12})`)
-    glow.addColorStop(1,   `hsla(${p.hue}, 60%, 50%, 0)`)
+    glow.addColorStop(0,   `hsla(${p.hue}, 70%, 60%, ${a * 0.15})`)
+    glow.addColorStop(0.35, `hsla(${p.hue}, 65%, 52%, ${a * 0.04})`)
+    glow.addColorStop(1,   `hsla(${p.hue}, 55%, 45%, 0)`)
     ctx.fillStyle = glow
     ctx.beginPath()
     ctx.arc(p.x, p.y, gr, 0, Math.PI * 2)
@@ -125,8 +126,8 @@ function draw() {
 
     // 核心亮点
     const core = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r)
-    core.addColorStop(0, `hsla(${p.hue}, 50%, 92%, ${a * 0.9})`)
-    core.addColorStop(1, `hsla(${p.hue}, 80%, 65%, ${a * 0.25})`)
+    core.addColorStop(0, `hsla(${p.hue}, 45%, 85%, ${a * 0.45})`)
+    core.addColorStop(1, `hsla(${p.hue}, 70%, 58%, ${a * 0.08})`)
     ctx.fillStyle = core
     ctx.beginPath()
     ctx.arc(p.x, p.y, r, 0, Math.PI * 2)

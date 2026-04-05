@@ -1,6 +1,7 @@
 # 异世界重生模拟器 — 项目交接文档
 
-_更新时间：2026-04-01 22:00_
+_更新时间：2026-04-05_
+_当前版本：v0.6.5_
 
 ---
 
@@ -8,7 +9,7 @@ _更新时间：2026-04-01 22:00_
 
 **名称**：异世界重生模拟器（Isekai Rebirth Simulator）
 **类型**：文字冒险 + 人生模拟 + Galgame 模式
-**技术栈**：Vue 3 + Vite + TypeScript + Pinia + AJV（JSON Schema 校验）
+**技术栈**：Vue 3 + Vite 8 + TypeScript + Pinia + AJV（JSON Schema 校验）+ Canvas 2D（粒子特效）
 **项目路径**：`/Users/ktsama/Projects/isekai-rebirth-simulator/`
 
 ### 核心玩法
@@ -16,6 +17,7 @@ _更新时间：2026-04-01 22:00_
 仿"人生重开模拟器"的异世界题材文字游戏。玩家分配属性和天赋，然后在异世界中经历一生（从出生到死亡），通过选择事件分支影响人生走向，最终获得评级。
 
 支持**多世界观模块化切换**（当前世界观：剑与魔法 Sword & Magic）。
+支持**多种族**可选（当前 4 个可选种族 + 3 个待开放种族），每个种族有独立的寿命区间、属性加成、专属天赋和种族变体事件文案。
 
 ---
 
@@ -53,26 +55,27 @@ isekai-rebirth-simulator/
 │   └── utils/
 ├── data/sword-and-magic/          # 剑与魔法世界观数据
 │   ├── events/                    # 事件数据（按年龄段分文件）
-│   │   ├── birth.json              # 出生（5个事件）
-│   │   ├── childhood.json          # 童年（24个事件）
-│   │   ├── teenager.json           # 少年（27个事件）
-│   │   ├── youth.json              # 青年（50个事件）
-│   │   ├── adult.json              # 壮年（86个事件）
-│   │   ├── middle-age.json         # 中年（28个事件）
-│   │   └── elder.json              # 老年（27个事件）
-│   ├── lore/                      # 世界观设定（972行）
-│   │   ├── factions.md             # 势力（279行）
-│   │   ├── geography.md            # 地理（169行）
-│   │   ├── history.md              # 历史（194行）
-│   │   ├── magic-system.md         # 魔法体系（164行）
-│   │   └── races.md                # 种族（166行）
+│   │   ├── birth.json              # 出生（63个事件）
+│   │   ├── childhood.json          # 童年（77个事件）
+│   │   ├── teenager.json           # 少年（87个事件）
+│   │   ├── youth.json              # 青年（121个事件）
+│   │   ├── adult.json              # 壮年（161个事件）
+│   │   ├── middle-age.json         # 中年（78个事件）
+│   │   └── elder.json              # 老年（76个事件）
+│   ├── lore/                      # 世界观设定（1120行）
+│   │   ├── factions.md             # 势力
+│   │   ├── geography.md            # 地理
+│   │   ├── history.md              # 历史
+│   │   ├── magic-system.md         # 魔法体系
+│   │   └── races.md                # 种族
 │   ├── attributes.json             # 属性定义（7个可分配 + hidden组）
-│   ├── talents.json                # 天赋池（41个）
-│   ├── items.json                  # 物品（20个）
-│   ├── achievements.json           # 成就/称号（41个）
+│   ├── talents.json                # 天赋池（68个）
+│   ├── items.json                  # 物品（22个）
+│   ├── achievements.json           # 成就/称号（126个）
+│   ├── races.json                  # 种族定义（7个种族，4个可选）
 │   ├── presets.json                # 预设角色（6个）
 │   ├── rules.json                  # 评分规则和评级
-│   ├── evaluations.json            # 评价称号（41个，基于 flag/属性条件触发）
+│   ├── evaluations.json            # 评价称号（51个，基于 flag/属性条件触发）
 │   └── manifest.json               # 世界观元数据
 ├── scripts/                        # 测试和分析脚本
 │   ├── test-score-distribution.ts  # 主测试脚本（5性格×4局=20局，评分分布+分支统计）
