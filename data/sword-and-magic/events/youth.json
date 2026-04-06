@@ -372,7 +372,7 @@
     "description": "邻居家的孩子对你笑了，你的心脏像是被魔法定住了。",
     "minAge": 12,
     "maxAge": 15,
-    "weight": 8,
+    "weight": 12,
     "include": "attribute.chr >= 5",
     "exclude": "has.flag.first_love",
     "unique": true,
@@ -3346,7 +3346,7 @@
     "description": "你对那个人的心意越来越清晰了。也许，是时候迈出这一步了。",
     "minAge": 16,
     "maxAge": 25,
-    "weight": 5,
+    "weight": 8,
     "include": "has.flag.first_love",
     "exclude": "has.flag.heartbroken | has.flag.dating | has.flag.engaged | has.flag.married",
     "unique": true,
@@ -3449,7 +3449,7 @@
     "description": "你们已经在一起一段时间了，默契越来越好，也许可以更进一步。",
     "minAge": 18,
     "maxAge": 28,
-    "weight": 4,
+    "weight": 7,
     "include": "has.flag.dating",
     "exclude": "has.flag.engaged | has.flag.married",
     "unique": true,
@@ -5480,6 +5480,7 @@
     ],
     "effects": [],
     "include": "",
+    "exclude": "has.flag.first_love",
     "branches": [
       {
         "id": "youth_first_love_br0",
@@ -6327,7 +6328,7 @@
     "description": "在旅途中投宿的旅馆里，你遇到了一个有趣的人。你们聊了整晚。",
     "minAge": 18,
     "maxAge": 24,
-    "weight": 3,
+    "weight": 5,
     "unique": true,
     "races": [
       "human"
@@ -8461,6 +8462,329 @@
           }
         ],
         "description": "你发现地表人未必懂锻造，但懂得买卖与面子。几杯酒下肚后，原本冷硬的交易也慢慢变成了可以长期往来的关系。"
+      }
+    ]
+  },
+  {
+    "id": "cursed_wanderer_village_exile",
+    "title": "被村庄驱赶",
+    "description": "灾厄再次降临在村庄——庄稼枯萎、井水变黑、牲畜接连死亡。村民们终于把目光投向了你。「就是那个被诅咒的孩子带来的！」在愤怒和恐惧中，你被迫收拾行囊离开了唯一称为家的地方。",
+    "minAge": 7,
+    "maxAge": 14,
+    "weight": 6,
+    "include": "has.talent.cursed_wanderer",
+    "exclude": "has.flag.village_exiled",
+    "unique": true,
+    "priority": "major",
+    "tag": "destiny",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "cursed_exile_leave_silently",
+        "title": "默默离开",
+        "description": "你没有争辩，也没有回头。天还没亮，你就独自踏上了荒野小路。",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "village_exiled",
+            "value": true,
+            "description": "被村庄驱逐"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "丢失了大部分财产"
+          }
+        ],
+        "successText": "你走了很远之后才敢回头看一眼。炊烟升起的村庄在晨雾中渐渐模糊。从今以后，你只能靠自己了。"
+      },
+      {
+        "id": "cursed_exile_plead",
+        "title": "试图解释",
+        "description": "你跪在村长面前，恳求他们相信你与灾厄无关。",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1
+          },
+          {
+            "type": "set_flag",
+            "target": "village_exiled",
+            "value": true,
+            "description": "被村庄驱逐（解释无效）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "丢失了大部分财产"
+          }
+        ],
+        "successText": "村长沉默了很久，最终叹了口气：「孩子，不是我们不信你……但你留在这里，大家不会安心的。」"
+      },
+      {
+        "id": "cursed_exile_curse_back",
+        "title": "愤怒诅咒",
+        "description": "你们把不幸归咎于我？那就让你们看看什么是真正的诅咒！",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1
+          },
+          {
+            "type": "set_flag",
+            "target": "village_exiled",
+            "value": true,
+            "description": "被村庄驱逐（诅咒回击）"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -3,
+            "description": "仓皇出逃，损失惨重"
+          }
+        ],
+        "successText": "一股黑色的力量从你体内涌出，震碎了窗户。村民们惊恐地后退。当你恢复意识时，已经站在了村外的荒野中。你不知道刚才发生了什么，但手腕上多了一道诡异的纹路。"
+      }
+    ]
+  },
+  {
+    "id": "cursed_wanderer_wandering",
+    "title": "流亡之路",
+    "description": "离开村庄后，你在荒野中独自流浪了很久。饥饿、寒冷和孤独是你唯一的伙伴。但奇怪的是，每当你在绝境中快要放弃时，总会有某种力量将你拉回来。",
+    "minAge": 10,
+    "maxAge": 18,
+    "weight": 5,
+    "include": "has.talent.cursed_wanderer",
+    "exclude": "has.flag.wandering_survived",
+    "unique": true,
+    "priority": "major",
+    "tag": "destiny",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "cursed_wander_survive",
+        "title": "咬牙坚持",
+        "description": "你不打算就这样倒下。诅咒跟着你又如何？活着本身就是对命运最好的反抗。",
+        "probability": 0.5,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "wandering_survived",
+            "value": true,
+            "description": "在流亡中存活"
+          }
+        ],
+        "successText": "你学会了在野果中分辨毒与食，在星空下辨别方向，在寒风中生火。第三十天清晨，你终于看到了远处城镇的轮廓。你活着走出了荒野。"
+      },
+      {
+        "id": "cursed_wander_merchant",
+        "title": "投靠商队",
+        "description": "一支路过的商队收留了你。作为交换，你帮忙搬货和照看牲畜。",
+        "probability": 0.3,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "商队支付的报酬"
+          },
+          {
+            "type": "set_flag",
+            "target": "wandering_survived",
+            "value": true,
+            "description": "在流亡中存活（商队收留）"
+          }
+        ],
+        "successText": "商队老板是个和蔼的中年人，他拍了拍你的肩膀：「小子，路上的风浪见多了，什么诅咒不诅咒的，能干活的都是好人。」这是离开村庄后，你第一次感受到温暖。"
+      },
+      {
+        "id": "cursed_wander_embrace_curse",
+        "title": "拥抱诅咒",
+        "description": "如果诅咒让你无法停留，那就让你把它变成前进的力量。",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "wandering_survived",
+            "value": true,
+            "description": "在流亡中存活（接受诅咒）"
+          }
+        ],
+        "successText": "你伸出手，让那股黑色的力量沿着手臂流淌。它不再灼痛，反而像一只冰凉的手引导着你前行。当你睁开眼时，发现自己站在了一条从未见过的路上——也许诅咒之中，也藏着某种指引。"
+      }
+    ]
+  },
+  {
+    "id": "cursed_wanderer_forced_migration",
+    "title": "被迫迁徙",
+    "description": "你终于在一个边境小镇安顿了下来，但好景不长——当你身上的诅咒气息被发现后，居民们开始在夜里朝你的窗户扔石头。又一次，你必须离开。",
+    "minAge": 14,
+    "maxAge": 22,
+    "weight": 4,
+    "include": "has.talent.cursed_wanderer & has.flag.village_exiled",
+    "exclude": "has.flag.migration_accepted",
+    "unique": true,
+    "priority": "major",
+    "tag": "destiny",
+    "routes": [
+      "*"
+    ],
+    "effects": [],
+    "branches": [
+      {
+        "id": "cursed_migration_find_sanctuary",
+        "title": "寻找庇护所",
+        "description": "你听说在大陆的另一端，有一个接纳「被遗弃者」的秘密城镇。",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "migration_accepted",
+            "value": true,
+            "description": "找到庇护所"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "长途旅行的开销"
+          }
+        ],
+        "successText": "翻越三座山脉后，你终于看到了山谷中那座小镇。门口的石碑上刻着：「所有无处可去之人，此处即是归途。」你的眼眶湿润了。"
+      },
+      {
+        "id": "cursed_migration_lonely_road",
+        "title": "继续独行",
+        "description": "你已经习惯了。没有哪个地方会永远接纳你，但也没有哪个地方能困住你。",
+        "probability": 0.35,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "migration_accepted",
+            "value": true,
+            "description": "接受流浪命运"
+          }
+        ],
+        "successText": "你背起行囊，头也不回地走上了公路。身后的石子还在飞来，但你已经不在乎了。天大地大，总有你的容身之处——哪怕那只是一片星空下的草地。"
+      },
+      {
+        "id": "cursed_migration_confront",
+        "title": "不再逃避",
+        "description": "这一次，你决定直面诅咒的源头。也许找到施咒者，才能终结这一切。",
+        "probability": 0.25,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2,
+            "description": "调查诅咒的开销"
+          },
+          {
+            "type": "set_flag",
+            "target": "migration_accepted",
+            "value": true,
+            "description": "踏上追寻诅咒之源的道路"
+          }
+        ],
+        "successText": "你在镇上的古老图书馆里找到了一些线索——诅咒的源头指向一个名为「永夜之塔」的地方。你不知道那里有什么在等着你，但你的脚步不再犹豫。这一辈子，你第一次有了明确的方向。"
       }
     ]
   }
