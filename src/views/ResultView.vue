@@ -365,43 +365,51 @@ async function handleCopyStorySource() {
 /* 人生回顾时间线 */
 .timeline {
   position: relative;
-  padding-left: 40px;
+  --timeline-age-col: 56px;
+  --timeline-gap: 16px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 14px;
-  top: 0;
-  bottom: 0;
+  left: calc(var(--timeline-age-col) + 10px);
+  top: 8px;
+  bottom: 8px;
   width: 2px;
   background: var(--border-color);
 }
 
 .timeline-item {
   position: relative;
+  display: grid;
+  grid-template-columns: var(--timeline-age-col) minmax(0, 1fr);
+  column-gap: var(--timeline-gap);
+  align-items: start;
   margin-bottom: var(--space-md);
 }
 
 .timeline-age {
-  position: absolute;
-  left: -40px;
-  width: 28px;
+  position: relative;
+  width: auto;
   text-align: right;
-  font-size: 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
   color: var(--text-gold);
   font-weight: 600;
+  white-space: nowrap;
+  padding-top: 2px;
 }
 
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -27px;
+  left: calc(var(--timeline-age-col) + 10px);
   top: 6px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--color-primary);
+  transform: translateX(-50%);
 }
 
 .timeline-content {
@@ -409,6 +417,7 @@ async function handleCopyStorySource() {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: var(--space-sm) var(--space-md);
+  min-width: 0;
 }
 
 .timeline-title {
@@ -463,6 +472,22 @@ async function handleCopyStorySource() {
 .timeline-effect-chip.negative {
   background: rgba(239, 68, 68, 0.12);
   color: var(--color-danger);
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    --timeline-age-col: 46px;
+    --timeline-gap: 12px;
+  }
+
+  .timeline::before,
+  .timeline-item::before {
+    left: calc(var(--timeline-age-col) + 8px);
+  }
+
+  .timeline-age {
+    font-size: 0.72rem;
+  }
 }
 
 /* 人生评价 */
