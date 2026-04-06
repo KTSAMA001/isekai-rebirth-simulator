@@ -2653,6 +2653,7 @@
     "maxAge": 10,
     "weight": 3,
     "unique": true,
+    "exclude": "has.flag.noble_birth",
     "races": [
       "human"
     ],
@@ -2686,6 +2687,75 @@
           }
         ],
         "description": "你选择了告诉大人们，静静等待结果。"
+      }
+    ]
+  },
+  {
+    "id": "noble_etiquette_class",
+    "title": "贵族礼仪课",
+    "description": "作为贵族子弟，你必须学习繁琐的社交礼仪。如何行礼、如何用餐、如何与不同身份的人交谈——这些看似无用的知识，日后却成了你最趁手的工具。",
+    "minAge": 6,
+    "maxAge": 10,
+    "weight": 8,
+    "include": "has.flag.noble_birth",
+    "unique": true,
+    "tag": "social",
+    "effects": [
+      {"type": "modify_attribute", "target": "chr", "value": 2, "description": "社交礼仪"},
+      {"type": "modify_attribute", "target": "int", "value": 1, "description": "学到了贵族知识"}
+    ],
+    "branches": [
+      {
+        "id": "embrace_etiquette",
+        "title": "认真学习",
+        "description": "你认真对待每一堂课，连最细微的餐桌礼仪都烂熟于心。",
+        "effects": [
+          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "优雅得体"},
+          {"type": "set_flag", "target": "noble_educated", "value": 1, "description": "受过正式贵族教育"}
+        ]
+      },
+      {
+        "id": "sneak_out_play",
+        "title": "偷偷溜出去玩",
+        "description": "礼仪课太无聊了，你偷偷溜出去和庄园外的小孩一起玩。",
+        "effects": [
+          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "自由的快乐"},
+          {"type": "modify_attribute", "target": "chr", "value": -1, "description": "被训斥"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noble_childhood_tutor",
+    "title": "家庭教师",
+    "description": "父亲为你请了一位从王都来的家庭教师。他不仅教你读书写字，还讲了许多外面世界的故事。你第一次知道，庄园之外还有那么广阔的天地。",
+    "minAge": 4,
+    "maxAge": 7,
+    "weight": 7,
+    "include": "has.flag.noble_birth",
+    "unique": true,
+    "tag": "life",
+    "effects": [
+      {"type": "modify_attribute", "target": "int", "value": 2, "description": "启蒙教育"}
+    ],
+    "branches": [
+      {
+        "id": "love_stories",
+        "title": "爱上了那些故事",
+        "description": "你缠着老师讲了一个又一个冒险故事，心里种下了远行的种子。",
+        "effects": [
+          {"type": "modify_attribute", "target": "spr", "value": 2, "description": "对外面的向往"},
+          {"type": "modify_attribute", "target": "int", "value": 1, "description": "地理知识"}
+        ]
+      },
+      {
+        "id": "model_student",
+        "title": "认真学好每一课",
+        "description": "你安安静静地完成了所有功课，老师向父亲夸你是最用功的学生。",
+        "effects": [
+          {"type": "modify_attribute", "target": "int", "value": 3, "description": "学业优秀"},
+          {"type": "set_flag", "target": "noble_educated", "value": 1, "description": "受过正式贵族教育"}
+        ]
       }
     ]
   },
@@ -3551,6 +3621,7 @@
     "maxAge": 10,
     "weight": 4,
     "unique": true,
+    "exclude": "has.flag.noble_birth",
     "races": [
       "human"
     ],
@@ -3717,7 +3788,7 @@
     "minAge": 5,
     "maxAge": 80,
     "weight": 2,
-    "unique": false,
+    "unique": true,
     "priority": "minor",
     "tag": "life",
     "routes": [
@@ -3739,7 +3810,7 @@
     "minAge": 5,
     "maxAge": 80,
     "weight": 2,
-    "unique": false,
+    "unique": true,
     "priority": "minor",
     "tag": "life",
     "routes": [

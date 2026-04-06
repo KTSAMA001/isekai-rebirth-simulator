@@ -823,6 +823,7 @@
     "minAge": 40,
     "maxAge": 55,
     "weight": 2,
+    "exclude": "has.flag.demon_king_slayer",
     "effects": [],
     "branches": [
       {
@@ -968,6 +969,130 @@
         "description": "战争爆发了。对哥布林来说，战争意味着两件事：巨大的危险，和更巨大的商机。废铁价格飙升，情报变得值钱，而哥布林天生就是最好的侦察兵——因为没人会注意一个矮小的绿皮生物。"
       }
     }
+  },
+  {
+    "id": "war_aftermath",
+    "title": "战后动荡",
+    "description": "魔王虽已被击败，但其余党仍在各地兴风作浪。旧日的军阀趁机割据，战争再次来临。",
+    "minAge": 40,
+    "maxAge": 55,
+    "weight": 2,
+    "include": "has.flag.demon_king_slayer",
+    "exclude": "has.flag.war_aftermath_done",
+    "effects": [],
+    "branches": [
+      {
+        "id": "war_aftermath_frontline",
+        "title": "继续战斗",
+        "description": "你再次披甲上阵，清剿魔王余党。",
+        "requireCondition": "attribute.str >= 10",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "HP -30"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "war_aftermath_done",
+            "value": 1,
+            "description": "平定余党"
+          }
+        ],
+        "successText": "你再次穿上了盔甲。魔王的爪牙虽然已不足为惧，但战争从来不会因为一个敌人的倒下就结束。",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 15,
+          "description": "体魄判定 DC15 — 清剿余党的考验"
+        },
+        "failureText": "余党比预想的更顽强，你带伤而归。"
+      },
+      {
+        "id": "war_aftermath_support",
+        "title": "组织后方",
+        "description": "你选择留在后方，组织难民安置和物资调配。",
+        "probability": 0.4,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -2
+          },
+          {
+            "type": "set_flag",
+            "target": "war_aftermath_done",
+            "value": 1,
+            "description": "安定后方"
+          }
+        ],
+        "successText": "你没有再去前线，而是留在废墟中帮助人们重建家园。这才是真正的战斗。"
+      },
+      {
+        "id": "war_aftermath_hero",
+        "title": "以英雄之名号召",
+        "description": "你以击败魔王的英雄之名，号召各地起义军联合讨伐军阀。",
+        "requireCondition": "attribute.chr >= 15 & attribute.str >= 14",
+        "probability": 0.2,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3
+          },
+          {
+            "type": "set_flag",
+            "target": "war_aftermath_done",
+            "value": 1,
+            "description": "平定乱世"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "HP -10（连日征战）"
+          }
+        ],
+        "successText": "你的名字就是一面旗帜。各地义军闻风而动，军阀的势力在你的号召下土崩瓦解。战争终于结束了。"
+      }
+    ],
+    "unique": true,
+    "tag": "epic",
+    "priority": "critical",
+    "routes": [
+      "*"
+    ]
   },
   {
     "id": "midlife_crisis",
@@ -4345,6 +4470,7 @@
         "title": "直面魔王",
         "description": "最后的战斗！",
         "probability": 0.2,
+        "requireCondition": "attribute.str >= 18",
         "effects": [
           {
             "type": "modify_attribute",
@@ -4492,7 +4618,8 @@
     "priority": "critical",
     "routes": [
       "*"
-    ]
+    ],
+    "exclude": "has.flag.demon_king_slayer"
   },
   {
     "id": "chain_rise_to_power",
@@ -6434,9 +6561,16 @@
             "type": "set_flag",
             "target": "dark_ritual",
             "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_cult_investigated",
+            "value": 1,
+            "description": "调查了暗黑教团"
           }
         ],
-        "successText": "你伪装成信徒潜入教团，发现他们在策划一场大规模的献祭仪式。你必须在为时已晚之前阻止这一切。"
+        "successText": "你伪装成信徒潜入教团，发现他们在策划一场大规模的献祭仪式。你必须在为时已晚之前阻止这一切。",
+        "probability": 0.5
       },
       {
         "id": "cult_report",
@@ -6483,6 +6617,54 @@
     "unique": true,
     "routes": [
       "*"
+    ]
+  },
+  {
+    "id": "dark_cult_aftermath",
+    "title": "暗影的低语",
+    "description": "自从你潜入调查了那个秘密教团后，一些奇怪的事情开始发生。你的门窗有时莫名打开，夜深人静时仿佛有人在耳边低语。教团似乎注意到了你的调查。",
+    "minAge": 28,
+    "maxAge": 40,
+    "weight": 4,
+    "include": "has.flag.dark_cult_investigated",
+    "exclude": "has.flag.dark_cult_resolved",
+    "unique": true,
+    "tag": "dark",
+    "effects": [],
+    "branches": [
+      {
+        "id": "seek_allies",
+        "title": "向城卫军举报",
+        "description": "你把收集到的情报交给了城卫军。几天后，教团的据点被捣毁。",
+        "probability": 0.6,
+        "effects": [
+          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "正义之名"},
+          {"type": "modify_attribute", "target": "mny", "value": 2, "description": "悬赏金"},
+          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "教团被剿灭"},
+          {"type": "set_flag", "target": "justice_lover", "value": 1, "description": "正义之士"}
+        ]
+      },
+      {
+        "id": "confront_alone",
+        "title": "独自对抗",
+        "description": "你决定一个人解决这件事。深夜你闯入教团的秘密集会，却发现他们的规模远超你的想象。",
+        "probability": 0.3,
+        "effects": [
+          {"type": "modify_attribute", "target": "str", "value": 2, "description": "死战经验"},
+          {"type": "modify_hp", "target": "hp", "value": -10, "description": "激战受伤"},
+          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "教团被击溃"},
+          {"type": "set_flag", "target": "dark_path", "value": 1, "description": "接触了暗黑力量"}
+        ]
+      },
+      {
+        "id": "ignore_it",
+        "title": "假装什么都没发生",
+        "description": "你选择了沉默。也许多一事不如少一事。",
+        "effects": [
+          {"type": "modify_attribute", "target": "spr", "value": -1, "description": "内心不安"},
+          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "选择遗忘"}
+        ]
+      }
     ]
   },
   {
@@ -6893,6 +7075,7 @@
     "maxAge": 50,
     "weight": 1,
     "include": "attribute.str >= 16 | attribute.mag >= 16",
+    "exclude": "has.flag.demon_king_slayer",
     "effects": [],
     "branches": [
       {
@@ -10735,7 +10918,60 @@
         "value": 2
       }
     ],
-    "include": "attribute.str >= 12"
+    "include": "attribute.str >= 12",
+    "branches": [
+      {
+        "id": "merc_fight",
+        "title": "刀口舔血",
+        "description": "你接下了最危险的任务，用伤痕换取丰厚的报酬。",
+        "probability": 0.6,
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "战斗经验"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "佣金"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -5,
+            "description": "受伤"
+          }
+        ]
+      },
+      {
+        "id": "merc_guard",
+        "title": "稳扎稳打",
+        "description": "你选择做护卫任务，虽然报酬一般，但胜在安全。",
+        "effects": [
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "战斗经验"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "佣金"
+          },
+          {
+            "type": "set_flag",
+            "target": "mercenary_veteran",
+            "value": 1,
+            "description": "老练佣兵"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "human_diplomatic_mission",
@@ -11521,13 +11757,29 @@
     "unique": true,
     "priority": "major",
     "tag": "legendary",
-    "routes": ["*"],
+    "routes": [
+      "*"
+    ],
     "include": "has.flag.dragon_rider",
     "exclude": "has.flag.dragon_grown",
     "effects": [
-      { "type": "modify_attribute", "target": "spr", "value": 3, "description": "心灵链接加深" },
-      { "type": "modify_attribute", "target": "chr", "value": 2, "description": "龙骑士的威严" },
-      { "type": "set_flag", "target": "dragon_grown", "value": 1 }
+      {
+        "type": "modify_attribute",
+        "target": "spr",
+        "value": 3,
+        "description": "心灵链接加深"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "龙骑士的威严"
+      },
+      {
+        "type": "set_flag",
+        "target": "dragon_grown",
+        "value": 1
+      }
     ],
     "branches": [
       {
@@ -11535,14 +11787,31 @@
         "title": "与幼龙一起练习飞行",
         "description": "你小心翼翼地爬上它的背。幼龙扑扇着翅膀，摇摇晃晃地升空——风声灌满你的耳朵。",
         "effects": [
-          { "type": "modify_attribute", "target": "str", "value": 2, "description": "飞行训练增强体魄" },
-          { "type": "modify_attribute", "target": "luk", "value": 1 }
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "飞行训练增强体魄"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
         ],
-        "diceCheck": { "attribute": "spr", "dc": 12, "description": "灵魂判定 DC12 — 需要与龙心意相通" },
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 12,
+          "description": "灵魂判定 DC12 — 需要与龙心意相通"
+        },
         "successText": "你们配合得越来越默契。幼龙载着你在云层间穿梭，整个世界在你脚下展开。",
         "failureText": "幼龙突然来了个急转弯，你差点摔下去。看来默契还需要时间磨合。",
         "failureEffects": [
-          { "type": "modify_hp", "target": "hp", "value": -8 }
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -8
+          }
         ]
       },
       {
@@ -11550,8 +11819,16 @@
         "title": "让它自由地探索世界",
         "description": "你解开了束缚它的绳索。龙不应该被圈养——你选择信任它会回来。",
         "effects": [
-          { "type": "modify_attribute", "target": "spr", "value": 3 },
-          { "type": "modify_attribute", "target": "chr", "value": 1 }
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1
+          }
         ]
       }
     ]
@@ -11566,7 +11843,9 @@
     "unique": true,
     "priority": "major",
     "tag": "legendary",
-    "routes": ["*"],
+    "routes": [
+      "*"
+    ],
     "include": "has.flag.dragon_grown",
     "effects": [],
     "branches": [
@@ -11575,9 +11854,23 @@
         "title": "巡视边境，威慑敌人",
         "description": "巨龙的影子掠过边境线，敌国的哨兵吓得四散奔逃。有些战争不需要打响就已经赢了。",
         "effects": [
-          { "type": "modify_attribute", "target": "chr", "value": 3, "description": "龙骑士的威名远播" },
-          { "type": "modify_attribute", "target": "str", "value": 1 },
-          { "type": "set_flag", "target": "dragon_patrol", "value": 1, "description": "龙骑士巡游" }
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "龙骑士的威名远播"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_patrol",
+            "value": 1,
+            "description": "龙骑士巡游"
+          }
         ]
       },
       {
@@ -11585,9 +11878,22 @@
         "title": "向未知的天际飞去",
         "description": "你拍了拍龙的脖子，指向地图上没有标记的方向。是时候去看看世界的尽头了。",
         "effects": [
-          { "type": "modify_attribute", "target": "int", "value": 2, "description": "龙背上的见闻" },
-          { "type": "modify_attribute", "target": "spr", "value": 2 },
-          { "type": "modify_attribute", "target": "luk", "value": 1 }
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "龙背上的见闻"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2
+          },
+          {
+            "type": "modify_attribute",
+            "target": "luk",
+            "value": 1
+          }
         ]
       }
     ]
@@ -11602,7 +11908,9 @@
     "unique": true,
     "priority": "critical",
     "tag": "legendary",
-    "routes": ["*"],
+    "routes": [
+      "*"
+    ],
     "include": "has.flag.dragon_grown",
     "exclude": "has.flag.dragon_bond_complete",
     "effects": [],
@@ -11612,17 +11920,50 @@
         "title": "接受龙之试炼",
         "description": "你走入火山口中央的熔岩之环。极度的高温让你几乎窒息，但龙的目光给了你力量。",
         "effects": [
-          { "type": "modify_attribute", "target": "spr", "value": 5, "description": "龙魂共鸣" },
-          { "type": "modify_attribute", "target": "mag", "value": 3, "description": "龙焰赐予的魔力" },
-          { "type": "modify_attribute", "target": "chr", "value": 2, "description": "真正的龙骑士" },
-          { "type": "set_flag", "target": "dragon_bond_complete", "value": 1 }
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 5,
+            "description": "龙魂共鸣"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mag",
+            "value": 3,
+            "description": "龙焰赐予的魔力"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "真正的龙骑士"
+          },
+          {
+            "type": "set_flag",
+            "target": "dragon_bond_complete",
+            "value": 1
+          }
         ],
-        "diceCheck": { "attribute": "spr", "dc": 18, "description": "灵魂判定 DC18 — 你的灵魂能否承受龙焰的洗礼？" },
+        "diceCheck": {
+          "attribute": "spr",
+          "dc": 18,
+          "description": "灵魂判定 DC18 — 你的灵魂能否承受龙焰的洗礼？"
+        },
         "successText": "龙焰包裹了你的全身，但你感受到的不是灼烧，而是温暖。当火焰散去时，你的瞳孔中映着龙族的竖瞳。从此你们不再是骑手与坐骑——你们是真正的伙伴。",
         "failureText": "你在龙焰面前退缩了。龙低下头，用鼻子轻轻蹭了蹭你，似乎在说：没关系，以后再来。",
         "failureEffects": [
-          { "type": "modify_hp", "target": "hp", "value": -20, "description": "龙焰灼伤" },
-          { "type": "modify_attribute", "target": "spr", "value": 2, "description": "虽败犹荣" }
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -20,
+            "description": "龙焰灼伤"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "虽败犹荣"
+          }
         ]
       },
       {
@@ -11630,8 +11971,16 @@
         "title": "你们之间不需要试炼来证明",
         "description": "你拍了拍龙的翅膀，转身离去。有些羁绊不需要仪式来确认。",
         "effects": [
-          { "type": "modify_attribute", "target": "spr", "value": 3 },
-          { "type": "modify_attribute", "target": "int", "value": 2 }
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2
+          }
         ]
       }
     ]

@@ -1747,6 +1747,12 @@
             "type": "modify_attribute",
             "target": "chr",
             "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "friend_reunion_done",
+            "value": 1,
+            "description": "故友重逢"
           }
         ],
         "description": "你选择了热泪盈眶，静静等待结果。"
@@ -1759,6 +1765,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "friend_reunion_done",
+            "value": 1,
+            "description": "故友重逢"
           }
         ],
         "description": "你权衡利弊后，选择了相视一笑。"
@@ -1767,7 +1779,8 @@
     "effects": [],
     "routes": [
       "*"
-    ]
+    ],
+    "exclude": "has.flag.friend_reunion_done"
   },
   {
     "id": "elder_world_peace",
@@ -3346,7 +3359,7 @@
         "value": 2
       }
     ],
-    "include": ""
+    "include": "has.flag.married"
   },
   {
     "id": "human_village_historian",

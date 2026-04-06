@@ -4357,6 +4357,7 @@
     "maxAge": 16,
     "weight": 4,
     "unique": true,
+    "exclude": "has.flag.noble_birth",
     "races": [
       "human"
     ],
@@ -4418,6 +4419,41 @@
           }
         ],
         "description": "经过一番思考，你选择了给冒险者工会跑腿。"
+      }
+    ]
+  },
+  {
+    "id": "noble_sword_training",
+    "title": "贵族剑术训练",
+    "description": "父亲请来了一位退役的骑士教你剑术。他说，贵族不仅要会说话，还要能保护自己的领民。",
+    "minAge": 12,
+    "maxAge": 15,
+    "weight": 6,
+    "include": "has.flag.noble_birth",
+    "exclude": "has.flag.squire | has.flag.magic_student",
+    "unique": true,
+    "tag": "combat",
+    "effects": [
+      {"type": "modify_attribute", "target": "str", "value": 2}
+    ],
+    "branches": [
+      {
+        "id": "train_diligently",
+        "title": "刻苦训练",
+        "description": "你日复一日地挥剑，直到老骑士终于露出满意的笑容。",
+        "effects": [
+          {"type": "modify_attribute", "target": "str", "value": 3, "description": "剑术精进"},
+          {"type": "set_flag", "target": "noble_combat_trained", "value": 1, "description": "贵族剑术"}
+        ]
+      },
+      {
+        "id": "prefer_books",
+        "title": "更想去读书",
+        "description": "比起挥剑，你更喜欢待在书房里。不过基本的防身术还是学会了。",
+        "effects": [
+          {"type": "modify_attribute", "target": "int", "value": 2, "description": "博览群书"},
+          {"type": "modify_attribute", "target": "str", "value": 1, "description": "基础防身"}
+        ]
       }
     ]
   },
@@ -4786,7 +4822,7 @@
     "minAge": 8,
     "maxAge": 80,
     "weight": 2,
-    "unique": false,
+    "unique": true,
     "priority": "minor",
     "tag": "life",
     "routes": [

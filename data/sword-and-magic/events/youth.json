@@ -1548,6 +1548,7 @@
     "maxAge": 18,
     "weight": 3,
     "unique": true,
+    "exclude": "has.flag.noble_birth",
     "effects": [],
     "tag": "life",
     "priority": "minor",
@@ -1601,6 +1602,91 @@
         "description": "你在地下黑市找了份活：帮走私商人分拣货物。工钱不多，但你学到了辨别魔药和假币的本事。偶尔还能顺走一两件\"没人认领的东西\"。"
       }
     }
+  },
+  {
+    "id": "noble_social_debut",
+    "title": "社交季初登场",
+    "description": "你终于到了参加社交季的年纪。在父亲的引荐下，你第一次踏入王都的社交场合。衣香鬓影、觥筹交错，这里既是战场也是舞台。",
+    "minAge": 16,
+    "maxAge": 20,
+    "weight": 6,
+    "include": "has.flag.noble_birth",
+    "unique": true,
+    "tag": "social",
+    "effects": [
+      {"type": "modify_attribute", "target": "chr", "value": 1, "description": "社交初体验"},
+      {"type": "modify_attribute", "target": "mny", "value": -1, "description": "置装费"}
+    ],
+    "branches": [
+      {
+        "id": "shine_at_ball",
+        "title": "在舞会上大放异彩",
+        "description": "你的谈吐和风度赢得了在场贵族的一致好评。",
+        "probability": 0.5,
+        "effects": [
+          {"type": "modify_attribute", "target": "chr", "value": 3, "description": "社交明星"},
+          {"type": "set_flag", "target": "social_star", "value": 1, "description": "社交名人"}
+        ]
+      },
+      {
+        "id": "meet_future_spouse",
+        "title": "遇到心仪的人",
+        "description": "在舞会上你遇到了一个让你心动的人，你们聊了很久。",
+        "probability": 0.3,
+        "effects": [
+          {"type": "modify_attribute", "target": "chr", "value": 1, "description": "心动"},
+          {"type": "set_flag", "target": "first_love", "value": 1, "description": "初恋"},
+          {"type": "set_flag", "target": "in_relationship", "value": 1, "description": "开始恋爱"}
+        ]
+      },
+      {
+        "id": "boring_night",
+        "title": "无聊的一夜",
+        "description": "你全程缩在角落吃点心，最后偷偷溜回了家。",
+        "effects": [
+          {"type": "modify_attribute", "target": "int", "value": 1, "description": "观察到的社交知识"},
+          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "独处的宁静"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "noble_estate_management",
+    "title": "庄园管理",
+    "description": "父亲开始让你参与庄园的管理。从佃农的租约到仓库的粮食，从马厩的维护到仆人的调度——治理一块领地远比想象中复杂。",
+    "minAge": 22,
+    "maxAge": 28,
+    "weight": 5,
+    "include": "has.flag.noble_birth",
+    "unique": true,
+    "tag": "social",
+    "effects": [
+      {"type": "modify_attribute", "target": "int", "value": 1, "description": "管理经验"},
+      {"type": "modify_attribute", "target": "mny", "value": 1, "description": "庄园收入"}
+    ],
+    "branches": [
+      {
+        "id": "capable_lord",
+        "title": "治理有方",
+        "description": "你展现出了不凡的治理才能，庄园在你手里井井有条。",
+        "probability": 0.5,
+        "effects": [
+          {"type": "modify_attribute", "target": "int", "value": 2, "description": "治理才能"},
+          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "领民爱戴"},
+          {"type": "modify_attribute", "target": "mny", "value": 3, "description": "庄园繁荣"},
+          {"type": "set_flag", "target": "capable_lord", "value": 1, "description": "有能力的领主"}
+        ]
+      },
+      {
+        "id": "overwhelmed",
+        "title": "力不从心",
+        "description": "繁杂的政务让你焦头烂额，你开始怀疑自己是否适合这条路。",
+        "effects": [
+          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "自我认知"},
+          {"type": "modify_attribute", "target": "mny", "value": -1, "description": "管理不善"}
+        ]
+      }
+    ]
   },
   {
     "id": "village_race",
@@ -3956,6 +4042,7 @@
     "minAge": 14,
     "maxAge": 18,
     "weight": 3,
+    "exclude": "has.flag.noble_birth",
     "effects": [],
     "branches": [
       {
@@ -8080,6 +8167,7 @@
     "maxAge": 32,
     "weight": 4,
     "unique": true,
+    "exclude": "has.flag.noble_birth",
     "priority": "minor",
     "tag": "life",
     "routes": [

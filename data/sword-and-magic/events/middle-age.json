@@ -3042,6 +3042,12 @@
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
+          },
+          {
+            "type": "set_flag",
+            "target": "friend_reunion_done",
+            "value": 1,
+            "description": "故友重逢"
           }
         ],
         "description": "你选择了彻夜长谈，静静等待结果。"
@@ -3059,6 +3065,12 @@
             "type": "modify_attribute",
             "target": "luk",
             "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "friend_reunion_done",
+            "value": 1,
+            "description": "故友重逢"
           }
         ],
         "description": "你鼓起勇气，决定一起再冒险一次。"
@@ -3069,7 +3081,8 @@
         "title": "故友重逢",
         "description": "你在黑市偶遇了以前一起长大的哥布林。他瘦了很多，但笑容没变。你们蹲在角落里分了一瓶蘑菇酒，像小时候一样。"
       }
-    }
+    },
+    "exclude": "has.flag.friend_reunion_done"
   },
   {
     "id": "mid_life_reflection",
