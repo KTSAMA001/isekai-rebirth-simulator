@@ -1931,7 +1931,7 @@
     ],
     "effects": [],
     "unique": true,
-    "exclude": "has.flag.lover_curse",
+    "exclude": "",
     "routes": [
       "*"
     ]
@@ -2080,6 +2080,12 @@
         "description": "你选择挺身而出，正面与威胁对抗。",
         "effects": [
           {
+            "type": "set_flag",
+            "target": "protect_family",
+            "value": 1,
+            "description": "守护家庭"
+          },
+          {
             "type": "modify_attribute",
             "target": "str",
             "value": 3
@@ -2101,6 +2107,12 @@
         "title": "转移家人",
         "description": "你优先确保家人的安全，放弃了家园。",
         "effects": [
+          {
+            "type": "set_flag",
+            "target": "protect_family",
+            "value": 1,
+            "description": "守护家庭"
+          },
           {
             "type": "modify_attribute",
             "target": "spr",

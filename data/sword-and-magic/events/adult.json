@@ -4958,7 +4958,7 @@
     "minAge": 16,
     "maxAge": 25,
     "include": "has.flag.dating",
-    "exclude": "has.flag.married | has.flag.starlight_promise | has.flag.eloped",
+    "exclude": "has.flag.married | has.flag.eloped",
     "weight": 6,
     "effects": [],
     "branches": [
@@ -5043,7 +5043,7 @@
     "minAge": 14,
     "maxAge": 22,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.festival_dance | has.flag.eloped",
+    "exclude": "has.flag.married | has.flag.eloped",
     "weight": 5,
     "effects": [],
     "branches": [
@@ -5124,7 +5124,7 @@
     "minAge": 18,
     "maxAge": 35,
     "include": "has.flag.in_relationship",
-    "exclude": "has.flag.married | has.flag.quest_parting | has.flag.eloped",
+    "exclude": "has.flag.married | has.flag.eloped",
     "weight": 5,
     "branches": [
       {
@@ -5210,7 +5210,7 @@
     "minAge": 16,
     "maxAge": 28,
     "include": "has.flag.dating",
-    "exclude": "has.flag.married | has.flag.forbidden_love",
+    "exclude": "has.flag.married",
     "weight": 4,
     "branches": [
       {
@@ -5397,7 +5397,7 @@
     ],
     "effects": [],
     "unique": true,
-    "exclude": "has.flag.widowed | has.flag.rescue_from_dungeon",
+    "exclude": "has.flag.widowed",
     "routes": [
       "*"
     ]
@@ -6638,10 +6638,30 @@
         "description": "你把收集到的情报交给了城卫军。几天后，教团的据点被捣毁。",
         "probability": 0.6,
         "effects": [
-          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "正义之名"},
-          {"type": "modify_attribute", "target": "mny", "value": 2, "description": "悬赏金"},
-          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "教团被剿灭"},
-          {"type": "set_flag", "target": "justice_lover", "value": 1, "description": "正义之士"}
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "正义之名"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 2,
+            "description": "悬赏金"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_cult_resolved",
+            "value": 1,
+            "description": "教团被剿灭"
+          },
+          {
+            "type": "set_flag",
+            "target": "justice_lover",
+            "value": 1,
+            "description": "正义之士"
+          }
         ]
       },
       {
@@ -6650,10 +6670,30 @@
         "description": "你决定一个人解决这件事。深夜你闯入教团的秘密集会，却发现他们的规模远超你的想象。",
         "probability": 0.3,
         "effects": [
-          {"type": "modify_attribute", "target": "str", "value": 2, "description": "死战经验"},
-          {"type": "modify_hp", "target": "hp", "value": -10, "description": "激战受伤"},
-          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "教团被击溃"},
-          {"type": "set_flag", "target": "dark_path", "value": 1, "description": "接触了暗黑力量"}
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "死战经验"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "激战受伤"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_cult_resolved",
+            "value": 1,
+            "description": "教团被击溃"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_path",
+            "value": 1,
+            "description": "接触了暗黑力量"
+          }
         ]
       },
       {
@@ -6661,8 +6701,18 @@
         "title": "假装什么都没发生",
         "description": "你选择了沉默。也许多一事不如少一事。",
         "effects": [
-          {"type": "modify_attribute", "target": "spr", "value": -1, "description": "内心不安"},
-          {"type": "set_flag", "target": "dark_cult_resolved", "value": 1, "description": "选择遗忘"}
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -1,
+            "description": "内心不安"
+          },
+          {
+            "type": "set_flag",
+            "target": "dark_cult_resolved",
+            "value": 1,
+            "description": "选择遗忘"
+          }
         ]
       }
     ]
