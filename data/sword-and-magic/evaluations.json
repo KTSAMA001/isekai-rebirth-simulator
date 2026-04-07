@@ -109,7 +109,7 @@
     "description": "龙？不过是多了一个翅膀的蜥蜴罢了。——你，大概会这么想。",
     "rarity": "legendary",
     "priority": 15,
-    "condition": "has.flag.dragon_slay"
+    "condition": "has.flag.dragon_slayer"
   },
   {
     "id": "eva_merchant_empire",
