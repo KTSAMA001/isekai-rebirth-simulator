@@ -1,9 +1,9 @@
 {
   "meta": {
-    "totalKnownFlags": 268,
+    "totalKnownFlags": 261,
     "dynamicSampleGames": 50,
-    "dynamicSetCount": 146,
-    "dynamicCoverage": 54.5
+    "dynamicSetCount": 149,
+    "dynamicCoverage": 57.1
   },
   "staticAnalysis": {
     "trueOrphans": [
@@ -12,23 +12,7 @@
       "on_mage_path",
       "on_merchant_path",
       "on_scholar_path",
-      "starlight_promise",
-      "festival_dance",
-      "quest_parting",
-      "forbidden_love",
-      "rescue_from_dungeon",
-      "lover_curse",
-      "protect_family",
-      "dragon_slay",
-      "dark_magic",
-      "guild_leader",
-      "craftsman",
-      "demon_hunt",
-      "cursed",
-      "reincarnated_memory",
-      "elemental_mastery",
-      "lover_death",
-      "justice_seek"
+      "guild_leader"
     ],
     "engineHardcoded": [
       "near_death",
@@ -1309,6 +1293,22 @@
         "reason": "条件链较深（事件 chain_rise_to_power, branch_effect, 需要: war_hero(需先触发), orator(需先触发), champion(需先触发)）"
       },
       {
+        "flag": "craftsman",
+        "setterEventId": "chain_master_craftsman",
+        "ageRange": [
+          35,
+          55
+        ],
+        "prerequisites": [
+          "famous_inventor",
+          "elemental_master",
+          "tower_master",
+          "researcher"
+        ],
+        "setterType": "event_effect",
+        "reason": "条件链较深（事件 chain_master_craftsman, event_effect, 需要: famous_inventor(需先触发), elemental_master(需先触发), tower_master(需先触发), researcher(需先触发)）"
+      },
+      {
         "flag": "master_mentor",
         "setterEventId": "chain_master_craftsman",
         "ageRange": [
@@ -1350,11 +1350,10 @@
         "prerequisites": [
           "dating",
           "married",
-          "starlight_promise",
           "eloped"
         ],
         "setterType": "branch_effect",
-        "reason": "条件链较深（事件 starlight_promise, branch_effect, 需要: dating(需先触发), married(需先触发), starlight_promise, eloped）"
+        "reason": "条件链较深（事件 starlight_promise, branch_effect, 需要: dating(需先触发), married(需先触发), eloped）"
       },
       {
         "flag": "lover_at_war",
@@ -1366,11 +1365,10 @@
         "prerequisites": [
           "in_relationship",
           "married",
-          "quest_parting",
           "eloped"
         ],
         "setterType": "branch_effect",
-        "reason": "条件链较深（事件 quest_parting, branch_effect, 需要: in_relationship(需先触发), married(需先触发), quest_parting, eloped）"
+        "reason": "条件链较深（事件 quest_parting, branch_effect, 需要: in_relationship(需先触发), married(需先触发), eloped）"
       },
       {
         "flag": "eloped",
@@ -1381,11 +1379,10 @@
         ],
         "prerequisites": [
           "dating",
-          "married",
-          "forbidden_love"
+          "married"
         ],
         "setterType": "branch_effect",
-        "reason": "条件链较深（事件 forbidden_love, branch_effect, 需要: dating(需先触发), married(需先触发), forbidden_love）"
+        "reason": "条件链较深（事件 forbidden_love, branch_effect, 需要: dating(需先触发), married(需先触发)）"
       },
       {
         "flag": "soul_bound",
@@ -1641,6 +1638,22 @@
         "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed）"
       },
       {
+        "flag": "lover_death",
+        "setterEventId": "lover_death_battlefield",
+        "ageRange": [
+          25,
+          50
+        ],
+        "prerequisites": [
+          "lover_at_war",
+          "in_relationship",
+          "married",
+          "widowed"
+        ],
+        "setterType": "branch_effect",
+        "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed(需先触发)）"
+      },
+      {
         "flag": "avenger",
         "setterEventId": "lover_death_battlefield",
         "ageRange": [
@@ -1655,6 +1668,82 @@
         ],
         "setterType": "branch_effect",
         "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed(需先触发)）"
+      },
+      {
+        "flag": "revenge_clue_found",
+        "setterEventId": "avenger_trail",
+        "ageRange": [
+          30,
+          65
+        ],
+        "prerequisites": [
+          "avenger",
+          "revenge_clue_found",
+          "revenge_completed",
+          "forgiveness"
+        ],
+        "setterType": "branch_effect",
+        "reason": "条件链较深（事件 avenger_trail, branch_effect, 需要: avenger(需先触发), revenge_clue_found, revenge_completed, forgiveness）"
+      },
+      {
+        "flag": "revenge_completed",
+        "setterEventId": "avenger_confrontation",
+        "ageRange": [
+          32,
+          70
+        ],
+        "prerequisites": [
+          "revenge_clue_found",
+          "revenge_completed",
+          "forgiveness"
+        ],
+        "setterType": "branch_effect",
+        "reason": "条件链较深（事件 avenger_confrontation, branch_effect, 需要: revenge_clue_found(需先触发), revenge_completed, forgiveness）"
+      },
+      {
+        "flag": "wounded_seeking",
+        "setterEventId": "avenger_confrontation",
+        "ageRange": [
+          32,
+          70
+        ],
+        "prerequisites": [
+          "revenge_clue_found",
+          "revenge_completed",
+          "forgiveness"
+        ],
+        "setterType": "branch_failure_effect",
+        "reason": "条件链较深（事件 avenger_confrontation, branch_failure_effect, 需要: revenge_clue_found(需先触发), revenge_completed(需先触发), forgiveness）"
+      },
+      {
+        "flag": "forgiveness",
+        "setterEventId": "avenger_confrontation",
+        "ageRange": [
+          32,
+          70
+        ],
+        "prerequisites": [
+          "revenge_clue_found",
+          "revenge_completed",
+          "forgiveness"
+        ],
+        "setterType": "branch_effect",
+        "reason": "条件链较深（事件 avenger_confrontation, branch_effect, 需要: revenge_clue_found(需先触发), revenge_completed(需先触发), forgiveness）"
+      },
+      {
+        "flag": "protect_family",
+        "setterEventId": "protect_family",
+        "ageRange": [
+          25,
+          55
+        ],
+        "prerequisites": [
+          "married",
+          "parent",
+          "protect_family"
+        ],
+        "setterType": "branch_effect",
+        "reason": "条件链较深（事件 protect_family, branch_effect, 需要: married(需先触发), parent(需先触发), protect_family）"
       },
       {
         "flag": "friend_reunion_done",
@@ -1739,6 +1828,7 @@
       "elf_archive_lineage",
       "dragon_omen_birth",
       "cursed_birth",
+      "cursed",
       "lineage_marked",
       "shadow_birth",
       "dwarf_born_at_forge",
@@ -1757,6 +1847,7 @@
       "has_pet",
       "fighter_spirit",
       "true_friend",
+      "demon_hunt",
       "fugitive",
       "demon_power",
       "has_ally",
@@ -1855,23 +1946,7 @@
       "quiet_end"
     ],
     "orphanFlagsStatic": [
-      "starlight_promise",
-      "festival_dance",
-      "quest_parting",
-      "forbidden_love",
-      "rescue_from_dungeon",
-      "lover_curse",
-      "protect_family",
-      "dragon_slay",
-      "dark_magic",
-      "guild_leader",
-      "craftsman",
-      "demon_hunt",
-      "cursed",
-      "reincarnated_memory",
-      "elemental_mastery",
-      "lover_death",
-      "justice_seek"
+      "guild_leader"
     ],
     "deadFlagsStatic": [
       "loving_family",
@@ -1907,7 +1982,6 @@
       "has_ally",
       "social_star",
       "capable_lord",
-      "justice_lover",
       "treasure_hunter",
       "lucky_coin",
       "potion_power",
@@ -1925,7 +1999,6 @@
       "on_journey",
       "pure_heart",
       "duel_champion",
-      "dark_mage",
       "trusted_by_dean",
       "team_leader",
       "heartbreak_growth",
@@ -1968,7 +2041,7 @@
       "iron_lord",
       "great_scholar",
       "business_tycoon",
-      "avenger",
+      "wounded_seeking",
       "tough_spirit",
       "iron_will",
       "mentor_legend",
@@ -1983,8 +2056,8 @@
       "on_merchant_path",
       "on_scholar_path"
     ],
-    "producedCount": 251,
-    "consumedCount": 160
+    "producedCount": 260,
+    "consumedCount": 155
   },
   "dynamicSample": {
     "flagsEverSet": [
@@ -2004,6 +2077,7 @@
       "mana_burned",
       "family_legacy",
       "power_sealed",
+      "protect_family",
       "has_student",
       "undying_legend",
       "spirit_ascended",
@@ -2057,12 +2131,14 @@
       "dragon_rider",
       "dragon_grown",
       "widowed",
+      "lover_death",
       "avenger",
-      "dark_mage",
+      "death_pact",
+      "arcane_student",
+      "inner_peace",
       "dragon_patrol",
       "wedding_grand",
-      "prophet",
-      "dragon_bond_complete",
+      "archmage",
       "tough_spirit",
       "iron_will",
       "near_death",
@@ -2087,18 +2163,19 @@
       "wild_birth",
       "hunter_lineage",
       "dwarf_master_miner",
+      "prophet",
       "author",
+      "dragon_bond_complete",
       "mysterious_encounter",
       "truth_seeker",
       "dirty_player",
       "emotional_maturity",
+      "dark_mage",
       "noble_conflict",
       "smart_seeker",
       "lucky_coin",
       "heartbreak_growth",
       "death_accepted",
-      "archmage",
-      "inner_peace",
       "merchant_apprentice",
       "military_service",
       "elf_worldtree_child",
@@ -2108,13 +2185,13 @@
       "forest_investigator",
       "elf_forest_keeper",
       "promise_keeper",
-      "arcane_student",
       "worldtree_candidate",
       "pioneer",
       "dwarf_master_keeper",
       "dwarf_reliable_name",
       "prophet_dream",
       "noble_grudge",
+      "cursed",
       "village_exiled",
       "wandering_survived",
       "migration_accepted",
@@ -2129,10 +2206,9 @@
       "elf_memory_garden_keeper",
       "dwarf_ore_sense",
       "miracle_survival",
-      "death_pact",
       "elf_reclusive",
-      "legacy_passed",
       "has_ally",
+      "legacy_passed",
       "famous_inventor"
     ],
     "flagsNeverSet": [
@@ -2158,6 +2234,7 @@
       "squire",
       "dungeon_veteran",
       "dungeon_injured",
+      "demon_hunt",
       "fugitive",
       "demon_power",
       "reincarnated",
@@ -2216,6 +2293,7 @@
       "war_mage",
       "underworld_contact",
       "council_member",
+      "craftsman",
       "rogue_contact",
       "business_owner",
       "elf_star_chronicler",
@@ -2228,6 +2306,10 @@
       "iron_lord",
       "great_scholar",
       "business_tycoon",
+      "revenge_clue_found",
+      "revenge_completed",
+      "wounded_seeking",
+      "forgiveness",
       "elf_star_codex_written",
       "transcendent",
       "legend_legacy",
@@ -2241,23 +2323,7 @@
       "on_mage_path",
       "on_merchant_path",
       "on_scholar_path",
-      "starlight_promise",
-      "festival_dance",
-      "quest_parting",
-      "forbidden_love",
-      "rescue_from_dungeon",
-      "lover_curse",
-      "protect_family",
-      "dragon_slay",
-      "dark_magic",
-      "guild_leader",
-      "craftsman",
-      "demon_hunt",
-      "cursed",
-      "reincarnated_memory",
-      "elemental_mastery",
-      "lover_death",
-      "justice_seek"
+      "guild_leader"
     ],
     "flagSetCount": {
       "barracks_birth": 1,
@@ -2276,6 +2342,7 @@
       "mana_burned": 2,
       "family_legacy": 5,
       "power_sealed": 6,
+      "protect_family": 24,
       "has_student": 28,
       "undying_legend": 5,
       "spirit_ascended": 8,
@@ -2329,12 +2396,14 @@
       "dragon_rider": 7,
       "dragon_grown": 6,
       "widowed": 4,
+      "lover_death": 4,
       "avenger": 4,
-      "dark_mage": 5,
+      "death_pact": 3,
+      "arcane_student": 4,
+      "inner_peace": 7,
       "dragon_patrol": 6,
       "wedding_grand": 4,
-      "prophet": 15,
-      "dragon_bond_complete": 4,
+      "archmage": 3,
       "tough_spirit": 8,
       "iron_will": 8,
       "near_death": 7,
@@ -2359,18 +2428,19 @@
       "wild_birth": 4,
       "hunter_lineage": 2,
       "dwarf_master_miner": 2,
+      "prophet": 14,
       "author": 5,
+      "dragon_bond_complete": 3,
       "mysterious_encounter": 11,
       "truth_seeker": 6,
       "dirty_player": 5,
       "emotional_maturity": 1,
+      "dark_mage": 4,
       "noble_conflict": 3,
       "smart_seeker": 4,
       "lucky_coin": 4,
       "heartbreak_growth": 1,
       "death_accepted": 3,
-      "archmage": 2,
-      "inner_peace": 4,
       "merchant_apprentice": 2,
       "military_service": 1,
       "elf_worldtree_child": 1,
@@ -2380,13 +2450,13 @@
       "forest_investigator": 2,
       "elf_forest_keeper": 1,
       "promise_keeper": 4,
-      "arcane_student": 3,
       "worldtree_candidate": 3,
       "pioneer": 1,
       "dwarf_master_keeper": 3,
       "dwarf_reliable_name": 3,
       "prophet_dream": 6,
       "noble_grudge": 2,
+      "cursed": 2,
       "village_exiled": 2,
       "wandering_survived": 2,
       "migration_accepted": 2,
@@ -2401,10 +2471,9 @@
       "elf_memory_garden_keeper": 1,
       "dwarf_ore_sense": 1,
       "miracle_survival": 1,
-      "death_pact": 2,
       "elf_reclusive": 1,
+      "has_ally": 2,
       "legacy_passed": 1,
-      "has_ally": 1,
       "famous_inventor": 1
     },
     "flagCheckCount": {
@@ -2475,6 +2544,7 @@
       "solo_adventurer": 50,
       "miracle_survival": 50,
       "never_retired": 50,
+      "revenge_completed": 50,
       "timid": 50,
       "noble_birth": 50,
       "magic_academy": 8,
@@ -2500,20 +2570,16 @@
       "chosen_one": 49,
       "death_accepted": 49,
       "mana_burned": 43,
-      "rescue_from_dungeon": 23,
       "dark_cult_investigated": 50,
       "orator": 50,
       "dragon_grown": 50,
-      "lover_curse": 23,
-      "quest_parting": 29,
+      "avenger": 50,
       "eloped": 29,
+      "revenge_clue_found": 49,
       "elemental_master": 49,
       "researcher": 49,
       "friend_reunion_done": 49,
       "war_veteran": 8,
-      "starlight_promise": 27,
-      "festival_dance": 25,
-      "forbidden_love": 27,
       "curse_breaker": 28,
       "world_tree_blessed": 8,
       "worldtree_candidate": 8,
@@ -2537,6 +2603,7 @@
       "dark_cult_resolved": 3,
       "elf_star_chronicler": 8,
       "war_aftermath_done": 7,
+      "forgiveness": 4,
       "dragon_bond_complete": 6,
       "goblin_merchant_king": 8,
       "goblin_mechanic": 8,
@@ -2659,6 +2726,16 @@
       "reason": "理论上可达（事件 birth_dragon_blood_omen 无 flag 前置条件，event_effect）"
     },
     "cursed_birth": {
+      "setterEventId": "birth_cursed_name",
+      "ageRange": [
+        1,
+        1
+      ],
+      "prerequisites": [],
+      "setterType": "event_effect",
+      "reason": "理论上可达（事件 birth_cursed_name 无 flag 前置条件，event_effect）"
+    },
+    "cursed": {
       "setterEventId": "birth_cursed_name",
       "ageRange": [
         1,
@@ -3170,6 +3247,16 @@
       ],
       "setterType": "branch_effect",
       "reason": "条件链较深（事件 merchant_apprentice, branch_effect, 需要: magic_student(需先触发), knight）"
+    },
+    "demon_hunt": {
+      "setterEventId": "demon_hunt",
+      "ageRange": [
+        10,
+        12
+      ],
+      "prerequisites": [],
+      "setterType": "event_effect",
+      "reason": "理论上可达（事件 demon_hunt 无 flag 前置条件，event_effect）"
     },
     "fugitive": {
       "setterEventId": "demon_hunt",
@@ -4608,6 +4695,21 @@
       "setterType": "branch_effect",
       "reason": "条件链较深（事件 chain_rise_to_power, branch_effect, 需要: war_hero(需先触发), orator(需先触发), champion(需先触发)）"
     },
+    "craftsman": {
+      "setterEventId": "chain_master_craftsman",
+      "ageRange": [
+        35,
+        55
+      ],
+      "prerequisites": [
+        "famous_inventor",
+        "elemental_master",
+        "tower_master",
+        "researcher"
+      ],
+      "setterType": "event_effect",
+      "reason": "条件链较深（事件 chain_master_craftsman, event_effect, 需要: famous_inventor(需先触发), elemental_master(需先触发), tower_master(需先触发), researcher(需先触发)）"
+    },
     "master_mentor": {
       "setterEventId": "chain_master_craftsman",
       "ageRange": [
@@ -4647,11 +4749,10 @@
       "prerequisites": [
         "dating",
         "married",
-        "starlight_promise",
         "eloped"
       ],
       "setterType": "branch_effect",
-      "reason": "条件链较深（事件 starlight_promise, branch_effect, 需要: dating(需先触发), married(需先触发), starlight_promise, eloped）"
+      "reason": "条件链较深（事件 starlight_promise, branch_effect, 需要: dating(需先触发), married(需先触发), eloped）"
     },
     "lover_at_war": {
       "setterEventId": "quest_parting",
@@ -4662,11 +4763,10 @@
       "prerequisites": [
         "in_relationship",
         "married",
-        "quest_parting",
         "eloped"
       ],
       "setterType": "branch_effect",
-      "reason": "条件链较深（事件 quest_parting, branch_effect, 需要: in_relationship(需先触发), married(需先触发), quest_parting, eloped）"
+      "reason": "条件链较深（事件 quest_parting, branch_effect, 需要: in_relationship(需先触发), married(需先触发), eloped）"
     },
     "eloped": {
       "setterEventId": "forbidden_love",
@@ -4676,11 +4776,10 @@
       ],
       "prerequisites": [
         "dating",
-        "married",
-        "forbidden_love"
+        "married"
       ],
       "setterType": "branch_effect",
-      "reason": "条件链较深（事件 forbidden_love, branch_effect, 需要: dating(需先触发), married(需先触发), forbidden_love）"
+      "reason": "条件链较深（事件 forbidden_love, branch_effect, 需要: dating(需先触发), married(需先触发)）"
     },
     "soul_bound": {
       "setterEventId": "soul_bound",
@@ -5147,6 +5246,21 @@
       "setterType": "branch_effect",
       "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed）"
     },
+    "lover_death": {
+      "setterEventId": "lover_death_battlefield",
+      "ageRange": [
+        25,
+        50
+      ],
+      "prerequisites": [
+        "lover_at_war",
+        "in_relationship",
+        "married",
+        "widowed"
+      ],
+      "setterType": "branch_effect",
+      "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed(需先触发)）"
+    },
     "avenger": {
       "setterEventId": "lover_death_battlefield",
       "ageRange": [
@@ -5161,6 +5275,77 @@
       ],
       "setterType": "branch_effect",
       "reason": "条件链较深（事件 lover_death_battlefield, branch_effect, 需要: lover_at_war(需先触发), in_relationship(需先触发), married(需先触发), widowed(需先触发)）"
+    },
+    "revenge_clue_found": {
+      "setterEventId": "avenger_trail",
+      "ageRange": [
+        30,
+        65
+      ],
+      "prerequisites": [
+        "avenger",
+        "revenge_clue_found",
+        "revenge_completed",
+        "forgiveness"
+      ],
+      "setterType": "branch_effect",
+      "reason": "条件链较深（事件 avenger_trail, branch_effect, 需要: avenger(需先触发), revenge_clue_found, revenge_completed, forgiveness）"
+    },
+    "revenge_completed": {
+      "setterEventId": "avenger_confrontation",
+      "ageRange": [
+        32,
+        70
+      ],
+      "prerequisites": [
+        "revenge_clue_found",
+        "revenge_completed",
+        "forgiveness"
+      ],
+      "setterType": "branch_effect",
+      "reason": "条件链较深（事件 avenger_confrontation, branch_effect, 需要: revenge_clue_found(需先触发), revenge_completed, forgiveness）"
+    },
+    "wounded_seeking": {
+      "setterEventId": "avenger_confrontation",
+      "ageRange": [
+        32,
+        70
+      ],
+      "prerequisites": [
+        "revenge_clue_found",
+        "revenge_completed",
+        "forgiveness"
+      ],
+      "setterType": "branch_failure_effect",
+      "reason": "条件链较深（事件 avenger_confrontation, branch_failure_effect, 需要: revenge_clue_found(需先触发), revenge_completed(需先触发), forgiveness）"
+    },
+    "forgiveness": {
+      "setterEventId": "avenger_confrontation",
+      "ageRange": [
+        32,
+        70
+      ],
+      "prerequisites": [
+        "revenge_clue_found",
+        "revenge_completed",
+        "forgiveness"
+      ],
+      "setterType": "branch_effect",
+      "reason": "条件链较深（事件 avenger_confrontation, branch_effect, 需要: revenge_clue_found(需先触发), revenge_completed(需先触发), forgiveness）"
+    },
+    "protect_family": {
+      "setterEventId": "protect_family",
+      "ageRange": [
+        25,
+        55
+      ],
+      "prerequisites": [
+        "married",
+        "parent",
+        "protect_family"
+      ],
+      "setterType": "branch_effect",
+      "reason": "条件链较深（事件 protect_family, branch_effect, 需要: married(需先触发), parent(需先触发), protect_family）"
     },
     "tough_spirit": {
       "setterEventId": "mid_chronic_pain",
@@ -5429,119 +5614,7 @@
       "setterType": "engine_hardcoded",
       "reason": "引擎硬编码: SimulationEngine.ts:805,990 (濒死存活)"
     },
-    "starlight_promise": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "festival_dance": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "quest_parting": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "forbidden_love": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "rescue_from_dungeon": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "lover_curse": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "protect_family": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "dragon_slay": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "dark_magic": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
     "guild_leader": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "craftsman": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "demon_hunt": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "cursed": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "reincarnated_memory": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "elemental_mastery": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "lover_death": {
-      "setterEventId": null,
-      "ageRange": null,
-      "prerequisites": [],
-      "setterType": "none",
-      "reason": "真正孤儿 — 无任何事件的 set_flag 引用此 flag"
-    },
-    "justice_seek": {
       "setterEventId": null,
       "ageRange": null,
       "prerequisites": [],

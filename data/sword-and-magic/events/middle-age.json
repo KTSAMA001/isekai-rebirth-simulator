@@ -1979,6 +1979,12 @@
           },
           {
             "type": "set_flag",
+            "target": "lover_death",
+            "value": 1,
+            "description": "失去挚爱"
+          },
+          {
+            "type": "set_flag",
             "target": "avenger",
             "value": 1,
             "description": "复仇者"
@@ -2031,6 +2037,12 @@
             "description": "丧偶"
           },
           {
+            "type": "set_flag",
+            "target": "lover_death",
+            "value": 1,
+            "description": "失去挚爱"
+          },
+          {
             "type": "modify_attribute",
             "target": "spr",
             "value": 2
@@ -2058,6 +2070,309 @@
         "description": "那群出去打探消息的哥布林回来了，但少了一个。一个浑身是血的同伴把一枚你再熟悉不过的小铜铃递到你手里。\"对不起……\" 你什么都听不见了。"
       }
     }
+  },
+  {
+    "id": "avenger_trail",
+    "title": "复仇的线索",
+    "description": "三年了。你走遍了战场废墟、酒馆和佣兵据点，从一个醉醺醺的退役斥候口中听到了一个名字——那个在溃败时下令封锁退路的指挥官，现在就藏在边境的自由城。",
+    "priority": "major",
+    "tags": [
+      "revenge",
+      "quest"
+    ],
+    "minAge": 30,
+    "maxAge": 65,
+    "include": "has.flag.avenger",
+    "exclude": "has.flag.revenge_clue_found | has.flag.revenge_completed | has.flag.forgiveness",
+    "weight": 5,
+    "unique": true,
+    "branches": [
+      {
+        "id": "avenger_trail_branch0",
+        "title": "顺藤摸瓜",
+        "description": "你花光了积蓄买通了一个走私贩子，拿到了那个人的行踪。线索指向边境自由城——他换了名字，做起了军火生意",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "revenge_clue_found",
+            "value": 1,
+            "description": "找到仇人下落"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 2,
+            "description": "三年追查让你变得更坚韧"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "学会了情报分析"
+          }
+        ]
+      },
+      {
+        "id": "avenger_trail_branch1",
+        "title": "偶遇同行者",
+        "description": "你在酒馆里遇到了另一个找他的人——对方的爱人也死在那场战役。你们没有说话，只是碰了碰杯。有些路，一个人走太冷了",
+        "effects": [
+          {
+            "type": "set_flag",
+            "target": "has_ally",
+            "value": 1,
+            "description": "找到了同路人"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "不再孤身一人"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "重新振作"
+          }
+        ]
+      },
+      {
+        "id": "avenger_trail_branch2",
+        "title": "放下执念",
+        "description": "某天夜里你梦见了那个人，梦里对方笑着说你该回家了。你醒来后盯着天花板看了很久，然后把那把剑擦干净，收进了柜子里",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "avenger",
+            "description": "不再执着于复仇",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "inner_peace",
+            "value": 1,
+            "description": "获得内心的平静"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "放下的力量"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -1,
+            "description": "刀锋钝了"
+          }
+        ]
+      }
+    ],
+    "effects": [],
+    "routes": [
+      "*"
+    ]
+  },
+  {
+    "id": "avenger_confrontation",
+    "title": "仇人见面",
+    "description": "你终于找到了他。边境自由城的一个雨夜，他坐在酒馆角落里数金币，脸上有条旧疤，比记忆中老了很多。他看见你的时候，手里的酒杯停住了。",
+    "priority": "critical",
+    "tags": [
+      "revenge",
+      "combat",
+      "choice"
+    ],
+    "minAge": 32,
+    "maxAge": 70,
+    "include": "has.flag.revenge_clue_found",
+    "exclude": "has.flag.revenge_completed | has.flag.forgiveness",
+    "weight": 8,
+    "unique": true,
+    "branches": [
+      {
+        "id": "avenger_confrontation_branch0",
+        "title": "手刃仇人",
+        "description": "你拔出剑，走向他。三年的恨意化成了一击",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "avenger",
+            "description": "复仇完成",
+            "value": 1
+          },
+          {
+            "type": "remove_flag",
+            "target": "revenge_clue_found",
+            "description": "线索不再需要",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "revenge_completed",
+            "value": 1,
+            "description": "复仇之路走到了终点"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "战斗中突破极限"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "并非毫发无伤"
+          }
+        ],
+        "failureEffects": [
+          {
+            "type": "set_flag",
+            "target": "wounded_seeking",
+            "value": 1,
+            "description": "带着伤疤再次出发"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -30,
+            "description": "重伤"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": -2,
+            "description": "身体受到了永久损伤"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": -2,
+            "description": "失败的自尊"
+          }
+        ],
+        "successText": "你的剑比他的快。他倒下的时候，脸上不是恐惧，是如释重负。血从剑槽滴到地板上，和外面的雨声混在一起。你说不清自己是什么感觉",
+        "failureText": "他比你想象中强得多。剑刃划过你的肋骨时，你听到了骨头碎裂的声音。你踉跄着逃进了雨夜，伤口的灼热和心里的不甘一起燃烧着",
+        "diceCheck": {
+          "attribute": "str",
+          "dc": 16,
+          "description": "力量判定 DC16 — 三年的执念，够不够一击致命？"
+        }
+      },
+      {
+        "id": "avenger_confrontation_branch1",
+        "title": "逼问真相",
+        "description": "你把剑架在他脖子上，要他说出当年撤退的真相",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "avenger",
+            "description": "仇恨消散",
+            "value": 1
+          },
+          {
+            "type": "remove_flag",
+            "target": "revenge_clue_found",
+            "description": "不再追查",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "revenge_completed",
+            "value": 1,
+            "description": "以另一种方式终结了复仇"
+          },
+          {
+            "type": "set_flag",
+            "target": "forgiveness",
+            "value": 1,
+            "description": "选择了宽恕"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "放下的力量"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -2,
+            "description": "但你的心也碎得更彻底了"
+          }
+        ],
+        "successText": "他开口说了实情：撤退命令来自更高层，他只是执行者。而且他自己的儿子也死在了那场战役。你站在那里，手里的剑慢慢垂了下来",
+        "failureText": "他死死闭着嘴，什么也不说。最后你把他打晕，翻遍了他的行李，只找到了一封烧了一半的家书。你拿着那封信站了很久",
+        "failureEffects": [
+          {
+            "type": "set_flag",
+            "target": "wounded_seeking",
+            "value": 1,
+            "description": "真相仍然不明"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "愤怒与困惑"
+          },
+          {
+            "type": "modify_hp",
+            "target": "hp",
+            "value": -10,
+            "description": "争斗中受了轻伤"
+          }
+        ],
+        "diceCheck": {
+          "attribute": "chr",
+          "dc": 14,
+          "description": "魅力判定 DC14 — 你能让他开口说出真相吗？"
+        }
+      },
+      {
+        "id": "avenger_confrontation_branch2",
+        "title": "放下屠刀",
+        "description": "你站在他面前，剑举了一半。然后你看见了角落里他女儿的照片——她笑起来和你记忆中的那个人一模一样。你收了剑",
+        "effects": [
+          {
+            "type": "remove_flag",
+            "target": "avenger",
+            "description": "放下了复仇",
+            "value": 1
+          },
+          {
+            "type": "remove_flag",
+            "target": "revenge_clue_found",
+            "description": "不再需要",
+            "value": 1
+          },
+          {
+            "type": "set_flag",
+            "target": "forgiveness",
+            "value": 1,
+            "description": "选择了放下"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 3,
+            "description": "放下的力量"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "你的选择让灵魂更完整"
+          }
+        ]
+      }
+    ],
+    "effects": [],
+    "routes": [
+      "*"
+    ]
   },
   {
     "id": "protect_family",

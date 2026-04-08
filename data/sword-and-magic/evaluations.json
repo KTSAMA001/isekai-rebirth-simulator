@@ -125,7 +125,7 @@
     "description": "你触碰了黑暗的力量。有些人说你是堕落了，但你更愿意称之为…解放。",
     "rarity": "rare",
     "priority": 10,
-    "condition": "has.flag.dark_magic"
+    "condition": "has.flag.dark_mage | has.flag.dark_path"
   },
   {
     "id": "eva_noble_enemies",
@@ -269,7 +269,7 @@
     "description": "你隐约记得前世的一些片段。也许这就是为什么你总觉得这个世界似曾相识。",
     "rarity": "rare",
     "priority": 10,
-    "condition": "has.flag.reincarnated_memory"
+    "condition": "has.flag.reincarnated"
   },
   {
     "id": "eva_eventful_life",
@@ -309,7 +309,7 @@
     "description": "火、水、风、土——四大元素在你手中如臂使指。自然的意志，由你来传达。",
     "rarity": "legendary",
     "priority": 15,
-    "condition": "has.flag.elemental_mastery & attribute.mag >= 25"
+    "condition": "has.flag.elemental_master & attribute.mag >= 25"
   },
   {
     "id": "eva_philosopher",
@@ -357,7 +357,7 @@
     "description": "你选择了正义，代价是伤痕累累。但你不后悔。有些东西比活着更重要。",
     "rarity": "common",
     "priority": 5,
-    "condition": "has.flag.justice_seek & attribute.chr >= 15"
+    "condition": "has.flag.justice_lover & attribute.chr >= 15"
   },
   {
     "id": "eva_disciple_master",
@@ -406,5 +406,29 @@
     "rarity": "legendary",
     "priority": 14,
     "condition": "has.flag.dwarf_has_masterwork & state.age >= 140"
+  },
+  {
+    "id": "eva_revenge_seeker",
+    "title": "未竟的复仇",
+    "description": "你始终未能为挚爱报仇。那把剑上的血早已干涸，但你心里的伤从未愈合。",
+    "rarity": "uncommon",
+    "priority": 8,
+    "condition": "has.flag.avenger"
+  },
+  {
+    "id": "eva_revenge_done",
+    "title": "复仇之路",
+    "description": "你找到了仇人，亲手了结了这段仇恨。剑入鞘的那一刻，你不确定自己是否真的解脱了。但至少，这世间少了一个该死的人。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.revenge_completed"
+  },
+  {
+    "id": "eva_forgiveness",
+    "title": "放下",
+    "description": "你本可以复仇。但你选择了放下。不是因为你软弱，而是因为你终于明白，有些仇恨不值得用余生去偿还。",
+    "rarity": "rare",
+    "priority": 10,
+    "condition": "has.flag.forgiveness"
   }
 ]

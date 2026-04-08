@@ -104,10 +104,32 @@ npx vitest run tests/engine/flag-lifecycle-tracker.test.ts
 # tests/helpers/flag-tracker.ts: collectProducedFlags(), collectConsumedFlags()
 ```
 
+### 引擎硬编码消费（必须手动扫描）
+
+以下位置存在引擎代码直接消费 Flag，`check-flags` 工具不会扫描这些：
+
+| 文件 | Flag | 角色 |
+|------|------|------|
+| `SimulationEngine.ts:805,990` | `miracle_survival` | 引擎 SET（濒死时 35% 概率触发），被 achievement:`miracle_afterglow` 消费 |
+| `SimulationEngine.ts:808,992` | `near_death` | 引擎 SET（濒死时 70% 概率触发），被 evaluation:`eva_near_death` 和 achievement:`dragon_near_death` 消费 |
+| `EvaluatorModule.ts:46` | `on_adventurer_path`, `on_knight_path`, `on_mage_path`, `on_merchant_path`, `on_scholar_path` | 引擎消费（路线加分 +15/个） |
+
+审计孤儿 Flag 时：
+- 上述 2 个引擎 SET 的 Flag 有 JSON 消费者，不是孤儿
+- 5 个路线 Flag 是引擎消费者，不是孤儿
+- 7 个 Flag 如被 `check-flags` 工具标记为异常，应排除误报
+
+### ConditionDSL flag 映射
+
+`ConditionDSL.ts:43` 的 `FLAG_DESCRIPTIONS` 常量包含 17 个 Flag 的中文描述映射。这些映射本身不是消费逻辑（仅用于 UI 显示），但反映了这些 Flag 被设计为可消费的意图。
+
 ### 工具已知局限
 
 | 局限 | 影响 | 对策 |
 |------|------|------|
-| 只扫 `has.flag.xxx` 不扫 `flag:xxx` | 漏消费 `magic_academy` | 手动补搜 `flag:` 语法 |
-| 不扫引擎代码 | 误报 `miracle_survival` 为孤儿 | 手动查 `SimulationEngine.ts` |
+| 只扫 `has.flag.xxx` 不扫 `flag:xxx` | 漏消费 | 手动补搜 `flag:` 语法 |
+| 不扫引擎代码 | 误报上述 7 个 Flag 为孤儿 | 参考上面的硬编码消费表排除 |
+| 不扫 `state.flags.has()` 硬编码 | 误报路线 Flag | 手动查 `EvaluatorModule.ts` |
+| 不扫 `prerequisites` 中的 `flag:` 简写 | 误报 `magic_academy` 为死 Flag | 手动 grep `prerequisites` 字段 |
+| 死 Flag 显示截断为前 20 个 | 大规模审计时漏看后续 | 用 grep/python 脚本获取完整列表 |
 | 动态采样覆盖率 54.5% | 部分死 Flag 可能在低概率分支被消费 | 50 局采样辅助验证 |
