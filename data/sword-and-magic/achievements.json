@@ -1291,5 +1291,14 @@
     "hidden": true,
     "condition": "achievement.count >= 115",
     "category": "秘密"
+  },
+  {
+    "id": "revenge_done",
+    "name": "血债血偿",
+    "description": "为挚爱复仇，不择手段。",
+    "icon": "⚔️",
+    "hidden": false,
+    "condition": "has.flag.revenge_completed & has.flag.widowed",
+    "category": "人生"
   }
 ]

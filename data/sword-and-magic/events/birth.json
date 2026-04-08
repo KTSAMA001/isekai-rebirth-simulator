@@ -1826,6 +1826,12 @@
         "target": "cursed_birth",
         "value": 1,
         "description": "不祥之生"
+      },
+      {
+        "type": "set_flag",
+        "target": "cursed",
+        "value": 1,
+        "description": "被诅咒"
       }
     ],
     "tag": "magic",

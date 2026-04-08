@@ -982,7 +982,14 @@
     "maxAge": 12,
     "weight": 1,
     "include": "has.talent.demon_heritage",
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "demon_hunt",
+        "value": 1,
+        "description": "遭遇猎魔骑士追杀"
+      }
+    ],
     "branches": [
       {
         "id": "resist_flee",
@@ -8480,7 +8487,14 @@
     "routes": [
       "*"
     ],
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "cursed",
+        "value": 1,
+        "description": "被诅咒之人"
+      }
+    ],
     "branches": [
       {
         "id": "cursed_exile_leave_silently",

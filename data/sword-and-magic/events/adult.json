@@ -4741,7 +4741,14 @@
     "maxAge": 55,
     "weight": 2,
     "include": "(has.flag.famous_inventor | has.flag.elemental_master | has.flag.tower_master | has.flag.researcher) & attribute.int >= 16",
-    "effects": [],
+    "effects": [
+      {
+        "type": "set_flag",
+        "target": "craftsman",
+        "value": 1,
+        "description": "匠师地位"
+      }
+    ],
     "branches": [
       {
         "id": "craft_teach",

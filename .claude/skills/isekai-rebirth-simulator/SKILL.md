@@ -109,7 +109,7 @@ atom       := '(' expression ')' | has_expr | comparison
 | `attribute.<id>` | 当前属性值 | `attribute.str >= 20` |
 | `attribute.peak.<id>` | 属性历史峰值 | `attribute.peak.mag >= 50` |
 | `age` | 当前年龄 | `age >= 18` |
-| `lifespan` | 寿命上限 | `lifespan >= 80` |
+| `lifespan` | 实际寿命（仅结算后可用） | `lifespan >= 80` |
 | `hp` | 当前 HP | `hp >= 50` |
 | `event.count.<id>` | 事件触发次数 | `event.count.battle >= 3` |
 | `achievement.count` | 已解锁成就数 | `achievement.count >= 10` |
@@ -126,6 +126,16 @@ atom       := '(' expression ')' | has_expr | comparison
 | `has.event.<id>` | 检查已触发事件 |
 | `has.achievement.<id>` | 检查已解锁成就 |
 | `has.counter.<id>` | 检查计数器 > 0 |
+
+### flag 简写语法
+
+`flag:<name>` 是 `has.flag.<name>` 的等价简写，两者效果相同：
+
+```
+flag:dragon_rider  ≡  has.flag.dragon_rider
+```
+
+> 数据文件中主要使用 `has.flag.<name>`，但引擎解析器同时支持两种写法。
 
 ### 组合示例
 
@@ -314,13 +324,16 @@ npx vue-tsc --noEmit
 # 2. 数据文件校验
 python3 scripts/content-tool.py validate
 
-# 3. Flag 一致性
+# 3. DSL 语法检查（修改条件表达式后务必执行）
+python3 scripts/content-tool.py check-dsl "has.flag.xxx & attribute.str >= 10"
+
+# 4. Flag 一致性
 python3 scripts/content-tool.py check-flags
 
-# 4. 单元测试
+# 5. 单元测试
 npx vitest run
 
-# 5. 开发服务器启动（可选）
+# 6. 开发服务器启动（可选）
 npx vite
 ```
 
