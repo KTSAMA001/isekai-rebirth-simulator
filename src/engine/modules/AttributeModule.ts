@@ -35,10 +35,9 @@ export class AttributeModule {
       const allocated = allocation[def.id] ?? 0
       const base = currentAttrs[def.id] ?? def.defaultValue
       const newVal = base + allocated
-      const clamped = Math.max(def.min, Math.min(def.max, newVal))
-      const actual = clamped - base
+      const actual = newVal - base
       used += Math.max(0, actual)
-      attrs[def.id] = clamped
+      attrs[def.id] = newVal
     }
 
     return {
@@ -60,8 +59,7 @@ export class AttributeModule {
       const def = this.world.index.attributesById.get(mod.attribute)
       if (!def) continue
 
-      const newVal = (attrs[mod.attribute] ?? 0) + mod.value
-      attrs[mod.attribute] = Math.max(def.min, Math.min(def.max, newVal))
+      attrs[mod.attribute] = (attrs[mod.attribute] ?? 0) + mod.value
 
       // 更新峰值
       if (attrs[mod.attribute] > (newPeaks[mod.attribute] ?? 0)) {
@@ -84,7 +82,7 @@ export class AttributeModule {
     const def = this.world.index.attributesById.get(target)
     if (!def) return { attributes: attrs, peaks: newPeaks }
 
-    attrs[target] = Math.max(def.min, Math.min(def.max, value))
+    attrs[target] = value
     if (attrs[target] > (newPeaks[target] ?? 0)) {
       newPeaks[target] = attrs[target]
     }

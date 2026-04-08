@@ -39,8 +39,6 @@ function increment(attrId: string) {
   const current = allocation.value[attrId] ?? 0
   const attr = props.attributes.find(a => a.id === attrId)
   if (!attr) return
-  const totalNow = getDisplayValue(attrId)
-  if (totalNow >= attr.max) return
   allocation.value = { ...allocation.value, [attrId]: current + 1 }
 }
 
@@ -80,7 +78,7 @@ function confirm() {
             <div
               class="attr-bar-fill"
               :style="{
-                width: `${(getDisplayValue(attr.id) / attr.max) * 100}%`,
+                width: `${Math.min((getDisplayValue(attr.id) / 50) * 100, 100)}%`,
                 background: attr.color,
               }"
             ></div>
@@ -89,7 +87,7 @@ function confirm() {
         <div class="attr-controls">
           <button class="ctrl-btn" :disabled="(allocation[attr.id] ?? 0) <= 0" @click="decrement(attr.id)">-</button>
           <span class="attr-value">{{ getDisplayValue(attr.id) }}</span>
-          <button class="ctrl-btn" :disabled="remaining <= 0 || getDisplayValue(attr.id) >= attr.max" @click="increment(attr.id)">+</button>
+          <button class="ctrl-btn" :disabled="remaining <= 0" @click="increment(attr.id)">+</button>
         </div>
         <div v-if="getBonus(attr.id) > 0" class="attr-bonus">
           +{{ getBonus(attr.id) }}

@@ -213,8 +213,8 @@ describe('SimulationEngine', () => {
       engine.draftTalents()
       // allocate 内部 remaining 不会为负，不抛异常
       expect(() => engine.allocateAttributes({ str: 999 })).not.toThrow()
-      // str 被 clamp 到属性上限 20
-      expect(engine.getState().attributes.str).toBe(20)
+      // 不再 clamp，str 直接加上去
+      expect(engine.getState().attributes.str).toBe(1004) // 5(default) + 999
     })
 
     it('HP 基于初始体魄计算（computeInitHp 在属性更新前调用）', () => {

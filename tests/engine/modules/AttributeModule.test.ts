@@ -31,20 +31,21 @@ describe('AttributeModule', () => {
       expect(result.remaining).toBe(12)
     })
 
-    it('不超过属性上限', () => {
+    it('属性无上限，自由增长', () => {
       const mod = createModule()
       const current = { str: 18, int: 5, chr: 5, luk: 5, mag: 5, hp_display: 100 }
       const result = mod.allocate(current, { str: 10 }, 20)
-      // str max = 20，当前 18 + 10 被 clamp 到 20，实际消耗 2
-      expect(result.attributes.str).toBe(20)
-      expect(result.remaining).toBe(18)
+      // 不再 clamp，18 + 10 = 28
+      expect(result.attributes.str).toBe(28)
+      expect(result.remaining).toBe(10)
     })
 
-    it('不低于属性下限', () => {
+    it('属性无下限，可以为负数', () => {
       const mod = createModule()
       const current = { str: 2, int: 5, chr: 5, luk: 5, mag: 5, hp_display: 100 }
       const result = mod.allocate(current, { str: -10 }, 20)
-      expect(result.attributes.str).toBe(0) // min = 0
+      // 不再 clamp，2 + (-10) = -8
+      expect(result.attributes.str).toBe(-8)
     })
 
     it('忽略 hidden 属性的分配', () => {
@@ -67,12 +68,12 @@ describe('AttributeModule', () => {
       expect(result.peaks.str).toBe(8)
     })
 
-    it('减少属性但不低于下限', () => {
+    it('减少属性可以为负数', () => {
       const mod = createModule()
       const attrs = { str: 2, int: 5, chr: 5, luk: 5, mag: 5 }
       const peaks = { str: 5, int: 5, chr: 5, luk: 5, mag: 5 }
       const result = mod.modify(attrs, peaks, [{ attribute: 'str', value: -10 }])
-      expect(result.attributes.str).toBe(0)
+      expect(result.attributes.str).toBe(-8)
       // 峰值不变
       expect(result.peaks.str).toBe(5)
     })
@@ -116,12 +117,12 @@ describe('AttributeModule', () => {
       expect(result.peaks.str).toBe(15)
     })
 
-    it('超过上限时 clamp', () => {
+    it('无上限，不 clamp', () => {
       const mod = createModule()
       const attrs = { str: 5, int: 5, chr: 5, luk: 5, mag: 5 }
       const peaks = { str: 5, int: 5, chr: 5, luk: 5, mag: 5 }
       const result = mod.set(attrs, peaks, 'str', 999)
-      expect(result.attributes.str).toBe(20) // max = 20
+      expect(result.attributes.str).toBe(999)
     })
 
     it('不存在的属性返回原值', () => {

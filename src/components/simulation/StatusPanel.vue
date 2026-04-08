@@ -87,7 +87,7 @@ function itemTooltip(item: { def: any; slot: any }) {
           <div
             class="attr-bar-fill"
             :style="{
-              width: ((state.attributes[attr.id] ?? 0) / attr.max) * 100 + '%',
+              width: Math.max(0, Math.min(((state.attributes[attr.id] ?? 0) / Math.max(attr.max, state.attributes[attr.id] ?? 0, 1)) * 100, 100)) + '%',
               background: attr.color,
             }"
           ></div>
