@@ -159,7 +159,7 @@ async function handleCopyStorySource() {
             <div
               class="peak-fill"
               :style="{
-                width: (stat.peak / stat.max * 100) + '%',
+                width: (stat.peak / Math.max(stat.max, stat.peak, 1) * 100) + '%',
                 background: stat.color,
               }"
             ></div>

@@ -99,8 +99,7 @@ export class SimulationEngine {
     // 应用预设属性加成
     if (preset?.attributes) {
       for (const [k, v] of Object.entries(preset.attributes)) {
-        const max = this.world.attributes.find(a => a.id === k)?.max ?? 99
-        attrs[k] = Math.min((attrs[k] ?? 0) + v, max)
+        attrs[k] = (attrs[k] ?? 0) + v
       }
     }
 
@@ -108,18 +107,14 @@ export class SimulationEngine {
     const raceDef = race ? this.world.races?.find(r => r.id === race) : undefined
     if (raceDef) {
       for (const mod of raceDef.attributeModifiers) {
-        const max = this.world.attributes.find(a => a.id === mod.attributeId)?.max ?? 99
-        const min = this.world.attributes.find(a => a.id === mod.attributeId)?.min ?? 0
-        attrs[mod.attributeId] = Math.max(min, Math.min((attrs[mod.attributeId] ?? 0) + mod.value, max))
+        attrs[mod.attributeId] = (attrs[mod.attributeId] ?? 0) + mod.value
       }
       // 应用种族×性别属性修正
       if (gender && raceDef.genderModifiers) {
         const genderMod = raceDef.genderModifiers.find(g => g.gender === gender)
         if (genderMod?.attributeModifiers) {
           for (const mod of genderMod.attributeModifiers) {
-            const max = this.world.attributes.find(a => a.id === mod.attributeId)?.max ?? 99
-            const min = this.world.attributes.find(a => a.id === mod.attributeId)?.min ?? 0
-            attrs[mod.attributeId] = Math.max(min, Math.min((attrs[mod.attributeId] ?? 0) + mod.value, max))
+            attrs[mod.attributeId] = (attrs[mod.attributeId] ?? 0) + mod.value
           }
         }
       }
@@ -248,8 +243,7 @@ export class SimulationEngine {
     // 应用天赋正值加成到属性
     let attrs = { ...this.state.attributes }
     for (const [attrId, bonus] of Object.entries(talentAttrs)) {
-      const max = this.world.attributes.find(a => a.id === attrId)?.max ?? 99
-      attrs[attrId] = Math.min((attrs[attrId] ?? 0) + bonus, max)
+      attrs[attrId] = (attrs[attrId] ?? 0) + bonus
     }
 
     this.state = {
@@ -779,8 +773,7 @@ export class SimulationEngine {
       if (bonus > 0) {
         const current = newState.attributes[attrId] ?? 0
         const peak = newState.attributePeaks[attrId] ?? 0
-        const max = this.world.attributes.find(a => a.id === attrId)?.max ?? 99
-        const newAttr = Math.min(Math.floor(current + bonus), max)
+        const newAttr = Math.floor(current + bonus)
         const newPeak = Math.max(peak, newAttr)
         newState = {
           ...newState,
