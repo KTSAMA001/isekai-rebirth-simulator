@@ -386,10 +386,16 @@ export class SimulationEngine {
     const rawNewHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
     // 单年 HP 净变化上限：固定 20，不与当前 HP 挂钩
     // 避免高 HP 角色单年损失过大
-    const maxNetLoss = Math.max(Math.floor(initHp * 0.25), 20)
+    const maxNetLoss = Math.max(Math.floor(initHp * maxDecayRatio), 12)
     const clampedNewHp = Math.max(rawNewHp, this.state.hp - maxNetLoss)
+    // 长寿种族 HP 平台期下限：lifeRatio < 0.5 时 HP 不低于 initHp*30%
+    // 防止长寿种族因随机事件叠加在生命前期暴毙
+    let bufferedHp = clampedNewHp
+    if (maxAge >= 250 && lifeRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
+      bufferedHp = Math.max(clampedNewHp, Math.floor(initHp * 0.3))
+    }
     // 条件恢复（C-2）：物品提供的 conditional_regen（HP<阈值时额外恢复）
-    let finalHp = clampedNewHp
+    let finalHp = bufferedHp
     if (finalHp > 0 && finalHp < modifiedCap) {
       const conditionalBonus = this.itemModule.getConditionalRegen({
         ...this.state,
