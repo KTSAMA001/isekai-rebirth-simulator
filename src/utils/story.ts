@@ -13,12 +13,15 @@ export function generateWorldbook(world: WorldInstance): string {
   if (world.manifest.tags.length > 0) {
     lines.push(`标签：${world.manifest.tags.join(' / ')}`)
   }
-  lines.push(`世界寿命上限参考：${world.manifest.maxAge} 岁`)
+  lines.push(`世界寿命上限参考：${world.manifest.maxAge} 岁（各种族寿命见下）`)
   lines.push('')
 
   lines.push('【主要种族】')
   for (const race of world.races ?? []) {
     lines.push(`- ${race.name}：${race.description}`)
+    if (race.lifespanRange) {
+      lines.push(`  寿命：${race.lifespanRange[0]}-${race.lifespanRange[1]} 岁`)
+    }
     if (race.lore) {
       lines.push(`  设定：${race.lore}`)
     }
