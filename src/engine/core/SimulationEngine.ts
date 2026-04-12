@@ -783,16 +783,19 @@ export class SimulationEngine {
 
   /** 根据生命周期阶段生成衰老提示文本 */
   private getAgingHint(): string {
-    const maxAge = this.effectiveMaxAge
-    const lifeRatio = this.state.age / maxAge
-    if (lifeRatio > 0.92) return '你已经油尽灯枯，每一次呼吸都弥足珍贵。'
-    if (lifeRatio > 0.85) return '岁月不饶人，你感到生命在流逝。'
-    if (lifeRatio > 0.78) return '你的身体越来越不听使唤，生病后恢复得很慢。'
-    if (lifeRatio > 0.7) return '你开始感到力不从心，体力大不如前。'
-    if (lifeRatio > 0.62) return '你发现爬楼梯都会微微气喘了。'
-    if (lifeRatio > 0.55) return '鬓角多了几根白发，你假装没注意到。'
-    if (lifeRatio > 0.45) return '你注意到自己恢复得不如从前快了。'
-    if (lifeRatio > 0.38) return '你开始怀念年轻时的充沛精力。'
+    // 基于中位寿命（lifespanRange 中值）而非理论极限
+    // 这样人类在 30-40 岁开始出现轻微衰老提示，50+ 岁出现明显衰老
+    const raceDef = this.world.races?.find((r: { id: string }) => r.id === this.state.character.race)
+    const medianDeath = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : this.effectiveMaxAge * 0.6
+    const lifeProgress = this.state.age / medianDeath
+    if (lifeProgress > 0.92) return '你已经油尽灯枯，每一次呼吸都弥足珍贵。'
+    if (lifeProgress > 0.85) return '岁月不饶人，你感到生命在流逝。'
+    if (lifeProgress > 0.78) return '你的身体越来越不听使唤，生病后恢复得很慢。'
+    if (lifeProgress > 0.7) return '你开始感到力不从心，体力大不如前。'
+    if (lifeProgress > 0.62) return '你发现爬楼梯都会微微气喘了。'
+    if (lifeProgress > 0.55) return '鬓角多了几根白发，你假装没注意到。'
+    if (lifeProgress > 0.45) return '你注意到自己恢复得不如从前快了。'
+    if (lifeProgress > 0.38) return '你开始怀念年轻时的充沛精力。'
     return ''
   }
 
