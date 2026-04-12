@@ -5,41 +5,41 @@
       "title": "默默无闻",
       "description": "在历史的长河中没有留下任何痕迹",
       "minScore": 0,
-      "maxScore": 80
+      "maxScore": 120
     },
     {
       "grade": "C",
       "title": "平凡一生",
       "description": "度过了一段普通而平静的人生",
-      "minScore": 80,
-      "maxScore": 130
+      "minScore": 120,
+      "maxScore": 200
     },
     {
       "grade": "B",
       "title": "小有成就",
       "description": "在某个领域取得了一定的成就",
-      "minScore": 130,
-      "maxScore": 200
+      "minScore": 200,
+      "maxScore": 280
     },
     {
       "grade": "A",
       "title": "声名远扬",
       "description": "你的名字被许多人铭记",
-      "minScore": 200,
-      "maxScore": 280
+      "minScore": 280,
+      "maxScore": 380
     },
     {
       "grade": "S",
       "title": "传奇人生",
       "description": "你的人生堪称一段传奇",
-      "minScore": 280,
-      "maxScore": 380
+      "minScore": 380,
+      "maxScore": 500
     },
     {
       "grade": "SS",
       "title": "不朽传说",
       "description": "你的传说将永远流传于世",
-      "minScore": 380,
+      "minScore": 500,
       "maxScore": null
     }
   ]

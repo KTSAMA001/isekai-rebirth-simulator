@@ -41,6 +41,10 @@ export class SimulationEngine {
   private routeAnchorsTriggered: Set<string> = new Set()
   /** 本局实际最大年龄（受种族寿命范围影响） */
   private effectiveMaxAge = 0
+  /** 童年 HP 伤害保护年龄阈值（modify_hp 中使用） */
+  static readonly CHILDHOOD_HP_PROTECTION_AGE = 15
+  /** 童年死亡保护年龄阈值（濒死判定中使用） */
+  static readonly CHILDHOOD_DEATH_PROTECTION_AGE = 10
 
   /** 从已保存的状态恢复引擎 */
   static restoreFromState(state: GameState, world: WorldInstance): SimulationEngine {
@@ -55,7 +59,7 @@ export class SimulationEngine {
     // 从第一个属性快照重建 initialStrRegen
     const firstSnapshot = state.attributeHistory[0]
     const initStr = firstSnapshot?.values?.['str'] ?? state.attributes['str'] ?? 0
-    engine.initialStrRegen = 1 + Math.floor(initStr / 3)
+    engine.initialStrRegen = Math.max(1, 1 + Math.floor(initStr / 3))
 
     // 重建 routeAnchorsTriggered：已触发过的锚点事件不再重复触发
     const routes = world.manifest.routes ?? []
@@ -82,10 +86,10 @@ export class SimulationEngine {
     this.dsl = new ConditionDSL()
     this.attrModule = new AttributeModule(world)
     this.talentModule = new TalentModule(world, this.random)
-    this.eventModule = new EventModule(world, this.random, this.dsl, this.attrModule)
+    this.itemModule = new ItemModule(world, this.dsl)
+    this.eventModule = new EventModule(world, this.random, this.dsl, this.attrModule, this.itemModule)
     this.evaluatorModule = new EvaluatorModule(world, world.evaluations)
     this.achievementModule = new AchievementModule(world, this.dsl)
-    this.itemModule = new ItemModule(world, this.dsl)
     this.diceModule = new DiceModule(this.random)
   }
 
@@ -288,7 +292,7 @@ export class SimulationEngine {
     this.state.hp = this.computeInitHp()
     // 固定每年的恢复量（基于初始体魄，不随成长增长）
     const initStr = attributes['str'] ?? 0
-    this.initialStrRegen = 1 + Math.floor(initStr / 3)
+    this.initialStrRegen = Math.max(1, 1 + Math.floor(initStr / 3))
 
     this.state = {
       ...this.state,
@@ -306,15 +310,17 @@ export class SimulationEngine {
   /** 根据属性计算初始 HP：25 + 体魄×3 */
   private computeInitHp(): number {
     const str = this.state.attributes['str'] ?? 0
-    return 25 + str * 3
+    return Math.max(25, 25 + str * 3)
   }
 
-  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 年龄衰减
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 连续年龄衰减
    *  所有衰老阈值基于 lifeRatio（age / effectiveMaxAge），适配不同种族寿命
+   *  使用 sigmoid 平滑过渡 + 二次加速，确保角色在 lifespanRange 范围内自然死亡
    */
   private regenHp(): void {
-    const regen = this.initialStrRegen
     const initHp = this.computeInitHp()
+    // 每年恢复量，上限为初始HP的12%（至少3），体魄只影响初始HP不影响恢复速度
+    const regen = Math.min(this.initialStrRegen, Math.max(3, Math.floor(initHp * 0.12)))
     const age = this.state.age
     const maxAge = this.effectiveMaxAge
     const lifeRatio = age / maxAge
@@ -324,34 +330,78 @@ export class SimulationEngine {
     const primeAge = maxAge * 0.35
     const declinePerYear = 0.4 / (maxAge * 0.65)
     const softCapMultiplier = Math.max(1.1 - Math.max(0, age - primeAge) * declinePerYear, 0.3)
-    const softCap = Math.max(Math.floor(initHp * softCapMultiplier), 20)
+    const softCap = Math.max(Math.floor(initHp * softCapMultiplier), 5)
     // 物品HP恢复加成
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
     // 物品HP软上限修正
     const capModifier = this.itemModule.getHpCapModifier(this.state)
-    const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 20)
+    const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 5)
 
-    // 年龄衰减：基于生命比例，后半生逐步加速
-    // 目标：对平均体魄(regen≈4)角色，在 lifeRatio≈0.92 时 net regen≈0
-    // 使角色在接近 effectiveMaxAge 时自然死亡
-    let ageDecay = 0
-    if (lifeRatio >= 1.1) ageDecay = 10
-    else if (lifeRatio >= 1.0) ageDecay = 7
-    else if (lifeRatio >= 0.92) ageDecay = 4
-    else if (lifeRatio >= 0.85) ageDecay = 3
-    else if (lifeRatio >= 0.78) ageDecay = 2
-    else if (lifeRatio >= 0.68) ageDecay = 1
+    // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
+    // 目标：lifespanRange 是理论极限，中位数应在范围的 80-90% 处
+    // sigmoid 中点：按种族寿命分层，短寿更早衰减
+    // 哥布林/兽人(<50): 0.38, 人类(50-100): 0.45, 矮人/半龙人(100-250): 0.50, 精灵/海精灵(250+): 0.52
+    const sigmoidMid = maxAge < 50 ? 0.38 : maxAge < 100 ? 0.45 : maxAge < 250 ? 0.50 : 0.52
+    const sigmoidK = 10
+    const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeRatio - sigmoidMid)))
+    const sigmoidDecay = Math.floor(5 * sigmoidValue)
 
-    // 超出预期寿命：额外加速衰老，确保不会永生
-    if (lifeRatio > 1.0) {
-      const overageRatio = lifeRatio - 1.0
-      ageDecay += Math.floor(overageRatio * 30)
+    // 二次加速: lifeRatio>0.5 后加速，系数与 maxAge 反相关
+    // 短寿种族衰减更快（人类），长寿种族衰减更慢（精灵）
+    // 中寿种族（100-400）衰减稍缓，避免矮人寿命过低
+    let quadScaleBase = 3500 / maxAge
+    // 短寿种族（<45）衰减稍强
+    if (maxAge < 45) {
+      quadScaleBase *= 1.5
+    }
+    // 长寿种族（250+）二次加速适中
+    if (maxAge >= 250) {
+      quadScaleBase *= 1.2
+    }
+    const quadScale = Math.max(quadScaleBase, 10)
+    const quadFactor = Math.max(0, lifeRatio - 0.5) ** 2 * quadScale
+    const quadDecay = Math.floor(quadFactor)
+
+    let ageDecay = sigmoidDecay + quadDecay
+
+    // 单年衰减上限：防止突然死亡，确保死亡过程渐进
+    // 短寿种族上限较高（允许较快死亡），长寿种族上限较低（平滑衰减）
+    const maxDecayRatio = maxAge < 50 ? 0.25 : maxAge < 100 ? 0.20 : 0.15
+    const maxYearlyDecay = Math.max(Math.floor(initHp * maxDecayRatio), 12)
+    ageDecay = Math.min(ageDecay, maxYearlyDecay)
+
+    // 童年前期无衰减（F-2-1）：10岁以下角色不因自然衰减死亡
+    if (age < SimulationEngine.CHILDHOOD_DEATH_PROTECTION_AGE) {
+      ageDecay = 0
     }
 
-    const newHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
+    // 超出预期寿命：严重惩罚，确保不永生
+    if (lifeRatio > 1.0) {
+      const overageRatio = lifeRatio - 1.0
+      const overageDecay = Math.floor(overageRatio * 60)
+      // overage 也受单年上限约束
+      ageDecay = Math.min(ageDecay + overageDecay, maxYearlyDecay * 2)
+    }
+
+    const rawNewHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
+    // 单年 HP 净变化上限：固定 20，不与当前 HP 挂钩
+    // 避免高 HP 角色单年损失过大
+    const maxNetLoss = Math.max(Math.floor(initHp * 0.25), 20)
+    const clampedNewHp = Math.max(rawNewHp, this.state.hp - maxNetLoss)
+    // 条件恢复（C-2）：物品提供的 conditional_regen（HP<阈值时额外恢复）
+    let finalHp = clampedNewHp
+    if (finalHp > 0 && finalHp < modifiedCap) {
+      const conditionalBonus = this.itemModule.getConditionalRegen({
+        ...this.state,
+        hp: clampedNewHp,
+      })
+      if (conditionalBonus > 0) {
+        finalHp = Math.min(clampedNewHp + conditionalBonus, modifiedCap)
+      }
+    }
     this.state = {
       ...this.state,
-      hp: newHp,
+      hp: Math.max(0, finalHp),
     }
   }
 
@@ -367,10 +417,11 @@ export class SimulationEngine {
     // 新的一年：恢复部分 HP（上一年受伤的恢复）
     this.regenHp()
 
-    // 年龄 +1
+    // 年龄 +1，重置年度 HP 损失追踪
     let newState = {
       ...this.state,
       age: this.state.age + 1,
+      yearlyHpLoss: 0,
     }
 
     // 检查天赋年龄触发效果
@@ -396,6 +447,9 @@ export class SimulationEngine {
 
     this.state = newState
 
+    // 衰老提示（在所有返回路径中使用）
+    const agingHint = this.getAgingHint()
+
     // 路线系统：检查路线切换（必须在 getCandidates 之前，确保入口 flag 对事件筛选可见）
     this.updateRoute()
 
@@ -412,7 +466,7 @@ export class SimulationEngine {
         triggeredEvents: new Set([...this.state.triggeredEvents, mutableAnchorEvent.id]),
       }
       if (mutableAnchorEvent.branches && mutableAnchorEvent.branches.length > 0) {
-        return { phase: 'awaiting_choice', event: mutableAnchorEvent, branches: mutableAnchorEvent.branches }
+        return { phase: 'awaiting_choice', event: mutableAnchorEvent, branches: mutableAnchorEvent.branches, agingHint: agingHint || undefined }
       }
       // 无分支锚点直接执行
       const effectTexts = this.eventModule.applyEffectsOnState(mutableAnchorEvent.effects, this.state)
@@ -420,7 +474,7 @@ export class SimulationEngine {
       this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
       this.pendingYearEvent = null
       this.postYearProcess()
-      return { phase: 'showing_event', event: mutableAnchorEvent, effectTexts, logEntry }
+      return { phase: 'showing_event', event: mutableAnchorEvent, effectTexts, logEntry, agingHint: agingHint || undefined }
     }
 
     // === Age 1 强制 birth 事件 ===
@@ -435,14 +489,14 @@ export class SimulationEngine {
           triggeredEvents: new Set([...this.state.triggeredEvents, birthEvent.id]),
         }
         if (birthEvent.branches && birthEvent.branches.length > 0) {
-          return { phase: 'awaiting_choice', event: birthEvent, branches: birthEvent.branches }
+          return { phase: 'awaiting_choice', event: birthEvent, branches: birthEvent.branches, agingHint: agingHint || undefined }
         }
         const effectTexts = this.eventModule.applyEffectsOnState(birthEvent.effects, this.state)
         const logEntry = { age: this.state.age, eventId: birthEvent.id, title: birthEvent.title, description: birthEvent.description, effects: effectTexts }
         this.state = { ...this.state, eventLog: [...this.state.eventLog, logEntry] }
         this.pendingYearEvent = null
         this.postYearProcess()
-        return { phase: 'showing_event', event: birthEvent, effectTexts, logEntry }
+        return { phase: 'showing_event', event: birthEvent, effectTexts, logEntry, agingHint: agingHint || undefined }
         }
       }
     }
@@ -451,7 +505,7 @@ export class SimulationEngine {
       // 平淡年：仍需执行年度后处理（死亡检查等）
       this.pendingYearEvent = null
       this.postYearProcess()
-      return { phase: 'mundane_year', event: null }
+      return { phase: 'mundane_year', event: null, agingHint: agingHint || undefined }
     }
 
     // 动态权重选择：tag属性亲和力 + weightModifiers + minor降权
@@ -509,7 +563,7 @@ export class SimulationEngine {
     let event: WorldEventDef | null = this.random.weightedPick(scored, s => s.weight).event
     if (!event) {
       this.pendingYearEvent = null
-      return { phase: 'mundane_year', event: null }
+      return { phase: 'mundane_year', event: null, agingHint: agingHint || undefined }
     }
     this.pendingYearEvent = event
 
@@ -524,6 +578,7 @@ export class SimulationEngine {
         phase: 'awaiting_choice',
         event,
         branches: event.branches,
+        agingHint: agingHint || undefined,
       }
     }
 
@@ -572,6 +627,7 @@ export class SimulationEngine {
       event,
       effectTexts,
       logEntry,
+      agingHint: agingHint || undefined,
     }
   }
 
@@ -715,6 +771,21 @@ export class SimulationEngine {
     }
   }
 
+  /** 根据生命周期阶段生成衰老提示文本 */
+  private getAgingHint(): string {
+    const maxAge = this.effectiveMaxAge
+    const lifeRatio = this.state.age / maxAge
+    if (lifeRatio > 0.92) return '你已经油尽灯枯，每一次呼吸都弥足珍贵。'
+    if (lifeRatio > 0.85) return '岁月不饶人，你感到生命在流逝。'
+    if (lifeRatio > 0.78) return '你的身体越来越不听使唤，生病后恢复得很慢。'
+    if (lifeRatio > 0.7) return '你开始感到力不从心，体力大不如前。'
+    if (lifeRatio > 0.62) return '你发现爬楼梯都会微微气喘了。'
+    if (lifeRatio > 0.55) return '鬓角多了几根白发，你假装没注意到。'
+    if (lifeRatio > 0.45) return '你注意到自己恢复得不如从前快了。'
+    if (lifeRatio > 0.38) return '你开始怀念年轻时的充沛精力。'
+    return ''
+  }
+
   /** 跳过平淡年 */
   skipYear(): YearResult {
     this.pendingYearEvent = null
@@ -722,14 +793,17 @@ export class SimulationEngine {
     // 后处理（HP恢复已在 startYear 年初完成）
     this.postYearProcessCore()
 
+    const agingHint = this.getAgingHint()
+
     return {
       phase: 'mundane_year',
       event: null,
+      agingHint: agingHint || undefined,
       logEntry: {
         age: this.state.age,
         eventId: '__mundane__',
         title: '平静的一年',
-        description: '什么特别的事都没发生，平平淡淡地度过了。',
+        description: '什么特别的事都没发生，平平淡淡地度过了。' + (agingHint ? '\n' + agingHint : ''),
         effects: [],
       },
     }
@@ -759,6 +833,44 @@ export class SimulationEngine {
     }
   }
 
+  /** 濒死判定：动态阈值 + 概率分层
+   *  童年保护（F-2-2）：10岁以下不触发濒死随机死亡
+   */
+  private nearDeathCheck(state: GameState): GameState {
+    if (state.hp <= 0 || state.age < SimulationEngine.CHILDHOOD_DEATH_PROTECTION_AGE) return state
+    const nearDeathThreshold = Math.max(8, Math.floor(this.computeInitHp() * 0.15))
+    if (state.hp > nearDeathThreshold) return state
+
+    const roll = this.random.next()
+    const halfThreshold = Math.floor(nearDeathThreshold * 0.5)
+    let newState = state
+
+    if (state.hp <= halfThreshold) {
+      // 极度濒死：35% 死亡 / 20% 奇迹(+20) / 45% 标记
+      if (roll < 0.35) {
+        newState = { ...state, hp: 0 }
+      } else if (roll < 0.55) {
+        newState = { ...state, hp: state.hp + 20 }
+        newState.flags = new Set([...newState.flags, 'miracle_survival'])
+      } else {
+        newState.flags = new Set([...newState.flags, 'near_death'])
+      }
+    } else {
+      // 轻度濒死：10% 死亡 / 20% 奇迹(+15) / 15% 小幅恢复(+5) / 55% 标记
+      if (roll < 0.10) {
+        newState = { ...state, hp: 0 }
+      } else if (roll < 0.30) {
+        newState = { ...state, hp: state.hp + 15 }
+        newState.flags = new Set([...newState.flags, 'miracle_survival'])
+      } else if (roll < 0.45) {
+        newState = { ...state, hp: state.hp + 5 }
+      } else {
+        newState.flags = new Set([...newState.flags, 'near_death'])
+      }
+    }
+    return newState
+  }
+
   /** 后处理核心逻辑：快照、成就、死亡检查 */
   private postYearProcessCore(): void {
     const snapshot = this.attrModule.snapshot(this.state.attributes, this.state.age)
@@ -786,21 +898,8 @@ export class SimulationEngine {
     // 检查成就
     newState = this.applyAchievements(newState)
 
-    // 濒死判定：HP ≤ 10 且 > 0 时，有概率直接死亡或奇迹生还
-    if (newState.hp > 0 && newState.hp <= 10) {
-      const roll = this.random.next()
-      if (roll < 0.20) {
-        // 20% 概率直接死亡
-        newState = { ...newState, hp: 0 }
-      } else if (roll < 0.35) {
-        // 15% 概率奇迹生还，恢复 HP
-        newState = { ...newState, hp: newState.hp + 18 }
-        newState.flags = new Set([...newState.flags, 'miracle_survival'])
-      } else {
-        // 70% 挂上濒死标记，继续
-        newState.flags = new Set([...newState.flags, 'near_death'])
-      }
-    }
+    // 濒死判定：动态阈值 + 概率分层
+    newState = this.nearDeathCheck(newState)
 
     // 免死效果检查
     if (newState.hp <= 0) {
@@ -846,37 +945,41 @@ export class SimulationEngine {
       }
     }
 
-    // 检查是否有新路线可以进入
-    if (!this.activeRoute) {
-      let bestRoute: LifeRoute | null = null
-      let fallbackRoute: LifeRoute | null = null
+    // 每帧都检查是否有更高优先级的路线可以进入
+    // 即使已有 activeRoute（如 commoner），也应允许升级到职业路线
+    let bestRoute: LifeRoute | null = null
+    let fallbackRoute: LifeRoute | null = null
 
-      for (const route of routes) {
-        // 无 enterCondition 的路线作为 fallback 候选
-        if (!route.enterCondition) {
-          if (!fallbackRoute || route.priority > fallbackRoute.priority) {
-            fallbackRoute = route
-          }
-          continue
+    for (const route of routes) {
+      // 无 enterCondition 的路线作为 fallback 候选（如 commoner）
+      if (!route.enterCondition) {
+        if (!fallbackRoute || route.priority > fallbackRoute.priority) {
+          fallbackRoute = route
         }
-        if (this.dsl.evaluate(route.enterCondition, ctx)) {
-          if (!bestRoute || route.priority > bestRoute.priority) {
-            bestRoute = route
-          }
+        continue
+      }
+      if (this.dsl.evaluate(route.enterCondition, ctx)) {
+        if (!bestRoute || route.priority > bestRoute.priority) {
+          bestRoute = route
         }
       }
+    }
 
-      // 没有匹配的条件路线时，使用 fallback 路线
-      const chosenRoute = bestRoute ?? fallbackRoute
-      if (chosenRoute) {
-        this.activeRoute = chosenRoute
-        // 设置路线入场 flag
-        if (chosenRoute.entryFlags && chosenRoute.entryFlags.length > 0) {
-          const newFlags = new Set(this.state.flags)
-          for (const f of chosenRoute.entryFlags) newFlags.add(f)
-          this.state = { ...this.state, flags: newFlags }
-        }
+    // 决定目标路线：有条件匹配的用条件路线，否则用 fallback
+    const targetRoute = bestRoute ?? fallbackRoute
+    // 只在路线实际变更时更新（避免每帧重复设 flag）
+    if (targetRoute && (!this.activeRoute || this.activeRoute.id !== targetRoute.id)) {
+      this.activeRoute = targetRoute
+      // 设置路线入场 flag
+      if (targetRoute.entryFlags && targetRoute.entryFlags.length > 0) {
+        const newFlags = new Set(this.state.flags)
+        for (const f of targetRoute.entryFlags) newFlags.add(f)
+        this.state = { ...this.state, flags: newFlags }
       }
+    }
+    // 无任何路线匹配时保持当前（不应发生，至少有 commoner fallback）
+    if (!this.activeRoute && fallbackRoute) {
+      this.activeRoute = fallbackRoute
     }
   }
 
@@ -970,21 +1073,13 @@ export class SimulationEngine {
 
     if (event) {
       const branchId = branchChoices?.[event.id]
+      const hpBeforeEvent = newState.hp
       newState = this.eventModule.resolveEvent(event, newState, branchId)
+      // HP 保护已由 EventModule.modify_hp 内部统一处理，无需外层 clamp
     }
 
-    // 濒死判定：HP ≤ 10 且 > 0 时，有概率直接死亡或奇迹生还
-    if (newState.hp > 0 && newState.hp <= 10) {
-      const roll = this.random.next()
-      if (roll < 0.20) {
-        newState = { ...newState, hp: 0 }
-      } else if (roll < 0.35) {
-        newState = { ...newState, hp: newState.hp + 18 }
-        newState.flags = new Set([...newState.flags, 'miracle_survival'])
-      } else {
-        newState.flags = new Set([...newState.flags, 'near_death'])
-      }
-    }
+    // 濒死判定：动态阈值 + 概率分层
+    newState = this.nearDeathCheck(newState)
 
     // 免死效果检查
     if (newState.hp <= 0) {

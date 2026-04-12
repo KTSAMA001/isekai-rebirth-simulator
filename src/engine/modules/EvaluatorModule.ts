@@ -40,11 +40,14 @@ export class EvaluatorModule {
     const lifespan = state.age
 
     const attrScore = totalAttributePeakSum * 1.2
-    const lifespanScore = lifespan * 0.3
-    const itemScore = state.inventory.items.length * 3
-    // 路线加分：每激活一条路线 +15 分
+    // 寿命得分：按种族归一化的寿命比例，压缩长寿种族优势
+    const effectiveMaxAge = state.effectiveMaxAge ?? this.world.manifest.maxAge
+    const lifespanRatio = Math.min(state.age / effectiveMaxAge, 1.2)
+    const lifespanScore = lifespanRatio * 60
+    const itemScore = state.inventory.items.length * 5
+    // 路线加分：每激活一条路线 +20 分
     const routeFlags = ['on_adventurer_path', 'on_knight_path', 'on_mage_path', 'on_merchant_path', 'on_scholar_path']
-    const routeBonus = routeFlags.reduce((bonus, flag) => bonus + (state.flags.has(flag) ? 15 : 0), 0)
+    const routeBonus = routeFlags.reduce((bonus, flag) => bonus + (state.flags.has(flag) ? 20 : 0), 0)
     const score = attrScore + lifespanScore + itemScore + routeBonus
 
     const grade = this.world.scoringRule.grades.find(
