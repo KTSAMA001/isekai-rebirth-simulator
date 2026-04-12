@@ -7,8 +7,8 @@
     "lore": "人类是这片大陆上数量最多的种族。虽然寿命短暂，但他们的野心和适应力让其他种族都不敢小觑。从王国的宝座到地城的深处，到处都有人类的身影。",
     "playable": true,
     "lifespanRange": [
-      40,
-      60
+      65,
+      85
     ],
     "attributeModifiers": [],
     "genderModifiers": [
