@@ -338,10 +338,10 @@ export class SimulationEngine {
     const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 5)
 
     // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
-    // 目标：lifespanRange 是理论极限，中位数应在范围的 80-90% 处
+    // 目标：lifespanRange 是实际中位寿命，大部分角色死在范围内
     // sigmoid 中点：按种族寿命分层，短寿更早衰减
-    // 哥布林/兽人(<50): 0.38, 人类(50-100): 0.45, 矮人/半龙人(100-250): 0.50, 精灵/海精灵(250+): 0.52
-    const sigmoidMid = maxAge < 50 ? 0.38 : maxAge < 100 ? 0.45 : maxAge < 250 ? 0.50 : 0.52
+    // 哥布林/兽人(<40): 0.40, 人类/半龙人(40-70): 0.45, 矮人(100-300): 0.48, 精灵/海精灵(200+): 0.50
+    const sigmoidMid = maxAge < 40 ? 0.40 : maxAge < 70 ? 0.45 : maxAge < 200 ? 0.48 : 0.50
     const sigmoidK = 10
     const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeRatio - sigmoidMid)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)
@@ -391,7 +391,7 @@ export class SimulationEngine {
     // 长寿种族 HP 平台期下限：lifeRatio < 0.5 时 HP 不低于 initHp*30%
     // 防止长寿种族因随机事件叠加在生命前期暴毙
     let bufferedHp = clampedNewHp
-    if (maxAge >= 250 && lifeRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
+    if (maxAge >= 200 && lifeRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
       bufferedHp = Math.max(clampedNewHp, Math.floor(initHp * 0.3))
     }
     // 条件恢复（C-2）：物品提供的 conditional_regen（HP<阈值时额外恢复）
