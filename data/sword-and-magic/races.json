@@ -119,7 +119,7 @@
     "exclusiveRoutes": [],
     "eventDir": "elf",
     "themeColor": "#4ade80",
-    "maxLifespan": 750
+    "maxLifespan": 500
   },
   {
     "id": "goblin",
@@ -267,7 +267,7 @@
     "exclusiveRoutes": [],
     "eventDir": "dwarf",
     "themeColor": "#d97706",
-    "maxLifespan": 450
+    "maxLifespan": 400
   },
   {
     "id": "beastfolk",
