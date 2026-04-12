@@ -339,9 +339,9 @@ export class SimulationEngine {
 
     // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
     // 目标：lifespanRange 是实际中位寿命，大部分角色死在范围内
-    // sigmoid 中点：按种族寿命分层，短寿更早衰减
-    // 哥布林/兽人(<40): 0.40, 人类/半龙人(40-70): 0.45, 矮人(100-300): 0.48, 精灵/海精灵(200+): 0.50
-    const sigmoidMid = maxAge < 40 ? 0.40 : maxAge < 70 ? 0.45 : maxAge < 200 ? 0.48 : 0.50
+    // sigmoid 中点：按种族寿命分层，短寿更早衰减，长寿更晚启动
+    // 哥布林/兽人(<40): 0.40, 人类/半龙人(40-70): 0.45, 矮人(70-200): 0.48, 精灵/海精灵(200+): 0.60
+    const sigmoidMid = maxAge < 40 ? 0.40 : maxAge < 70 ? 0.45 : maxAge < 200 ? 0.48 : 0.60
     const sigmoidK = 10
     const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeRatio - sigmoidMid)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)
@@ -354,9 +354,9 @@ export class SimulationEngine {
     if (maxAge < 45) {
       quadScaleBase *= 1.5
     }
-    // 长寿种族（250+）二次加速适中
-    if (maxAge >= 250) {
-      quadScaleBase *= 1.2
+    // 长寿种族（200+）二次加速减弱，让衰减更平缓
+    if (maxAge >= 200) {
+      quadScaleBase *= 0.8
     }
     const quadScale = Math.max(quadScaleBase, 10)
     const quadFactor = Math.max(0, lifeRatio - 0.5) ** 2 * quadScale
