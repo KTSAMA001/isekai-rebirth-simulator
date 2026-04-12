@@ -15,26 +15,32 @@ import type { RandomProvider } from '../core/RandomProvider'
 import { cloneState } from '../core/stateUtils'
 import type { ConditionDSL } from './ConditionDSL'
 import type { AttributeModule } from './AttributeModule'
+import type { ItemModule } from './ItemModule'
 
 export class EventModule {
+  /** 童年 HP 伤害保护年龄阈值 */
+  static readonly CHILDHOOD_HP_PROTECTION_AGE = 15
   private world: WorldInstance
   private random: RandomProvider
   private dsl: ConditionDSL
   private attrModule: AttributeModule
+  private itemModule: ItemModule
 
   /** 人类基准寿命（[70,100] 中点），用于跨种族年龄缩放 */
-  private static readonly HUMAN_BASELINE_LIFESPAN = 85
+  private static readonly HUMAN_BASELINE_LIFESPAN = 50
 
   constructor(
     world: WorldInstance,
     random: RandomProvider,
     dsl: ConditionDSL,
-    attrModule: AttributeModule
+    attrModule: AttributeModule,
+    itemModule: ItemModule
   ) {
     this.world = world
     this.random = random
     this.dsl = dsl
     this.attrModule = attrModule
+    this.itemModule = itemModule
   }
 
   /**
@@ -53,10 +59,21 @@ export class EventModule {
     if (isRaceExclusive || lifespanRatio === 1) {
       return [event.minAge, event.maxAge]
     }
-    return [
-      Math.round(event.minAge * lifespanRatio),
-      Math.round(event.maxAge * lifespanRatio),
-    ]
+    // 对受「心理年龄」影响的事件类型（life/romance/social）和关键人生事件，缩放 ratio 上限为 2.0
+    // 避免长寿命种族（如精灵 ratio≈4.7）的初恋等事件被放大到不合理年龄
+    const psychologyCappedTags = new Set(['life', 'romance', 'social'])
+    const needsCap = psychologyCappedTags.has(event.tag ?? '') || event.priority === 'major'
+    const effectiveRatio = needsCap ? Math.min(lifespanRatio, 2.0) : lifespanRatio
+
+    let scaledMin = Math.round(event.minAge * effectiveRatio)
+    const scaledMax = Math.round(event.maxAge * effectiveRatio)
+    // 短寿命种族保护：缩放后 minAge 不低于原始 minAge 的 50%，避免成人事件过早触发
+    // 例如哥布林(lifespanRatio≈0.39)的 youth 事件(minAge=18)不会缩放到 7 岁以下
+    if (lifespanRatio < 0.6) {
+      const floorMin = Math.ceil(event.minAge * 0.5)
+      scaledMin = Math.max(scaledMin, floorMin)
+    }
+    return [scaledMin, scaledMax]
   }
 
   /** 获取当前年龄可触发的事件候选列表 */
@@ -329,13 +346,48 @@ export class EventModule {
       }
       case 'modify_hp': {
         const hpBefore = state.hp
-        state.hp = Math.max(0, state.hp + effect.value)
-        // 致命打击：单次伤害超过当前 HP 的 50%，额外扣 10 HP
-        if (effect.value < 0 && Math.abs(effect.value) > hpBefore * 0.5) {
-          state.hp = Math.max(0, state.hp - 10)
-          return `${effect.description ?? `HP ${effect.value}`}；致命打击！额外 HP -10`
+        // 童年保护（B-2-1）：age < 15 时，单次伤害不超过当前 HP 的 60%
+        let damage = effect.value
+        if (damage < 0 && state.age < EventModule.CHILDHOOD_HP_PROTECTION_AGE) {
+          const maxDamage = Math.floor(hpBefore * 0.6)
+          damage = Math.max(damage, -maxDamage)
         }
-        return effect.description ?? `HP ${effect.value >= 0 ? '+' : ''}${effect.value}`
+        // 伤害减免（C-1）：物品提供的 damage_reduction
+        if (damage < 0) {
+          const reduction = this.itemModule.getDamageReduction(state)
+          if (reduction > 0) {
+            damage = Math.round(damage * (1 - reduction))
+          }
+        }
+        // 单次事件 HP 降幅上限：防止事件直接秒杀
+        if (damage < 0) {
+          const maxEventDamage = Math.max(20, Math.floor(hpBefore * 0.3))
+          // 但如果原始伤害就能致死（≤ -hpBefore），允许致死
+          if (effect.value >= -hpBefore) {
+            damage = Math.max(damage, -maxEventDamage)
+          }
+          // 年度累积 HP 损失软限制（P1 修复）：同一年多事件叠加时，超过阈值后伤害减半
+          const maxHp = hpBefore + (state.maxHpBonus ?? 0)
+          const yearlyCap = Math.max(30, Math.floor(maxHp * 0.4))
+          const prevLoss = state.yearlyHpLoss ?? 0
+          if (prevLoss >= yearlyCap) {
+            damage = Math.floor(damage / 2)
+          }
+        }
+        const actualDamage = damage
+        state.hp = Math.max(0, state.hp + actualDamage)
+        // 累积年度 HP 损失
+        if (actualDamage < 0) {
+          state.yearlyHpLoss = (state.yearlyHpLoss ?? 0) + Math.abs(actualDamage)
+        }
+        // 致命打击（B-5）：单次伤害超过当前 HP 的 50%，额外扣 HP（按比例，上限10）
+        if (actualDamage < 0 && Math.abs(actualDamage) > hpBefore * 0.5) {
+          const criticalBonus = Math.min(10, Math.floor(hpBefore * 0.15))
+          state.hp = Math.max(0, state.hp - criticalBonus)
+          state.yearlyHpLoss = (state.yearlyHpLoss ?? 0) + criticalBonus
+          return `${effect.description ?? `HP ${actualDamage}`}；致命打击！额外 HP -${criticalBonus}`
+        }
+        return effect.description ?? `HP ${actualDamage >= 0 ? '+' : ''}${actualDamage}`
       }
       case 'set_flag': {
         state.flags = new Set([...state.flags, effect.target])
@@ -365,8 +417,15 @@ export class EventModule {
         return effect.description ?? `计数器 ${effect.target} ${sign}${effect.value}`
       }
       case 'grant_item': {
-        // 物品获取由 SimulationEngine 处理
-        return effect.description ?? ''
+        const grantResult = this.itemModule.grantItem(state, effect.target)
+        if (grantResult.success) {
+          // 一次性 HP 加成
+          const hpBonus = this.itemModule.getFlatHpBonus(effect.target)
+          if (hpBonus > 0) {
+            state.hp = state.hp + hpBonus
+          }
+        }
+        return effect.description ?? grantResult.message
       }
       case 'trigger_event': {
         // 触发后续事件

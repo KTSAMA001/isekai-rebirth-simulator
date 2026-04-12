@@ -5813,7 +5813,7 @@
     "minAge": 28,
     "maxAge": 60,
     "weight": 2,
-    "include": "has.flag.married|has.flag.parent",
+    "include": "has.flag.married,has.flag.parent",
     "exclude": "has.flag.widowed",
     "tag": "social",
     "priority": "minor",
