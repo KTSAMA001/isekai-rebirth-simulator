@@ -39,10 +39,9 @@ export class EvaluatorModule {
     )
     const lifespan = state.age
 
-    // 属性分：归一化，长寿种族和短寿种族可比
-    // 效率分（每年属性增长效率）+ 总量分（少量权重）
+    // 属性分：对数压缩，长寿/短寿种族可比
     const attrPerYear = totalAttributePeakSum / Math.max(lifespan, 1)
-    const attrScore = attrPerYear * 25 + totalAttributePeakSum * 0.4
+    const attrScore = attrPerYear * 25 + Math.log(totalAttributePeakSum + 1) * 20
     // 寿命得分：按种族归一化的寿命比例
     const effectiveMaxAge = state.effectiveMaxAge ?? this.world.manifest.maxAge
     const lifespanRatio = Math.min(lifespan / effectiveMaxAge, 1.2)
