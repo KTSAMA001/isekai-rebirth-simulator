@@ -41,6 +41,7 @@ export class SimulationEngine {
   private routeAnchorsTriggered: Set<string> = new Set()
   /** 本局实际最大年龄（受种族寿命范围影响） */
   private effectiveMaxAge = 0
+  private personalSigmoidMid = 0
   /** 童年 HP 伤害保护年龄阈值（modify_hp 中使用） */
   static readonly CHILDHOOD_HP_PROTECTION_AGE = 15
   /** 童年死亡保护年龄阈值（濒死判定中使用） */
@@ -73,6 +74,7 @@ export class SimulationEngine {
 
     // 恢复种族寿命上限
     engine.effectiveMaxAge = state.effectiveMaxAge ?? world.manifest.maxAge
+    engine.personalSigmoidMid = (state as any).personalSigmoidMid ?? 0.55
 
     // 重建 activeRoute：根据当前状态重新评估路线条件
     engine.updateRoute()
@@ -132,9 +134,13 @@ export class SimulationEngine {
     // lifespanRange 用于显示和评分，effectiveMaxAge 用于 HP 衰减和事件系统
     // 这样 33 岁的人类不会被当成"老年人"，但大部分人仍会在 lifespanRange 内死亡
     if (raceDef?.maxLifespan) {
-      // 在 maxLifespan 的 80%-100% 范围内随机，产生自然差异
+      // effectiveMaxAge 决定 HP 衰减曲线 + 事件缩放
+      // 宽范围随机(50%-100%)：产生夭折、早亡、长寿的自然分布
+      // lifespanRange 是中位区间，大部分人死在里面，但不是所有人
       const max = raceDef.maxLifespan
-      this.effectiveMaxAge = Math.floor(max * 0.8 + this.random.next() * max * 0.2)
+      this.effectiveMaxAge = Math.floor(max * 0.5 + this.random.next() * max * 0.5)
+      // 个体衰减差异：sigmoid 中点 0.55 ± 0.15
+      this.personalSigmoidMid = 0.55 + (this.random.next() - 0.5) * 0.3
     } else if (raceDef?.lifespanRange) {
       this.effectiveMaxAge = raceDef.lifespanRange[1]
     } else {
@@ -349,8 +355,8 @@ export class SimulationEngine {
     const medianDeath = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : maxAge * 0.6
     const decayRatio = age / medianDeath
 
-    // sigmoid 中点：0.5 = 在中位寿命处衰减最剧烈
-    const sigmoidMid = 0.55
+    // sigmoid 中点：基于中位寿命，个体差异在 initGame 时已随机确定
+    const sigmoidMid = this.personalSigmoidMid
     const sigmoidK = 10
     const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (decayRatio - sigmoidMid)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)
