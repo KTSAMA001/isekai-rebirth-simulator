@@ -343,35 +343,34 @@ export class SimulationEngine {
     const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 5)
 
     // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
-    // effectiveMaxAge 基于 maxLifespan（理论极限），HP 衰减要在 lifespanRange 内就加速
-    // sigmoid 中点设在中位寿命比例处
-    // 短寿(max<70): 0.55, 中寿(70-500): 0.30, 长寿(500+): 0.40
-    const sigmoidMid = maxAge < 70 ? 0.55 : maxAge < 500 ? 0.30 : 0.40
+    // 衰减比例基于中位寿命（lifespanRange中值），而非理论极限（effectiveMaxAge）
+    // 这样人类在 40-50 岁（中位寿命 ~50）开始明显衰减，在 40-60 岁区间死亡
+    const raceDef = this.world.races?.find((r: { id: string }) => r.id === this.state.character.race)
+    const medianDeath = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : maxAge * 0.6
+    const decayRatio = age / medianDeath
+
+    // sigmoid 中点：0.5 = 在中位寿命处衰减最剧烈
+    const sigmoidMid = 0.55
     const sigmoidK = 10
-    const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeRatio - sigmoidMid)))
+    const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (decayRatio - sigmoidMid)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)
 
-    // 二次加速: lifeRatio>0.5 后加速，系数与 maxAge 反相关
-    // 短寿种族衰减更快（人类），长寿种族衰减更慢（精灵）
-    // 中寿种族（100-400）衰减稍缓，避免矮人寿命过低
-    let quadScaleBase = 3500 / maxAge
-    // 短寿种族（<45）衰减稍强
-    if (maxAge < 45) {
+    // 二次加速: decayRatio>0.5 后加速
+    let quadScaleBase = 3500 / medianDeath
+    if (medianDeath < 45) {
       quadScaleBase *= 1.5
     }
-    // 长寿种族（200+）二次加速减弱，让衰减更平缓
-    if (maxAge >= 200) {
+    if (medianDeath >= 200) {
       quadScaleBase *= 0.8
     }
     const quadScale = Math.max(quadScaleBase, 10)
-    const quadFactor = Math.max(0, lifeRatio - 0.5) ** 2 * quadScale
+    const quadFactor = Math.max(0, decayRatio - 0.5) ** 2 * quadScale
     const quadDecay = Math.floor(quadFactor)
 
     let ageDecay = sigmoidDecay + quadDecay
 
     // 单年衰减上限：防止突然死亡，确保死亡过程渐进
-    // 短寿种族上限较高（允许较快死亡），长寿种族上限较低（平滑衰减）
-    const maxDecayRatio = maxAge < 50 ? 0.25 : maxAge < 100 ? 0.20 : 0.15
+    const maxDecayRatio = medianDeath < 50 ? 0.25 : medianDeath < 100 ? 0.20 : 0.15
     const maxYearlyDecay = Math.max(Math.floor(initHp * maxDecayRatio), 12)
     ageDecay = Math.min(ageDecay, maxYearlyDecay)
 
@@ -396,7 +395,7 @@ export class SimulationEngine {
     // 长寿种族 HP 平台期下限：lifeRatio < 0.5 时 HP 不低于 initHp*30%
     // 防止长寿种族因随机事件叠加在生命前期暴毙
     let bufferedHp = clampedNewHp
-    if (maxAge >= 200 && lifeRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
+    if (medianDeath >= 200 && decayRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
       bufferedHp = Math.max(clampedNewHp, Math.floor(initHp * 0.3))
     }
     // 条件恢复（C-2）：物品提供的 conditional_regen（HP<阈值时额外恢复）
