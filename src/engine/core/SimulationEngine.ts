@@ -128,10 +128,15 @@ export class SimulationEngine {
       peaks[key] = attrs[key]
     }
 
-    // 计算本局最大年龄：种族有 lifespanRange 则在范围内随机，否则使用世界默认值
-    if (raceDef?.lifespanRange) {
-      const [minLife, maxLife] = raceDef.lifespanRange
-      this.effectiveMaxAge = minLife + Math.floor(this.random.next() * (maxLife - minLife + 1))
+    // 计算本局有效年龄上限：基于理论极限寿命(maxLifespan)，而非中位寿命(lifespanRange)
+    // lifespanRange 用于显示和评分，effectiveMaxAge 用于 HP 衰减和事件系统
+    // 这样 33 岁的人类不会被当成"老年人"，但大部分人仍会在 lifespanRange 内死亡
+    if (raceDef?.maxLifespan) {
+      // 在 maxLifespan 的 80%-100% 范围内随机，产生自然差异
+      const max = raceDef.maxLifespan
+      this.effectiveMaxAge = Math.floor(max * 0.8 + this.random.next() * max * 0.2)
+    } else if (raceDef?.lifespanRange) {
+      this.effectiveMaxAge = raceDef.lifespanRange[1]
     } else {
       this.effectiveMaxAge = this.world.manifest.maxAge
     }
@@ -338,10 +343,10 @@ export class SimulationEngine {
     const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 5)
 
     // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
-    // 目标：lifespanRange 是实际中位寿命，大部分角色死在范围内
-    // sigmoid 中点：按种族寿命分层，短寿更早衰减，长寿更晚启动
-    // 哥布林/兽人(<40): 0.40, 人类/半龙人(40-70): 0.45, 矮人(70-200): 0.48, 精灵/海精灵(200+): 0.60
-    const sigmoidMid = maxAge < 40 ? 0.40 : maxAge < 70 ? 0.45 : maxAge < 200 ? 0.48 : 0.60
+    // effectiveMaxAge 基于 maxLifespan（理论极限），HP 衰减要在 lifespanRange 内就加速
+    // sigmoid 中点设在中位寿命比例处
+    // 短寿(max<70): 0.55, 中寿(70-500): 0.30, 长寿(500+): 0.40
+    const sigmoidMid = maxAge < 70 ? 0.55 : maxAge < 500 ? 0.30 : 0.40
     const sigmoidK = 10
     const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeRatio - sigmoidMid)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)

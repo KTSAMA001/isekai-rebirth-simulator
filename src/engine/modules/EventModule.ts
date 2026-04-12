@@ -27,7 +27,7 @@ export class EventModule {
   private itemModule: ItemModule
 
   /** 人类基准寿命（[70,100] 中点），用于跨种族年龄缩放 */
-  private static readonly HUMAN_BASELINE_LIFESPAN = 50
+  private static readonly HUMAN_BASELINE_LIFESPAN = 100
 
   constructor(
     world: WorldInstance,
