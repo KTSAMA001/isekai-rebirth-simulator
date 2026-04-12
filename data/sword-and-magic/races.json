@@ -7,8 +7,8 @@
     "lore": "人类是这片大陆上数量最多的种族。虽然寿命短暂，但他们的野心和适应力让其他种族都不敢小觑。从王国的宝座到地城的深处，到处都有人类的身影。",
     "playable": true,
     "lifespanRange": [
-      80,
-      90
+      75,
+      95
     ],
     "attributeModifiers": [],
     "genderModifiers": [
@@ -20,7 +20,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["human_male_valor", "human_male_ambition_fire"]
+        "exclusiveTalents": [
+          "human_male_valor",
+          "human_male_ambition_fire"
+        ]
       },
       {
         "gender": "female",
@@ -30,7 +33,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["human_female_grace", "human_female_weaver"]
+        "exclusiveTalents": [
+          "human_female_grace",
+          "human_female_weaver"
+        ]
       }
     ],
     "exclusiveTalents": [
@@ -48,17 +54,17 @@
     "lore": "精灵族居住在古老的世界树庇荫之下，他们的文明比人类王国的历史还要悠久百倍。漫长的寿命赋予了他们深邃的智慧和对魔法的直觉，但也让他们对短命种族的事务显得漫不经心。精灵不崇尚物质财富，但世界树的恩泽让他们衣食无忧。",
     "playable": true,
     "lifespanRange": [
-      380,
-      420
+      400,
+      600
     ],
     "attributeModifiers": [
       {
         "attributeId": "mag",
-        "value": 8
+        "value": 5
       },
       {
         "attributeId": "int",
-        "value": 5
+        "value": 3
       },
       {
         "attributeId": "chr",
@@ -66,11 +72,11 @@
       },
       {
         "attributeId": "spr",
-        "value": 4
+        "value": 3
       },
       {
         "attributeId": "str",
-        "value": -5
+        "value": -3
       }
     ],
     "genderModifiers": [
@@ -82,7 +88,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["elf_male_lorekeeper", "elf_male_bladesinger"]
+        "exclusiveTalents": [
+          "elf_male_lorekeeper",
+          "elf_male_bladesinger"
+        ]
       },
       {
         "gender": "female",
@@ -96,7 +105,10 @@
             "value": 1
           }
         ],
-        "exclusiveTalents": ["elf_female_moonweaver", "elf_female_lifesinger"]
+        "exclusiveTalents": [
+          "elf_female_moonweaver",
+          "elf_female_lifesinger"
+        ]
       }
     ],
     "exclusiveTalents": [
@@ -116,32 +128,32 @@
     "playable": true,
     "lifespanRange": [
       30,
-      36
+      50
     ],
     "attributeModifiers": [
       {
         "attributeId": "luk",
-        "value": 10
-      },
-      {
-        "attributeId": "str",
-        "value": -8
-      },
-      {
-        "attributeId": "chr",
-        "value": -6
-      },
-      {
-        "attributeId": "mag",
-        "value": -3
+        "value": 6
       },
       {
         "attributeId": "int",
-        "value": 3
+        "value": 2
+      },
+      {
+        "attributeId": "str",
+        "value": -3
+      },
+      {
+        "attributeId": "chr",
+        "value": -3
+      },
+      {
+        "attributeId": "mag",
+        "value": -2
       },
       {
         "attributeId": "mny",
-        "value": -5
+        "value": -2
       }
     ],
     "genderModifiers": [
@@ -153,7 +165,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["goblin_male_scrapper", "goblin_male_berserker"]
+        "exclusiveTalents": [
+          "goblin_male_scrapper",
+          "goblin_male_berserker"
+        ]
       },
       {
         "gender": "female",
@@ -167,7 +182,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["goblin_female_trickster", "goblin_female_fortune"]
+        "exclusiveTalents": [
+          "goblin_female_trickster",
+          "goblin_female_fortune"
+        ]
       }
     ],
     "exclusiveTalents": [
@@ -186,25 +204,25 @@
     "lore": "矮人世代居住在炽焰山脉的铁砧要塞，据说最初由龙族亲手创造，用来开采魔矿与看守遗迹。他们把炉火视作神圣象征，相信龙息化作炉焰，能照见一个工匠是否值得托付作品与誓言。矮人社会最看重的不是金币，而是作品、师承与信誉：一个师傅只带一个徒弟，一件传世之作足以让名字被石厅铭记百年。他们在地下几乎不会迷路，却常在地表道路上为方向发愁；但只要谈到矿脉、铁砧与守护龙族旧迹，他们依然是大陆上最可靠的一群人。",
     "playable": true,
     "lifespanRange": [
-      160,
-      180
+      200,
+      300
     ],
     "attributeModifiers": [
       {
         "attributeId": "str",
-        "value": 8
+        "value": 5
       },
       {
         "attributeId": "spr",
-        "value": 3
+        "value": 2
       },
       {
         "attributeId": "chr",
-        "value": -4
+        "value": -2
       },
       {
         "attributeId": "mag",
-        "value": -5
+        "value": -3
       }
     ],
     "genderModifiers": [
@@ -216,7 +234,10 @@
             "value": 2
           }
         ],
-        "exclusiveTalents": ["dwarf_male_shieldbeard", "dwarf_male_tunnel_warden"]
+        "exclusiveTalents": [
+          "dwarf_male_shieldbeard",
+          "dwarf_male_tunnel_warden"
+        ]
       },
       {
         "gender": "female",
@@ -230,7 +251,10 @@
             "value": 1
           }
         ],
-        "exclusiveTalents": ["dwarf_female_runekeeper", "dwarf_female_clan_brewer"]
+        "exclusiveTalents": [
+          "dwarf_female_runekeeper",
+          "dwarf_female_clan_brewer"
+        ]
       }
     ],
     "exclusiveTalents": [
@@ -249,21 +273,21 @@
     "lore": "兽人部落散布在大陆的各个角落——狼族占据北方草原，虎族盘踞东部密林，猫族则在城市的暗巷中经营情报网络。他们之间的差异比人类的种族差异还大，唯一的共同点是：永远不要在夜晚和兽人赛跑。",
     "playable": false,
     "lifespanRange": [
-      60,
-      68
+      40,
+      60
     ],
     "attributeModifiers": [
       {
         "attributeId": "str",
-        "value": 10
+        "value": 6
       },
       {
         "attributeId": "mag",
-        "value": -8
+        "value": -3
       },
       {
         "attributeId": "int",
-        "value": -3
+        "value": -2
       }
     ],
     "themeColor": "#dc2626"
@@ -277,24 +301,24 @@
     "playable": false,
     "lifespanRange": [
       450,
-      490
+      650
     ],
     "attributeModifiers": [
       {
         "attributeId": "mag",
-        "value": 12
+        "value": 7
       },
       {
         "attributeId": "chr",
-        "value": 5
+        "value": 3
       },
       {
         "attributeId": "str",
-        "value": -8
+        "value": -3
       },
       {
         "attributeId": "mny",
-        "value": -6
+        "value": -2
       }
     ],
     "themeColor": "#06b6d4"
@@ -307,29 +331,29 @@
     "lore": "在远古时代，有极少数巨龙选择以人形与凡人结合。他们的后代继承了龙的鳞片和吐息，却也继承了被龙族视为杂种、被人类视为怪物的命运。半龙人的一生注定孤独，但他们的力量足以改写历史。",
     "playable": false,
     "lifespanRange": [
-      220,
+      150,
       250
     ],
     "attributeModifiers": [
       {
         "attributeId": "str",
-        "value": 10
+        "value": 6
       },
       {
         "attributeId": "mag",
-        "value": 8
-      },
-      {
-        "attributeId": "spr",
         "value": 5
       },
       {
+        "attributeId": "spr",
+        "value": 3
+      },
+      {
         "attributeId": "chr",
-        "value": -10
+        "value": -4
       },
       {
         "attributeId": "mny",
-        "value": -8
+        "value": -2
       }
     ],
     "themeColor": "#7c3aed"
