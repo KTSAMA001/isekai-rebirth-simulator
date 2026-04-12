@@ -311,7 +311,7 @@ function goBack() {
             </div>
             <span v-if="isRaceLocked(race)" class="race-lock-tag">暂未开放</span>
           </div>
-          <div class="race-lifespan">寿命 {{ race.lifespanRange[0] }}~{{ race.lifespanRange[1] }}</div>
+          <div class="race-lifespan">寿命 {{ race.lifespanRange[0] }}~{{ race.lifespanRange[1] }}<span v-if="(race as any).maxLifespan" class="race-max-lifespan">（极限 {{ (race as any).maxLifespan }} 岁）</span></div>
           <div class="race-desc">{{ race.description }}</div>
           <div v-if="isRaceLocked(race)" class="race-lock-hint">当前版本展示设定，暂不可选择</div>
           <div v-if="race.attributeModifiers?.length" class="race-mods">
@@ -747,6 +747,11 @@ function goBack() {
   border-radius: var(--radius-sm);
   display: inline-block;
   margin-bottom: 4px;
+}
+
+.race-max-lifespan {
+  opacity: 0.7;
+  margin-left: 4px;
 }
 
 .race-desc {

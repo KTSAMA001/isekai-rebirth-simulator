@@ -44,7 +44,8 @@
       "human_ambition"
     ],
     "exclusiveRoutes": [],
-    "themeColor": "#94a3b8"
+    "themeColor": "#94a3b8",
+    "maxLifespan": 100
   },
   {
     "id": "elf",
@@ -117,7 +118,8 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "elf",
-    "themeColor": "#4ade80"
+    "themeColor": "#4ade80",
+    "maxLifespan": 750
   },
   {
     "id": "goblin",
@@ -194,7 +196,8 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "goblin",
-    "themeColor": "#84cc16"
+    "themeColor": "#84cc16",
+    "maxLifespan": 60
   },
   {
     "id": "dwarf",
@@ -263,7 +266,8 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "dwarf",
-    "themeColor": "#d97706"
+    "themeColor": "#d97706",
+    "maxLifespan": 450
   },
   {
     "id": "beastfolk",

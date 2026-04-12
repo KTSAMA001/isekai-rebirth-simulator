@@ -35,8 +35,10 @@ export interface WorldRaceDef {
   lore: string
   /** 是否可选（false = 界面显示但灰色不可选） */
   playable: boolean
-  /** 寿命范围 [最小, 最大] */
+  /** 寿命范围 [最小, 最大] — 实际中位寿命区间 */
   lifespanRange: [number, number]
+  /** 理论寿命上限（D&D 自然死亡极限） */
+  maxLifespan?: number
   /** 基础属性修正（相对于世界默认值） */
   attributeModifiers: RaceAttributeModifier[]
   /** 性别差异修正 */
@@ -474,6 +476,8 @@ export interface GameState {
   hp: number
   /** HP 上限加成（来自事件效果，如龙血觉醒） */
   maxHpBonus: number
+  /** 本年度已累积的 HP 损失（每年 age transition 时重置） */
+  yearlyHpLoss?: number
   flags: Set<string>
   counters: Map<string, number>
   triggeredEvents: Set<string>
@@ -542,6 +546,8 @@ export interface YearResult {
   riskRolled?: boolean
   /** D20 骰判定详细结果（仅 diceCheck 时有值） */
   diceCheckResult?: DiceCheckResult
+  /** 衰老提示文本（lifeRatio 超过阈值时生成，供 UI 展示） */
+  agingHint?: string
 }
 
 // ==================== 生命周期路线 ====================
