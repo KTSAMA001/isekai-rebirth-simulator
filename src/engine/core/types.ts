@@ -39,6 +39,8 @@ export interface WorldRaceDef {
   lifespanRange: [number, number]
   /** 理论寿命上限（D&D 自然死亡极限） */
   maxLifespan?: number
+  /** 生命阶段定义（绝对年龄，生物发育节律） */
+  lifeStages?: Record<string, [number, number]>
   /** 基础属性修正（相对于世界默认值） */
   attributeModifiers: RaceAttributeModifier[]
   /** 性别差异修正 */
@@ -302,6 +304,14 @@ export interface WorldEventDef {
     title?: string
     description?: string
   }>
+  /** 事件所在的单一生命阶段（文件名决定） */
+  lifeStage?: string
+  /** 事件所在的多个生命阶段（跨阶段事件） */
+  lifeStages?: string[]
+  /** 阶段内起始进度 0-1，默认 0 */
+  minStageProgress?: number
+  /** 阶段内结束进度 0-1，默认 1 */
+  maxStageProgress?: number
 }
 
 /** 成就定义 */
