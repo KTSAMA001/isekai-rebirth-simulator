@@ -141,11 +141,16 @@ describe('数据文件校验', () => {
       for (const e of allEvents) {
         expect(e.id).toBeDefined()
         expect(e.title).toBeDefined()
-        expect(typeof e.minAge).toBe('number')
-        expect(typeof e.maxAge).toBe('number')
+        // 事件可以指定 minAge/maxAge 或 lifeStage（由种族阶段系统决定年龄范围）
+        if (e.lifeStage || e.lifeStages) {
+          // 基于生命阶段的事件，minAge/maxAge 可选
+        } else {
+          expect(typeof e.minAge).toBe('number')
+          expect(typeof e.maxAge).toBe('number')
+          expect(e.minAge).toBeLessThanOrEqual(e.maxAge)
+        }
         expect(typeof e.weight).toBe('number')
         expect(e.weight).toBeGreaterThan(0)
-        expect(e.minAge).toBeLessThanOrEqual(e.maxAge)
         expect(Array.isArray(e.effects)).toBe(true)
       }
     })

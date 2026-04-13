@@ -5,6 +5,7 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { SimulationEngine } from '@/engine/core/SimulationEngine'
 import { createSwordAndMagicWorld } from '@/worlds/sword-and-magic'
+import { ConditionDSL } from '@/engine/modules/ConditionDSL'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
 import * as crypto from 'node:crypto'
@@ -216,7 +217,15 @@ async function runPlaythrough(
       })
     } else if (result.phase === 'awaiting_choice' && result.event && result.branches) {
       const evt = result.event
-      const firstBranch = result.branches[0]
+      // 选择第一个条件满足的分支（跳过 requireCondition 不满足的）
+      const ctx = { state, world }
+      const dsl = new ConditionDSL()
+      const availableBranch = result.branches.find(b => {
+        if (!b.requireCondition) return true
+        const conditions = b.requireCondition.split(',').map(c => c.trim())
+        return conditions.every(c => dsl.evaluate(c, ctx))
+      })
+      const firstBranch = availableBranch ?? result.branches[0]
       engine.resolveBranch(firstBranch.id)
       state = engine.getState()
       yearLog.push({
@@ -372,7 +381,15 @@ async function runRouteTest(
       yearLog.push({ age: state.age, hpBefore, hpAfter: state.hp, hpDelta: state.hp - hpBefore, eventId: '__mundane__', title: '平静的一年', phase: 'mundane_year' })
     } else if (result.phase === 'awaiting_choice' && result.event && result.branches) {
       const evt = result.event
-      const firstBranch = result.branches[0]
+      // 选择第一个条件满足的分支（跳过 requireCondition 不满足的）
+      const ctx = { state, world }
+      const dsl = new ConditionDSL()
+      const availableBranch = result.branches.find(b => {
+        if (!b.requireCondition) return true
+        const conditions = b.requireCondition.split(',').map(c => c.trim())
+        return conditions.every(c => dsl.evaluate(c, ctx))
+      })
+      const firstBranch = availableBranch ?? result.branches[0]
       engine.resolveBranch(firstBranch.id)
       state = engine.getState()
       yearLog.push({ age: state.age, hpBefore, hpAfter: state.hp, hpDelta: state.hp - hpBefore, eventId: evt.id, title: evt.title, tag: evt.tag, routes: evt.routes, branchChoice: firstBranch.title, branchCount: result.branches.length, phase: 'awaiting_choice' })

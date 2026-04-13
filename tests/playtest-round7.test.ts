@@ -5,6 +5,7 @@
 import { describe, it, expect } from 'vitest'
 import { SimulationEngine } from '@/engine/core/SimulationEngine'
 import { createSwordAndMagicWorld } from '@/worlds/sword-and-magic'
+import { ConditionDSL } from '@/engine/modules/ConditionDSL'
 
 type PlaythroughConfig = {
   race: string
@@ -118,7 +119,15 @@ async function runGalgamePlaythrough(
       })
     } else if (result.phase === 'awaiting_choice' && result.event && result.branches) {
       const evt = result.event
-      const firstBranch = result.branches[0]
+      // 选择第一个条件满足的分支（跳过 requireCondition 不满足的）
+      const ctx = { state, world: engine.getWorld() }
+      const dsl = new ConditionDSL()
+      const availableBranch = result.branches.find(b => {
+        if (!b.requireCondition) return true
+        const conditions = b.requireCondition.split(',').map(c => c.trim())
+        return conditions.every(c => dsl.evaluate(c, ctx))
+      })
+      const firstBranch = availableBranch ?? result.branches[0]
       const resolveResult = engine.resolveBranch(firstBranch.id)
       state = engine.getState()
 

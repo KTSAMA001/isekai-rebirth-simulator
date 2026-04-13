@@ -147,9 +147,18 @@ async function runPlaythrough(
       })
     } else if (result.phase === 'awaiting_choice' && result.event && result.branches) {
       const evt = result.event
-      // Pick first available branch (the most common choice)
-      const firstBranch = result.branches[0]
-      const resolveResult = engine.resolveBranch(firstBranch.id)
+      // Pick first available branch that satisfies requireCondition
+      let chosenBranch = result.branches[0]
+      let resolveResult: any
+      for (const b of result.branches) {
+        try {
+          resolveResult = engine.resolveBranch(b.id)
+          chosenBranch = b
+          break
+        } catch {
+          continue
+        }
+      }
       state = engine.getState()
       yearLog.push({
         age: state.age,
@@ -160,7 +169,7 @@ async function runPlaythrough(
         title: evt.title,
         tag: evt.tag,
         routes: evt.routes,
-        branchChoice: firstBranch.title,
+        branchChoice: chosenBranch.title,
         isSuccess: resolveResult.isSuccess,
         branchCount: result.branches.length,
       })

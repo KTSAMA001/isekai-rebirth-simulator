@@ -90,6 +90,7 @@ describe('SimulationEngine', () => {
       const world = makeWorld({
         races: [makeRace('goblin', {
           lifespanRange: [25, 35],
+          maxLifespan: 35,
         })],
       })
       const engine = new SimulationEngine(world, 42)
@@ -443,20 +444,29 @@ describe('SimulationEngine', () => {
     })
 
     it('HP <= 0 触发死亡', () => {
+      // 需要绕过童年保护（age < 15 时伤害受限），设置初始 HP 较低
       const events = [makeEvent('lethal', {
-        minAge: 1, maxAge: 100, weight: 999,
+        minAge: 20, maxAge: 100, weight: 999,
         effects: [{ type: 'modify_hp', target: 'hp', value: -9999, description: '' }],
       })]
       const engine = createEngine({ events })
       initToSimulating(engine)
-      engine.startYear()
+      // 快速推演到 20+ 岁，绕过童年保护
+      for (let i = 0; i < 20; i++) {
+        const state = engine.getState()
+        if (state.phase !== 'simulating') break
+        const result = engine.startYear()
+        if (result.phase === 'awaiting_choice' && result.branches) {
+          engine.resolveBranch(result.branches[0].id)
+        }
+      }
       const state = engine.getState()
       expect(state.phase).toBe('finished')
     })
 
     it('短寿命种族通过HP自然衰减死亡', () => {
       const world = makeWorld({
-        races: [makeRace('mayfly', { lifespanRange: [3, 3] })],
+        races: [makeRace('mayfly', { lifespanRange: [3, 3], maxLifespan: 5 })],
       })
       const engine = new SimulationEngine(world, 42)
       engine.initGame('短命', undefined, 'mayfly')
@@ -505,23 +515,34 @@ describe('SimulationEngine', () => {
   describe('濒死判定', () => {
     it('HP 在 (0, 10] 范围触发特殊判定', () => {
       // 使用不同种子多次测试，覆盖各分支
+      // 使用 age=20 绕过童年保护（age < 10 时濒死随机判定不触发）
+      // 使用极大的伤害值绕过单次伤害上限（effect.value < -hpBefore 时不限制）
       let deathCount = 0
       let surviveCount = 0
       let nearDeathCount = 0
       for (let seed = 0; seed < 100; seed++) {
         const events = [makeEvent('hurt', {
-          minAge: 1, maxAge: 1, weight: 999,
-          effects: [{ type: 'modify_hp', target: 'hp', value: -35, description: '' }],
+          minAge: 20, maxAge: 20, weight: 999,
+          effects: [{ type: 'modify_hp', target: 'hp', value: -9999, description: '' }],
         })]
         const engine = createEngine({ events }, seed)
         initToSimulating(engine)
+        // 快速推演到 20 岁
+        for (let i = 0; i < 19; i++) {
+          if (engine.getState().phase !== 'simulating') break
+          const result = engine.startYear()
+          if (result.phase === 'awaiting_choice' && result.branches) {
+            engine.resolveBranch(result.branches[0].id)
+          }
+        }
+        if (engine.getState().phase !== 'simulating') continue
         engine.startYear()
         const state = engine.getState()
         if (state.phase === 'finished') deathCount++
         else if (state.flags.has('miracle_survival')) surviveCount++
         else if (state.flags.has('near_death')) nearDeathCount++
       }
-      // 统计验证各分支都有触发（概率分别为 20%, 15%, 65%）
+      // 统计验证各分支都有触发
       expect(deathCount + surviveCount + nearDeathCount).toBeGreaterThan(0)
     })
   })
@@ -679,7 +700,7 @@ describe('SimulationEngine', () => {
   describe('完整生命周期', () => {
     it('可以从初始化运行到死亡', () => {
       const world = makeWorld({
-        races: [makeRace('human', { lifespanRange: [10, 15] })],
+        races: [makeRace('human', { lifespanRange: [10, 15], maxLifespan: 15 })],
         events: [
           makeEvent('birth_humble', { minAge: 1, maxAge: 1, weight: 100 }),
           makeEvent('daily_life', { minAge: 1, maxAge: 100, weight: 100 }),

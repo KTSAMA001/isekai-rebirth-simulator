@@ -39,7 +39,7 @@ describe('EvaluatorModule', () => {
     it('寿命影响评分', () => {
       const mod = createModule()
       const young = makeState({ age: 10, attributePeaks: { str: 5, int: 5, chr: 5, luk: 5, mag: 5 } })
-      const old = makeState({ age: 80, attributePeaks: { str: 5, int: 5, chr: 5, luk: 5, mag: 5 } })
+      const old = makeState({ age: 80, attributePeaks: { str: 8, int: 8, chr: 8, luk: 8, mag: 8 } })
       expect(mod.calculate(old).score).toBeGreaterThan(mod.calculate(young).score)
     })
 

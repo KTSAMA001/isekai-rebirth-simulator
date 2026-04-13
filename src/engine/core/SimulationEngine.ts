@@ -167,6 +167,14 @@ export class SimulationEngine {
           }
         }
       }
+      // 属性下限保护：种族修正后属性不低于属性定义的 min 值
+      for (const [attrId, value] of Object.entries(attrs)) {
+        const attrDef = this.world.index.attributesById.get(attrId)
+        const min = attrDef?.min ?? 0
+        if (value < min) {
+          attrs[attrId] = min
+        }
+      }
     }
 
     for (const key of Object.keys(attrs)) {

@@ -6,7 +6,7 @@
  * 验证目标:
  * 1. 3 局完整人类模拟，输出编年史
  * 2. 事件触发年龄合理性
- * 3. 人类寿命落在 40-60 范围（lifespanRange）
+ * 3. 人类寿命落在 50-95 范围（lifespanRange，基于 maxLifespan=100 + Beta 分布）
  * 4. 33 岁不再触发衰老提示
  * 5. family_dinner 只在有孩子后触发
  * 6. 最后一战等事件的对手年龄合理
@@ -268,15 +268,15 @@ describe('人类实机验证 — 年龄与事件合理性', () => {
   })
 
   it('任务2b: 青年事件(15-25岁)不越界', () => {
-    // 青年事件 minAge 通常在 15-18
+    // 青年事件 minAge 通常在 10-18，检查实际触发年龄不小于事件的 minAge
     let violations = 0
     for (const seed of SEEDS) {
       const result = results.get(seed)!
       for (const entry of result.chronicle) {
         if (entry.eventId.startsWith('youth_') || entry.eventId.startsWith('teen_')) {
           const ev = world.index.eventsById.get(entry.eventId)
-          if (ev && entry.age < 14) {
-            console.log(`    ⚠️ 种子#${seed}: ${entry.eventId}(${entry.title}) 在 ${entry.age} 岁触发（<14）`)
+          if (ev && entry.age < ev.minAge) {
+            console.log(`    ⚠️ 种子#${seed}: ${entry.eventId}(${entry.title}) 在 ${entry.age} 岁触发（minAge=${ev.minAge}）`)
             violations++
           }
         }
@@ -384,10 +384,10 @@ describe('人类实机验证 — 年龄与事件合理性', () => {
 
   // ==================== 任务 3: 寿命范围验证 ====================
 
-  it('任务3: 人类寿命应在 lifespanRange [40, 60] 范围内（允许 ±5 的随机偏差）', () => {
-    const HUMAN_LIFESPAN_MIN = 40
-    const HUMAN_LIFESPAN_MAX = 60
-    const TOLERANCE = 8 // HP 系统和随机性导致 ±8 偏差是合理的
+  it('任务3: 人类寿命应在 lifespanRange [50, 95] 范围内（maxLifespan=100, Beta 分布中位寿命约 70）', () => {
+    const HUMAN_LIFESPAN_MIN = 50
+    const HUMAN_LIFESPAN_MAX = 95
+    const TOLERANCE = 5 // HP 系统和随机性导致偏差
 
     const lifespans: number[] = []
     for (const seed of SEEDS) {
@@ -413,48 +413,46 @@ describe('人类实机验证 — 年龄与事件合理性', () => {
 
   // ==================== 任务 4: effectiveMaxAge 验证 ====================
 
-  it('任务4a: effectiveMaxAge 基于 maxLifespan(100)，范围应在 80-100', () => {
+  it('任务4a: effectiveMaxAge 应等于人类 maxLifespan(100)', () => {
     for (const seed of SEEDS) {
       const result = results.get(seed)!
       console.log(`  种子#${seed}: effectiveMaxAge=${result.effectiveMaxAge}`)
-      expect(result.effectiveMaxAge).toBeGreaterThanOrEqual(80)
-      expect(result.effectiveMaxAge).toBeLessThanOrEqual(100)
+      expect(result.effectiveMaxAge).toBe(100)
     }
   })
 
-  it('任务4b: 多次运行 effectiveMaxAge 有随机分布（80%-100% of maxLifespan）', () => {
-    const maxAges: number[] = []
+  it('任务4b: 多次运行 personalDeathProgress 有随机分布（Beta(8,3) clamp [0.60, 0.92]）', () => {
+    const deathProgresses: number[] = []
     for (let seed = 1000; seed < 1020; seed++) {
       const engine = createHumanEngine(seed)
-      const state = engine.getState()
-      maxAges.push(state.effectiveMaxAge ?? 0)
+      deathProgresses.push(engine.getPersonalDeathProgress())
     }
-    const unique = new Set(maxAges)
-    const min = Math.min(...maxAges)
-    const max = Math.max(...maxAges)
-    console.log(`  20 局 effectiveMaxAge 范围: ${min}-${max}`)
+    const unique = new Set(deathProgresses)
+    const min = Math.min(...deathProgresses)
+    const max = Math.max(...deathProgresses)
+    console.log(`  20 局 personalDeathProgress 范围: ${min.toFixed(4)}-${max.toFixed(4)}`)
     console.log(`  不同值: ${unique.size} 种`)
-    // maxLifespan=100, 80%-100% 即 80-100
-    expect(min).toBeGreaterThanOrEqual(80)
-    expect(max).toBeLessThanOrEqual(100)
+    // Beta(8,3) clamp 到 [0.60, 0.92]
+    expect(min).toBeGreaterThanOrEqual(0.60)
+    expect(max).toBeLessThanOrEqual(0.92)
     expect(unique.size).toBeGreaterThan(1) // 应该有随机性
   })
 
   // ==================== 任务 5: family_dinner 验证 ====================
 
   it('任务5: family_dinner 只在 married AND parent flag 都存在时触发', () => {
-    // 先验证 DSL 层
-    const includeExpr = 'has.flag.married,has.flag.parent'
+    // 先验证 DSL 层 — 使用 & (AND) 连接
+    const includeExpr = 'has.flag.married&has.flag.parent'
     expect(dsl.evaluate(includeExpr, { state: { flags: new Set() } as any, world })).toBe(false)
     expect(dsl.evaluate(includeExpr, { state: { flags: new Set(['married']) } as any, world })).toBe(false)
     expect(dsl.evaluate(includeExpr, { state: { flags: new Set(['parent']) } as any, world })).toBe(false)
     expect(dsl.evaluate(includeExpr, { state: { flags: new Set(['married', 'parent']) } as any, world })).toBe(true)
     console.log('  ✓ family_dinner include 条件 DSL 验证通过')
 
-    // 验证事件定义
+    // 验证事件定义 — 数据中使用 & 作为 AND 连接符
     const ev = world.index.eventsById.get('family_dinner')
     expect(ev).toBeDefined()
-    expect(ev!.include).toBe('has.flag.married,has.flag.parent')
+    expect(ev!.include).toBe('has.flag.married&has.flag.parent')
     console.log('  ✓ family_dinner 事件定义条件正确')
   })
 
@@ -526,11 +524,11 @@ describe('人类批量验证 — 20 局统计', () => {
     }
 
     const avgLife = lifespans.reduce((a, b) => a + b, 0) / lifespans.length
-    const inRange = lifespans.filter(l => l >= 32 && l <= 68).length
+    const inRange = lifespans.filter(l => l >= 45 && l <= 100).length
     console.log(`\n  20 局统计:`)
     console.log(`    平均寿命: ${avgLife.toFixed(1)} 岁`)
     console.log(`    寿命范围: ${Math.min(...lifespans)}-${Math.max(...lifespans)} 岁`)
-    console.log(`    在 32-68 范围内: ${inRange}/20 局`)
+    console.log(`    在 45-100 范围内: ${inRange}/20 局`)
     console.log(`    40 岁前严重衰老提示: ${totalEarlyAging} 次`)
 
     expect(totalEarlyAging).toBe(0)

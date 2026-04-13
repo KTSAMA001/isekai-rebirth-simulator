@@ -15,6 +15,7 @@ import { describe, it, expect } from 'vitest'
 import { ConditionDSL } from '@/engine/modules/ConditionDSL'
 import { EventModule } from '@/engine/modules/EventModule'
 import { AttributeModule } from '@/engine/modules/AttributeModule'
+import { ItemModule } from '@/engine/modules/ItemModule'
 import { SimulationEngine } from '@/engine/core/SimulationEngine'
 import { RandomProvider } from '@/engine/core/RandomProvider'
 import { makeWorld, makeState, makeEvent } from '../helpers'
@@ -108,7 +109,8 @@ describe('事件条件修复 — EventModule 候选筛选', () => {
     const world = makeWorld({ events })
     const rng = new RandomProvider(42)
     const attrMod = new AttributeModule(world)
-    return { module: new EventModule(world, rng, dsl, attrMod), world }
+    const itemMod = new ItemModule(world, dsl)
+    return { module: new EventModule(world, rng, dsl, attrMod, itemMod), world }
   }
 
   describe('human_debt_crisis 筛选', () => {

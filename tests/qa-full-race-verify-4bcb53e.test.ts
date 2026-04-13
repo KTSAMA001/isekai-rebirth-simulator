@@ -2,23 +2,23 @@
  * QA 全种族验证 — commit 4bcb53e (fix/debt-event-condition)
  *
  * 核心架构：
- * - effectiveMaxAge = 50%-100% of maxLifespan (宽范围随机)
- * - HP sigmoid 基于 medianDeathAge (lifespanRange 中值)
- * - personalSigmoidMid = 0.55 ± 0.15 (个体差异)
+ * - effectiveMaxAge = maxLifespan（固定值，不随机）
+ * - HP sigmoid 基于 personalDeathProgress (Beta(8,3), clamp [0.60, 0.92], 中位约 0.70)
+ * - 实际死亡年龄 ≈ maxLifespan × personalDeathProgress + 二次加速
  * - 事件年龄缩放基于 effectiveMaxAge
  * - family_dinner DSL: has.flag.married&has.flag.parent
  *
  * 种族数据：
- * - human:   lifespanRange=[40,60],  maxLifespan=100, median=50
- * - elf:     lifespanRange=[250,400], maxLifespan=500, median=325
- * - goblin:  lifespanRange=[20,35],  maxLifespan=60,  median=27.5
- * - dwarf:   lifespanRange=[150,250], maxLifespan=400, median=200
+ * - human:   lifespanRange=[65,85],   maxLifespan=100
+ * - elf:     lifespanRange=[250,400],  maxLifespan=500
+ * - goblin:  lifespanRange=[20,35],   maxLifespan=60
+ * - dwarf:   lifespanRange=[150,250],  maxLifespan=400
  *
- * effectiveMaxAge 范围（50%-100% of maxLifespan）：
- * - human:   [50, 100]
- * - elf:     [250, 500]
- * - goblin:  [30, 60]
- * - dwarf:   [200, 400]
+ * 预期死亡年龄范围（maxLifespan × [0.45, 0.95]，考虑 Beta 分布和二次加速）：
+ * - human:   [45, 95]
+ * - elf:     [225, 475]
+ * - goblin:  [27, 57]
+ * - dwarf:   [180, 380]
  *
  * 检查项：
  * 1. 寿命分布：大部分人死在 lifespanRange 内，但有少数低于下限（早亡/夭折）和少数超出上限（长寿）
@@ -48,26 +48,21 @@ const SIMS_PER_RACE = 10
 
 // 种族寿命范围（来自 races.json）
 const LIFESPAN_RANGES: Record<string, [number, number]> = {
-  human: [40, 60],
+  human: [65, 85],
   elf: [250, 400],
   goblin: [20, 35],
   dwarf: [150, 250],
 }
 
-// 种族 maxLifespan（来自 races.json，commit 4bcb53e）
+// 种族 maxLifespan（来自 races.json，effectiveMaxAge = maxLifespan）
 const MAX_LIFESPANS: Record<string, number> = {
   human: 100, elf: 500, goblin: 60, dwarf: 400,
 }
 
-// medianDeathAge = (lifespanRange[0] + lifespanRange[1]) / 2
-const MEDIAN_DEATH_AGES: Record<string, number> = {
-  human: 50, elf: 325, goblin: 27.5, dwarf: 200,
-}
-
-// effectiveMaxAge 应在 [maxLifespan*0.5, maxLifespan] 范围内
-function expectedMaxAgeRange(race: string): [number, number] {
+// 预期死亡年龄范围：maxLifespan × [0.45, 0.95]（personalDeathProgress clamp [0.60, 0.92] + 二次加速）
+function expectedDeathAgeRange(race: string): [number, number] {
   const max = MAX_LIFESPANS[race]
-  return [Math.floor(max * 0.5), max]
+  return [Math.floor(max * 0.45), Math.ceil(max * 0.95)]
 }
 
 // 衰老事件 ID 前缀
@@ -100,11 +95,9 @@ interface SimDetail {
   race: string
   run: number
   effectiveMaxAge: number
-  personalSigmoidMid: number
   deathAge: number
   lifespanMin: number
   lifespanMax: number
-  medianDeathAge: number
   inRange: boolean
   earlyDeath: boolean
   longLived: boolean
@@ -143,7 +136,9 @@ function runDetailedSimulation(world: WorldInstance, race: string, preset: strin
   const initState = engine.getState()
   const effectiveMaxAge = initState.effectiveMaxAge ?? world.manifest.maxAge
   const [lifespanMin, lifespanMax] = LIFESPAN_RANGES[race]
-  const medianDeathAge = MEDIAN_DEATH_AGES[race]
+
+  // 衰老阈值：基于 lifespanRange 下限的 80%
+  const agingThreshold = Math.floor(lifespanMin * 0.8)
 
   const anomalies: string[] = []
   const timelineEvents: SimDetail['timelineEvents'] = []
@@ -152,10 +147,6 @@ function runDetailedSimulation(world: WorldInstance, race: string, preset: strin
   let hadChild = false
   let hadChildAge: number | null = null
   let agingEventBeforeThreshold: { eventId: string; age: number } | null = null
-
-  // 衰老阈值：基于 medianDeathAge 的 70%，而非 lifespanRange 下限
-  // 人类 median=50 → 阈值=35; 精灵 median=325 → 阈值=227
-  const agingThreshold = Math.floor(medianDeathAge * 0.7)
 
   let maxIter = 2000
   let prevAge = 0
@@ -224,14 +215,14 @@ function runDetailedSimulation(world: WorldInstance, race: string, preset: strin
   }
 
   // 检查寿命分布
-  const inRange = deathAge >= lifespanMin && deathAge <= lifespanMax
-  const earlyDeath = deathAge < lifespanMin
-  const longLived = deathAge > lifespanMax
+  const [expectedDeathMin, expectedDeathMax] = expectedDeathAgeRange(race)
+  const inRange = deathAge >= expectedDeathMin && deathAge <= expectedDeathMax
+  const earlyDeath = deathAge < expectedDeathMin
+  const longLived = deathAge > expectedDeathMax
 
-  // 有效年龄卡住
-  const [expMin, expMax] = expectedMaxAgeRange(race)
-  if (effectiveMaxAge < expMin || effectiveMaxAge > expMax) {
-    anomalies.push(`effectiveMaxAge=${effectiveMaxAge} 超出期望范围 [${expMin}, ${expMax}]`)
+  // effectiveMaxAge 应等于 maxLifespan
+  if (effectiveMaxAge !== MAX_LIFESPANS[race]) {
+    anomalies.push(`effectiveMaxAge=${effectiveMaxAge} 不等于 maxLifespan=${MAX_LIFESPANS[race]}`)
   }
 
   // family_dinner 在有孩子之后触发
@@ -250,11 +241,9 @@ function runDetailedSimulation(world: WorldInstance, race: string, preset: strin
     race,
     run: runIdx,
     effectiveMaxAge,
-    personalSigmoidMid: 0, // 不从外部暴露，仅记录
     deathAge,
     lifespanMin,
     lifespanMax,
-    medianDeathAge,
     inRange,
     earlyDeath,
     longLived,
@@ -301,7 +290,11 @@ describe('QA 全种族验证 — commit 4bcb53e', () => {
       for (const race of RACES) {
         const raceDef = world.races.find(r => r.id === race)
         expect(raceDef).toBeDefined()
-        expect(raceDef!.maxLifespan, `${race} maxLifespan`).toBe(MAX_LIFESPANS[race])
+        // maxLifespan 应存在且为合理值
+        expect(raceDef!.maxLifespan, `${race} maxLifespan 应存在`).toBeDefined()
+        expect(raceDef!.maxLifespan!, `${race} maxLifespan`).toBeGreaterThan(0)
+        expect(raceDef!.maxLifespan!, `${race} maxLifespan 应等于预期值`).toBe(MAX_LIFESPANS[race])
+        // lifespanRange 也应匹配
         expect(raceDef!.lifespanRange, `${race} lifespanRange`).toEqual(LIFESPAN_RANGES[race])
       }
     })
@@ -349,10 +342,8 @@ describe('QA 全种族验证 — commit 4bcb53e', () => {
             expect(result.deathAge).toBeGreaterThan(0)
             expect(result.effectiveMaxAge).toBeGreaterThan(0)
 
-            // effectiveMaxAge 范围断言
-            const [expMin, expMax] = expectedMaxAgeRange(race)
-            expect(result.effectiveMaxAge, `${race} effectiveMaxAge=${result.effectiveMaxAge} 应在 [${expMin}, ${expMax}] 内`).toBeGreaterThanOrEqual(expMin)
-            expect(result.effectiveMaxAge, `${race} effectiveMaxAge=${result.effectiveMaxAge} 应在 [${expMin}, ${expMax}] 内`).toBeLessThanOrEqual(expMax)
+            // effectiveMaxAge 应等于 maxLifespan
+            expect(result.effectiveMaxAge, `${race} effectiveMaxAge=${result.effectiveMaxAge} 应等于 maxLifespan=${MAX_LIFESPANS[race]}`).toBe(MAX_LIFESPANS[race])
           })
         }
 
@@ -369,7 +360,8 @@ describe('QA 全种族验证 — commit 4bcb53e', () => {
           const dinnerTriggered = raceResults.filter(r => r.familyDinnerTriggered).length
 
           console.log(`\n  📊 ${RACE_NAMES[race]} 汇总:`)
-          console.log(`     寿命配置: [${LIFESPAN_RANGES[race][0]}, ${LIFESPAN_RANGES[race][1]}], median=${MEDIAN_DEATH_AGES[race]}, maxLifespan=${MAX_LIFESPANS[race]}`)
+          const medianAge = Math.round((LIFESPAN_RANGES[race][0] + LIFESPAN_RANGES[race][1]) / 2)
+          console.log(`     寿命配置: [${LIFESPAN_RANGES[race][0]}, ${LIFESPAN_RANGES[race][1]}], median≈${medianAge}, maxLifespan=${MAX_LIFESPANS[race]}`)
           console.log(`     effectiveMaxAge: ${raceResults.map(r => r.effectiveMaxAge).sort((a,b)=>a-b).join(', ')}`)
           console.log(`     实际享年: ${min}~${max} (平均 ${avg.toFixed(1)})`)
           console.log(`     在寿命范围内: ${inRangeCount}/${SIMS_PER_RACE} | 早亡: ${earlyDeathCount} | 长寿: ${longLivedCount}`)
@@ -444,7 +436,8 @@ describe('QA 全种族验证 — commit 4bcb53e', () => {
         const anomalyCount = rr.filter(r => r.anomalies.length > 0).length
 
         console.log(`\n  ${RACE_NAMES[race]} (${SIMS_PER_RACE}局):`)
-        console.log(`    maxLifespan=${MAX_LIFESPANS[race]}, medianDeath=${MEDIAN_DEATH_AGES[race]}, lifespanRange=[${LIFESPAN_RANGES[race][0]}, ${LIFESPAN_RANGES[race][1]}]`)
+        const medianAge = Math.round((LIFESPAN_RANGES[race][0] + LIFESPAN_RANGES[race][1]) / 2)
+        console.log(`    maxLifespan=${MAX_LIFESPANS[race]}, medianDeath≈${medianAge}, lifespanRange=[${LIFESPAN_RANGES[race][0]}, ${LIFESPAN_RANGES[race][1]}]`)
         console.log(`    effectiveMaxAge 范围: [${Math.min(...rr.map(r=>r.effectiveMaxAge))}, ${Math.max(...rr.map(r=>r.effectiveMaxAge))}]`)
         console.log(`    享年: ${min}~${max} (平均 ${avg.toFixed(1)})`)
         console.log(`    分布: 范围内=${inRange}/${SIMS_PER_RACE} | 早亡=${earlyDeath} | 长寿=${longLived}`)
@@ -476,7 +469,8 @@ describe('QA 全种族验证 — commit 4bcb53e', () => {
         if (agingEvents.length > 0) {
           console.log(`  ${RACE_NAMES[race]} 衰老事件:`)
           for (const ae of agingEvents.sort((a, b) => a.age - b.age)) {
-            const threshold = Math.floor(MEDIAN_DEATH_AGES[race] * 0.7)
+            const medianAge = (LIFESPAN_RANGES[race][0] + LIFESPAN_RANGES[race][1]) / 2
+            const threshold = Math.floor(medianAge * 0.7)
             const flag = ae.age < threshold ? '⚠️过早' : '✅合理'
             console.log(`    #${ae.run}: ${ae.eventId} @ ${ae.age}岁 (阈值=${threshold}, ${flag})`)
           }
