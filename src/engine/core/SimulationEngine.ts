@@ -21,6 +21,44 @@ function generatePlayId(): string {
   return Date.now().toString(36) + Math.random().toString(36).substring(2, 8)
 }
 
+/**
+ * Gamma(alpha, 1) 随机变量生成（Marsaglia & Tsang 方法）
+ * 适用于 alpha >= 1，alpha < 1 时用 alpha+1 技巧转换
+ */
+function sampleGamma(random: RandomProvider, alpha: number): number {
+  if (alpha < 1) {
+    // Gamma(alpha, 1) = Gamma(alpha+1, 1) * U^(1/alpha)
+    return sampleGamma(random, alpha + 1) * Math.pow(random.next(), 1 / alpha)
+  }
+  const d = alpha - 1 / 3
+  const c = 1 / Math.sqrt(9 * d)
+  while (true) {
+    let x: number
+    let v: number
+    do {
+      // Box-Muller 生成正态分布
+      const u1 = random.next()
+      const u2 = random.next()
+      x = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2)
+      v = 1 + c * x
+    } while (v <= 0)
+    v = v * v * v
+    const u = random.next()
+    if (u < 1 - 0.0331 * (x * x) * (x * x)) return d * v
+    if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v))) return d * v
+  }
+}
+
+/**
+ * Beta(a, b) 随机变量生成
+ * 基于两个独立 Gamma 变量：Beta(a,b) = Gamma(a) / (Gamma(a) + Gamma(b))
+ */
+function sampleBeta(random: RandomProvider, a: number, b: number): number {
+  const ga = sampleGamma(random, a)
+  const gb = sampleGamma(random, b)
+  return ga / (ga + gb)
+}
+
 export class SimulationEngine {
   private state!: GameState
   private world: WorldInstance
@@ -42,6 +80,10 @@ export class SimulationEngine {
   /** 本局实际最大年龄（受种族寿命范围影响） */
   private effectiveMaxAge = 0
   private personalSigmoidMid = 0
+  /** 种族理论寿命上限（Phase 0 基础设施，当前未使用） */
+  private raceMaxLifespan = 0
+  /** 个体死亡进度（Beta 分布，Phase 0 基础设施，当前未使用） */
+  private personalDeathProgress = 0
   /** 童年 HP 伤害保护年龄阈值（modify_hp 中使用） */
   static readonly CHILDHOOD_HP_PROTECTION_AGE = 15
   /** 童年死亡保护年龄阈值（濒死判定中使用） */
@@ -146,6 +188,10 @@ export class SimulationEngine {
     } else {
       this.effectiveMaxAge = this.world.manifest.maxAge
     }
+
+    // Phase 0 基础设施：种族寿命上限和个体死亡进度（当前不影响任何行为）
+    this.raceMaxLifespan = raceDef?.maxLifespan ?? this.world.manifest.maxAge
+    this.personalDeathProgress = Math.min(0.92, Math.max(0.60, sampleBeta(this.random, 8, 3)))
 
     this.state = {
       meta: {
@@ -1046,6 +1092,22 @@ export class SimulationEngine {
   /** 获取当前激活的路线（供外部查询） */
   getActiveRoute(): LifeRoute | null {
     return this.activeRoute
+  }
+
+  /** 获取当前生命进度（0.0~1.0+），基于 raceMaxLifespan 计算 */
+  getLifeProgress(): number {
+    if (this.raceMaxLifespan <= 0) return 0
+    return this.state.age / this.raceMaxLifespan
+  }
+
+  /** 获取种族寿命上限 */
+  getRaceMaxLifespan(): number {
+    return this.raceMaxLifespan
+  }
+
+  /** 获取个体死亡进度（Beta 分布中位点） */
+  getPersonalDeathProgress(): number {
+    return this.personalDeathProgress
   }
 
   /** 推演一年（向后兼容，保留原有接口） */
