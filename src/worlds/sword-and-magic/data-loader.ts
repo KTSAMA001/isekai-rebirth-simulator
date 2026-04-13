@@ -22,7 +22,7 @@ import sharedDefs from './schemas/shared.json'
 const schemas: Record<string, object> = {
   event: {
     type: 'object',
-    required: ['id', 'title', 'description', 'minAge', 'maxAge', 'weight', 'effects'],
+    required: ['id', 'title', 'description', 'weight', 'effects'],
     additionalProperties: true,
     properties: {
       id: { type: 'string' },
@@ -30,6 +30,10 @@ const schemas: Record<string, object> = {
       description: { type: 'string' },
       minAge: { type: 'integer', minimum: 0, maximum: 1000 },
       maxAge: { type: 'integer', minimum: 0, maximum: 1000 },
+      lifeStage: { type: 'string' },
+      lifeStages: { type: 'array', items: { type: 'string' } },
+      minStageProgress: { type: 'number', minimum: 0, maximum: 1 },
+      maxStageProgress: { type: 'number', minimum: 0, maximum: 1 },
       weight: { type: 'number', minimum: 0 },
       include: { type: 'string' },
       exclude: { type: 'string' },
