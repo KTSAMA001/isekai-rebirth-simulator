@@ -142,8 +142,8 @@ function checkHumanElderBefore50(results: SimResult[]) {
   return violations
 }
 
-/** 检查项 3: 精灵 elder 事件年龄 >= 350（lifeStage elder 起始） */
-function checkElfElderAfter275(results: SimResult[]) {
+/** 检查项 3: 精灵 elder 事件年龄 >= 350（精灵 lifeStage elder 起始 = 350） */
+function checkElfElderAfter350(results: SimResult[]) {
   const violations: Array<{ seed: number; age: number; eventId: string; title: string }> = []
   const records: Array<{ seed: number; age: number; eventId: string }> = []
   for (const r of results) {
@@ -286,30 +286,30 @@ describe('QA Phase 1 — 种族衰老/事件合理性验证', () => {
     })
   })
 
-  // ==================== 检查项 3: 精灵 elder > 275 ====================
-  describe('检查项 3: 精灵 elder 事件触发年龄 > 275', () => {
-    it('精灵 elder 事件触发年龄 > 275', () => {
-      const { violations, records } = checkElfElderAfter275(allResults)
+  // ==================== 检查项 3: 精灵 elder > 350 ====================
+  describe('检查项 3: 精灵 elder 事件触发年龄 > 350', () => {
+    it('精灵 elder 事件触发年龄 > 350', () => {
+      const { violations, records } = checkElfElderAfter350(allResults)
 
-      console.log('\n📋 检查项 3: 精灵 elder 事件 (阈值: 275岁)')
+      console.log('\n📋 检查项 3: 精灵 elder 事件 (阈值: 350岁)')
       console.log('─'.repeat(80))
 
       if (records.length === 0) {
         console.log('    无 elder 事件触发（5 局均未触发）')
       } else {
         for (const rec of records) {
-          const flag = rec.age <= 275 ? '⚠️过早' : '✅合理'
+          const flag = rec.age <= 350 ? '⚠️过早' : '✅合理'
           console.log(`    ${flag} seed=${rec.seed} ${rec.age}岁: ${rec.eventId}`)
         }
       }
 
       if (violations.length === 0) {
-        console.log(`  ✅ 通过: 无违规${records.length > 0 ? ` (${records.length} 条 elder 事件均 > 275)` : ''}`)
+        console.log(`  ✅ 通过: 无违规${records.length > 0 ? ` (${records.length} 条 elder 事件均 > 350)` : ''}`)
       } else {
         console.log(`  ❌ 失败: ${violations.length} 项违规`)
       }
 
-      expect(violations.length, `精灵有 ${violations.length} 个 elder 事件在 ≤275 岁触发`).toBe(0)
+      expect(violations.length, `精灵有 ${violations.length} 个 elder 事件在 ≤350 岁触发`).toBe(0)
     })
   })
 
@@ -381,13 +381,13 @@ describe('QA Phase 1 — 种族衰老/事件合理性验证', () => {
       // 检查结果汇总
       const h = checkHumanLifespan(allResults)
       const v2 = checkHumanElderBefore50(allResults)
-      const v3 = checkElfElderAfter275(allResults).violations
+      const v3 = checkElfElderAfter350(allResults).violations
       const v4 = checkGoblinEarlyElderMiddle(allResults)
 
       console.log('\n  验证结果:')
       console.log(`    ${h.outOfTolerance.length === 0 && h.inRange / h.total >= 0.6 ? '✅' : '❌'} 检查项 1 (人类寿命 65-85): ${h.inRange}/${h.total}达标${h.outOfTolerance.length > 0 ? `, ${h.outOfTolerance.length}超容忍` : ''}`)
       console.log(`    ✅/❌ 检查项 2 (人类 elder < 50):  ${v2.length === 0 ? '✅ 通过' : `❌ ${v2.length} 项违规`}`)
-      console.log(`    ✅/❌ 检查项 3 (精灵 elder ≤ 275): ${v3.length === 0 ? '✅ 通过' : `❌ ${v3.length} 项违规`}`)
+      console.log(`    ✅/❌ 检查项 3 (精灵 elder ≤ 350): ${v3.length === 0 ? '✅ 通过' : `❌ ${v3.length} 项违规`}`)
       console.log(`    ✅/❌ 检查项 4 (哥布林 elder/middle < 12): ${v4.length === 0 ? '✅ 通过' : `❌ ${v4.length} 项违规`}`)
       console.log(`    📊 检查项 5 (享年分布): 已记录（共 ${allResults.length} 局）`)
 
