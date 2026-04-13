@@ -384,11 +384,11 @@ export class SimulationEngine {
     // K=12 让衰减更集中在 personalDeathProgress 附近
     const sigmoidK = 12
     const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeProgress - this.personalDeathProgress)))
-    const sigmoidDecay = Math.floor(8 * sigmoidValue)
+    const sigmoidDecay = Math.floor(25 * sigmoidValue)
 
     // 二次加速：lifeProgress 超过 personalDeathProgress 后加速衰减
     const excessProgress = Math.max(0, lifeProgress - this.personalDeathProgress)
-    const quadDecay = Math.floor(excessProgress * excessProgress * 20)
+    const quadDecay = Math.floor(excessProgress * excessProgress * 80)
 
     let ageDecay = sigmoidDecay + quadDecay
 
