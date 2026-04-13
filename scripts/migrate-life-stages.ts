@@ -16,10 +16,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // 人类生命阶段边界（基准）
 const HUMAN_LIFE_STAGES = {
   childhood: [2, 10],
-  teenager: [11, 17],
+  teen: [11, 17],
   youth: [14, 22],
   adult: [20, 45],
-  'middle-age': [35, 60],
+  midlife: [35, 60],
   elder: [55, 100]
 }
 
@@ -75,10 +75,10 @@ interface MigrationStats {
   skippedEvents: number
 }
 
-function getHumanStageBoundary(lifeStage: string): [number, number] {
-  const stage = FILE_TO_LIFE_STAGE[`${lifeStage}.json` as keyof typeof FILE_TO_LIFE_STAGE]
+function getHumanStageBoundary(fileName: string): [number, number] {
+  const stage = FILE_TO_LIFE_STAGE[fileName as keyof typeof FILE_TO_LIFE_STAGE]
   if (!stage || !HUMAN_LIFE_STAGES[stage]) {
-    throw new Error(`Unknown life stage: ${lifeStage}`)
+    throw new Error(`Unknown mapping for file: ${fileName}`)
   }
   return HUMAN_LIFE_STAGES[stage]
 }
@@ -117,16 +117,8 @@ function migrateEvent(event: EventDef, fileName: string, stats: MigrationStats):
     return event
   }
 
-  // 获取对应的 lifeStage
-  const lifeStage = FILE_TO_LIFE_STAGE[fileName as keyof typeof FILE_TO_LIFE_STAGE]
-  if (!lifeStage) {
-    console.warn(`Unknown file mapping: ${fileName}`)
-    stats.skippedEvents++
-    return event
-  }
-
   // 获取人类阶段边界
-  const stageBoundary = getHumanStageBoundary(lifeStage)
+  const stageBoundary = getHumanStageBoundary(fileName)
 
   // 检查是否为跨阶段事件
   const isCrossStage = checkCrossStage(event, stageBoundary)
@@ -162,6 +154,7 @@ function migrateEvent(event: EventDef, fileName: string, stats: MigrationStats):
     // 单阶段事件：计算 stageProgress，删除 minAge/maxAge
     const [minProgress, maxProgress] = calculateStageProgress(event.minAge, event.maxAge, stageBoundary)
 
+      const lifeStage = FILE_TO_LIFE_STAGE[fileName as keyof typeof FILE_TO_LIFE_STAGE]
     const migrated = {
       ...event,
       lifeStage,

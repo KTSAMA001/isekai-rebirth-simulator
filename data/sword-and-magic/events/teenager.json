@@ -4434,7 +4434,11 @@
     "unique": true,
     "tag": "combat",
     "effects": [
-      {"type": "modify_attribute", "target": "str", "value": 2}
+      {
+        "type": "modify_attribute",
+        "target": "str",
+        "value": 2
+      }
     ],
     "branches": [
       {
@@ -4442,8 +4446,18 @@
         "title": "刻苦训练",
         "description": "你日复一日地挥剑，直到老骑士终于露出满意的笑容。",
         "effects": [
-          {"type": "modify_attribute", "target": "str", "value": 3, "description": "剑术精进"},
-          {"type": "set_flag", "target": "noble_combat_trained", "value": 1, "description": "贵族剑术"}
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 3,
+            "description": "剑术精进"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_combat_trained",
+            "value": 1,
+            "description": "贵族剑术"
+          }
         ]
       },
       {
@@ -4451,8 +4465,18 @@
         "title": "更想去读书",
         "description": "比起挥剑，你更喜欢待在书房里。不过基本的防身术还是学会了。",
         "effects": [
-          {"type": "modify_attribute", "target": "int", "value": 2, "description": "博览群书"},
-          {"type": "modify_attribute", "target": "str", "value": 1, "description": "基础防身"}
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "博览群书"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "str",
+            "value": 1,
+            "description": "基础防身"
+          }
         ]
       }
     ]

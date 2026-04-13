@@ -1621,8 +1621,18 @@
     "unique": true,
     "tag": "social",
     "effects": [
-      {"type": "modify_attribute", "target": "chr", "value": 1, "description": "社交初体验"},
-      {"type": "modify_attribute", "target": "mny", "value": -1, "description": "置装费"}
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 1,
+        "description": "社交初体验"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": -1,
+        "description": "置装费"
+      }
     ],
     "branches": [
       {
@@ -1631,8 +1641,18 @@
         "description": "你的谈吐和风度赢得了在场贵族的一致好评。",
         "probability": 0.5,
         "effects": [
-          {"type": "modify_attribute", "target": "chr", "value": 3, "description": "社交明星"},
-          {"type": "set_flag", "target": "social_star", "value": 1, "description": "社交名人"}
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 3,
+            "description": "社交明星"
+          },
+          {
+            "type": "set_flag",
+            "target": "social_star",
+            "value": 1,
+            "description": "社交名人"
+          }
         ]
       },
       {
@@ -1641,9 +1661,24 @@
         "description": "在舞会上你遇到了一个让你心动的人，你们聊了很久。",
         "probability": 0.3,
         "effects": [
-          {"type": "modify_attribute", "target": "chr", "value": 1, "description": "心动"},
-          {"type": "set_flag", "target": "first_love", "value": 1, "description": "初恋"},
-          {"type": "set_flag", "target": "in_relationship", "value": 1, "description": "开始恋爱"}
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 1,
+            "description": "心动"
+          },
+          {
+            "type": "set_flag",
+            "target": "first_love",
+            "value": 1,
+            "description": "初恋"
+          },
+          {
+            "type": "set_flag",
+            "target": "in_relationship",
+            "value": 1,
+            "description": "开始恋爱"
+          }
         ]
       },
       {
@@ -1651,8 +1686,18 @@
         "title": "无聊的一夜",
         "description": "你全程缩在角落吃点心，最后偷偷溜回了家。",
         "effects": [
-          {"type": "modify_attribute", "target": "int", "value": 1, "description": "观察到的社交知识"},
-          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "独处的宁静"}
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "观察到的社交知识"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "独处的宁静"
+          }
         ]
       }
     ]
@@ -1668,8 +1713,18 @@
     "unique": true,
     "tag": "social",
     "effects": [
-      {"type": "modify_attribute", "target": "int", "value": 1, "description": "管理经验"},
-      {"type": "modify_attribute", "target": "mny", "value": 1, "description": "庄园收入"}
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "管理经验"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "mny",
+        "value": 1,
+        "description": "庄园收入"
+      }
     ],
     "branches": [
       {
@@ -1678,10 +1733,30 @@
         "description": "你展现出了不凡的治理才能，庄园在你手里井井有条。",
         "probability": 0.5,
         "effects": [
-          {"type": "modify_attribute", "target": "int", "value": 2, "description": "治理才能"},
-          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "领民爱戴"},
-          {"type": "modify_attribute", "target": "mny", "value": 3, "description": "庄园繁荣"},
-          {"type": "set_flag", "target": "capable_lord", "value": 1, "description": "有能力的领主"}
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 2,
+            "description": "治理才能"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "领民爱戴"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": 3,
+            "description": "庄园繁荣"
+          },
+          {
+            "type": "set_flag",
+            "target": "capable_lord",
+            "value": 1,
+            "description": "有能力的领主"
+          }
         ]
       },
       {
@@ -1689,8 +1764,18 @@
         "title": "力不从心",
         "description": "繁杂的政务让你焦头烂额，你开始怀疑自己是否适合这条路。",
         "effects": [
-          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "自我认知"},
-          {"type": "modify_attribute", "target": "mny", "value": -1, "description": "管理不善"}
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "自我认知"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "mny",
+            "value": -1,
+            "description": "管理不善"
+          }
         ]
       }
     ]

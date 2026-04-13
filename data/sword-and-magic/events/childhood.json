@@ -2701,8 +2701,18 @@
     "unique": true,
     "tag": "social",
     "effects": [
-      {"type": "modify_attribute", "target": "chr", "value": 2, "description": "社交礼仪"},
-      {"type": "modify_attribute", "target": "int", "value": 1, "description": "学到了贵族知识"}
+      {
+        "type": "modify_attribute",
+        "target": "chr",
+        "value": 2,
+        "description": "社交礼仪"
+      },
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 1,
+        "description": "学到了贵族知识"
+      }
     ],
     "branches": [
       {
@@ -2710,8 +2720,18 @@
         "title": "认真学习",
         "description": "你认真对待每一堂课，连最细微的餐桌礼仪都烂熟于心。",
         "effects": [
-          {"type": "modify_attribute", "target": "chr", "value": 2, "description": "优雅得体"},
-          {"type": "set_flag", "target": "noble_educated", "value": 1, "description": "受过正式贵族教育"}
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": 2,
+            "description": "优雅得体"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_educated",
+            "value": 1,
+            "description": "受过正式贵族教育"
+          }
         ]
       },
       {
@@ -2719,8 +2739,18 @@
         "title": "偷偷溜出去玩",
         "description": "礼仪课太无聊了，你偷偷溜出去和庄园外的小孩一起玩。",
         "effects": [
-          {"type": "modify_attribute", "target": "spr", "value": 1, "description": "自由的快乐"},
-          {"type": "modify_attribute", "target": "chr", "value": -1, "description": "被训斥"}
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 1,
+            "description": "自由的快乐"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "chr",
+            "value": -1,
+            "description": "被训斥"
+          }
         ]
       }
     ]
@@ -2736,7 +2766,12 @@
     "unique": true,
     "tag": "life",
     "effects": [
-      {"type": "modify_attribute", "target": "int", "value": 2, "description": "启蒙教育"}
+      {
+        "type": "modify_attribute",
+        "target": "int",
+        "value": 2,
+        "description": "启蒙教育"
+      }
     ],
     "branches": [
       {
@@ -2744,8 +2779,18 @@
         "title": "爱上了那些故事",
         "description": "你缠着老师讲了一个又一个冒险故事，心里种下了远行的种子。",
         "effects": [
-          {"type": "modify_attribute", "target": "spr", "value": 2, "description": "对外面的向往"},
-          {"type": "modify_attribute", "target": "int", "value": 1, "description": "地理知识"}
+          {
+            "type": "modify_attribute",
+            "target": "spr",
+            "value": 2,
+            "description": "对外面的向往"
+          },
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 1,
+            "description": "地理知识"
+          }
         ]
       },
       {
@@ -2753,8 +2798,18 @@
         "title": "认真学好每一课",
         "description": "你安安静静地完成了所有功课，老师向父亲夸你是最用功的学生。",
         "effects": [
-          {"type": "modify_attribute", "target": "int", "value": 3, "description": "学业优秀"},
-          {"type": "set_flag", "target": "noble_educated", "value": 1, "description": "受过正式贵族教育"}
+          {
+            "type": "modify_attribute",
+            "target": "int",
+            "value": 3,
+            "description": "学业优秀"
+          },
+          {
+            "type": "set_flag",
+            "target": "noble_educated",
+            "value": 1,
+            "description": "受过正式贵族教育"
+          }
         ]
       }
     ]
