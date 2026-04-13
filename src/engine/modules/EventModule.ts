@@ -10,6 +10,7 @@ import type {
   EventEffect,
   EventLogEntry,
   LifeRoute,
+  WorldRaceDef,
 } from '../core/types'
 import type { RandomProvider } from '../core/RandomProvider'
 import { cloneState } from '../core/stateUtils'
@@ -41,39 +42,41 @@ export class EventModule {
   }
 
   /**
-   * 计算事件的等效年龄范围（基于 raceMaxLifespan 百分比缩放）
-   * - 事件的 minAge/maxAge 视为人类百分比：55 = 55% 的人生进度
-   * - 转换为当前种族的实际年龄
-   * - 出生/婴儿事件（maxAge <= 1）：不缩放
-   * - 种族专属事件：不缩放，已用种族实际年龄
+   * 计算事件的触发年龄范围（基于生命阶段系统）
+   * - 种族专属事件（有 races 字段）：直接用 minAge/maxAge
+   * - birth 事件（maxAge <= 1）：直接用 minAge/maxAge
+   * - 跨阶段事件（有 lifeStages 数组）：用 minAge/maxAge
+   * - 单阶段事件（有 lifeStage）：用 race.lifeStages 映射 + stageProgress
+   * - 兜底：用 minAge/maxAge
    */
-  private getScaledAgeRange(event: WorldEventDef, playerRace: string | undefined, raceMaxLifespan: number): [number, number] {
-    // 出生/婴儿事件不缩放
+  private getEventAgeRange(event: WorldEventDef, raceDef: WorldRaceDef | undefined): [number, number] | null {
+    // 1. birth 事件
     if (event.maxAge <= 1) return [event.minAge, event.maxAge]
 
-    // 种族专属事件不需要缩放
-    const isRaceExclusive = event.races && event.races.length === 1 && event.races[0] === playerRace
-    if (isRaceExclusive) return [event.minAge, event.maxAge]
+    // 2. 种族专属事件：直接用绝对年龄
+    if (event.races && event.races.length > 0) return [event.minAge, event.maxAge]
 
-    // 事件 minAge/maxAge 视为人类百分比：55 = 55%
-    // 转换为当前种族的实际年龄
-    const minProgress = event.minAge / 100
-    const maxProgress = event.maxAge / 100
-
-    // 心理年龄事件 cap 到 50%
-    const psychologyCappedTags = new Set(['life', 'romance', 'social'])
-    const needsCap = psychologyCappedTags.has(event.tag ?? '') || event.priority === 'major'
-    const effectiveMaxProgress = needsCap ? Math.min(maxProgress, 0.50) : maxProgress
-
-    let scaledMin = Math.round(minProgress * raceMaxLifespan)
-    const scaledMax = Math.round(effectiveMaxProgress * raceMaxLifespan)
-
-    // 短寿命保护：缩放后 minAge 不低于原始 minAge 的 50%，避免成人事件过早触发
-    if (raceMaxLifespan < 100) {
-      scaledMin = Math.max(scaledMin, Math.ceil(event.minAge * 0.5))
+    // 3. 跨阶段事件：lifeStages 数组 + minAge/maxAge
+    if (event.lifeStages && event.lifeStages.length > 0 && event.minAge !== undefined) {
+      return [event.minAge, event.maxAge]
     }
 
-    return [scaledMin, scaledMax]
+    // 4. 单阶段事件：用种族阶段边界 + stageProgress
+    if (event.lifeStage && raceDef?.lifeStages?.[event.lifeStage]) {
+      const [sMin, sMax] = raceDef.lifeStages[event.lifeStage]!
+      const stageSpan = sMax - sMin
+      const minP = event.minStageProgress ?? 0
+      const maxP = event.maxStageProgress ?? 1
+      return [
+        Math.round(sMin + minP * stageSpan),
+        Math.round(sMin + maxP * stageSpan)
+      ]
+    }
+
+    // 5. 兜底
+    if (event.minAge !== undefined) return [event.minAge, event.maxAge]
+
+    return null
   }
 
   /** 获取当前年龄可触发的事件候选列表 */
@@ -85,9 +88,10 @@ export class EventModule {
     const maxLifespan = raceMaxLifespan ?? state.effectiveMaxAge ?? 100
 
     return this.world.events.filter(event => {
-      // 年龄范围（按种族寿命百分比缩放）
-      const [scaledMin, scaledMax] = this.getScaledAgeRange(event, playerRace, maxLifespan)
-      if (age < scaledMin || age > scaledMax) return false
+      // 年龄范围（基于生命阶段系统）
+      const raceDef = playerRace ? this.world.races?.find(r => r.id === playerRace) : undefined
+      const ageRange = this.getEventAgeRange(event, raceDef)
+      if (ageRange && (age < ageRange[0] || age > ageRange[1])) return false
       // unique 事件去重
       if (event.unique && state.triggeredEvents.has(event.id)) return false
       // 种族过滤：事件指定了种族列表时，玩家种族必须在其中
