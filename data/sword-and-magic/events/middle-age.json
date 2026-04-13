@@ -3,8 +3,6 @@
     "id": "world_breaking_start",
     "title": "世界崩坏开始",
     "description": "你感到世界在颤抖。不是地震——是世界本身的法则在瓦解。面对世界的崩坏，你选择——",
-    "minAge": 50,
-    "maxAge": 60,
     "weight": 1,
     "include": "has.talent.worldbreaker & (has.flag.knight | has.flag.guild_member)",
     "effects": [
@@ -111,7 +109,10 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 1
   },
   {
     "id": "retirement",
@@ -201,7 +202,11 @@
         "title": "放下匕首",
         "description": "你把那把跟了你半辈子的匕首插在火堆旁的石头上，决定不再冒险了。对哥布林来说，能活到这个年纪就已经是传奇。"
       }
-    }
+    },
+    "lifeStages": [
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "final_cataclysm",
@@ -378,6 +383,10 @@
     "priority": "critical",
     "routes": [
       "merchant"
+    ],
+    "lifeStages": [
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -475,14 +484,16 @@
     "priority": "minor",
     "routes": [
       "merchant"
+    ],
+    "lifeStages": [
+      "midlife",
+      "elder"
     ]
   },
   {
     "id": "mid_heir_training",
     "title": "培养继承人",
     "description": "你的孩子到了该学东西的年纪。你决定亲自教导他。",
-    "minAge": 35,
-    "maxAge": 50,
     "weight": 4,
     "include": "has.flag.parent & attribute.chr >= 12 & attribute.int >= 12",
     "effects": [],
@@ -587,7 +598,10 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.6
   },
   {
     "id": "mid_political_intrigue",
@@ -708,8 +722,6 @@
     "id": "mid_existential_crisis",
     "title": "深夜的独白",
     "description": "你站在窗前，看着镜子里的自己。白头发多了几根，皱纹也深了。这一切，值得吗？",
-    "minAge": 35,
-    "maxAge": 50,
     "weight": 4,
     "include": "attribute.spr < 18",
     "effects": [],
@@ -818,14 +830,15 @@
         "title": "深夜的独白",
         "description": "哥布林的寿命太短了。你坐在黑暗中，数着自己掉落的又一颗牙齿。手指关节开始发疼，眼睛也不如从前锐利。再过几年你就会像那些老哥布林一样蜷缩在角落。这一切……值得吗？"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.6
   },
   {
     "id": "mid_found_school",
     "title": "开宗立派",
     "description": "你决定创办自己的道场/学院/商会，将毕生所学传承下去。",
-    "minAge": 35,
-    "maxAge": 55,
     "weight": 2,
     "include": "attribute.str >= 18 | attribute.mag >= 18 | attribute.int >= 18",
     "effects": [],
@@ -934,7 +947,10 @@
         "title": "哥布林学堂",
         "description": "你决定教部落里的小哥布林读写和算数。你知道，懂人类的文字在交易中有多大的优势——你不希望下一代再吃你吃过的亏。"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_old_enemy",
@@ -1048,6 +1064,10 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -1157,6 +1177,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1389,6 +1414,11 @@
     "priority": "minor",
     "routes": [
       "scholar"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1510,6 +1540,10 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -1645,6 +1679,10 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -1744,6 +1782,10 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -1861,6 +1903,11 @@
     "priority": "minor",
     "routes": [
       "merchant"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1934,6 +1981,10 @@
     "exclude": "",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -2069,7 +2120,11 @@
         "title": "噩耗",
         "description": "那群出去打探消息的哥布林回来了，但少了一个。一个浑身是血的同伴把一枚你再熟悉不过的小铜铃递到你手里。\"对不起……\" 你什么都听不见了。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "avenger_trail",
@@ -2172,6 +2227,11 @@
     "effects": [],
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -2372,6 +2432,11 @@
     "effects": [],
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -2456,7 +2521,12 @@
         "title": "巢穴入侵者",
         "description": "深夜，孩子们的哭声把你惊醒。你抓起匕首推开门——一只暗蛛正在你的巢穴门口吐丝。它的八只眼睛死死盯着里面的方向。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "widowed_wanderer",
@@ -2557,14 +2627,17 @@
         "title": "失去之后的游荡",
         "description": "你已经不记得自己走了多久。从地洞到地洞，从黑市到黑市。喝掉了多少瓶蘑菇酒。世界对你来说只剩下灰色。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "mid_body_decline",
     "title": "岁月的痕迹",
     "description": "多年的冒险生涯开始在你身上留下痕迹。曾经轻松举起的巨剑，如今握起来有些吃力了。膝盖在阴天会隐隐作痛，而镜中的白发也越来越多。",
-    "minAge": 45,
-    "maxAge": 55,
     "weight": 5,
     "effects": [],
     "branches": [
@@ -2657,14 +2730,15 @@
         "title": "哥布林式衰老",
         "description": "你的关节开始嘎吱作响，眼睛也没以前那么亮了。在哥布林社会，你这个年纪已经算是'老不死的'了。但你的脑子还是一样灵光——至少你自己这么认为。"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0.4,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_chronic_pain",
     "title": "旧伤复发",
     "description": "年轻时受过的伤开始反复发作。每到深夜，肩膀的箭伤、腰部的摔伤、还有那道从左臂延伸到胸口的爪痕，都在无声地提醒你——你不再是当年那个不知疲倦的冒险者了。",
-    "minAge": 45,
-    "maxAge": 60,
     "weight": 4,
     "effects": [],
     "branches": [
@@ -2754,14 +2828,15 @@
         "title": "旧伤复发",
         "description": "年轻时偷东西被打断过的手指又开始疼了。那次被人类踢到的肋骨也在阴天隐隐作痛。哥布林的身体本来就不耐磨损——你还能撑几年？"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0.4,
+    "maxStageProgress": 1
   },
   {
     "id": "mid_vision_decline",
     "title": "模糊的视界",
     "description": "你发现瞄准目标时越来越吃力了。法术偶尔偏了几寸，弓箭再也无法百步穿杨。是不是该承认，你的眼睛已经开始背叛你了？",
-    "minAge": 50,
-    "maxAge": 60,
     "weight": 3,
     "effects": [],
     "branches": [
@@ -2833,7 +2908,10 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 1
   },
   {
     "id": "mid_slowing_down",
@@ -2912,14 +2990,16 @@
         "title": "迟缓的脚步",
         "description": "你发现自己不如从前灵活了。闪避变得吃力，偷东西也没以前利索了。上次差点被人类抓住——这在几年前是不可能的。"
       }
-    }
+    },
+    "lifeStages": [
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "mid_legacy_review",
     "title": "回首半生",
     "description": "走到人生中段的这一天，你独自坐在窗前，回忆过去的一切。",
-    "minAge": 50,
-    "maxAge": 55,
     "weight": 3,
     "effects": [],
     "branches": [
@@ -2978,14 +3058,15 @@
         "title": "回首半生",
         "description": "对哥布林来说，你已经算是老家伙了。你坐在洞穴深处，回忆这些年偷过的东西、骗过的人、赚到的金币。值得。"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_apprentice_success",
     "title": "弟子出师",
     "description": "你培养多年的弟子终于学有所成，要独自踏上冒险之路了。",
-    "minAge": 50,
-    "maxAge": 60,
     "weight": 2,
     "include": "has.flag.has_student",
     "effects": [],
@@ -3040,14 +3121,15 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 1
   },
   {
     "id": "mid_magic_potion",
     "title": "炼金术突破",
     "description": "多年研究炼金术，你终于调配出了一种效果惊人的药剂。",
-    "minAge": 45,
-    "maxAge": 60,
     "weight": 1,
     "include": "attribute.mag >= 12 | attribute.int >= 16",
     "effects": [],
@@ -3104,7 +3186,10 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0.4,
+    "maxStageProgress": 1
   },
   {
     "id": "mid_garden_retirement",
@@ -3160,6 +3245,10 @@
     "unique": true,
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3338,8 +3427,6 @@
     "id": "mid_old_friend_reunion",
     "title": "故友重逢",
     "description": "你在一个意想不到的地方遇到了多年未见的老朋友。",
-    "minAge": 35,
-    "maxAge": 55,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3409,14 +3496,15 @@
         "description": "你在黑市偶遇了以前一起长大的哥布林。他瘦了很多，但笑容没变。你们蹲在角落里分了一瓶蘑菇酒，像小时候一样。"
       }
     },
-    "exclude": "has.flag.friend_reunion_done"
+    "exclude": "has.flag.friend_reunion_done",
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_life_reflection",
     "title": "人生回顾",
     "description": "某个安静的夜晚，你独自坐在窗前，回顾这些年走过的路。",
-    "minAge": 35,
-    "maxAge": 55,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3436,7 +3524,10 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_natural_disaster",
@@ -3511,7 +3602,12 @@
         "title": "地下洪水",
         "description": "地面上的连日暴雨让地下水位猛涨，你的巢穴和储物间全被淹了。哥布林们在齐腰深的水里拼命转移物资。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "mid_property_acquisition",
@@ -3591,14 +3687,16 @@
         "title": "扩大地盘",
         "description": "你积攒了足够的资源，是时候扩大自己的领地了——把隔壁那个废弃的洞穴打通，做成仓库。当然，得先\"说服\"那里的蜘蛛搬家。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "mid_mentoring_youth",
     "title": "指导年轻人",
     "description": "一个充满热情但缺乏经验的年轻人向你请教。你看到了曾经的自己。",
-    "minAge": 35,
-    "maxAge": 55,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3655,14 +3753,15 @@
         ],
         "description": "你选择了让他自己去经历，静静等待结果。"
       }
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_health_scare",
     "title": "健康警报",
     "description": "你突然感到一阵剧烈的胸痛。这是身体在提醒你——你已经不再年轻了。",
-    "minAge": 40,
-    "maxAge": 55,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -3726,14 +3825,15 @@
         "title": "身体警报",
         "description": "你突然剧烈咳血。对短命的哥布林来说，这意味着你的身体已经在衰退了。年轻的部落成员用异样的眼光看着你——在哥布林社会，病弱就意味着被淘汰。"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mid_legacy_project",
     "title": "留下遗产",
     "description": "你开始思考——你想为这个世界留下什么？",
-    "minAge": 40,
-    "maxAge": 60,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -3828,7 +3928,10 @@
         ],
         "description": "你权衡利弊后，选择了创建一个基金会。这可能带来魅力提升了，但也伴随着风险。"
       }
-    ]
+    ],
+    "lifeStage": "midlife",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "elf_watching_generations",
@@ -5162,8 +5265,6 @@
     "id": "midlife_new_craft",
     "title": "半路学艺",
     "description": "你忽然觉得，人生走到这里还远没到定型的时候。于是你决定认真学一门此前从未深究过的手艺，也许来自王国工坊、神殿书房、商队营地，或者旅途中偶然见过的异乡人。",
-    "minAge": 35,
-    "maxAge": 60,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -5233,7 +5334,10 @@
       "goblin": {
         "description": "你忽然觉得，虽然哥布林的一生短得很，但也没必要只会原来那几手。于是你决定认真学一门此前从未深究过的新手艺。"
       }
-    }
+    },
+    "lifeStage": "midlife",
+    "minStageProgress": 0,
+    "maxStageProgress": 1
   },
   {
     "id": "mid_familiar_place_changes",
@@ -5310,7 +5414,12 @@
       "goblin": {
         "description": "你曾经很熟悉的一处地方正在悄悄改变。也许是下水道被封了一截，也许是黑市搬了位置，连惯常藏东西的角落都开始让你认不出来。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "mid_dwarf_name_in_hall",

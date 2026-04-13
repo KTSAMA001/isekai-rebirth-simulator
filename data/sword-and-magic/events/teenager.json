@@ -248,6 +248,11 @@
     "priority": "major",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -373,6 +378,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -470,6 +479,11 @@
     "priority": "major",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -772,6 +786,10 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -904,6 +922,11 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1044,6 +1067,10 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1192,6 +1219,12 @@
     "priority": "minor",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1276,7 +1309,11 @@
         "title": "地下酒馆斗殴",
         "description": "你溜进了一个半地下的酒馆——这是少数不会赶走哥布林的地方。几杯劣质麦酒下肚，一个喝醉的人类冲你竖中指。你摸了摸腰间的匕首。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "fairy_friend_return",
@@ -1338,6 +1375,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1500,6 +1541,10 @@
     "exclude": "has.flag.lord",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1612,7 +1657,11 @@
       "female": {
         "description": "你在月光下独自流泪。那个承诺会永远在一起的人，终究还是离开了。但你擦干眼泪，对自己说：下一次，我会更强大。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "knight_glory",
@@ -1830,7 +1879,12 @@
         "title": "流星雨",
         "description": "部落里的老哥布林说今晚值得爬到地面看看。你半信半疑地钻出洞口——漫天的流星划过夜空，比任何闪亮的宝石都美。你第一次觉得，地面世界也不全是坏的。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "traveling_merchant",
@@ -1901,7 +1955,12 @@
         "title": "走私商人来访",
         "description": "一个戴着面纱的商人来到了哥布林聚落。他带来了各种\"特殊商品\"——被禁的魔法道具、来路不明的药水，还有一些人类王国的情报。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "forest_camping",
@@ -1979,6 +2038,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -2072,7 +2136,12 @@
         "title": "黑市悬赏",
         "description": "地下黑市的告示墙上贴满了委托——从偷窃到刺探情报应有尽有。你最感兴趣的是一个奇怪的委托：偷走一个人类商人的账本，报酬是一整袋金币。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "love_at_first_sight",
@@ -2213,7 +2282,12 @@
       "female": {
         "description": "你在人群中与一双炽热的目光相遇。那个人正朝你走来，嘴唇微动却说不出话。你感觉心跳漏了一拍，面颊不自觉地烫了起来。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "secret_training",
@@ -2304,6 +2378,11 @@
     "priority": "major",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -2410,7 +2489,11 @@
         "title": "预知梦",
         "description": "你做了一个异常清晰的梦——梦中你站在地面上，身后是燃烧的城市。但奇怪的是，所有人类都在跑，而你的族人正在废墟中寻宝。这是预兆吗？"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "mag_elemental_fusion",
@@ -2522,6 +2605,11 @@
     "priority": "major",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -2652,7 +2740,12 @@
         "title": "部落演说",
         "description": "部落举行了大会，讨论一个关系到所有人的问题。你被推到了中间发言。这是你证明自己的机会——但哥布林大会的规矩是：说得不好可能会被扔烂菜叶子。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "mage_arcane_library",
@@ -2764,6 +2857,11 @@
     "priority": "major",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -2838,7 +2936,12 @@
         "title": "废墟中的古书",
         "description": "你在一处坍塌的地下遗迹中发现了一本积满灰尘的古书。大部分文字你看不懂，但里面画满了奇怪的机械图纸——这对哥布林来说可是无价之宝。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "rival_training",
@@ -2894,7 +2997,12 @@
     "routes": [
       "*"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "elf_ancient_magic",
@@ -3729,6 +3837,13 @@
         ],
         "description": "你权衡利弊后，选择了释放出去。这可能带来魔力提升了，但也伴随着风险。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3781,6 +3896,12 @@
         ],
         "description": "你选择了谢绝，自学成才，静静等待结果。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -3840,6 +3961,13 @@
         ],
         "description": "你权衡利弊后，选择了交给图书馆。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3857,14 +3985,18 @@
         "target": "str",
         "value": 5
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "teen_first_adventure",
     "title": "人生第一次冒险",
     "description": "你独自离开家，踏上了一段短途旅行。目的地不远，但对你来说这是巨大的一步。",
-    "minAge": 12,
-    "maxAge": 16,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3927,14 +4059,15 @@
         ],
         "description": "面对抉择，你决定去山上看日出——也许这是最好的选择。"
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0.16666666666666666,
+    "maxStageProgress": 0.8333333333333334
   },
   {
     "id": "teen_mentor_meeting",
     "title": "遇见师傅",
     "description": "一位经验丰富的旅人注意到了你的潜力，愿意花些时间指点你。",
-    "minAge": 13,
-    "maxAge": 17,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -4003,14 +4136,15 @@
         ],
         "description": "你选择了学习生存技巧，静静等待结果。"
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 1
   },
   {
     "id": "teen_secret_discovered",
     "title": "发现秘密",
     "description": "你无意中发现了一个不该知道的秘密——镇长一直在私吞救济金。",
-    "minAge": 13,
-    "maxAge": 17,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -4072,14 +4206,15 @@
         ],
         "description": "你权衡利弊后，选择了私下找镇长谈条件。"
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 1
   },
   {
     "id": "teen_library_discovery",
     "title": "图书馆的秘密阁楼",
     "description": "你在图书馆发现了一个隐藏的阁楼，里面放满了古旧的书。",
-    "minAge": 11,
-    "maxAge": 16,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -4125,14 +4260,15 @@
         ],
         "description": "面对抉择，你决定研究魔法相关的记载——也许这是最好的选择。"
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8333333333333334
   },
   {
     "id": "teen_race_competition",
     "title": "少年竞技会",
     "description": "镇上举办了少年竞技比赛。跑步、射箭、猜谜，你全都想参加。",
-    "minAge": 12,
-    "maxAge": 16,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -4212,14 +4348,15 @@
         "title": "矿车竞速赛",
         "description": "一年一度的矿车竞速赛开始了！你和其他年轻哥布林骑着各自改装的矿车，在废弃的矿道里疯狂飞驰。速度是其次——关键是谁的矿车更炸裂。"
       }
-    }
+    },
+    "lifeStage": "teen",
+    "minStageProgress": 0.16666666666666666,
+    "maxStageProgress": 0.8333333333333334
   },
   {
     "id": "teen_nightmare",
     "title": "反复出现的噩梦",
     "description": "最近你总是做同一个噩梦——一片黑暗中有什么东西在呼唤你。",
-    "minAge": 12,
-    "maxAge": 17,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -4271,7 +4408,10 @@
         ],
         "description": "你权衡利弊后，选择了把梦境内容记录下来。"
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0.16666666666666666,
+    "maxStageProgress": 1
   },
   {
     "id": "teen_traveling_circus",
@@ -4347,7 +4487,12 @@
         "title": "流浪马戏团",
         "description": "一个流浪马戏团路过了你居住区附近。你戴上兜帽偷偷混进去——杂技、魔术和喷火表演让你大开眼界。你暗暗想着：也许有一天我也能加入他们。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "human_first_job",
@@ -4426,8 +4571,6 @@
     "id": "noble_sword_training",
     "title": "贵族剑术训练",
     "description": "父亲请来了一位退役的骑士教你剑术。他说，贵族不仅要会说话，还要能保护自己的领民。",
-    "minAge": 12,
-    "maxAge": 15,
     "weight": 6,
     "include": "has.flag.noble_birth",
     "exclude": "has.flag.squire | has.flag.magic_student",
@@ -4479,7 +4622,10 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "teen",
+    "minStageProgress": 0.16666666666666666,
+    "maxStageProgress": 0.6666666666666666
   },
   {
     "id": "human_bully_defense",
@@ -4712,7 +4858,15 @@
         "value": -1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_training_day",
@@ -4766,6 +4920,14 @@
         ],
         "description": "你选择了冥想修行，静静等待结果。"
       }
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -4788,7 +4950,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_rainy_contemplation",
@@ -4810,7 +4980,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_helping_stranger",
@@ -4837,7 +5015,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_stargazing",
@@ -4859,7 +5045,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "human_knight_dream",
@@ -5855,7 +6049,11 @@
       "goblin": {
         "description": "部落长辈第一次把一件正经差事交给你独自完成。也许是去黑市换零件，也许是穿过下水道把消息送到另一窝哥布林手里，这回只能靠你自己。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "teen_future_talk",
@@ -5932,7 +6130,11 @@
       "goblin": {
         "description": "某个安静的夜晚，你和同龄哥布林挤在洞口边，聊起以后是去黑市发财、混进人类城镇、加入盗贼团，还是当个能活很久的老滑头。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "teen_dwarf_choose_master",

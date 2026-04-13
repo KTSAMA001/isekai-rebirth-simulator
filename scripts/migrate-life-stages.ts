@@ -199,11 +199,13 @@ function main() {
 
     const fileMigrationReport = []
 
+    const migratedEvents: EventDef[] = []
     for (const event of events) {
       stats.totalEvents++
 
       const original = JSON.stringify(event, null, 2)
       const migrated = migrateEvent(event, fileName, stats)
+      migratedEvents.push(migrated)
 
       if (original !== JSON.stringify(migrated, null, 2)) {
         fileMigrationReport.push({
@@ -227,7 +229,7 @@ function main() {
     })
 
     // 写回修改后的文件
-    fs.writeFileSync(filePath, JSON.stringify(events, null, 2))
+    fs.writeFileSync(filePath, JSON.stringify(migratedEvents, null, 2))
   }
 
   // 输出统计信息

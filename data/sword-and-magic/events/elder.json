@@ -3,8 +3,6 @@
     "id": "legend_spread",
     "title": "传说的传播",
     "description": "吟游诗人们开始传唱你的故事。",
-    "minAge": 65,
-    "maxAge": 88,
     "weight": 3,
     "include": "attribute.chr >= 15 & has.flag.dragon_slayer | has.flag.knight_hero | has.flag.war_hero | has.flag.archmage | has.flag.famous_inventor & has.flag.knight | has.flag.guild_member | has.flag.mage_graduate",
     "effects": [],
@@ -60,14 +58,15 @@
         "title": "传说的传播",
         "description": "年轻的哥布林开始传颂你的故事——那个从垃圾堆里爬出来，最终成为大首领/大商人/传奇盗贼的哥布林。你的名字成了部落的骄傲。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.2222222222222222,
+    "maxStageProgress": 0.7333333333333333
   },
   {
     "id": "peaceful_end",
     "title": "平静的终章",
     "description": "你坐在门廊的摇椅上，看着孙辈们在花园里奔跑。夕阳很美。",
-    "minAge": 70,
-    "maxAge": 88,
     "weight": 4,
     "include": "attribute.spr >= 8 & has.flag.parent",
     "unique": true,
@@ -93,14 +92,15 @@
         "title": "洞穴深处的夕阳",
         "description": "你裹着破布毯子缩在洞穴最深处。小哥布林们在你面前跑来跑去，叽叽喳喳地吵闹。一束光从远处的洞口渗进来。你还能看到这一切，就很好。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 0.7333333333333333
   },
   {
     "id": "magic_breakthrough_final",
     "title": "最后的魔法",
     "description": "你感到自己的魔力在消散，于是决定将毕生所学注入最后一道法术。",
-    "minAge": 70,
-    "maxAge": 90,
     "weight": 4,
     "include": "attribute.mag >= 22",
     "effects": [],
@@ -165,14 +165,15 @@
     "priority": "minor",
     "routes": [
       "mage"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_memoir",
     "title": "撰写回忆录",
     "description": "你坐在壁炉旁，翻开一本空白的羊皮纸。一生的故事，总该留下点什么。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 4,
     "include": "attribute.int >= 15",
     "effects": [],
@@ -284,14 +285,15 @@
       "goblin": {
         "description": "你决定写回忆录——虽然大半个哥布林社会都是文盲。你用炭笔在废纸上歪歪扭扭地写下自己的故事。谁知道呢，也许有一天，某个年轻的哥布林会从你的故事中找到活下去的勇气。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_disciple_visit",
     "title": "故徒来访",
     "description": "一个年轻人敲响了你的门，自称是你当年教导过的学生。他的眼中满是敬意。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 4,
     "include": "has.flag.guild_member | has.flag.mage_graduate | has.flag.knight | attribute.chr >= 12",
     "effects": [],
@@ -390,14 +392,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_last_adventure",
     "title": "不服老的冒险",
     "description": "听说地下城发现了新的楼层。你的心跳加速了——冒险者的血液可不会因为几根白头发就冷却下来。",
-    "minAge": 55,
-    "maxAge": 70,
     "weight": 3,
     "include": "attribute.str >= 14 | attribute.mag >= 14",
     "effects": [],
@@ -503,7 +506,10 @@
         "title": "老骨头的最后冒险",
         "description": "听说深处的废弃矿道又被发现了新洞穴。你的心跳加速了——哥布林的探索欲可不会因为掉了几颗牙就消失。你抓起锈迹斑斑的匕首，踉跄着走了出去。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.3333333333333333
   },
   {
     "id": "elder_family_reunion",
@@ -617,14 +623,16 @@
         "title": "满巢的热闹",
         "description": "你的后代们都回来了。洞穴里挤满了大大小小的哥布林，吵吵闹闹、推推搡搡。烤虫子的香味弥漫在空气中。这是你最满足的时刻。"
       }
-    }
+    },
+    "lifeStages": [
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "elder_illness",
     "title": "疾病缠身",
     "description": "你开始频繁咳嗽，身体越来越沉重。医生的表情不太好看。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 5,
     "include": "attribute.str < 25",
     "effects": [],
@@ -737,14 +745,15 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_spirit_trial",
     "title": "灵魂试炼",
     "description": "在一个月圆之夜，你的意识突然脱离了身体。你看到了自己的一生如走马灯般闪过。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 3,
     "include": "attribute.spr >= 15 | has.talent.dragon_blood | has.talent.demon_heritage",
     "effects": [],
@@ -847,14 +856,15 @@
     "priority": "major",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_legacy_gift",
     "title": "传家之宝",
     "description": "你决定把最重要的东西传给下一代。它承载着你一生的记忆和荣耀。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 3,
     "include": "has.flag.dragon_slayer | has.flag.knight_hero | has.flag.archmage | has.flag.famous_inventor | has.flag.merchant_master",
     "effects": [],
@@ -935,14 +945,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_kingdom_crisis",
     "title": "王国危机",
     "description": "战争来临了。即使是白发苍苍的老者，也被征召保卫家园。",
-    "minAge": 55,
-    "maxAge": 88,
     "weight": 3,
     "include": "attribute.str >= 12 | attribute.mag >= 12",
     "effects": [],
@@ -1050,7 +1061,10 @@
         "title": "地面战争来了",
         "description": "地面的战争终于波及到了地下。无论年轻还是年老，每个哥布林都被召集起来——要么帮忙设陷阱，要么帮忙转移物资。你拖着老迈的身体站了起来。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7333333333333333
   },
   {
     "id": "elder_peaceful_days",
@@ -1162,14 +1176,16 @@
         "title": "安静的日子",
         "description": "你搬到了一个很深很安静的小洞穴。每天数数自己的收藏品，给发光蘑菇浇水，听地下暗河的水声。对一个老哥布林来说，这就是幸福。"
       }
-    }
+    },
+    "lifeStages": [
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "elder_final_counting",
     "title": "生命的终点",
     "description": "你感觉到了——生命之火只剩最后一点余烬。这一次，你真的走到了尽头。",
-    "minAge": 65,
-    "maxAge": 88,
     "weight": 2,
     "include": "hp <= 12",
     "effects": [],
@@ -1309,14 +1325,15 @@
     "priority": "critical",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.2222222222222222,
+    "maxStageProgress": 0.7333333333333333
   },
   {
     "id": "elder_frail",
     "title": "风烛残年",
     "description": "年迈的身体越来越脆弱了。简单的散步都会气喘吁吁，上楼梯要扶着墙壁才能站稳。曾经能举起巨剑的双手，如今连茶杯都在微微颤抖。",
-    "minAge": 65,
-    "maxAge": 88,
     "weight": 6,
     "effects": [],
     "branches": [
@@ -1391,14 +1408,15 @@
       "goblin": {
         "description": "你已经活得比大多数哥布林都要久了。你佝偻的身躯在年轻哥布林眼中是传奇——'那个还活着的老家伙'。你的每一天都是奇迹，你的每一个故事都值得被记住。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.2222222222222222,
+    "maxStageProgress": 0.7333333333333333
   },
   {
     "id": "elder_memory_fade",
     "title": "渐渐模糊的记忆",
     "description": "你开始记不清一些事情了。昨天发生的事和十年前的记忆混在一起，有时叫不出老朋友的名字，有时站在家门口忘了自己要去哪里。时间在偷走你最珍贵的东西。",
-    "minAge": 70,
-    "maxAge": 92,
     "weight": 4,
     "effects": [],
     "branches": [
@@ -1464,14 +1482,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 0.8222222222222222
   },
   {
     "id": "elder_final_illness",
     "title": "最后的病榻",
     "description": "一场突如其来的重病将你击倒在床。高烧不退，呼吸困难。医生们表情凝重地交换着眼神——这一次，恐怕不只是普通的感冒。",
-    "minAge": 70,
-    "maxAge": 90,
     "weight": 5,
     "include": "age >= 72 & hp <= 35",
     "effects": [],
@@ -1566,14 +1585,15 @@
         "title": "矿石之病",
         "description": "你的呼吸越来越沉重——百年的矿尘终于在你的肺中积下了最后一层。老矮人们管这叫'矿石之病'，几乎每个活得够久的矿工都会经历。你躺在石床上，听着远处传来的锤击声，心想：至少这一生，没有白费。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_apprentice_return",
     "title": "学徒归来",
     "description": "一个熟悉的身影出现在门口。是当年那个毛头小子——不，如今已经是独当一面的大人了。",
-    "minAge": 80,
-    "maxAge": 92,
     "weight": 6,
     "include": "has.flag.has_student",
     "unique": true,
@@ -1613,14 +1633,15 @@
     "effects": [],
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.5555555555555556,
+    "maxStageProgress": 0.8222222222222222
   },
   {
     "id": "elder_legend_verified",
     "title": "传说被验证",
     "description": "一位历史学家找到了你，说在你的经历中发现了许多被时代遗忘的真相。",
-    "minAge": 80,
-    "maxAge": 95,
     "weight": 4,
     "include": "has.flag.dragon_defeated|has.flag.curse_breaker",
     "unique": true,
@@ -1675,14 +1696,15 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.5555555555555556,
+    "maxStageProgress": 0.8888888888888888
   },
   {
     "id": "elder_wisdom_seekers",
     "title": "求知者来访",
     "description": "几个年轻的冒险者千里迢迢赶来，只为听你讲述当年的故事。",
-    "minAge": 80,
-    "maxAge": 95,
     "weight": 1,
     "tag": "social",
     "priority": "minor",
@@ -1721,14 +1743,15 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.5555555555555556,
+    "maxStageProgress": 0.8888888888888888
   },
   {
     "id": "elder_reunion",
     "title": "故人重逢",
     "description": "你在集市上看到了一个熟悉的背影。那是……不可能吧？你们已经多少年没见了？",
-    "minAge": 82,
-    "maxAge": 95,
     "weight": 5,
     "unique": true,
     "tag": "social",
@@ -1780,14 +1803,15 @@
     "routes": [
       "*"
     ],
-    "exclude": "has.flag.friend_reunion_done"
+    "exclude": "has.flag.friend_reunion_done",
+    "lifeStage": "elder",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 0.8888888888888888
   },
   {
     "id": "elder_world_peace",
     "title": "和平降临",
     "description": "你活到了这一天。持续了数十年的战争终于结束了，人们走上街头庆祝。",
-    "minAge": 85,
-    "maxAge": 98,
     "weight": 3,
     "unique": true,
     "tag": "epic",
@@ -1836,7 +1860,10 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.6666666666666666,
+    "maxStageProgress": 0.9555555555555556
   },
   {
     "id": "centenarian_celebration",
@@ -1912,8 +1939,6 @@
     "id": "elder_natural_death",
     "title": "安详的离去",
     "description": "你坐在窗边的摇椅上，阳光暖暖地洒在身上。往事如走马灯般闪过——那些冒险、那些人、那些笑容。你微微一笑，闭上了眼睛。",
-    "minAge": 85,
-    "maxAge": 100,
     "weight": 4,
     "include": "hp <= 25",
     "tag": "life",
@@ -1945,14 +1970,15 @@
         "title": "最后的炉火",
         "description": "你坐在锻造炉旁的老椅子上，火光映着你满是皱纹的脸。你伸出布满老茧的手，最后一次抚摸那把陪伴了你一生的锤子。\"好活儿……\"你低声说完最后一句话，像一座山一样安静地闭上了眼睛。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.6666666666666666,
+    "maxStageProgress": 1
   },
   {
     "id": "elder_technique_pass",
     "title": "绝学传承",
     "description": "你决定将毕生所学的绝学整理成册，留给后人。",
-    "minAge": 65,
-    "maxAge": 85,
     "weight": 2,
     "include": "has.flag.has_student",
     "effects": [],
@@ -2013,14 +2039,15 @@
     "unique": true,
     "routes": [
       "scholar"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.2222222222222222,
+    "maxStageProgress": 0.6666666666666666
   },
   {
     "id": "elder_last_feast",
     "title": "最后的盛宴",
     "description": "老朋友们从各地赶来，为你举办了一场盛大的聚会。",
-    "minAge": 70,
-    "maxAge": 85,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -2065,14 +2092,15 @@
         "title": "最后的盛宴",
         "description": "老朋友们从各个聚落赶来——那些还活着的老哥布林。你们围坐在篝火旁，喝着按年份酿制的蘑菇酒，聊着那些年轻时的疯狂事迹。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.3333333333333333,
+    "maxStageProgress": 0.6666666666666666
   },
   {
     "id": "elder_star_gazing_final",
     "title": "最后的星空",
     "description": "一个晴朗的夜晚，你独自来到小时候常去的那座山丘，仰望星空。",
-    "minAge": 75,
-    "maxAge": 95,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -2140,14 +2168,15 @@
         "title": "最后的星空",
         "description": "你踉跄着爬出了地洞——也许是最后一次了。夜空很美，跟你第一次看到它的时候一样。你还记得那个夜晚——一个从没见过星星的哥布林小孩，惊得长大了嘴巴。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.4444444444444444,
+    "maxStageProgress": 0.8888888888888888
   },
   {
     "id": "elder_old_enemy",
     "title": "昔日的对手",
     "description": "你收到了一封信——来自几十年前的宿敌，他想见你最后一面。",
-    "minAge": 65,
-    "maxAge": 80,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -2196,7 +2225,10 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0.2222222222222222,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elf_memory_garden_elder",
@@ -2270,8 +2302,6 @@
     "id": "elder_last_journey",
     "title": "最后的旅途",
     "description": "你决定在腿脚还能走的时候，再做一次旅行。去看看年轻时想去却没去的地方。",
-    "minAge": 55,
-    "maxAge": 75,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -2334,14 +2364,15 @@
         "title": "最后的旅途",
         "description": "你决定在腿脚还能走的时候，去看看那个传说中最深最远的地下洞穴——据说那里有一面完全由水晶组成的墙壁，在黑暗中散发着幽蓝的光。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.4444444444444444
   },
   {
     "id": "elder_garden_peace",
     "title": "花园时光",
     "description": "你拥有了一座小花园。每天浇水、除草、看花开花落，成了最享受的事。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -2362,14 +2393,15 @@
         "title": "蘑菇花园",
         "description": "你在洞穴的一角培育了一片发光蘑菇。每天浇水、通风、看它们忽明忽暗。对一个走过了这么多路的老哥布林来说，这种安宁比金子还珍贵。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_passing_wisdom",
     "title": "智者之言",
     "description": "年轻人特地远道而来向你请教。你的人生经历本身就是一部教科书。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -2389,14 +2421,15 @@
         "value": 1
       }
     ],
-    "include": "attribute.int >= 15 | attribute.mag >= 15 | attribute.str >= 20"
+    "include": "attribute.int >= 15 | attribute.mag >= 15 | attribute.str >= 20",
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_old_letters",
     "title": "旧日书信",
     "description": "整理遗物时，你翻出了一箱泛黄的书信。每一封都承载着一段过去的故事。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -2410,14 +2443,15 @@
         "target": "spr",
         "value": 2
       }
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_unexpected_visitor",
     "title": "意外的来访者",
     "description": "一个你已经快忘记的人出现在你家门前。原来你年轻时随手帮过的忙，改变了对方的一生。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -2436,14 +2470,15 @@
         "target": "chr",
         "value": 1
       }
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_dream_fulfilled",
     "title": "完成心愿",
     "description": "你终于做到了那件一直放在心里的事。尽管来得很晚，但终究没有遗憾。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -2458,14 +2493,15 @@
         "value": 3
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_sunset_watching",
     "title": "夕阳",
     "description": "你坐在门前看着夕阳慢慢沉入地平线。这个画面你看过无数次，但今天格外美丽。",
-    "minAge": 60,
-    "maxAge": 80,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -2480,14 +2516,15 @@
         "value": 2
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStage": "elder",
+    "minStageProgress": 0.1111111111111111,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_miracle_recovery",
     "title": "奇迹般的康复",
     "description": "所有人都以为你撑不过这个冬天了，但春天来临时你又精神奕奕地站了起来。",
-    "minAge": 60,
-    "maxAge": 80,
     "weight": 2,
     "unique": true,
     "priority": "minor",
@@ -2507,14 +2544,15 @@
         "value": 2
       }
     ],
-    "include": "attribute.luk >= 12"
+    "include": "attribute.luk >= 12",
+    "lifeStage": "elder",
+    "minStageProgress": 0.1111111111111111,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_autobiography",
     "title": "自传",
     "description": "一位作家听说了你传奇的人生故事，想为你写一本传记。",
-    "minAge": 55,
-    "maxAge": 80,
     "weight": 2,
     "unique": true,
     "priority": "minor",
@@ -2554,14 +2592,15 @@
         ],
         "description": "你权衡利弊后，选择了有些事不想公开。"
       }
-    ]
+    ],
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "elder_final_gift",
     "title": "最后的礼物",
     "description": "你把自己最珍贵的东西送给了一个你认为最配得上的人。",
-    "minAge": 60,
-    "maxAge": 80,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -2581,7 +2620,10 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStage": "elder",
+    "minStageProgress": 0.1111111111111111,
+    "maxStageProgress": 0.5555555555555556
   },
   {
     "id": "human_grandchild_story",
@@ -3575,8 +3617,6 @@
     "id": "elder_sort_keepsakes",
     "title": "整理珍藏",
     "description": "你把多年积攒下来的箱子和抽屉一一打开。里面有旅途中带回的地城小物、集市换来的纪念、神殿赐下的护符，很多东西已经不值钱了，但每一件都还带着旧日的温度。",
-    "minAge": 55,
-    "maxAge": 90,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3641,14 +3681,15 @@
       "goblin": {
         "description": "你把多年积攒下来的箱子和破袋子一一打开。里面有闪亮的小废铁、捡来的齿轮、从黑市换到的怪东西，很多都不值钱，但每一件你都舍不得随便丢。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_feast_missing_names",
     "title": "席间空位",
     "description": "节日或团聚又一次来了。可能是王国冬祭、神殿庆典后的家宴，或只是某个照旧摆起桌子的晚上。灯还是那样亮，饭还是那样香，只是席间有些位置再也不会坐上当年的人了。",
-    "minAge": 58,
-    "maxAge": 90,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3713,7 +3754,10 @@
       "goblin": {
         "description": "部落又一次围着火堆开宴了。肉还是照样抢，酒还是照样呛，只是火堆边总有几个熟悉的位置，已经很久没人吵闹了。"
       }
-    }
+    },
+    "lifeStage": "elder",
+    "minStageProgress": 0.06666666666666667,
+    "maxStageProgress": 0.7777777777777778
   },
   {
     "id": "elder_dwarf_last_inspection",

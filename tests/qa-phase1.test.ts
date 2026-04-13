@@ -142,7 +142,7 @@ function checkHumanElderBefore50(results: SimResult[]) {
   return violations
 }
 
-/** 检查项 3: 精灵 elder 事件年龄 > 275 */
+/** 检查项 3: 精灵 elder 事件年龄 >= 350（lifeStage elder 起始） */
 function checkElfElderAfter275(results: SimResult[]) {
   const violations: Array<{ seed: number; age: number; eventId: string; title: string }> = []
   const records: Array<{ seed: number; age: number; eventId: string }> = []
@@ -151,7 +151,7 @@ function checkElfElderAfter275(results: SimResult[]) {
     for (const evt of r.events) {
       if (evt.eventId.includes('elder')) {
         records.push({ seed: r.seed, age: evt.age, eventId: evt.eventId })
-        if (evt.age <= 275) {
+        if (evt.age < 350) {
           violations.push({ seed: r.seed, age: evt.age, eventId: evt.eventId, title: evt.title })
         }
       }

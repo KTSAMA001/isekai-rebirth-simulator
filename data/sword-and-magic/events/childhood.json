@@ -3,8 +3,6 @@
     "id": "magic_burst_baby",
     "title": "婴儿的魔力暴走",
     "description": "你打了个喷嚏，摇篮旁边的蜡烛全部同时爆炸了。保姆吓得辞职了。",
-    "minAge": 3,
-    "maxAge": 5,
     "weight": 3,
     "include": "attribute.mag >= 6",
     "unique": true,
@@ -97,14 +95,15 @@
         "title": "魔力苏醒·精灵之血",
         "description": "你体内的精灵血脉在沉睡多年后突然苏醒。与人类的魔力暴走不同，精灵的魔力觉醒如同花朵绽放——美丽而自然。你的周围开始飘起金色的光点，空气中充满了世界树的芬芳。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.375
   },
   {
     "id": "bullied",
     "title": "被大孩子欺负",
     "description": "村里的大孩子抢走了你的面包，还把你推进泥坑。",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "exclude": "has.flag.bullied_child",
     "effects": [
@@ -260,7 +259,10 @@
       "female": {
         "description": "你被几个大孩子围住了。他们嘲笑你'女孩子就该待在家里'，还抢走了你的东西。但你的眼中没有泪水，只有倔强的光芒。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "church_orphan",
@@ -332,8 +334,6 @@
     "id": "fairy_encounter",
     "title": "林中的精灵",
     "description": "你在森林边缘发现了一只受伤的精灵，你帮它包扎了翅膀。",
-    "minAge": 5,
-    "maxAge": 6,
     "weight": 3,
     "include": "attribute.luk >= 6 & attribute.spr >= 4",
     "unique": true,
@@ -398,14 +398,15 @@
         "title": "不速之客",
         "description": "你在翻垃圾堆时发现了一只被困在瓶子里的小妖精。她看到你时先是一脸惊恐，然后发现你并没有恶意。'一个...善良的哥布林？真稀奇。'她犹豫地说。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 0.5
   },
   {
     "id": "bullied_repeat",
     "title": "他们又来了",
     "description": "欺负你的大孩子又出现了，这次他们把你堵在了小巷里。看来上次的隐忍被当成了软弱。",
-    "minAge": 4,
-    "maxAge": 8,
     "weight": 8,
     "include": "has.flag.timid",
     "unique": true,
@@ -488,14 +489,15 @@
         "title": "又被欺负了",
         "description": "那群人类孩子又出现了，这次他们堵住了你回地洞的路。你的背抵着墙壁，看着他们一步步逼近。身为哥布林，你从小就知道——跑不掉的时候，就得用脑子。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.75
   },
   {
     "id": "stand_up_moment",
     "title": "不再忍耐",
     "description": "那些大孩子又来挑衅了。但这次，你心里有什么东西碎裂了——取而代之的是一股从未有过的勇气。",
-    "minAge": 6,
-    "maxAge": 10,
     "weight": 5,
     "include": "has.flag.timid",
     "unique": true,
@@ -591,14 +593,15 @@
         "title": "不再逃跑",
         "description": "又一群人类小鬼来找茬。但这次不一样——你掏出藏在裤兜里的辣椒粉猛地撒了出去！趁他们揉眼睛的时候，你一溜烟钻进了下水道。得意的笑声在管道里回荡。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.5,
+    "maxStageProgress": 1
   },
   {
     "id": "noble_kid_revenge",
     "title": "权贵的欺凌",
     "description": "一个穿着锦缎的贵族孩子当街抢走了你的东西，还朝你吐了口唾沫。路人们纷纷移开目光——谁都知道他父亲是镇上有头有脸的人物。",
-    "minAge": 5,
-    "maxAge": 9,
     "weight": 1,
     "unique": true,
     "effects": [],
@@ -703,14 +706,15 @@
         "title": "人类孩子的石头",
         "description": "一群人类孩子发现了你。他们捡起石头朝你扔过来——\"脏哥布林！滚回下水道去！\"你夹着脑袋狂奔，心里发誓总有一天要让他们后悔。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 0.875
   },
   {
     "id": "childhood_play",
     "title": "村口的泥巴大战",
     "description": "你和邻居家的小孩在村口展开了一场激烈的泥巴大战！",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "unique": true,
     "effects": [],
@@ -762,15 +766,16 @@
       "goblin": {
         "description": "你和其他哥布林小鬼在废品堆里翻找'宝藏'。一个生锈的齿轮、一块奇怪的石头、一段断掉的魔杖——在哥布林眼里，这些都是价值连城的珍宝。你们还发明了一个新游戏：谁能把石头扔得最准。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "steal_sweets",
     "effects": [],
     "title": "偷吃糖果",
     "description": "你趁照顾你的大人不注意偷拿了一颗糖果，结果被发现了。",
-    "minAge": 3,
-    "maxAge": 7,
     "weight": 4,
     "unique": true,
     "branches": [
@@ -868,14 +873,15 @@
         "title": "哥布林的第一次'采购'",
         "description": "你盯上了面包铺的蜂蜜糖。哥布林天生就有一种本能——如果一个东西没有被看住，那它就是属于你的。你的小手已经在不知不觉中伸了出去。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.625
   },
   {
     "id": "first_snow",
     "title": "初雪",
     "description": "今年第一场雪，你兴奋地冲出门堆雪人。",
-    "minAge": 3,
-    "maxAge": 8,
     "weight": 2,
     "unique": true,
     "effects": [],
@@ -925,14 +931,15 @@
         "title": "第一场雪",
         "description": "你从地道口探出头，发现外面的世界变白了。你从没见过这种东西——冷冰冰的白色粉末从天上掉下来。你抓了一把塞进嘴里，又惊又喜。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.75
   },
   {
     "id": "tree_climbing",
     "title": "爬树冒险",
     "description": "你挑战爬上了村里最高的那棵树。",
-    "minAge": 5,
-    "maxAge": 10,
     "weight": 4,
     "unique": true,
     "effects": [],
@@ -1016,7 +1023,10 @@
         "title": "向上攀爬",
         "description": "你挑战攀爬地下城里最高的排水管道。管壁又湿又滑，但你那灵活的小爪子找到了每一个凹点。爬到顶端时，你第一次从排水口看到了外面的天空。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 1
   },
   {
     "id": "river_fishing",
@@ -1101,14 +1111,16 @@
         "title": "下水道捞宝",
         "description": "你和几个小伙伴拿着自制的网兜，蹲在下水道的汇流处。人类扔掉的东西会从这里冲下来——有时候能捞到铜币甚至银首饰。今天运气怎么样？"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen"
+    ]
   },
   {
     "id": "childhood_chase",
     "title": "抓蜻蜓",
     "description": "夏日午后，你拿着自制的小网兜在草丛间追逐蜻蜓。",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "unique": true,
     "effects": [],
@@ -1209,14 +1221,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "childhood_hide_seek",
     "title": "捉迷藏",
     "description": "你和小伙伴们玩起了捉迷藏，你来当躲藏的那一个。",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "unique": true,
     "effects": [],
@@ -1315,14 +1328,15 @@
         "title": "地洞捉迷藏",
         "description": "你和小伙伴在四通八达的地下管道里玩捉迷藏。哥布林天生的夜视能力让这个游戏更加刺激——你找到了一条谁都不知道的秘密通道，藏了整整一下午。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "childhood_pet",
     "title": "捡到受伤小鸟",
     "description": "你在草丛里发现了一只翅膀受伤的小鸟，它正可怜地叫着。",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "unique": true,
     "effects": [],
@@ -1411,15 +1425,16 @@
         "title": "收养了一只大老鼠",
         "description": "你在废墟里发现了一只受伤的巨鼠，它的后腿被夹子夹住了。你小心地帮它解开，用嚼烂的草叶包扎伤口。它舔了舔你的手指，从此成了你最忠实的伙伴。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "village_festival",
     "effects": [],
     "title": "村里祭典",
     "description": "丰收的季节到了，村子里举办了一年一度的祭典，到处都是热闹的摊位和欢笑声。",
-    "minAge": 3,
-    "maxAge": 6,
     "weight": 5,
     "unique": true,
     "branches": [
@@ -1517,15 +1532,16 @@
         "title": "废品集市",
         "description": "一年一度的废品交换大会开始了！哥布林们把攒了一年的\"宝贝\"摆出来——生锈的盔甲碎片、奇怪的矿石、来路不明的魔法道具。整个地下城热闹非凡，空气中弥漫着烤虫子的香味。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.5
   },
   {
     "id": "stray_dog",
     "effects": [],
     "title": "流浪狗",
     "description": "你在回家的路上遇到了一只脏兮兮的流浪小狗，它用湿漉漉的眼睛看着你。",
-    "minAge": 4,
-    "maxAge": 7,
     "weight": 5,
     "unique": true,
     "branches": [
@@ -1604,14 +1620,15 @@
         "title": "地洞里的生物",
         "description": "你在回巢的路上遇到了一只脏兮兮的洞鼠崽。它瑟瑟发抖地缩在角落里，显然是被鼠群抛弃了。你决定……"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.625
   },
   {
     "id": "rainy_day_adventure",
     "title": "雨日冒险",
     "description": "下着大雨，你偷偷溜出家门，在雨中发现了一个被废弃的地窖入口...",
-    "minAge": 5,
-    "maxAge": 9,
     "weight": 4,
     "unique": true,
     "effects": [],
@@ -1702,14 +1719,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 0.875
   },
   {
     "id": "first_competition",
     "title": "第一次比赛",
     "description": "村里举办了一年一度的儿童比赛，你被推上了赛场...",
-    "minAge": 6,
-    "maxAge": 10,
     "weight": 4,
     "unique": true,
     "effects": [],
@@ -1814,15 +1832,16 @@
         "title": "第一次赌博",
         "description": "部落里的大人们在玩骰子赌博。你偷偷加入了一局——赌注是三颗闪亮的玻璃珠。结果……"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.5,
+    "maxStageProgress": 1
   },
   {
     "id": "grandma_recipes",
     "effects": [],
     "title": "奶奶的秘方",
     "description": "奶奶教你做一种特殊的药膏，她说这是祖传的秘方...",
-    "minAge": 5,
-    "maxAge": 9,
     "weight": 4,
     "unique": true,
     "branches": [
@@ -1931,15 +1950,16 @@
         "title": "长老的秘方",
         "description": "部落里最老的哥布林教你调配一种特殊的药膏——用蘑菇、泥巴和一种你叫不出名字的虫子做的。\"抹上这个，什么伤都能好。\"她咧嘴笑着说。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 0.875
   },
   {
     "id": "river_discovery",
     "effects": [],
     "title": "河底发光",
     "description": "干旱季节河水退去，你发现河底有什么东西在发光...",
-    "minAge": 6,
-    "maxAge": 10,
     "weight": 4,
     "unique": true,
     "branches": [
@@ -2039,7 +2059,10 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.5,
+    "maxStageProgress": 1
   },
   {
     "id": "child_plague",
@@ -2144,7 +2167,11 @@
         "title": "瘟疫蔓延",
         "description": "地下城里爆发了一场可怕的瘟疫。对哥布林来说，拥挤潮湿的环境让疾病传播得更快。部落里已经有好几个人倒下了……"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen"
+    ]
   },
   {
     "id": "child_drowning",
@@ -2225,14 +2252,16 @@
         ]
       }
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "childhood",
+      "teen"
+    ]
   },
   {
     "id": "magic_academy_letter",
     "title": "魔法学院来信",
     "description": "一天早晨，一只发光的水晶猫头鹰停在了你的窗台上，嘴里衔着一封紫色蜡封的信。信上写着你的名字——这是皇家魔法学院的入学邀请！",
-    "minAge": 7,
-    "maxAge": 10,
     "weight": 4,
     "include": "attribute.mag >= 5",
     "exclude": "has.flag.magic_student | has.flag.knight",
@@ -2310,7 +2339,10 @@
         "title": "奇怪的录取通知",
         "description": "一天，一只脏兮兮的乌鸦叼着一封信落在你面前。信上写着你的名字——某个不知名的地下魔法组织邀请你加入。他们说你有\"混乱天赋\"，这在哥布林中极为罕见。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.625,
+    "maxStageProgress": 1
   },
   {
     "id": "elf_world_tree_pilgrimage",
@@ -2694,8 +2726,6 @@
     "id": "noble_etiquette_class",
     "title": "贵族礼仪课",
     "description": "作为贵族子弟，你必须学习繁琐的社交礼仪。如何行礼、如何用餐、如何与不同身份的人交谈——这些看似无用的知识，日后却成了你最趁手的工具。",
-    "minAge": 6,
-    "maxAge": 10,
     "weight": 8,
     "include": "has.flag.noble_birth",
     "unique": true,
@@ -2753,14 +2783,15 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.5,
+    "maxStageProgress": 1
   },
   {
     "id": "noble_childhood_tutor",
     "title": "家庭教师",
     "description": "父亲为你请了一位从王都来的家庭教师。他不仅教你读书写字，还讲了许多外面世界的故事。你第一次知道，庄园之外还有那么广阔的天地。",
-    "minAge": 4,
-    "maxAge": 7,
     "weight": 7,
     "include": "has.flag.noble_birth",
     "unique": true,
@@ -2812,7 +2843,10 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.625
   },
   {
     "id": "elf_first_treesong",
@@ -3220,7 +3254,15 @@
         "title": "七彩蘑菇",
         "description": "你在地下深处捡到一颗发出七色光芒的蘑菇。老哥布林们说这种东西百年才出现一次——吃了会变强，也可能会爆炸。你小心翼翼地藏进了口袋。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "lucky_coin_found",
@@ -3242,6 +3284,14 @@
         "target": "mny",
         "value": 1
       }
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3270,14 +3320,20 @@
         "title": "陌生人的善意",
         "description": "你饿得快晕过去的时候，一个路过的矮人商人把半块面包递给了你。\"拿去吧，小家伙。\"他没有像其他人那样露出厌恶的表情。这份温暖你记了很久。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "child_lost_in_woods",
     "title": "迷路",
     "description": "你在林子里玩耍时迷了路。太阳下山了，四周一片漆黑，你只能靠直觉摸索方向。",
-    "minAge": 4,
-    "maxAge": 8,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3340,14 +3396,15 @@
         "title": "迷失地面",
         "description": "你好奇地爬出了地面，想看看外面的世界。等你反应过来，已经分不清哪个洞口是回去的路了。太阳刺痛了你的眼睛——地面世界对哥布林来说又大又亮又危险。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.75
   },
   {
     "id": "child_stray_animal",
     "title": "收养流浪动物",
     "description": "你在路边发现了一只受伤的小动物。它用怯生生的眼神看着你。",
-    "minAge": 4,
-    "maxAge": 9,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3400,14 +3457,15 @@
       "goblin": {
         "description": "你发现了一只被陷阱夹住腿的洞鼠。它拼命挣扎，向你发出求救般的吱吱声。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.875
   },
   {
     "id": "child_first_fight",
     "title": "第一次打架",
     "description": "有个比你大的孩子抢走了你的东西，你决定要不要还手。",
-    "minAge": 5,
-    "maxAge": 10,
     "weight": 5,
     "unique": true,
     "priority": "minor",
@@ -3464,14 +3522,15 @@
         ],
         "description": "你权衡利弊后，选择了用技巧躲避。"
       }
-    ]
+    ],
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 1
   },
   {
     "id": "child_dream_flying",
     "title": "会飞的梦",
     "description": "你做了一个奇异的梦——你在云层之上飞翔，看到了壮丽的大地。醒来后，你总觉得那不只是梦。",
-    "minAge": 3,
-    "maxAge": 8,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -3491,14 +3550,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStage": "childhood",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.75
   },
   {
     "id": "child_river_adventure",
     "title": "河边探险",
     "description": "你和小伙伴偷偷跑到河边玩耍，发现了一个隐藏的小瀑布和一片秘密花园。",
-    "minAge": 5,
-    "maxAge": 10,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -3555,14 +3615,15 @@
         "title": "地下暗河探险",
         "description": "你和小伙伴偷偷顺着一条地下暗河往深处游去，发现了一处从没人去过的洞穴，里面长满了发光的蘑菇，像一座地下花园。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 1
   },
   {
     "id": "child_night_sky",
     "title": "仰望星空",
     "description": "某个夜晚你独自爬上屋顶，看到了此生最美的星空。一颗流星划过天际。",
-    "minAge": 5,
-    "maxAge": 10,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -3588,14 +3649,15 @@
         "title": "第一次看星空",
         "description": "某个夜晚你偷偷爬出地洞，抬头看到了此生最美的景象——满天的星星。在地下生活的哥布林很少有机会看到这些。一颗流星划过，你赶紧许了个愿。"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.375,
+    "maxStageProgress": 1
   },
   {
     "id": "child_cooking_adventure",
     "title": "第一次做饭",
     "description": "你决定给家人做一顿饭。过程手忙脚乱，但结果……",
-    "minAge": 6,
-    "maxAge": 10,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -3641,7 +3703,10 @@
         "title": "第一次做饭",
         "description": "你决定给家人做顿饭。收集了下水道里的蘑菇、一只刚抓来的洞鼠、还有从人类那里偷来的香料。过程手忙脚乱——但成品意外地还不错？"
       }
-    }
+    },
+    "lifeStage": "childhood",
+    "minStageProgress": 0.5,
+    "maxStageProgress": 1
   },
   {
     "id": "human_church_school",
@@ -3834,7 +3899,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_found_coin",
@@ -3856,7 +3929,15 @@
         "value": 1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_good_meal",
@@ -3883,7 +3964,15 @@
       "goblin": {
         "description": "你发现了一窝特别肥美的虫子。对哥布林来说，这简直是山珍海味！"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "random_minor_injury",
@@ -3905,7 +3994,15 @@
         "value": -1
       }
     ],
-    "include": ""
+    "include": "",
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "human_bedtime_story",

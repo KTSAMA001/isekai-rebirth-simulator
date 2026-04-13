@@ -3,8 +3,6 @@
     "id": "dragon_slay_attempt",
     "title": "讨伐巨龙",
     "description": "一头黑龙盘踞在东方炽焰山脉的龙眠谷，赏金高得惊人。你决定去试试。",
-    "minAge": 28,
-    "maxAge": 38,
     "weight": 1,
     "include": "attribute.str >= 14 | attribute.mag >= 14",
     "effects": [],
@@ -177,14 +175,15 @@
       "adventurer",
       "mage"
     ],
-    "routeMode": "all"
+    "routeMode": "all",
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 0.72
   },
   {
     "id": "marry_noble",
     "title": "政治联姻",
     "description": "你被安排与一位贵族结婚。这在王国中很常见。",
-    "minAge": 25,
-    "maxAge": 30,
     "weight": 6,
     "include": "attribute.chr >= 10 & attribute.mny >= 8 & has.flag.knight | has.flag.lord | has.flag.merchant_master",
     "exclude": "has.flag.married | has.flag.in_relationship | has.flag.widowed",
@@ -266,14 +265,15 @@
         "title": "嫁入名门",
         "description": "你将嫁入一个声名显赫的贵族家庭。精致的婚纱衬托着你的容貌，宾客们投来艳羡的目光。你在祭坛前深呼一口气——新的人生即将开始。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.4
   },
   {
     "id": "marry_adventurer",
     "title": "与冒险者结婚",
     "description": "你们在一次地下城探索中相识相知，决定共度余生。",
-    "minAge": 22,
-    "maxAge": 30,
     "weight": 5,
     "include": "has.flag.engaged | has.flag.dating_deepen",
     "exclude": "has.flag.married | has.flag.widowed",
@@ -357,14 +357,15 @@
     "priority": "critical",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.4
   },
   {
     "id": "adult_first_child",
     "title": "初为人父母",
     "description": "家里传来了新生儿的啼哭。你第一次真正意识到，自己的人生从此不再只属于自己。",
-    "minAge": 24,
-    "maxAge": 42,
     "weight": 12,
     "include": "has.flag.married",
     "exclude": "has.flag.parent | has.flag.widowed",
@@ -413,14 +414,15 @@
         "title": "成为母亲",
         "description": "你抱着刚来到这个世界的小生命，疲惫得几乎睁不开眼，却仍感到一种前所未有的坚定。你的人生，被重新命名了。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.16,
+    "maxStageProgress": 0.88
   },
   {
     "id": "merchant_career",
     "title": "商路崛起",
     "description": "你的生意越做越大，开始涉足跨城贸易。路上的商队、海盗、税收官——每一个都是考验。",
-    "minAge": 22,
-    "maxAge": 30,
     "weight": 5,
     "include": "has.flag.merchant_apprentice",
     "unique": true,
@@ -511,7 +513,10 @@
     "priority": "critical",
     "routes": [
       "merchant"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.4
   },
   {
     "id": "become_lord",
@@ -667,6 +672,11 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -725,6 +735,11 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -814,6 +829,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -968,7 +987,12 @@
       "goblin": {
         "description": "战争爆发了。对哥布林来说，战争意味着两件事：巨大的危险，和更巨大的商机。废铁价格飙升，情报变得值钱，而哥布林天生就是最好的侦察兵——因为没人会注意一个矮小的绿皮生物。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "war_aftermath",
@@ -1092,6 +1116,11 @@
     "priority": "critical",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1180,14 +1209,16 @@
         "title": "已经老了吗？",
         "description": "哥布林的中年危机来得特别早——毕竟你的寿命只有三四十年。许多同龄的哥布林已经开始掉牙了。你看着镜中日渐苍老的面容，心想：我到底做了什么有意义的事？"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "reincarnated_invention",
     "title": "前世知识变现",
     "description": "你想起前世的配方，调出了一种这个世界从未见过的药剂——可乐。一夜之间风靡王国。",
-    "minAge": 30,
-    "maxAge": 40,
     "weight": 1,
     "include": "attribute.int >= 10 & has.flag.married",
     "effects": [],
@@ -1276,14 +1307,15 @@
         "title": "前世知识变现",
         "description": "你想起了前世的一个配方，用地下蘑菇和某种矿物粉末调制出了一种提神饮料。一夜之间，整个地下城的哥布林都在排队买——你给它取名叫\"闪电汁\"。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.4,
+    "maxStageProgress": 0.8
   },
   {
     "id": "scenic_travel",
     "title": "远行见世面",
     "description": "你攒够了钱，决定去邻城看看。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 1,
     "unique": true,
     "effects": [],
@@ -1338,7 +1370,10 @@
     "include": "attribute.mny >= 5",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "teaching_others",
@@ -1395,6 +1430,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1402,8 +1442,6 @@
     "effects": [],
     "title": "老友重逢",
     "description": "在城里的酒馆，你遇到了多年未见的老朋友。你们曾经一起在泥巴地里打滚，如今他已是一方小有名气的商人。",
-    "minAge": 35,
-    "maxAge": 45,
     "weight": 2,
     "unique": true,
     "branches": [
@@ -1483,15 +1521,16 @@
         "title": "老友重逢",
         "description": "在黑市的角落里，你遇到了小时候一起翻垃圾堆的老朋友。他已经是地下贸易圈里有头有脸的人物了。你们蹲在地上分了一壶劣质蘑菇酒，聊起当年的事。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 1
   },
   {
     "id": "apprentice_contest",
     "effects": [],
     "title": "弟子比武大会",
     "description": "城中举办了一年一度的弟子比武大会，各门各派的年轻弟子齐聚一堂，切磋武艺。",
-    "minAge": 35,
-    "maxAge": 45,
     "weight": 4,
     "unique": true,
     "branches": [
@@ -1571,15 +1610,16 @@
     "include": "has.flag.has_student",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.6,
+    "maxStageProgress": 1
   },
   {
     "id": "investment_opportunity",
     "effects": [],
     "title": "投资机会",
     "description": "一个商人向你推荐了一个\"稳赚不赔\"的投资项目，承诺三个月内翻倍回报。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 4,
     "include": "has.flag.merchant_apprentice | has.flag.merchant_master & has.flag.has_student & has.flag.has_student",
     "unique": true,
@@ -1666,15 +1706,16 @@
         "title": "投资机会",
         "description": "一个哥布林向你推荐了一个\"稳赚不赔\"的买卖——在三个城市之间走私稀有矿石。他承诺三趟就能回本。但你知道，哥布林嘴里的\"稳赚不赔\"……"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "mysterious_stranger",
     "effects": [],
     "title": "神秘旅人",
     "description": "在旅途中你遇到了一个戴面具的旅人，他似乎知道你的过去...",
-    "minAge": 25,
-    "maxAge": 30,
     "weight": 1,
     "unique": true,
     "branches": [
@@ -1766,7 +1807,10 @@
     "include": "attribute.int >= 8",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.4
   },
   {
     "id": "old_rival",
@@ -1870,6 +1914,11 @@
     "include": "attribute.chr >= 5 | attribute.str >= 10",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -1981,7 +2030,13 @@
         "title": "赌场豪赌",
         "description": "地下城最大的赌场年终大赌开始了。你揣着攒了半年的积蓄走了进去。哥布林天生好运——但赌场老板也是哥布林。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "luk_wild_encounter",
@@ -2073,6 +2128,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -2218,6 +2278,11 @@
     "exclude": "has.flag.enlightened",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -2336,7 +2401,12 @@
         "title": "诅咒解除",
         "description": "一个同族人爬到你面前，恳求你帮他解除身上的诅咒——他偷了人类法师的东西后就一直倒霉。你有办法吗？"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "spr_near_death",
@@ -2472,6 +2542,10 @@
     "exclude": "has.flag.enlightened|has.flag.chosen_one|has.flag.death_accepted|has.flag.cheated_death",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -2604,6 +2678,12 @@
     "priority": "critical",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -2716,7 +2796,12 @@
         "title": "地下贸易线",
         "description": "一支来自另一个哥布林聚落的走私队经过你的地盘。他们愿意跟你合作——你提供情报和仓储，他们负责运输。利润五五分。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "mny_tax_crisis",
@@ -2829,7 +2914,12 @@
         "title": "保护费涨价",
         "description": "人类城镇的卫兵队长突然提高了\"容许金\"——也就是允许哥布林在下水道居住的保护费。再交下去你的积蓄就要见底了。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "mage_magic_tower",
@@ -2935,6 +3025,11 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3063,6 +3158,11 @@
     "priority": "critical",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -3170,6 +3270,10 @@
     "priority": "major",
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -3419,8 +3523,6 @@
     "id": "merchant_guild",
     "title": "商行",
     "description": "你有了一个大胆的想法——成立自己的商行。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 3,
     "include": "has.flag.merchant_apprentice & attribute.mny >= 10 & attribute.int >= 10",
     "effects": [],
@@ -3525,7 +3627,10 @@
     "priority": "minor",
     "routes": [
       "merchant"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "merchant_auction",
@@ -3625,6 +3730,10 @@
     "priority": "minor",
     "routes": [
       "merchant"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -3753,14 +3862,16 @@
         "title": "经济寒冬",
         "description": "地面的经济危机波及到了地下。人类扔掉的废品变少了——这就是哥布林的经济晴雨表。黑市交易量骤降，存货卖不出去。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "adv_bounty",
     "title": "高价悬赏",
     "description": "冒险者公会发布了一个S级悬赏——讨伐一只古代魔兽。赏金足够买一座城堡。",
-    "minAge": 22,
-    "maxAge": 45,
     "weight": 3,
     "include": "has.flag.guild_member & attribute.str >= 14",
     "effects": [],
@@ -3861,14 +3972,15 @@
     "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 1
   },
   {
     "id": "adv_uncharted",
     "title": "未踏之地",
     "description": "地图上有一片从未被标注的空白区域。你决定去探索它。",
-    "minAge": 20,
-    "maxAge": 40,
     "weight": 2,
     "include": "has.flag.guild_member",
     "effects": [],
@@ -3975,7 +4087,10 @@
     "exclude": "has.flag.lord | has.flag.political_player",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "dual_war_mage",
@@ -4088,8 +4203,6 @@
     "id": "dual_merchant_spy",
     "title": "暗商",
     "description": "一位神秘商人提出了一份特殊的交易：帮你收集情报，你帮他运输'特殊货物'。利润极高。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 2,
     "include": "attribute.mny >= 12 & attribute.int >= 12",
     "effects": [],
@@ -4211,7 +4324,10 @@
       "merchant",
       "adventurer"
     ],
-    "routeMode": "all"
+    "routeMode": "all",
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "challenge_abyss",
@@ -4322,6 +4438,11 @@
     "priority": "critical",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -4453,6 +4574,11 @@
     "priority": "critical",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -4619,7 +4745,12 @@
     "routes": [
       "*"
     ],
-    "exclude": "has.flag.demon_king_slayer"
+    "exclude": "has.flag.demon_king_slayer",
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "chain_rise_to_power",
@@ -4731,7 +4862,11 @@
         "title": "权力之路",
         "description": "你的名声在地下世界越来越响。有人开始议论——也许你该去争那个位子：哥布林聚落的大首领。但现任首领可不是好惹的。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "chain_master_craftsman",
@@ -4833,6 +4968,11 @@
     "priority": "minor",
     "routes": [
       "scholar"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -4951,6 +5091,10 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -5036,7 +5180,12 @@
         "title": "月光下的约定",
         "description": "你们坐在地洞出口的边缘，外面的月光照在你们身上。那个人把一块发光的矿石塞到你手里，轻声说：\"等我回来，我们就一起去建那个最大的贸易站。\""
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "festival_dance",
@@ -5117,7 +5266,12 @@
         "title": "废品狂欢夜",
         "description": "哥布林的庆典不叫丰收祭——叫\"翻箱倒柜节\"。大家把一年攒的最得意的宝贝拿出来炫耀，喝到烂醉，围着篝火跳那种看起来像抽搐的舞蹈。有个哥布林朝你伸出手，\"来一起！\""
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "quest_parting",
@@ -5203,7 +5357,12 @@
         "title": "分别",
         "description": "那个人要去一个很远的地方。你站在地洞出口，手里攥着自己最珍贵的一颗闪亮宝石，想要递过去，却怎么也张不开嘴。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "forbidden_love",
@@ -5320,6 +5479,11 @@
     "unique": true,
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5331,8 +5495,6 @@
       "romance",
       "epic"
     ],
-    "minAge": 28,
-    "maxAge": 40,
     "include": "has.flag.married",
     "weight": 5,
     "branches": [
@@ -5407,7 +5569,10 @@
     "exclude": "has.flag.widowed",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 0.8
   },
   {
     "id": "soul_bound",
@@ -5419,8 +5584,6 @@
       "epic",
       "magic"
     ],
-    "minAge": 20,
-    "maxAge": 35,
     "include": "has.flag.dating",
     "exclude": "has.flag.married | has.flag.soul_bound | has.flag.eloped",
     "weight": 3,
@@ -5491,7 +5654,10 @@
     ],
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.6
   },
   {
     "id": "family_blessing",
@@ -5502,8 +5668,6 @@
       "romance",
       "life"
     ],
-    "minAge": 22,
-    "maxAge": 38,
     "include": "has.flag.married",
     "exclude": "has.flag.parent",
     "weight": 5,
@@ -5575,14 +5739,15 @@
         "title": "新的小哥布林",
         "description": "洞穴深处传来一声有力的啼哭——你的孩子出生了。哥布林的婴儿小到可以放在手掌里，但那双明亮的眼睛已经在四处张望了。你小心翼翼地把小家伙抱起来，心想：一定要让你过得比我好。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.72
   },
   {
     "id": "marriage_proposal",
     "title": "求婚",
     "description": "你看着身边这个人，突然觉得应该把这份感情变成承诺。",
-    "minAge": 22,
-    "maxAge": 35,
     "weight": 4,
     "include": "has.flag.dating_deepen",
     "exclude": "has.flag.engaged|has.flag.married|has.flag.eloped",
@@ -5647,14 +5812,15 @@
       "female": {
         "description": "他突然在你面前单膝跪下，掏出一枚闪闪发光的戒指。你的手不自觉地捂住了嘴，眼眶瞬间就湿润了。这一刻你等了很久。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.6
   },
   {
     "id": "wedding_ceremony",
     "title": "婚礼",
     "description": "终于到了这一天。你穿上了最好的衣服，站在所有人面前。",
-    "minAge": 22,
-    "maxAge": 38,
     "weight": 6,
     "include": "has.flag.engaged",
     "exclude": "has.flag.married",
@@ -5742,7 +5908,10 @@
       "female": {
         "description": "你身披洁白的婚纱，缓步走向祭坛。每走一步，心跳就快一分。他站在祭坛前等你，目光闪烁着比烛光更温暖的光芒。今天是你最美的一天。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.72
   },
   {
     "id": "marriage_anniversary",
@@ -5804,7 +5973,12 @@
     "routes": [
       "*"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "family_dinner",
@@ -5857,14 +6031,17 @@
         ]
       }
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "magic_research_breakthrough",
     "title": "魔法研究突破",
     "description": "经过长时间的研究，你在某个魔法领域取得了重大突破。",
-    "minAge": 28,
-    "maxAge": 45,
     "weight": 2,
     "include": "attribute.mag >= 12",
     "effects": [],
@@ -5925,14 +6102,15 @@
     "routes": [
       "scholar"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 1
   },
   {
     "id": "martial_arts_master",
     "title": "武道至境",
     "description": "在一次与强敌的对决中，你对武道的理解突飞猛进。",
-    "minAge": 28,
-    "maxAge": 45,
     "weight": 2,
     "include": "attribute.str >= 14",
     "effects": [],
@@ -5983,7 +6161,10 @@
     "routes": [
       "scholar"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 1
   },
   {
     "id": "write_a_book",
@@ -6051,7 +6232,12 @@
     "routes": [
       "scholar"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "disciple_comes",
@@ -6115,6 +6301,11 @@
     "unique": true,
     "routes": [
       "scholar"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -6190,14 +6381,17 @@
     "unique": true,
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "elemental_trial",
     "title": "元素试炼",
     "description": "一座古老的试炼塔出现在你面前，传说通过试炼者可获得元素之力。",
-    "minAge": 20,
-    "maxAge": 35,
     "weight": 1,
     "include": "attribute.mag >= 10",
     "effects": [],
@@ -6254,7 +6448,10 @@
     "unique": true,
     "routes": [
       "mage"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.6
   },
   {
     "id": "masterpiece_craft",
@@ -6311,14 +6508,16 @@
     "unique": true,
     "routes": [
       "scholar"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "ancient_ruins_explore",
     "title": "远古遗迹探索",
     "description": "探险者在荒野中发现了一座远古遗迹的入口，里面可能藏着失落的宝藏。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -6378,14 +6577,15 @@
     "unique": true,
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "mercenary_contract",
     "title": "佣兵合同",
     "description": "一位富商雇你护送货物穿越危险的边境地带。",
-    "minAge": 22,
-    "maxAge": 40,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -6462,14 +6662,15 @@
     "routes": [
       "adventurer"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.8
   },
   {
     "id": "siege_defense",
     "title": "守城之战",
     "description": "敌军围攻了你所在的城市，所有人都被召集守城。",
-    "minAge": 22,
-    "maxAge": 45,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -6532,14 +6733,15 @@
         "title": "保卫巢穴",
         "description": "人类冒险者发现了你们的地下据点！他们带着武器来\"清剿\"。所有哥布林都被召集起来——设陷阱、堵通道、准备战斗。这是保卫家园的时刻。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 1
   },
   {
     "id": "dark_cult_encounter",
     "title": "暗黑教团",
     "description": "你无意中发现了一个秘密教团的集会。他们正在进行某种禁忌仪式。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -6624,14 +6826,15 @@
     "unique": true,
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "dark_cult_aftermath",
     "title": "暗影的低语",
     "description": "自从你潜入调查了那个秘密教团后，一些奇怪的事情开始发生。你的门窗有时莫名打开，夜深人静时仿佛有人在耳边低语。教团似乎注意到了你的调查。",
-    "minAge": 28,
-    "maxAge": 40,
     "weight": 4,
     "include": "has.flag.dark_cult_investigated",
     "exclude": "has.flag.dark_cult_resolved",
@@ -6722,14 +6925,15 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 0.8
   },
   {
     "id": "desert_caravan",
     "title": "沙漠商队",
     "description": "一支穿越死亡沙漠的商队招募护卫，报酬非常优厚。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -6783,14 +6987,15 @@
     "routes": [
       "adventurer"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "assassin_contract",
     "title": "暗杀委托",
     "description": "一个神秘人找到你，开出了天价让你去解决一个目标。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -6840,14 +7045,15 @@
     "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "war_campaign",
     "title": "远征军",
     "description": "王国组建远征军讨伐边境的兽人部落，征召所有能战斗的人。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -6928,7 +7134,10 @@
         "title": "战争来了",
         "description": "地面世界的战争波及到了地下。交战双方都想利用哥布林的地道网络。你的部落面临选择：站队、还是两边都不帮？"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "pirate_attack",
@@ -6996,14 +7205,17 @@
     "exclude": "has.flag.lord | has.flag.political_player",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "dungeon_hidden_floor",
     "title": "副本隐藏层",
     "description": "你在探索副本时发现了一道隐藏的门，门后传来诡异的光芒。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 1,
     "include": "has.flag.dungeon_first",
     "effects": [],
@@ -7065,14 +7277,15 @@
     "exclude": "has.flag.lord",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "prison_break",
     "title": "越狱救援",
     "description": "你的一位旧友被关进了监狱，他声称自己是被冤枉的。",
-    "minAge": 22,
-    "maxAge": 40,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -7122,7 +7335,10 @@
     "exclude": "has.flag.lord | has.flag.political_player",
     "routes": [
       "adventurer"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.08,
+    "maxStageProgress": 0.8
   },
   {
     "id": "boss_lair_assault",
@@ -7200,14 +7416,16 @@
     "priority": "critical",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "buy_house",
     "title": "买房置业",
     "description": "你攒了一些钱，是时候考虑买套房子安家了。",
-    "minAge": 26,
-    "maxAge": 40,
     "weight": 2,
     "include": "attribute.mny >= 6",
     "effects": [],
@@ -7275,7 +7493,10 @@
         "title": "占据好地盘",
         "description": "你攒够了资本，盯上了一处位置绝佳的地下洞穴——通风好、有干净水源、靠近黑市。但现在的住户不太想搬走。你打算怎么\"请\"他走？"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.24,
+    "maxStageProgress": 0.8
   },
   {
     "id": "harvest_festival",
@@ -7344,7 +7565,14 @@
       "goblin": {
         "description": "丰收节！哥布林最爱的节日——不是因为丰收（哥布林不种地），而是因为节日意味着到处都是美食摊、赌博棚和粗心大意的醉鬼。这是'采购'的最佳时机。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "neighbor_dispute",
@@ -7414,7 +7642,12 @@
         "title": "领地纠纷",
         "description": "隔壁洞穴的哥布林占了你巢穴外面的通道做晾晒架。你的东西没地方放了。按规矩，这种事可以赌一把来解决。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "hunting_trip",
@@ -7482,14 +7715,17 @@
         "title": "狩猎远征",
         "description": "秋天到了，几个哥布林朋友邀你一起去地下深处的暗河猎洞鳄。哥布林式狩猎：三分靠勇气，七分靠诡计。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "business_venture",
     "title": "创业冒险",
     "description": "你发现了一个商机，如果抓住的话可能会大赚一笔。",
-    "minAge": 26,
-    "maxAge": 45,
     "weight": 2,
     "include": "attribute.mny >= 8",
     "effects": [],
@@ -7551,7 +7787,10 @@
         "title": "创业冒险",
         "description": "你发现了一个商机——人类丢弃的魔法道具碎片可以拆出还能用的魔力核心。如果收集够多，转卖给矮人炼金师能赚大钱。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.24,
+    "maxStageProgress": 1
   },
   {
     "id": "community_leader",
@@ -7614,7 +7853,12 @@
         "title": "部落推选",
         "description": "年长的哥布林们推选你来处理部落的公共事务——分配洞穴、调解纠纷、跟人类的代表谈判。责任不小，但油水也不少。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
+    ]
   },
   {
     "id": "pet_companion",
@@ -7675,6 +7919,13 @@
     "unique": true,
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -7736,14 +7987,17 @@
     "unique": true,
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
     "id": "gambling_night",
     "title": "赌场之夜",
     "description": "朋友们拉你去地下赌场玩几把，输赢全看运气。",
-    "minAge": 20,
-    "maxAge": 45,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -7834,14 +8088,15 @@
         "title": "赌神之夜",
         "description": "赌场是哥布林的天堂。当其他种族靠技巧和作弊赢钱时，哥布林只需要靠自己天生的好运气。今晚的赌桌上，所有人都看向了你——那个总是赢的绿皮小鬼。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0,
+    "maxStageProgress": 1
   },
   {
     "id": "rare_dragon_egg",
     "title": "龙蛋",
     "description": "在一次洞穴探险中，你发现了一枚散发着微光的龙蛋。",
-    "minAge": 20,
-    "maxAge": 40,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -7914,14 +8169,15 @@
     "tag": "legendary",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.8
   },
   {
     "id": "rare_time_loop",
     "title": "时间循环",
     "description": "你在一次魔法实验中意外触发了时间循环，同一天重复了无数次。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 1,
     "include": "attribute.mag >= 14",
     "effects": [],
@@ -7982,7 +8238,10 @@
     "tag": "legendary",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "rare_gods_gift",
@@ -8079,14 +8338,17 @@
     "tag": "legendary",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
     "id": "rare_reincarnation_hint",
     "title": "前世记忆",
     "description": "在一次深度冥想中，你想起了前世的记忆——你曾经是一个伟大的英雄。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 1,
     "include": "attribute.spr >= 18",
     "effects": [],
@@ -8154,7 +8416,10 @@
     "tag": "legendary",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "elf_longevity_burden",
@@ -8798,8 +9063,6 @@
     "id": "adult_guild_promotion",
     "title": "工会晋升",
     "description": "凭借你的实力和声望，冒险者工会提议让你担任更高级别的职位。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -8839,14 +9102,15 @@
         ],
         "description": "面对抉择，你决定拒绝，留在一线——也许这是最好的选择。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "adult_haunted_mansion",
     "title": "闹鬼庄园",
     "description": "委托人请你调查一座据说闹鬼的庄园。在月光下，那座古老的建筑看起来确实不祥。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -8911,14 +9175,15 @@
         ],
         "description": "你选择了白天去调查，静静等待结果。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "adult_teaching_offer",
     "title": "教学邀请",
     "description": "一所学院邀请你担任客座教师。你的经验足以教导年轻一代。",
-    "minAge": 28,
-    "maxAge": 45,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -8985,14 +9250,15 @@
         ],
         "description": "你选择了拒绝，自己还需要提升，静静等待结果。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 1
   },
   {
     "id": "adult_rival_encounter",
     "title": "宿敌重逢",
     "description": "你在路上遇到了曾经的竞争对手。岁月改变了你们，但那股不服输的劲头还在。",
-    "minAge": 25,
-    "maxAge": 45,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -9057,14 +9323,15 @@
         ],
         "description": "你权衡利弊后，选择了无视对方。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 1
   },
   {
     "id": "adult_treasure_map",
     "title": "破旧的藏宝图",
     "description": "你在旧货市场花了一枚铜币买了张泛黄的羊皮纸。仔细一看，竟然是一张藏宝图！",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 2,
     "unique": true,
     "priority": "minor",
@@ -9147,7 +9414,10 @@
         "successText": "力量与勇气的结合让你完美地完成了挑战。（力量提升了）",
         "failureText": "你的力量还不够……勉强应对后，留下了不少遗憾。（生命值下降了）"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "adult_plague_crisis",
@@ -9217,14 +9487,16 @@
         "title": "瘟疫来袭",
         "description": "一场可怕的瘟疫从地面传到了地下。哥布林拥挤的生活环境让疾病传播极快。部落里已经有人开始出现症状了……"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "adult_business_startup",
     "title": "创业梦想",
     "description": "你有了一个商业点子——看起来能赚大钱，但需要投入全部积蓄。",
-    "minAge": 25,
-    "maxAge": 40,
     "weight": 3,
     "unique": true,
     "priority": "minor",
@@ -9297,14 +9569,15 @@
         ],
         "description": "你选择了算了，还是稳妥些，静静等待结果。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.2,
+    "maxStageProgress": 0.8
   },
   {
     "id": "adult_dragon_rumor",
     "title": "龙的踪迹",
     "description": "远方的山脉上发现了龙的踪迹。冒险者公会悬赏重金，但没几个人敢去。",
-    "minAge": 28,
-    "maxAge": 45,
     "weight": 2,
     "unique": true,
     "priority": "minor",
@@ -9369,7 +9642,10 @@
         ],
         "description": "你权衡利弊后，选择了这种事让英雄去吧。"
       }
-    ]
+    ],
+    "lifeStage": "adult",
+    "minStageProgress": 0.32,
+    "maxStageProgress": 1
   },
   {
     "id": "human_political_election",
@@ -11888,6 +12164,11 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -11953,6 +12234,11 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -12040,6 +12326,11 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -12247,8 +12538,6 @@
     "id": "adult_restore_keepsake",
     "title": "修缮旧物",
     "description": "你翻出一件陪伴自己多年的旧物。可能是王国集市上买来的旧挂坠、旅途中带回的地城纪念、学院时代的徽章，或一把用得发亮的小工具。它已经磨损得厉害，但你突然不想让它就这样坏掉。",
-    "minAge": 26,
-    "maxAge": 45,
     "weight": 4,
     "unique": true,
     "priority": "minor",
@@ -12323,7 +12612,10 @@
       "goblin": {
         "description": "你翻出一件陪伴自己多年的旧物。也许是从垃圾堆里捡来的齿轮、第一次赚钱买下的匕首，或者一块一直舍不得卖的亮晶晶废铁。它已经破旧得厉害，但你突然不想让它就这样散掉。"
       }
-    }
+    },
+    "lifeStage": "adult",
+    "minStageProgress": 0.24,
+    "maxStageProgress": 1
   },
   {
     "id": "adult_neighborhood_request",
@@ -12405,7 +12697,11 @@
       "goblin": {
         "description": "你窝里的地盘遇到了一件反复拖着没人处理的麻烦事。可能是漏水、塌洞、分赃不均，最后大家骂骂咧咧地吵了一圈，还是把目光投向了你。"
       }
-    }
+    },
+    "lifeStages": [
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "adult_dwarf_masterwork",

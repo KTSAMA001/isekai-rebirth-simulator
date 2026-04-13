@@ -102,7 +102,10 @@
         "title": "魔法学院入学·历史首位",
         "description": "你可能是这所魔法学院历史上第一个哥布林学生。入学面试官看到你时愣了三秒，然后反复确认了五遍你的成绩单。不管怎样，你的魔力测试结果是货真价实的。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood"
+    ]
   },
   {
     "id": "magic_exam",
@@ -242,6 +245,10 @@
     ],
     "routes": [
       "mage"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen"
     ]
   },
   {
@@ -364,7 +371,12 @@
         "title": "最小的侍从",
         "description": "当你说要成为骑士侍从时，所有人都笑了。一个身高只到人类膝盖的哥布林，要穿上铠甲挥舞长剑？但你的眼中燃烧着不输任何人的决心。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "first_love",
@@ -514,7 +526,11 @@
       "female": {
         "description": "你注意到一个少年经常在你身旁逗留。每次四目相对时他都会慌张地别过头去。你心中涌起一种奇妙的悸动，像是春天第一朵花悄悄绽放。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "bullied_fight_back",
@@ -594,6 +610,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth"
     ]
   },
   {
@@ -733,14 +753,16 @@
     "priority": "minor",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth"
     ]
   },
   {
     "id": "recovery_period",
     "title": "伤愈期",
     "description": "地下城的伤还没好全，你被迫在家休养。窗外的阳光照在身上，你开始思考很多事。",
-    "minAge": 14,
-    "maxAge": 16,
     "weight": 7,
     "include": "has.flag.dungeon_injured",
     "unique": true,
@@ -814,14 +836,15 @@
     "priority": "minor",
     "routes": [
       "*"
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.25
   },
   {
     "id": "merchant_apprentice",
     "title": "商人的嗅觉",
     "description": "一位路过村子的旅行商人注意到了你。\"小家伙，你有没有兴趣学做生意？\"",
-    "minAge": 14,
-    "maxAge": 20,
     "weight": 6,
     "include": "attribute.chr >= 5 | attribute.mny >= 5",
     "exclude": "has.flag.magic_student | has.flag.knight",
@@ -910,7 +933,10 @@
         "title": "黑市学徒",
         "description": "一位哥布林老商人注意到了你的精明。\"小子，想不想学点真本事？\"他经营着地下城最大的黑市摊位，据说连人类商会都要给他面子。"
       }
-    }
+    },
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.75
   },
   {
     "id": "dragon_awakening",
@@ -972,6 +998,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth"
     ]
   },
   {
@@ -1162,6 +1192,9 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "childhood"
     ]
   },
   {
@@ -1279,7 +1312,11 @@
         "title": "废弃矿道探险",
         "description": "深层地下有一条被封死的古矿道，传说里面有整面墙的矿石结晶。有个胆大的哥布林砸开了封条——现在谁敢先进去？"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen"
+    ]
   },
   {
     "id": "help_farmer",
@@ -1341,7 +1378,12 @@
         "title": "帮老哥布林搬家",
         "description": "部落里年纪最大的老哥布林被迫搬离了原来的巢穴。你帮他把那堆\"宝贝\"——其实全是破铜烂铁和旧零件——搬到了新地方。老头给了你一颗闪闪发光的石头作为谢礼。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "wander_market",
@@ -1414,6 +1456,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -1465,6 +1512,12 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1545,14 +1598,16 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth"
     ]
   },
   {
     "id": "part_time_work",
     "title": "打零工",
     "description": "你决定在镇上的铁匠铺帮忙赚点零花钱。",
-    "minAge": 14,
-    "maxAge": 18,
     "weight": 3,
     "unique": true,
     "exclude": "has.flag.noble_birth",
@@ -1608,14 +1663,15 @@
         "title": "黑市打工",
         "description": "你在地下黑市找了份活：帮走私商人分拣货物。工钱不多，但你学到了辨别魔药和假币的本事。偶尔还能顺走一两件\"没人认领的东西\"。"
       }
-    }
+    },
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5
   },
   {
     "id": "noble_social_debut",
     "title": "社交季初登场",
     "description": "你终于到了参加社交季的年纪。在父亲的引荐下，你第一次踏入王都的社交场合。衣香鬓影、觥筹交错，这里既是战场也是舞台。",
-    "minAge": 16,
-    "maxAge": 20,
     "weight": 6,
     "include": "has.flag.noble_birth",
     "unique": true,
@@ -1700,7 +1756,10 @@
           }
         ]
       }
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 0.75
   },
   {
     "id": "noble_estate_management",
@@ -1778,6 +1837,10 @@
           }
         ]
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -1872,7 +1935,12 @@
         "title": "矿车大赛",
         "description": "哥布林聚落一年一度的矿车大赛！参赛者要骑着自己改装的矿车穿过一条充满陷阱和弯道的废弃矿道。第一名不仅有奖品，还能在部落里横着走一整年。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "old_soldier_story",
@@ -1972,6 +2040,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -2059,6 +2132,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -2161,7 +2239,11 @@
         "title": "部落纷争",
         "description": "两个哥布林家族因为一块矿脉的归属争吵不休。按照传统，这种纠纷应该用赌博来解决——但这次双方都输不起。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen"
+    ]
   },
   {
     "id": "lost_treasure_map",
@@ -2250,6 +2332,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -2352,7 +2439,12 @@
         "title": "部落里的对手",
         "description": "部落里出现了一个和你同龄的哥布林，什么都要跟你比——比谁攒的闪亮零件多、比谁跑得快、比谁敢偷更危险的东西。大家总是拿你们做比较。"
       }
-    }
+    },
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
+    ]
   },
   {
     "id": "luk_lucky_coin",
@@ -2442,6 +2534,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -2558,6 +2655,11 @@
     "priority": "minor",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -2680,14 +2782,17 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
     "id": "mny_inherit_uncle",
     "title": "叔父遗产",
     "description": "你从未谋面的叔父去世了，留给你一笔遗产和一封信。",
-    "minAge": 15,
-    "maxAge": 22,
     "weight": 3,
     "include": "attribute.mny >= 6",
     "effects": [],
@@ -2796,7 +2901,10 @@
     "priority": "minor",
     "routes": [
       "merchant"
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 1
   },
   {
     "id": "str_bodyguard_job",
@@ -2919,6 +3027,11 @@
     "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -3024,6 +3137,11 @@
     "priority": "minor",
     "routes": [
       "scholar"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -3252,6 +3370,11 @@
     "exclude": "has.flag.lord",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -3338,7 +3461,12 @@
       "knight",
       "mage"
     ],
-    "routeMode": "all"
+    "routeMode": "all",
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "dual_scholar_warrior",
@@ -3430,7 +3558,11 @@
       "scholar",
       "knight"
     ],
-    "routeMode": "all"
+    "routeMode": "all",
+    "lifeStages": [
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "dating_start",
@@ -3533,6 +3665,11 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -3597,14 +3734,16 @@
     "priority": "major",
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
     "id": "magic_theory_class",
     "title": "魔法理论课",
     "description": "一位老教授在学院开设了高阶魔法理论课程，名额有限。",
-    "minAge": 15,
-    "maxAge": 20,
     "weight": 3,
     "include": "has.flag.magic_student",
     "effects": [],
@@ -3644,7 +3783,10 @@
     "routes": [
       "*"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "youth",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 0.75
   },
   {
     "id": "sword_training_camp",
@@ -3710,8 +3852,6 @@
     "id": "secret_master",
     "title": "隐居大师",
     "description": "在深山里遇到一位隐居的神秘高手，他似乎在寻找传人。",
-    "minAge": 15,
-    "maxAge": 22,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -3767,14 +3907,15 @@
     "unique": true,
     "routes": [
       "scholar"
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 1
   },
   {
     "id": "talent_awakening",
     "title": "天赋觉醒",
     "description": "在一次生死危机中，你体内沉睡的力量突然觉醒了。",
-    "minAge": 16,
-    "maxAge": 22,
     "weight": 1,
     "effects": [],
     "branches": [
@@ -3837,14 +3978,15 @@
     "unique": true,
     "routes": [
       "scholar"
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0.25,
+    "maxStageProgress": 1
   },
   {
     "id": "traveling_sage",
     "title": "云游学者",
     "description": "一位来自远方的学者路过村庄，他知识渊博，说话时旁征博引。",
-    "minAge": 15,
-    "maxAge": 22,
     "weight": 2,
     "effects": [],
     "branches": [
@@ -3898,7 +4040,10 @@
     "routes": [
       "*"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "youth",
+    "minStageProgress": 0.125,
+    "maxStageProgress": 1
   },
   {
     "id": "underground_arena",
@@ -3968,7 +4113,11 @@
         "title": "地下竞技场",
         "description": "哥布林聚落深处的秘密竞技场。规矩很简单：只要不出人命，什么手段都行。狡猾的哥布林选手经常用陷阱、烟雾弹和暗器赢得比赛。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "bandit_ambush",
@@ -4061,6 +4210,11 @@
     "exclude": "has.flag.lord | has.flag.political_player | has.flag.council_member | has.flag.elf_sage_council",
     "routes": [
       "adventurer"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -4125,14 +4279,17 @@
     "routes": [
       "adventurer"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "part_time_job",
     "title": "打工赚零花钱",
     "description": "村庄里有人招临时工，虽然报酬不多，但胜在轻松。",
-    "minAge": 14,
-    "maxAge": 18,
     "weight": 3,
     "exclude": "has.flag.noble_birth",
     "effects": [],
@@ -4188,7 +4345,10 @@
         "title": "临时活计",
         "description": "有人需要一个\"不引人注目的小家伙\"去完成一项工作。报酬不错，但内容嘛……不能多问。这种活在哥布林圈子里不稀奇。"
       }
-    }
+    },
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5
   },
   {
     "id": "street_performer",
@@ -4256,7 +4416,12 @@
         "title": "地面世界的表演",
         "description": "你戴着兜帽混在人群中，看一个人类在广场上表演魔术。当他让一枚金币消失时，你差点叫出声——那手法也太粗糙了，任何一个哥布林小偷都做得比他好。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "market_haggling",
@@ -4313,14 +4478,17 @@
     "unique": true,
     "routes": [
       "*"
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
     "id": "guild_recruitment",
     "title": "冒险者公会招募",
     "description": "镇上的冒险者公会贴出了招募告示：「无论出身，只要你有勇气和实力，就能成为冒险者！」你站在告示牌前，心中涌起一股冲动。",
-    "minAge": 14,
-    "maxAge": 18,
     "weight": 4,
     "include": "attribute.str >= 6 | attribute.mag >= 6",
     "exclude": "has.flag.guild_member | has.flag.magic_student | has.flag.knight | has.flag.lord",
@@ -4412,7 +4580,10 @@
         "title": "冒险者公会？",
         "description": "你在人类城镇的告示栏上看到了冒险者公会的招募告示：\"无论出身，只要有勇气。\"你犹豫了——他们说的\"无论出身\"，真的包括哥布林吗？"
       }
-    }
+    },
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5
   },
   {
     "id": "squire_opportunity",
@@ -4501,8 +4672,6 @@
     "id": "merchant_guidance",
     "title": "商人学徒招募",
     "description": "集市上最大的商行贴出了学徒招募令。老板是个精明的半精灵，据说只要入了他门下，不出五年就能独立经营。条件是——得会说话，还得有点本钱。",
-    "minAge": 14,
-    "maxAge": 20,
     "weight": 3,
     "include": "attribute.chr >= 6 | attribute.mny >= 6",
     "exclude": "has.flag.merchant_apprentice | has.flag.magic_student | has.flag.knight | has.flag.lord",
@@ -4574,7 +4743,10 @@
     "routes": [
       "*"
     ],
-    "unique": true
+    "unique": true,
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.75
   },
   {
     "id": "scholar_guidance",
@@ -4678,7 +4850,11 @@
         "title": "地下学者",
         "description": "一个被人类社会驱逐的老学者躲进了哥布林聚落。他说愿意教会一个聪明的哥布林读书写字和炼金术，条件是帮他弄到研究材料。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "goblin_underground_race",
@@ -5327,7 +5503,12 @@
         "title": "地下竞技场的邀请",
         "description": "你的实力被地下竞技场的主办人注意到了。他邀请你参加本年度的锦标赛——奖金丰厚，而且据说有人类赌场在幕后下注。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
+    ]
   },
   {
     "id": "mountain_bandit_leader",
@@ -5382,6 +5563,11 @@
         ],
         "description": "你选择了设个圈套，静静等待结果。"
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife"
     ]
   },
   {
@@ -5481,6 +5667,12 @@
         ],
         "description": "你权衡利弊后，选择了记录下来慢慢研究。"
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult",
+      "midlife",
+      "elder"
     ]
   },
   {
@@ -5555,6 +5747,11 @@
         ],
         "description": "你选择了在入口研究机关，静静等待结果。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5628,7 +5825,12 @@
       "goblin": {
         "description": "对方是你在黑市认识的。虽然哥布林不太讲究浪漫，但你的心跳确实快了几拍。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "youth_caravan_guard",
@@ -5680,6 +5882,11 @@
         ],
         "description": "你权衡利弊后，选择了不去，太危险了。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5766,6 +5973,10 @@
         ],
         "description": "面对抉择，你决定参军报国——也许这是最好的选择。"
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5825,6 +6036,10 @@
         ],
         "description": "你选择了不关自己的事，静静等待结果。"
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5905,6 +6120,11 @@
         "successText": "你对魔法的掌控令人叹服，施法过程行云流水。（魔力提升了）",
         "failureText": "法术在最后一刻偏离了方向，结果令人失望。（生命值下降了）"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -5957,6 +6177,11 @@
         ],
         "description": "你权衡利弊后，选择了谨慎地拒绝。"
       }
+    ],
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
     ]
   },
   {
@@ -6024,6 +6249,10 @@
         ],
         "description": "你权衡利弊后，选择了转头就走。"
       }
+    ],
+    "lifeStages": [
+      "youth",
+      "adult"
     ]
   },
   {
@@ -8250,7 +8479,12 @@
       "goblin": {
         "description": "为了谋生或避风头，你和几位同龄哥布林暂时挤在同一处窝棚、废弃地窖或下水道岔口。地方小得离谱，但总比一个人挨饿强。"
       }
-    }
+    },
+    "lifeStages": [
+      "teen",
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "youth_short_term_job",
@@ -8328,7 +8562,11 @@
       "goblin": {
         "description": "你接到一份只做几天或几周的临时差事。可能是替黑市望风、给商人搬货，或者钻进别人不愿去的狭窄地方，钱不多，但活总能长见识。"
       }
-    }
+    },
+    "lifeStages": [
+      "youth",
+      "adult"
+    ]
   },
   {
     "id": "youth_dwarf_ore_vein_call",
@@ -8679,6 +8917,11 @@
         ],
         "successText": "一股黑色的力量从你体内涌出，震碎了窗户。村民们惊恐地后退。当你恢复意识时，已经站在了村外的荒野中。你不知道刚才发生了什么，但手腕上多了一道诡异的纹路。"
       }
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
@@ -8779,14 +9022,17 @@
         ],
         "successText": "你伸出手，让那股黑色的力量沿着手臂流淌。它不再灼痛，反而像一只冰凉的手引导着你前行。当你睁开眼时，发现自己站在了一条从未见过的路上——也许诅咒之中，也藏着某种指引。"
       }
+    ],
+    "lifeStages": [
+      "childhood",
+      "teen",
+      "youth"
     ]
   },
   {
     "id": "cursed_wanderer_forced_migration",
     "title": "被迫迁徙",
     "description": "你终于在一个边境小镇安顿了下来，但好景不长——当你身上的诅咒气息被发现后，居民们开始在夜里朝你的窗户扔石头。又一次，你必须离开。",
-    "minAge": 14,
-    "maxAge": 22,
     "weight": 4,
     "include": "has.talent.cursed_wanderer & has.flag.village_exiled",
     "exclude": "has.flag.migration_accepted",
@@ -8885,6 +9131,9 @@
         ],
         "successText": "你在镇上的古老图书馆里找到了一些线索——诅咒的源头指向一个名为「永夜之塔」的地方。你不知道那里有什么在等着你，但你的脚步不再犹豫。这一辈子，你第一次有了明确的方向。"
       }
-    ]
+    ],
+    "lifeStage": "youth",
+    "minStageProgress": 0,
+    "maxStageProgress": 1
   }
 ]
