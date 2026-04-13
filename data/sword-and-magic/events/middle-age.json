@@ -118,8 +118,6 @@
     "id": "retirement",
     "title": "挂剑归隐",
     "description": "你把武器挂在了壁炉上方，决定安度晚年。",
-    "minAge": 60,
-    "maxAge": 70,
     "weight": 5,
     "unique": true,
     "effects": [],
@@ -203,10 +201,9 @@
         "description": "你把那把跟了你半辈子的匕首插在火堆旁的石头上，决定不再冒险了。对哥布林来说，能活到这个年纪就已经是传奇。"
       }
     },
-    "lifeStages": [
-      "midlife",
-      "elder"
-    ]
+    "lifeStage": "elder",
+    "minStageProgress": 0,
+    "maxStageProgress": 0.5
   },
   {
     "id": "final_cataclysm",
