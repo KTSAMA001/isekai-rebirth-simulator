@@ -10,6 +10,15 @@
       65,
       85
     ],
+    "maxLifespan": 100,
+    "lifeStages": {
+      "childhood": [2, 10],
+      "teen": [11, 17],
+      "youth": [14, 22],
+      "adult": [20, 45],
+      "midlife": [35, 60],
+      "elder": [55, 100]
+    },
     "attributeModifiers": [],
     "genderModifiers": [
       {
@@ -44,8 +53,7 @@
       "human_ambition"
     ],
     "exclusiveRoutes": [],
-    "themeColor": "#94a3b8",
-    "maxLifespan": 100
+    "themeColor": "#94a3b8"
   },
   {
     "id": "elf",
@@ -58,6 +66,15 @@
       250,
       400
     ],
+    "maxLifespan": 500,
+    "lifeStages": {
+      "childhood": [2, 50],
+      "teen": [30, 80],
+      "youth": [50, 120],
+      "adult": [80, 250],
+      "midlife": [200, 380],
+      "elder": [350, 500]
+    },
     "attributeModifiers": [
       {
         "attributeId": "mag",
@@ -118,8 +135,7 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "elf",
-    "themeColor": "#4ade80",
-    "maxLifespan": 500
+    "themeColor": "#4ade80"
   },
   {
     "id": "goblin",
@@ -132,6 +148,15 @@
       20,
       35
     ],
+    "maxLifespan": 60,
+    "lifeStages": {
+      "childhood": [1, 6],
+      "teen": [5, 12],
+      "youth": [8, 18],
+      "adult": [15, 35],
+      "midlife": [25, 50],
+      "elder": [35, 60]
+    },
     "attributeModifiers": [
       {
         "attributeId": "luk",
@@ -196,8 +221,7 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "goblin",
-    "themeColor": "#84cc16",
-    "maxLifespan": 60
+    "themeColor": "#84cc16"
   },
   {
     "id": "dwarf",
@@ -210,6 +234,15 @@
       150,
       250
     ],
+    "maxLifespan": 400,
+    "lifeStages": {
+      "childhood": [2, 30],
+      "teen": [20, 50],
+      "youth": [30, 80],
+      "adult": [60, 200],
+      "midlife": [180, 320],
+      "elder": [280, 400]
+    },
     "attributeModifiers": [
       {
         "attributeId": "str",
@@ -266,8 +299,7 @@
     ],
     "exclusiveRoutes": [],
     "eventDir": "dwarf",
-    "themeColor": "#d97706",
-    "maxLifespan": 400
+    "themeColor": "#d97706"
   },
   {
     "id": "beastfolk",
