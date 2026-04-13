@@ -26,9 +26,6 @@ export class EventModule {
   private attrModule: AttributeModule
   private itemModule: ItemModule
 
-  /** 人类基准寿命（[70,100] 中点），用于跨种族年龄缩放 */
-  private static readonly HUMAN_BASELINE_LIFESPAN = 100
-
   constructor(
     world: WorldInstance,
     random: RandomProvider,
@@ -44,49 +41,52 @@ export class EventModule {
   }
 
   /**
-   * 计算事件的等效年龄范围（按种族寿命比例缩放）
-   * - 出生/婴儿事件（maxAge <= 1）：不缩放，确保所有种族第一年都能触发
-   * - 种族专属事件（races 只包含当前种族）：不缩放，已用种族实际年龄
-   * - 通用事件/多种族事件：以人类寿命为基准按比例缩放
+   * 计算事件的等效年龄范围（基于 raceMaxLifespan 百分比缩放）
+   * - 事件的 minAge/maxAge 视为人类百分比：55 = 55% 的人生进度
+   * - 转换为当前种族的实际年龄
+   * - 出生/婴儿事件（maxAge <= 1）：不缩放
+   * - 种族专属事件：不缩放，已用种族实际年龄
    */
-  private getScaledAgeRange(event: WorldEventDef, playerRace: string | undefined, lifespanRatio: number): [number, number] {
-    // 出生/婴儿事件不缩放：游戏首个时间刻 age=1，缩放会导致短寿命种族无法触发
-    if (event.maxAge <= 1) {
-      return [event.minAge, event.maxAge]
-    }
+  private getScaledAgeRange(event: WorldEventDef, playerRace: string | undefined, raceMaxLifespan: number): [number, number] {
+    // 出生/婴儿事件不缩放
+    if (event.maxAge <= 1) return [event.minAge, event.maxAge]
+
     // 种族专属事件不需要缩放
     const isRaceExclusive = event.races && event.races.length === 1 && event.races[0] === playerRace
-    if (isRaceExclusive || lifespanRatio === 1) {
-      return [event.minAge, event.maxAge]
-    }
-    // 对受「心理年龄」影响的事件类型（life/romance/social）和关键人生事件，缩放 ratio 上限为 2.0
-    // 避免长寿命种族（如精灵 ratio≈4.7）的初恋等事件被放大到不合理年龄
+    if (isRaceExclusive) return [event.minAge, event.maxAge]
+
+    // 事件 minAge/maxAge 视为人类百分比：55 = 55%
+    // 转换为当前种族的实际年龄
+    const minProgress = event.minAge / 100
+    const maxProgress = event.maxAge / 100
+
+    // 心理年龄事件 cap 到 50%
     const psychologyCappedTags = new Set(['life', 'romance', 'social'])
     const needsCap = psychologyCappedTags.has(event.tag ?? '') || event.priority === 'major'
-    const effectiveRatio = needsCap ? Math.min(lifespanRatio, 2.0) : lifespanRatio
+    const effectiveMaxProgress = needsCap ? Math.min(maxProgress, 0.50) : maxProgress
 
-    let scaledMin = Math.round(event.minAge * effectiveRatio)
-    const scaledMax = Math.round(event.maxAge * effectiveRatio)
-    // 短寿命种族保护：缩放后 minAge 不低于原始 minAge 的 50%，避免成人事件过早触发
-    // 例如哥布林(lifespanRatio≈0.39)的 youth 事件(minAge=18)不会缩放到 7 岁以下
-    if (lifespanRatio < 0.6) {
-      const floorMin = Math.ceil(event.minAge * 0.5)
-      scaledMin = Math.max(scaledMin, floorMin)
+    let scaledMin = Math.round(minProgress * raceMaxLifespan)
+    const scaledMax = Math.round(effectiveMaxProgress * raceMaxLifespan)
+
+    // 短寿命保护：缩放后 minAge 不低于原始 minAge 的 50%，避免成人事件过早触发
+    if (raceMaxLifespan < 100) {
+      scaledMin = Math.max(scaledMin, Math.ceil(event.minAge * 0.5))
     }
+
     return [scaledMin, scaledMax]
   }
 
   /** 获取当前年龄可触发的事件候选列表 */
-  getCandidates(age: number, state: GameState, activeRoutes?: LifeRoute[] | null): WorldEventDef[] {
+  getCandidates(age: number, state: GameState, activeRoutes?: LifeRoute[] | null, raceMaxLifespan?: number): WorldEventDef[] {
     const ctx = { state, world: this.world }
     const playerRace = state.character.race
     const playerGender = state.character.gender
-    // 寿命缩放比例：角色实际寿命 / 人类基准寿命
-    const lifespanRatio = (state.effectiveMaxAge ?? EventModule.HUMAN_BASELINE_LIFESPAN) / EventModule.HUMAN_BASELINE_LIFESPAN
+    // 种族寿命上限：优先使用传入值，回退到 state 中的值
+    const maxLifespan = raceMaxLifespan ?? state.effectiveMaxAge ?? 100
 
     return this.world.events.filter(event => {
-      // 年龄范围（按种族寿命比例缩放）
-      const [scaledMin, scaledMax] = this.getScaledAgeRange(event, playerRace, lifespanRatio)
+      // 年龄范围（按种族寿命百分比缩放）
+      const [scaledMin, scaledMax] = this.getScaledAgeRange(event, playerRace, maxLifespan)
       if (age < scaledMin || age > scaledMax) return false
       // unique 事件去重
       if (event.unique && state.triggeredEvents.has(event.id)) return false

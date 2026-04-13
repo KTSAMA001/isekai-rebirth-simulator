@@ -480,7 +480,7 @@ export class SimulationEngine {
     this.updateRoute()
 
     // 获取候选事件（此时 state 已包含路线入口 flag）
-    const candidates = this.eventModule.getCandidates(this.state.age, this.state, this.activeRoute ? [this.activeRoute] : null)
+    const candidates = this.eventModule.getCandidates(this.state.age, this.state, this.activeRoute ? [this.activeRoute] : null, this.raceMaxLifespan)
 
     // 路线系统：检查强制锚点事件
     let mutableAnchorEvent = this.checkMandatoryAnchor()
