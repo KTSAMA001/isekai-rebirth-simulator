@@ -42,11 +42,10 @@ export class EvaluatorModule {
     // 属性分：对数压缩，长寿/短寿种族可比
     const attrPerYear = totalAttributePeakSum / Math.max(lifespan, 1)
     const attrScore = attrPerYear * 25 + Math.log(totalAttributePeakSum + 1) * 20
-    // 寿命得分：基于中位寿命范围(lifespanRange)而非理论极限(effectiveMaxAge)
-    // 这样活到 50 岁的人类得分高，活到 300 岁的精灵得分也合理
+    // 寿命得分：基于种族理论寿命上限(maxLifespan)
     const raceDef = this.world.races?.find(r => r.id === state.character.race)
-    const lifespanBase = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : (state.effectiveMaxAge ?? this.world.manifest.maxAge)
-    const lifespanRatio = Math.min(lifespan / lifespanBase, 1.2)
+    const maxLifespan = raceDef?.maxLifespan ?? (state.effectiveMaxAge ?? this.world.manifest.maxAge)
+    const lifespanRatio = Math.min(lifespan / maxLifespan, 1.2)
     const lifespanScore = lifespanRatio * 60
     const itemScore = state.inventory.items.length * 5
     // 路线加分：每激活一条路线 +20 分
