@@ -77,12 +77,11 @@ export class SimulationEngine {
   private activeRoute: LifeRoute | null = null
   /** 已触发的路线锚点事件（key = "routeId:eventId"） */
   private routeAnchorsTriggered: Set<string> = new Set()
-  /** 本局实际最大年龄（受种族寿命范围影响） */
+  /** 本局实际最大年龄（= raceMaxLifespan，兼容性保留） */
   private effectiveMaxAge = 0
-  private personalSigmoidMid = 0
-  /** 种族理论寿命上限（Phase 0 基础设施，当前未使用） */
+  /** 种族理论寿命上限 */
   private raceMaxLifespan = 0
-  /** 个体死亡进度（Beta 分布，Phase 0 基础设施，当前未使用） */
+  /** 个体死亡进度（Beta 分布，sigmoid 衰减中点） */
   private personalDeathProgress = 0
   /** 童年 HP 伤害保护年龄阈值（modify_hp 中使用） */
   static readonly CHILDHOOD_HP_PROTECTION_AGE = 15
@@ -115,8 +114,10 @@ export class SimulationEngine {
     }
 
     // 恢复种族寿命上限
-    engine.effectiveMaxAge = state.effectiveMaxAge ?? world.manifest.maxAge
-    engine.personalSigmoidMid = (state as any).personalSigmoidMid ?? 0.55
+    const raceDef = state.character.race ? world.races?.find(r => r.id === state.character.race) : undefined
+    engine.raceMaxLifespan = raceDef?.maxLifespan ?? world.manifest.maxAge
+    engine.effectiveMaxAge = engine.raceMaxLifespan
+    engine.personalDeathProgress = (state as any).personalDeathProgress ?? 0.70
 
     // 重建 activeRoute：根据当前状态重新评估路线条件
     engine.updateRoute()
@@ -172,25 +173,11 @@ export class SimulationEngine {
       peaks[key] = attrs[key]
     }
 
-    // 计算本局有效年龄上限：基于理论极限寿命(maxLifespan)，而非中位寿命(lifespanRange)
-    // lifespanRange 用于显示和评分，effectiveMaxAge 用于 HP 衰减和事件系统
-    // 这样 33 岁的人类不会被当成"老年人"，但大部分人仍会在 lifespanRange 内死亡
-    if (raceDef?.maxLifespan) {
-      // effectiveMaxAge 决定 HP 衰减曲线 + 事件缩放
-      // 宽范围随机(50%-100%)：产生夭折、早亡、长寿的自然分布
-      // lifespanRange 是中位区间，大部分人死在里面，但不是所有人
-      const max = raceDef.maxLifespan
-      this.effectiveMaxAge = Math.floor(max * 0.5 + this.random.next() * max * 0.5)
-      // 个体衰减差异：sigmoid 中点 0.55 ± 0.15
-      this.personalSigmoidMid = 0.55 + (this.random.next() - 0.5) * 0.3
-    } else if (raceDef?.lifespanRange) {
-      this.effectiveMaxAge = raceDef.lifespanRange[1]
-    } else {
-      this.effectiveMaxAge = this.world.manifest.maxAge
-    }
-
-    // Phase 0 基础设施：种族寿命上限和个体死亡进度（当前不影响任何行为）
+    // 种族寿命上限：所有衰减和缩放基于此值
     this.raceMaxLifespan = raceDef?.maxLifespan ?? this.world.manifest.maxAge
+    // effectiveMaxAge 保留为 raceMaxLifespan 的别名（兼容性）
+    this.effectiveMaxAge = this.raceMaxLifespan
+    // 个体死亡进度：Beta(8,3) 分布，clamp 到 [0.60, 0.92]
     this.personalDeathProgress = Math.min(0.92, Math.max(0.60, sampleBeta(this.random, 8, 3)))
 
     this.state = {
@@ -370,23 +357,22 @@ export class SimulationEngine {
     return Math.max(25, 25 + str * 3)
   }
 
-  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + 连续年龄衰减
-   *  所有衰老阈值基于 lifeRatio（age / effectiveMaxAge），适配不同种族寿命
-   *  使用 sigmoid 平滑过渡 + 二次加速，确保角色在 lifespanRange 范围内自然死亡
+  /** 每年恢复 HP：基于初始体魄（不随属性成长增长），软上限控制 + sigmoid 衰减
+   *  所有衰老阈值基于 lifeProgress（age / raceMaxLifespan），适配不同种族寿命
+   *  sigmoid 中点为 personalDeathProgress（个体死亡进度），K=12
    */
   private regenHp(): void {
     const initHp = this.computeInitHp()
     // 每年恢复量，上限为初始HP的12%（至少3），体魄只影响初始HP不影响恢复速度
     const regen = Math.min(this.initialStrRegen, Math.max(3, Math.floor(initHp * 0.12)))
     const age = this.state.age
-    const maxAge = this.effectiveMaxAge
-    const lifeRatio = age / maxAge
+    const lifeProgress = age / this.raceMaxLifespan
 
-    // 软上限：巅峰期(lifeRatio≤0.35)为 ×1.1，之后逐步衰减
-    // 到 lifeRatio=1.0 降至 ×0.7，最低 ×0.3
-    const primeAge = maxAge * 0.35
-    const declinePerYear = 0.4 / (maxAge * 0.65)
-    const softCapMultiplier = Math.max(1.1 - Math.max(0, age - primeAge) * declinePerYear, 0.3)
+    // 软上限：巅峰期(lifeProgress≤0.35)为 ×1.1，之后逐步衰减
+    // 到 lifeProgress=1.0 降至 ×0.7，最低 ×0.3
+    const primeProgress = 0.35
+    const declinePerProgress = 0.4 / 0.65
+    const softCapMultiplier = Math.max(1.1 - Math.max(0, lifeProgress - primeProgress) * declinePerProgress, 0.3)
     const softCap = Math.max(Math.floor(initHp * softCapMultiplier), 5)
     // 物品HP恢复加成
     const itemBonus = this.itemModule.getHpRegenBonus(this.state)
@@ -394,36 +380,16 @@ export class SimulationEngine {
     const capModifier = this.itemModule.getHpCapModifier(this.state)
     const modifiedCap = Math.max(softCap * (1 + capModifier) + (this.state.maxHpBonus ?? 0), 5)
 
-    // 衰减分三段：sigmoid 平滑过渡 + 二次加速 + 超龄惩罚
-    // 衰减比例基于中位寿命（lifespanRange中值），而非理论极限（effectiveMaxAge）
-    // 这样人类在 40-50 岁（中位寿命 ~50）开始明显衰减，在 40-60 岁区间死亡
-    const raceDef = this.world.races?.find((r: { id: string }) => r.id === this.state.character.race)
-    const medianDeath = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : maxAge * 0.6
-    const decayRatio = age / medianDeath
-
-    // sigmoid 中点：基于中位寿命，个体差异在 initGame 时已随机确定
-    const sigmoidMid = this.personalSigmoidMid
-    const sigmoidK = 10
-    const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (decayRatio - sigmoidMid)))
+    // Sigmoid 衰减：基于 lifeProgress，中点为 personalDeathProgress
+    // K=12 让衰减更集中在 personalDeathProgress 附近
+    const sigmoidK = 12
+    const sigmoidValue = 1 / (1 + Math.exp(-sigmoidK * (lifeProgress - this.personalDeathProgress)))
     const sigmoidDecay = Math.floor(5 * sigmoidValue)
 
-    // 二次加速: decayRatio>0.5 后加速
-    let quadScaleBase = 3500 / medianDeath
-    if (medianDeath < 45) {
-      quadScaleBase *= 1.5
-    }
-    if (medianDeath >= 200) {
-      quadScaleBase *= 0.8
-    }
-    const quadScale = Math.max(quadScaleBase, 10)
-    const quadFactor = Math.max(0, decayRatio - 0.5) ** 2 * quadScale
-    const quadDecay = Math.floor(quadFactor)
-
-    let ageDecay = sigmoidDecay + quadDecay
+    let ageDecay = sigmoidDecay
 
     // 单年衰减上限：防止突然死亡，确保死亡过程渐进
-    const maxDecayRatio = medianDeath < 50 ? 0.25 : medianDeath < 100 ? 0.20 : 0.15
-    const maxYearlyDecay = Math.max(Math.floor(initHp * maxDecayRatio), 12)
+    const maxYearlyDecay = Math.max(Math.floor(initHp * 0.20), 12)
     ageDecay = Math.min(ageDecay, maxYearlyDecay)
 
     // 童年前期无衰减（F-2-1）：10岁以下角色不因自然衰减死亡
@@ -431,23 +397,21 @@ export class SimulationEngine {
       ageDecay = 0
     }
 
-    // 超出预期寿命：严重惩罚，确保不永生
-    if (lifeRatio > 1.0) {
-      const overageRatio = lifeRatio - 1.0
+    // 超出种族寿命上限：严重惩罚，确保不永生
+    if (lifeProgress > 1.0) {
+      const overageRatio = lifeProgress - 1.0
       const overageDecay = Math.floor(overageRatio * 60)
-      // overage 也受单年上限约束
       ageDecay = Math.min(ageDecay + overageDecay, maxYearlyDecay * 2)
     }
 
     const rawNewHp = Math.min(this.state.hp + regen - ageDecay + itemBonus, modifiedCap)
-    // 单年 HP 净变化上限：固定 20，不与当前 HP 挂钩
-    // 避免高 HP 角色单年损失过大
-    const maxNetLoss = Math.max(Math.floor(initHp * maxDecayRatio), 12)
+    // 单年 HP 净变化上限
+    const maxNetLoss = Math.max(Math.floor(initHp * 0.20), 12)
     const clampedNewHp = Math.max(rawNewHp, this.state.hp - maxNetLoss)
-    // 长寿种族 HP 平台期下限：lifeRatio < 0.5 时 HP 不低于 initHp*30%
+    // 长寿种族 HP 平台期下限：lifeProgress < 0.5 时 HP 不低于 initHp*30%
     // 防止长寿种族因随机事件叠加在生命前期暴毙
     let bufferedHp = clampedNewHp
-    if (medianDeath >= 200 && decayRatio < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
+    if (this.raceMaxLifespan >= 200 && lifeProgress < 0.5 && clampedNewHp < initHp * 0.3 && clampedNewHp > 0) {
       bufferedHp = Math.max(clampedNewHp, Math.floor(initHp * 0.3))
     }
     // 条件恢复（C-2）：物品提供的 conditional_regen（HP<阈值时额外恢复）
@@ -833,17 +797,13 @@ export class SimulationEngine {
     }
   }
 
-  /** 根据生命周期阶段生成衰老提示文本 */
+  /** 根据生命周期阶段生成衰老提示文本（基于 lifeProgress） */
   private getAgingHint(): string {
-    // 基于中位寿命（lifespanRange 中值）而非理论极限
-    // 这样人类在 30-40 岁开始出现轻微衰老提示，50+ 岁出现明显衰老
-    const raceDef = this.world.races?.find((r: { id: string }) => r.id === this.state.character.race)
-    const medianDeath = raceDef?.lifespanRange ? (raceDef.lifespanRange[0] + raceDef.lifespanRange[1]) / 2 : this.effectiveMaxAge * 0.6
-    const lifeProgress = this.state.age / medianDeath
+    const lifeProgress = this.state.age / this.raceMaxLifespan
     if (lifeProgress > 0.92) return '你已经油尽灯枯，每一次呼吸都弥足珍贵。'
     if (lifeProgress > 0.85) return '岁月不饶人，你感到生命在流逝。'
     if (lifeProgress > 0.78) return '你的身体越来越不听使唤，生病后恢复得很慢。'
-    if (lifeProgress > 0.7) return '你开始感到力不从心，体力大不如前。'
+    if (lifeProgress > 0.70) return '你开始感到力不从心，体力大不如前。'
     if (lifeProgress > 0.62) return '你发现爬楼梯都会微微气喘了。'
     if (lifeProgress > 0.55) return '鬓角多了几根白发，你假装没注意到。'
     if (lifeProgress > 0.45) return '你注意到自己恢复得不如从前快了。'
