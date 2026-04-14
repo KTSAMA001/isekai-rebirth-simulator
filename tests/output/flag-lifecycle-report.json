@@ -23,8 +23,8 @@
         "flag": "bullied",
         "setterEventId": "bullied",
         "ageRange": [
-          3,
-          6
+          null,
+          null
         ],
         "prerequisites": [
           "bullied_child"
@@ -36,8 +36,8 @@
         "flag": "bullied_child",
         "setterEventId": "bullied",
         "ageRange": [
-          3,
-          6
+          null,
+          null
         ],
         "prerequisites": [
           "bullied_child"
@@ -49,8 +49,8 @@
         "flag": "timid",
         "setterEventId": "bullied",
         "ageRange": [
-          3,
-          6
+          null,
+          null
         ],
         "prerequisites": [
           "bullied_child"
@@ -62,8 +62,8 @@
         "flag": "deep_observer",
         "setterEventId": "bullied",
         "ageRange": [
-          3,
-          6
+          null,
+          null
         ],
         "prerequisites": [
           "bullied_child"
@@ -75,8 +75,8 @@
         "flag": "fight_back",
         "setterEventId": "bullied",
         "ageRange": [
-          3,
-          6
+          null,
+          null
         ],
         "prerequisites": [
           "bullied_child"
@@ -88,8 +88,8 @@
         "flag": "bullied_repeat",
         "setterEventId": "bullied_repeat",
         "ageRange": [
-          4,
-          8
+          null,
+          null
         ],
         "prerequisites": [
           "timid",
@@ -102,8 +102,8 @@
         "flag": "timid_deep",
         "setterEventId": "bullied_repeat",
         "ageRange": [
-          4,
-          8
+          null,
+          null
         ],
         "prerequisites": [
           "timid",
@@ -116,8 +116,8 @@
         "flag": "parental_help",
         "setterEventId": "bullied_repeat",
         "ageRange": [
-          4,
-          8
+          null,
+          null
         ],
         "prerequisites": [
           "timid",
@@ -130,8 +130,8 @@
         "flag": "brave",
         "setterEventId": "stand_up_moment",
         "ageRange": [
-          6,
-          10
+          null,
+          null
         ],
         "prerequisites": [
           "timid"
@@ -143,8 +143,8 @@
         "flag": "smart_seeker",
         "setterEventId": "stand_up_moment",
         "ageRange": [
-          6,
-          10
+          null,
+          null
         ],
         "prerequisites": [
           "timid"
@@ -156,8 +156,8 @@
         "flag": "magic_student",
         "setterEventId": "magic_academy_letter",
         "ageRange": [
-          7,
-          10
+          null,
+          null
         ],
         "prerequisites": [
           "magic_student",
@@ -170,8 +170,8 @@
         "flag": "noble_educated",
         "setterEventId": "noble_etiquette_class",
         "ageRange": [
-          6,
-          10
+          null,
+          null
         ],
         "prerequisites": [
           "noble_birth"
@@ -358,8 +358,8 @@
         "flag": "merchant_apprentice",
         "setterEventId": "merchant_apprentice",
         "ageRange": [
-          14,
-          20
+          null,
+          null
         ],
         "prerequisites": [
           "magic_student",
@@ -372,8 +372,8 @@
         "flag": "social_star",
         "setterEventId": "noble_social_debut",
         "ageRange": [
-          16,
-          20
+          null,
+          null
         ],
         "prerequisites": [
           "noble_birth"
@@ -490,8 +490,8 @@
         "flag": "guild_member",
         "setterEventId": "guild_recruitment",
         "ageRange": [
-          14,
-          18
+          null,
+          null
         ],
         "prerequisites": [
           "guild_member",
@@ -601,8 +601,8 @@
         "flag": "migration_accepted",
         "setterEventId": "cursed_wanderer_forced_migration",
         "ageRange": [
-          14,
-          22
+          null,
+          null
         ],
         "prerequisites": [
           "village_exiled",
@@ -847,8 +847,8 @@
         "flag": "noble_combat_trained",
         "setterEventId": "noble_sword_training",
         "ageRange": [
-          12,
-          15
+          null,
+          null
         ],
         "prerequisites": [
           "noble_birth",
@@ -862,8 +862,8 @@
         "flag": "married",
         "setterEventId": "marry_noble",
         "ageRange": [
-          25,
-          30
+          null,
+          null
         ],
         "prerequisites": [
           "knight",
@@ -880,8 +880,8 @@
         "flag": "refused_marriage",
         "setterEventId": "marry_noble",
         "ageRange": [
-          25,
-          30
+          null,
+          null
         ],
         "prerequisites": [
           "knight",
@@ -898,8 +898,8 @@
         "flag": "engaged",
         "setterEventId": "marry_adventurer",
         "ageRange": [
-          22,
-          30
+          null,
+          null
         ],
         "prerequisites": [
           "engaged",
@@ -914,8 +914,8 @@
         "flag": "parent",
         "setterEventId": "adult_first_child",
         "ageRange": [
-          24,
-          42
+          null,
+          null
         ],
         "prerequisites": [
           "married",
@@ -929,8 +929,8 @@
         "flag": "merchant_master",
         "setterEventId": "merchant_career",
         "ageRange": [
-          22,
-          30
+          null,
+          null
         ],
         "prerequisites": [
           "merchant_apprentice"
@@ -1012,8 +1012,8 @@
         "flag": "inventor_fame",
         "setterEventId": "reincarnated_invention",
         "ageRange": [
-          30,
-          40
+          null,
+          null
         ],
         "prerequisites": [
           "married"
@@ -1197,8 +1197,8 @@
         "flag": "guild_founder",
         "setterEventId": "merchant_guild",
         "ageRange": [
-          25,
-          45
+          null,
+          null
         ],
         "prerequisites": [
           "merchant_apprentice"
@@ -1236,8 +1236,8 @@
         "flag": "famous_hunter",
         "setterEventId": "adv_bounty",
         "ageRange": [
-          22,
-          45
+          null,
+          null
         ],
         "prerequisites": [
           "guild_member",
@@ -1253,8 +1253,8 @@
         "flag": "pioneer",
         "setterEventId": "adv_uncharted",
         "ageRange": [
-          20,
-          40
+          null,
+          null
         ],
         "prerequisites": [
           "guild_member",
@@ -1388,8 +1388,8 @@
         "flag": "soul_bound",
         "setterEventId": "soul_bound",
         "ageRange": [
-          20,
-          35
+          null,
+          null
         ],
         "prerequisites": [
           "dating",
@@ -1405,8 +1405,8 @@
         "flag": "wedding_grand",
         "setterEventId": "wedding_ceremony",
         "ageRange": [
-          22,
-          38
+          null,
+          null
         ],
         "prerequisites": [
           "engaged",
@@ -1419,8 +1419,8 @@
         "flag": "rogue_contact",
         "setterEventId": "mercenary_contract",
         "ageRange": [
-          22,
-          40
+          null,
+          null
         ],
         "prerequisites": [
           "lord",
@@ -1435,8 +1435,8 @@
         "flag": "dark_cult_resolved",
         "setterEventId": "dark_cult_aftermath",
         "ageRange": [
-          28,
-          40
+          null,
+          null
         ],
         "prerequisites": [
           "dark_cult_investigated",
@@ -1544,8 +1544,8 @@
         "flag": "world_breaking",
         "setterEventId": "world_breaking_start",
         "ageRange": [
-          50,
-          60
+          null,
+          null
         ],
         "prerequisites": [
           "knight",
@@ -1612,8 +1612,8 @@
         "flag": "great_parent",
         "setterEventId": "mid_heir_training",
         "ageRange": [
-          35,
-          50
+          null,
+          null
         ],
         "prerequisites": [
           "parent"
@@ -1749,8 +1749,8 @@
         "flag": "friend_reunion_done",
         "setterEventId": "mid_old_friend_reunion",
         "ageRange": [
-          35,
-          55
+          null,
+          null
         ],
         "prerequisites": [
           "friend_reunion_done"
@@ -1788,8 +1788,8 @@
         "flag": "legend_legacy",
         "setterEventId": "elder_legacy_gift",
         "ageRange": [
-          55,
-          90
+          null,
+          null
         ],
         "prerequisites": [
           "dragon_slayer",
@@ -1805,8 +1805,8 @@
         "flag": "legendary_hero",
         "setterEventId": "elder_legend_verified",
         "ageRange": [
-          80,
-          95
+          null,
+          null
         ],
         "prerequisites": [
           "dragon_defeated",
@@ -2072,11 +2072,9 @@
       "adopted_child",
       "family_legacy",
       "war_veteran",
-      "spirit_ascended",
       "near_death",
       "never_retired",
-      "miracle_survival",
-      "famous_author",
+      "legacy_passed",
       "wild_birth",
       "hunter_lineage",
       "first_love",
@@ -2093,110 +2091,112 @@
       "has_ally",
       "healer",
       "philanthropist",
-      "mentor_legend",
-      "master_mentor",
-      "peaceful_retirement",
       "memoir_written",
+      "peaceful_retirement",
+      "mentor_legend",
+      "famous_author",
       "war_hero",
-      "treasure_hunter",
+      "prophet_dream",
       "forest_healer",
       "curse_breaker",
-      "power_sealed",
-      "friend_reunion_done",
-      "school_founder",
-      "kingdom_hero",
-      "star_song_master",
-      "elf_sage_council",
-      "legacy_passed",
-      "world_tree_blessed",
-      "eloped",
-      "inner_peace",
-      "archmage",
-      "diplomat",
-      "worldtree_candidate",
-      "dragon_rider",
-      "bullied",
-      "bullied_child",
-      "fight_back",
-      "dungeon_first",
-      "info_broker",
-      "has_successor",
-      "goblin_sage",
-      "true_friend",
-      "shaman_apprentice",
-      "guild_member",
-      "on_adventurer_path",
-      "dwarf_master_smith",
-      "dark_path",
-      "famous_hunter",
-      "homeowner",
-      "lucky_gambler",
-      "undying_legend",
-      "dwarf_hold_defender",
-      "dwarf_has_masterwork",
-      "dwarf_has_apprentice",
-      "noble_conflict",
-      "promise_keeper",
-      "dwarf_master_miner",
-      "prophet",
-      "author",
-      "herbal_knowledge",
       "merchant_apprentice",
       "on_merchant_path",
-      "economic_genius",
-      "cheated_death",
+      "guild_member",
+      "justice_lover",
+      "star_song_master",
+      "inherited_wealth",
+      "guild_founder",
+      "mysterious_encounter",
+      "treasure_hunter",
+      "dark_ritual",
+      "dark_cult_investigated",
+      "dark_cult_resolved",
+      "elf_sage_council",
+      "elf_worldtree_child",
+      "world_tree_blessed",
+      "dirty_player",
+      "has_successor",
+      "prophet",
+      "diplomat",
+      "dragon_rider",
+      "worldtree_candidate",
+      "dragon_awakened",
       "engaged",
-      "heartbroken",
+      "wedding_grand",
+      "dark_mage",
+      "famous_inventor",
+      "inventor_fame",
+      "friend_reunion_done",
+      "goblin_sage",
+      "school_founder",
+      "tough_spirit",
+      "iron_will",
+      "shaman_apprentice",
+      "bullied",
+      "bullied_child",
       "timid",
       "deep_observer",
+      "bullied_repeat",
+      "parental_help",
+      "dungeon_first",
+      "fighter_spirit",
+      "herbal_knowledge",
+      "heartbroken",
+      "dwarf_dragon_vow",
+      "old_enemy_defeated",
+      "cheated_death",
+      "dwarf_hold_defender",
+      "dwarf_has_apprentice",
+      "founder",
+      "dwarf_master_miner",
+      "noble_conflict",
+      "dwarf_has_masterwork",
+      "on_adventurer_path",
       "magic_student",
       "on_mage_path",
-      "fighter_spirit",
       "mage_graduate",
-      "forbidden_knowledge",
-      "elemental_lord",
-      "tavern_fighter",
-      "justice_lover",
-      "guild_founder",
-      "dark_ritual",
+      "enlightened",
+      "smart_seeker",
+      "emotional_magic",
+      "author",
       "smith_apprentice",
-      "dark_mage",
-      "elf_worldtree_child",
+      "planted_seed_at_tree",
+      "fight_back",
       "truth_seeker",
       "forest_investigator",
       "elf_reclusive",
-      "lottery_winner",
+      "miracle_survival",
       "dragon_omen_birth",
-      "death_pact",
-      "dwarf_master_keeper",
-      "tough_spirit",
-      "iron_will",
+      "true_friend",
+      "tavern_fighter",
+      "spirit_ascended",
+      "noble_grudge",
       "never_give_up",
-      "mysterious_encounter",
-      "bullied_repeat",
-      "parental_help",
+      "master_mentor",
       "orator",
-      "master_disciple",
-      "dirty_player",
-      "death_accepted",
-      "smart_seeker",
-      "old_enemy_defeated",
       "pioneer",
+      "economic_genius",
+      "undying_legend",
+      "kingdom_hero",
+      "inner_peace",
       "elf_starborn",
-      "elf_star_apprentice",
-      "political_player",
-      "planted_seed_at_tree",
-      "rogue_contact",
-      "dark_cult_investigated",
-      "chosen_one",
-      "founder",
-      "enlightened",
-      "tower_master",
-      "dark_cult_resolved",
+      "forbidden_knowledge",
+      "demon_king_slayer",
+      "spirit_companion",
+      "info_broker",
+      "dwarf_master_keeper",
+      "abyss_walker",
+      "death_pact",
+      "quiet_end",
+      "world_tree_empowered",
+      "lucky_coin",
       "goblin_merchant_king",
-      "dwarf_reliable_name",
+      "homeowner",
+      "business_tycoon",
+      "goblin_mechanic",
       "cursed",
-      "village_exiled"
+      "village_exiled",
+      "migration_accepted"
     ],
     "flagsNeverSet": [
       "noble_birth",
@@ -2208,16 +2208,14 @@
       "shadow_birth",
       "dwarf_born_at_forge",
       "dwarf_ore_sense",
-      "emotional_magic",
       "early_magic_control",
       "fairy_friend",
       "timid_deep",
       "brave",
-      "noble_grudge",
-      "world_tree_empowered",
       "noble_educated",
       "elf_archive_apprentice",
       "elf_sapling_oath",
+      "elf_star_apprentice",
       "magic_academy",
       "magic_top_student",
       "magic_natural",
@@ -2230,28 +2228,23 @@
       "reincarnated",
       "social_star",
       "capable_lord",
-      "lucky_coin",
       "potion_power",
-      "spirit_companion",
-      "inherited_wealth",
       "experienced_guard",
-      "famous_inventor",
       "champion",
       "legend_explorer",
       "stage_mage",
       "scholar_warrior",
-      "dragon_awakened",
       "tough_reputation",
       "knight",
-      "goblin_mechanic",
       "elf_memory_curator",
       "elf_canopy_guardian",
       "elf_astral_student",
-      "migration_accepted",
+      "dwarf_reliable_name",
       "squire_failed",
       "solo_adventurer",
       "quest_victory",
       "on_journey",
+      "dark_path",
       "soul_corrupted",
       "pure_heart",
       "escaped_dark",
@@ -2267,31 +2260,38 @@
       "knight_hero",
       "knight_tactician",
       "knight_honor",
-      "prophet_dream",
       "elemental_master",
       "researcher",
       "arcane_student",
       "noble_combat_trained",
-      "dwarf_dragon_vow",
+      "dwarf_master_smith",
       "dragon_slayer",
       "dragon_defeated",
       "refused_marriage",
       "merchant_master",
       "lord",
+      "archmage",
+      "power_sealed",
       "war_aftermath_done",
-      "inventor_fame",
+      "lottery_winner",
+      "master_disciple",
+      "death_accepted",
+      "chosen_one",
       "mana_burned",
       "international_trader",
       "tax_reformer",
+      "tower_master",
+      "elemental_lord",
       "artifact_owner",
+      "famous_hunter",
       "war_mage",
       "underworld_contact",
-      "abyss_walker",
       "divine_champion",
-      "demon_king_slayer",
       "council_member",
       "craftsman",
-      "wedding_grand",
+      "promise_keeper",
+      "eloped",
+      "rogue_contact",
       "business_owner",
       "mercenary_veteran",
       "dragon_grown",
@@ -2304,10 +2304,11 @@
       "world_destroyed",
       "world_rebuilt",
       "became_god",
+      "political_player",
       "beloved_lord",
       "iron_lord",
       "great_scholar",
-      "business_tycoon",
+      "lucky_gambler",
       "revenge_clue_found",
       "revenge_completed",
       "wounded_seeking",
@@ -2320,148 +2321,147 @@
       "peaceful_end",
       "warriors_death",
       "ascended",
-      "quiet_end",
       "legendary_hero",
       "on_knight_path",
       "guild_leader"
     ],
     "flagSetCount": {
-      "wandering_survived": 2,
-      "married": 6,
+      "wandering_survived": 1,
+      "married": 8,
       "military_service": 3,
-      "parent": 8,
-      "has_student": 18,
-      "on_scholar_path": 15,
-      "protect_family": 6,
-      "great_parent": 3,
-      "adopted_child": 7,
+      "parent": 7,
+      "has_student": 25,
+      "on_scholar_path": 18,
+      "protect_family": 5,
+      "great_parent": 1,
+      "adopted_child": 4,
       "family_legacy": 3,
-      "war_veteran": 4,
-      "spirit_ascended": 6,
-      "near_death": 20,
+      "war_veteran": 3,
+      "near_death": 18,
       "never_retired": 7,
-      "miracle_survival": 5,
-      "famous_author": 14,
-      "wild_birth": 9,
+      "legacy_passed": 4,
+      "wild_birth": 8,
       "hunter_lineage": 4,
-      "first_love": 27,
-      "dating": 19,
-      "in_relationship": 22,
-      "lover_at_war": 5,
-      "dating_deepen": 11,
+      "first_love": 20,
+      "dating": 13,
+      "in_relationship": 15,
+      "lover_at_war": 1,
+      "dating_deepen": 5,
       "soul_bound": 5,
-      "has_pet": 15,
+      "has_pet": 14,
       "royal_recognized": 2,
       "widowed": 1,
       "lover_death": 1,
       "avenger": 1,
-      "has_ally": 1,
-      "healer": 13,
-      "philanthropist": 12,
-      "mentor_legend": 3,
-      "master_mentor": 8,
-      "peaceful_retirement": 6,
-      "memoir_written": 8,
+      "has_ally": 3,
+      "healer": 8,
+      "philanthropist": 8,
+      "memoir_written": 4,
+      "peaceful_retirement": 9,
+      "mentor_legend": 7,
+      "famous_author": 8,
       "war_hero": 10,
-      "treasure_hunter": 5,
+      "prophet_dream": 1,
       "forest_healer": 3,
-      "curse_breaker": 1,
-      "power_sealed": 3,
-      "friend_reunion_done": 25,
-      "school_founder": 6,
-      "kingdom_hero": 4,
-      "star_song_master": 7,
-      "elf_sage_council": 6,
-      "legacy_passed": 5,
+      "curse_breaker": 3,
+      "merchant_apprentice": 10,
+      "on_merchant_path": 10,
+      "guild_member": 9,
+      "justice_lover": 7,
+      "star_song_master": 8,
+      "inherited_wealth": 5,
+      "guild_founder": 5,
+      "mysterious_encounter": 7,
+      "treasure_hunter": 7,
+      "dark_ritual": 6,
+      "dark_cult_investigated": 5,
+      "dark_cult_resolved": 5,
+      "elf_sage_council": 8,
+      "elf_worldtree_child": 3,
       "world_tree_blessed": 5,
-      "eloped": 1,
-      "inner_peace": 8,
-      "archmage": 4,
+      "dirty_player": 10,
+      "has_successor": 21,
+      "prophet": 10,
       "diplomat": 5,
+      "dragon_rider": 8,
       "worldtree_candidate": 4,
-      "dragon_rider": 6,
-      "bullied": 11,
-      "bullied_child": 11,
-      "fight_back": 2,
-      "dungeon_first": 13,
-      "info_broker": 2,
-      "has_successor": 22,
+      "dragon_awakened": 4,
+      "engaged": 3,
+      "wedding_grand": 1,
+      "dark_mage": 9,
+      "famous_inventor": 4,
+      "inventor_fame": 1,
+      "friend_reunion_done": 29,
       "goblin_sage": 2,
-      "true_friend": 5,
+      "school_founder": 5,
+      "tough_spirit": 6,
+      "iron_will": 6,
       "shaman_apprentice": 2,
-      "guild_member": 3,
-      "on_adventurer_path": 3,
-      "dwarf_master_smith": 1,
-      "dark_path": 3,
-      "famous_hunter": 2,
-      "homeowner": 4,
-      "lucky_gambler": 1,
-      "undying_legend": 1,
-      "dwarf_hold_defender": 8,
-      "dwarf_has_masterwork": 6,
-      "dwarf_has_apprentice": 8,
-      "noble_conflict": 3,
-      "promise_keeper": 1,
-      "dwarf_master_miner": 2,
-      "prophet": 7,
-      "author": 6,
-      "herbal_knowledge": 3,
-      "merchant_apprentice": 4,
-      "on_merchant_path": 4,
-      "economic_genius": 2,
-      "cheated_death": 3,
-      "engaged": 4,
+      "bullied": 18,
+      "bullied_child": 18,
+      "timid": 8,
+      "deep_observer": 8,
+      "bullied_repeat": 6,
+      "parental_help": 6,
+      "dungeon_first": 8,
+      "fighter_spirit": 7,
+      "herbal_knowledge": 11,
       "heartbroken": 7,
-      "timid": 3,
-      "deep_observer": 3,
+      "dwarf_dragon_vow": 1,
+      "old_enemy_defeated": 2,
+      "cheated_death": 2,
+      "dwarf_hold_defender": 8,
+      "dwarf_has_apprentice": 8,
+      "founder": 3,
+      "dwarf_master_miner": 3,
+      "noble_conflict": 3,
+      "dwarf_has_masterwork": 4,
+      "on_adventurer_path": 3,
       "magic_student": 3,
       "on_mage_path": 3,
-      "fighter_spirit": 2,
-      "mage_graduate": 3,
-      "forbidden_knowledge": 2,
-      "elemental_lord": 1,
-      "tavern_fighter": 2,
-      "justice_lover": 6,
-      "guild_founder": 1,
-      "dark_ritual": 4,
+      "mage_graduate": 1,
+      "enlightened": 2,
+      "smart_seeker": 5,
+      "emotional_magic": 1,
+      "author": 5,
       "smith_apprentice": 1,
-      "dark_mage": 5,
-      "elf_worldtree_child": 3,
-      "truth_seeker": 4,
+      "planted_seed_at_tree": 2,
+      "fight_back": 2,
+      "truth_seeker": 5,
       "forest_investigator": 2,
       "elf_reclusive": 2,
-      "lottery_winner": 2,
+      "miracle_survival": 6,
       "dragon_omen_birth": 1,
-      "death_pact": 3,
-      "dwarf_master_keeper": 3,
-      "tough_spirit": 4,
-      "iron_will": 4,
+      "true_friend": 3,
+      "tavern_fighter": 3,
+      "spirit_ascended": 2,
+      "noble_grudge": 2,
       "never_give_up": 2,
-      "mysterious_encounter": 3,
-      "bullied_repeat": 1,
-      "parental_help": 1,
-      "orator": 4,
-      "master_disciple": 3,
-      "dirty_player": 1,
-      "death_accepted": 1,
-      "smart_seeker": 1,
-      "old_enemy_defeated": 1,
-      "pioneer": 2,
+      "master_mentor": 5,
+      "orator": 2,
+      "pioneer": 1,
+      "economic_genius": 1,
+      "undying_legend": 1,
+      "kingdom_hero": 1,
+      "inner_peace": 3,
       "elf_starborn": 1,
-      "elf_star_apprentice": 1,
-      "political_player": 1,
-      "planted_seed_at_tree": 1,
-      "rogue_contact": 2,
-      "dark_cult_investigated": 2,
-      "chosen_one": 1,
-      "founder": 1,
-      "enlightened": 1,
-      "tower_master": 1,
-      "dark_cult_resolved": 1,
+      "forbidden_knowledge": 3,
+      "demon_king_slayer": 1,
+      "spirit_companion": 2,
+      "info_broker": 1,
+      "dwarf_master_keeper": 1,
+      "abyss_walker": 1,
+      "death_pact": 3,
+      "quiet_end": 1,
+      "world_tree_empowered": 1,
+      "lucky_coin": 1,
       "goblin_merchant_king": 1,
-      "dwarf_reliable_name": 1,
+      "homeowner": 1,
+      "business_tycoon": 1,
+      "goblin_mechanic": 1,
       "cursed": 1,
-      "village_exiled": 1
+      "village_exiled": 1,
+      "migration_accepted": 1
     },
     "flagCheckCount": {
       "guild_member": 50,
@@ -2535,7 +2535,7 @@
       "timid": 50,
       "noble_birth": 50,
       "village_exiled": 50,
-      "squire": 46,
+      "squire": 49,
       "wandering_survived": 3,
       "first_love": 50,
       "dungeon_first": 50,
@@ -2549,25 +2549,25 @@
       "soul_corrupted": 50,
       "engaged": 50,
       "dating_deepen": 50,
-      "enlightened": 49,
+      "enlightened": 50,
       "underworld_contact": 50,
       "lover_at_war": 50,
-      "protect_family": 32,
+      "protect_family": 28,
       "dark_cult_investigated": 50,
-      "chosen_one": 49,
-      "death_accepted": 49,
-      "prophet": 40,
-      "mana_burned": 40,
-      "orator": 49,
-      "dragon_grown": 49,
-      "avenger": 49,
-      "revenge_clue_found": 49,
-      "elemental_master": 48,
-      "researcher": 48,
-      "friend_reunion_done": 48,
+      "chosen_one": 50,
+      "death_accepted": 50,
+      "prophet": 49,
+      "mana_burned": 49,
+      "orator": 50,
+      "dragon_grown": 50,
+      "avenger": 50,
+      "revenge_clue_found": 50,
+      "elemental_master": 50,
+      "researcher": 50,
+      "friend_reunion_done": 50,
       "war_veteran": 8,
-      "eloped": 22,
-      "soul_bound": 19,
+      "eloped": 15,
+      "soul_bound": 13,
       "forgiveness": 1,
       "world_tree_blessed": 8,
       "worldtree_candidate": 8,
@@ -2581,19 +2581,20 @@
       "elf_archive_apprentice": 8,
       "elf_sapling_oath": 8,
       "elf_star_apprentice": 8,
-      "elf_canopy_guardian": 7,
-      "elf_memory_curator": 7,
-      "elf_astral_student": 7,
-      "curse_breaker": 18,
-      "elf_memory_garden_seed": 6,
-      "elf_forest_keeper": 6,
-      "elf_memory_garden_keeper": 6,
-      "elf_star_chronicler": 6,
+      "elf_canopy_guardian": 8,
+      "elf_memory_curator": 8,
+      "elf_astral_student": 8,
+      "elf_memory_garden_seed": 8,
+      "elf_forest_keeper": 8,
+      "elf_memory_garden_keeper": 8,
+      "dark_cult_resolved": 5,
+      "elf_star_chronicler": 8,
       "goblin_merchant_king": 8,
       "goblin_mechanic": 8,
       "goblin_sage": 8,
       "info_broker": 8,
       "pioneer": 8,
+      "curse_breaker": 24,
       "dwarf_dragon_vow": 8,
       "dwarf_has_masterwork": 8,
       "dwarf_hold_defender": 8,
@@ -2604,8 +2605,7 @@
       "dwarf_master_keeper": 8,
       "dwarf_born_at_forge": 8,
       "dwarf_reliable_name": 8,
-      "magic_academy": 3,
-      "dark_cult_resolved": 2,
+      "magic_academy": 1,
       "migration_accepted": 1
     }
   },
@@ -2773,8 +2773,8 @@
     "emotional_magic": {
       "setterEventId": "magic_burst_baby",
       "ageRange": [
-        3,
-        5
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2783,8 +2783,8 @@
     "early_magic_control": {
       "setterEventId": "magic_burst_baby",
       "ageRange": [
-        3,
-        5
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2793,8 +2793,8 @@
     "bullied": {
       "setterEventId": "bullied",
       "ageRange": [
-        3,
-        6
+        null,
+        null
       ],
       "prerequisites": [
         "bullied_child"
@@ -2805,8 +2805,8 @@
     "bullied_child": {
       "setterEventId": "bullied",
       "ageRange": [
-        3,
-        6
+        null,
+        null
       ],
       "prerequisites": [
         "bullied_child"
@@ -2817,8 +2817,8 @@
     "timid": {
       "setterEventId": "bullied",
       "ageRange": [
-        3,
-        6
+        null,
+        null
       ],
       "prerequisites": [
         "bullied_child"
@@ -2829,8 +2829,8 @@
     "deep_observer": {
       "setterEventId": "bullied",
       "ageRange": [
-        3,
-        6
+        null,
+        null
       ],
       "prerequisites": [
         "bullied_child"
@@ -2841,8 +2841,8 @@
     "fight_back": {
       "setterEventId": "bullied",
       "ageRange": [
-        3,
-        6
+        null,
+        null
       ],
       "prerequisites": [
         "bullied_child"
@@ -2853,8 +2853,8 @@
     "fairy_friend": {
       "setterEventId": "fairy_encounter",
       "ageRange": [
-        5,
-        6
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2863,8 +2863,8 @@
     "bullied_repeat": {
       "setterEventId": "bullied_repeat",
       "ageRange": [
-        4,
-        8
+        null,
+        null
       ],
       "prerequisites": [
         "timid",
@@ -2876,8 +2876,8 @@
     "timid_deep": {
       "setterEventId": "bullied_repeat",
       "ageRange": [
-        4,
-        8
+        null,
+        null
       ],
       "prerequisites": [
         "timid",
@@ -2889,8 +2889,8 @@
     "parental_help": {
       "setterEventId": "bullied_repeat",
       "ageRange": [
-        4,
-        8
+        null,
+        null
       ],
       "prerequisites": [
         "timid",
@@ -2902,8 +2902,8 @@
     "brave": {
       "setterEventId": "stand_up_moment",
       "ageRange": [
-        6,
-        10
+        null,
+        null
       ],
       "prerequisites": [
         "timid"
@@ -2914,8 +2914,8 @@
     "smart_seeker": {
       "setterEventId": "stand_up_moment",
       "ageRange": [
-        6,
-        10
+        null,
+        null
       ],
       "prerequisites": [
         "timid"
@@ -2926,8 +2926,8 @@
     "noble_grudge": {
       "setterEventId": "noble_kid_revenge",
       "ageRange": [
-        5,
-        9
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2936,8 +2936,8 @@
     "noble_conflict": {
       "setterEventId": "noble_kid_revenge",
       "ageRange": [
-        5,
-        9
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2946,8 +2946,8 @@
     "dirty_player": {
       "setterEventId": "first_competition",
       "ageRange": [
-        6,
-        10
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2956,8 +2956,8 @@
     "herbal_knowledge": {
       "setterEventId": "grandma_recipes",
       "ageRange": [
-        5,
-        9
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -2966,8 +2966,8 @@
     "magic_student": {
       "setterEventId": "magic_academy_letter",
       "ageRange": [
-        7,
-        10
+        null,
+        null
       ],
       "prerequisites": [
         "magic_student",
@@ -3019,8 +3019,8 @@
     "noble_educated": {
       "setterEventId": "noble_etiquette_class",
       "ageRange": [
-        6,
-        10
+        null,
+        null
       ],
       "prerequisites": [
         "noble_birth"
@@ -3031,8 +3031,8 @@
     "has_pet": {
       "setterEventId": "child_stray_animal",
       "ageRange": [
-        4,
-        9
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3041,8 +3041,8 @@
     "fighter_spirit": {
       "setterEventId": "child_first_fight",
       "ageRange": [
-        5,
-        10
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3223,8 +3223,8 @@
     "merchant_apprentice": {
       "setterEventId": "merchant_apprentice",
       "ageRange": [
-        14,
-        20
+        null,
+        null
       ],
       "prerequisites": [
         "magic_student",
@@ -3286,8 +3286,8 @@
     "social_star": {
       "setterEventId": "noble_social_debut",
       "ageRange": [
-        16,
-        20
+        null,
+        null
       ],
       "prerequisites": [
         "noble_birth"
@@ -3360,8 +3360,8 @@
     "inherited_wealth": {
       "setterEventId": "mny_inherit_uncle",
       "ageRange": [
-        15,
-        22
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3370,8 +3370,8 @@
     "philanthropist": {
       "setterEventId": "mny_inherit_uncle",
       "ageRange": [
-        15,
-        22
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3481,8 +3481,8 @@
     "has_student": {
       "setterEventId": "secret_master",
       "ageRange": [
-        15,
-        22
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3491,8 +3491,8 @@
     "dragon_awakened": {
       "setterEventId": "talent_awakening",
       "ageRange": [
-        16,
-        22
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -3516,8 +3516,8 @@
     "guild_member": {
       "setterEventId": "guild_recruitment",
       "ageRange": [
-        14,
-        18
+        null,
+        null
       ],
       "prerequisites": [
         "guild_member",
@@ -3669,8 +3669,8 @@
     "migration_accepted": {
       "setterEventId": "cursed_wanderer_forced_migration",
       "ageRange": [
-        14,
-        22
+        null,
+        null
       ],
       "prerequisites": [
         "village_exiled",
@@ -4067,8 +4067,8 @@
     "noble_combat_trained": {
       "setterEventId": "noble_sword_training",
       "ageRange": [
-        12,
-        15
+        null,
+        null
       ],
       "prerequisites": [
         "noble_birth",
@@ -4121,8 +4121,8 @@
     "dragon_slayer": {
       "setterEventId": "dragon_slay_attempt",
       "ageRange": [
-        28,
-        38
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4138,8 +4138,8 @@
     "dragon_defeated": {
       "setterEventId": "dragon_slay_attempt",
       "ageRange": [
-        28,
-        38
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4148,8 +4148,8 @@
     "married": {
       "setterEventId": "marry_noble",
       "ageRange": [
-        25,
-        30
+        null,
+        null
       ],
       "prerequisites": [
         "knight",
@@ -4165,8 +4165,8 @@
     "refused_marriage": {
       "setterEventId": "marry_noble",
       "ageRange": [
-        25,
-        30
+        null,
+        null
       ],
       "prerequisites": [
         "knight",
@@ -4182,8 +4182,8 @@
     "engaged": {
       "setterEventId": "marry_adventurer",
       "ageRange": [
-        22,
-        30
+        null,
+        null
       ],
       "prerequisites": [
         "engaged",
@@ -4197,8 +4197,8 @@
     "parent": {
       "setterEventId": "adult_first_child",
       "ageRange": [
-        24,
-        42
+        null,
+        null
       ],
       "prerequisites": [
         "married",
@@ -4211,8 +4211,8 @@
     "merchant_master": {
       "setterEventId": "merchant_career",
       "ageRange": [
-        22,
-        30
+        null,
+        null
       ],
       "prerequisites": [
         "merchant_apprentice"
@@ -4338,8 +4338,8 @@
     "inventor_fame": {
       "setterEventId": "reincarnated_invention",
       "ageRange": [
-        30,
-        40
+        null,
+        null
       ],
       "prerequisites": [
         "married"
@@ -4551,8 +4551,8 @@
     "guild_founder": {
       "setterEventId": "merchant_guild",
       "ageRange": [
-        25,
-        45
+        null,
+        null
       ],
       "prerequisites": [
         "merchant_apprentice"
@@ -4587,8 +4587,8 @@
     "famous_hunter": {
       "setterEventId": "adv_bounty",
       "ageRange": [
-        22,
-        45
+        null,
+        null
       ],
       "prerequisites": [
         "guild_member",
@@ -4603,8 +4603,8 @@
     "pioneer": {
       "setterEventId": "adv_uncharted",
       "ageRange": [
-        20,
-        40
+        null,
+        null
       ],
       "prerequisites": [
         "guild_member",
@@ -4627,8 +4627,8 @@
     "underworld_contact": {
       "setterEventId": "dual_merchant_spy",
       "ageRange": [
-        25,
-        45
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4769,8 +4769,8 @@
     "soul_bound": {
       "setterEventId": "soul_bound",
       "ageRange": [
-        20,
-        35
+        null,
+        null
       ],
       "prerequisites": [
         "dating",
@@ -4785,8 +4785,8 @@
     "wedding_grand": {
       "setterEventId": "wedding_ceremony",
       "ageRange": [
-        22,
-        38
+        null,
+        null
       ],
       "prerequisites": [
         "engaged",
@@ -4808,8 +4808,8 @@
     "rogue_contact": {
       "setterEventId": "mercenary_contract",
       "ageRange": [
-        22,
-        40
+        null,
+        null
       ],
       "prerequisites": [
         "lord",
@@ -4823,8 +4823,8 @@
     "dark_ritual": {
       "setterEventId": "dark_cult_encounter",
       "ageRange": [
-        25,
-        45
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4833,8 +4833,8 @@
     "dark_cult_investigated": {
       "setterEventId": "dark_cult_encounter",
       "ageRange": [
-        25,
-        45
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4843,8 +4843,8 @@
     "dark_cult_resolved": {
       "setterEventId": "dark_cult_aftermath",
       "ageRange": [
-        28,
-        40
+        null,
+        null
       ],
       "prerequisites": [
         "dark_cult_investigated",
@@ -4856,8 +4856,8 @@
     "business_owner": {
       "setterEventId": "business_venture",
       "ageRange": [
-        26,
-        45
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -4866,8 +4866,8 @@
     "dragon_rider": {
       "setterEventId": "rare_dragon_egg",
       "ageRange": [
-        20,
-        40
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5044,8 +5044,8 @@
     "world_breaking": {
       "setterEventId": "world_breaking_start",
       "ageRange": [
-        50,
-        60
+        null,
+        null
       ],
       "prerequisites": [
         "knight",
@@ -5057,8 +5057,8 @@
     "peaceful_retirement": {
       "setterEventId": "retirement",
       "ageRange": [
-        60,
-        70
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5067,8 +5067,8 @@
     "never_retired": {
       "setterEventId": "retirement",
       "ageRange": [
-        60,
-        70
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5127,8 +5127,8 @@
     "great_parent": {
       "setterEventId": "mid_heir_training",
       "ageRange": [
-        35,
-        50
+        null,
+        null
       ],
       "prerequisites": [
         "parent"
@@ -5149,8 +5149,8 @@
     "founder": {
       "setterEventId": "mid_found_school",
       "ageRange": [
-        35,
-        55
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5335,8 +5335,8 @@
     "tough_spirit": {
       "setterEventId": "mid_chronic_pain",
       "ageRange": [
-        45,
-        60
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5345,8 +5345,8 @@
     "iron_will": {
       "setterEventId": "mid_chronic_pain",
       "ageRange": [
-        45,
-        60
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5355,8 +5355,8 @@
     "friend_reunion_done": {
       "setterEventId": "mid_old_friend_reunion",
       "ageRange": [
-        35,
-        55
+        null,
+        null
       ],
       "prerequisites": [
         "friend_reunion_done"
@@ -5421,8 +5421,8 @@
     "transcendent": {
       "setterEventId": "magic_breakthrough_final",
       "ageRange": [
-        70,
-        90
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5431,8 +5431,8 @@
     "memoir_written": {
       "setterEventId": "elder_memoir",
       "ageRange": [
-        55,
-        90
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5441,8 +5441,8 @@
     "undying_legend": {
       "setterEventId": "elder_last_adventure",
       "ageRange": [
-        55,
-        70
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5451,8 +5451,8 @@
     "mentor_legend": {
       "setterEventId": "elder_last_adventure",
       "ageRange": [
-        55,
-        70
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5461,8 +5461,8 @@
     "spirit_ascended": {
       "setterEventId": "elder_spirit_trial",
       "ageRange": [
-        55,
-        90
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5471,8 +5471,8 @@
     "legend_legacy": {
       "setterEventId": "elder_legacy_gift",
       "ageRange": [
-        55,
-        90
+        null,
+        null
       ],
       "prerequisites": [
         "dragon_slayer",
@@ -5487,8 +5487,8 @@
     "kingdom_hero": {
       "setterEventId": "elder_kingdom_crisis",
       "ageRange": [
-        55,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5497,8 +5497,8 @@
     "eternal_glory": {
       "setterEventId": "elder_final_counting",
       "ageRange": [
-        65,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5507,8 +5507,8 @@
     "peaceful_end": {
       "setterEventId": "elder_final_counting",
       "ageRange": [
-        65,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5517,8 +5517,8 @@
     "warriors_death": {
       "setterEventId": "elder_final_counting",
       "ageRange": [
-        65,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5527,8 +5527,8 @@
     "ascended": {
       "setterEventId": "elder_final_counting",
       "ageRange": [
-        65,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5537,8 +5537,8 @@
     "quiet_end": {
       "setterEventId": "elder_final_counting",
       "ageRange": [
-        65,
-        88
+        null,
+        null
       ],
       "prerequisites": [],
       "setterType": "branch_effect",
@@ -5547,8 +5547,8 @@
     "legendary_hero": {
       "setterEventId": "elder_legend_verified",
       "ageRange": [
-        80,
-        95
+        null,
+        null
       ],
       "prerequisites": [
         "dragon_defeated",
