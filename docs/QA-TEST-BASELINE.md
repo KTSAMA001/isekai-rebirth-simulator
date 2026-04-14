@@ -388,7 +388,7 @@ personalDeathProgress = Beta(8, 3)，clamp 到 [0.60, 0.92]
 | `magic_academy_enrollment` 魔法学院来信 | `mag ≥ 8` | 魔力 3 的角色不应触发 |
 | `magic_graduate` 魔法学院毕业 | `has.flag.magic_student & int ≥ 10` | 无 flag 或智力低不应触发 |
 | `dragon_slay_attempt` 讨伐巨龙 | `str ≥ 14 \| mag ≥ 14`（OR，任一即可） | 体魄 5 且魔力 5 的角色不应触发 |
-| `marry_noble` 政治联姻 | `chr ≥ 10 & mny ≥ 8 & (knight \| lord \| merchant_master)` | 魅力 3 无 flag 不应触发 |
+| `marry_noble` 政治联姻 | `(chr ≥ 10 & mny ≥ 8 & has.flag.knight) \| has.flag.lord \| has.flag.merchant_master`（DSL `&` 优先级高于 `\|`，lord/merchant_master 不需要属性门槛） | 魅力 3 无 flag 不应触发 |
 | `marriage_proposal` 求婚 | `has.flag.dating_deepen` | 没有 dating_deepen flag 不应触发 |
 | `adult_guild_promotion` 工会晋升 | `has.flag.guild_member`（+ 属性） | 无 flag 不应触发 |
 | `legend_spread` 传说的传播 | `(chr≥15 & dragon_slayer) \| knight_hero \| war_hero \| archmage \| (famous_inventor & knight) \| guild_member \| mage_graduate`（DSL 中 `&` 优先级高于 `\|`，无需 chr≥15 即可凭单一英雄/职业 flag 触发） | 拥有任一英雄/职业类 flag 即可能触发 |
@@ -459,7 +459,7 @@ personalDeathProgress = Beta(8, 3)，clamp 到 [0.60, 0.92]
 #### 验证方法
 
 1. **前后对比法**：记录事件触发前的角色状态（HP、属性、flag 列表、物品列表），触发后对比是否发生了预期变化
-2. **Effect 审查法**：检查事件的 `effects` 数组是否为空或缺少关键效果类型（`modify_hp`、`modify_attribute`、`set_flag`、`add_item`）
+2. **Effect 审查法**：检查事件的 `effects` 数组是否为空或缺少关键效果类型（`modify_hp`、`modify_attribute`、`set_flag`、`grant_item`）
 3. **Flag 传播验证**：设了 flag 的事件触发后，依赖该 flag 的后续事件是否在正确时机被触发
 4. **物品落地验证**：获得物品的事件触发后，检查物品是否出现在物品栏中，且是否实际生效（如 HP 恢复加成）
 
