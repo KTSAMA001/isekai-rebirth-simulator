@@ -20,7 +20,7 @@
     "剑与魔法"
   ],
   "maxAge": 60,
-  "initialPoints": 20,
+  "initialPoints": 10,
   "talentDraftCount": 10,
   "talentSelectCount": 3,
   "files": {

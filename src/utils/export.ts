@@ -140,22 +140,65 @@ export function exportAsText(state: GameState, world?: WorldInstance): void {
 /** 复制编年史到剪贴板 */
 export async function copyChronicleToClipboard(state: GameState, world?: WorldInstance): Promise<boolean> {
   const text = generateChronicle(state, world)
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  } catch {
-    return false
-  }
+  return copyTextToClipboard(text)
 }
 
 /** 复制任意文本到剪贴板 */
 export async function copyTextToClipboard(text: string): Promise<boolean> {
+  // 1. 优先使用 Clipboard API
   try {
     await navigator.clipboard.writeText(text)
     return true
   } catch {
+    // 2. fallback: execCommand("copy")
+    try {
+      const textarea = document.createElement('textarea')
+      textarea.value = text
+      textarea.style.position = 'fixed'
+      textarea.style.left = '-9999px'
+      textarea.style.top = '-9999px'
+      document.body.appendChild(textarea)
+      textarea.select()
+      const success = document.execCommand('copy')
+      document.body.removeChild(textarea)
+      if (success) return true
+    } catch {
+      // execCommand 也失败
+    }
+    // 3. 最终 fallback: 弹出 textarea 让用户手动复制
+    showManualCopyArea(text)
     return false
   }
+}
+
+/** 显示手动复制区域 */
+function showManualCopyArea(text: string): void {
+  const overlay = document.createElement('div')
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;'
+
+  const box = document.createElement('div')
+  box.style.cssText = 'background:#fff;padding:16px;border-radius:8px;max-width:80vw;max-height:80vh;display:flex;flex-direction:column;gap:8px;'
+
+  const msg = document.createElement('p')
+  msg.textContent = '自动复制失败，请手动选择下方文本并复制：'
+  msg.style.cssText = 'margin:0;color:#333;font-size:14px;'
+
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.readOnly = true
+  textarea.style.cssText = 'width:60vw;height:40vh;font-size:12px;resize:none;'
+
+  const btn = document.createElement('button')
+  btn.textContent = '关闭'
+  btn.style.cssText = 'align-self:flex-end;padding:6px 16px;cursor:pointer;'
+  btn.onclick = () => document.body.removeChild(overlay)
+
+  box.appendChild(msg)
+  box.appendChild(textarea)
+  box.appendChild(btn)
+  overlay.appendChild(box)
+  document.body.appendChild(overlay)
+  textarea.select()
 }
 
 // ==================== 工具函数 ====================

@@ -7,7 +7,7 @@
     "color": "#f472b6",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "social"
   },
   {
@@ -18,7 +18,7 @@
     "color": "#60a5fa",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "mental"
   },
   {
@@ -29,7 +29,7 @@
     "color": "#f87171",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "physical"
   },
   {
@@ -40,7 +40,7 @@
     "color": "#fbbf24",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "social"
   },
   {
@@ -51,7 +51,7 @@
     "color": "#a78bfa",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "mental"
   },
   {
@@ -62,7 +62,7 @@
     "color": "#c084fc",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "magical"
   },
   {
@@ -73,7 +73,7 @@
     "color": "#4ade80",
     "min": 0,
     "max": 99,
-    "defaultValue": 0,
+    "defaultValue": 5,
     "group": "special"
   }
 ]

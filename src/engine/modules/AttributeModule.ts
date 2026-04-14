@@ -37,7 +37,7 @@ export class AttributeModule {
       const newVal = base + allocated
       const actual = newVal - base
       used += Math.max(0, actual)
-      attrs[def.id] = newVal
+      attrs[def.id] = Math.max(0, newVal)
     }
 
     return {

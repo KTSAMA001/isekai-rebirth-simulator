@@ -40,12 +40,12 @@ describe('AttributeModule', () => {
       expect(result.remaining).toBe(10)
     })
 
-    it('属性无下限，可以为负数', () => {
+    it('出生属性下限保护，allocate 结果 clamp 到 0', () => {
       const mod = createModule()
       const current = { str: 2, int: 5, chr: 5, luk: 5, mag: 5, hp_display: 100 }
       const result = mod.allocate(current, { str: -10 }, 20)
-      // 不再 clamp，2 + (-10) = -8
-      expect(result.attributes.str).toBe(-8)
+      // 2 + (-10) = -8 → clamp 到 0
+      expect(result.attributes.str).toBe(0)
     })
 
     it('忽略 hidden 属性的分配', () => {
