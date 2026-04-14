@@ -7,7 +7,7 @@
  *   and_expr   := atom ( '&' atom )*
  *   atom       := '(' expression ')' | comparison
  *   comparison := identifier op value
- *   identifier := 'attribute.id' | 'age' | 'has.talent.id' | 'flag.name' |
+ *   identifier := 'attribute.id' | 'age' | 'lifeProgress' | 'has.talent.id' | 'flag.name' |
  *                 'event.count.id' | 'achievement.count' | 'lifespan' |
  *                 'result.score' | 'result.grade' | 'result.lifespan'
  *   op         := '==' | '!=' | '>=' | '<=' | '>' | '<'
@@ -111,6 +111,7 @@ export class ConditionDSL {
     }
     if (attr === 'hp') return `生命值 ${opText} ${value}`
     if (attr === 'age') return `年龄 ${opText} ${value}`
+    if (attr === 'lifeProgress') return `生命进度 ${opText} ${value}`
     if (attr.startsWith('counter.')) {
       const counterId = attr.substring('counter.'.length)
       return `${counterId} ${opText} ${value}`
@@ -178,6 +179,11 @@ export class ConditionDSL {
     }
     // age
     if (attr === 'age') return ctx.state.age
+    // lifeProgress — 生命进度 (0.0~1.0+)，基于 raceMaxLifespan
+    if (attr === 'lifeProgress') {
+      const maxLifespan = ctx.state.effectiveMaxAge ?? 100
+      return maxLifespan > 0 ? ctx.state.age / maxLifespan : 0
+    }
     // lifespan / result.lifespan — 实际活到的岁数；仅结算后可用
     if (attr === 'lifespan' || attr === 'result.lifespan') {
       return ctx.state.result?.lifespan ?? Number.NaN

@@ -242,7 +242,7 @@
         "type": "trigger_on_age",
         "target": "hp",
         "value": -20,
-        "age": 60,
+        "lifeProgress": 0.60,
         "description": "寿命损耗"
       }
     ],

@@ -249,10 +249,11 @@ describe('数据文件校验', () => {
       const midlifeReview = allEvents.find((e: any) => e.id === 'mid_legacy_review')
 
       expect(centenarianEvent).toBeDefined()
-      expect(centenarianEvent.races).toEqual(['human'])
+      // Phase 2: 百岁庆典改为百分比语义，minAge=100 视为人类百分比
+      // 对于非人类种族，由于心理年龄 cap (tag=life)，事件不会触发
       expect(centenarianEvent.minAge).toBe(100)
       expect(centenarianEvent.maxAge).toBe(100)
-      expect(centenarianEvent.include).toBe('age == 100')
+      expect(centenarianEvent.include).toBe('lifeProgress >= 1.0')
 
       expect(midlifeReview).toBeDefined()
       expect(midlifeReview.description).not.toContain('五十岁')

@@ -113,7 +113,10 @@ export interface TalentEffect {
   type: 'modify_attribute' | 'add_event' | 'trigger_on_age' | 'multiply_attribute'
   target: string
   value?: number
+  /** 绝对年龄触发（种族专属天赋用） */
   age?: number
+  /** 百分比生命进度触发（0.0~1.0，跨种族通用） */
+  lifeProgress?: number
   condition?: string
   probability?: number
   description: string

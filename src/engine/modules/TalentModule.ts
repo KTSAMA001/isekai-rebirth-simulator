@@ -167,9 +167,20 @@ export class TalentModule {
       if (!def) continue
 
       for (const effect of def.effects) {
-        // trigger_on_age 类型：检查年龄匹配
-        if (effect.type === 'trigger_on_age' && effect.age === age) {
-          effects.push(effect)
+        // trigger_on_age 类型：检查触发条件
+        if (effect.type === 'trigger_on_age') {
+          // 百分比生命进度触发（跨种族通用）
+          if (effect.lifeProgress !== undefined) {
+            const maxLifespan = state.effectiveMaxAge ?? 100
+            const currentProgress = maxLifespan > 0 ? age / maxLifespan : 0
+            if (currentProgress >= effect.lifeProgress && (age - 1) / maxLifespan < effect.lifeProgress) {
+              effects.push(effect)
+            }
+          }
+          // 绝对年龄触发（种族专属）
+          else if (effect.age !== undefined && effect.age === age) {
+            effects.push(effect)
+          }
         }
       }
     }

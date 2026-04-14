@@ -1492,7 +1492,7 @@
     "title": "最后的病榻",
     "description": "一场突如其来的重病将你击倒在床。高烧不退，呼吸困难。医生们表情凝重地交换着眼神——这一次，恐怕不只是普通的感冒。",
     "weight": 5,
-    "include": "age >= 72 & hp <= 35",
+    "include": "lifeProgress >= 0.72 & hp <= 35",
     "effects": [],
     "branches": [
       {
@@ -1872,7 +1872,7 @@
     "minAge": 100,
     "maxAge": 100,
     "weight": 8,
-    "include": "age == 100",
+    "include": "lifeProgress >= 1.0",
     "unique": true,
     "tag": "life",
     "priority": "major",

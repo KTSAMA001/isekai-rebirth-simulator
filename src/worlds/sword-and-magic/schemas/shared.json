@@ -13,7 +13,8 @@
       "probability": { "type": "number", "minimum": 0, "maximum": 1 },
       "condition": { "type": "string" },
       "description": { "type": "string" },
-      "age": { "type": "integer" }
+      "age": { "type": "integer" },
+      "lifeProgress": { "type": "number", "minimum": 0, "maximum": 1 }
     }
   },
 
