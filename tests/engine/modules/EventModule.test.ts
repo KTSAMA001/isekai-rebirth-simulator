@@ -111,15 +111,16 @@ describe('EventModule', () => {
       expect(candidates).toHaveLength(1) // 不缩放，age=1 仍在 [0,1] 范围
     })
 
-    it('通用事件使用绝对年龄范围', () => {
-      // 新版使用生命阶段系统，通用事件不再按寿命比例缩放
+    it('通用事件使用百分比换算', () => {
+      // Phase 1: 通用事件的 minAge/maxAge 视为人类百分比，换算为种族实际年龄
       const events = [makeEvent('adult_event', { minAge: 20, maxAge: 30 })]
       const { module } = createModule(events)
-      // age=120 超出了 [20, 30]，不匹配
+      // 精灵 maxLifespan=500，minAge=20→100, maxAge=30→150
       const state = makeState({ age: 120, effectiveMaxAge: 500, character: { name: '测试', race: 'elf' } })
-      expect(module.getCandidates(120, state)).toHaveLength(0)
-      // age=25 在 [20, 30] 内，匹配
-      expect(module.getCandidates(25, state)).toHaveLength(1)
+      // age=120 在 [100, 150] 内，匹配
+      expect(module.getCandidates(120, state)).toHaveLength(1)
+      // age=25 低于 [100, 150]，不匹配
+      expect(module.getCandidates(25, state)).toHaveLength(0)
     })
   })
 

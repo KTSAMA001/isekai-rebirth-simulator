@@ -1027,7 +1027,17 @@ export class SimulationEngine {
       if (!anchor.mandatory) continue
       const anchorKey = `${this.activeRoute.id}:${anchor.eventId}`
       if (this.routeAnchorsTriggered.has(anchorKey)) continue
-      if (this.state.age < anchor.minAge || this.state.age > anchor.maxAge) continue
+      // 锚点 minAge/maxAge 视为人类百分比，换算为当前种族实际年龄
+      let anchorMin = anchor.minAge
+      let anchorMax = anchor.maxAge
+      if (this.raceMaxLifespan !== 100) {
+        anchorMin = Math.round((anchor.minAge / 100) * this.raceMaxLifespan)
+        anchorMax = Math.round((anchor.maxAge / 100) * this.raceMaxLifespan)
+        // 短寿命保护
+        anchorMin = Math.max(anchorMin, Math.floor(anchor.minAge * 0.5))
+        anchorMax = Math.max(anchorMax, anchorMin)
+      }
+      if (this.state.age < anchorMin || this.state.age > anchorMax) continue
       // 检查事件是否满足条件
       const event = this.world.index.eventsById.get(anchor.eventId)
       if (!event) continue

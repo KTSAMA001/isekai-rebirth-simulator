@@ -155,22 +155,62 @@ function checkAgeRange(
   world: WorldInstance,
 ): Violation[] {
   const violations: Violation[] = []
+  const raceDef = world.races?.find(r => r.id === result.race)
+  const raceMaxLifespan = raceDef?.maxLifespan ?? 100
+
   for (const evt of result.events) {
     const def = world.index.eventsById.get(evt.eventId)
     if (!def) continue
 
-    // 允许 ±1 的容差（引擎可能在本年初就进入下一年）
-    if (evt.age < def.minAge || evt.age > def.maxAge + 1) {
+    // 计算事件的实际有效年龄范围（与引擎 EventModule.getEventAgeRange 一致）
+    let effectiveMin = def.minAge
+    let effectiveMax = def.maxAge
+
+    // birth 事件和种族专属事件不换算
+    const isBirth = def.maxAge <= 1
+    const isRaceSpecific = def.races && def.races.length > 0
+    const hasLifeStage = !!def.lifeStage
+    const hasLifeStages = def.lifeStages && def.lifeStages.length > 0
+
+    if (!isBirth && !isRaceSpecific && !hasLifeStage) {
+      // 百分比换算（与引擎逻辑一致）
+      if (raceMaxLifespan !== 100 && def.minAge !== undefined) {
+        let minProgress = def.minAge / 100
+        let maxProgress = def.maxAge / 100
+        // 心理年龄 cap
+        if (def.tag && ['life', 'romance', 'social'].includes(def.tag)) {
+          maxProgress = Math.min(maxProgress, 0.50)
+        }
+        effectiveMin = Math.round(minProgress * raceMaxLifespan)
+        effectiveMax = Math.round(maxProgress * raceMaxLifespan)
+        // 短寿命保护
+        effectiveMin = Math.max(effectiveMin, Math.floor(def.minAge * 0.5))
+        effectiveMax = Math.max(effectiveMax, effectiveMin)
+      }
+    }
+
+    // 单阶段事件用 lifeStages 边界
+    if (hasLifeStage && raceDef?.lifeStages?.[def.lifeStage!]) {
+      const [sMin, sMax] = raceDef.lifeStages[def.lifeStage!]!
+      const stageSpan = sMax - sMin
+      const minP = def.minStageProgress ?? 0
+      const maxP = def.maxStageProgress ?? 1
+      effectiveMin = Math.round(sMin + minP * stageSpan)
+      effectiveMax = Math.round(sMin + maxP * stageSpan)
+    }
+
+    // 允许 ±1 的容差
+    if (evt.age < effectiveMin || evt.age > effectiveMax + 1) {
       violations.push({
         checkId: 1,
-        severity: evt.age < def.minAge ? 'P1' : 'P2',
+        severity: evt.age < effectiveMin ? 'P1' : 'P2',
         race: result.race,
         seed: result.seed,
         age: evt.age,
         eventId: evt.eventId,
-        expected: `age ∈ [${def.minAge}, ${def.maxAge}]`,
+        expected: `age ∈ [${effectiveMin}, ${effectiveMax}]`,
         actual: `age = ${evt.age}`,
-        detail: `事件 "${evt.title}" (id=${evt.eventId}) 在 ${evt.age} 岁触发，但定义范围是 [${def.minAge}, ${def.maxAge}]`,
+        detail: `事件 "${evt.title}" (id=${evt.eventId}) 在 ${evt.age} 岁触发，但有效范围是 [${effectiveMin}, ${effectiveMax}]`,
       })
     }
   }

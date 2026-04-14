@@ -41,27 +41,30 @@ export class EventModule {
     this.itemModule = itemModule
   }
 
+  /** 人类基准寿命（百分比换算的分母） */
+  private static readonly HUMAN_BASE_LIFESPAN = 100
+  /** 心理年龄 cap 标签：这些标签的事件 maxProgress 不超过 0.50 */
+  private static readonly PSYCHOLOGY_CAPPED_TAGS = ['life', 'romance', 'social']
+  /** 心理年龄 cap 上限 */
+  private static readonly PSYCHOLOGY_CAP = 0.50
+
   /**
-   * 计算事件的触发年龄范围（基于生命阶段系统）
-   * - 种族专属事件（有 races 字段）：直接用 minAge/maxAge
+   * 计算事件的触发年龄范围（基于百分比系统）
+   * - 种族专属事件（有 races 字段）：直接用 minAge/maxAge（绝对年龄）
    * - birth 事件（maxAge <= 1）：直接用 minAge/maxAge
-   * - 跨阶段事件（有 lifeStages 数组）：用 minAge/maxAge
    * - 单阶段事件（有 lifeStage）：用 race.lifeStages 映射 + stageProgress
-   * - 兜底：用 minAge/maxAge
+   * - 跨阶段事件（有 lifeStages 数组）+ 兜底：minAge/maxAge 视为人类百分比，换算为当前种族实际年龄
+   *   - 心理年龄 cap：life/romance/social 事件 maxProgress 不超过 0.50
+   *   - 短寿命保护：缩放后 minAge 不低于原 minAge × 0.5
    */
-  private getEventAgeRange(event: WorldEventDef, raceDef: WorldRaceDef | undefined): [number, number] | null {
+  private getEventAgeRange(event: WorldEventDef, raceDef: WorldRaceDef | undefined, raceMaxLifespan: number): [number, number] | null {
     // 1. birth 事件
     if (event.maxAge <= 1) return [event.minAge, event.maxAge]
 
     // 2. 种族专属事件：直接用绝对年龄
     if (event.races && event.races.length > 0) return [event.minAge, event.maxAge]
 
-    // 3. 跨阶段事件：lifeStages 数组 + minAge/maxAge
-    if (event.lifeStages && event.lifeStages.length > 0 && event.minAge !== undefined) {
-      return [event.minAge, event.maxAge]
-    }
-
-    // 4. 单阶段事件：用种族阶段边界 + stageProgress
+    // 3. 单阶段事件：用种族阶段边界 + stageProgress
     if (event.lifeStage && raceDef?.lifeStages?.[event.lifeStage]) {
       const [sMin, sMax] = raceDef.lifeStages[event.lifeStage]!
       const stageSpan = sMax - sMin
@@ -73,8 +76,28 @@ export class EventModule {
       ]
     }
 
-    // 5. 兜底
-    if (event.minAge !== undefined) return [event.minAge, event.maxAge]
+    // 4. 跨阶段事件 + 兜底：百分比换算
+    if (event.minAge !== undefined) {
+      // 人类种族不需要换算（maxLifespan=100, minAge 本身就是人类年龄）
+      if (raceMaxLifespan === EventModule.HUMAN_BASE_LIFESPAN) {
+        return [event.minAge, event.maxAge]
+      }
+      // 事件 minAge/maxAge 视为人类百分比
+      let minProgress = event.minAge / EventModule.HUMAN_BASE_LIFESPAN
+      let maxProgress = event.maxAge / EventModule.HUMAN_BASE_LIFESPAN
+      // 心理年龄 cap：life/romance/social 事件 maxProgress 不超过 0.50
+      const tag = event.tag
+      if (tag && EventModule.PSYCHOLOGY_CAPPED_TAGS.includes(tag)) {
+        maxProgress = Math.min(maxProgress, EventModule.PSYCHOLOGY_CAP)
+      }
+      // 转换为当前种族的实际年龄
+      let scaledMin = Math.round(minProgress * raceMaxLifespan)
+      let scaledMax = Math.round(maxProgress * raceMaxLifespan)
+      // 短寿命保护：缩放后 minAge 不低于原 minAge × 0.5
+      scaledMin = Math.max(scaledMin, Math.floor(event.minAge * 0.5))
+      scaledMax = Math.max(scaledMax, scaledMin)
+      return [scaledMin, scaledMax]
+    }
 
     return null
   }
@@ -90,7 +113,7 @@ export class EventModule {
     return this.world.events.filter(event => {
       // 年龄范围（基于生命阶段系统）
       const raceDef = playerRace ? this.world.races?.find(r => r.id === playerRace) : undefined
-      const ageRange = this.getEventAgeRange(event, raceDef)
+      const ageRange = this.getEventAgeRange(event, raceDef, maxLifespan)
       if (ageRange && (age < ageRange[0] || age > ageRange[1])) return false
       // unique 事件去重
       if (event.unique && state.triggeredEvents.has(event.id)) return false
