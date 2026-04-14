@@ -52,11 +52,18 @@ SimulationEngine.simulateYear()
        └─ EvaluatorModule.calculate() — 最终评分 + 评语
 ```
 
-### 年龄缩放规则
+### 年龄缩放规则（百分比系统）
 
-- **出生事件** (maxAge ≤ 1)：不缩放
-- **种族专属事件** (`races: ["当前种族"]` 且仅一个种族)：不缩放，用种族实际年龄
-- **通用/多种族事件**：`minAge/maxAge × (effectiveMaxAge / 85)`，以人类 85 岁为基准
+事件的 `minAge`/`maxAge` 被视为**人类参考年龄**（百分比基准 = 100）。非人类种族按比例换算：`实际年龄 = minAge / 100 × raceMaxLifespan`
+
+四条路径（优先级从高到低）：
+1. **出生事件** (maxAge ≤ 1)：直接使用，不换算
+2. **种族专属事件** (有 `races` 字段)：绝对年龄，不换算
+3. **单阶段事件** (有 `lifeStage` 单值 + 种族有该阶段定义)：用 `raceDef.lifeStages[stage]` + `minStageProgress/maxStageProgress`
+4. **兜底** (跨阶段 / 无 stage)：`minAge/100 × raceMaxLifespan`
+   - 人类跳过换算（maxLifespan === 100 时直接返回原值）
+   - **心理年龄 cap**：`life`/`romance`/`social` 标签 → `maxProgress ≤ 0.50`
+   - **短寿命保护**：`scaledMin ≥ floor(event.minAge × 0.5)`
 
 ---
 
@@ -77,8 +84,8 @@ SimulationEngine.simulateYear()
 
 ### 事件文件按年龄段分配
 
-| 文件 | 年龄范围 | 说明 |
-|------|---------|------|
+| 文件 | 人类参考年龄 | 说明 |
+|------|-------------|------|
 | birth.json | 0-1 | 出生事件 |
 | childhood.json | 2-6 | 童年 |
 | teenager.json | 7-15 | 少年 |
@@ -87,7 +94,7 @@ SimulationEngine.simulateYear()
 | middle-age.json | 51-80 | 中年 |
 | elder.json | 81+ | 老年 |
 
-新事件的 `minAge` 决定它应该放入哪个文件。
+> ⚠️ 年龄值是人类参考年龄（百分比基准 = 100），非人类种族经过百分比换算。新事件的 `minAge` 决定放入哪个文件。
 
 ---
 
@@ -109,6 +116,7 @@ atom       := '(' expression ')' | has_expr | comparison
 | `attribute.<id>` | 当前属性值 | `attribute.str >= 20` |
 | `attribute.peak.<id>` | 属性历史峰值 | `attribute.peak.mag >= 50` |
 | `age` | 当前年龄 | `age >= 18` |
+| `lifeProgress` | 生命进度 = age / raceMaxLifespan | `lifeProgress >= 0.72` |
 | `lifespan` | 实际寿命（仅结算后可用） | `lifespan >= 80` |
 | `hp` | 当前 HP | `hp >= 50` |
 | `event.count.<id>` | 事件触发次数 | `event.count.battle >= 3` |
@@ -163,6 +171,12 @@ character.race == goblin & has.flag.merchant
 | `trigger_event` | 链式触发事件 | 事件ID | - |
 | `grant_item` | 获得物品 | 物品ID | - |
 | `modify_max_hp_bonus` | HP上限加成 | - | 增减值 |
+
+### EventEffect 中 trigger_on_age 新增字段
+
+| 字段 | 说明 | 示例 |
+|------|------|------|
+| `lifeProgress` | 按生命进度百分比触发（替代绝对 age） | `0.6` 表示 60% 寿命时触发 |
 
 公共可选字段：`probability`(0-1 生效概率), `condition`(DSL 条件), `description`(描述文本)
 
@@ -273,7 +287,7 @@ python3 scripts/content-tool.py add event
 - `draftWeight` 控制抽取权重（common=100, rare=10, legendary=1）
 - `requireRace/requireGender/requirePreset` 限定抽取条件
 - `mutuallyExclusive` 设置互斥天赋
-- effects 的 `type` 支持：`modify_attribute`, `multiply_attribute`, `add_event`, `trigger_on_age`
+- effects 的 `type` 支持：`modify_attribute`, `multiply_attribute`, `add_event`, `trigger_on_age`（支持 `lifeProgress` 字段）
 
 ---
 
@@ -343,15 +357,15 @@ npx vite
 
 ### 可用种族
 
-| ID | 名称 | 寿命(约) | 可玩 | 特点 |
-|----|------|----------|------|------|
-| human | 人类 | 80-90 | ✅ | 均衡 |
-| elf | 精灵 | 380-420 | ✅ | mag+8, int+5, str-5 |
-| goblin | 哥布林 | 30-36 | ✅ | luk+10, str-8, chr-6 |
-| dwarf | 矮人 | 160-180 | ✅ | str+8, mag-5 |
-| beastfolk | 兽人 | 60-68 | ❌ | str+10, mag-8 |
-| seaelf | 海精灵 | 450-490 | ❌ | mag+12, str-8 |
-| halfdragon | 半龙人 | 220-250 | ❌ | str+10, mag+8, chr-10 |
+| ID | 名称 | maxLifespan | lifespanRange | 可玩 | 特点 |
+|----|------|-------------|---------------|------|------|
+| human | 人类 | 100 | [65, 85] | ✅ | 均衡 |
+| elf | 精灵 | 500 | [250, 400] | ✅ | mag+8, int+5, str-5 |
+| goblin | 哥布林 | 60 | [20, 35] | ✅ | luk+10, str-8, chr-6 |
+| dwarf | 矮人 | 400 | [150, 250] | ✅ | str+8, mag-5 |
+| beastfolk | 兽人 | — | — | ❌ | str+10, mag-8 |
+| seaelf | 海精灵 | — | — | ❌ | mag+12, str-8 |
+| halfdragon | 半龙人 | — | — | ❌ | str+10, mag+8, chr-10 |
 
 > 寿命为近似范围（~10-18%浮动）。实际死亡由HP系统驱动，角色只要HP>0就可存活，甚至超过寿命上限。
 
@@ -366,6 +380,20 @@ npx vite
 | spr | 灵魂 | 精神/感知 |
 | mag | 魔力 | 魔法能力 |
 | luk | 运势 | 幸运/随机事件 |
+
+---
+
+## 关键常量
+
+| 常量 | 值 | 说明 |
+|------|----|------|
+| `HUMAN_BASE_LIFESPAN` | 100 | 人类参考寿命（百分比基准） |
+| `CHILDHOOD_DEATH_PROTECTION_AGE` | 10 | 10 岁以下死亡保护 |
+| `PSYCHOLOGY_CAP` | 0.50 | 心理年龄 cap（life/romance/social 标签） |
+| `SHORT_LIFESPAN_MIN_RATIO` | 0.5 | 短寿命保护系数 |
+| 死亡进度分布 | Beta(8,3) clamp [0.60, 0.92] | 每个角色衰老曲线不同 |
+| HP sigmoid 陡度 | K=12 | 衰减曲线陡度 |
+| HP 平台期 | raceMaxLifespan >= 200 && lifeProgress < 0.5 | 精灵/矮人 HP ≥ initHp×30% |
 
 ---
 

@@ -1,6 +1,6 @@
 # QA 最终全面测试报告
 
-> 生成时间: 2026-04-13T15:37:48.738Z
+> 生成时间: 2026-04-14T06:05:09.718Z
 > 测试版本: 4 可玩种族 × 3局（共 12 局）+ 6 条路线专项测试
 > 项目: isekai-rebirth-simulator
 
@@ -19,15 +19,15 @@
 | 1 | 人类-男-A | human | male | 58 | 37 | 0 | B(小有成就) | 240.7 | 57 | 1 | scholar | none→commoner@1; commoner→scholar@32 |
 | 2 | 人类-女-B | human | female | 71 | 46 | 0 | B(小有成就) | 256.1 | 70 | 1 | scholar | none→commoner@1; commoner→scholar@36 |
 | 3 | 人类-男-C | human | male | 74 | 49 | 0 | B(小有成就) | 258.5 | 73 | 1 | scholar | none→commoner@1; commoner→scholar@38 |
-| 4 | 精灵-女-A | elf | female | 347 | 43 | 0 | B(小有成就) | 244.7 | 139 | 208 | merchant | none→commoner@1; commoner→scholar@25; scholar→merchant@59 |
-| 5 | 精灵-男-B | elf | male | 276 | 31 | 0 | B(小有成就) | 228 | 119 | 157 | mage | none→commoner@1; commoner→scholar@31; scholar→mage@43 |
-| 6 | 精灵-女-C | elf | female | 351 | 28 | 0 | B(小有成就) | 224.5 | 134 | 217 | mage | none→commoner@1; commoner→mage@48 |
-| 7 | 哥布林-女-A | goblin | female | 47 | 34 | 0 | B(小有成就) | 236.8 | 47 | 0 | commoner | none→commoner@1 |
-| 8 | 哥布林-男-B | goblin | male | 47 | 25 | 0 | B(小有成就) | 255 | 47 | 0 | scholar | none→commoner@1; commoner→scholar@33 |
-| 9 | 哥布林-女-C | goblin | female | 42 | 34 | 0 | B(小有成就) | 263.1 | 42 | 0 | merchant | none→commoner@1; commoner→merchant@9 |
-| 10 | 矮人-男-A | dwarf | male | 337 | 49 | 0 | B(小有成就) | 216.3 | 141 | 196 | merchant | none→commoner@1; commoner→merchant@32 |
-| 11 | 矮人-女-B | dwarf | female | 283 | 40 | 0 | B(小有成就) | 202.9 | 111 | 172 | mage | none→commoner@1; commoner→mage@23 |
-| 12 | 矮人-男-C | dwarf | male | 309 | 58 | 0 | B(小有成就) | 241.9 | 142 | 167 | adventurer | none→commoner@1; commoner→adventurer@34 |
+| 4 | 精灵-女-A | elf | female | 344 | 43 | 0 | B(小有成就) | 243.7 | 344 | 0 | mage | none→commoner@1; commoner→mage@45 |
+| 5 | 精灵-男-B | elf | male | 291 | 31 | 0 | B(小有成就) | 248.7 | 291 | 0 | mage | none→commoner@1; commoner→mage@34 |
+| 6 | 精灵-女-C | elf | female | 360 | 28 | 0 | B(小有成就) | 252.8 | 360 | 0 | mage | none→commoner@1; commoner→mage@33 |
+| 7 | 哥布林-女-A | goblin | female | 44 | 34 | 0 | B(小有成就) | 264.3 | 44 | 0 | scholar | none→commoner@1; commoner→scholar@43 |
+| 8 | 哥布林-男-B | goblin | male | 43 | 25 | 0 | B(小有成就) | 239.8 | 43 | 0 | commoner | none→commoner@1 |
+| 9 | 哥布林-女-C | goblin | female | 42 | 34 | 0 | B(小有成就) | 233.8 | 42 | 0 | commoner | none→commoner@1 |
+| 10 | 矮人-男-A | dwarf | male | 350 | 49 | 0 | B(小有成就) | 244.5 | 324 | 26 | merchant | none→commoner@1; commoner→merchant@33 |
+| 11 | 矮人-女-B | dwarf | female | 293 | 40 | 0 | B(小有成就) | 248.6 | 290 | 3 | mage | none→commoner@1; commoner→mage@22 |
+| 12 | 矮人-男-C | dwarf | male | 307 | 58 | 0 | B(小有成就) | 246.5 | 304 | 3 | mage | none→commoner@1; commoner→mage@22 |
 
 ### 1.2 人类详情
 
@@ -194,481 +194,481 @@
 
 #### 精灵-女-A (seed=9011)
 
-- **寿命**: 347 / 500 (69.4%)
+- **寿命**: 344 / 500 (68.8%)
 - **初始HP**: 43
-- **HP范围**: 0 ~ 123
-- **评级**: B (小有成就), 分数=244.7
-- **事件触发**: 139 年有事件, 208 年平静, 137 个独立事件
-- **最大年HP损失**: -23, 最大年HP恢复: +23
-- **HP<50的年龄**: 1, 2, 7, 8, 9, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346
-- **路线**: merchant
-- **路线切换**: none→commoner @ age 1, commoner→scholar @ age 25, scholar→merchant @ age 59
-- **成就**: first_step, ten_lives, beauty_supreme, elf_forest_healer_ach, soul_pure, wisdom_peak, eternal_wanderer, longevity, dragon_knight, elf_dragon_bond, archmage_body, elf_worldtree_guardian, elf_star_song_ach, elf_magic_pinnacle, merchant_empire, centenarian, master_of_all, wealth_peak, elf_council_seat, legacy_master, elf_mentor_legacy, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle, miracle_afterglow
-- **物品**: lucky_charm, soul_gem
-- **HP里程碑**: age0=-1, age1=46, age5=50, age10=50, age15=65, age20=76
-  age50=63
-- **事件序列** (139 个):
+- **HP范围**: 0 ~ 201
+- **评级**: B (小有成就), 分数=243.7
+- **事件触发**: 344 年有事件, 0 年平静, 181 个独立事件
+- **最大年HP损失**: -33, 最大年HP恢复: +23
+- **HP<50的年龄**: 1, 2, 26, 27, 29, 30, 31, 32, 33, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343
+- **路线**: mage
+- **路线切换**: none→commoner @ age 1, commoner→mage @ age 45
+- **成就**: first_step, ten_lives, elf_worldtree_blessed, elf_spirit_bond, soul_pure, elf_star_song_ach, archmage_body, elf_forest_healer_ach, beauty_supreme, scholar_warrior, elf_magic_pinnacle, wisdom_peak, mage_path, iron_body, tower_master_ach, cheated_death_ach, dragon_knight, elf_dragon_bond, elf_council_seat, demon_king_slayer_ach, divine_champion_ach, elemental_lord_ach, archmage_ach, female_archmage, war_hero_ach, legacy_master, elf_mentor_legacy, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle, miracle_afterglow
+- **物品**: soul_gem
+- **HP里程碑**: age0=-1, age1=46, age5=50, age10=53, age15=53, age20=53
+  age50=86
+- **事件序列** (344 个):
   - age 1: [birth_storm] 暴风夜  HP:43→46(+3)
   - age 2: [elf_moonlight_lullaby] 月光摇篮曲  HP:46→49(+3)
   - age 3: [elf_starlight_bath] 星光沐浴 (→ 平静地接受洗礼) HP:49→50(+1)
   - age 4: [elf_animal_friend] 林间小鹿  HP:50→50(+0)
-  - age 5: [elf_butterfly_dance] 蝶舞课堂  HP:50→50(+0)
-  - age 6: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:50→53(+3)
-  - age 7: [elf_elvish_calligraphy] 古精灵文书法课 (→ 专注练字，追求完美) HP:53→47(-6)
-  - age 8: [village_feud] 村长之争 (→ 帮弱者说话) HP:47→47(+0)
-  - age 9: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:47→47(+0)
-  - age 10: [random_training_day] 勤奋的一天 (→ 训练体能) HP:47→50(+3)
-  - age 11: [old_soldier_story] 老兵的故事 (→ 认真听完) HP:50→53(+3)
-  - age 12: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:53→56(+3)
-  - age 13: [rival_training] 与对手切磋 (→ 接受挑战) HP:56→59(+3)
-  - age 14: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:59→62(+3)
-  - age 15: [elf_dream_walker] 梦境行走  HP:62→65(+3)
-  - age 16: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:65→67(+2)
-  - age 17: [youth_caravan_guard] 商队护卫 (→ 报名参加) HP:67→67(+0)
-  - age 18: [street_performance] 街头表演 (→ 上台尝试) HP:67→70(+3)
-  - age 19: [youth_crisis_crossroad] 命运的十字路口 (→ 踏上冒险旅途) HP:70→73(+3)
-  - age 20: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:73→76(+3)
-  - age 21: [forest_camping] 森林露营 (→ 享受星空) HP:76→79(+3)
-  - age 22: [youth_mysterious_stranger] 神秘旅人 (→ 帮助他) HP:79→82(+3)
-  - age 23: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:82→83(+1)
-  - age 24: [scholar_guidance] 学者收徒 (→ 拜师求教) HP:83→86(+3)
-  - age 25: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:86→81(-5)
-  - age 26: [elf_ranger_path] 游侠之路  HP:81→84(+3)
-  - age 27: [random_rainy_contemplation] 雨中沉思  HP:84→87(+3)
-  - age 28: [elf_moonwell_ritual] 月池仪式  HP:87→90(+3)
-  - age 29: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:90→93(+3)
-  - age 30: [stand_up_moment] 不再忍耐 (→ 正面反击) HP:93→82(-11)
-  - ... 省略 109 个事件 ...
-  - age 300: [elf_last_song] 最后的歌 HP:30→33(+3)
-  - age 301: [elf_time_perception] 时间的感知 HP:33→36(+3)
-  - age 308: [mid_vision_decline] 模糊的视界 HP:33→35(+2)
-  - age 309: [mid_legacy_review] 回首半生 HP:35→37(+2)
-  - age 310: [mid_apprentice_success] 弟子出师 HP:37→30(-7)
+  - age 5: [elf_elvish_calligraphy] 古精灵文书法课 (→ 专注练字，追求完美) HP:50→50(+0)
+  - age 6: [elf_first_treesong] 第一次听见树歌 (→ 尝试用魔力回应树灵) HP:50→50(+0)
+  - age 7: [elf_butterfly_dance] 蝶舞课堂  HP:50→50(+0)
+  - age 8: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:50→53(+3)
+  - age 9: [elf_world_tree_pilgrimage] 世界树巡礼 (→ 静心聆听世界树的声音) HP:53→53(+0)
+  - age 10: [child_dream_flying] 会飞的梦  HP:53→53(+0)
+  - age 11: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:53→53(+0)
+  - age 12: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:53→50(-3)
+  - age 13: [elf_ancient_library] 远古图书馆  HP:50→53(+3)
+  - age 14: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:53→53(+0)
+  - age 15: [elf_dream_walker] 梦境行走  HP:53→53(+0)
+  - age 16: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:53→53(+0)
+  - age 17: [childhood_pet] 捡到受伤小鸟 (→ 带回家照顾) HP:53→53(+0)
+  - age 18: [elf_spirit_animal] 灵魂伙伴 (→ 伸出手触摸它) HP:53→53(+0)
+  - age 19: [elf_spirit_deer] 灵鹿相伴  HP:53→53(+0)
+  - age 20: [elf_human_encounter] 初遇人类 (→ 友善地打招呼) HP:53→53(+0)
+  - age 21: [stray_dog] 流浪狗 (→ 带它回家) HP:53→53(+0)
+  - age 22: [elf_starlight_weaving] 星光织衣  HP:53→53(+0)
+  - age 23: [elf_human_city_visit] 初访人类城市 (→ 深入了解人类文化) HP:53→53(+0)
+  - age 24: [elf_world_tree_communion] 与世界树共鸣  HP:53→53(+0)
+  - age 25: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:53→53(+0)
+  - age 26: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:53→45(-8)
+  - age 27: [elf_beast_tongue] 兽语习得  HP:45→48(+3)
+  - age 28: [random_weather_blessing] 好天气  HP:48→51(+3)
+  - age 29: [river_discovery] 河底发光 (→ 潜下去捡) HP:51→43(-8)
+  - age 30: [stand_up_moment] 不再忍耐 (→ 正面反击) HP:43→38(-5)
+  - ... 省略 314 个事件 ...
+  - age 340: [random_minor_injury] 小伤 HP:28→29(+1)
+  - age 341: [random_minor_injury] 小伤 HP:29→40(+11)
+  - age 342: [random_nightmare_visit] 不安的梦 HP:40→37(-3)
+  - age 343: [random_nightmare_visit] 不安的梦 HP:37→33(-4)
+  - age 344: [random_nightmare_visit] 不安的梦 HP:33→0(-33)
 
 #### 精灵-男-B (seed=9012)
 
-- **寿命**: 276 / 500 (55.2%)
+- **寿命**: 291 / 500 (58.2%)
 - **初始HP**: 31
-- **HP范围**: 0 ~ 133
-- **评级**: B (小有成就), 分数=228
-- **事件触发**: 119 年有事件, 157 年平静, 116 个独立事件
-- **最大年HP损失**: -21, 最大年HP恢复: +13
-- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 22, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275
+- **HP范围**: 0 ~ 223
+- **评级**: B (小有成就), 分数=248.7
+- **事件触发**: 291 年有事件, 0 年平静, 184 个独立事件
+- **最大年HP损失**: -35, 最大年HP恢复: +22
+- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290
 - **路线**: mage
-- **路线切换**: none→commoner @ age 1, commoner→scholar @ age 31, scholar→mage @ age 43
-- **成就**: first_step, ten_lives, elf_forest_healer_ach, soul_pure, beauty_supreme, male_beauty, archmage_body, elf_magic_pinnacle, elf_worldtree_guardian, elf_star_song_ach, longevity, dragon_knight, elf_dragon_bond, wisdom_peak, scholar_warrior, elf_council_seat, legacy_master, elf_mentor_legacy, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle
-- **物品**: 无
-- **HP里程碑**: age0=-1, age1=34, age5=46, age10=53, age15=50, age20=53
-  age50=77
-- **事件序列** (119 个):
+- **路线切换**: none→commoner @ age 1, commoner→mage @ age 34
+- **成就**: first_step, ten_lives, elf_spirit_bond, elf_forest_healer_ach, elf_star_song_ach, soul_pure, wisdom_peak, archmage_body, elf_magic_pinnacle, scholar_warrior, beauty_supreme, male_beauty, iron_body, mage_path, elf_worldtree_guardian, tower_master_ach, dragon_knight, elf_dragon_bond, elf_council_seat, demon_king_slayer_ach, divine_champion_ach, archmage_ach, legacy_master, elf_mentor_legacy, war_hero_ach, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle, miracle_afterglow
+- **物品**: lucky_charm
+- **HP里程碑**: age0=-1, age1=34, age5=46, age10=53, age15=47, age20=53
+  age50=96
+- **事件序列** (291 个):
   - age 1: [birth_sharp_eyes] 目光过人的婴孩  HP:31→34(+3)
   - age 2: [elf_moonlight_lullaby] 月光摇篮曲  HP:34→37(+3)
   - age 3: [elf_starlight_bath] 星光沐浴 (→ 平静地接受洗礼) HP:37→40(+3)
   - age 4: [elf_first_treesong] 第一次听见树歌 (→ 尝试用魔力回应树灵) HP:40→43(+3)
-  - age 5: [elf_dewdrop_game] 露珠捉迷藏  HP:43→46(+3)
-  - age 6: [elf_seed_planting] 种下第一棵树  HP:46→49(+3)
-  - age 7: [random_weather_blessing] 好天气  HP:49→52(+3)
-  - age 8: [random_street_performance] 街头表演  HP:52→53(+1)
-  - age 9: [first_snow] 初雪 (→ 堆雪人) HP:53→53(+0)
+  - age 5: [elf_seed_planting] 种下第一棵树  HP:43→46(+3)
+  - age 6: [elf_butterfly_dance] 蝶舞课堂  HP:46→49(+3)
+  - age 7: [elf_animal_friend] 林间小鹿  HP:49→52(+3)
+  - age 8: [elf_herb_gathering] 采药课  HP:52→53(+1)
+  - age 9: [elf_talking_to_tree] 与树对话  HP:53→53(+0)
   - age 10: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:53→53(+0)
-  - age 11: [village_festival] 村里祭典 (→ 大吃特吃) HP:53→53(+0)
-  - age 12: [childhood_pet] 捡到受伤小鸟 (→ 带回家照顾) HP:53→50(-3)
-  - age 13: [teen_future_talk] 夜谈未来 (→ 认真说出愿望) HP:50→50(+0)
-  - age 14: [child_lost_in_woods] 迷路 (→ 跟着星星走) HP:50→50(+0)
-  - age 15: [elf_forest_fire_rescue] 森林火灾救援  HP:50→50(+0)
-  - age 16: [random_found_coin] 捡到硬币  HP:50→53(+3)
-  - age 17: [youth_mysterious_stranger] 神秘旅人 (→ 帮助他) HP:53→53(+0)
-  - age 18: [elf_crystal_weaving] 水晶织法 (→ 专心编织) HP:53→53(+0)
-  - age 19: [chr_public_speech] 广场演说 (→ 慷慨陈词) HP:53→53(+0)
-  - age 20: [elf_dream_walker] 梦境行走  HP:53→53(+0)
-  - age 21: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:53→53(+0)
-  - age 22: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:53→48(-5)
-  - age 23: [market_haggling] 集市砍价 (→ 砍价大师) HP:48→51(+3)
-  - age 24: [harvest_festival] 丰收祭典 (→ 参加各项比赛) HP:51→54(+3)
-  - age 25: [elf_dwarf_trade] 与矮人贸易 (→ 公平交易) HP:54→57(+3)
-  - age 26: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:57→60(+3)
-  - age 27: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:60→63(+3)
-  - age 28: [elf_healing_spring] 治愈之泉  HP:63→69(+6)
-  - age 29: [elf_beast_tongue] 兽语习得  HP:69→67(-2)
-  - age 30: [scholar_guidance] 学者收徒 (→ 拜师求教) HP:67→67(+0)
-  - ... 省略 89 个事件 ...
-  - age 236: [mid_legacy_project] 留下遗产 HP:120→119(-1)
-  - age 237: [mid_health_scare] 健康警报 HP:119→116(-3)
-  - age 272: [mid_chronic_pain] 旧伤复发 HP:23→28(+5)
-  - age 273: [mid_body_decline] 岁月的痕迹 HP:28→18(-10)
-  - age 274: [mid_magic_potion] 炼金术突破 HP:18→18(+0)
+  - age 11: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:53→53(+0)
+  - age 12: [village_festival] 村里祭典 (→ 大吃特吃) HP:53→50(-3)
+  - age 13: [elf_ancient_library] 远古图书馆  HP:50→47(-3)
+  - age 14: [child_lost_in_woods] 迷路 (→ 跟着星星走) HP:47→47(+0)
+  - age 15: [elf_forbidden_book] 禁书 (→ 偷偷翻开) HP:47→47(+0)
+  - age 16: [elf_dream_walker] 梦境行走  HP:47→47(+0)
+  - age 17: [elf_spirit_animal] 灵魂伙伴 (→ 伸出手触摸它) HP:47→47(+0)
+  - age 18: [elf_forest_guardian_test] 森林守卫考核 (→ 与自然和谐共处) HP:47→47(+0)
+  - age 19: [child_dream_flying] 会飞的梦  HP:47→50(+3)
+  - age 20: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:50→53(+3)
+  - age 21: [elf_ranger_path] 游侠之路  HP:53→53(+0)
+  - age 22: [childhood_pet] 捡到受伤小鸟 (→ 带回家照顾) HP:53→56(+3)
+  - age 23: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:56→59(+3)
+  - age 24: [elf_healing_spring] 治愈之泉  HP:59→65(+6)
+  - age 25: [child_night_sky] 仰望星空  HP:65→67(+2)
+  - age 26: [elf_ancient_language] 远古精灵语 (→ 花时间破译) HP:67→67(+0)
+  - age 27: [elf_starlight_weaving] 星光织衣  HP:67→67(+0)
+  - age 28: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:67→67(+0)
+  - age 29: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:67→67(+0)
+  - age 30: [elf_ancient_magic] 精灵秘术·星辰之歌 (→ 全身心学习星辰之歌) HP:67→70(+3)
+  - ... 省略 261 个事件 ...
+  - age 287: [random_minor_injury] 小伤 HP:36→33(-3)
+  - age 288: [random_minor_injury] 小伤 HP:33→25(-8)
+  - age 289: [random_nightmare_visit] 不安的梦 HP:25→33(+8)
+  - age 290: [random_minor_injury] 小伤 HP:33→25(-8)
+  - age 291: [random_minor_injury] 小伤 HP:25→0(-25)
 
 #### 精灵-女-C (seed=9013)
 
-- **寿命**: 351 / 500 (70.2%)
+- **寿命**: 360 / 500 (72.0%)
 - **初始HP**: 28
-- **HP范围**: 0 ~ 185
-- **评级**: B (小有成就), 分数=224.5
-- **事件触发**: 134 年有事件, 217 年平静, 124 个独立事件
-- **最大年HP损失**: -23, 最大年HP恢复: +13
-- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 24, 30, 31, 41, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350
+- **HP范围**: 0 ~ 283
+- **评级**: B (小有成就), 分数=252.8
+- **事件触发**: 360 年有事件, 0 年平静, 210 个独立事件
+- **最大年HP损失**: -35, 最大年HP恢复: +23
+- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 37, 38, 39, 40, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359
 - **路线**: mage
-- **路线切换**: none→commoner @ age 1, commoner→mage @ age 48
-- **成就**: first_step, ten_lives, elf_worldtree_blessed, beauty_supreme, soul_pure, elf_forest_healer_ach, archmage_body, elf_star_song_ach, elf_magic_pinnacle, scholar_warrior, longevity, elf_worldtree_guardian, dragon_knight, elf_dragon_bond, iron_body, loving_family, wisdom_peak, elf_council_seat, legacy_master, elf_mentor_legacy, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle, miracle_afterglow
+- **路线切换**: none→commoner @ age 1, commoner→mage @ age 33
+- **成就**: first_step, ten_lives, elf_worldtree_blessed, elf_spirit_bond, elf_star_song_ach, elf_forest_healer_ach, soul_pure, archmage_body, scholar_warrior, elf_magic_pinnacle, wisdom_peak, beauty_supreme, iron_body, mage_path, tower_master_ach, dragon_knight, elf_dragon_bond, single_mother_warrior, elemental_lord_ach, elf_council_seat, divine_champion_ach, lucky_gambler_ach, demon_king_slayer_ach, archmage_ach, female_archmage, legacy_master, elf_mentor_legacy, war_hero_ach, love_and_war, fairy_companion, undying_legend_ach, peaceful_ending, legacy_of_students, famous_author_ach, memories_in_hands, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, elf_long_cycle
 - **物品**: holy_pendant, ancient_relic
-- **HP里程碑**: age0=-1, age1=30, age5=39, age10=50, age15=60, age20=66
-  age50=75
-- **事件序列** (134 个):
+- **HP里程碑**: age0=-1, age1=30, age5=39, age10=47, age15=47, age20=47
+  age50=78
+- **事件序列** (360 个):
   - age 1: [birth_wilderness] 荒野出生 (→ 萨满世家) HP:28→30(+2)
   - age 2: [elf_moonlight_lullaby] 月光摇篮曲  HP:30→32(+2)
   - age 3: [elf_starlight_bath] 星光沐浴 (→ 平静地接受洗礼) HP:32→34(+2)
   - age 4: [church_orphan] 教会的温暖 (→ 留在教会) HP:34→36(+2)
-  - age 5: [elf_first_treesong] 第一次听见树歌 (→ 尝试用魔力回应树灵) HP:36→39(+3)
-  - age 6: [elf_animal_friend] 林间小鹿  HP:39→42(+3)
-  - age 7: [elf_world_tree_pilgrimage] 世界树巡礼 (→ 静心聆听世界树的声音) HP:42→45(+3)
-  - age 8: [elf_butterfly_dance] 蝶舞课堂  HP:45→47(+2)
-  - age 9: [random_minor_injury] 小伤  HP:47→49(+2)
-  - age 10: [random_training_day] 勤奋的一天 (→ 训练体能) HP:49→50(+1)
-  - age 11: [rival_training] 与对手切磋 (→ 接受挑战) HP:50→53(+3)
-  - age 12: [random_street_performance] 街头表演  HP:53→56(+3)
-  - age 13: [teen_future_talk] 夜谈未来 (→ 认真说出愿望) HP:56→59(+3)
-  - age 14: [random_helping_stranger] 帮助陌生人  HP:59→60(+1)
-  - age 15: [elf_forbidden_book] 禁书 (→ 偷偷翻开) HP:60→60(+0)
-  - age 16: [love_at_first_sight] 一见钟情 (→ 上前搭讪) HP:60→60(+0)
-  - age 17: [dating_start] 开始交往 (→ 正式告白) HP:60→60(+0)
-  - age 18: [elf_forest_guardian_test] 森林守卫考核 (→ 与自然和谐共处) HP:60→60(+0)
-  - age 19: [festival_dance] 丰收祭的舞蹈 (→ 一起跳舞) HP:60→63(+3)
-  - age 20: [dating_deepen] 感情升温 (→ 一起冒险) HP:63→66(+3)
-  - age 21: [random_weather_blessing] 好天气  HP:66→69(+3)
-  - age 22: [forbidden_love] 禁忌之恋 (→ 一起私奔) HP:69→57(-12)
-  - age 23: [elf_human_city_visit] 初访人类城市 (→ 深入了解人类文化) HP:57→60(+3)
-  - age 24: [spr_divine_sign] 神谕降临 (→ 倾心聆听，接受神恩) HP:60→48(-12)
-  - age 25: [childhood_hide_seek] 捉迷藏 (→ 藏得太好没人找到) HP:48→51(+3)
-  - age 26: [first_competition] 第一次比赛 (→ 拼尽全力) HP:51→54(+3)
-  - age 27: [elf_dwarf_trade] 与矮人贸易 (→ 公平交易) HP:54→57(+3)
-  - age 28: [elf_ranger_path] 游侠之路  HP:57→60(+3)
-  - age 29: [harvest_festival] 丰收祭典 (→ 参加各项比赛) HP:60→63(+3)
-  - age 30: [spr_curse_breaker] 诅咒解除 (→ 尝试解除) HP:63→46(-17)
-  - ... 省略 104 个事件 ...
-  - age 308: [mid_vision_decline] 模糊的视界 HP:145→144(-1)
-  - age 309: [mid_legacy_review] 回首半生 HP:144→143(-1)
-  - age 310: [mid_apprentice_success] 弟子出师 HP:143→141(-2)
-  - age 350: [elder_kingdom_crisis] 王国危机 HP:19→12(-7)
-  - age 351: [elf_farewell_ceremony] 告别仪式 HP:12→0(-12)
+  - age 5: [elf_world_tree_pilgrimage] 世界树巡礼 (→ 静心聆听世界树的声音) HP:36→39(+3)
+  - age 6: [elf_talking_to_tree] 与树对话  HP:39→42(+3)
+  - age 7: [elf_first_treesong] 第一次听见树歌 (→ 尝试用魔力回应树灵) HP:42→45(+3)
+  - age 8: [elf_first_magic_spark] 第一缕魔火  HP:45→47(+2)
+  - age 9: [elf_herb_gathering] 采药课  HP:47→47(+0)
+  - age 10: [child_dream_flying] 会飞的梦  HP:47→47(+0)
+  - age 11: [village_festival] 村里祭典 (→ 大吃特吃) HP:47→47(+0)
+  - age 12: [elf_half_elf_friend] 半精灵朋友 (→ 不顾非议继续做朋友) HP:47→44(-3)
+  - age 13: [elf_spirit_animal] 灵魂伙伴 (→ 伸出手触摸它) HP:44→44(+0)
+  - age 14: [elf_forest_fire_rescue] 森林火灾救援  HP:44→44(+0)
+  - age 15: [elf_ancient_library] 远古图书馆  HP:44→47(+3)
+  - age 16: [elf_forbidden_book] 禁书 (→ 偷偷翻开) HP:47→47(+0)
+  - age 17: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:47→47(+0)
+  - age 18: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:47→47(+0)
+  - age 19: [elf_first_century] 第一个百年  HP:47→47(+0)
+  - age 20: [noble_kid_revenge] 权贵的欺凌 (→ 咽下这口气) HP:47→47(+0)
+  - age 21: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:47→47(+0)
+  - age 22: [elf_dwarf_trade] 与矮人贸易 (→ 公平交易) HP:47→47(+0)
+  - age 23: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:47→47(+0)
+  - age 24: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:47→44(-3)
+  - age 25: [elf_world_tree_communion] 与世界树共鸣  HP:44→47(+3)
+  - age 26: [stand_up_moment] 不再忍耐 (→ 正面反击) HP:47→50(+3)
+  - age 27: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:50→53(+3)
+  - age 28: [first_competition] 第一次比赛 (→ 拼尽全力) HP:53→56(+3)
+  - age 29: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:56→51(-5)
+  - age 30: [elf_ancient_magic] 精灵秘术·星辰之歌 (→ 全身心学习星辰之歌) HP:51→54(+3)
+  - ... 省略 330 个事件 ...
+  - age 356: [elder_autobiography] 自传 HP:45→38(-7)
+  - age 357: [elder_dream_fulfilled] 完成心愿 HP:38→35(-3)
+  - age 358: [elder_spirit_trial] 灵魂试炼 HP:35→17(-18)
+  - age 359: [elder_kingdom_crisis] 王国危机 HP:17→9(-8)
+  - age 360: [elder_sort_keepsakes] 整理珍藏 HP:9→0(-9)
 
 ### 1.2 哥布林详情
 
 #### 哥布林-女-A (seed=9021)
 
-- **寿命**: 47 / 60 (78.3%)
+- **寿命**: 44 / 60 (73.3%)
 - **初始HP**: 34
-- **HP范围**: 0 ~ 110
-- **评级**: B (小有成就), 分数=236.8
-- **事件触发**: 47 年有事件, 0 年平静, 46 个独立事件
-- **最大年HP损失**: -19, 最大年HP恢复: +4
-- **HP<50的年龄**: 1, 2, 3, 44, 45, 46
-- **路线**: commoner
-- **路线切换**: none→commoner @ age 1
-- **成就**: first_step, ten_lives, goblin_trade_king, goblin_sage_ach, goblin_diplomat_ach, goblin_long_life, famous_author_ach, beauty_supreme, era_remembered, balanced_finale
+- **HP范围**: 0 ~ 101
+- **评级**: B (小有成就), 分数=264.3
+- **事件触发**: 44 年有事件, 0 年平静, 43 个独立事件
+- **最大年HP损失**: -25, 最大年HP恢复: +14
+- **HP<50的年龄**: 1, 2, 3, 40, 41, 42, 43
+- **路线**: scholar
+- **路线切换**: none→commoner @ age 1, commoner→scholar @ age 43
+- **成就**: first_step, ten_lives, goblin_diplomat_ach, goblin_trade_king, beauty_supreme, goblin_long_life, soul_pure, era_remembered, balanced_finale
 - **物品**: lucky_charm
-- **HP里程碑**: age0=-1, age1=38, age5=54, age10=73, age15=90, age20=96
-- **事件序列** (47 个):
+- **HP里程碑**: age0=-1, age1=38, age5=54, age10=67, age15=72, age20=92
+- **事件序列** (44 个):
   - age 1: [birth_goblin_merchant] 黑市世家  HP:34→38(+4)
   - age 2: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:38→42(+4)
   - age 3: [goblin_trash_treasure] 垃圾堆里的宝物 (→ 藏起来慢慢研究) HP:42→46(+4)
   - age 4: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:46→50(+4)
-  - age 5: [goblin_survival_lesson] 生存第一课 (→ 用嗅觉找到出口) HP:50→54(+4)
-  - age 6: [child_night_sky] 仰望星空  HP:54→58(+4)
-  - age 7: [goblin_tunnel_race] 地洞竞速 (→ 拼命跑) HP:58→62(+4)
-  - age 8: [goblin_insect_feast] 虫虫大餐  HP:62→66(+4)
-  - age 9: [random_minor_injury] 小伤  HP:66→69(+3)
-  - age 10: [old_soldier_story] 老兵的故事 (→ 认真听完) HP:69→73(+4)
-  - age 11: [pet_companion] 捡到流浪动物 (→ 带回家养) HP:73→77(+4)
-  - age 12: [first_love] 初恋的味道 (→ 表白) HP:77→81(+4)
-  - age 13: [teen_traveling_circus] 流浪马戏团 (→ 偷偷学杂技) HP:81→83(+2)
-  - age 14: [goblin_trap_master] 陷阱大师  HP:83→86(+3)
-  - age 15: [goblin_alliance] 异族联盟 (→ 建立友谊) HP:86→90(+4)
-  - age 16: [goblin_wrestling_match] 摔跤比赛  HP:90→90(+0)
-  - age 17: [goblin_clockwork_toy] 发条玩具  HP:90→94(+4)
-  - age 18: [random_nightmare_visit] 不安的梦  HP:94→96(+2)
-  - age 19: [youth_gambling_den] 赌场诱惑 (→ 小赌怡情) HP:96→96(+0)
-  - age 20: [goblin_potion_brewing] 毒药与良药 (→ 自己先试喝) HP:96→96(+0)
-  - age 21: [random_stargazing] 观星  HP:96→100(+4)
-  - age 22: [goblin_mine_discovery] 矿脉发现  HP:100→100(+0)
-  - age 23: [goblin_arena_underdog] 竞技场的黑马 (→ 用速度和灵活取胜) HP:100→99(-1)
-  - age 24: [goblin_rescue_mission] 营救同胞 (→ 正面突袭) HP:99→103(+4)
-  - age 25: [chain_dark_past] 黑暗过去 (→ 谈判) HP:103→107(+4)
-  - age 26: [adult_restore_keepsake] 修缮旧物 (→ 自己动手修好) HP:107→109(+2)
-  - age 27: [random_training_day] 勤奋的一天 (→ 训练体能) HP:109→108(-1)
-  - age 28: [goblin_trade_empire] 哥布林的黑市王国 (→ 扩大经营——开设地下拍卖行) HP:108→110(+2)
-  - age 29: [goblin_old_bones_ache] 骨头疼  HP:110→107(-3)
-  - age 30: [mid_existential_crisis] 深夜的独白 (→ 找到新目标) HP:107→107(+0)
-  - ... 省略 17 个事件 ...
-  - age 43: [adult_plague_crisis] 瘟疫来袭 HP:62→53(-9)
-  - age 44: [elder_dream_fulfilled] 完成心愿 HP:53→43(-10)
-  - age 45: [mid_gambling] 地下赌场 HP:43→32(-11)
-  - age 46: [random_training_day] 勤奋的一天 HP:32→19(-13)
-  - age 47: [random_helping_stranger] 帮助陌生人 HP:19→0(-19)
+  - age 5: [goblin_shiny_collection] 闪亮收藏  HP:50→54(+4)
+  - age 6: [catch_thief] 抓小偷 (→ 追上去) HP:54→58(+4)
+  - age 7: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:58→62(+4)
+  - age 8: [old_soldier_story] 老兵的故事 (→ 认真听完) HP:62→60(-2)
+  - age 9: [random_nightmare_visit] 不安的梦  HP:60→64(+4)
+  - age 10: [youth_caravan_guard] 商队护卫 (→ 报名参加) HP:64→67(+3)
+  - age 11: [tavern_brawl] 酒馆斗殴 (→ 加入混战) HP:67→56(-11)
+  - age 12: [goblin_first_theft] 第一次偷窃 (→ 小心翼翼地行动) HP:56→60(+4)
+  - age 13: [traveling_sage] 云游学者 (→ 跟随学者学习) HP:60→64(+4)
+  - age 14: [goblin_alchemy_discovery] 误入炼金工坊 (→ 继续实验（危险！）) HP:64→68(+4)
+  - age 15: [goblin_night_raid] 夜间突袭 (→ 负责放风) HP:68→72(+4)
+  - age 16: [goblin_first_boss_fight] 挑战头领 (→ 正面挑战) HP:72→76(+4)
+  - age 17: [youth_shared_roof] 同住一檐下 (→ 把日子打理顺) HP:76→80(+4)
+  - age 18: [luk_lottery] 王国彩票 (→ 中大奖了！) HP:80→84(+4)
+  - age 19: [goblin_tavern_brawl] 酒馆遭遇战 (→ 用酒瓶反击) HP:84→88(+4)
+  - age 20: [goblin_merchant_debut] 第一笔生意  HP:88→92(+4)
+  - age 21: [community_leader] 社区领袖 (→ 接受职位) HP:92→96(+4)
+  - age 22: [goblin_passing_the_torch] 传承手艺  HP:96→96(+0)
+  - age 23: [mid_adopt_orphan] 路边孤儿 (→ 带回家) HP:96→95(-1)
+  - age 24: [adult_rival_encounter] 宿敌重逢 (→ 友好地叙旧) HP:95→91(-4)
+  - age 25: [goblin_peace_treaty] 和平条约 (→ 以诚意打动对方) HP:91→90(-1)
+  - age 26: [goblin_trade_empire] 哥布林的黑市王国 (→ 扩大经营——开设地下拍卖行) HP:90→90(+0)
+  - age 27: [random_weather_blessing] 好天气  HP:90→89(-1)
+  - age 28: [adult_neighborhood_request] 邻里的请求 (→ 组织大家一起做) HP:89→88(-1)
+  - age 29: [random_nightmare_visit] 不安的梦  HP:88→87(-1)
+  - age 30: [elder_family_reunion] 天伦之乐 (→ 其乐融融) HP:87→101(+14)
+  - ... 省略 14 个事件 ...
+  - age 40: [elder_kingdom_crisis] 王国危机 HP:72→47(-25)
+  - age 41: [elder_sort_keepsakes] 整理珍藏 HP:47→40(-7)
+  - age 42: [mid_mentoring_youth] 指导年轻人 HP:40→32(-8)
+  - age 43: [mid_body_decline] 岁月的痕迹 HP:32→13(-19)
+  - age 44: [mid_old_friend_reunion] 故友重逢 HP:13→0(-13)
 
 #### 哥布林-男-B (seed=9022)
 
-- **寿命**: 47 / 60 (78.3%)
+- **寿命**: 43 / 60 (71.7%)
 - **初始HP**: 25
-- **HP范围**: 0 ~ 50
-- **评级**: B (小有成就), 分数=255
-- **事件触发**: 47 年有事件, 0 年平静, 46 个独立事件
-- **最大年HP损失**: -20, 最大年HP恢复: +1
-- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46
-- **路线**: scholar
-- **路线切换**: none→commoner @ age 1, commoner→scholar @ age 33
-- **成就**: first_step, ten_lives, goblin_sage_ach, goblin_long_life, famous_author_ach, beauty_supreme, male_beauty, era_remembered
+- **HP范围**: 0 ~ 39
+- **评级**: B (小有成就), 分数=239.8
+- **事件触发**: 43 年有事件, 0 年平静, 42 个独立事件
+- **最大年HP损失**: -25, 最大年HP恢复: +11
+- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42
+- **路线**: commoner
+- **路线切换**: none→commoner @ age 1
+- **成就**: first_step, ten_lives, dragon_knight, goblin_trade_king, goblin_long_life, soul_pure, beauty_supreme, male_beauty, era_remembered
 - **物品**: 无
-- **HP里程碑**: age0=-1, age1=26, age5=30, age10=35, age15=40, age20=45
-- **事件序列** (47 个):
+- **HP里程碑**: age0=-1, age1=26, age5=22, age10=27, age15=32, age20=37
+- **事件序列** (43 个):
   - age 1: [birth_twins] 双生子  HP:25→26(+1)
   - age 2: [village_festival] 村里祭典 (→ 大吃特吃) HP:26→27(+1)
-  - age 3: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:27→28(+1)
-  - age 4: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:28→29(+1)
-  - age 5: [random_weather_blessing] 好天气  HP:29→30(+1)
-  - age 6: [goblin_mushroom_garden] 蘑菇花园  HP:30→31(+1)
-  - age 7: [goblin_tunnel_race] 地洞竞速 (→ 拼命跑) HP:31→32(+1)
-  - age 8: [teen_nightmare] 反复出现的噩梦 (→ 在梦中回应那个声音) HP:32→33(+1)
-  - age 9: [part_time_job] 打工赚零花钱 (→ 认真干活) HP:33→34(+1)
-  - age 10: [teen_race_competition] 少年竞技会 (→ 参加跑步) HP:34→35(+1)
-  - age 11: [random_training_day] 勤奋的一天 (→ 训练体能) HP:35→36(+1)
-  - age 12: [star_gazing] 观星 (→ 冥想) HP:36→37(+1)
-  - age 13: [cursed_wanderer_village_exile] 被村庄驱赶 (→ 默默离开) HP:37→38(+1)
-  - age 14: [random_good_meal] 丰盛的一餐  HP:38→39(+1)
-  - age 15: [goblin_night_raid] 夜间突袭 (→ 负责放风) HP:39→40(+1)
-  - age 16: [chr_public_speech] 广场演说 (→ 慷慨陈词) HP:40→41(+1)
-  - age 17: [random_nightmare_visit] 不安的梦  HP:41→42(+1)
-  - age 18: [forest_camping] 森林露营 (→ 享受星空) HP:42→43(+1)
-  - age 19: [goblin_disguise_adventure] 伪装冒险 (→ 小心翼翼不露馅) HP:43→44(+1)
-  - age 20: [random_helping_stranger] 帮助陌生人  HP:44→45(+1)
-  - age 21: [youth_tavern_rumor] 酒馆传闻 (→ 凑过去听) HP:45→46(+1)
-  - age 22: [youth_short_term_job] 临时差事 (→ 老老实实做完) HP:46→47(+1)
-  - age 23: [dark_cult_encounter] 暗黑教团 (→ 潜入调查) HP:47→38(-9)
-  - age 24: [youth_bandit_ambush] 路遇山贼 (→ 战斗！) HP:38→39(+1)
-  - age 25: [goblin_passing_the_torch] 传承手艺  HP:39→40(+1)
-  - age 26: [goblin_chief_council] 首领议事会  HP:40→41(+1)
-  - age 27: [goblin_recipe_book] 食谱大全  HP:41→42(+1)
-  - age 28: [goblin_tribe_legacy] 部落的记忆  HP:42→43(+1)
-  - age 29: [random_found_coin] 捡到硬币  HP:43→44(+1)
-  - age 30: [goblin_elder_legend] 传说中的老哥布林 (→ 传授你的生存智慧) HP:44→45(+1)
-  - ... 省略 17 个事件 ...
-  - age 43: [spr_divine_sign] 神谕降临 HP:25→22(-3)
-  - age 44: [elder_memory_fade] 渐渐模糊的记忆 HP:22→19(-3)
-  - age 45: [spr_meditation_retreat] 闭关修炼 HP:19→15(-4)
-  - age 46: [random_minor_injury] 小伤 HP:15→9(-6)
-  - age 47: [mid_magic_experiment] 禁忌实验 HP:9→0(-9)
+  - age 3: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:27→20(-7)
+  - age 4: [goblin_tunnel_race] 地洞竞速 (→ 拼命跑) HP:20→21(+1)
+  - age 5: [random_good_meal] 丰盛的一餐  HP:21→22(+1)
+  - age 6: [goblin_human_toy] 人类的玩具  HP:22→23(+1)
+  - age 7: [help_farmer] 帮农夫收麦 (→ 帮忙割麦) HP:23→24(+1)
+  - age 8: [teen_nightmare] 反复出现的噩梦 (→ 在梦中回应那个声音) HP:24→25(+1)
+  - age 9: [teen_secret_discovered] 发现秘密 (→ 公开揭发) HP:25→26(+1)
+  - age 10: [star_gazing] 观星 (→ 冥想) HP:26→27(+1)
+  - age 11: [random_helping_stranger] 帮助陌生人  HP:27→28(+1)
+  - age 12: [goblin_human_kindness] 人类的善意  HP:28→29(+1)
+  - age 13: [goblin_underground_race] 地下竞速赛 (→ 用智慧取胜——走近路) HP:29→30(+1)
+  - age 14: [kindness_of_stranger] 陌生人的善意  HP:30→31(+1)
+  - age 15: [luk_wild_encounter] 野外奇遇 (→ 探索洞穴) HP:31→32(+1)
+  - age 16: [random_helping_stranger] 帮助陌生人  HP:32→33(+1)
+  - age 17: [goblin_potion_brewing] 毒药与良药 (→ 自己先试喝) HP:33→34(+1)
+  - age 18: [random_stargazing] 观星  HP:34→35(+1)
+  - age 19: [goblin_merchant_debut] 第一笔生意  HP:35→36(+1)
+  - age 20: [goblin_human_language] 学会人类语言  HP:36→37(+1)
+  - age 21: [rare_dragon_egg] 龙蛋 (→ 孵化并养育幼龙) HP:37→33(-4)
+  - age 22: [goblin_disguise_adventure] 伪装冒险 (→ 小心翼翼不露馅) HP:33→34(+1)
+  - age 23: [adult_treasure_map] 破旧的藏宝图 (→ 组队去寻宝) HP:34→35(+1)
+  - age 24: [random_weather_blessing] 好天气  HP:35→36(+1)
+  - age 25: [goblin_recipe_book] 食谱大全  HP:36→37(+1)
+  - age 26: [goblin_elder_respect] 受人尊敬的老哥布林  HP:37→38(+1)
+  - age 27: [random_found_coin] 捡到硬币  HP:38→39(+1)
+  - age 28: [mid_magic_experiment] 禁忌实验 (→ 全力激活魔法阵) HP:39→20(-19)
+  - age 29: [goblin_trade_empire] 哥布林的黑市王国 (→ 扩大经营——开设地下拍卖行) HP:20→21(+1)
+  - age 30: [elder_peaceful_days] 宁静时光 (→ 精心打理花园) HP:21→32(+11)
+  - ... 省略 13 个事件 ...
+  - age 39: [goblin_final_feast] 最后的盛宴 HP:38→34(-4)
+  - age 40: [elder_illness] 疾病缠身 HP:34→9(-25)
+  - age 41: [elder_sunset_watching] 夕阳 HP:9→8(-1)
+  - age 42: [elder_final_gift] 最后的礼物 HP:8→11(+3)
+  - age 43: [elder_final_counting] 生命的终点 HP:11→0(-11)
 
 #### 哥布林-女-C (seed=9023)
 
 - **寿命**: 42 / 60 (70.0%)
 - **初始HP**: 34
-- **HP范围**: 0 ~ 65
-- **评级**: B (小有成就), 分数=263.1
-- **事件触发**: 42 年有事件, 0 年平静, 41 个独立事件
-- **最大年HP损失**: -26, 最大年HP恢复: +11
-- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 33, 34, 35, 36, 37, 38, 39, 40, 41
-- **路线**: merchant
-- **路线切换**: none→commoner @ age 1, commoner→merchant @ age 9
-- **成就**: first_step, ten_lives, merchant_empire, goblin_interracial_love, goblin_pioneer_ach, goblin_long_life, era_remembered, miracle_afterglow
-- **物品**: soul_gem
-- **HP里程碑**: age0=-1, age1=37, age5=32, age10=47, age15=47, age20=60
+- **HP范围**: 0 ~ 61
+- **评级**: B (小有成就), 分数=233.8
+- **事件触发**: 42 年有事件, 0 年平静, 42 个独立事件
+- **最大年HP损失**: -18, 最大年HP恢复: +6
+- **HP<50的年龄**: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 22, 23, 34, 35, 36, 38, 39, 40, 41
+- **路线**: commoner
+- **路线切换**: none→commoner @ age 1
+- **成就**: first_step, ten_lives, goblin_long_life, peaceful_ending, era_remembered
+- **物品**: 无
+- **HP里程碑**: age0=-1, age1=37, age5=24, age10=39, age15=54, age20=58
 - **事件序列** (42 个):
   - age 1: [birth_eclipse] 日蚀之日  HP:34→37(+3)
   - age 2: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:37→40(+3)
-  - age 3: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:40→43(+3)
-  - age 4: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:43→29(-14)
-  - age 5: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:29→32(+3)
-  - age 6: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:32→35(+3)
-  - age 7: [teen_secret_discovered] 发现秘密 (→ 公开揭发) HP:35→38(+3)
-  - age 8: [merchant_guidance] 商人学徒招募 (→ 拜师学商) HP:38→41(+3)
-  - age 9: [random_street_performance] 街头表演  HP:41→44(+3)
-  - age 10: [help_farmer] 帮农夫收麦 (→ 帮忙割麦) HP:44→47(+3)
-  - age 11: [goblin_forge_trick] 炉火的恶作剧 (→ 改良设计) HP:47→50(+3)
-  - age 12: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:50→53(+3)
-  - age 13: [random_weather_blessing] 好天气  HP:53→47(-6)
-  - age 14: [goblin_alchemy_accident] 炼金事故  HP:47→46(-1)
-  - age 15: [random_training_day] 勤奋的一天 (→ 训练体能) HP:46→47(+1)
-  - age 16: [goblin_wrestling_match] 摔跤比赛  HP:47→50(+3)
-  - age 17: [goblin_warchief_duel] 首领争夺战 (→ 发起挑战) HP:50→53(+3)
-  - age 18: [goblin_treasure_dive] 寻宝潜水 (→ 搜刮宝物) HP:53→56(+3)
-  - age 19: [merchant_career] 商路崛起 (→ 扩张商路) HP:56→59(+3)
-  - age 20: [marry_noble] 政治联姻 (→ 接受联姻) HP:59→60(+1)
-  - age 21: [youth_gambling_den] 赌场诱惑 (→ 小赌怡情) HP:60→60(+0)
-  - age 22: [goblin_rescue_mission] 营救同胞 (→ 正面突袭) HP:60→60(+0)
-  - age 23: [youth_short_term_job] 临时差事 (→ 老老实实做完) HP:60→63(+3)
-  - age 24: [spr_meditation_retreat] 闭关修炼 (→ 闭关苦修) HP:63→65(+2)
-  - age 25: [goblin_smuggling_ring] 走私网络 (→ 扩大规模) HP:65→58(-7)
-  - age 26: [goblin_cooking_contest] 烹饪大赛 (→ 坚持传统口味) HP:58→58(+0)
-  - age 27: [midlife_new_craft] 半路学艺 (→ 学点能打动人的) HP:58→57(-1)
-  - age 28: [goblin_underground_empire] 地下帝国梦 (→ 开始挖掘) HP:57→57(+0)
-  - age 29: [adult_haunted_mansion] 闹鬼庄园 (→ 带武器硬闯) HP:57→58(+1)
-  - age 30: [mid_existential_crisis] 深夜的独白 (→ 找到新目标) HP:58→59(+1)
+  - age 3: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:40→28(-12)
+  - age 4: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:28→31(+3)
+  - age 5: [river_discovery] 河底发光 (→ 潜下去捡) HP:31→24(-7)
+  - age 6: [luk_lucky_coin] 捡到金币 (→ 收起来) HP:24→27(+3)
+  - age 7: [first_love] 初恋的味道 (→ 表白) HP:27→30(+3)
+  - age 8: [goblin_scavenger_instinct] 天生的寻宝者 (→ 一枚残破的魔法饰物) HP:30→33(+3)
+  - age 9: [street_performance] 街头表演 (→ 上台尝试) HP:33→36(+3)
+  - age 10: [luk_potion_find] 神秘药水 (→ 一口闷！) HP:36→39(+3)
+  - age 11: [random_street_performance] 街头表演  HP:39→42(+3)
+  - age 12: [goblin_tribe_challenge] 部落挑战赛 (→ 参加格斗) HP:42→45(+3)
+  - age 13: [goblin_wrestling_match] 摔跤比赛  HP:45→48(+3)
+  - age 14: [youth_crisis_crossroad] 命运的十字路口 (→ 踏上冒险旅途) HP:48→51(+3)
+  - age 15: [dating_start] 开始交往 (→ 正式告白) HP:51→54(+3)
+  - age 16: [goblin_alchemy_accident] 炼金事故  HP:54→56(+2)
+  - age 17: [soul_bound] 灵魂契约 (→ 接受灵魂契约) HP:56→49(-7)
+  - age 18: [goblin_mechanical_genius] 机关天赋 (→ 跟矮人学习机械) HP:49→52(+3)
+  - age 19: [goblin_treasure_dive] 寻宝潜水 (→ 搜刮宝物) HP:52→55(+3)
+  - age 20: [goblin_rescue_mission] 营救同胞 (→ 正面突袭) HP:55→58(+3)
+  - age 21: [goblin_cooking_contest] 烹饪大赛 (→ 坚持传统口味) HP:58→61(+3)
+  - age 22: [mid_magic_experiment] 禁忌实验 (→ 全力激活魔法阵) HP:61→44(-17)
+  - age 23: [mid_gambling] 地下赌场 (→ 梭哈！) HP:44→47(+3)
+  - age 24: [goblin_mine_discovery] 矿脉发现  HP:47→50(+3)
+  - age 25: [mid_old_friend_reunion] 故友重逢 (→ 彻夜长谈) HP:50→52(+2)
+  - age 26: [mid_familiar_place_changes] 熟悉的地方变了 (→ 参与新的模样) HP:52→54(+2)
+  - age 27: [goblin_potion_brewing] 毒药与良药 (→ 自己先试喝) HP:54→56(+2)
+  - age 28: [random_nightmare_visit] 不安的梦  HP:56→57(+1)
+  - age 29: [mid_existential_crisis] 深夜的独白 (→ 找到新目标) HP:57→58(+1)
+  - age 30: [goblin_passing_the_torch] 传承手艺  HP:58→59(+1)
   - ... 省略 12 个事件 ...
-  - age 38: [random_street_performance] 街头表演 HP:35→37(+2)
-  - age 39: [mid_business_rivalry] 商战 HP:37→37(+0)
-  - age 40: [random_minor_injury] 小伤 HP:37→35(-2)
-  - age 41: [elder_illness] 疾病缠身 HP:35→9(-26)
-  - age 42: [student_successor] 收徒传艺 HP:9→0(-9)
+  - age 38: [elder_final_gift] 最后的礼物 HP:51→45(-6)
+  - age 39: [goblin_tribal_legend] 部落传说 HP:45→37(-8)
+  - age 40: [goblin_sunset_hill] 山丘上的日落 HP:37→28(-9)
+  - age 41: [elder_passing_wisdom] 智者之言 HP:28→18(-10)
+  - age 42: [elder_illness] 疾病缠身 HP:18→0(-18)
 
 ### 1.2 矮人详情
 
 #### 矮人-男-A (seed=9031)
 
-- **寿命**: 337 / 400 (84.3%)
+- **寿命**: 350 / 400 (87.5%)
 - **初始HP**: 49
-- **HP范围**: 0 ~ 189
-- **评级**: B (小有成就), 分数=216.3
-- **事件触发**: 141 年有事件, 196 年平静, 129 个独立事件
-- **最大年HP损失**: -45, 最大年HP恢复: +20
-- **HP<50的年龄**: 334, 335, 336
+- **HP范围**: 0 ~ 294
+- **评级**: B (小有成就), 分数=244.5
+- **事件触发**: 324 年有事件, 26 年平静, 201 个独立事件
+- **最大年HP损失**: -38, 最大年HP恢复: +21
+- **HP<50的年龄**: 348, 349
 - **路线**: merchant
-- **路线切换**: none→commoner @ age 1, commoner→merchant @ age 32
-- **成就**: first_step, ten_lives, dwarf_dragon_vow_ach, iron_body, beauty_supreme, male_beauty, eternal_wanderer, widowed_hero, revenge_done, dwarf_masterwork_ach, dwarf_holdfast_ach, loving_family, longevity, dragon_knight, scholar_warrior, dwarf_hall_name, wisdom_peak, dwarf_apprentice_legacy, dwarf_forge_to_ember, dwarf_dragonfire_legacy, soul_pure, male_great_father, memories_in_hands, undying_legend_ach, legacy_of_students, famous_author_ach, peaceful_ending, eternal_peace, dwarf_long_watch, balanced_finale, iron_will_to_end, century_witness
-- **物品**: 无
-- **HP里程碑**: age0=-1, age1=54, age5=73, age10=78, age15=93, age20=90
-  age50=109
-- **事件序列** (141 个):
+- **路线切换**: none→commoner @ age 1, commoner→merchant @ age 33
+- **成就**: first_step, ten_lives, dwarf_dragon_vow_ach, scholar_warrior, dwarf_masterwork_ach, wisdom_peak, beauty_supreme, male_beauty, dwarf_holdfast_ach, iron_body, merchant_empire, dwarf_surface_broker, soul_pure, dwarf_hall_name, dwarf_apprentice_legacy, revenge_done, divine_champion_ach, demon_king_slayer_ach, dragon_knight, dwarf_forge_to_ember, dwarf_dragonfire_legacy, archmage_ach, archmage_body, eternal_wanderer, widowed_hero, famous_author_ach, legacy_of_students, memories_in_hands, peaceful_ending, undying_legend_ach, longevity, eternal_peace, starry_lifetime, hero_ach, dwarf_long_watch, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness
+- **物品**: soul_gem
+- **HP里程碑**: age0=-1, age1=54, age5=73, age10=70, age15=70, age20=63
+  age50=133
+- **事件序列** (324 个):
   - age 1: [birth_dwarf_forge_ember] 炉边初啼 (→ 在炉火边安静下来) HP:49→54(+5)
   - age 4: [child_dwarf_first_hammer] 第一次握锤 (→ 先练稳稳落锤) HP:64→69(+5)
-  - age 5: [random_good_meal] 丰盛的一餐  HP:69→73(+4)
-  - age 6: [child_dream_flying] 会飞的梦  HP:73→73(+0)
-  - age 7: [random_found_coin] 捡到硬币  HP:73→73(+0)
-  - age 8: [first_snow] 初雪 (→ 堆雪人) HP:73→73(+0)
-  - age 9: [young_rival] 少年的对手 (→ 努力超越他) HP:73→73(+0)
-  - age 10: [village_race] 村里赛跑 (→ 全力冲刺) HP:73→78(+5)
-  - age 11: [lost_treasure_map] 藏宝图碎片 (→ 仔细研究) HP:78→83(+5)
-  - age 12: [first_love] 初恋的味道 (→ 表白) HP:83→86(+3)
-  - age 13: [help_farmer] 帮农夫收麦 (→ 帮忙割麦) HP:86→86(+0)
-  - age 14: [child_dwarf_surface_fair] 第一次去地表集市 (→ 寸步不离商队) HP:86→91(+5)
-  - age 15: [random_helping_stranger] 帮助陌生人  HP:91→93(+2)
-  - age 16: [village_festival] 村里祭典 (→ 大吃特吃) HP:93→93(+0)
-  - age 17: [dating_start] 开始交往 (→ 正式告白) HP:93→90(-3)
-  - age 18: [youth_short_term_job] 临时差事 (→ 老老实实做完) HP:90→90(+0)
-  - age 19: [random_stargazing] 观星  HP:90→90(+0)
-  - age 20: [forest_camping] 森林露营 (→ 享受星空) HP:90→90(+0)
-  - age 21: [teen_dwarf_dragon_relic_vigil] 守望龙族旧迹 (→ 向遗迹行最庄重的礼) HP:90→86(-4)
-  - age 22: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:86→86(+0)
-  - age 23: [youth_gambling_den] 赌场诱惑 (→ 小赌怡情) HP:86→90(+4)
-  - age 24: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:90→90(+0)
-  - age 25: [market_haggling] 集市砍价 (→ 砍价大师) HP:90→95(+5)
-  - age 26: [quest_parting] 远征前的告别 (→ 系上护身符) HP:95→96(+1)
-  - age 27: [food_culture] 美食之旅 (→ 学习烹饪) HP:96→96(+0)
-  - age 28: [dating_deepen] 感情升温 (→ 一起冒险) HP:96→96(+0)
-  - age 29: [random_training_day] 勤奋的一天 (→ 训练体能) HP:96→101(+5)
-  - age 30: [random_weather_blessing] 好天气  HP:101→106(+5)
-  - age 31: [merchant_guidance] 商人学徒招募 (→ 拜师学商) HP:106→106(+0)
-  - age 32: [teen_mentor_meeting] 遇见师傅 (→ 学习剑技) HP:106→106(+0)
-  - ... 省略 111 个事件 ...
-  - age 320: [elder_memory_fade] 渐渐模糊的记忆 HP:97→95(-2)
-  - age 321: [peaceful_end] 平静的终章 HP:95→93(-2)
-  - age 322: [elder_last_feast] 最后的盛宴 HP:93→90(-3)
-  - age 333: [elder_star_gazing_final] 最后的星空 HP:55→51(-4)
-  - age 337: [elder_final_illness] 最后的病榻 HP:36→0(-36)
+  - age 6: [village_festival] 村里祭典 (→ 大吃特吃) HP:73→73(+0)
+  - age 7: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:73→70(-3)
+  - age 8: [child_dream_flying] 会飞的梦  HP:70→70(+0)
+  - age 9: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:70→70(+0)
+  - age 10: [child_dwarf_surface_fair] 第一次去地表集市 (→ 寸步不离商队) HP:70→70(+0)
+  - age 11: [childhood_hide_seek] 捉迷藏 (→ 藏得太好没人找到) HP:70→70(+0)
+  - age 12: [stray_dog] 流浪狗 (→ 带它回家) HP:70→70(+0)
+  - age 13: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:70→70(+0)
+  - age 14: [child_night_sky] 仰望星空  HP:70→70(+0)
+  - age 15: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:70→70(+0)
+  - age 16: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:70→59(-11)
+  - age 17: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:59→64(+5)
+  - age 18: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:64→69(+5)
+  - age 19: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:69→70(+1)
+  - age 20: [random_good_meal] 丰盛的一餐  HP:70→63(-7)
+  - age 21: [teen_library_discovery] 图书馆的秘密阁楼 (→ 沉浸在故事中) HP:63→63(+0)
+  - age 22: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:63→63(+0)
+  - age 23: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:63→68(+5)
+  - age 24: [child_cooking_adventure] 第一次做饭 (→ 认真按步骤来) HP:68→73(+5)
+  - age 25: [random_minor_injury] 小伤  HP:73→76(+3)
+  - age 26: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:76→77(+1)
+  - age 27: [teen_dwarf_dragon_relic_vigil] 守望龙族旧迹 (→ 向遗迹行最庄重的礼) HP:77→82(+5)
+  - age 28: [stand_up_moment] 不再忍耐 (→ 正面反击) HP:82→83(+1)
+  - age 29: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:83→88(+5)
+  - age 30: [teen_nightmare] 反复出现的噩梦 (→ 在梦中回应那个声音) HP:88→83(-5)
+  - age 31: [teen_secret_discovered] 发现秘密 (→ 公开揭发) HP:83→83(+0)
+  - age 32: [merchant_guidance] 商人学徒招募 (→ 拜师学商) HP:83→83(+0)
+  - age 33: [teen_race_competition] 少年竞技会 (→ 参加跑步) HP:83→83(+0)
+  - ... 省略 294 个事件 ...
+  - age 333: [elder_star_gazing_final] 最后的星空 HP:138→134(-4)
+  - age 347: [elder_apprentice_return] 学徒归来 HP:59→52(-7)
+  - age 348: [elder_legend_verified] 传说被验证 HP:52→45(-7)
+  - age 349: [elder_wisdom_seekers] 求知者来访 HP:45→38(-7)
+  - age 350: [elder_final_illness] 最后的病榻 HP:38→0(-38)
 
 #### 矮人-女-B (seed=9032)
 
-- **寿命**: 283 / 400 (70.8%)
+- **寿命**: 293 / 400 (73.3%)
 - **初始HP**: 40
-- **HP范围**: 0 ~ 124
-- **评级**: B (小有成就), 分数=202.9
-- **事件触发**: 111 年有事件, 172 年平静, 96 个独立事件
-- **最大年HP损失**: -30, 最大年HP恢复: +14
-- **HP<50的年龄**: 1, 2, 53, 54, 55, 56, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282
+- **HP范围**: 0 ~ 294
+- **评级**: B (小有成就), 分数=248.6
+- **事件触发**: 290 年有事件, 3 年平静, 178 个独立事件
+- **最大年HP损失**: -36, 最大年HP恢复: +24
+- **HP<50的年龄**: 1, 2, 14, 15, 289, 290, 291, 292
 - **路线**: mage
-- **路线切换**: none→commoner @ age 1, commoner→mage @ age 23
-- **成就**: first_step, ten_lives, beauty_supreme, dwarf_masterwork_ach, dwarf_holdfast_ach, dragon_knight, longevity, wisdom_peak, dwarf_hall_name, dwarf_apprentice_legacy, scholar_warrior, soul_pure, dwarf_long_watch, balanced_finale, iron_will_to_end, century_witness, miracle_afterglow
-- **物品**: soul_gem
-- **HP里程碑**: age0=-1, age1=44, age5=59, age10=54, age15=63, age20=69
-  age50=56
-- **事件序列** (111 个):
+- **路线切换**: none→commoner @ age 1, commoner→mage @ age 22
+- **成就**: first_step, ten_lives, scholar_warrior, beauty_supreme, iron_body, soul_pure, dwarf_masterwork_ach, dwarf_holdfast_ach, mage_path, wisdom_peak, dragon_knight, dwarf_apprentice_legacy, elemental_lord_ach, archmage_body, tower_master_ach, single_mother_warrior, archmage_ach, female_archmage, dwarf_surface_broker, divine_champion_ach, demon_king_slayer_ach, fairy_companion, famous_author_ach, legacy_of_students, undying_legend_ach, peaceful_ending, dwarf_long_watch, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness
+- **物品**: soul_gem, ancient_relic
+- **HP里程碑**: age0=-1, age1=44, age5=60, age10=57, age15=46, age20=66
+  age50=87
+- **事件序列** (290 个):
   - age 1: [birth_twins] 双生子  HP:40→44(+4)
   - age 4: [child_dwarf_first_hammer] 第一次握锤 (→ 先练稳稳落锤) HP:52→56(+4)
-  - age 5: [random_minor_injury] 小伤  HP:56→59(+3)
-  - age 6: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:59→60(+1)
-  - age 7: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:60→53(-7)
-  - age 8: [childhood_pet] 捡到受伤小鸟 (→ 带回家照顾) HP:53→50(-3)
-  - age 9: [young_rival] 少年的对手 (→ 努力超越他) HP:50→50(+0)
-  - age 10: [catch_thief] 抓小偷 (→ 追上去) HP:50→54(+4)
-  - age 11: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:54→58(+4)
-  - age 12: [first_love] 初恋的味道 (→ 表白) HP:58→62(+4)
-  - age 13: [stray_dog] 流浪狗 (→ 带它回家) HP:62→63(+1)
-  - age 14: [random_minor_injury] 小伤  HP:63→62(-1)
-  - age 15: [chr_public_speech] 广场演说 (→ 慷慨陈词) HP:62→63(+1)
-  - age 16: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:63→63(+0)
-  - age 17: [first_competition] 第一次比赛 (→ 拼尽全力) HP:63→57(-6)
-  - age 18: [festival_dance] 丰收祭的舞蹈 (→ 一起跳舞) HP:57→61(+4)
-  - age 19: [dating_start] 开始交往 (→ 正式告白) HP:61→65(+4)
-  - age 20: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:65→69(+4)
-  - age 21: [youth_short_term_job] 临时差事 (→ 老老实实做完) HP:69→73(+4)
-  - age 22: [magic_academy_letter] 魔法学院来信 (→ 入学就读) HP:73→73(+0)
-  - age 23: [youth_gambling_den] 赌场诱惑 (→ 小赌怡情) HP:73→73(+0)
-  - age 24: [youth_shared_roof] 同住一檐下 (→ 把日子打理顺) HP:73→73(+0)
-  - age 25: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:73→65(-8)
-  - age 26: [child_cooking_adventure] 第一次做饭 (→ 认真按步骤来) HP:65→69(+4)
-  - age 27: [random_training_day] 勤奋的一天 (→ 训练体能) HP:69→73(+4)
-  - age 28: [random_training_day] 勤奋的一天 (→ 训练体能) HP:73→77(+4)
-  - age 29: [quest_parting] 远征前的告别 (→ 系上护身符) HP:77→80(+3)
-  - age 30: [spr_meditation_retreat] 闭关修炼 (→ 闭关苦修) HP:80→80(+0)
-  - age 31: [random_minor_injury] 小伤  HP:80→72(-8)
-  - age 32: [mid_return_adventure] 重出江湖 (→ 挑战新地城) HP:72→52(-20)
-  - ... 省略 81 个事件 ...
-  - age 266: [mid_vision_decline] 模糊的视界 HP:45→41(-4)
-  - age 280: [elder_kingdom_crisis] 王国危机 HP:36→27(-9)
-  - age 281: [elder_last_journey] 最后的旅途 HP:27→28(+1)
-  - age 282: [elder_passing_wisdom] 智者之言 HP:28→29(+1)
-  - age 283: [elder_last_adventure] 不服老的冒险 HP:29→0(-29)
+  - age 6: [village_festival] 村里祭典 (→ 大吃特吃) HP:60→60(+0)
+  - age 7: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:60→57(-3)
+  - age 8: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:57→60(+3)
+  - age 9: [childhood_pet] 捡到受伤小鸟 (→ 带回家照顾) HP:60→57(-3)
+  - age 10: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:57→57(+0)
+  - age 11: [child_dwarf_surface_fair] 第一次去地表集市 (→ 寸步不离商队) HP:57→57(+0)
+  - age 12: [stray_dog] 流浪狗 (→ 带它回家) HP:57→57(+0)
+  - age 13: [noble_kid_revenge] 权贵的欺凌 (→ 咽下这口气) HP:57→57(+0)
+  - age 14: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:57→42(-15)
+  - age 15: [child_night_sky] 仰望星空  HP:42→46(+4)
+  - age 16: [child_lost_in_woods] 迷路 (→ 跟着星星走) HP:46→50(+4)
+  - age 17: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:50→54(+4)
+  - age 18: [first_competition] 第一次比赛 (→ 拼尽全力) HP:54→58(+4)
+  - age 19: [first_snow] 初雪 (→ 堆雪人) HP:58→62(+4)
+  - age 20: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:62→66(+4)
+  - age 21: [magic_academy_letter] 魔法学院来信 (→ 入学就读) HP:66→70(+4)
+  - age 22: [river_discovery] 河底发光 (→ 潜下去捡) HP:70→74(+4)
+  - age 23: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:74→77(+3)
+  - age 24: [random_weather_blessing] 好天气  HP:77→70(-7)
+  - age 25: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:70→62(-8)
+  - age 26: [teen_race_competition] 少年竞技会 (→ 参加跑步) HP:62→66(+4)
+  - age 27: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:66→70(+4)
+  - age 28: [teen_library_discovery] 图书馆的秘密阁楼 (→ 沉浸在故事中) HP:70→74(+4)
+  - age 29: [random_found_coin] 捡到硬币  HP:74→78(+4)
+  - age 30: [teen_nightmare] 反复出现的噩梦 (→ 在梦中回应那个声音) HP:78→82(+4)
+  - age 31: [river_fishing] 河边抓鱼 (→ 耐心等待) HP:82→83(+1)
+  - age 32: [wander_market] 逛集市 (→ 买了一本旧书) HP:83→77(-6)
+  - age 33: [teen_first_adventure] 人生第一次冒险 (→ 去探索据说闹鬼的废墟) HP:77→77(+0)
+  - ... 省略 260 个事件 ...
+  - age 289: [elder_spirit_trial] 灵魂试炼 HP:52→34(-18)
+  - age 290: [elder_feast_missing_names] 席间空位 HP:34→39(+5)
+  - age 291: [elder_last_adventure] 不服老的冒险 HP:39→30(-9)
+  - age 292: [elder_dream_fulfilled] 完成心愿 HP:30→29(-1)
+  - age 293: [retirement] 挂剑归隐 HP:29→0(-29)
 
 #### 矮人-男-C (seed=9033)
 
-- **寿命**: 309 / 400 (77.3%)
+- **寿命**: 307 / 400 (76.8%)
 - **初始HP**: 58
-- **HP范围**: 0 ~ 186
-- **评级**: B (小有成就), 分数=241.9
-- **事件触发**: 142 年有事件, 167 年平静, 126 个独立事件
-- **最大年HP损失**: -26, 最大年HP恢复: +20
-- **HP<50的年龄**: 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308
-- **路线**: adventurer
-- **路线切换**: none→commoner @ age 1, commoner→adventurer @ age 34
-- **成就**: first_step, ten_lives, dwarf_dragon_vow_ach, beauty_supreme, male_beauty, eternal_wanderer, scholar_warrior, dwarf_masterwork_ach, merchant_empire, dwarf_surface_broker, dwarf_holdfast_ach, longevity, dragon_knight, loving_family, iron_body, wisdom_peak, dwarf_hall_name, dwarf_apprentice_legacy, wealth_peak, dwarf_dragonfire_legacy, male_great_father, soul_pure, famous_author_ach, legacy_of_students, peaceful_ending, eternal_peace, undying_legend_ach, memories_in_hands, dwarf_long_watch, era_remembered, balanced_finale, iron_will_to_end, century_witness
-- **物品**: soul_gem
-- **HP里程碑**: age0=-1, age1=63, age5=77, age10=77, age15=90, age20=101
-  age50=131
-- **事件序列** (142 个):
+- **HP范围**: 0 ~ 282
+- **评级**: B (小有成就), 分数=246.5
+- **事件触发**: 304 年有事件, 3 年平静, 177 个独立事件
+- **最大年HP损失**: -33, 最大年HP恢复: +25
+- **HP<50的年龄**: 297, 298, 300, 301, 303, 304, 305, 306
+- **路线**: mage
+- **路线切换**: none→commoner @ age 1, commoner→mage @ age 22
+- **成就**: first_step, ten_lives, dwarf_dragon_vow_ach, scholar_warrior, iron_body, wisdom_peak, dwarf_holdfast_ach, beauty_supreme, male_beauty, dwarf_masterwork_ach, mage_path, archmage_body, soul_pure, dwarf_apprentice_legacy, dwarf_hall_name, tower_master_ach, elemental_lord_ach, dragon_knight, divine_champion_ach, demon_king_slayer_ach, cheated_death_ach, archmage_ach, dwarf_dragonfire_legacy, war_hero_ach, fairy_companion, famous_author_ach, undying_legend_ach, legacy_of_students, memories_in_hands, peaceful_ending, dwarf_long_watch, era_remembered, balanced_finale, arcane_reserve_final, iron_will_to_end, century_witness, miracle_afterglow
+- **物品**: soul_gem, lucky_charm
+- **HP里程碑**: age0=-1, age1=63, age5=77, age10=77, age15=77, age20=87
+  age50=159
+- **事件序列** (304 个):
   - age 1: [birth_wilderness] 荒野出生 (→ 萨满世家) HP:58→63(+5)
   - age 4: [child_dwarf_first_hammer] 第一次握锤 (→ 先练稳稳落锤) HP:73→73(+0)
-  - age 5: [random_weather_blessing] 好天气  HP:73→77(+4)
-  - age 6: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:77→77(+0)
-  - age 7: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:77→77(+0)
-  - age 8: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:77→80(+3)
-  - age 9: [random_stargazing] 观星  HP:80→77(-3)
-  - age 10: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:77→77(+0)
-  - age 11: [explore_ruins] 废墟探险 (→ 推门进去) HP:77→72(-5)
-  - age 12: [bullied_fight_back] 反击！ (→ 直接动手) HP:72→77(+5)
-  - age 13: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:77→82(+5)
-  - age 14: [chr_public_speech] 广场演说 (→ 慷慨陈词) HP:82→87(+5)
-  - age 15: [teen_future_talk] 夜谈未来 (→ 认真说出愿望) HP:87→90(+3)
-  - age 16: [random_good_meal] 丰盛的一餐  HP:90→90(+0)
-  - age 17: [harvest_festival] 丰收祭典 (→ 参加各项比赛) HP:90→90(+0)
-  - age 18: [youth_tavern_rumor] 酒馆传闻 (→ 凑过去听) HP:90→95(+5)
-  - age 19: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:95→96(+1)
-  - age 20: [teen_library_discovery] 图书馆的秘密阁楼 (→ 沉浸在故事中) HP:96→101(+5)
-  - age 21: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:101→103(+2)
-  - age 22: [child_lost_in_woods] 迷路 (→ 跟着星星走) HP:103→103(+0)
-  - age 23: [first_competition] 第一次比赛 (→ 拼尽全力) HP:103→103(+0)
-  - age 24: [random_found_coin] 捡到硬币  HP:103→108(+5)
-  - age 25: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:108→113(+5)
-  - age 26: [random_nightmare_visit] 不安的梦  HP:113→118(+5)
-  - age 27: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:118→119(+1)
-  - age 28: [youth_short_term_job] 临时差事 (→ 老老实实做完) HP:119→113(-6)
-  - age 29: [food_culture] 美食之旅 (→ 学习烹饪) HP:113→113(+0)
-  - age 30: [hunting_trip] 狩猎之旅 (→ 追踪大型猎物) HP:113→108(-5)
-  - age 31: [teen_dwarf_dragon_relic_vigil] 守望龙族旧迹 (→ 向遗迹行最庄重的礼) HP:108→113(+5)
-  - age 32: [adult_plague_crisis] 瘟疫来袭 (→ 帮助救治病人) HP:113→118(+5)
-  - ... 省略 112 个事件 ...
-  - age 297: [elder_final_gift] 最后的礼物 HP:33→33(+0)
-  - age 298: [elder_sunset_watching] 夕阳 HP:33→33(+0)
-  - age 307: [legend_spread] 传说的传播 HP:22→20(-2)
-  - age 308: [elder_frail] 风烛残年 HP:20→1(-19)
-  - age 309: [elder_old_enemy] 昔日的对手 HP:1→0(-1)
+  - age 6: [childhood_play] 村口的泥巴大战 (→ 当孩子王) HP:77→77(+0)
+  - age 7: [bullied] 被大孩子欺负 (→ 忍气吞声) HP:77→80(+3)
+  - age 8: [childhood_chase] 抓蜻蜓 (→ 抓到了一只) HP:80→80(+0)
+  - age 9: [bullied_repeat] 他们又来了 (→ 继续忍耐) HP:80→77(-3)
+  - age 10: [first_snow] 初雪 (→ 堆雪人) HP:77→77(+0)
+  - age 11: [childhood_hide_seek] 捉迷藏 (→ 藏得太好没人找到) HP:77→77(+0)
+  - age 12: [steal_sweets] 偷吃糖果 (→ 老实道歉) HP:77→77(+0)
+  - age 13: [rainy_day_adventure] 雨日冒险 (→ 钻进去看看) HP:77→69(-8)
+  - age 14: [child_night_sky] 仰望星空  HP:69→74(+5)
+  - age 15: [grandma_recipes] 奶奶的秘方 (→ 认真学习) HP:74→77(+3)
+  - age 16: [child_river_adventure] 河边探险 (→ 探索瀑布后面的洞穴) HP:77→70(-7)
+  - age 17: [child_lost_in_woods] 迷路 (→ 跟着星星走) HP:70→75(+5)
+  - age 18: [first_competition] 第一次比赛 (→ 拼尽全力) HP:75→77(+2)
+  - age 19: [child_cooking_adventure] 第一次做饭 (→ 认真按步骤来) HP:77→82(+5)
+  - age 20: [child_first_fight] 第一次打架 (→ 挥拳反击) HP:82→87(+5)
+  - age 21: [magic_academy_letter] 魔法学院来信 (→ 入学就读) HP:87→92(+5)
+  - age 22: [teen_library_discovery] 图书馆的秘密阁楼 (→ 沉浸在故事中) HP:92→96(+4)
+  - age 23: [tree_climbing] 爬树冒险 (→ 爬到最高处) HP:96→96(+0)
+  - age 24: [teen_dwarf_choose_master] 拜师之日 (→ 跟锻炉师傅学火候) HP:96→101(+5)
+  - age 25: [child_stray_animal] 收养流浪动物 (→ 带回家照顾) HP:101→106(+5)
+  - age 26: [teen_nightmare] 反复出现的噩梦 (→ 在梦中回应那个声音) HP:106→106(+0)
+  - age 27: [stand_up_moment] 不再忍耐 (→ 正面反击) HP:106→106(+0)
+  - age 28: [village_feud] 村长之争 (→ 帮弱者说话) HP:106→111(+5)
+  - age 29: [teen_race_competition] 少年竞技会 (→ 参加跑步) HP:111→113(+2)
+  - age 30: [random_minor_injury] 小伤  HP:113→117(+4)
+  - age 31: [random_minor_injury] 小伤  HP:117→118(+1)
+  - age 32: [teen_dwarf_dragon_relic_vigil] 守望龙族旧迹 (→ 向遗迹行最庄重的礼) HP:118→119(+1)
+  - age 33: [explore_ruins] 废墟探险 (→ 推门进去) HP:119→114(-5)
+  - ... 省略 274 个事件 ...
+  - age 303: [random_nightmare_visit] 不安的梦 HP:51→42(-9)
+  - age 304: [random_nightmare_visit] 不安的梦 HP:42→32(-10)
+  - age 305: [random_nightmare_visit] 不安的梦 HP:32→35(+3)
+  - age 306: [random_nightmare_visit] 不安的梦 HP:35→33(-2)
+  - age 307: [elder_frail] 风烛残年 HP:33→0(-33)
 
 ## 2. 路线系统专项验证
 
@@ -678,10 +678,10 @@
 |------|------|-------|---------|----------|----------|------------|------|------|
 | adventurer | human | ✅ | 1 | first_quest | ⚠️ dungeon_explore_1, advanced_dungeon | 2 | 62 | B |
 | knight | human | ✅ | 1 | knight_tournament | ⚠️ knight_glory | 3 | 79 | B |
-| mage | elf | ✅ | 1 | magic_graduate | ⚠️ magic_exam, magic_duel | 5 | 51 | B |
+| mage | elf | ✅ | 1 | magic_duel, magic_graduate | ⚠️ magic_exam | 8 | 287 | B |
 | merchant | human | ✅ | 1 | 无 | ⚠️ merchant_career, investment_opportunity, become_lord | 0 | 70 | B |
-| scholar | dwarf | ✅ | 1 | 无 | ⚠️ write_a_book, disciple_comes | 1 | 358 | B |
-| commoner | goblin | ✅ | 1 | 无 | ✅ | 0 | 40 | B |
+| scholar | dwarf | ✅ | 1 | 无 | ⚠️ write_a_book, disciple_comes | 0 | 366 | B |
+| commoner | goblin | ✅ | 1 | 无 | ✅ | 0 | 36 | B |
 
 ### 2.2 路线自然切换测试（12 局中的路线切换统计）
 
@@ -689,15 +689,15 @@
 - 人类-男-A: commoner → commoner @ age 1, commoner → scholar @ age 32
 - 人类-女-B: commoner → commoner @ age 1, commoner → scholar @ age 36
 - 人类-男-C: commoner → commoner @ age 1, commoner → scholar @ age 38
-- 精灵-女-A: commoner → commoner @ age 1, commoner → scholar @ age 25, scholar → merchant @ age 59
-- 精灵-男-B: commoner → commoner @ age 1, commoner → scholar @ age 31, scholar → mage @ age 43
-- 精灵-女-C: commoner → commoner @ age 1, commoner → mage @ age 48
-- 哥布林-女-A: commoner → commoner @ age 1
-- 哥布林-男-B: commoner → commoner @ age 1, commoner → scholar @ age 33
-- 哥布林-女-C: commoner → commoner @ age 1, commoner → merchant @ age 9
-- 矮人-男-A: commoner → commoner @ age 1, commoner → merchant @ age 32
-- 矮人-女-B: commoner → commoner @ age 1, commoner → mage @ age 23
-- 矮人-男-C: commoner → commoner @ age 1, commoner → adventurer @ age 34
+- 精灵-女-A: commoner → commoner @ age 1, commoner → mage @ age 45
+- 精灵-男-B: commoner → commoner @ age 1, commoner → mage @ age 34
+- 精灵-女-C: commoner → commoner @ age 1, commoner → mage @ age 33
+- 哥布林-女-A: commoner → commoner @ age 1, commoner → scholar @ age 43
+- 哥布林-男-B: commoner → commoner @ age 1
+- 哥布林-女-C: commoner → commoner @ age 1
+- 矮人-男-A: commoner → commoner @ age 1, commoner → merchant @ age 33
+- 矮人-女-B: commoner → commoner @ age 1, commoner → mage @ age 22
+- 矮人-男-C: commoner → commoner @ age 1, commoner → mage @ age 22
 
 ## 3. HP 系统验证
 
@@ -710,9 +710,9 @@
 | 种族 | 平均寿命 | 寿命范围 | 平均初始HP | 平均最低HP | 平均最高HP | HP<50局数 |
 |------|---------|---------|-----------|-----------|-----------|-----------|
 | human | 67.7 | 58~74 | 44.0 | 0.0 | 120.3 | 3/3 |
-| elf | 324.7 | 276~351 | 34.0 | 0.0 | 147.0 | 3/3 |
-| goblin | 45.3 | 42~47 | 31.0 | 0.0 | 75.0 | 3/3 |
-| dwarf | 309.7 | 283~337 | 49.0 | 0.0 | 166.3 | 3/3 |
+| elf | 331.7 | 291~360 | 34.0 | 0.0 | 235.7 | 3/3 |
+| goblin | 43.0 | 42~44 | 31.0 | 0.0 | 67.0 | 3/3 |
+| dwarf | 316.7 | 293~350 | 49.0 | 0.0 | 290.0 | 3/3 |
 
 ### 3.3 衰老模型表现
 
@@ -722,35 +722,35 @@
 - 人类-男-C: Q1(avg=67.2) Q2(avg=124.4) Q3(avg=140.7) Q4(avg=81.2) 死亡age=74
 
 #### elf
-- 精灵-女-A: Q1(avg=79.7) Q2(avg=106.6) Q3(avg=116.9) Q4(avg=46.8) 死亡age=347
-- 精灵-男-B: Q1(avg=67.4) Q2(avg=112.8) Q3(avg=131.7) Q4(avg=94.5) 死亡age=276
-- 精灵-女-C: Q1(avg=77.6) Q2(avg=167.3) Q3(avg=176.3) Q4(avg=120.0) 死亡age=351
+- 精灵-女-A: Q1(avg=78.0) Q2(avg=152.7) Q3(avg=153.0) Q4(avg=68.0) 死亡age=344
+- 精灵-男-B: Q1(avg=80.0) Q2(avg=152.5) Q3(avg=187.7) Q4(avg=103.6) 死亡age=291
+- 精灵-女-C: Q1(avg=81.3) Q2(avg=173.5) Q3(avg=253.2) Q4(avg=179.0) 死亡age=360
 
 #### goblin
-- 哥布林-女-A: Q1(avg=57.7) Q2(avg=92.6) Q3(avg=105.9) Q4(avg=58.7) 死亡age=47
-- 哥布林-男-B: Q1(avg=31.0) Q2(avg=41.7) Q3(avg=44.5) Q4(avg=23.7) 死亡age=47
-- 哥布林-女-C: Q1(avg=38.6) Q2(avg=52.8) Q3(avg=59.4) Q4(avg=32.2) 死亡age=42
+- 哥布林-女-A: Q1(avg=54.3) Q2(avg=79.6) Q3(avg=89.4) Q4(avg=55.0) 死亡age=44
+- 哥布林-男-B: Q1(avg=24.1) Q2(avg=32.5) Q3(avg=32.6) Q4(avg=21.6) 死亡age=43
+- 哥布林-女-C: Q1(avg=32.5) Q2(avg=51.9) Q3(avg=53.6) Q4(avg=39.0) 死亡age=42
 
 #### dwarf
-- 矮人-男-A: Q1(avg=118.0) Q2(avg=184.2) Q3(avg=172.2) Q4(avg=120.1) 死亡age=337
-- 矮人-女-B: Q1(avg=67.9) Q2(avg=118.3) Q3(avg=119.2) Q4(avg=79.1) 死亡age=283
-- 矮人-男-C: Q1(avg=121.4) Q2(avg=176.1) Q3(avg=174.9) Q4(avg=94.4) 死亡age=309
+- 矮人-男-A: Q1(avg=109.8) Q2(avg=214.6) Q3(avg=265.7) Q4(avg=183.2) 死亡age=350
+- 矮人-女-B: Q1(avg=81.7) Q2(avg=183.9) Q3(avg=254.1) Q4(avg=190.7) 死亡age=293
+- 矮人-男-C: Q1(avg=127.6) Q2(avg=216.0) Q3(avg=246.1) Q4(avg=170.8) 死亡age=307
 
 ## 4. 事件覆盖度
 
 - **总事件数**: 675
-- **触发过的事件**: 426 (63.1%)
+- **触发过的事件**: 451 (66.8%)
 - **未触发的非unique事件**: 1
 
 ### 4.1 按路线统计事件分布
 
 | 路线 | 专属事件数 | 已触发 | 覆盖率 |
 |------|-----------|--------|--------|
-| mage | 24 | 6 | 25.0% |
+| mage | 24 | 11 | 45.8% |
 | knight | 14 | 3 | 21.4% |
-| adventurer | 27 | 3 | 11.1% |
-| merchant | 20 | 8 | 40.0% |
-| scholar | 14 | 6 | 42.9% |
+| adventurer | 27 | 2 | 7.4% |
+| merchant | 20 | 12 | 60.0% |
+| scholar | 14 | 4 | 28.6% |
 
 ### 4.2 从未触发的非unique事件（前50个）
 
@@ -821,7 +821,7 @@
 - 精灵 精灵-女-C 最低HP降至 0，HP 过低
 - 路线 adventurer (冒险者-人类): 锚点事件未触发: dungeon_explore_1, advanced_dungeon
 - 路线 knight (骑士-人类): 锚点事件未触发: knight_glory
-- 路线 mage (法师-精灵): 锚点事件未触发: magic_exam, magic_duel
+- 路线 mage (法师-精灵): 锚点事件未触发: magic_exam
 - 路线 merchant (商人-人类): 锚点事件未触发: merchant_career, investment_opportunity, become_lord
 - 路线 scholar (学者-矮人): 锚点事件未触发: write_a_book, disciple_comes
 
@@ -833,7 +833,7 @@
 
 ### 各局触发的事件合集
 
-共 426 个独立事件被触发（含路线测试）：
+共 451 个独立事件被触发（含路线测试）：
 
 - `adult_business_startup`
 - `adult_dragon_rumor`
@@ -849,8 +849,8 @@
 - `adult_teaching_offer`
 - `adult_treasure_map`
 - `adv_bounty`
-- `adv_legendary_dungeon`
 - `apprentice_contest`
+- `arcane_academy_invitation`
 - `arena_champion_invite`
 - `avenger_confrontation`
 - `avenger_trail`
@@ -869,10 +869,10 @@
 - `bullied`
 - `bullied_fight_back`
 - `bullied_repeat`
-- `business_venture`
 - `buy_house`
 - `catch_thief`
 - `chain_dark_past`
+- `chain_rise_to_power`
 - `challenge_abyss`
 - `challenge_final_boss`
 - `challenge_god_trial`
@@ -895,13 +895,14 @@
 - `church_orphan`
 - `community_leader`
 - `cryptic_manuscript`
-- `cursed_wanderer_village_exile`
 - `dark_cult_aftermath`
 - `dark_cult_encounter`
+- `dark_mage_choice`
 - `dating_deepen`
 - `dating_start`
-- `disciple_comes`
 - `divine_vision`
+- `dragon_sky_patrol`
+- `dragon_ultimate_bond`
 - `dragon_youngling_growth`
 - `elder_apprentice_return`
 - `elder_autobiography`
@@ -911,6 +912,7 @@
 - `elder_dwarf_last_inspection`
 - `elder_family_reunion`
 - `elder_feast_missing_names`
+- `elder_final_counting`
 - `elder_final_gift`
 - `elder_final_illness`
 - `elder_frail`
@@ -921,6 +923,7 @@
 - `elder_last_feast`
 - `elder_last_journey`
 - `elder_legacy_gift`
+- `elder_legend_verified`
 - `elder_memoir`
 - `elder_memory_fade`
 - `elder_miracle_recovery`
@@ -935,14 +938,17 @@
 - `elder_technique_pass`
 - `elder_unexpected_visitor`
 - `elder_wisdom_seekers`
+- `elder_world_peace`
 - `elemental_trial`
+- `elf_ancient_language`
+- `elf_ancient_library`
+- `elf_ancient_magic`
 - `elf_animal_friend`
 - `elf_beast_tongue`
 - `elf_butterfly_dance`
 - `elf_century_meditation`
 - `elf_council_invitation`
 - `elf_crystal_cave`
-- `elf_crystal_weaving`
 - `elf_dark_elf_encounter`
 - `elf_dewdrop_game`
 - `elf_diplomatic_mission`
@@ -952,10 +958,11 @@
 - `elf_dwarf_trade`
 - `elf_elvish_calligraphy`
 - `elf_eternal_garden`
+- `elf_eternal_sleep`
 - `elf_fading_forest`
 - `elf_fading_magic`
-- `elf_farewell_ceremony`
 - `elf_first_century`
+- `elf_first_magic_spark`
 - `elf_first_treesong`
 - `elf_forbidden_book`
 - `elf_forbidden_magic_scroll`
@@ -965,12 +972,14 @@
 - `elf_forest_guardian_test`
 - `elf_half_elf_friend`
 - `elf_healing_spring`
+- `elf_herb_gathering`
 - `elf_human_city_visit`
 - `elf_human_encounter`
 - `elf_human_friend_aging`
 - `elf_lament_for_fallen`
 - `elf_last_song`
 - `elf_longevity_burden`
+- `elf_magic_duel`
 - `elf_magic_research`
 - `elf_moonlight_lullaby`
 - `elf_moonstone_forge`
@@ -983,15 +992,18 @@
 - `elf_seed_planting`
 - `elf_silver_harp`
 - `elf_spell_weaving`
+- `elf_spirit_animal`
 - `elf_spirit_deer`
 - `elf_star_song`
 - `elf_starlight_bath`
 - `elf_starlight_weaving`
+- `elf_talking_to_tree`
 - `elf_teaching_young`
 - `elf_time_perception`
 - `elf_treesong_mastery`
 - `elf_watching_generations`
 - `elf_wisdom_council_seat`
+- `elf_world_tree_communion`
 - `elf_world_tree_pilgrimage`
 - `elf_worldtree_guardian`
 - `elf_young_elf_mentor`
@@ -1008,50 +1020,46 @@
 - `forest_camping`
 - `gambling_night`
 - `goblin_alchemy_accident`
+- `goblin_alchemy_discovery`
 - `goblin_alliance`
-- `goblin_arena_underdog`
-- `goblin_big_brother`
-- `goblin_buried_treasure_reveal`
 - `goblin_chief_council`
-- `goblin_clockwork_toy`
 - `goblin_cooking_contest`
 - `goblin_disguise_adventure`
 - `goblin_dream_of_equality`
-- `goblin_elder_legend`
-- `goblin_final_feast_elder`
-- `goblin_forge_trick`
+- `goblin_elder_respect`
+- `goblin_final_feast`
+- `goblin_first_boss_fight`
+- `goblin_first_theft`
 - `goblin_human_kindness`
 - `goblin_human_language`
-- `goblin_human_shop`
 - `goblin_human_toy`
-- `goblin_insect_feast`
+- `goblin_junkyard_palace`
 - `goblin_legacy_hoard`
+- `goblin_longest_living`
 - `goblin_mechanical_genius`
+- `goblin_merchant_debut`
 - `goblin_mine_discovery`
-- `goblin_mushroom_garden`
 - `goblin_night_raid`
 - `goblin_old_bones_ache`
 - `goblin_passing_the_torch`
 - `goblin_peace_treaty`
 - `goblin_potion_brewing`
+- `goblin_rebellion`
 - `goblin_recipe_book`
 - `goblin_rescue_mission`
-- `goblin_sage`
 - `goblin_scavenger_instinct`
-- `goblin_shiny_obsession`
-- `goblin_smuggling_ring`
+- `goblin_shiny_collection`
 - `goblin_sunset_hill`
-- `goblin_survival_lesson`
 - `goblin_tavern_brawl`
 - `goblin_trade_empire`
-- `goblin_trap_master`
 - `goblin_trash_treasure`
 - `goblin_treasure_dive`
+- `goblin_treasure_map`
 - `goblin_tribal_legend`
+- `goblin_tribe_challenge`
 - `goblin_tribe_legacy`
 - `goblin_tunnel_race`
-- `goblin_underground_empire`
-- `goblin_warchief_duel`
+- `goblin_underground_race`
 - `goblin_wrestling_match`
 - `grandma_recipes`
 - `guild_recruitment`
@@ -1127,29 +1135,35 @@
 - `knight_tournament`
 - `legend_spread`
 - `lost_treasure_map`
-- `love_at_first_sight`
 - `lover_curse`
 - `lover_death_battlefield`
+- `luk_lottery`
+- `luk_lucky_coin`
+- `luk_potion_find`
 - `luk_wild_encounter`
 - `mag_elemental_fusion`
+- `mage_arcane_library`
 - `mage_elemental_plane`
+- `mage_magic_tower`
 - `mage_magic_war`
 - `magic_academy_letter`
-- `magic_burst_baby`
+- `magic_breakthrough_final`
+- `magic_duel`
 - `magic_graduate`
 - `magic_theory_class`
+- `magical_creature_tame`
+- `mana_overflow`
 - `market_haggling`
 - `marriage_anniversary`
-- `marriage_proposal`
 - `marry_adventurer`
-- `marry_noble`
 - `martial_arts_master`
 - `master_spell`
-- `masterpiece_craft`
 - `merchant_apprentice`
+- `merchant_auction`
 - `merchant_career`
+- `merchant_economic_crisis`
 - `merchant_guidance`
-- `merchant_guild`
+- `meteor_shower`
 - `mid_adopt_orphan`
 - `mid_apprentice_success`
 - `mid_body_decline`
@@ -1173,6 +1187,7 @@
 - `mid_natural_disaster`
 - `mid_old_enemy`
 - `mid_old_friend_reunion`
+- `mid_property_acquisition`
 - `mid_return_adventure`
 - `mid_scholar_work`
 - `mid_slowing_down`
@@ -1180,8 +1195,13 @@
 - `midlife_crisis`
 - `midlife_new_craft`
 - `mny_inherit_uncle`
+- `mny_tax_crisis`
+- `mny_trade_route`
+- `mountain_bandit_leader`
 - `mysterious_stranger`
+- `neighbor_dispute`
 - `noble_admirer`
+- `noble_kid_revenge`
 - `old_friend_reunion`
 - `old_rival`
 - `old_soldier_story`
@@ -1216,21 +1236,25 @@
 - `soul_bound`
 - `spr_curse_breaker`
 - `spr_divine_sign`
+- `spr_dream_vision`
 - `spr_meditation_retreat`
 - `spr_near_death`
 - `spr_spirit_animal`
 - `squire_opportunity`
 - `stand_up_moment`
 - `star_gazing`
+- `starlight_promise`
 - `steal_sweets`
 - `stray_dog`
 - `street_performance`
+- `street_performer`
 - `student_successor`
 - `tavern_brawl`
 - `teaching_others`
 - `teen_dwarf_choose_master`
 - `teen_dwarf_dragon_relic_vigil`
 - `teen_first_adventure`
+- `teen_first_errand`
 - `teen_future_talk`
 - `teen_library_discovery`
 - `teen_mentor_meeting`
@@ -1238,15 +1262,16 @@
 - `teen_race_competition`
 - `teen_secret_discovered`
 - `teen_traveling_circus`
+- `traveling_merchant`
 - `traveling_sage`
 - `tree_climbing`
 - `village_festival`
 - `village_feud`
 - `village_race`
 - `wander_market`
+- `war_aftermath`
 - `war_breaks_out`
 - `wedding_ceremony`
-- `world_breaking_start`
 - `write_a_book`
 - `young_rival`
 - `youth_bandit_ambush`
