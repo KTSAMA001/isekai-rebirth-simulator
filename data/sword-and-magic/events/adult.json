@@ -10221,7 +10221,7 @@
         "value": true
       }
     ],
-    "include": ""
+    "include": "has.flag.engaged"
   },
   {
     "id": "human_child_born",
@@ -11011,7 +11011,7 @@
       "*"
     ],
     "effects": [],
-    "include": "",
+    "include": "has.flag.engaged | has.flag.dating_deepen",
     "branches": [
       {
         "id": "goblin_interracial_marriage_br0",
@@ -11506,7 +11506,7 @@
       "*"
     ],
     "effects": [],
-    "include": "",
+    "include": "attribute.mny <= 5",
     "branches": [
       {
         "id": "human_debt_crisis_br0",
