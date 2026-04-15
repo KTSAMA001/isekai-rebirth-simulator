@@ -89,16 +89,20 @@ sigmoid = 1 / (1 + exp(-K * (lifeProgress - personalDeathProgress)))
 HP = HP - sigmoid衰减 + initialStrRegen恢复
 ```
 - **K = 12**（sigmoid 陡度）
-- **personalDeathProgress**：Beta(8,3) 采样，clamp [0.60, 0.92]
+- **personalDeathProgress**：基于种族 `lifespanRange` 动态计算，Beta(3,3) 对称分布线性映射到 `[deathProgressMin, deathProgressMax]`
+  - `deathProgressMin = max(0.20, range[0]/maxLifespan - 0.10)`
+  - `deathProgressMax = min(0.95, range[1]/maxLifespan + 0.08)`
+  - Beta(3,3) 均值 0.5，大部分采样在 [0.3, 0.7]，映射后集中在 lifespanRange 中部
 - **童年保护**：10 岁以下死亡保护（`CHILDHOOD_DEATH_PROTECTION_AGE = 10`）
 - **HP 平台期**：`raceMaxLifespan >= 200 && lifeProgress < 0.5` 时 HP 不低于 `initHp × 30%`
   - 精灵（500）和矮人（400）享受此保护
   - 人类（100）和哥布林（60）不享受
 
-### Beta(8,3) 死亡分布
-- 期望值 = 8/11 ≈ 0.727，标准差 ≈ 0.11
-- 大部分角色在 72.7% 寿命处开始急剧衰老
-- 含义：每个角色衰老曲线不同（早衰/长寿），增加重玩性
+### Beta(3,3) 动态死亡分布
+- Beta(3,3) 对称分布，均值 0.5，标准差 ≈ 0.16
+- 通过线性映射到种族的 lifespanRange 附近，确保大部分角色在正常寿命范围内死亡
+- 映射范围 = [range下界/Max - 10%, range上界/Max + 8%]，留出早死（下界前）和晚死（上界后）空间
+- 含义：不同种族有各自合理的死亡分布，每个角色衰老曲线不同，增加重玩性
 
 ### 评分系统（`EvaluatorModule`）
 ```
@@ -207,7 +211,7 @@ lifespanScore = min(lifespan / raceMaxLifespan, 1.2) × 60
 - **10 岁以下不会自然死亡**：`CHILDHOOD_DEATH_PROTECTION_AGE = 10`
 - **同一事件在阶段重叠期都可触发**：阶段设计有意重叠
 - **长寿种族事件密度降低**：百分比拉伸后事件分散在更长寿命中，密度自然降低
-- **人类预期死亡 ~62 岁**：Beta(8,3) 均值 0.727 × 85（lifespanRange 上界）≈ 62，合理范围
+- **人类预期死亡 ~74 岁**：Beta(3,3) 映射中点 ≈ 0.74 × 100 = 74，落在 lifespanRange [65,85] 内
 - **`twin_souls` 在各种族 60% 寿命处触发**：哥布林 21岁、人类 51岁、矮人 150岁、精灵 240岁
 
 ### ⚠️ 需要关注但不一定是 bug
@@ -346,7 +350,7 @@ Sigmoid 衰减：
 #### 死亡进度分布
 
 ```
-personalDeathProgress = Beta(8, 3)，clamp 到 [0.60, 0.92]
+personalDeathProgress = Beta(3,3) 动态映射，范围 = [range[0]/Max - 0.10, range[1]/Max + 0.08]
 
 含义：
 - 8,3 的 Beta 分布中位数约 0.73 → 大多数角色在寿命的 73% 左右开始明显衰老
@@ -368,7 +372,7 @@ personalDeathProgress = Beta(8, 3)，clamp 到 [0.60, 0.92]
 - ✅ **健康年轻人不应突然死亡**：HP 满的 20 岁角色，ageDecay 接近 0，不应该在普通事件中暴毙
 - ✅ **儿童不应自然死亡**：10 岁以下 ageDecay 强制为 0，验证不应出现 10 岁前自然死亡
 - ✅ **死亡应该渐进**：sigmoid K=12 集中在 personalDeathProgress 附近，HP 不会突然从满血归零
-- ✅ **极端早亡罕见但可能**：Beta(8,3) clamp [0.60, 0.92]，低于 60% 寿命死亡的只有当事件伤害叠加 HP 时才可能
+- ✅ **极端早亡罕见但可能**：映射范围下限可低至 0.20（lifeProgress 20%），低于 lifespanRange 下界死亡的只有当事件伤害叠加 HP 时才可能
 - ✅ **不应永生**：超寿命惩罚确保 `lifeProgress > 1.0` 后加速死亡
 
 ---
