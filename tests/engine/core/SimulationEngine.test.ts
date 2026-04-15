@@ -725,7 +725,7 @@ describe('SimulationEngine', () => {
       expect(finalState.phase).toBe('finished')
       expect(finalState.result).toBeDefined()
       expect(finalState.age).toBeGreaterThan(0)
-      expect(finalState.eventLog.length).toBeGreaterThanOrEqual(0)
+      expect(finalState.eventLog.length).toBeGreaterThan(0)
     })
 
     it('skipYear 正确处理平淡年', () => {

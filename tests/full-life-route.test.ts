@@ -190,8 +190,116 @@ describe('完整人生路线预设', () => {
     }
 
     console.log(`\n负债(mny=-1)债务危机触发率: ${debtTriggered}/${RUN_COUNT}`)
-    // 衰减加速后角色可能死在债务危机年龄(25-50)前，触发率不保证
-    expect(debtTriggered).toBeGreaterThanOrEqual(0)
+    // mny=-1 低家境，活到 25-50 岁年龄段时应有概率触发
+    expect(debtTriggered).toBeGreaterThan(0)
+  })
+
+  it('高家境(mny=18)债务危机触发率远低于低家境(mny=-1)', () => {
+    let highMnyDebt = 0
+    let lowMnyDebt = 0
+    const COMPARE_RUNS = 50
+
+    // 低家境
+    for (let i = 0; i < COMPARE_RUNS; i++) {
+      const engine = new SimulationEngine(worldInstance, 100 + i * 777)
+      engine.initGame('穷人', undefined, 'human', 'male')
+      const talents = engine.draftTalents()
+      engine.selectTalents(talents.slice(0, 3))
+      engine.allocateAttributes({ str: 5, int: 5, chr: 5, luk: 5, mag: 5, mny: -1, spr: 5 })
+
+      for (let j = 0; j < 150; j++) {
+        if (engine.getState().phase === 'finished') break
+        const r = engine.startYear()
+        if (r.phase === 'awaiting_choice' && r.branches) {
+          const avail = r.branches.filter((b: any) => canPickBranch(b, engine.getState(), worldInstance))
+          engine.resolveBranch(avail[0]?.id ?? r.branches[0].id)
+        }
+      }
+
+      if (engine.getState().eventLog.some(e => e.eventId === 'human_debt_crisis')) lowMnyDebt++
+    }
+
+    // 高家境
+    for (let i = 0; i < COMPARE_RUNS; i++) {
+      const engine = new SimulationEngine(worldInstance, 200 + i * 999)
+      engine.initGame('富人', undefined, 'human', 'male')
+      const talents = engine.draftTalents()
+      engine.selectTalents(talents.slice(0, 3))
+      engine.allocateAttributes({ str: 5, int: 5, chr: 5, luk: 5, mag: 5, mny: 18, spr: 5 })
+
+      for (let j = 0; j < 150; j++) {
+        if (engine.getState().phase === 'finished') break
+        const r = engine.startYear()
+        if (r.phase === 'awaiting_choice' && r.branches) {
+          const avail = r.branches.filter((b: any) => canPickBranch(b, engine.getState(), worldInstance))
+          engine.resolveBranch(avail[0]?.id ?? r.branches[0].id)
+        }
+      }
+
+      if (engine.getState().eventLog.some(e => e.eventId === 'human_debt_crisis')) highMnyDebt++
+    }
+
+    console.log(`\n债务危机触发率对比:`)
+    console.log(`  低家境(mny=-1): ${lowMnyDebt}/${COMPARE_RUNS} (${(lowMnyDebt / COMPARE_RUNS * 100).toFixed(0)}%)`)
+    console.log(`  高家境(mny=18): ${highMnyDebt}/${COMPARE_RUNS} (${(highMnyDebt / COMPARE_RUNS * 100).toFixed(0)}%)`)
+
+    // 核心断言：高家境触发率必须远低于低家境
+    // include 条件是 attribute.mny <= 5，初始 mny=18 需要大量事件扣减才能降到 5 以下
+    expect(lowMnyDebt).toBeGreaterThan(highMnyDebt)
+    // 高家境触发率不应超过低家境的 30%
+    expect(highMnyDebt).toBeLessThanOrEqual(Math.max(lowMnyDebt * 0.3, 2))
+  })
+
+  it('无 engaged flag 时不应触发婚礼', () => {
+    let weddingTriggered = 0
+    const WEDDING_RUNS = 50
+
+    for (let i = 0; i < WEDDING_RUNS; i++) {
+      const engine = new SimulationEngine(worldInstance, 500 + i * 1111)
+      engine.initGame('单身', undefined, 'human', 'male')
+      const talents = engine.draftTalents()
+      engine.selectTalents(talents.slice(0, 3))
+      // 普通 mny，不选择任何恋爱分支（回避恋爱事件链）
+      engine.allocateAttributes({ str: 8, int: 8, chr: 3, luk: 5, mag: 5, mny: 8, spr: 5 })
+
+      for (let j = 0; j < 150; j++) {
+        if (engine.getState().phase === 'finished') break
+        const state = engine.getState()
+
+        // 如果已获得 engaged flag，跳过这次统计（恋爱事件自动进入链了）
+        if (state.flags.has('engaged')) continue
+
+        const r = engine.startYear()
+        if (r.phase === 'awaiting_choice' && r.branches) {
+          // 主动回避恋爱分支：选择非恋爱分支
+          const avail = r.branches.filter((b: any) => {
+            // 跳过会设置 engaged/married/dating/in_relationship 的分支
+            if (b.effects?.some((e: any) =>
+              e.type === 'set_flag' && ['engaged', 'married', 'dating', 'in_relationship'].includes(e.target)
+            )) return false
+            return canPickBranch(b, engine.getState(), worldInstance)
+          })
+          const fallback = r.branches.filter((b: any) => canPickBranch(b, engine.getState(), worldInstance))
+          engine.resolveBranch(avail[0]?.id ?? fallback[0]?.id ?? r.branches[0].id)
+        }
+
+        // 检查是否触发了婚礼但从未有过 engaged flag
+        const newState = engine.getState()
+        const lastLog = newState.eventLog[newState.eventLog.length - 1]
+        if (lastLog && lastLog.age === newState.age && lastLog.eventId === 'human_wedding_ceremony') {
+          // 只有在从未设置过 engaged flag 的情况下才计数
+          // 但需要排除：先获得 engaged 再触发婚礼的正常情况
+          // 这里检查是否在婚礼触发前从未有过 engaged
+          if (!newState.flags.has('engaged') && !state.flags.has('engaged')) {
+            weddingTriggered++
+          }
+        }
+      }
+    }
+
+    console.log(`\n无engaged触发婚礼率: ${weddingTriggered}/${WEDDING_RUNS}`)
+    // include 条件是 has.flag.engaged，没有 engaged flag 绝不应触发婚礼
+    expect(weddingTriggered).toBe(0)
   })
 
   it('验证无条件事件的触发频率', () => {

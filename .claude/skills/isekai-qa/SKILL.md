@@ -221,6 +221,45 @@ merchant_apprentice → merchant_master
 
 ---
 
+## 测试覆盖原则
+
+### 正面 + 负面断言缺一不可
+
+测试不能只测"应该触发/通过"的情况，必须同时测试"不应该触发/失败"的情况。
+
+**强制规则：**
+
+1. **条件类事件必须双向验证**
+   - 条件满足时 → 验证事件**能**触发（正面测试）
+   - 条件不满足时 → 验证事件**不能**触发（负面测试）
+   - 示例：`human_debt_crisis`（include: `attribute.mny <= 5`）→ 测 mny=-1 触发 + mny=18 不触发
+
+2. **属性门槛事件必须双向验证**
+   - 高于门槛 → 验证触发
+   - 低于门槛 → 验证不触发
+   - 蒙特卡洛模拟中用大量样本（≥50 次）确保统计置信度
+
+3. **Flag 依赖事件必须双向验证**
+   - 有前置 flag → 验证事件可达
+   - 无前置 flag → 验证事件不可达
+   - 示例：`human_wedding_ceremony`（include: `has.flag.engaged`）→ 有 engaged 触发 + 无 engaged 不触发
+
+4. **弱断言视为测试缺陷，必须替换**
+   - ❌ `expect(x).toBeGreaterThanOrEqual(0)` — 计数器/数组长度永远 >= 0，无意义
+   - ❌ `expect(x).toBeTruthy()` — 过于宽泛，无法捕获回归
+   - ✅ 替换为具体期望值：`expect(debtTriggered).toBe(0)` 或 `expect(count).toBeGreaterThan(0)`
+   - ✅ 边界断言需有意义：`expect(v).toBeGreaterThanOrEqual(0)` + `expect(v).toBeLessThan(1)` 组合有效
+
+5. **新建测试模板**
+   ```
+   // 正面：条件满足时应触发
+   it('低家境(mny=-1)应触发债务危机', () => { ... expect(debtTriggered).toBeGreaterThan(0) })
+   // 负面：条件不满足时不应触发
+   it('高家境(mny=18)不应触发债务危机', () => { ... expect(debtTriggered).toBe(0) })
+   ```
+
+---
+
 ## references/ 目录
 
 核心检查规则摘要见 `references/checklist.md`，避免每次加载完整 QA-TEST-BASELINE.md（约 540 行）。
