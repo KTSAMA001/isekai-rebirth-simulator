@@ -40,8 +40,8 @@ describe('SimulationEngine', () => {
     it('HP 初始化为 25 + str×3', () => {
       const engine = createEngine()
       const state = engine.initGame('测试')
-      // 默认 str=5 → HP = 25 + 15 = 40
-      expect(state.hp).toBe(40)
+      // 默认 str=0 → HP = 25 + 0 = 25（最低 25）
+      expect(state.hp).toBe(25)
     })
 
     it('应用预设属性加成', () => {
@@ -57,8 +57,8 @@ describe('SimulationEngine', () => {
       })
       const engine = new SimulationEngine(world, 42)
       const state = engine.initGame('测试', 'p1')
-      // str: 5(default) + 3(preset) = 8
-      expect(state.attributes.str).toBe(8)
+      // str: 0(default) + 3(preset) = 3
+      expect(state.attributes.str).toBe(3)
     })
 
     it('应用种族属性修正', () => {
@@ -69,7 +69,7 @@ describe('SimulationEngine', () => {
       })
       const engine = new SimulationEngine(world, 42)
       const state = engine.initGame('精灵', undefined, 'elf')
-      expect(state.attributes.int).toBe(8) // 5 + 3
+      expect(state.attributes.int).toBe(3) // 0 + 3
     })
 
     it('应用种族×性别属性修正', () => {
@@ -83,7 +83,7 @@ describe('SimulationEngine', () => {
       })
       const engine = new SimulationEngine(world, 42)
       const state = engine.initGame('测试', undefined, 'human', 'female')
-      expect(state.attributes.chr).toBe(7) // 5 + 2
+      expect(state.attributes.chr).toBe(2) // 0 + 2
     })
 
     it('种族寿命范围影响 effectiveMaxAge', () => {
@@ -176,7 +176,7 @@ describe('SimulationEngine', () => {
       engine.draftTalents()
       engine.selectTalents(['strong'])
       const state = engine.getState()
-      expect(state.attributes.str).toBe(8) // 5 + 3
+      expect(state.attributes.str).toBe(3) // 0 + 3
     })
 
     it('天赋负值扣减可分配点数', () => {
@@ -215,7 +215,7 @@ describe('SimulationEngine', () => {
       // allocate 内部 remaining 不会为负，不抛异常
       expect(() => engine.allocateAttributes({ str: 999 })).not.toThrow()
       // 不再 clamp，str 直接加上去
-      expect(engine.getState().attributes.str).toBe(1004) // 5(default) + 999
+      expect(engine.getState().attributes.str).toBe(999) // 0(default) + 999
     })
 
     it('HP 基于初始体魄计算（computeInitHp 在属性更新前调用）', () => {
@@ -224,8 +224,8 @@ describe('SimulationEngine', () => {
       engine.draftTalents()
       engine.allocateAttributes({ str: 10 })
       const state = engine.getState()
-      // computeInitHp 使用分配前的 str=5 → HP = 25 + 5*3 = 40
-      expect(state.hp).toBe(40)
+      // computeInitHp 使用分配前的 str=0 → HP = 25 + 0*3 = 25
+      expect(state.hp).toBe(25)
     })
 
     it('属性峰值更新', () => {
@@ -234,7 +234,7 @@ describe('SimulationEngine', () => {
       engine.draftTalents()
       engine.allocateAttributes({ str: 10 })
       const state = engine.getState()
-      expect(state.attributePeaks.str).toBe(15)
+      expect(state.attributePeaks.str).toBe(10)
     })
   })
 
@@ -321,7 +321,7 @@ describe('SimulationEngine', () => {
       if (yearResult.phase === 'awaiting_choice') {
         const branchResult = engine.resolveBranch('brave')
         expect(branchResult.phase).toBe('showing_event')
-        expect(engine.getState().attributes.str).toBeGreaterThanOrEqual(8) // 5 + 3
+        expect(engine.getState().attributes.str).toBeGreaterThanOrEqual(3) // 0 + 3
       }
     })
 

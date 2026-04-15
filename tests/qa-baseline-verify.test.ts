@@ -720,7 +720,7 @@ describe('第 9.5 节：属性门槛', () => {
     description: string
   }> = [
     { eventId: 'birth_noble', expectedInclude: 'attribute.mny >= 6', description: '降生贵族需要 mny >= 6' },
-    { eventId: 'birth_slums', expectedInclude: 'attribute.mny <= 4', description: '贫民窟需要 mny <= 4' },
+    { eventId: 'birth_slums', expectedInclude: 'attribute.mny <= 2', description: '贫民窟需要 mny <= 2' },
     { eventId: 'fairy_encounter', expectedInclude: 'attribute.luk >= 6 & attribute.spr >= 4', description: '林中的精灵需要 luk>=6 & spr>=4' },
     { eventId: 'knight_examination', expectedInclude: 'has.flag.squire', description: '骑士考核需要 squire flag' },
     { eventId: 'magic_academy_enrollment', expectedInclude: 'attribute.mag >= 8', description: '魔法学院来信需要 mag >= 8' },

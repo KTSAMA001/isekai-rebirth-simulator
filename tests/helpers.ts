@@ -18,11 +18,11 @@ import type {
 /** 创建默认属性定义 */
 export function makeAttributeDefs(): WorldAttributeDef[] {
   return [
-    { id: 'str', name: '体魄', icon: '💪', description: '', color: '#f00', min: 0, max: 20, defaultValue: 5 },
-    { id: 'int', name: '智慧', icon: '🧠', description: '', color: '#00f', min: 0, max: 20, defaultValue: 5 },
-    { id: 'chr', name: '魅力', icon: '✨', description: '', color: '#ff0', min: 0, max: 20, defaultValue: 5 },
-    { id: 'luk', name: '幸运', icon: '🍀', description: '', color: '#0f0', min: 0, max: 20, defaultValue: 5 },
-    { id: 'mag', name: '魔力', icon: '🔮', description: '', color: '#a0f', min: 0, max: 20, defaultValue: 5 },
+    { id: 'str', name: '体魄', icon: '💪', description: '', color: '#f00', min: 0, max: 20, defaultValue: 0 },
+    { id: 'int', name: '智慧', icon: '🧠', description: '', color: '#00f', min: 0, max: 20, defaultValue: 0 },
+    { id: 'chr', name: '魅力', icon: '✨', description: '', color: '#ff0', min: 0, max: 20, defaultValue: 0 },
+    { id: 'luk', name: '幸运', icon: '🍀', description: '', color: '#0f0', min: 0, max: 20, defaultValue: 0 },
+    { id: 'mag', name: '魔力', icon: '🔮', description: '', color: '#a0f', min: 0, max: 20, defaultValue: 0 },
     { id: 'hp_display', name: '生命力', icon: '❤️', description: '', color: '#f0a', min: 0, max: 999, defaultValue: 100, hidden: true },
   ]
 }

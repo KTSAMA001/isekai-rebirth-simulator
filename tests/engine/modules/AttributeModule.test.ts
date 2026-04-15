@@ -12,11 +12,11 @@ describe('AttributeModule', () => {
     it('初始化所有属性为默认值', () => {
       const mod = createModule()
       const attrs = mod.initAttributes()
-      expect(attrs.str).toBe(5)
-      expect(attrs.int).toBe(5)
-      expect(attrs.chr).toBe(5)
-      expect(attrs.luk).toBe(5)
-      expect(attrs.mag).toBe(5)
+      expect(attrs.str).toBe(0)
+      expect(attrs.int).toBe(0)
+      expect(attrs.chr).toBe(0)
+      expect(attrs.luk).toBe(0)
+      expect(attrs.mag).toBe(0)
       expect(attrs.hp_display).toBe(100)
     })
   })
@@ -40,12 +40,12 @@ describe('AttributeModule', () => {
       expect(result.remaining).toBe(10)
     })
 
-    it('出生属性下限保护，allocate 结果 clamp 到 0', () => {
+    it('属性无下限，可以为负数', () => {
       const mod = createModule()
       const current = { str: 2, int: 5, chr: 5, luk: 5, mag: 5, hp_display: 100 }
       const result = mod.allocate(current, { str: -10 }, 20)
-      // 2 + (-10) = -8 → clamp 到 0
-      expect(result.attributes.str).toBe(0)
+      // 2 + (-10) = -8，允许负数
+      expect(result.attributes.str).toBe(-8)
     })
 
     it('忽略 hidden 属性的分配', () => {

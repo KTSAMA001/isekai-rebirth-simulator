@@ -55,7 +55,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 8,
-    "include": "attribute.mny <= 4",
+    "include": "attribute.mny <= 2",
     "unique": true,
     "effects": [
       {
@@ -66,7 +66,7 @@
     ],
     "tag": "life",
     "priority": "major",
-    "exclude": "attribute.mny >= 5",
+    "exclude": "attribute.mny >= 3",
     "routes": [
       "*"
     ],
@@ -1112,7 +1112,7 @@
     "minAge": 1,
     "maxAge": 1,
     "weight": 2,
-    "include": "attribute.mny <= 3 & attribute.str >= 6",
+    "include": "attribute.mny <= 1 & attribute.str >= 6",
     "unique": true,
     "effects": [
       {
