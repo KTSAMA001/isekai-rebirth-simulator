@@ -5817,6 +5817,12 @@
         "type": "modify_attribute",
         "target": "chr",
         "value": 1
+      },
+      {
+        "type": "modify_hp",
+        "target": "hp",
+        "value": -5,
+        "description": "忙了一整夜，体力透支"
       }
     ],
     "include": ""

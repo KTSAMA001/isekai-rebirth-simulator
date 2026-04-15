@@ -271,7 +271,7 @@
     "minAge": 4,
     "maxAge": 6,
     "weight": 3,
-    "include": "attribute.mny <= 2",
+    "include": "attribute.mny <= 4",
     "unique": true,
     "effects": [],
     "tag": "life",

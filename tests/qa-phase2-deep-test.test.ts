@@ -768,7 +768,8 @@ describe('E. 事件链条深度分析', () => {
     // 从事件定义中提取 required flags 并检查
     const flagChecks = [
       // elder_family_reunion 需要 has.flag.parent (不需要 married)
-      { flag: 'parent', events: ['elder_family_reunion', 'human_family_photo', 'human_retirement_cottage', 'human_grandchild_story', 'human_grandchild_laughter'] },
+      { flag: 'parent', events: ['elder_family_reunion', 'human_family_photo', 'human_grandchild_story', 'human_grandchild_laughter'] },
+      { flag: 'married', events: ['human_retirement_cottage'] },
       { flag: 'has_student', events: ['elder_apprentice_return', 'elder_technique_pass'] },
     ]
 
