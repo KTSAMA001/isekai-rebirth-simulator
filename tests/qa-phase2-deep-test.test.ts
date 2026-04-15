@@ -25,6 +25,9 @@ const RACE_NAMES: Record<string, string> = {
 const RACE_MAX_LIFESPAN: Record<string, number> = {
   human: 100, elf: 500, goblin: 60, dwarf: 400,
 }
+const RACE_LIFESPAN_RANGE: Record<string, [number, number]> = {
+  human: [65, 85], elf: [250, 400], goblin: [20, 35], dwarf: [150, 250],
+}
 const RACE_LIFE_STAGES: Record<string, Record<string, [number, number]>> = {
   human: { childhood: [2, 10], teen: [11, 17], youth: [14, 22], adult: [20, 45], midlife: [35, 60], elder: [55, 100] },
   elf:   { childhood: [2, 50], teen: [30, 80], youth: [50, 120], adult: [80, 250], midlife: [200, 380], elder: [350, 500] },
@@ -224,9 +227,15 @@ describe('A. 各种族完整生命周期模拟（50轮/种族）', () => {
         expect(overage.length, `${overage.length} 个角色超过 ${overageThreshold} 岁`).toBe(0)
       })
 
-      it('死亡时 lifeProgress 在合理范围内（0.55~1.1）', () => {
+      it('死亡时 lifeProgress 在合理范围内', () => {
+        const maxLifespan = RACE_MAX_LIFESPAN[race]
+        const range = RACE_LIFESPAN_RANGE[race]
+        // 下限：lifespanRange 下界的 60%（允许早死空间）
+        // 上限：maxLifespan 的 115%（允许少量超限）
+        const lowerBound = Math.max(0.15, (range[0] * 0.6) / maxLifespan)
+        const upperBound = 1.15
         const results = raceResults[race]!
-        const unreasonable = results.filter(r => r.lifeProgress < 0.45 || r.lifeProgress > 1.15)
+        const unreasonable = results.filter(r => r.lifeProgress < lowerBound || r.lifeProgress > upperBound)
 
         for (const r of unreasonable) {
           allAnomalies.push({
@@ -235,7 +244,7 @@ describe('A. 各种族完整生命周期模拟（50轮/种族）', () => {
             seed: r.seed,
             age: r.deathAge,
             eventId: 'death',
-            description: `lifeProgress=${r.lifeProgress.toFixed(3)} 异常（期望 0.55~1.1）`,
+            description: `lifeProgress=${r.lifeProgress.toFixed(3)} 异常（期望 ${lowerBound.toFixed(2)}~${upperBound.toFixed(2)}）`,
           })
         }
 

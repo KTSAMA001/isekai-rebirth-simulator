@@ -185,8 +185,18 @@ export class SimulationEngine {
     this.raceMaxLifespan = raceDef?.maxLifespan ?? this.world.manifest.maxAge
     // effectiveMaxAge 保留为 raceMaxLifespan 的别名（兼容性）
     this.effectiveMaxAge = this.raceMaxLifespan
-    // 个体死亡进度：Beta(8,3) 分布，clamp 到 [0.60, 0.92]
-    this.personalDeathProgress = Math.min(0.92, Math.max(0.60, sampleBeta(this.random, 8, 3)))
+    // 个体死亡进度：基于 lifespanRange 动态计算
+    // 让大部分角色在 lifespanRange 内死亡，保留早死/晚死可能性
+    const lifespanRange = raceDef?.lifespanRange ?? [this.raceMaxLifespan * 0.65, this.raceMaxLifespan * 0.85]
+    const rangeProgressMin = lifespanRange[0] / this.raceMaxLifespan
+    const rangeProgressMax = lifespanRange[1] / this.raceMaxLifespan
+    // 映射范围：range 下界前 10% ~ range 上界后 8%，留出早死和晚死空间
+    const deathProgressMin = Math.max(0.20, rangeProgressMin - 0.10)
+    const deathProgressMax = Math.min(0.95, rangeProgressMax + 0.08)
+    // Beta(3,3) 线性映射到 [deathProgressMin, deathProgressMax]
+    // Beta(3,3) 对称分布，均值 0.5，大部分在 [0.3, 0.7]，映射后集中在范围中间
+    const betaSample = sampleBeta(this.random, 3, 3)
+    this.personalDeathProgress = deathProgressMin + betaSample * (deathProgressMax - deathProgressMin)
 
     this.state = {
       meta: {
