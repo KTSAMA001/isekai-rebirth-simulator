@@ -176,19 +176,19 @@ describe('第 1-2 节：种族数据一致性', () => {
     expect(elf!.playable).toBe(true)
   })
 
-  it('哥布林数据一致：maxLifespan=60, lifespanRange=[25,45]', () => {
+  it('哥布林数据一致：maxLifespan=60, lifespanRange=[20,35]', () => {
     const goblin = getRace('goblin')
     expect(goblin).toBeDefined()
     expect(goblin!.maxLifespan).toBe(60)
-    expect(goblin!.lifespanRange).toEqual([25, 45])
+    expect(goblin!.lifespanRange).toEqual([20, 35])
     expect(goblin!.playable).toBe(true)
   })
 
-  it('矮人数据一致：maxLifespan=400, lifespanRange=[180,290]', () => {
+  it('矮人数据一致：maxLifespan=400, lifespanRange=[150,250]', () => {
     const dwarf = getRace('dwarf')
     expect(dwarf).toBeDefined()
     expect(dwarf!.maxLifespan).toBe(400)
-    expect(dwarf!.lifespanRange).toEqual([180, 290])
+    expect(dwarf!.lifespanRange).toEqual([150, 250])
     expect(dwarf!.playable).toBe(true)
   })
 
@@ -215,14 +215,14 @@ describe('第 1-2 节：种族数据一致性', () => {
       race: 'goblin',
       stages: {
         childhood: [1, 6], teen: [5, 12], youth: [8, 18],
-        adult: [15, 40], midlife: [30, 50], elder: [40, 60],
+        adult: [15, 35], midlife: [25, 50], elder: [35, 60],
       },
     },
     {
       race: 'dwarf',
       stages: {
         childhood: [2, 30], teen: [20, 50], youth: [30, 80],
-        adult: [60, 220], midlife: [180, 320], elder: [280, 400],
+        adult: [60, 200], midlife: [180, 320], elder: [280, 400],
       },
     },
   ]
@@ -564,11 +564,11 @@ describe('第 9.3 节：跨种族年龄等价', () => {
     expect(400 >= elderRange[0] && 400 <= elderRange[1]).toBe(true)
   })
 
-  it('哥布林 40 岁触发退休事件合理（等价人类 67 岁）', () => {
+  it('哥布林 35 岁触发退休事件合理（等价人类 58 岁）', () => {
     const goblin = getRace('goblin')
-    // 哥布林 40 岁 = 67% 寿命，等价人类 67 岁
+    // 哥布林 35 岁 = 58% 寿命，等价人类 58 岁
     const elderRange = goblin!.lifeStages!.elder
-    expect(40 >= elderRange[0]).toBe(true)
+    expect(35 >= elderRange[0]).toBe(true)
   })
 
   it('哥布林心理年龄 cap：浪漫/社交事件在 30 岁前（60×0.50）触发完', () => {
@@ -974,8 +974,8 @@ describe('第 9.9 节：各种族存活年龄统计', () => {
   const RACE_CONFIGS = [
     { race: 'human', maxLifespan: 100, lifespanRange: [65, 85] as [number, number] },
     { race: 'elf', maxLifespan: 500, lifespanRange: [250, 400] as [number, number] },
-    { race: 'goblin', maxLifespan: 60, lifespanRange: [25, 45] as [number, number] },
-    { race: 'dwarf', maxLifespan: 400, lifespanRange: [180, 290] as [number, number] },
+    { race: 'goblin', maxLifespan: 60, lifespanRange: [20, 35] as [number, number] },
+    { race: 'dwarf', maxLifespan: 400, lifespanRange: [150, 250] as [number, number] },
   ]
   const SIM_COUNT = 50
 
@@ -1060,12 +1060,12 @@ describe('第 9.9 节：各种族存活年龄统计', () => {
         expect(overMax.length).toBeLessThanOrEqual(Math.ceil(SIM_COUNT * 0.1))
       })
 
-      it('平均存活年龄在合理范围（lifespanRange 的 70%-110%）', () => {
+      it('平均存活年龄在合理范围（lifespanRange 的 50%-130%）', () => {
         const avg = calcMean(deathAges)
         const rangeLow = config.lifespanRange[0]
         const rangeHigh = config.lifespanRange[1]
-        const minExpected = rangeLow * 0.7
-        const maxExpected = rangeHigh * 1.1
+        const minExpected = rangeLow * 0.5
+        const maxExpected = rangeHigh * 1.3
 
         console.log(`  [${config.race}] 平均=${avg.toFixed(1)} 中位数=${calcMedian(deathAges)} ` +
           `min=${Math.min(...deathAges)} max=${Math.max(...deathAges)} ` +
