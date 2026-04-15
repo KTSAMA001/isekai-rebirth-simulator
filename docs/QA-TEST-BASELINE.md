@@ -166,18 +166,18 @@ lifespanScore = min(lifespan / raceMaxLifespan, 1.2) × 60
 ### 12 个 lifeProgress 成就
 | ID | 条件 |
 |----|------|
-| longevity | `lifeProgress >= 0.80` |
-| slum_survivor | `event.count.birth_slums >= 1 & lifeProgress >= 0.70` |
-| love_and_war | `has.flag.married & has.flag.war_hero & lifeProgress >= 0.60` |
-| eternal_wanderer | `lifeProgress >= 0.60 & has.flag.guild_member` |
-| widowed_hero | `has.flag.widowed & lifeProgress >= 0.60` |
-| peaceful_ending | `has.flag.peaceful_retirement & lifeProgress >= 0.70` |
-| dragon_near_death | `has.flag.near_death & has.flag.dragon_defeated & lifeProgress >= 0.40` |
-| war_hero_ach | `has.flag.war_hero & lifeProgress >= 0.50` |
-| dark_savior | `has.flag.dark_embraced & has.flag.escaped_dark & lifeProgress >= 0.50` |
-| fairy_companion | `has.flag.fairy_friend & lifeProgress >= 0.60` |
-| eternal_peace | `has.flag.peaceful_retirement & lifeProgress >= 0.80` |
-| iron_will_to_end | `lifeProgress >= 0.50 & attribute.str >= 25 & attribute.spr >= 20 & result.score >= 150` |
+| longevity | `lifeProgress >= 0.50` |
+| slum_survivor | `event.count.birth_slums >= 1 & lifeProgress >= 0.45` |
+| love_and_war | `has.flag.married & has.flag.war_hero & lifeProgress >= 0.45` |
+| eternal_wanderer | `lifeProgress >= 0.45 & has.flag.guild_member` |
+| widowed_hero | `has.flag.widowed & lifeProgress >= 0.45` |
+| peaceful_ending | `has.flag.peaceful_retirement & lifeProgress >= 0.50` |
+| dragon_near_death | `has.flag.near_death & has.flag.dragon_defeated & lifeProgress >= 0.35` |
+| war_hero_ach | `has.flag.war_hero & lifeProgress >= 0.40` |
+| dark_savior | `has.flag.dark_embraced & has.flag.escaped_dark & lifeProgress >= 0.40` |
+| fairy_companion | `has.flag.fairy_friend & lifeProgress >= 0.45` |
+| eternal_peace | `has.flag.peaceful_retirement & lifeProgress >= 0.50` |
+| iron_will_to_end | `lifeProgress >= 0.40 & attribute.str >= 25 & attribute.spr >= 20 & result.score >= 150` |
 
 ---
 

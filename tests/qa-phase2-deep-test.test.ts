@@ -642,12 +642,12 @@ describe('D. DSL lifeProgress 条件验证', () => {
 
   describe('成就 lifeProgress 条件验证', () => {
     const lpAchievements = [
-      { id: 'longevity', lpThreshold: 0.80, desc: '长寿之人 lifeProgress >= 0.80' },
-      { id: 'slum_survivor', lpThreshold: 0.70, desc: '泥泞中绽放 lifeProgress >= 0.70' },
-      { id: 'love_and_war', lpThreshold: 0.60, desc: '战争与爱情 lifeProgress >= 0.60' },
-      { id: 'peaceful_ending', lpThreshold: 0.70, desc: '落叶归根 lifeProgress >= 0.70' },
-      { id: 'widowed_hero', lpThreshold: 0.60, desc: '丧偶之痛 lifeProgress >= 0.60' },
-      { id: 'eternal_peace', lpThreshold: 0.80, desc: '岁月静好 lifeProgress >= 0.80' },
+      { id: 'longevity', lpThreshold: 0.50, desc: '长寿之人 lifeProgress >= 0.50' },
+      { id: 'slum_survivor', lpThreshold: 0.45, desc: '泥泞中绽放 lifeProgress >= 0.45' },
+      { id: 'love_and_war', lpThreshold: 0.45, desc: '战争与爱情 lifeProgress >= 0.45' },
+      { id: 'peaceful_ending', lpThreshold: 0.50, desc: '落叶归根 lifeProgress >= 0.50' },
+      { id: 'widowed_hero', lpThreshold: 0.45, desc: '丧偶之痛 lifeProgress >= 0.45' },
+      { id: 'eternal_peace', lpThreshold: 0.50, desc: '岁月静好 lifeProgress >= 0.50' },
     ]
 
     it('解锁成就时 lifeProgress 满足阈值', () => {

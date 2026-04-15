@@ -20,10 +20,10 @@
   {
     "id": "longevity",
     "name": "长寿之人",
-    "description": "活到80岁",
+    "description": "活到人生的一半",
     "icon": "🕐",
     "hidden": false,
-    "condition": "lifeProgress >= 0.80",
+    "condition": "lifeProgress >= 0.50",
     "category": "人生"
   },
   {
@@ -38,10 +38,10 @@
   {
     "id": "slum_survivor",
     "name": "泥泞中绽放",
-    "description": "出身贫民窟，活到70岁",
+    "description": "出身贫民窟，活到人生的中途",
     "icon": "🌱",
     "hidden": true,
-    "condition": "event.count.birth_slums >= 1 & lifeProgress >= 0.70",
+    "condition": "event.count.birth_slums >= 1 & lifeProgress >= 0.45",
     "category": "人生"
   },
   {
@@ -65,19 +65,19 @@
   {
     "id": "love_and_war",
     "name": "战争与爱情",
-    "description": "结婚并经历战争，最终活到60岁",
+    "description": "结婚并经历战争，最终活过人生中途",
     "icon": "💍",
     "hidden": true,
-    "condition": "has.flag.married & has.flag.war_hero & lifeProgress >= 0.60",
+    "condition": "has.flag.married & has.flag.war_hero & lifeProgress >= 0.45",
     "category": "人生"
   },
   {
     "id": "eternal_wanderer",
     "name": "永远的旅人",
-    "description": "加入公会后活到60岁，却从未定居",
+    "description": "加入公会后活过人生中途，却从未定居",
     "icon": "🧳",
     "hidden": true,
-    "condition": "lifeProgress >= 0.60 & has.flag.guild_member",
+    "condition": "lifeProgress >= 0.45 & has.flag.guild_member",
     "category": "人生"
   },
   {
@@ -110,10 +110,10 @@
   {
     "id": "widowed_hero",
     "name": "丧偶之痛",
-    "description": "失去伴侣后仍然坚强地活到60岁",
+    "description": "失去伴侣后仍然坚强地活过人生中途",
     "icon": "🥀",
     "hidden": true,
-    "condition": "has.flag.widowed & lifeProgress >= 0.60",
+    "condition": "has.flag.widowed & lifeProgress >= 0.45",
     "category": "人生"
   },
   {
@@ -131,7 +131,7 @@
     "description": "安详地度过晚年",
     "icon": "🍂",
     "hidden": true,
-    "condition": "has.flag.peaceful_retirement & lifeProgress >= 0.70",
+    "condition": "has.flag.peaceful_retirement & lifeProgress >= 0.50",
     "category": "人生"
   },
   {
@@ -212,7 +212,7 @@
     "description": "在讨伐巨龙中险些丧命但活了下来",
     "icon": "💀",
     "hidden": true,
-    "condition": "has.flag.near_death & has.flag.dragon_defeated & lifeProgress >= 0.40",
+    "condition": "has.flag.near_death & has.flag.dragon_defeated & lifeProgress >= 0.35",
     "category": "战斗"
   },
   {
@@ -221,7 +221,7 @@
     "description": "在战争中存活并成为英雄",
     "icon": "🎖️",
     "hidden": false,
-    "condition": "has.flag.war_hero & lifeProgress >= 0.50",
+    "condition": "has.flag.war_hero & lifeProgress >= 0.40",
     "category": "战斗"
   },
   {
@@ -275,7 +275,7 @@
     "description": "走上暗黑之路但最终逃离并活下来",
     "icon": "🕯️",
     "hidden": true,
-    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & lifeProgress >= 0.50",
+    "condition": "has.flag.dark_embraced & has.flag.escaped_dark & lifeProgress >= 0.40",
     "category": "魔法"
   },
   {
@@ -1016,16 +1016,16 @@
     "description": "与精灵成为朋友并重逢",
     "icon": "🧚",
     "hidden": true,
-    "condition": "has.flag.fairy_friend & lifeProgress >= 0.60",
+    "condition": "has.flag.fairy_friend & lifeProgress >= 0.45",
     "category": "秘密"
   },
   {
     "id": "eternal_peace",
     "name": "岁月静好",
-    "description": "成为领主并平静地活到80岁",
+    "description": "成为领主并平静地活到人生的一半",
     "icon": "🌿",
     "hidden": true,
-    "condition": "has.flag.peaceful_retirement & lifeProgress >= 0.80",
+    "condition": "has.flag.peaceful_retirement & lifeProgress >= 0.50",
     "category": "秘密"
   },
   {
@@ -1133,7 +1133,7 @@
     "description": "活过半百后，仍保有强健体魄与坚定灵魂",
     "icon": "🗿",
     "hidden": true,
-    "condition": "lifeProgress >= 0.50 & attribute.str >= 25 & attribute.spr >= 20 & result.score >= 150",
+    "condition": "lifeProgress >= 0.40 & attribute.str >= 25 & attribute.spr >= 20 & result.score >= 150",
     "category": "终局"
   },
   {
